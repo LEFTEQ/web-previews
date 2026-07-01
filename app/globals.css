@@ -1,0 +1,611 @@
+/* =====================================================
+   Hotel Stará Pekárna · Liberec
+   Koncept: „teplo domu“ — bývalá zámecká pekárna,
+   dnes privátní wellness. Paleta z pece a páry:
+   tmavá litina, žhavý jantar, kůrka chleba, pára.
+   Signature: „tři teploty“ — velké °C číslice jako
+   strukturní prvek místo 01/02/03.
+   ===================================================== */
+
+:root {
+  --pk-iron: #21211d;        /* litina pece */
+  --pk-iron-soft: #2e2d27;
+  --pk-steam: #f7f3ec;       /* pára / mouka */
+  --pk-crust: #b06a2c;       /* kůrka chleba */
+  --pk-ember: #d98e3b;       /* žhavý jantar */
+  --pk-pool: #3d6b6a;        /* voda vířivky — tichý protipól */
+  --pk-ink: #262521;
+  --pk-ink-soft: #57534a;
+
+  --pk-display: "Georgia", "Times New Roman", serif;
+  --pk-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  --pk-max: 68rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--pk-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--pk-ink);
+  background: var(--pk-steam);
+  -webkit-font-smoothing: antialiased;
+}
+
+.pk img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---------- Focus ---------- */
+.pk a:focus-visible,
+.pk button:focus-visible {
+  outline: 3px solid var(--pk-ember);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =====================================================
+   HERO
+   ===================================================== */
+.pk-hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  color: var(--pk-steam);
+  overflow: hidden;
+  background: var(--pk-iron);
+}
+
+.pk-hero__media {
+  position: absolute;
+  inset: 0;
+}
+
+.pk-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.pk-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(33, 33, 29, 0.92) 0%,
+      rgba(33, 33, 29, 0.55) 45%,
+      rgba(33, 33, 29, 0.35) 100%
+    );
+}
+
+.pk-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  max-width: var(--pk-max);
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 3rem;
+}
+
+/* --- Topbar + wordmark --- */
+.pk-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(247, 243, 236, 0.25);
+}
+
+.pk-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.pk-wordmark__hotel {
+  font-family: var(--pk-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--pk-ember);
+}
+
+.pk-wordmark__name {
+  font-family: var(--pk-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.pk-wordmark__place {
+  font-size: 0.72rem;
+  color: rgba(247, 243, 236, 0.7);
+  letter-spacing: 0.04em;
+  margin-top: 0.15rem;
+}
+
+.pk-topbar__contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+}
+
+.pk-contact-link {
+  color: var(--pk-steam);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(247, 243, 236, 0.35);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.pk-contact-link--mail {
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+
+.pk-contact-link:hover {
+  color: var(--pk-ember);
+  border-color: var(--pk-ember);
+}
+
+/* --- Hero content --- */
+.pk-hero__content {
+  margin-top: auto;
+  padding-top: 3rem;
+  max-width: 38rem;
+}
+
+.pk-hero__eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--pk-ember);
+  margin: 0 0 1rem;
+}
+
+.pk-hero__title {
+  font-family: var(--pk-display);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 7.5vw, 4.2rem);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.25rem;
+}
+
+.pk-hero__title em {
+  font-style: italic;
+  color: var(--pk-ember);
+}
+
+.pk-hero__line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.6em);
+  animation: pk-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.pk-hero__line--1 { animation-delay: 0.1s; }
+.pk-hero__line--2 { animation-delay: 0.28s; }
+.pk-hero__line--3 { animation-delay: 0.46s; }
+
+@keyframes pk-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pk-hero__lead {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: rgba(247, 243, 236, 0.88);
+  margin: 0 0 1.75rem;
+  opacity: 0;
+  animation: pk-fade 0.8s ease 0.7s forwards;
+}
+
+.pk-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  opacity: 0;
+  animation: pk-fade 0.8s ease 0.85s forwards;
+}
+
+@keyframes pk-fade {
+  to { opacity: 1; }
+}
+
+.pk-btn {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border-radius: 2rem;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.pk-btn--fill {
+  background: var(--pk-ember);
+  color: var(--pk-iron);
+}
+
+.pk-btn--fill:hover {
+  background: var(--pk-steam);
+  transform: translateY(-2px);
+}
+
+.pk-btn--line {
+  border: 1px solid rgba(247, 243, 236, 0.5);
+  color: var(--pk-steam);
+}
+
+.pk-btn--line:hover {
+  border-color: var(--pk-ember);
+  color: var(--pk-ember);
+}
+
+.pk-hero__code {
+  margin: 1.25rem 0 0;
+  font-size: 0.85rem;
+  color: rgba(247, 243, 236, 0.75);
+  opacity: 0;
+  animation: pk-fade 0.8s ease 1s forwards;
+}
+
+.pk-hero__code strong {
+  color: var(--pk-ember);
+  letter-spacing: 0.12em;
+}
+
+/* =====================================================
+   SEKCE — společné
+   ===================================================== */
+.pk-section {
+  padding: 4.5rem 1.25rem;
+}
+
+.pk-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--pk-crust);
+  margin: 0 0 0.75rem;
+}
+
+.pk-h2 {
+  font-family: var(--pk-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+/* =====================================================
+   SEKCE 1 — Tři teploty (signature)
+   ===================================================== */
+.pk-warmth {
+  background: var(--pk-steam);
+}
+
+.pk-section__head {
+  max-width: var(--pk-max);
+  margin: 0 auto 2.5rem;
+}
+
+.pk-section__lead {
+  color: var(--pk-ink-soft);
+  max-width: 34rem;
+  margin: 0;
+}
+
+.pk-degrees {
+  max-width: var(--pk-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: rgba(38, 37, 33, 0.12);
+  border-top: 1px solid rgba(38, 37, 33, 0.12);
+  border-bottom: 1px solid rgba(38, 37, 33, 0.12);
+}
+
+.pk-degree {
+  background: var(--pk-steam);
+  padding: 2rem 1.5rem 2.25rem;
+  transition: background 0.25s ease;
+}
+
+.pk-degree:hover {
+  background: #fdfaf4;
+}
+
+.pk-degree__temp {
+  font-family: var(--pk-display);
+  font-size: clamp(3rem, 9vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+  color: var(--pk-crust);
+  font-variant-numeric: lining-nums;
+}
+
+.pk-degree:nth-child(1) .pk-degree__temp { color: var(--pk-pool); }
+.pk-degree:nth-child(2) .pk-degree__temp { color: var(--pk-ember); }
+.pk-degree:nth-child(3) .pk-degree__temp { color: var(--pk-crust); }
+
+.pk-degree__label {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--pk-ink-soft);
+  margin: 0.35rem 0 1.25rem;
+}
+
+.pk-degree__title {
+  font-family: var(--pk-display);
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem;
+}
+
+.pk-degree__text {
+  color: var(--pk-ink-soft);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* --- Nabídky --- */
+.pk-offers {
+  max-width: var(--pk-max);
+  margin: 2.5rem auto 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.pk-offer {
+  background: #fff;
+  border: 1px solid rgba(38, 37, 33, 0.1);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.pk-offer__title {
+  font-family: var(--pk-display);
+  font-size: 1.15rem;
+  margin: 0 0 0.5rem;
+}
+
+.pk-offer__text {
+  color: var(--pk-ink-soft);
+  font-size: 0.95rem;
+  margin: 0 0 1.25rem;
+  flex: 1;
+}
+
+.pk-offer__link {
+  color: var(--pk-crust);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(176, 106, 44, 0.3);
+  align-self: flex-start;
+  padding-bottom: 0.1rem;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.pk-offer__link:hover {
+  color: var(--pk-ember);
+  border-color: var(--pk-ember);
+}
+
+/* =====================================================
+   SEKCE 2 — Dům & lokalita
+   ===================================================== */
+.pk-house {
+  background: var(--pk-iron);
+  color: var(--pk-steam);
+}
+
+.pk-house .pk-eyebrow {
+  color: var(--pk-ember);
+}
+
+.pk-house__grid {
+  max-width: var(--pk-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.pk-house__figure {
+  margin: 0;
+}
+
+.pk-house__img {
+  width: 100%;
+  border-radius: 0.75rem;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.pk-house__caption {
+  font-size: 0.8rem;
+  color: rgba(247, 243, 236, 0.6);
+  margin-top: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
+.pk-house__text {
+  color: rgba(247, 243, 236, 0.85);
+  margin: 0 0 2rem;
+}
+
+/* --- Vzdálenosti pěšky --- */
+.pk-walks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem 1.5rem;
+  margin: 0 0 2rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(247, 243, 236, 0.18);
+  border-bottom: 1px solid rgba(247, 243, 236, 0.18);
+}
+
+.pk-walk {
+  margin: 0;
+}
+
+.pk-walk__time {
+  font-family: var(--pk-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--pk-ember);
+  line-height: 1;
+}
+
+.pk-walk__dest {
+  margin: 0.35rem 0 0;
+  font-size: 0.85rem;
+  color: rgba(247, 243, 236, 0.75);
+}
+
+/* --- Citace --- */
+.pk-quote {
+  margin: 0 0 2rem;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--pk-crust);
+}
+
+.pk-quote p {
+  font-family: var(--pk-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin: 0 0 0.5rem;
+  color: rgba(247, 243, 236, 0.92);
+}
+
+.pk-quote cite {
+  font-style: normal;
+  font-size: 0.85rem;
+  color: rgba(247, 243, 236, 0.6);
+}
+
+.pk-house__contactline {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(247, 243, 236, 0.8);
+}
+
+.pk-inline-link {
+  color: var(--pk-ember);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(217, 142, 59, 0.4);
+  transition: border-color 0.2s ease;
+}
+
+.pk-inline-link:hover {
+  border-color: var(--pk-ember);
+}
+
+/* =====================================================
+   RESPONZIVITA
+   ===================================================== */
+@media (min-width: 640px) {
+  .pk-degrees {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pk-offers {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 820px) {
+  .pk-section {
+    padding: 6rem 2rem;
+  }
+
+  .pk-hero__inner {
+    padding: 2rem 2rem 4.5rem;
+  }
+
+  .pk-house__grid {
+    grid-template-columns: 5fr 7fr;
+    gap: 4rem;
+  }
+
+  .pk-walks {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .pk-topbar__contact {
+    align-items: flex-start;
+  }
+
+  .pk-topbar {
+    flex-direction: column;
+  }
+}
+
+/* =====================================================
+   REDUCED MOTION
+   ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .pk-hero__line,
+  .pk-hero__lead,
+  .pk-hero__actions,
+  .pk-hero__code {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .pk-btn,
+  .pk-degree,
+  .pk-offer__link,
+  .pk-contact-link,
+  .pk-inline-link {
+    transition: none;
+  }
+
+  .pk-btn--fill:hover {
+    transform: none;
+  }
+}
