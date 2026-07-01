@@ -1,0 +1,471 @@
+:root {
+  /* paleta: hluboká lázeňská modrozeleň, teplo infrasauny, solná bílá */
+  --el-hlubina: #123a3a;      /* tmavá lázeňská zelenomodrá */
+  --el-hlubina-2: #0c2b2b;
+  --el-para: #e9f2ee;         /* světlá „pára“ — pozadí sekcí */
+  --el-sul: #fdfcf8;          /* solná bílá */
+  --el-zar: #e8743c;          /* infračervená záře */
+  --el-zar-svetla: #f4a877;
+  --el-inkoust: #1c2a29;
+
+  --el-display: "Georgia", "Times New Roman", serif;
+  --el-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--el-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--el-inkoust);
+  background: var(--el-sul);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--el-zar);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.el-container {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ============ HERO ============ */
+
+.el-hero {
+  position: relative;
+  background: linear-gradient(
+    170deg,
+    var(--el-hlubina-2) 0%,
+    var(--el-hlubina) 55%,
+    #1a4a45 100%
+  );
+  color: var(--el-sul);
+  overflow: hidden;
+}
+
+.el-hero-inner {
+  position: relative;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3.5rem;
+  z-index: 1;
+}
+
+.el-hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
+
+.el-wordmark {
+  font-family: var(--el-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.el-wordmark em {
+  font-style: italic;
+  color: var(--el-zar-svetla);
+  display: inline;
+}
+
+.el-wordmark-city {
+  font-family: var(--el-body);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: rgba(253, 252, 248, 0.65);
+  margin-top: 0.3rem;
+}
+
+.el-hero-tel {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--el-hlubina-2);
+  background: var(--el-zar-svetla);
+  text-decoration: none;
+  padding: 0.65rem 1.2rem;
+  border-radius: 999px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.el-hero-tel:hover {
+  background: var(--el-zar);
+  color: var(--el-sul);
+  transform: translateY(-1px);
+}
+
+.el-hero-title {
+  font-family: var(--el-display);
+  font-weight: 400;
+  font-size: clamp(3.4rem, 13vw, 8.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.el-line {
+  opacity: 0;
+  transform: translateY(1.2rem);
+  animation: el-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.el-line-1 { animation-delay: 0.1s; }
+.el-line-2 {
+  animation-delay: 0.3s;
+  font-style: italic;
+  color: var(--el-zar-svetla);
+  padding-left: 0.9em;
+}
+.el-line-3 { animation-delay: 0.5s; }
+
+.el-dot {
+  color: var(--el-zar);
+}
+
+@keyframes el-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* signature: stoupající vlny tepla */
+.el-heat {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.el-heat svg {
+  position: absolute;
+  right: -8%;
+  top: 0;
+  height: 100%;
+  width: 70%;
+}
+
+.el-heat-w {
+  fill: none;
+  stroke: var(--el-zar);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  opacity: 0.35;
+  animation: el-shimmer 5s ease-in-out infinite alternate;
+}
+
+.el-heat-w2 { stroke: var(--el-zar-svetla); animation-delay: 0.7s; opacity: 0.25; }
+.el-heat-w3 { animation-delay: 1.4s; opacity: 0.45; }
+.el-heat-w4 { stroke: var(--el-zar-svetla); animation-delay: 2.1s; opacity: 0.2; }
+.el-heat-w5 { animation-delay: 2.8s; opacity: 0.3; }
+
+@keyframes el-shimmer {
+  from { transform: translateY(0); }
+  to { transform: translateY(-14px); }
+}
+
+.el-hero-lead {
+  max-width: 30rem;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: rgba(253, 252, 248, 0.88);
+  margin: 0 0 2.5rem;
+}
+
+.el-hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 3rem;
+  margin: 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(253, 252, 248, 0.2);
+}
+
+.el-hero-facts dt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--el-zar-svetla);
+  margin-bottom: 0.2rem;
+}
+
+.el-hero-facts dd {
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+.el-hero-facts a {
+  color: var(--el-sul);
+  text-decoration-color: var(--el-zar);
+  text-underline-offset: 3px;
+}
+
+/* ============ SLUŽBY ============ */
+
+.el-sluzby {
+  background: var(--el-para);
+  padding: 4.5rem 0 4rem;
+}
+
+.el-eyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  font-weight: 700;
+  color: var(--el-zar);
+  margin: 0 0 0.75rem;
+}
+
+.el-h2 {
+  font-family: var(--el-display);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 2.25rem;
+  color: var(--el-hlubina-2);
+}
+
+.el-karty {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.el-karta {
+  background: var(--el-sul);
+  border-radius: 1rem;
+  padding: 1.6rem 1.6rem 1.4rem;
+  border-top: 4px solid var(--el-zar-svetla);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.el-karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(18, 58, 58, 0.14);
+}
+
+.el-karta-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--el-hlubina);
+  margin-bottom: 0.8rem;
+}
+
+.el-teplota {
+  color: var(--el-zar);
+  font-weight: 700;
+}
+
+.el-karta h3 {
+  font-family: var(--el-display);
+  font-weight: 400;
+  font-size: 1.45rem;
+  margin: 0 0 0.5rem;
+  color: var(--el-hlubina-2);
+}
+
+.el-karta p {
+  margin: 0 0 0.9rem;
+  font-size: 0.97rem;
+}
+
+.el-karta-pro {
+  font-style: italic;
+  color: var(--el-hlubina);
+  font-size: 0.9rem;
+  border-top: 1px dashed rgba(18, 58, 58, 0.25);
+  padding-top: 0.75rem;
+  margin-bottom: 0;
+}
+
+.el-sluzby-note {
+  margin: 2.25rem 0 0;
+  max-width: 38rem;
+  font-size: 1rem;
+}
+
+.el-sluzby-note a {
+  color: var(--el-hlubina);
+  font-weight: 600;
+  text-decoration-color: var(--el-zar);
+  text-underline-offset: 3px;
+}
+
+/* ============ O NÁS ============ */
+
+.el-onas {
+  background: var(--el-sul);
+  padding: 4.5rem 0;
+}
+
+.el-onas-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.el-onas-foto {
+  position: relative;
+}
+
+.el-onas-foto img {
+  width: 100%;
+  border-radius: 1rem;
+  box-shadow: 0 18px 44px rgba(18, 58, 58, 0.2);
+}
+
+.el-foto-popisek {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  background: rgba(12, 43, 43, 0.85);
+  color: var(--el-sul);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+}
+
+.el-onas-text p {
+  max-width: 36rem;
+}
+
+.el-duvody {
+  list-style: none;
+  margin: 1.75rem 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.el-duvody li {
+  padding-left: 1.4rem;
+  position: relative;
+  font-size: 0.98rem;
+}
+
+.el-duvody li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--el-zar);
+}
+
+.el-duvody strong {
+  color: var(--el-hlubina-2);
+}
+
+.el-citace {
+  font-family: var(--el-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: var(--el-hlubina-2);
+  margin: 2rem 0 0;
+  padding: 1.25rem 0 0 1.5rem;
+  border-left: 3px solid var(--el-zar-svetla);
+}
+
+.el-citace cite {
+  display: block;
+  font-family: var(--el-body);
+  font-style: normal;
+  font-size: 0.85rem;
+  color: var(--el-inkoust);
+  margin-top: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (min-width: 640px) {
+  .el-karty {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .el-hero-inner {
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+  }
+
+  .el-onas-grid {
+    grid-template-columns: 5fr 6fr;
+    gap: 3.5rem;
+  }
+
+  .el-onas-foto {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .el-line {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .el-heat-w {
+    animation: none;
+  }
+
+  .el-karta,
+  .el-hero-tel {
+    transition: none;
+  }
+}
