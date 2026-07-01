@@ -1,0 +1,461 @@
+/* =====================================================
+   HLAVÁČ – PODLAHY s.r.o. · Hradec Králové
+   Paleta odvozená z řemesla: dubové dřevo, olejovaný
+   povrch, tmavá spára, mosazná přechodová lišta.
+   Signature: hero titulek skládaný jako podlahová prkna
+   (posunuté „plaňky" s vazbou half-bond).
+   ===================================================== */
+
+:root {
+  --dub: #b07b4a;          /* dubové dřevo */
+  --dub-svetly: #d9b384;   /* broušený povrch */
+  --spara: #241a12;        /* tmavá spára / mořený ořech */
+  --mosaz: #c8973e;        /* mosazná lišta – akcent */
+  --papir: #faf6ef;        /* světlý podklad */
+  --stena: #efe6d8;        /* teplá stěna */
+  --ink: #2b2019;
+
+  --f-display: "Georgia", "Times New Roman", serif;
+  --f-body: "Trebuchet MS", "Verdana", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--papir);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hp a:focus-visible,
+.hp button:focus-visible {
+  outline: 3px solid var(--mosaz);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  color: var(--papir);
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    12deg,
+    rgba(36, 26, 18, 0.94) 0%,
+    rgba(36, 26, 18, 0.72) 45%,
+    rgba(36, 26, 18, 0.25) 100%
+  );
+}
+
+.hero-inner {
+  position: relative;
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: 6rem 1.25rem 3.5rem;
+}
+
+.wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-bottom: 2.5rem;
+  padding-left: 0.9rem;
+  border-left: 4px solid var(--mosaz);
+}
+
+.wordmark-name {
+  font-family: var(--f-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+}
+
+.wordmark-sub {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dub-svetly);
+}
+
+/* --- SIGNATURE: titulek skládaný jako prkna --- */
+
+.hero-title {
+  margin: 0 0 1.5rem;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 6.5vw, 4.4rem);
+  line-height: 1.06;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.plank {
+  display: inline-block;
+  background: var(--papir);
+  color: var(--spara);
+  padding: 0.08em 0.45em 0.14em;
+  margin-bottom: 4px; /* spára mezi prkny */
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
+  animation: plank-lay 0.6s ease-out backwards;
+}
+
+/* vazba half-bond: každé prkno posunuté jako při pokládce */
+.plank-1 { margin-left: 0; animation-delay: 0.1s; }
+.plank-2 { margin-left: 1.4em; animation-delay: 0.32s; }
+.plank-3 { margin-left: 0.55em; animation-delay: 0.54s; }
+
+.plank-accent {
+  background: var(--mosaz);
+  color: var(--spara);
+}
+
+@keyframes plank-lay {
+  from {
+    opacity: 0;
+    transform: translateX(2.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: #f0e6d8;
+  margin: 0 0 2rem;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-bottom: 2.2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  font-family: var(--f-body);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--mosaz);
+  color: var(--spara);
+}
+
+.btn-solid:hover {
+  background: var(--dub-svetly);
+  transform: translateY(-2px);
+}
+
+.btn-line {
+  border: 2px solid var(--papir);
+  color: var(--papir);
+}
+
+.btn-line:hover {
+  background: var(--papir);
+  color: var(--spara);
+  transform: translateY(-2px);
+}
+
+.hero-facts {
+  list-style: none;
+  margin: 0;
+  padding: 1.1rem 0 0;
+  border-top: 1px solid rgba(250, 246, 239, 0.3);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 2.2rem;
+  font-size: 0.95rem;
+  color: #e6d9c6;
+}
+
+.hero-facts strong {
+  color: var(--papir);
+}
+
+/* ============ SEKCE – společné ============ */
+
+.section-head {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mosaz);
+}
+
+.hp h2 {
+  font-family: var(--f-display);
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  color: var(--spara);
+}
+
+.section-lead {
+  max-width: 38rem;
+  margin: 0 0 2.5rem;
+  color: #5a4a3a;
+}
+
+/* ============ SLUŽBY ============ */
+
+.sluzby {
+  padding: 4.5rem 0 4rem;
+  background: var(--papir);
+}
+
+.sluzby-grid {
+  width: min(1100px, 100%);
+  margin: 0 auto 3rem;
+  padding: 0 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+
+.sluzba {
+  background: #fff;
+  border-top: 4px solid var(--dub);
+  border-radius: 3px;
+  padding: 1.4rem 1.4rem 1.2rem;
+  box-shadow: 0 1px 4px rgba(43, 32, 25, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sluzba:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(43, 32, 25, 0.14);
+}
+
+.sluzba h3 {
+  font-family: var(--f-display);
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem;
+  color: var(--spara);
+}
+
+.sluzba p {
+  margin: 0 0 0.7rem;
+  font-size: 0.98rem;
+  color: #4a3c2f;
+}
+
+.sluzba-detail {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--mosaz);
+  margin: 0;
+}
+
+.sluzby-figure {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.figure-img {
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(43, 32, 25, 0.18);
+}
+
+.hp figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.9rem;
+  color: #6b5a48;
+}
+
+/* ============ JAK PRACUJEME ============ */
+
+.prace {
+  padding: 4.5rem 0 5rem;
+  background: var(--stena);
+}
+
+.prace-layout {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.kroky {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.krok {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+}
+
+.krok-cislo {
+  flex: none;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: grid;
+  place-items: center;
+  background: var(--spara);
+  color: var(--dub-svetly);
+  font-family: var(--f-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-radius: 3px;
+}
+
+.krok h3 {
+  font-family: var(--f-display);
+  font-size: 1.2rem;
+  margin: 0.15rem 0 0.35rem;
+  color: var(--spara);
+}
+
+.krok p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #4a3c2f;
+}
+
+.prace-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.reference {
+  margin: 0;
+  padding: 1.4rem 1.5rem;
+  background: #fff;
+  border-left: 4px solid var(--mosaz);
+  border-radius: 3px;
+  box-shadow: 0 1px 4px rgba(43, 32, 25, 0.08);
+}
+
+.reference p {
+  margin: 0 0 0.8rem;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.reference cite {
+  font-style: normal;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #6b5a48;
+}
+
+/* ============ RESPONSIVITA ============ */
+
+@media (min-width: 640px) {
+  .sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .prace-layout {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* na úzkém displeji prkna zarovnat, ať se nelámou z obrazu */
+  .plank-2 { margin-left: 0.6em; }
+  .plank-3 { margin-left: 0.3em; }
+
+  .hero-inner {
+    padding-top: 4rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .plank {
+    animation: none;
+  }
+
+  .btn,
+  .sluzba {
+    transition: none;
+  }
+
+  .btn-solid:hover,
+  .btn-line:hover,
+  .sluzba:hover {
+    transform: none;
+  }
+}
