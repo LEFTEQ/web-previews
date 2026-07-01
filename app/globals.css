@@ -1,0 +1,580 @@
+/* =====================================================
+   Autoškola Suchánek — Ostrava
+   Palette: asfalt, křídově bílá, dopravní modrá (značka
+   „přikázaný směr"), výstražná žluť školního vozu
+   Type: Archivo (display, technický grotesk s DNA
+   dopravního značení) + system stack pro tělo
+   Signature: řadicí kulisa „H" jako navigace kurzů
+   ===================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap");
+
+:root {
+  --asfalt: #16181d;
+  --asfalt-2: #23262e;
+  --krida: #f7f8fa;
+  --modra: #0b57d0;      /* dopravní modrá — přikázaný směr */
+  --modra-tma: #0a3f96;
+  --zlut: #ffc61a;       /* výstražná žluť školního vozu */
+  --seda: #5b6068;
+  --font-display: "Archivo", "Arial Black", sans-serif;
+  --font-body: "Archivo", -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--asfalt);
+  background: var(--krida);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+.as a:focus-visible,
+.as button:focus-visible {
+  outline: 3px solid var(--zlut);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ HERO ============ */
+
+.as-hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  overflow: hidden;
+  /* šrafovaná zábrana — pruh na spodní hraně hera */
+  border-bottom: 12px solid;
+  border-image: repeating-linear-gradient(
+    -45deg,
+    var(--zlut) 0 22px,
+    var(--asfalt) 22px 44px
+  ) 12;
+}
+
+.as-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.as-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.as-hero__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg, rgba(11, 15, 24, 0.92) 0%, rgba(11, 15, 24, 0.72) 45%, rgba(11, 15, 24, 0.35) 100%);
+}
+
+.as-hero__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 3rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* --- topbar --- */
+
+.as-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+
+.as-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  color: #fff;
+}
+
+.as-wordmark__badge { flex: none; display: grid; }
+
+.as-wordmark__text {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  line-height: 1.15;
+  display: flex;
+  flex-direction: column;
+}
+
+.as-wordmark__text strong {
+  font-weight: 900;
+  font-stretch: 110%;
+  letter-spacing: 0.06em;
+  font-size: 1.15rem;
+}
+
+.as-wordmark__text em {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--zlut);
+  margin-top: 0.15rem;
+}
+
+.as-topbar__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  padding: 0.55rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  transition: border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.as-topbar__phone:hover {
+  border-color: var(--zlut);
+  background: rgba(255, 198, 26, 0.12);
+}
+
+/* --- hero content --- */
+
+.as-hero__content {
+  margin-top: auto;
+  padding-top: 3rem;
+  max-width: 46rem;
+}
+
+.as-hero__eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--zlut);
+  margin: 0 0 1rem;
+}
+
+.as-hero__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 115%;
+  font-size: clamp(2.2rem, 6.5vw, 4.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem;
+}
+
+.as-hero__mark {
+  color: var(--asfalt);
+  background: var(--zlut);
+  padding: 0 0.18em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.as-hero__lead {
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  max-width: 38rem;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0 0 1.75rem;
+}
+
+.as-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.75rem;
+}
+
+.as-btn {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 10px;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.as-btn--primary {
+  background: var(--modra);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(11, 87, 208, 0.45);
+}
+
+.as-btn--primary:hover {
+  background: var(--modra-tma);
+  transform: translateY(-2px);
+}
+
+.as-btn--ghost {
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+}
+
+.as-btn--ghost:hover {
+  border-color: #fff;
+  transform: translateY(-2px);
+}
+
+/* --- SIGNATURE: řadicí schéma H --- */
+
+.as-gearbox {
+  animation: as-rise 0.7s ease-out 0.2s both;
+}
+
+.as-gearbox__label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 0.85rem;
+}
+
+.as-gearbox__gate {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(4.5rem, 6rem));
+  grid-template-rows: auto 1.4rem auto;
+  justify-content: start;
+  column-gap: clamp(1rem, 4vw, 2.5rem);
+  position: relative;
+}
+
+/* vodicí dráhy kulisy */
+.as-gearbox__gate::before {
+  content: "";
+  grid-column: 1 / -1;
+  grid-row: 2;
+  align-self: center;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.28);
+  border-radius: 2px;
+  margin: 0 1.5rem;
+}
+
+.as-gear {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  text-decoration: none;
+  color: #fff;
+  padding: 0.4rem 0.3rem;
+  z-index: 1;
+}
+
+/* svislé dráhy k jednotlivým „rychlostem" */
+.as-gear::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 4px;
+  background: rgba(255, 255, 255, 0.28);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+.as-gear--1, .as-gear--3, .as-gear--5 { grid-row: 1; }
+.as-gear--2, .as-gear--4, .as-gear--r { grid-row: 3; }
+.as-gear--1, .as-gear--2 { grid-column: 1; }
+.as-gear--3, .as-gear--4 { grid-column: 2; }
+.as-gear--5, .as-gear--r { grid-column: 3; }
+
+.as-gear--1::before, .as-gear--3::before, .as-gear--5::before { top: 55%; bottom: -1.4rem; }
+.as-gear--2::before, .as-gear--4::before, .as-gear--r::before { top: -1.4rem; bottom: 55%; }
+
+.as-gear b {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.15rem;
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--asfalt-2);
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  transition: transform 0.18s, border-color 0.18s, background 0.18s;
+}
+
+.as-gear--r b {
+  background: var(--modra);
+  border-color: var(--modra);
+}
+
+.as-gear i {
+  font-style: normal;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.as-gear:hover b,
+.as-gear:focus-visible b {
+  transform: scale(1.12);
+  border-color: var(--zlut);
+  background: var(--asfalt);
+}
+
+@keyframes as-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ SEKCE: KURZY ============ */
+
+.as-section {
+  padding: clamp(3.5rem, 8vw, 6rem) 1.25rem;
+}
+
+.as-section > .as-section__head,
+.as-section > .as-courses,
+.as-section > .as-trust {
+  max-width: 1160px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.as-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--modra);
+  margin: 0 0 0.75rem;
+}
+
+.as-eyebrow--light { color: var(--zlut); }
+
+.as-section__head h2,
+.as-trust__body h2 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 110%;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+  max-width: 34ch;
+}
+
+.as-section__intro {
+  max-width: 42rem;
+  color: var(--seda);
+  margin: 0 0 2.5rem;
+}
+
+.as-courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1.25rem;
+}
+
+.as-course {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  border: 1px solid #e3e6ec;
+  border-top: 5px solid var(--modra);
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.as-course:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(22, 24, 29, 0.1);
+}
+
+.as-course--featured {
+  border-top-color: var(--zlut);
+  background: linear-gradient(180deg, #fffdf4 0%, #fff 60%);
+}
+
+.as-course__tag {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: var(--asfalt);
+  padding: 0.25rem 0.7rem;
+  border-radius: 6px;
+  margin-bottom: 0.9rem;
+}
+
+.as-course--featured .as-course__tag {
+  background: var(--zlut);
+  color: var(--asfalt);
+}
+
+.as-course h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  margin: 0 0 0.6rem;
+}
+
+.as-course p {
+  margin: 0 0 0.9rem;
+  color: #383c44;
+}
+
+.as-course__meta {
+  font-size: 0.85rem;
+  color: var(--seda);
+  border-top: 1px dashed #d6dae2;
+  padding-top: 0.75rem;
+  margin-bottom: 0 !important;
+}
+
+/* ============ SEKCE: ŠKOLENÍ / DŮVĚRA ============ */
+
+.as-section--dark {
+  background: var(--asfalt);
+  color: #fff;
+}
+
+.as-trust {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.as-trust__media img {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.as-trust__caption {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0.75rem 0 0;
+}
+
+.as-trust__body > p {
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 40rem;
+}
+
+.as-facts {
+  display: grid;
+  gap: 1.25rem;
+  margin: 2rem 0;
+  padding: 0;
+}
+
+.as-fact {
+  border-left: 4px solid var(--zlut);
+  padding-left: 1rem;
+}
+
+.as-fact dt {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 110%;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: var(--zlut);
+}
+
+.as-fact dd {
+  margin: 0.25rem 0 0;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.as-quote {
+  margin: 2rem 0 0;
+  padding: 1.5rem;
+  background: var(--asfalt-2);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.as-quote p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+}
+
+.as-quote footer {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ============ RESPONSIVITA ============ */
+
+@media (min-width: 720px) {
+  .as-trust {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: 3.5rem;
+  }
+  .as-trust__media {
+    position: sticky;
+    top: 2rem;
+  }
+  .as-facts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .as-topbar__phone span { display: none; }
+  .as-hero__content { padding-top: 2rem; }
+  .as-gearbox__gate {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 0.5rem;
+  }
+  .as-btn { width: 100%; text-align: center; }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .as-gearbox { animation: none; }
+  .as-btn,
+  .as-course,
+  .as-gear b,
+  .as-topbar__phone {
+    transition: none;
+  }
+  .as-btn:hover,
+  .as-course:hover,
+  .as-gear:hover b {
+    transform: none;
+  }
+}
