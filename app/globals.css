@@ -1,0 +1,540 @@
+/* =====================================================================
+   AUTODOPRAVA HLAVATÝ — Liberec
+   Palette: asfalt / signální žluť techniky / betonová šeď / bílá
+   Type: Archivo (display, wide caps jako značení na korbě) + system body
+   Signature: výstražné šrafování (hazard stripes) kontejnerů a strojů
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Archivo:ital,wght@0,400;0,600;1,400&display=swap");
+
+:root {
+  --asfalt: #17191c;        /* tmavý asfalt */
+  --asfalt-2: #22252a;      /* mokrý asfalt */
+  --zlut: #f5b800;          /* signální žluť Bobcatu */
+  --zlut-tmava: #c79500;
+  --beton: #e9e7e2;         /* betonová šeď-bílá */
+  --beton-2: #d8d5ce;
+  --ink: #1c1e21;
+  --ink-soft: #4c5057;
+  --white: #ffffff;
+
+  --font-display: "Archivo", "Arial Black", system-ui, sans-serif;
+  --font-body: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--beton);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ah a:focus-visible,
+.ah button:focus-visible {
+  outline: 3px solid var(--zlut);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* =========================== HERO =========================== */
+
+.hero {
+  position: relative;
+  background: var(--asfalt);
+  color: var(--beton);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+/* jemná textura asfaltu */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 85% 0%, rgba(245, 184, 0, 0.08), transparent 60%),
+    repeating-linear-gradient(0deg, transparent 0 3px, rgba(255, 255, 255, 0.012) 3px 4px);
+  pointer-events: none;
+}
+
+.hero-top {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.wordmark-badge {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  background: var(--zlut);
+  color: var(--asfalt);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 75%;
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+  clip-path: polygon(0 0, 100% 0, 100% 78%, 78% 100%, 0 100%); /* seříznutý roh = radlice */
+}
+
+.wordmark-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 90%;
+  font-size: 0.95rem;
+  line-height: 1.15;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero-dispecink {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-decoration: none;
+  color: var(--beton);
+}
+
+.hero-dispecink-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--zlut);
+}
+
+.hero-dispecink-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-dispecink:hover .hero-dispecink-num { color: var(--zlut); }
+
+.hero-body {
+  position: relative;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 3.5rem 0 3rem;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--beton-2);
+  animation: hero-rise 0.6s ease-out both;
+}
+
+.hero-eyebrow-year {
+  display: inline-block;
+  background: var(--zlut);
+  color: var(--asfalt);
+  font-weight: 800;
+  padding: 0.1rem 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.hero-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 78%; /* zúžený řez jako nápis na korbě */
+  font-size: clamp(3.2rem, 11vw, 7.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--white);
+  animation: hero-rise 0.6s ease-out 0.12s both;
+}
+
+.hero-title-accent {
+  color: var(--zlut);
+  /* šrafování uvnitř písma na velkých displejích */
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--zlut) 0 14px,
+    var(--zlut-tmava) 14px 20px
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.hero-sub {
+  max-width: 34rem;
+  margin: 1.5rem 0 0;
+  font-size: 1.05rem;
+  color: var(--beton-2);
+  animation: hero-rise 0.6s ease-out 0.24s both;
+}
+
+.hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  animation: hero-rise 0.6s ease-out 0.36s both;
+}
+
+.btn-primary,
+.btn-ghost {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 90%;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--zlut);
+  color: var(--asfalt);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+}
+
+.btn-primary:hover { background: #ffd23d; transform: translateY(-2px); }
+
+.btn-ghost {
+  color: var(--beton);
+  border: 2px solid rgba(233, 231, 226, 0.35);
+}
+
+.btn-ghost:hover { border-color: var(--zlut); color: var(--zlut); }
+
+/* — signature: výstražné šrafování jako spodní hrana hero — */
+.hero-hazard {
+  position: relative;
+  margin: 0 -1.25rem;
+}
+
+.hazard-stripes {
+  height: 34px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--zlut) 0 28px,
+    var(--asfalt) 28px 56px
+  );
+  background-size: 79.2px 100%;
+  animation: hazard-roll 2.4s linear infinite;
+}
+
+.hazard-plate {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem 0.75rem;
+  background: var(--asfalt-2);
+  color: var(--beton-2);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.24em;
+  padding: 0.7rem 1rem;
+  border-top: 1px solid rgba(245, 184, 0, 0.35);
+}
+
+.hazard-dot { color: var(--zlut); }
+
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hazard-roll {
+  from { background-position: 0 0; }
+  to { background-position: 79.2px 0; }
+}
+
+/* =========================== SLUŽBY =========================== */
+
+.sluzby {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 4rem 1.25rem 4.5rem;
+}
+
+.section-head { max-width: 40rem; }
+
+.section-eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--zlut-tmava);
+}
+
+.section-eyebrow::before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 2rem;
+  height: 3px;
+  margin-right: 0.6rem;
+  background: repeating-linear-gradient(-45deg, var(--zlut) 0 5px, var(--asfalt) 5px 10px);
+}
+
+.section-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 80%;
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.section-lead {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+.sluzby-grid {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.karta {
+  background: var(--white);
+  padding: 1.4rem 1.4rem 1.5rem;
+  border-left: 4px solid var(--zlut);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.karta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(23, 25, 28, 0.1);
+}
+
+.karta-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.karta-kod {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 75%;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  background: var(--asfalt);
+  color: var(--zlut);
+  padding: 0.15rem 0.55rem;
+}
+
+.karta-stroj {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+  text-align: right;
+}
+
+.karta-nazev {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 85%;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.karta-popis {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+
+.sluzby-cenik {
+  margin: 2rem 0 0;
+  padding: 1rem 1.25rem;
+  background: var(--beton-2);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.sluzby-cenik a {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration-color: var(--zlut);
+  text-decoration-thickness: 2px;
+}
+
+.sluzby-cenik a:hover { color: var(--zlut-tmava); }
+
+/* =========================== DŮVĚRA =========================== */
+
+.duvera {
+  background: var(--asfalt);
+  color: var(--beton);
+  padding: 4rem 1.25rem 4.5rem;
+  border-top: 8px solid var(--zlut);
+}
+
+.duvera-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.section-eyebrow-light { color: var(--zlut); }
+
+.section-title-light { color: var(--white); }
+
+.duvera-p {
+  margin: 0 0 1rem;
+  color: var(--beton-2);
+  max-width: 36rem;
+}
+
+.duvera-fakta {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  align-content: start;
+}
+
+.fakt {
+  background: var(--asfalt-2);
+  padding: 1.1rem 1.2rem;
+  border-top: 3px solid var(--zlut);
+}
+
+.fakt dt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--beton-2);
+}
+
+.fakt dd {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 80%;
+  font-size: 1.6rem;
+  color: var(--zlut);
+  font-variant-numeric: tabular-nums;
+}
+
+.duvera-kontakty {
+  list-style: none;
+  max-width: 68rem;
+  margin: 2.5rem auto 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: rgba(233, 231, 226, 0.15);
+  border: 1px solid rgba(233, 231, 226, 0.15);
+}
+
+.duvera-kontakty li {
+  background: var(--asfalt);
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.kontakt-role {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--zlut);
+}
+
+.duvera-kontakty a {
+  color: var(--white);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.duvera-kontakty a:hover { color: var(--zlut); }
+
+.duvera-kontakty .kontakt-mail {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: var(--beton-2);
+  text-decoration: underline;
+  text-decoration-color: rgba(245, 184, 0, 0.5);
+}
+
+.duvera-kontakty .kontakt-mail:hover { color: var(--zlut); }
+
+/* =========================== RESPONSIVE =========================== */
+
+@media (min-width: 640px) {
+  .sluzby-grid { grid-template-columns: repeat(2, 1fr); }
+  .duvera-kontakty { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 960px) {
+  .hero-body { padding: 5rem 0 4.5rem; }
+  .sluzby-grid { grid-template-columns: repeat(4, 1fr); }
+  .duvera-inner { grid-template-columns: 1.2fr 1fr; gap: 4rem; }
+}
+
+/* =========================== MOTION =========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-eyebrow,
+  .hero-title,
+  .hero-sub,
+  .hero-cta-row {
+    animation: none;
+  }
+  .hazard-stripes { animation: none; }
+  .karta,
+  .btn-primary,
+  .btn-ghost {
+    transition: none;
+  }
+  .karta:hover,
+  .btn-primary:hover {
+    transform: none;
+  }
+}
