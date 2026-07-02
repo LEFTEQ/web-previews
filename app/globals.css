@@ -1,0 +1,458 @@
+/* =====================================================================
+   ŠICHNÁREK — klempířství, Ostrava
+   Koncept: „falcovaný plech“ — chladná ocelová paleta odvozená z
+   pozinkovaného plechu a antracitové krytiny, teplý akcent mědi
+   (klempířský materiál). Signature: falc — šikmý ohyb, který se
+   propisuje do wordmarku, švů sekcí a hero titulku skládaného
+   jako tabule plechu.
+   ===================================================================== */
+
+:root {
+  --steel-900: #1b2228; /* antracit krytiny */
+  --steel-700: #2e3a43; /* břidlicová ocel */
+  --steel-300: #aab6bd; /* pozink */
+  --steel-100: #eef1f2; /* světlý plech, pozadí */
+  --copper: #b4632c;    /* měděný svod */
+  --copper-deep: #8f4a1c;
+  --paper: #ffffff;
+
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Arial, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-ui: Arial, Helvetica, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--steel-100);
+  color: var(--steel-900);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* Focus — viditelný, měděný */
+.klemp a:focus-visible,
+.klemp button:focus-visible {
+  outline: 3px solid var(--copper);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =====================  HERO  ===================== */
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: flex-end;
+  color: var(--paper);
+  overflow: hidden;
+  /* signature: spodní hrana hero „ohnutá“ jako falc */
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3.5rem), 0 100%);
+  padding-bottom: 3rem;
+}
+
+.hero-media,
+.hero-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-media img { object-fit: cover; }
+
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(196deg, rgba(27, 34, 40, 0.25) 0%, rgba(27, 34, 40, 0.82) 62%, rgba(27, 34, 40, 0.94) 100%);
+}
+
+.hero-inner {
+  position: relative;
+  width: min(72rem, 100% - 2.5rem);
+  margin: 0 auto;
+  padding: 7rem 0 4.5rem;
+}
+
+/* Wordmark — kondenz, s „ohnutým“ falcem místo diakritiky */
+.brandline {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.75rem;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.65rem;
+  letter-spacing: 0.22em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.wm-fold {
+  width: 1.6rem;
+  height: 0.55rem;
+  background: var(--copper);
+  transform: skewX(-24deg);
+  display: inline-block;
+}
+
+.brand-sub {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--steel-300);
+}
+
+/* Titulek skládaný jako tabule plechu — každý řádek mírně předsazený */
+.hero-title {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.3rem, 7.5vw, 5.2rem);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+}
+
+.ht-row {
+  display: block;
+}
+
+.ht-2 { padding-left: clamp(1rem, 4vw, 3rem); }
+.ht-3 { padding-left: clamp(2rem, 8vw, 6rem); color: var(--copper); }
+
+/* Page-load: řádky se „ohnou“ nahoru jako plech z ohýbačky */
+@keyframes fold-in {
+  from { opacity: 0; transform: translateY(0.7em) skewY(2.5deg); }
+  to   { opacity: 1; transform: translateY(0) skewY(0); }
+}
+
+.ht-row { animation: fold-in 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) both; }
+.ht-1 { animation-delay: 0.05s; }
+.ht-2 { animation-delay: 0.18s; }
+.ht-3 { animation-delay: 0.31s; }
+
+.hero-lead {
+  max-width: 38rem;
+  font-size: 1.06rem;
+  color: #dde3e6;
+  margin: 0 0 2.2rem;
+  animation: fold-in 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) 0.45s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+  animation: fold-in 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) 0.55s both;
+}
+
+.btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: 0.95rem 1.6rem;
+  display: inline-block;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  /* zkosený roh — falc */
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 0.7rem), calc(100% - 0.7rem) 100%, 0 100%);
+}
+
+.btn-solid {
+  background: var(--copper);
+  color: var(--paper);
+}
+
+.btn-solid:hover { background: var(--copper-deep); transform: translateY(-2px); }
+
+.btn-line {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--steel-300);
+}
+
+.btn-line:hover { background: rgba(255, 255, 255, 0.18); transform: translateY(-2px); }
+
+.hero-facts {
+  list-style: none;
+  margin: 0;
+  padding: 1.4rem 0 0;
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(170, 182, 189, 0.35);
+  animation: fold-in 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) 0.65s both;
+}
+
+.hero-facts li { display: flex; flex-direction: column; }
+
+.hero-facts strong {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  color: var(--paper);
+}
+
+.hero-facts span {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--steel-300);
+}
+
+/* =====================  SPOLEČNÉ HLAVIČKY SEKCÍ  ===================== */
+
+.section-head {
+  max-width: 44rem;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.section-head--left {
+  margin: 0 0 1.5rem;
+  text-align: left;
+}
+
+/* seam = šev / falc: krátký šikmý měděný proužek nad každou sekcí */
+.seam {
+  display: inline-block;
+  width: 2.4rem;
+  height: 0.5rem;
+  background: var(--copper);
+  transform: skewX(-24deg);
+  margin-bottom: 1.1rem;
+}
+
+.eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--copper-deep);
+  margin: 0 0 0.6rem;
+}
+
+.klemp h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.7rem, 4.2vw, 2.6rem);
+  line-height: 1.05;
+  letter-spacing: 0.015em;
+  margin: 0 0 1rem;
+  color: var(--steel-900);
+}
+
+.section-lead {
+  color: var(--steel-700);
+  margin: 0;
+}
+
+/* =====================  SEKCE 1 — ŘEMESLO  ===================== */
+
+.work {
+  padding: 5rem 0 4.5rem;
+  width: min(72rem, 100% - 2.5rem);
+  margin: 0 auto;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+.work-card {
+  background: var(--paper);
+  padding: 1.7rem 1.5rem 1.9rem;
+  border-top: 4px solid var(--steel-700);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0 100%);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.work-card:hover {
+  transform: translateY(-4px);
+  border-top-color: var(--copper);
+}
+
+.work-card h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.15rem;
+  line-height: 1.25;
+  letter-spacing: 0.03em;
+  margin: 0 0 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* „štítek materiálu“ — jako ražba na plechu */
+.card-gauge {
+  align-self: flex-start;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--steel-700);
+  background: var(--steel-100);
+  padding: 0.25rem 0.6rem;
+  box-shadow: inset 0 0 0 1px var(--steel-300);
+}
+
+.work-card p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--steel-700);
+}
+
+.work-figure {
+  margin: 0;
+}
+
+.work-figure img {
+  width: 100%;
+  max-height: 26rem;
+  object-fit: cover;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2rem), 0 100%);
+}
+
+.work-figure figcaption,
+.trust-figure figcaption {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  color: var(--steel-700);
+  padding-top: 0.8rem;
+  border-left: 4px solid var(--copper);
+  padding-left: 0.8rem;
+  margin-top: 0.4rem;
+}
+
+/* =====================  SEKCE 2 — DŮVĚRA  ===================== */
+
+.trust {
+  background: var(--steel-900);
+  color: var(--steel-100);
+  clip-path: polygon(0 3rem, 100% 0, 100% 100%, 0 100%);
+  padding: 7rem 0 5rem;
+}
+
+.trust-inner {
+  width: min(72rem, 100% - 2.5rem);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.trust h2 { color: var(--paper); }
+
+.trust .eyebrow { color: var(--copper); }
+
+.trust-copy > p {
+  color: var(--steel-300);
+  margin: 0 0 1.8rem;
+}
+
+.trust-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.trust-list li {
+  padding: 1rem 1.1rem 1rem 1.3rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid var(--copper);
+  color: var(--steel-300);
+  font-size: 0.98rem;
+}
+
+.trust-list strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 1.02rem;
+  color: var(--paper);
+  margin-bottom: 0.15rem;
+}
+
+.trust-figure {
+  margin: 0;
+  position: sticky;
+  top: 2rem;
+}
+
+.trust-figure img {
+  width: 100%;
+  clip-path: polygon(0 0, 100% 1.5rem, 100% 100%, 0 calc(100% - 1.5rem));
+}
+
+.trust-figure figcaption {
+  color: var(--steel-300);
+}
+
+/* =====================  RESPONZIVITA  ===================== */
+
+@media (max-width: 860px) {
+  .trust-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .trust-figure { position: static; }
+}
+
+@media (max-width: 560px) {
+  .hero { min-height: 100svh; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2rem), 0 100%); }
+  .hero-inner { padding: 5.5rem 0 3.5rem; }
+  .hero-facts { gap: 1.4rem 2rem; }
+  .ht-2, .ht-3 { padding-left: 0; }
+  .btn { width: 100%; text-align: center; }
+  .work { padding-top: 4rem; }
+  .trust { clip-path: polygon(0 1.5rem, 100% 0, 100% 100%, 0 100%); padding-top: 5.5rem; }
+}
+
+/* =====================  REDUCED MOTION  ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ht-row,
+  .hero-lead,
+  .hero-actions,
+  .hero-facts {
+    animation: none;
+  }
+  .btn,
+  .work-card {
+    transition: none;
+  }
+  .btn:hover,
+  .work-card:hover {
+    transform: none;
+  }
+}
