@@ -1,0 +1,511 @@
+/* ============================================================
+   MUSKOX s.r.o. — stříkané izolace, České Budějovice
+   Paleta: arktická modř (tundra/mráz) × pěnová žluť (PUR pěna)
+   Typo: Archivo (široký, technický grotesk pro displeje)
+         + system sans pro text — bez externích knihoven,
+         fonty přes @font-face fallback stack níže.
+   ============================================================ */
+
+:root {
+  --mraz-900: #0b1f33;   /* nejhlubší arktická modř */
+  --mraz-800: #12304c;
+  --mraz-100: #e8f0f6;   /* ledově světlé pozadí */
+  --pena-500: #f2b127;   /* pěnová žluť — barva čerstvé PUR pěny */
+  --pena-300: #f8d47c;
+  --inkoust: #14212e;
+  --papir: #fdfcf8;
+
+  --pismo-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+  --pismo-text: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--pismo-text);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--inkoust);
+  background: var(--papir);
+  -webkit-font-smoothing: antialiased;
+}
+
+.mx a:focus-visible,
+.mx button:focus-visible {
+  outline: 3px solid var(--pena-500);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ HERO ============ */
+
+.mx-hero {
+  background:
+    radial-gradient(1200px 700px at 85% -10%, var(--mraz-800) 0%, transparent 60%),
+    var(--mraz-900);
+  color: var(--mraz-100);
+  padding: 1.5rem 1.25rem 4rem;
+  overflow: hidden;
+}
+
+.mx-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1180px;
+  margin: 0 auto 3rem;
+  flex-wrap: wrap;
+}
+
+.mx-wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.mx-wordmark-main {
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: 1.5rem;
+  letter-spacing: 0.22em;
+  color: #fff;
+}
+
+.mx-wordmark-sub {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pena-300);
+}
+
+.mx-tel {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  border-bottom: 2px solid var(--pena-500);
+  padding-bottom: 2px;
+}
+
+.mx-tel:hover {
+  color: var(--pena-300);
+}
+
+.mx-hero-grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.mx-eyebrow {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pena-500);
+  margin: 0 0 1.25rem;
+}
+
+.mx-h1 {
+  margin: 0 0 1.5rem;
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: clamp(2.1rem, 7vw, 4.1rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.mx-h1-line {
+  display: block;
+}
+
+.mx-h1-accent {
+  color: var(--pena-500);
+  /* podtržení jako housenka nastříkané pěny */
+  text-decoration: underline;
+  text-decoration-color: rgba(242, 177, 39, 0.35);
+  text-decoration-thickness: 0.14em;
+  text-underline-offset: 0.12em;
+}
+
+.mx-perex {
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  font-size: 1.06rem;
+  color: #c4d4e2;
+}
+
+.mx-hero-akce {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-bottom: 2.5rem;
+}
+
+.mx-btn {
+  display: inline-block;
+  background: var(--pena-500);
+  color: var(--mraz-900);
+  font-weight: 800;
+  text-decoration: none;
+  padding: 0.95rem 1.6rem;
+  border-radius: 999px;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.mx-btn:hover {
+  background: var(--pena-300);
+  transform: translateY(-2px);
+}
+
+.mx-btn-ghost {
+  display: inline-block;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.95rem 1.4rem;
+  border: 2px solid rgba(232, 240, 246, 0.35);
+  border-radius: 999px;
+  transition: border-color 0.18s ease;
+}
+
+.mx-btn-ghost:hover {
+  border-color: var(--pena-500);
+}
+
+.mx-hero-fakta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(232, 240, 246, 0.18);
+}
+
+.mx-hero-fakta dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #8fa8bd;
+  margin-bottom: 0.2rem;
+}
+
+.mx-hero-fakta dd {
+  margin: 0;
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: 1.25rem;
+  color: var(--pena-500);
+}
+
+/* --- signature vizuál: expandující vrstvy pěny --- */
+
+.mx-hero-vizual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+  max-width: 340px;
+}
+
+.mx-pena {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.mx-vrstva {
+  fill: none;
+  stroke-linecap: round;
+  transform-origin: 50% 50%;
+}
+
+.mx-v1 { stroke: var(--pena-500); stroke-width: 5; fill: rgba(242, 177, 39, 0.9); }
+.mx-v2 { stroke: var(--pena-500); stroke-width: 3.5; opacity: 0.85; }
+.mx-v3 { stroke: var(--pena-300); stroke-width: 2.5; opacity: 0.6; }
+.mx-v4 { stroke: var(--pena-300); stroke-width: 1.8; opacity: 0.35; }
+.mx-v5 { stroke: var(--mraz-100); stroke-width: 1.2; opacity: 0.18; }
+
+.mx-vizual-popisek {
+  margin: 0.5rem 0 0;
+  font-size: 0.82rem;
+  text-align: center;
+  color: #8fa8bd;
+  letter-spacing: 0.04em;
+}
+
+/* --- animace načtení: pěna „expanduje", text nabíhá --- */
+
+@keyframes mx-expanze {
+  from { transform: scale(0.2); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes mx-nabeh {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.mx-vrstva {
+  animation: mx-expanze 0.9s cubic-bezier(0.22, 1.2, 0.36, 1) both;
+}
+
+.mx-v1 { animation-delay: 0.15s; }
+.mx-v2 { animation-delay: 0.3s; }
+.mx-v3 { animation-delay: 0.45s; }
+.mx-v4 { animation-delay: 0.6s; }
+.mx-v5 { animation-delay: 0.75s; }
+
+.mx-fade {
+  animation: mx-nabeh 0.6s ease both;
+}
+
+.mx-d1 { animation-delay: 0.05s; }
+.mx-d2 { animation-delay: 0.15s; }
+.mx-d3 { animation-delay: 0.25s; }
+.mx-d4 { animation-delay: 0.35s; }
+.mx-d5 { animation-delay: 0.5s; }
+.mx-d6 { animation-delay: 0.62s; }
+.mx-d7 { animation-delay: 0.74s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .mx-vrstva,
+  .mx-fade {
+    animation: none;
+  }
+  .mx-btn:hover {
+    transform: none;
+  }
+}
+
+/* ============ SLUŽBY ============ */
+
+.mx-sluzby {
+  background: var(--papir);
+  padding: 4.5rem 1.25rem;
+}
+
+.mx-sekce-hlava {
+  max-width: 1180px;
+  margin: 0 auto 2.75rem;
+}
+
+.mx-h2 {
+  margin: 0 0 1rem;
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: clamp(1.6rem, 4.5vw, 2.5rem);
+  line-height: 1.12;
+  text-transform: uppercase;
+  color: var(--mraz-900);
+  max-width: 46rem;
+}
+
+.mx-sekce-perex {
+  max-width: 38rem;
+  margin: 0;
+  color: #45586a;
+}
+
+.mx-sluzby-mriz {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.mx-karta {
+  background: var(--mraz-100);
+  border-radius: 18px;
+  padding: 1.75rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  border: 1px solid rgba(11, 31, 51, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mx-karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(11, 31, 51, 0.12);
+}
+
+.mx-karta-tag {
+  margin: 0;
+  align-self: flex-start;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mraz-900);
+  background: var(--pena-500);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+}
+
+.mx-karta-nazev {
+  margin: 0;
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  color: var(--mraz-900);
+}
+
+.mx-karta-popis {
+  margin: 0;
+  color: #45586a;
+  flex-grow: 1;
+}
+
+.mx-karta-cislo {
+  margin: 0.4rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 2px dashed rgba(11, 31, 51, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.mx-karta-cislo strong {
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--mraz-900);
+}
+
+.mx-karta-cislo span {
+  font-size: 0.8rem;
+  color: #6b7d8e;
+}
+
+/* ============ DŮVĚRA / REFERENCE ============ */
+
+.mx-duvera {
+  background:
+    radial-gradient(900px 500px at 10% 0%, var(--mraz-800) 0%, transparent 55%),
+    var(--mraz-900);
+  color: var(--mraz-100);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.mx-duvera-uvod {
+  max-width: 1180px;
+  margin: 0 auto 3rem;
+}
+
+.mx-eyebrow-svetly {
+  color: var(--pena-300);
+}
+
+.mx-h2-svetly {
+  color: #fff;
+}
+
+.mx-zluta {
+  color: var(--pena-500);
+}
+
+.mx-duvera-perex {
+  max-width: 40rem;
+  margin: 0;
+  color: #c4d4e2;
+}
+
+.mx-reference {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.mx-ref {
+  background: rgba(232, 240, 246, 0.06);
+  border: 1px solid rgba(232, 240, 246, 0.12);
+  border-radius: 18px;
+  padding: 1.6rem 1.5rem;
+}
+
+.mx-ref blockquote {
+  margin: 0;
+}
+
+.mx-ref-text {
+  margin: 0 0 1.1rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #dde8f1;
+}
+
+.mx-ref-autor {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.mx-ref-jmeno {
+  font-weight: 800;
+  color: var(--pena-500);
+}
+
+.mx-ref-misto {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8fa8bd;
+}
+
+/* ============ RESPONZIVITA ============ */
+
+@media (min-width: 700px) {
+  .mx-hero {
+    padding: 2rem 2.5rem 5rem;
+  }
+
+  .mx-sluzby,
+  .mx-duvera {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .mx-sluzby-mriz {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mx-reference {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1020px) {
+  .mx-hero-grid {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 4rem;
+  }
+
+  .mx-hero-vizual {
+    max-width: 440px;
+  }
+}
