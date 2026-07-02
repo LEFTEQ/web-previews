@@ -1,0 +1,505 @@
+/* ==========================================================================
+   ROCKFOIL CENTRUM OLOMOUC — stratigrafie kamene
+   Palette:
+   --rf-slate   #2b3038  (mokrá břidlice — základ)
+   --rf-paper   #eceae4  (světlý křemen — pozadí)
+   --rf-mica    #c2833f  (podsvícený onyx / slídová měď — akcent)
+   --rf-vein    #8a8f98  (žilka v kameni — sekundární text)
+   --rf-ink     #1c2026  (nejtmavší vrstva)
+   Type: Archivo Narrow-like condensed via system stacks is unreliable →
+   使用 local-safe stacks: display = "Arial Narrow", ...; body = Georgia? Ne —
+   volíme: display: 'Haettenschweiler'…? Keep robust:
+   display: ui-sans-serif condensed fallback; body: system sans.
+   ========================================================================== */
+
+@font-face {
+  font-family: "rf-fallback-guard";
+  src: local("Arial");
+  font-display: swap;
+}
+
+:root {
+  --rf-slate: #2b3038;
+  --rf-ink: #1c2026;
+  --rf-paper: #eceae4;
+  --rf-mica: #c2833f;
+  --rf-vein: #8a8f98;
+  --rf-line: #d5d2c9;
+
+  --rf-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed",
+    "Liberation Sans Narrow", Impact, sans-serif;
+  --rf-body: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+
+  --rf-max: 72rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--rf-paper);
+  color: var(--rf-ink);
+  font-family: var(--rf-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.rf a {
+  color: inherit;
+}
+
+.rf :focus-visible {
+  outline: 3px solid var(--rf-mica);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ————— HERO ————— */
+
+.rf-hero {
+  position: relative;
+  background: var(--rf-slate);
+  color: var(--rf-paper);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.rf-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.4rem clamp(1.25rem, 5vw, 4rem);
+  border-bottom: 1px solid rgba(236, 234, 228, 0.16);
+}
+
+.rf-wordmark {
+  font-family: var(--rf-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.rf-wordmark em {
+  font-style: normal;
+  color: var(--rf-mica);
+}
+
+.rf-wordmark-sub {
+  font-family: var(--rf-body);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--rf-vein);
+}
+
+.rf-hero-tel {
+  font-family: var(--rf-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  border-bottom: 2px solid var(--rf-mica);
+  padding-bottom: 0.15rem;
+  white-space: nowrap;
+}
+
+.rf-hero-tel:hover {
+  color: var(--rf-mica);
+}
+
+.rf-hero-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2.5rem, 7vh, 5rem) clamp(1.25rem, 5vw, 4rem) clamp(2rem, 5vh, 3rem);
+  max-width: var(--rf-max);
+}
+
+.rf-eyebrow {
+  margin: 0 0 1.2rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--rf-mica);
+}
+
+.rf-h1 {
+  margin: 0;
+  font-family: var(--rf-display);
+  font-weight: 700;
+  font-size: clamp(3.4rem, 13vw, 9.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.rf-h1-line {
+  display: block;
+  animation: rf-split 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Vrstvy nadpisu se "odštípávají" jako kámen — každá řádka jiná vrstva */
+.rf-h1-a {
+  color: var(--rf-paper);
+  animation-delay: 0.05s;
+}
+
+.rf-h1-b {
+  color: var(--rf-vein);
+  padding-left: clamp(1rem, 6vw, 5rem);
+  animation-delay: 0.18s;
+}
+
+.rf-h1-c {
+  color: var(--rf-mica);
+  padding-left: clamp(2rem, 12vw, 10rem);
+  animation-delay: 0.31s;
+}
+
+@keyframes rf-split {
+  from {
+    opacity: 0;
+    transform: translateX(-1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rf-hero-lead {
+  margin: 1.8rem 0 0;
+  max-width: 34rem;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  color: #cfd2d8;
+  animation: rf-fade 0.8s ease 0.5s both;
+}
+
+.rf-hero-actions {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem;
+  animation: rf-fade 0.8s ease 0.65s both;
+}
+
+@keyframes rf-fade {
+  from {
+    opacity: 0;
+    transform: translateY(0.6rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rf-btn {
+  display: inline-block;
+  font-family: var(--rf-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 3px;
+  transition: transform 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+}
+
+.rf-btn-solid {
+  background: var(--rf-mica);
+  color: var(--rf-ink);
+}
+
+.rf-btn-solid:hover {
+  background: #d69451;
+  transform: translateY(-2px);
+}
+
+.rf-hours {
+  font-size: 0.85rem;
+  color: var(--rf-vein);
+  max-width: 20rem;
+}
+
+/* ————— SIGNATURE: stratigrafie ————— */
+
+.rf-strata {
+  display: flex;
+  flex-direction: column;
+}
+
+.rf-stratum {
+  height: clamp(1.6rem, 4vh, 2.6rem);
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(1.25rem, 5vw, 4rem);
+  transform-origin: left center;
+  animation: rf-layer 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rf-stratum span {
+  font-size: 0.62rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(236, 234, 228, 0.55);
+  mix-blend-mode: luminosity;
+}
+
+@keyframes rf-layer {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Každá vrstva má jinou horninu, jiný sklon zubaté "štípané" hrany */
+.rf-s1 { background: #3f4650; animation-delay: 0.45s; }
+.rf-s2 { background: #565d66; animation-delay: 0.55s; }
+.rf-s3 { background: var(--rf-mica); animation-delay: 0.65s; }
+.rf-s3 span { color: rgba(28, 32, 38, 0.65); mix-blend-mode: normal; }
+.rf-s4 { background: #b9a888; animation-delay: 0.75s; }
+.rf-s4 span { color: rgba(28, 32, 38, 0.55); mix-blend-mode: normal; }
+.rf-s5 { background: #8a7d6b; animation-delay: 0.85s; }
+
+/* ————— SECTIONS ————— */
+
+.rf-section {
+  padding: clamp(3.5rem, 9vw, 6.5rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.rf-section-head {
+  max-width: var(--rf-max);
+  margin: 0 auto 2.8rem;
+}
+
+.rf-h2 {
+  margin: 0;
+  font-family: var(--rf-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4.5vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  max-width: 40rem;
+}
+
+.rf-h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--rf-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* — sortiment — */
+
+.rf-sortiment {
+  background: var(--rf-paper);
+}
+
+.rf-grid {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: var(--rf-max);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1px;
+  background: var(--rf-line);
+  border: 1px solid var(--rf-line);
+}
+
+.rf-card {
+  background: var(--rf-paper);
+  padding: 1.8rem 1.6rem 2rem;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.rf-card:hover {
+  background: #f4f2ed;
+}
+
+/* barevný "vzorek horniny" — kód jako na skladové etiketě */
+.rf-card-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  margin-bottom: 1.1rem;
+  border-radius: 2px;
+  font-family: var(--rf-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.rf-card-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #494f58;
+}
+
+.rf-note {
+  max-width: var(--rf-max);
+  margin: 1.6rem auto 0;
+  font-size: 0.88rem;
+  color: var(--rf-vein);
+}
+
+/* — sklad / důvěra — */
+
+.rf-sklad {
+  background: var(--rf-ink);
+  color: var(--rf-paper);
+}
+
+.rf-eyebrow-light {
+  color: var(--rf-mica);
+}
+
+.rf-h2-light {
+  color: var(--rf-paper);
+}
+
+.rf-h3-light {
+  color: var(--rf-paper);
+}
+
+.rf-facts {
+  max-width: var(--rf-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 2.4rem;
+}
+
+.rf-fact {
+  border-top: 3px solid var(--rf-mica);
+  padding-top: 1.1rem;
+}
+
+.rf-fact-num {
+  margin: 0;
+  font-family: var(--rf-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.rf-fact-label {
+  margin: 0.4rem 0 0.9rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rf-vein);
+}
+
+.rf-fact-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #b9bdc4;
+}
+
+.rf-visit {
+  max-width: var(--rf-max);
+  margin: 3.2rem auto 0;
+  padding-top: 2.2rem;
+  border-top: 1px solid rgba(236, 234, 228, 0.16);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+}
+
+.rf-visit-text {
+  margin: 0;
+  max-width: 36rem;
+  font-size: 0.95rem;
+  color: #b9bdc4;
+}
+
+.rf-btn-light {
+  background: transparent;
+  color: var(--rf-paper);
+  border: 2px solid var(--rf-mica);
+}
+
+.rf-btn-light:hover {
+  background: var(--rf-mica);
+  color: var(--rf-ink);
+  transform: translateY(-2px);
+}
+
+/* ————— REDUCED MOTION ————— */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .rf-h1-line,
+  .rf-hero-lead,
+  .rf-hero-actions,
+  .rf-stratum {
+    animation: none;
+  }
+  .rf-btn,
+  .rf-card {
+    transition: none;
+  }
+}
+
+/* ————— MOBILE ————— */
+
+@media (max-width: 40rem) {
+  .rf-hero-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .rf-h1-b {
+    padding-left: 0.8rem;
+  }
+
+  .rf-h1-c {
+    padding-left: 1.6rem;
+  }
+
+  .rf-visit {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rf-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
