@@ -1,0 +1,482 @@
+:root {
+  /* paleta odvozená z řeznického světa: masitá červeň, špalek, řeznický papír, tuk/slonovina */
+  --meat: #8f1d2c;        /* zrající hovězí, hlavní barva */
+  --meat-deep: #5e1019;   /* stín v červeni */
+  --paper: #efe4d3;       /* řeznický balicí papír */
+  --paper-warm: #e6d5bc;  /* ohmataný okraj papíru */
+  --block: #2b2320;       /* dubový špalek, text */
+  --fat: #f7f1e4;         /* slonovina / tuk */
+  --stamp: #1f4e46;       /* zelené veterinární razítko — akcent */
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--block);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.plot a { color: inherit; }
+
+.plot :focus-visible {
+  outline: 3px solid var(--stamp);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  background:
+    /* jemný pruh "řeznického papíru" */
+    repeating-linear-gradient(
+      -55deg,
+      transparent 0 34px,
+      rgba(43, 35, 32, 0.045) 34px 36px
+    ),
+    linear-gradient(170deg, var(--paper) 0%, var(--paper-warm) 100%);
+  padding: 1.5rem 1.25rem 4.5rem;
+  overflow: hidden;
+  border-bottom: 10px solid var(--meat);
+}
+
+.hero::after {
+  /* zubatý spodní okraj utrženého papíru nad červeným pruhem */
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 14px;
+  background: var(--meat);
+  clip-path: polygon(
+    0 100%, 0 60%, 3% 20%, 6% 65%, 9% 25%, 12% 60%, 15% 15%, 18% 55%,
+    21% 30%, 24% 70%, 27% 20%, 30% 60%, 33% 25%, 36% 65%, 39% 15%,
+    42% 55%, 45% 30%, 48% 70%, 51% 20%, 54% 60%, 57% 25%, 60% 65%,
+    63% 15%, 66% 55%, 69% 30%, 72% 70%, 75% 20%, 78% 60%, 81% 25%,
+    84% 65%, 87% 15%, 90% 55%, 93% 30%, 96% 70%, 100% 20%, 100% 100%
+  );
+}
+
+.hero-top {
+  max-width: 68rem;
+  margin: 0 auto 2.75rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.wordmark { display: flex; flex-direction: column; line-height: 1; }
+
+.wordmark-main {
+  font-family: "Arial Black", "Franklin Gothic Medium", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 2.1rem;
+  letter-spacing: 0.32em;
+  color: var(--meat);
+  /* "plot" = laťky: svislé linky mezi písmeny nese samotný prostrk + podtržení laťkami */
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--meat) 0 0.72em,
+    transparent 0.72em 1.04em
+  );
+  background-size: 100% 4px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 8px;
+}
+
+.wordmark-sub {
+  margin-top: 0.45rem;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--block);
+}
+
+.hero-phone {
+  text-decoration: none;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.hero-phone-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--stamp);
+  font-family: Arial, sans-serif;
+}
+
+.hero-phone-number {
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 1.25rem;
+  color: var(--meat);
+}
+
+.hero-phone:hover .hero-phone-number { color: var(--meat-deep); }
+
+.hero-body {
+  max-width: 68rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  font-family: Arial, sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--stamp);
+  margin: 0 0 1.25rem;
+}
+
+.hero-title {
+  margin: 0 0 1.5rem;
+  font-family: "Arial Black", "Franklin Gothic Medium", Arial, sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.6rem, 9vw, 6rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: var(--block);
+}
+
+.hero-title .line { display: block; }
+.hero-title .accent { color: var(--meat); }
+
+.line {
+  opacity: 0;
+  transform: translateY(0.35em);
+  animation: rise 0.6s ease-out forwards;
+}
+.line-1 { animation-delay: 0.05s; }
+.line-2 { animation-delay: 0.18s; }
+.line-3 { animation-delay: 0.31s; }
+
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-lede {
+  max-width: 34rem;
+  font-size: 1.15rem;
+  margin: 0 0 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: 3px;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--meat);
+  color: var(--fat);
+  border: 2px solid var(--meat);
+}
+.btn-solid:hover { background: var(--meat-deep); border-color: var(--meat-deep); }
+
+.btn-line {
+  border: 2px solid var(--block);
+  color: var(--block);
+  background: transparent;
+}
+.btn-line:hover { background: var(--block); color: var(--fat); }
+
+.btn-block { display: block; text-align: center; margin-top: 1.25rem; }
+
+/* signature: cedulka "dnes na pultu" jako ručně psaná tabule/účtenka, mírně natočená */
+.hero-ticket {
+  position: relative;
+  max-width: 68rem;
+  margin: 3rem auto 0;
+  background: var(--fat);
+  border: 1px solid rgba(43, 35, 32, 0.25);
+  box-shadow: 4px 5px 0 rgba(43, 35, 32, 0.18);
+  padding: 1.1rem 1.3rem 1.3rem;
+  transform: rotate(-1.2deg);
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: var(--block);
+  animation: rise 0.6s ease-out 0.45s forwards;
+  opacity: 0;
+}
+
+.ticket-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.3rem 0;
+}
+
+.ticket-dots {
+  flex: 1;
+  border-bottom: 2px dotted rgba(43, 35, 32, 0.4);
+}
+
+.ticket-stamp {
+  position: absolute;
+  top: -0.8rem;
+  right: 1rem;
+  transform: rotate(6deg);
+  border: 3px solid var(--stamp);
+  color: var(--stamp);
+  border-radius: 50px;
+  padding: 0.25rem 0.8rem;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  background: var(--fat);
+}
+
+/* ============ PULT ============ */
+
+.counter {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 4rem 1.25rem 3rem;
+}
+
+.section-head { max-width: 38rem; margin-bottom: 2.5rem; }
+
+.section-head h2,
+.shop h2 {
+  font-family: "Arial Black", "Franklin Gothic Medium", Arial, sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+  line-height: 1.1;
+  margin: 0 0 1rem;
+  color: var(--block);
+}
+
+.section-head p { margin: 0; }
+
+.cuts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+
+.cut {
+  background: var(--fat);
+  border: 1px solid rgba(43, 35, 32, 0.15);
+  border-top: 5px solid var(--meat);
+  padding: 1.3rem 1.4rem 1.4rem;
+  border-radius: 3px;
+  position: relative;
+}
+
+.cut h3 {
+  margin: 0 0 0.4rem;
+  font-family: Arial, sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1rem;
+  color: var(--meat);
+}
+
+.cut p { margin: 0; font-size: 0.98rem; }
+
+.cut-mark {
+  position: absolute;
+  top: 1.35rem;
+  right: 1.3rem;
+  width: 22px;
+  height: 10px;
+  /* miniatura laťkového plotu — podpis značky v každé kartě */
+  background: repeating-linear-gradient(
+    90deg,
+    var(--paper-warm) 0 4px,
+    transparent 4px 7px
+  );
+}
+
+.cut-order {
+  border-top-color: var(--stamp);
+  background: var(--stamp);
+  color: var(--fat);
+}
+
+.cut-order h3 { color: var(--fat); }
+
+.cut-order-link {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  color: var(--fat);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.cut-order-link:hover { text-decoration: none; }
+
+/* ============ KRÁM ============ */
+
+.shop {
+  background: var(--block);
+  color: var(--fat);
+  padding: 4rem 1.25rem;
+  border-top: 10px solid var(--meat);
+}
+
+.shop-grid {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.shop h2 { color: var(--fat); }
+
+.shop-story p { max-width: 36rem; }
+
+.shop-claims {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+}
+
+.shop-claims li {
+  padding: 0.55rem 0 0.55rem 1.6rem;
+  position: relative;
+  border-bottom: 1px dotted rgba(247, 241, 228, 0.3);
+}
+
+.shop-claims li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.05rem;
+  width: 14px;
+  height: 6px;
+  background: repeating-linear-gradient(90deg, var(--meat) 0 3px, transparent 3px 5px);
+}
+
+.shop-card {
+  background: var(--fat);
+  color: var(--block);
+  border-radius: 4px;
+  padding: 1.75rem 1.6rem;
+  box-shadow: 5px 6px 0 rgba(0, 0, 0, 0.35);
+}
+
+.shop-card h3 {
+  margin: 0 0 1rem;
+  font-family: Arial, sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 1rem;
+  color: var(--meat);
+}
+
+.hours {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.hours th {
+  text-align: left;
+  font-weight: 400;
+  padding: 0.35rem 0;
+}
+
+.hours td {
+  text-align: right;
+  padding: 0.35rem 0;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 700;
+}
+
+.hours tr + tr { border-top: 1px dotted rgba(43, 35, 32, 0.3); }
+
+.hours .closed td { color: var(--meat); }
+
+.shop-address {
+  font-style: normal;
+  margin-top: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.shop-map-link {
+  display: block;
+  text-align: center;
+  margin-top: 0.9rem;
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+  color: var(--stamp);
+  font-weight: 700;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (min-width: 640px) {
+  .cuts { grid-template-columns: 1fr 1fr; }
+  .hero { padding: 2rem 2rem 5rem; }
+  .hero-ticket { max-width: 26rem; margin-left: 0; }
+}
+
+@media (min-width: 960px) {
+  .cuts { grid-template-columns: repeat(3, 1fr); }
+  .shop-grid { grid-template-columns: 1.3fr 1fr; align-items: start; }
+  .hero-body { padding-right: 2rem; }
+  .hero-ticket {
+    position: absolute;
+    right: max(2rem, calc((100% - 68rem) / 2));
+    bottom: 4.5rem;
+    margin: 0;
+    width: 21rem;
+  }
+  .hero { padding-bottom: 7rem; }
+}
+
+/* ============ MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .line,
+  .hero-ticket {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .hero-ticket { transform: rotate(-1.2deg); }
+  .btn { transition: none; }
+}
