@@ -1,0 +1,561 @@
+/* =====================================================
+   DACH MORAVIA — klempířství Ostrava
+   Palette drawn from the trade itself:
+   - zinek (weathered titanium-zinc grey-blue)
+   - měď (copper — the noble metal they prefer)
+   - patina (aged copper verdigris, used sparingly)
+   - břidlice (slate-dark ground)
+   Signature: the "falc" — a standing-seam vertical line
+   that folds through the wordmark, hero headline and
+   service cards. Structure = the seam of the roof.
+   ===================================================== */
+
+:root {
+  --dm-slate: #232a30;      /* břidlice — deep blue-grey ground */
+  --dm-zinc: #9aa7ae;       /* titanzinek */
+  --dm-zinc-light: #e8ecee; /* světlý plech */
+  --dm-copper: #b4602f;     /* měď, čerstvě ohnutá */
+  --dm-copper-deep: #8a4520;
+  --dm-patina: #5f8f7f;     /* měděnka — accent, rare */
+  --dm-paper: #f2f4f5;      /* chladný, kovový podklad — ne krémový */
+  --dm-ink: #1b2127;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--dm-paper);
+  color: var(--dm-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Display face: condensed grotesque — the stencil/technical
+   register of sheet-metal workshops. Body stays a warm serif
+   so the page reads human, not industrial-cold. */
+.dm h1,
+.dm h2,
+.dm h3,
+.dm-wordmark,
+.dm-eyebrow,
+.dm-btn,
+.dm-service__gauge,
+.dm-topbar__tel {
+  font-family: "Arial Narrow", "Helvetica Neue Condensed", Impact,
+    "Franklin Gothic Medium", Arial, sans-serif;
+}
+
+.dm img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.dm a {
+  color: var(--dm-copper-deep);
+}
+
+.dm a:focus-visible,
+.dm-btn:focus-visible {
+  outline: 3px solid var(--dm-copper);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- shared ---------- */
+
+.dm-eyebrow {
+  margin: 0 0 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dm-zinc);
+}
+
+.dm-eyebrow--dark {
+  color: var(--dm-copper);
+}
+
+.dm-section {
+  padding: 4.5rem 1.25rem;
+}
+
+.dm-section h2 {
+  margin: 0 0 1.2rem;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* ---------- HERO ---------- */
+
+.dm-hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  color: var(--dm-zinc-light);
+  overflow: hidden;
+}
+
+.dm-hero__media,
+.dm-hero__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.dm-hero__media img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.dm-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(27, 33, 39, 0.94) 0%,
+    rgba(27, 33, 39, 0.72) 45%,
+    rgba(27, 33, 39, 0.35) 100%
+  );
+}
+
+.dm-hero__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.dm-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(154, 167, 174, 0.35);
+}
+
+/* Wordmark: DACH | MORAVIA folded around a copper seam */
+.dm-wordmark {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.dm-wordmark em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--dm-zinc);
+}
+
+.dm-wordmark__seam {
+  position: absolute;
+  left: 3.05em;
+  top: -0.25em;
+  bottom: -0.25em;
+  width: 3px;
+  background: var(--dm-copper);
+  transform: skewX(-12deg);
+}
+
+.dm-topbar__tel {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-size: 1.05rem;
+  border-bottom: 2px solid var(--dm-copper);
+  padding-bottom: 2px;
+  white-space: nowrap;
+}
+
+.dm-topbar__tel:hover {
+  color: var(--dm-copper);
+}
+
+.dm-hero__copy {
+  margin-top: auto;
+  padding-top: 3.5rem;
+  max-width: 44rem;
+}
+
+.dm-hero__title {
+  margin: 0 0 1.2rem;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  line-height: 0.98;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #fff;
+}
+
+/* The signature: "na falc" typeset as a folded seam —
+   copper keyline running through the words, slight skew
+   like a standing seam viewed down the roof pitch. */
+.dm-fold {
+  position: relative;
+  display: inline-block;
+  color: var(--dm-copper);
+  padding: 0 0.18em;
+  transform: skewX(-6deg);
+}
+
+.dm-fold::before,
+.dm-fold::after {
+  content: "";
+  position: absolute;
+  top: 0.06em;
+  bottom: 0.02em;
+  width: 3px;
+  background: var(--dm-copper);
+}
+
+.dm-fold::before {
+  left: -0.08em;
+}
+
+.dm-fold::after {
+  right: -0.08em;
+  background: var(--dm-patina);
+}
+
+.dm-hero__lead {
+  margin: 0 0 1.8rem;
+  font-size: 1.1rem;
+  max-width: 36rem;
+  color: var(--dm-zinc-light);
+}
+
+.dm-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.dm-btn {
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.dm-btn--full {
+  background: var(--dm-copper);
+  color: #fff;
+}
+
+.dm-btn--full:hover {
+  background: var(--dm-copper-deep);
+  transform: translateY(-2px);
+}
+
+.dm-btn--line {
+  border: 2px solid var(--dm-zinc);
+  color: #fff;
+}
+
+.dm-btn--line:hover {
+  border-color: var(--dm-copper);
+  color: var(--dm-copper);
+}
+
+.dm-hero__facts {
+  list-style: none;
+  margin: 3rem 0 0;
+  padding: 1.3rem 0 0;
+  border-top: 1px solid rgba(154, 167, 174, 0.35);
+  display: grid;
+  gap: 1.1rem;
+}
+
+.dm-hero__facts li {
+  display: grid;
+  gap: 0.15rem;
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--dm-copper);
+}
+
+.dm-hero__facts strong {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.dm-hero__facts span {
+  font-size: 0.92rem;
+  color: var(--dm-zinc);
+}
+
+/* page-load: one orchestrated moment — copy rises, facts follow */
+@media (prefers-reduced-motion: no-preference) {
+  .dm-hero__copy,
+  .dm-hero__facts {
+    animation: dm-rise 0.8s ease-out both;
+  }
+
+  .dm-hero__facts {
+    animation-delay: 0.25s;
+  }
+
+  @keyframes dm-rise {
+    from {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ---------- SLUŽBY ---------- */
+
+.dm-services {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.dm-section__head {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.dm-services__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* Each card carries the seam on its left edge; the "gauge"
+   label names the real material spec (plate thickness /
+   krytina) — structure that encodes the trade, not décor. */
+.dm-service {
+  position: relative;
+  background: #fff;
+  border-left: 3px solid var(--dm-copper);
+  padding: 1.6rem 1.5rem 1.5rem;
+  box-shadow: 0 1px 0 rgba(35, 42, 48, 0.08),
+    0 8px 24px rgba(35, 42, 48, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dm-service:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 2px 0 rgba(35, 42, 48, 0.08),
+    0 14px 32px rgba(35, 42, 48, 0.12);
+}
+
+.dm-service__gauge {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.3rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dm-zinc);
+  border: 1px solid var(--dm-zinc);
+  border-radius: 2px;
+  padding: 0.15rem 0.5rem;
+}
+
+.dm-service h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-right: 5.5rem;
+}
+
+.dm-service p {
+  margin: 0;
+  font-size: 1rem;
+  color: #3c454d;
+}
+
+.dm-services__note {
+  margin: 2.2rem 0 0;
+  max-width: 44rem;
+  font-size: 1.05rem;
+  padding-left: 0.95rem;
+  border-left: 3px solid var(--dm-patina);
+}
+
+/* ---------- O FIRMĚ ---------- */
+
+.dm-about {
+  background: var(--dm-slate);
+  color: var(--dm-zinc-light);
+}
+
+.dm-about .dm-eyebrow--dark {
+  color: var(--dm-copper);
+}
+
+.dm-about h2 {
+  color: #fff;
+}
+
+.dm-about__grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+}
+
+.dm-about__media img {
+  width: 100%;
+  border-radius: 2px;
+}
+
+.dm-about__media {
+  margin: 0;
+}
+
+.dm-about__media figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.88rem;
+  color: var(--dm-zinc);
+  padding-left: 0.8rem;
+  border-left: 3px solid var(--dm-copper);
+}
+
+.dm-about__copy p {
+  max-width: 38rem;
+}
+
+.dm-about__points {
+  list-style: none;
+  margin: 1.6rem 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.dm-about__points li {
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--dm-copper);
+  max-width: 38rem;
+}
+
+.dm-about__points strong {
+  color: #fff;
+}
+
+.dm-about__quote {
+  margin: 2rem 0;
+  padding: 1.3rem 1.4rem;
+  background: rgba(154, 167, 174, 0.1);
+  border-left: 3px solid var(--dm-patina);
+  border-radius: 2px;
+  max-width: 38rem;
+}
+
+.dm-about__quote p {
+  margin: 0 0 0.5rem;
+  font-style: italic;
+  font-size: 1.08rem;
+}
+
+.dm-about__quote cite {
+  font-style: normal;
+  font-size: 0.9rem;
+  color: var(--dm-zinc);
+}
+
+.dm-about__contact {
+  font-size: 1.08rem;
+}
+
+.dm-about__contact a {
+  color: var(--dm-copper);
+  font-weight: 700;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.dm-about__contact a:hover {
+  color: #d07a45;
+}
+
+/* ---------- responsive ---------- */
+
+@media (min-width: 640px) {
+  .dm-hero__facts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .dm-services__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .dm-section {
+    padding: 6rem 2rem;
+  }
+
+  .dm-hero__inner {
+    padding: 2rem 2rem 3.5rem;
+  }
+
+  .dm-about__grid {
+    grid-template-columns: 5fr 6fr;
+    align-items: start;
+  }
+
+  .dm-about__media {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .dm *,
+  .dm *::before,
+  .dm *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
