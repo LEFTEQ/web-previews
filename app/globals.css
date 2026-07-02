@@ -1,0 +1,600 @@
+/* ============================================================
+   NOVIS reality — Plzeň · správa nemovitostí
+   Palette: katastrální modř + plzeňská cihla + papír map
+   Type: system stack tuned — display: condensed grotesque feel
+   Signature: katastrální parcelace (SVG mřížka parcel) v hero
+   ============================================================ */
+
+:root {
+  --nv-ink: #14243b;        /* katastrální inkoust — tmavá modř */
+  --nv-blue: #1f4e79;       /* razítková modrá */
+  --nv-paper: #eef2f0;      /* papír katastrální mapy */
+  --nv-white: #ffffff;
+  --nv-brick: #c8502e;      /* plzeňská cihla — akcent */
+  --nv-mist: #b9c6d6;       /* linka parcel */
+
+  --nv-font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", system-ui, sans-serif;
+  --nv-font-body: Georgia, "Times New Roman", serif;
+  --nv-font-mono: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--nv-paper);
+  color: var(--nv-ink);
+  font-family: var(--nv-font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--nv-brick);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.nv-hero {
+  position: relative;
+  background: var(--nv-ink);
+  color: var(--nv-paper);
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.nv-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.4rem 1.25rem;
+  position: relative;
+  z-index: 2;
+}
+
+.nv-wordmark {
+  font-family: var(--nv-font-display);
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.nv-wordmark-novis {
+  font-weight: 800;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--nv-white);
+}
+
+.nv-wordmark-reality {
+  font-family: var(--nv-font-mono);
+  font-size: 0.95rem;
+  color: var(--nv-brick);
+  letter-spacing: 0.28em;
+  text-transform: lowercase;
+}
+
+.nv-hero-tel {
+  font-family: var(--nv-font-mono);
+  font-size: 0.95rem;
+  color: var(--nv-paper);
+  text-decoration: none;
+  border-bottom: 1px solid var(--nv-brick);
+  padding-bottom: 2px;
+  white-space: nowrap;
+}
+
+.nv-hero-tel:hover {
+  color: var(--nv-brick);
+}
+
+.nv-hero-body {
+  position: relative;
+  z-index: 2;
+  padding: 3.5rem 1.25rem 2rem;
+  max-width: 46rem;
+  flex: 1;
+}
+
+.nv-hero-eyebrow {
+  font-family: var(--nv-font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nv-mist);
+  margin: 0 0 1.5rem;
+}
+
+.nv-hero-title {
+  font-family: var(--nv-font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(3.2rem, 12vw, 8.5rem);
+  line-height: 0.94;
+  letter-spacing: 0.01em;
+  margin: 0 0 1.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.nv-line {
+  display: block;
+}
+
+.nv-line-1 {
+  color: var(--nv-white);
+}
+
+.nv-line-2 {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--nv-mist);
+}
+
+.nv-line-3 {
+  color: var(--nv-brick);
+}
+
+.nv-dot {
+  color: var(--nv-white);
+}
+
+.nv-hero-sub {
+  font-size: 1.1rem;
+  max-width: 34rem;
+  color: var(--nv-mist);
+  margin: 0 0 2.25rem;
+}
+
+.nv-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.nv-btn {
+  font-family: var(--nv-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: 0.95rem 1.7rem;
+  border-radius: 2px;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.nv-btn-solid {
+  background: var(--nv-brick);
+  color: var(--nv-white);
+}
+
+.nv-btn-solid:hover {
+  background: #a83f22;
+  transform: translateY(-2px);
+}
+
+.nv-btn-ghost {
+  border: 1px solid var(--nv-mist);
+  color: var(--nv-paper);
+}
+
+.nv-btn-ghost:hover {
+  border-color: var(--nv-brick);
+  color: var(--nv-brick);
+}
+
+/* --- signature: parcelace --- */
+
+.nv-parcely {
+  position: absolute;
+  right: -8%;
+  bottom: 0;
+  width: min(72vw, 640px);
+  height: auto;
+  color: var(--nv-mist);
+  opacity: 0.5;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.nv-parcely-lines path {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: nv-draw 2.4s ease-out forwards;
+}
+
+.nv-parcely-lines path:nth-child(2) { animation-delay: 0.2s; }
+.nv-parcely-lines path:nth-child(3) { animation-delay: 0.35s; }
+.nv-parcely-lines path:nth-child(4) { animation-delay: 0.5s; }
+.nv-parcely-lines path:nth-child(5) { animation-delay: 0.65s; }
+.nv-parcely-lines path:nth-child(6) { animation-delay: 0.8s; }
+.nv-parcely-lines path:nth-child(7) { animation-delay: 0.95s; }
+.nv-parcely-lines path:nth-child(8) { animation-delay: 1.1s; }
+
+.nv-parcely-fill path {
+  fill: var(--nv-brick);
+  opacity: 0;
+  animation: nv-fade 1s ease-out 1.6s forwards;
+}
+
+.nv-parcely-num text {
+  fill: var(--nv-mist);
+  font-family: var(--nv-font-mono);
+  opacity: 0;
+  animation: nv-fade 0.8s ease-out 2s forwards;
+}
+
+@keyframes nv-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes nv-fade {
+  to { opacity: 0.35; }
+}
+
+.nv-hero-body .nv-hero-eyebrow,
+.nv-hero-title .nv-line,
+.nv-hero-sub,
+.nv-hero-cta {
+  animation: nv-rise 0.7s ease-out both;
+}
+
+.nv-hero-title .nv-line-1 { animation-delay: 0.1s; }
+.nv-hero-title .nv-line-2 { animation-delay: 0.22s; }
+.nv-hero-title .nv-line-3 { animation-delay: 0.34s; }
+.nv-hero-sub { animation-delay: 0.5s; }
+.nv-hero-cta { animation-delay: 0.62s; }
+
+@keyframes nv-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nv-hero-strip {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(185, 198, 214, 0.3);
+  padding: 0.9rem 1.25rem;
+  font-family: var(--nv-font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--nv-mist);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.nv-strip-sep {
+  color: var(--nv-brick);
+}
+
+/* ============ SEKCE OBECNĚ ============ */
+
+.nv-eyebrow {
+  font-family: var(--nv-font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--nv-brick);
+  margin: 0 0 0.75rem;
+}
+
+.nv-section-head h2 {
+  font-family: var(--nv-font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  line-height: 1.05;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+/* ============ SLUŽBY ============ */
+
+.nv-sluzby {
+  padding: 4.5rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.nv-sluzby .nv-section-head {
+  margin-bottom: 3rem;
+}
+
+.nv-sluzby-grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.nv-sluzby-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.nv-sluzba {
+  padding: 1.6rem 0;
+  border-top: 1px solid var(--nv-mist);
+}
+
+.nv-sluzba:last-child {
+  border-bottom: 1px solid var(--nv-mist);
+}
+
+.nv-sluzba-tag {
+  font-family: var(--nv-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nv-blue);
+  margin: 0 0 0.4rem;
+}
+
+.nv-sluzba h3 {
+  font-family: var(--nv-font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  margin: 0 0 0.6rem;
+  letter-spacing: 0.02em;
+}
+
+.nv-sluzba-popis {
+  margin: 0 0 0.7rem;
+  color: #3a4a60;
+  max-width: 38rem;
+}
+
+.nv-sluzba-detail {
+  font-family: var(--nv-font-mono);
+  font-size: 0.82rem;
+  color: var(--nv-brick);
+  margin: 0;
+  letter-spacing: 0.06em;
+}
+
+.nv-sluzby-figure {
+  margin: 0;
+}
+
+.nv-sluzby-figure img {
+  width: 100%;
+  border: 1px solid var(--nv-mist);
+  border-radius: 3px;
+}
+
+.nv-sluzby-figure figcaption {
+  font-family: var(--nv-font-mono);
+  font-size: 0.8rem;
+  color: var(--nv-blue);
+  margin-top: 0.75rem;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+/* ============ DŮVĚRA + NABÍDKA ============ */
+
+.nv-duvera {
+  background: var(--nv-white);
+  border-top: 4px solid var(--nv-ink);
+  padding: 4.5rem 1.25rem;
+}
+
+.nv-duvera > * {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nv-duvera .nv-section-head {
+  margin-bottom: 2.5rem;
+}
+
+.nv-nabidky {
+  list-style: none;
+  margin: 0 auto 4rem;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.nv-nabidka {
+  border: 1px solid var(--nv-mist);
+  border-left: 4px solid var(--nv-blue);
+  border-radius: 3px;
+  padding: 1.25rem 1.4rem;
+  background: var(--nv-paper);
+  transition: transform 0.2s ease, border-left-color 0.2s ease;
+}
+
+.nv-nabidka:hover {
+  transform: translateY(-3px);
+  border-left-color: var(--nv-brick);
+}
+
+.nv-nabidka-typ {
+  font-family: var(--nv-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--nv-blue);
+  margin: 0 0 0.4rem;
+}
+
+.nv-nabidka-misto {
+  font-family: var(--nv-font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  margin: 0 0 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.nv-nabidka-radek {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-family: var(--nv-font-mono);
+  font-size: 0.9rem;
+}
+
+.nv-nabidka-cena {
+  color: var(--nv-brick);
+  font-weight: 700;
+}
+
+/* --- o nás --- */
+
+.nv-onas {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.nv-onas-figure {
+  margin: 0;
+}
+
+.nv-onas-figure img {
+  width: 100%;
+  border: 1px solid var(--nv-mist);
+  border-radius: 3px;
+}
+
+.nv-onas-text h3 {
+  font-family: var(--nv-font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  line-height: 1.1;
+  margin: 0 0 1rem;
+}
+
+.nv-onas-text > p {
+  color: #3a4a60;
+  margin: 0 0 1.25rem;
+}
+
+.nv-onas-body {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.nv-onas-body li {
+  padding-left: 1.1rem;
+  border-left: 3px solid var(--nv-brick);
+  color: #3a4a60;
+}
+
+.nv-onas-body strong {
+  color: var(--nv-ink);
+}
+
+.nv-onas-adresa {
+  font-family: var(--nv-font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  color: var(--nv-blue);
+}
+
+/* ============ RESPONZIVITA ============ */
+
+@media (min-width: 640px) {
+  .nv-hero-top {
+    padding: 1.6rem 3rem;
+  }
+
+  .nv-hero-body {
+    padding: 4.5rem 3rem 2rem;
+  }
+
+  .nv-hero-strip {
+    padding: 1rem 3rem;
+  }
+
+  .nv-nabidky {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .nv-sluzby-grid {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+  }
+
+  .nv-sluzby-figure {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .nv-onas {
+    grid-template-columns: 1fr 1.15fr;
+    align-items: center;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .nv-parcely-lines path,
+  .nv-parcely-fill path,
+  .nv-parcely-num text,
+  .nv-hero-body .nv-hero-eyebrow,
+  .nv-hero-title .nv-line,
+  .nv-hero-sub,
+  .nv-hero-cta {
+    animation: none;
+  }
+
+  .nv-parcely-lines path {
+    stroke-dashoffset: 0;
+  }
+
+  .nv-parcely-fill path,
+  .nv-parcely-num text {
+    opacity: 0.35;
+  }
+
+  .nv-btn,
+  .nv-nabidka {
+    transition: none;
+  }
+}
