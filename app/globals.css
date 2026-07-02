@@ -1,0 +1,558 @@
+:root {
+  /* Paleta z betonu a stavby: mokrá zálivka, vyzrálý beton, bednicí překližka, signální oranž vytyčovací šňůry */
+  --beton-mokry: #23262a; /* čerstvě zavibrovaný beton */
+  --beton-zraly: #b9bcbd; /* vyzrálá deska */
+  --beton-svetly: #e8e9e7; /* zahlazený povrch */
+  --overlak: #f2f3f1; /* podklad stránky */
+  --sig: #ff5a1f; /* signální sprej / vytyčovací šňůra */
+  --ocel: #4a4f55; /* armatura */
+
+  --disp: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", "Arial", sans-serif;
+  --body: Georgia, "Times New Roman", serif;
+  --mono: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--overlak);
+  color: var(--beton-mokry);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ub a:focus-visible,
+.ub .btn:focus-visible {
+  outline: 3px solid var(--sig);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =========================================================
+   HERO — typografická deska: mokrý beton nahoře, tuhnoucí dole
+   ========================================================= */
+.hero {
+  position: relative;
+  background: var(--beton-mokry);
+  color: var(--beton-svetly);
+  padding: 1.25rem 1.25rem 0;
+  overflow: hidden;
+}
+
+/* jemná textura pohledového betonu — svislé stopy po bednění */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 118px,
+    rgba(255, 255, 255, 0.035) 118px,
+    rgba(255, 255, 255, 0.035) 121px
+  );
+  pointer-events: none;
+}
+
+.hero-top {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.wordmark {
+  font-family: var(--disp);
+  font-weight: 400;
+  font-size: 1.35rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--beton-svetly);
+}
+
+.wordmark b {
+  font-weight: 700;
+  color: var(--sig);
+}
+
+.wordmark-sub {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  color: var(--beton-zraly);
+  margin-top: 0.15rem;
+}
+
+.hero-tel {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  color: var(--beton-svetly);
+  text-decoration: none;
+  border-bottom: 2px solid var(--sig);
+  padding-bottom: 2px;
+}
+
+.hero-tel:hover {
+  color: var(--sig);
+}
+
+.hero-body {
+  position: relative;
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 3.5rem 0 3rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--sig);
+  margin-bottom: 1.5rem;
+  animation: nalij 0.7s ease-out both;
+}
+
+/* Titulek jako tři vrstvy betonáže — každá řada „doteče“ zvlášť */
+.hero-title {
+  font-family: var(--disp);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(3.1rem, 12vw, 8.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+
+.hero-title .row {
+  display: block;
+  animation: nalij 0.7s ease-out both;
+}
+
+.hero-title .row-1 {
+  animation-delay: 0.1s;
+  color: var(--beton-zraly);
+}
+
+.hero-title .row-2 {
+  animation-delay: 0.25s;
+  color: var(--beton-svetly);
+}
+
+.hero-title .row-3 {
+  animation-delay: 0.4s;
+  color: #fff;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--sig);
+}
+
+.hero-lead {
+  max-width: 34rem;
+  margin-top: 1.75rem;
+  font-size: 1.1rem;
+  color: var(--beton-zraly);
+  animation: nalij 0.7s ease-out 0.55s both;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 2.2rem;
+  animation: nalij 0.7s ease-out 0.7s both;
+}
+
+.btn {
+  font-family: var(--disp);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: 0.9rem 1.5rem;
+  display: inline-block;
+}
+
+.btn-fill {
+  background: var(--sig);
+  color: #1a1200;
+}
+
+.btn-fill:hover {
+  background: #ff7440;
+}
+
+.btn-line {
+  color: var(--beton-svetly);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.btn-line:hover {
+  border-color: var(--sig);
+  color: var(--sig);
+}
+
+/* Signature: hrana čerstvé zálivky — nepravidelná linie betonu tekoucího do bednění */
+.pour {
+  position: relative;
+  margin: 0 -1.25rem;
+}
+
+.pour-edge {
+  height: 46px;
+  background: var(--overlak);
+  clip-path: polygon(
+    0 100%, 0 62%, 6% 40%, 13% 58%, 21% 30%, 29% 52%, 37% 22%,
+    45% 48%, 53% 28%, 61% 55%, 69% 32%, 77% 60%, 85% 34%,
+    92% 56%, 100% 38%, 100% 100%
+  );
+}
+
+.pour-slab {
+  background: var(--overlak);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.4rem 1.5rem 1rem;
+}
+
+/* razítka jako popisky na desce sprejem / dodací list betonárny */
+.pour-mark {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--ocel);
+  text-transform: uppercase;
+}
+
+@keyframes nalij {
+  from {
+    opacity: 0;
+    transform: translateY(0.7em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   SEKCE — společné
+   ========================================================= */
+section {
+  padding: 4rem 1.25rem;
+}
+
+.sec-head {
+  max-width: 62rem;
+  margin: 0 auto 2.5rem;
+}
+
+.sec-head h2 {
+  font-family: var(--disp);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.8rem, 4.5vw, 2.9rem);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+
+.sec-head h2::after {
+  content: "";
+  display: block;
+  width: 4.5rem;
+  height: 5px;
+  background: var(--sig);
+  margin-top: 0.7rem;
+}
+
+.sec-sub {
+  margin-top: 1rem;
+  max-width: 36rem;
+  color: var(--ocel);
+}
+
+/* =========================================================
+   SLUŽBY — mřížka jako pole armatury: karty s ocelovou linkou
+   ========================================================= */
+.sluzby {
+  background: var(--overlak);
+}
+
+.sluzby-grid {
+  list-style: none;
+  max-width: 62rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--beton-zraly); /* spáry mezi deskami */
+  border: 1px solid var(--beton-zraly);
+}
+
+.karta {
+  background: #fff;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  border-top: 5px solid var(--beton-mokry);
+  transition: border-color 0.2s ease;
+}
+
+.karta:hover {
+  border-top-color: var(--sig);
+}
+
+.karta h3 {
+  font-family: var(--disp);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 1.25rem;
+}
+
+.karta p {
+  color: var(--ocel);
+  font-size: 0.98rem;
+}
+
+.karta-detail {
+  margin-top: auto;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--beton-mokry);
+  border-top: 1px dashed var(--beton-zraly);
+  padding-top: 0.7rem;
+}
+
+.karta-cenik {
+  background: var(--beton-mokry);
+  color: var(--beton-svetly);
+  border-top-color: var(--sig);
+}
+
+.karta-cenik h3 {
+  color: #fff;
+}
+
+.karta-cenik p {
+  color: var(--beton-zraly);
+}
+
+.karta-link {
+  margin-top: auto;
+  font-family: var(--disp);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.9rem;
+  color: var(--sig);
+  text-decoration: none;
+  border-bottom: 2px solid var(--sig);
+  align-self: flex-start;
+  padding-bottom: 2px;
+}
+
+.karta-link:hover {
+  color: #ff7440;
+}
+
+/* =========================================================
+   DŮVĚRA — světle šedá deska, kontakty jako popisky na plánu
+   ========================================================= */
+.duvera {
+  background: var(--beton-svetly);
+}
+
+.duvera-grid {
+  max-width: 62rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.duvod h3 {
+  font-family: var(--disp);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.15rem;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.5rem;
+  padding-left: 0.9rem;
+  border-left: 5px solid var(--sig);
+}
+
+.duvod p {
+  color: var(--ocel);
+  font-size: 0.98rem;
+  padding-left: 0.9rem;
+  border-left: 5px solid transparent;
+}
+
+.realizace {
+  max-width: 62rem;
+  margin: 3rem auto 0;
+  background: #fff;
+  border: 1px solid var(--beton-zraly);
+  padding: 1.75rem 1.5rem;
+}
+
+.realizace-h {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--sig);
+  margin-bottom: 1.2rem;
+}
+
+.realizace-list {
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+}
+
+.realizace-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  border-bottom: 1px dashed var(--beton-zraly);
+  padding-bottom: 1rem;
+}
+
+.realizace-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.realizace-list strong {
+  font-family: var(--disp);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 1.02rem;
+}
+
+.realizace-list span {
+  color: var(--ocel);
+  font-size: 0.92rem;
+}
+
+.kontakty {
+  max-width: 62rem;
+  margin: 2.5rem auto 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.kontakt {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.kontakt-role {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ocel);
+}
+
+.kontakt a {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--beton-mokry);
+  text-decoration: none;
+  border-bottom: 2px solid var(--sig);
+  align-self: flex-start;
+}
+
+.kontakt a:hover {
+  color: var(--sig);
+}
+
+.kontakt-adresa {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+/* =========================================================
+   RESPONZIVITA
+   ========================================================= */
+@media (min-width: 640px) {
+  .sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .kontakty {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .hero {
+    padding: 1.5rem 3rem 0;
+  }
+
+  .pour {
+    margin: 0 -3rem;
+  }
+
+  section {
+    padding: 5.5rem 3rem;
+  }
+
+  .sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .duvera-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* =========================================================
+   REDUKOVANÝ POHYB
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-eyebrow,
+  .hero-title .row,
+  .hero-lead,
+  .hero-cta {
+    animation: none;
+  }
+
+  .karta {
+    transition: none;
+  }
+}
