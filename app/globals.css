@@ -1,0 +1,542 @@
+/* ================================================================
+   SAŠ GLASS — sklenářství Praha 6
+   Paleta odvozená ze skla: hrana floatu je zelenkavá (glass-edge),
+   tabule je chladně modrošedá, řez diamantem = ostrá světlá linie.
+   ================================================================ */
+
+:root {
+  --sg-ice: #eef4f6;        /* světlá plocha — matné sklo */
+  --sg-pane: #dce8ec;       /* tabule skla */
+  --sg-deep: #0e2b33;       /* hlubina silného skla, text */
+  --sg-edge: #1f8a70;       /* zelená hrana floatového skla — akcent */
+  --sg-cut: #9fd8cf;        /* světlý odlesk řezu */
+  --sg-white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--sg-ice);
+  color: var(--sg-deep);
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sg h1,
+.sg h2,
+.sg h3,
+.wordmark {
+  font-family: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed",
+    Arial, sans-serif;
+  font-stretch: condensed;
+  letter-spacing: 0.01em;
+}
+
+.sg a:focus-visible,
+.sg .btn:focus-visible {
+  outline: 3px solid var(--sg-edge);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- tlačítka ---------- */
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 2px solid var(--sg-deep);
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--sg-deep);
+  color: var(--sg-white);
+}
+
+.btn-solid:hover {
+  background: var(--sg-edge);
+  border-color: var(--sg-edge);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--sg-deep);
+}
+
+.btn-ghost:hover {
+  background: var(--sg-pane);
+  transform: translateY(-2px);
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  padding: 1.25rem 1.25rem 4rem;
+  background:
+    linear-gradient(160deg, var(--sg-ice) 0%, var(--sg-pane) 55%, #cfe3e2 100%);
+  overflow: hidden;
+}
+
+/* vertikální „tabule“ v pozadí — sklad skla opřeného o stěnu */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      98deg,
+      transparent 0px,
+      transparent 120px,
+      rgba(31, 138, 112, 0.10) 120px,
+      rgba(31, 138, 112, 0.10) 124px,
+      rgba(255, 255, 255, 0.35) 124px,
+      rgba(255, 255, 255, 0.35) 127px,
+      transparent 127px,
+      transparent 240px
+    );
+  pointer-events: none;
+}
+
+.hero-top {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* logo: mezi SAŠ a GLASS prochází šikmý „řez“ */
+.wordmark-cut {
+  display: inline-block;
+  width: 3px;
+  height: 1.5em;
+  margin: 0 0.45em;
+  background: linear-gradient(var(--sg-edge), var(--sg-cut));
+  transform: skewX(-18deg);
+}
+
+.hero-top-note {
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sg-edge);
+  font-weight: 700;
+}
+
+.hero-body {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: clamp(3rem, 10vh, 7rem);
+}
+
+.hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sg-edge);
+}
+
+.hero-title {
+  margin: 0;
+  font-size: clamp(3rem, 11vw, 7.5rem);
+  line-height: 0.98;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hero-title .line {
+  display: block;
+}
+
+/* slovo „milimetr“ jako sklo: průhledný tah + zelená hrana */
+.glass-word {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--sg-edge);
+  text-shadow: 3px 3px 0 rgba(159, 216, 207, 0.55);
+}
+
+/* ---------- signature: řezná linie diamantu ---------- */
+
+.cutline {
+  position: relative;
+  height: 2.6rem;
+  margin: 2rem 0 1.5rem;
+  max-width: 720px;
+}
+
+.cutline-track {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--sg-deep) 0%, var(--sg-edge) 70%, transparent 100%);
+  transform-origin: left center;
+  animation: sg-cut 1.4s cubic-bezier(0.7, 0, 0.2, 1) 0.3s both;
+}
+
+.cutline-diamond {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  margin-top: -7px;
+  background: var(--sg-edge);
+  transform: rotate(45deg);
+  animation: sg-diamond 1.4s cubic-bezier(0.7, 0, 0.2, 1) 0.3s both;
+  box-shadow: 0 0 0 4px rgba(31, 138, 112, 0.18);
+}
+
+.cutline-label {
+  position: absolute;
+  right: 0;
+  top: calc(50% + 0.7rem);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(14, 43, 51, 0.6);
+  animation: sg-fade 0.6s ease 1.6s both;
+}
+
+@keyframes sg-cut {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes sg-diamond {
+  from {
+    left: 0;
+  }
+  to {
+    left: calc(100% - 14px);
+  }
+}
+
+@keyframes sg-fade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-lead {
+  max-width: 34rem;
+  font-size: 1.15rem;
+  margin: 0 0 1.75rem;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  margin: 0;
+  padding-top: 1.25rem;
+  border-top: 2px solid rgba(14, 43, 51, 0.15);
+  max-width: 720px;
+}
+
+.fact dt {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(14, 43, 51, 0.6);
+}
+
+.fact dd {
+  margin: 0.15rem 0 0;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+/* ================= SLUŽBY ================= */
+
+.sluzby {
+  padding: 4.5rem 1.25rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-head h2 {
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+  line-height: 1.1;
+}
+
+.section-sub {
+  max-width: 36rem;
+  margin: 0 0 2.5rem;
+  color: rgba(14, 43, 51, 0.75);
+}
+
+.tabule-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+/* karta jako tabule skla: zelená hrana vlevo (hrana floatu) */
+.tabule {
+  background: var(--sg-white);
+  border-left: 5px solid var(--sg-edge);
+  padding: 1.5rem 1.5rem 1.6rem;
+  box-shadow: 0 2px 10px rgba(14, 43, 51, 0.07);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.tabule:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(14, 43, 51, 0.13);
+}
+
+.tabule-mm {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sg-edge);
+  background: rgba(31, 138, 112, 0.1);
+  padding: 0.2rem 0.55rem;
+  margin-bottom: 0.75rem;
+}
+
+.tabule h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
+  text-transform: uppercase;
+}
+
+.tabule p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: rgba(14, 43, 51, 0.85);
+}
+
+/* ================= DŮVĚRA ================= */
+
+.duvera {
+  background: var(--sg-deep);
+  color: var(--sg-ice);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.duvera .section-head,
+.duvera-grid,
+.dilna {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.duvera .section-sub {
+  color: rgba(238, 244, 246, 0.75);
+}
+
+.duvera-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3.5rem;
+}
+
+.duvera-card {
+  position: relative;
+  padding: 1.5rem 1.5rem 1.6rem;
+  background: rgba(238, 244, 246, 0.05);
+  border: 1px solid rgba(159, 216, 207, 0.25);
+}
+
+/* diamantový zářez v rohu karty */
+.duvera-cut {
+  position: absolute;
+  top: -6px;
+  left: 1.4rem;
+  width: 12px;
+  height: 12px;
+  background: var(--sg-edge);
+  transform: rotate(45deg);
+}
+
+.duvera-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: var(--sg-cut);
+}
+
+.duvera-card p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: rgba(238, 244, 246, 0.85);
+}
+
+/* ---------- dílna / mapa ---------- */
+
+.dilna {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  border-top: 2px solid rgba(159, 216, 207, 0.25);
+  padding-top: 3rem;
+}
+
+.dilna-mapa {
+  position: relative;
+  min-height: 220px;
+  background:
+    linear-gradient(rgba(159, 216, 207, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(159, 216, 207, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+  border: 1px solid rgba(159, 216, 207, 0.25);
+}
+
+.dilna-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  background: var(--sg-edge);
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 8px rgba(31, 138, 112, 0.25),
+    0 0 0 18px rgba(31, 138, 112, 0.1);
+}
+
+.dilna-info h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  color: var(--sg-cut);
+}
+
+.dilna-adresa {
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin: 0 0 0.75rem;
+}
+
+.dilna-info p {
+  color: rgba(238, 244, 246, 0.85);
+  max-width: 34rem;
+}
+
+.dilna-hodiny {
+  font-size: 0.92rem;
+  color: rgba(159, 216, 207, 0.9);
+  margin-bottom: 1.5rem;
+}
+
+.duvera .btn-solid {
+  background: var(--sg-edge);
+  border-color: var(--sg-edge);
+  color: var(--sg-white);
+}
+
+.duvera .btn-solid:hover {
+  background: var(--sg-cut);
+  border-color: var(--sg-cut);
+  color: var(--sg-deep);
+}
+
+/* ================= responsivita ================= */
+
+@media (min-width: 760px) {
+  .dilna {
+    grid-template-columns: 1fr 1.2fr;
+    align-items: center;
+  }
+
+  .dilna-mapa {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-cta .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-facts {
+    gap: 1.5rem;
+  }
+
+  .cutline-label {
+    display: none;
+  }
+}
+
+/* ================= reduced motion ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .cutline-track,
+  .cutline-diamond,
+  .cutline-label {
+    animation: none;
+  }
+
+  .cutline-diamond {
+    left: calc(100% - 14px);
+  }
+
+  .btn,
+  .tabule {
+    transition: none;
+  }
+}
