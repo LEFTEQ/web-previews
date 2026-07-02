@@ -1,0 +1,447 @@
+/* =====================================================
+   PRÁDELNA HASE — Plzeň
+   Palette: hluboká pračková modř + pára + horký válec
+   Type: Archivo Black (display) / system grotesk (body)
+   Signature: pás mandlu — prádlo vyjíždí z válce
+   ===================================================== */
+
+:root {
+  --modr-hluboka: #0b2545;   /* buben pračky, hloubka vody */
+  --modr-stredni: #13315c;
+  --para: #eef4f8;           /* pára nad mandlem */
+  --bila-pradlo: #ffffff;
+  --zluta-valec: #f5a623;    /* horký kov, výstraha na stroji */
+  --inkoust: #10233b;
+  --sed-text: #45566b;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--inkoust);
+  background: var(--para);
+  -webkit-font-smoothing: antialiased;
+}
+
+.hase a:focus-visible,
+.hase .btn:focus-visible {
+  outline: 3px solid var(--zluta-valec);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  background: var(--modr-hluboka);
+  color: var(--bila-pradlo);
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.5rem clamp(1.25rem, 5vw, 4rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.wordmark {
+  font-family: "Archivo Black", "Arial Black", Arial, sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.14em;
+  font-weight: 400;
+}
+
+.wordmark b {
+  color: var(--zluta-valec);
+  font-weight: 400;
+}
+
+.hero-lokalita {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.hero-body {
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem) clamp(2.5rem, 6vw, 4.5rem);
+  max-width: 60rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--zluta-valec);
+  margin-bottom: 1.25rem;
+}
+
+.hero-title {
+  font-family: "Archivo Black", "Arial Black", Arial, sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.4rem, 8.5vw, 5.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin-bottom: 1.75rem;
+}
+
+.hero-title .radek {
+  display: block;
+  animation: vyjeti 0.7s ease-out both;
+}
+
+.hero-title .radek-2 {
+  color: var(--zluta-valec);
+  animation-delay: 0.15s;
+}
+
+.hero-title .radek-3 {
+  color: rgba(255, 255, 255, 0.55);
+  animation-delay: 0.3s;
+}
+
+@keyframes vyjeti {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-perex {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 2.25rem;
+  animation: vyjeti 0.7s 0.45s ease-out both;
+}
+
+.hero-akce {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  animation: vyjeti 0.7s 0.55s ease-out both;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.95rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  border-radius: 3px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-plna {
+  background: var(--zluta-valec);
+  color: var(--modr-hluboka);
+}
+
+.btn-plna:hover {
+  transform: translateY(-2px);
+  background: #ffb945;
+}
+
+.btn-linka {
+  color: var(--bila-pradlo);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.btn-linka:hover {
+  border-color: var(--bila-pradlo);
+  transform: translateY(-2px);
+}
+
+/* ---- signature: pás mandlu ---- */
+
+.mandl {
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.mandl-valec {
+  position: absolute;
+  left: clamp(1.25rem, 5vw, 4rem);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 30%, #ffc85e, var(--zluta-valec) 55%, #c77f0e);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 0 6px var(--modr-hluboka), 0 0 0 7px rgba(255, 255, 255, 0.2);
+  animation: otaceni 9s linear infinite;
+}
+
+.mandl-teplota {
+  font-family: "Archivo Black", "Arial Black", Arial, sans-serif;
+  font-size: 0.85rem;
+  color: var(--modr-hluboka);
+}
+
+@keyframes otaceni {
+  from { transform: translateY(-50%) rotate(0deg); }
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
+.mandl-pas {
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--modr-stredni);
+  padding: 1.1rem 0;
+  /* pruhy jako lišty podávacího pásu mandlu */
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 88px,
+    rgba(255, 255, 255, 0.07) 88px,
+    rgba(255, 255, 255, 0.07) 90px
+  );
+}
+
+.mandl-text {
+  display: inline-block;
+  font-family: "Archivo Black", "Arial Black", Arial, sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.5);
+  animation: pas 28s linear infinite;
+  padding-left: 100%;
+}
+
+@keyframes pas {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+/* ============ SLUŽBY ============ */
+
+.sluzby {
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem);
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.sekce-hlava {
+  max-width: 38rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.sekce-hlava h2 {
+  font-family: "Archivo Black", "Arial Black", Arial, sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.sekce-perex {
+  color: var(--sed-text);
+  font-size: 1.05rem;
+}
+
+.sluzby-mrizka {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.25rem;
+}
+
+.sluzba {
+  background: var(--bila-pradlo);
+  border-radius: 4px;
+  padding: 1.75rem 1.5rem;
+  border-top: 4px solid var(--modr-hluboka);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sluzba:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(11, 37, 69, 0.12);
+}
+
+.sluzba-hlava {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.sluzba h3 {
+  font-family: "Archivo Black", "Arial Black", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 1.15rem;
+}
+
+.sluzba-program {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--modr-hluboka);
+  background: var(--para);
+  border: 1px solid #d4e0ea;
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  white-space: nowrap;
+}
+
+.sluzba p {
+  color: var(--sed-text);
+  font-size: 0.98rem;
+}
+
+.sluzby-pozn {
+  margin-top: 2rem;
+  color: var(--sed-text);
+  font-size: 0.98rem;
+  max-width: 42rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--zluta-valec);
+}
+
+/* ============ DŮVĚRA ============ */
+
+.duvera {
+  background: var(--modr-hluboka);
+  color: var(--bila-pradlo);
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.sekce-hlava-svetla h2 {
+  color: var(--bila-pradlo);
+}
+
+.sekce-hlava-svetla .sekce-perex {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.duvera > .sekce-hlava,
+.duvody,
+.citace {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.duvera > .sekce-hlava {
+  max-width: 72rem;
+}
+
+.duvera .sekce-hlava {
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.duvody {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 2rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.duvod {
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  padding-top: 1.25rem;
+}
+
+.duvod-cislo {
+  display: block;
+  font-family: "Archivo Black", "Arial Black", Arial, sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  color: var(--zluta-valec);
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+
+.duvod p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.98rem;
+}
+
+.citace {
+  border-left: 4px solid var(--zluta-valec);
+  padding: 0.5rem 0 0.5rem 1.5rem;
+}
+
+.citace p {
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  line-height: 1.45;
+  max-width: 44rem;
+  margin-bottom: 0.75rem;
+}
+
+.citace cite {
+  font-style: normal;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ============ MOBIL ============ */
+
+@media (max-width: 480px) {
+  .hero-akce .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .mandl-valec {
+    width: 3.4rem;
+    height: 3.4rem;
+  }
+
+  .mandl-teplota {
+    font-size: 0.7rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-title .radek,
+  .hero-perex,
+  .hero-akce,
+  .mandl-valec,
+  .mandl-text {
+    animation: none;
+  }
+
+  .mandl-text {
+    padding-left: 1.5rem;
+  }
+
+  .sluzba:hover,
+  .btn:hover {
+    transform: none;
+  }
+}
