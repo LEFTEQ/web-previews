@@ -1,0 +1,651 @@
+/* ==========================================================================
+   CK MÁJ — cestovní kancelář, České Budějovice
+   Koncept: „jízdní řád jednoho krásného dne" — autobus vyjíždí ráno
+   z Budějovic, večer se vrací. Signature prvek: vodorovná trasa se
+   zastávkami a časy (odvozeno z reality vlastní autobusové dopravy CK).
+   Paleta: hluboká dunajská modř + slunečná žluť (autobus, léto, směrovky),
+   žádné krémové/terakotové defaulty.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Karla:ital,wght@0,300..800;1,300..800&display=swap");
+
+:root {
+  --mj-navy: #0d2b52;      /* dunajská modř — základ */
+  --mj-navy-deep: #081c38; /* noční návrat domů */
+  --mj-sun: #ffc531;       /* slunečná žluť — směrovka autobusu */
+  --mj-sky: #e8f0fb;       /* denní světlo, pozadí */
+  --mj-teal: #1a7f8e;      /* jezera: Traunsee, Wolfgangsee */
+  --mj-ink: #16233a;       /* text */
+  --mj-white: #ffffff;
+
+  --mj-display: "Archivo", "Arial Narrow", sans-serif;
+  --mj-body: "Karla", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--mj-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--mj-ink);
+  background: var(--mj-sky);
+  -webkit-font-smoothing: antialiased;
+}
+
+.mj a {
+  color: inherit;
+}
+
+.mj :focus-visible {
+  outline: 3px solid var(--mj-sun);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+
+.mj-hero {
+  position: relative;
+  background: linear-gradient(168deg, var(--mj-navy) 0%, var(--mj-navy-deep) 78%);
+  color: var(--mj-white);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+/* jemný pruh slunce po straně — směrovka autobusu */
+.mj-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 100%;
+  background: var(--mj-sun);
+}
+
+.mj-hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+/* --- wordmark --- */
+.mj-wordmark {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
+}
+
+.mj-wordmark-ck {
+  font-family: var(--mj-display);
+  font-weight: 500;
+  font-stretch: 75%;
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  color: var(--mj-sun);
+}
+
+.mj-wordmark-maj {
+  font-family: var(--mj-display);
+  font-weight: 900;
+  font-stretch: 115%;
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.mj-wordmark-sub {
+  flex-basis: 100%;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.mj-hero-nav {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.mj-nav-link {
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: var(--mj-white);
+  border-bottom: 2px solid var(--mj-sun);
+  padding-bottom: 2px;
+}
+
+.mj-nav-link:hover {
+  color: var(--mj-sun);
+}
+
+/* --- hero main --- */
+.mj-hero-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 0 3rem;
+}
+
+.mj-hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mj-sun);
+  animation: mj-rise 0.6s ease-out both;
+}
+
+.mj-hero-title {
+  margin: 0;
+  font-family: var(--mj-display);
+  font-weight: 900;
+  font-stretch: 115%;
+  font-size: clamp(2.6rem, 9vw, 6rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.mj-hero-title em {
+  font-style: normal;
+  color: var(--mj-sun);
+  position: relative;
+}
+
+.mj-line {
+  display: block;
+  animation: mj-rise 0.7s ease-out both;
+}
+
+.mj-line-2 {
+  animation-delay: 0.15s;
+}
+
+.mj-hero-lead {
+  max-width: 34rem;
+  margin: 1.5rem 0 2rem;
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.85);
+  animation: mj-rise 0.7s ease-out 0.3s both;
+}
+
+.mj-hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  animation: mj-rise 0.7s ease-out 0.4s both;
+}
+
+.mj-btn {
+  display: inline-block;
+  padding: 0.85rem 1.75rem;
+  font-family: var(--mj-body);
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.mj-btn-solid {
+  background: var(--mj-sun);
+  color: var(--mj-navy-deep);
+}
+
+.mj-btn-solid:hover {
+  transform: translateY(-2px);
+  background: #ffd35e;
+}
+
+.mj-btn-ghost {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: var(--mj-white);
+}
+
+.mj-btn-ghost:hover {
+  border-color: var(--mj-sun);
+  color: var(--mj-sun);
+  transform: translateY(-2px);
+}
+
+/* --- SIGNATURE: trasa dne / jízdní řád --- */
+.mj-route {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 0 3.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.mj-route-line {
+  position: absolute;
+  top: calc(2.5rem + 7px);
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--mj-sun) 0 14px,
+    transparent 14px 24px
+  );
+  transform-origin: left center;
+  animation: mj-drive 1.4s ease-out 0.5s both;
+}
+
+.mj-route-stop {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.6rem;
+  animation: mj-rise 0.5s ease-out both;
+}
+
+.mj-stop-1 { animation-delay: 0.7s; }
+.mj-stop-2 { animation-delay: 0.95s; }
+.mj-stop-3 { animation-delay: 1.2s; }
+.mj-stop-4 { animation-delay: 1.45s; }
+
+.mj-route-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--mj-navy);
+  border: 3px solid var(--mj-sun);
+}
+
+.mj-route-dot--end {
+  background: var(--mj-sun);
+}
+
+.mj-route-time {
+  font-family: var(--mj-display);
+  font-weight: 800;
+  font-stretch: 110%;
+  font-size: 1.35rem;
+  color: var(--mj-sun);
+  font-variant-numeric: tabular-nums;
+}
+
+.mj-route-place {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ==========================================================================
+   SEKCE 1 — VÝLETY
+   ========================================================================== */
+
+.mj-section {
+  padding: 4rem 1.25rem;
+}
+
+.mj-section-head {
+  max-width: 1100px;
+  margin: 0 auto 2.5rem;
+}
+
+.mj-section-title {
+  margin: 0 0 0.75rem;
+  font-family: var(--mj-display);
+  font-weight: 900;
+  font-stretch: 115%;
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--mj-navy);
+}
+
+.mj-title-dot {
+  color: var(--mj-sun);
+}
+
+.mj-section-sub {
+  margin: 0;
+  max-width: 36rem;
+  font-size: 1.1rem;
+  color: #46567a;
+}
+
+/* karty výletů — připomínají jízdenky: perforovaná hrana u ceny */
+.mj-trips {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.mj-trip {
+  display: flex;
+  flex-direction: column;
+  background: var(--mj-white);
+  border-radius: 14px;
+  padding: 1.4rem 1.4rem 0;
+  box-shadow: 0 2px 10px rgba(13, 43, 82, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mj-trip:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(13, 43, 82, 0.14);
+}
+
+.mj-trip-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.9rem;
+}
+
+.mj-trip-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mj-teal);
+  background: rgba(26, 127, 142, 0.1);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+}
+
+.mj-trip-zeme {
+  font-family: var(--mj-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: #93a2bf;
+}
+
+.mj-trip-nazev {
+  margin: 0 0 0.4rem;
+  font-family: var(--mj-display);
+  font-weight: 800;
+  font-stretch: 105%;
+  font-size: 1.3rem;
+  line-height: 1.15;
+  color: var(--mj-navy);
+}
+
+.mj-trip-popis {
+  margin: 0 0 1.1rem;
+  font-size: 0.95rem;
+  color: #46567a;
+  flex-grow: 1;
+}
+
+/* perforace jízdenky nad cenou */
+.mj-trip-cena {
+  margin: 0 -1.4rem;
+  padding: 0.85rem 1.4rem;
+  border-top: 2px dashed #d5deee;
+  font-family: var(--mj-display);
+  font-weight: 900;
+  font-size: 1.35rem;
+  color: var(--mj-navy);
+  font-variant-numeric: tabular-nums;
+}
+
+.mj-trip-od {
+  font-family: var(--mj-body);
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: #93a2bf;
+  margin-right: 0.2rem;
+}
+
+.mj-trips-note {
+  max-width: 1100px;
+  margin: 2.5rem auto 0;
+  padding: 1.25rem 1.5rem;
+  background: var(--mj-white);
+  border-left: 6px solid var(--mj-sun);
+  border-radius: 0 10px 10px 0;
+  color: #46567a;
+}
+
+/* ==========================================================================
+   SEKCE 2 — DŮVĚRA + SLUŽBY
+   ========================================================================== */
+
+.mj-section-onas {
+  background: var(--mj-navy);
+  color: var(--mj-white);
+}
+
+.mj-section-title--light {
+  color: var(--mj-white);
+}
+
+.mj-section-sub--light {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.mj-duvody {
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.mj-duvod {
+  border-top: 4px solid var(--mj-sun);
+  padding-top: 1rem;
+}
+
+.mj-duvod-cislo {
+  margin: 0 0 0.35rem;
+  font-family: var(--mj-display);
+  font-weight: 900;
+  font-stretch: 115%;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--mj-sun);
+  font-variant-numeric: tabular-nums;
+}
+
+.mj-duvod-jednotka {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--mj-white);
+}
+
+.mj-duvod-text {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.98rem;
+}
+
+.mj-sluzby {
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.mj-sluzba {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 1.5rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.mj-sluzba:hover {
+  border-color: var(--mj-sun);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.mj-sluzba-titul {
+  margin: 0 0 0.6rem;
+  font-family: var(--mj-display);
+  font-weight: 800;
+  font-stretch: 105%;
+  font-size: 1.15rem;
+  color: var(--mj-sun);
+}
+
+.mj-sluzba-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.mj-pobocky {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 2rem;
+}
+
+.mj-pobocka-label {
+  margin: 0 0 0.25rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mj-sun);
+}
+
+.mj-pobocka-adresa {
+  margin: 0;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.mj-inline-link {
+  color: var(--mj-white);
+  font-weight: 700;
+  text-decoration-color: var(--mj-sun);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.mj-inline-link:hover {
+  color: var(--mj-sun);
+}
+
+/* ==========================================================================
+   ANIMACE
+   ========================================================================== */
+
+@keyframes mj-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mj-drive {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .mj-hero-eyebrow,
+  .mj-line,
+  .mj-hero-lead,
+  .mj-hero-actions,
+  .mj-route-line,
+  .mj-route-stop {
+    animation: none;
+  }
+
+  .mj-trip,
+  .mj-btn,
+  .mj-sluzba {
+    transition: none;
+  }
+
+  .mj-trip:hover,
+  .mj-btn-solid:hover,
+  .mj-btn-ghost:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   RESPONZIVITA
+   ========================================================================== */
+
+@media (max-width: 720px) {
+  .mj-route {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+    padding-bottom: 2.5rem;
+  }
+
+  /* na mobilu trasa vede svisle podél zastávek */
+  .mj-route-line {
+    top: 2.5rem;
+    left: 7px;
+    width: 3px;
+    height: calc(100% - 3.5rem);
+    background: repeating-linear-gradient(
+      180deg,
+      var(--mj-sun) 0 14px,
+      transparent 14px 24px
+    );
+    transform-origin: top center;
+  }
+
+  .mj-route-stop {
+    padding-top: 0;
+    padding-left: 2.2rem;
+  }
+
+  .mj-route-dot {
+    top: 4px;
+  }
+
+  .mj-hero-top {
+    padding-bottom: 1.25rem;
+  }
+
+  .mj-section {
+    padding: 3rem 1.1rem;
+  }
+}
