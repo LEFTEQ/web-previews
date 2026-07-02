@@ -1,0 +1,545 @@
+/* ==========================================================================
+   PIVNÍ AMBASÁDA — Pardubice
+   Palette: sklep-černá / pivní jantar / hustá pěna / měděná pípa / chmel
+   Type: Bricolage Grotesque (display, taproom chalkboard energy)
+         + Sofia Sans (body, čitelná, česká diakritika sedí)
+   Signature: řada osmi pip v hero — každá čepuje jinou barvu piva
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Sofia+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap");
+
+:root {
+  --sklep: #14100b;        /* tmavý sklep, ne čistá černá */
+  --sklep-2: #1e1810;
+  --pena: #f6efdf;         /* hustá pěna */
+  --jantar: #e8a13c;       /* dvanáctka proti světlu */
+  --med: #b4552c;          /* měděná trubka pípy */
+  --chmel: #6d7a3f;        /* chmelová zeleň — tichý doplněk */
+  --linka: rgba(20, 16, 11, 0.16);
+  --linka-svetla: rgba(246, 239, 223, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Sofia Sans", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--sklep);
+  background: var(--pena);
+  -webkit-font-smoothing: antialiased;
+}
+
+.pa a:focus-visible,
+.pa button:focus-visible {
+  outline: 3px solid var(--med);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============================ HERO ============================ */
+
+.hero {
+  background: var(--sklep);
+  color: var(--pena);
+  padding: clamp(1.25rem, 3vw, 2.5rem) clamp(1.25rem, 5vw, 4rem)
+    clamp(2rem, 4vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 5vh, 3.5rem);
+  min-height: 100svh;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  /* jemný jantarový přeliv odspodu — pivo proti světlu */
+  content: "";
+  position: absolute;
+  inset: auto -10% -30% -10%;
+  height: 55%;
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgba(232, 161, 60, 0.22),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.wordmark {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.28em;
+  line-height: 1.25;
+  display: flex;
+  flex-direction: column;
+}
+
+.wordmark-line--accent {
+  color: var(--jantar);
+}
+
+.hero-locality {
+  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(246, 239, 223, 0.65);
+}
+
+.hero-main {
+  position: relative;
+  z-index: 1;
+  max-width: 60rem;
+}
+
+.hero-title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.6rem, 8.5vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+  text-wrap: balance;
+}
+
+.hero-title-row {
+  display: block;
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-title-row--indent {
+  color: var(--jantar);
+  animation-delay: 0.12s;
+}
+
+.hero-sub {
+  max-width: 34rem;
+  margin: 0;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  color: rgba(246, 239, 223, 0.82);
+  animation: rise 0.7s 0.24s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* --- Signature: řada pip --- */
+
+.taps {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: clamp(0.5rem, 2vw, 1.5rem);
+  align-items: end;
+  position: relative;
+  z-index: 1;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--linka-svetla);
+}
+
+.tap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  animation: rise 0.6s calc(0.35s + var(--i) * 0.07s)
+    cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.tap-handle {
+  width: 10px;
+  height: clamp(20px, 3vw, 34px);
+  background: var(--pena);
+  border-radius: 5px 5px 2px 2px;
+}
+
+.tap-pipe {
+  width: 4px;
+  height: clamp(14px, 2vw, 22px);
+  background: var(--med);
+}
+
+.tap-beer {
+  width: 4px;
+  border-radius: 0 0 2px 2px;
+  background: var(--jantar);
+  transform-origin: top;
+  animation: pour 1s calc(0.6s + var(--i) * 0.07s)
+    cubic-bezier(0.3, 0, 0.2, 1) both;
+}
+
+/* každá pípa čepuje jiné pivo: barva + délka proudu */
+.tap:nth-child(1) .tap-beer { background: #f0c96a; height: 38px; } /* světlý ležák */
+.tap:nth-child(2) .tap-beer { background: #e8b452; height: 46px; } /* ležák */
+.tap:nth-child(3) .tap-beer { background: #d9dc9a; height: 30px; } /* cold IPA */
+.tap:nth-child(4) .tap-beer { background: #edd58f; height: 42px; } /* weizen */
+.tap:nth-child(5) .tap-beer { background: #e07a4a; height: 26px; } /* pastry sour */
+.tap:nth-child(6) .tap-beer { background: #cf8a2e; height: 50px; } /* west coast */
+.tap:nth-child(7) .tap-beer { background: #e8a13c; height: 36px; } /* APA */
+.tap:nth-child(8) .tap-beer { background: #dfae6b; height: 44px; } /* NEIPA */
+
+.tap-num {
+  margin-top: 0.6rem;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: rgba(246, 239, 223, 0.5);
+}
+
+/* --- fakta pod pípami --- */
+
+.hero-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.25rem 2rem;
+  position: relative;
+  z-index: 1;
+  animation: rise 0.7s 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.fact-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(246, 239, 223, 0.55);
+}
+
+.fact-value {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.fact-link {
+  color: var(--jantar);
+  text-decoration: none;
+  border-bottom: 2px solid rgba(232, 161, 60, 0.4);
+}
+
+.fact-link:hover {
+  border-bottom-color: var(--jantar);
+}
+
+/* ============================ SEKCE ============================ */
+
+.section {
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--med);
+}
+
+.eyebrow--light {
+  color: var(--jantar);
+}
+
+.section-title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.75rem;
+}
+
+.section-title--light {
+  color: var(--pena);
+}
+
+.section-note {
+  margin: 0;
+  max-width: 36rem;
+  color: rgba(20, 16, 11, 0.7);
+}
+
+.section-head {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+/* --- Na čepu --- */
+
+.section--tap {
+  background: var(--pena);
+}
+
+.beer-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 2px solid var(--sklep);
+}
+
+.beer {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr auto;
+  gap: 0.35rem 1.5rem;
+  align-items: baseline;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--linka);
+  transition: background-color 0.2s ease, padding-left 0.2s ease;
+}
+
+.beer:hover {
+  background: rgba(232, 161, 60, 0.12);
+  padding-left: 0.5rem;
+}
+
+.beer-tapno {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--med);
+}
+
+.beer-name {
+  margin: 0;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  line-height: 1.2;
+}
+
+.beer-stupen {
+  color: var(--med);
+}
+
+.beer-meta {
+  margin: 0.15rem 0 0;
+  font-size: 0.92rem;
+  color: rgba(20, 16, 11, 0.65);
+}
+
+.beer-price {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+
+.tap-extras {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.extra {
+  border-left: 4px solid var(--jantar);
+  padding: 0.25rem 0 0.25rem 1.25rem;
+}
+
+.extra-title {
+  margin: 0 0 0.35rem;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+
+.extra-text {
+  margin: 0;
+  color: rgba(20, 16, 11, 0.75);
+}
+
+/* --- O nás + lahve --- */
+
+.section--about {
+  background: var(--sklep-2);
+  color: rgba(246, 239, 223, 0.85);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.about-text {
+  max-width: 32rem;
+  margin: 0 0 1.1rem;
+}
+
+.about-contact {
+  margin-top: 1.75rem;
+  border-top: 1px solid var(--linka-svetla);
+  padding-top: 1.25rem;
+}
+
+.about-contact-line {
+  margin: 0 0 0.35rem;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.about-link {
+  color: var(--jantar);
+  text-decoration: none;
+  border-bottom: 2px solid rgba(232, 161, 60, 0.35);
+}
+
+.about-link:hover {
+  border-bottom-color: var(--jantar);
+}
+
+.cellar {
+  background: var(--sklep);
+  border: 1px solid var(--linka-svetla);
+  border-radius: 6px;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.cellar-title {
+  margin: 0 0 1.25rem;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--pena);
+}
+
+.cellar-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cellar-item {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--linka-svetla);
+}
+
+.cellar-item:last-child {
+  border-bottom: none;
+}
+
+.cellar-country {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--chmel);
+  padding-top: 0.3rem;
+}
+
+.cellar-beer {
+  margin: 0;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--pena);
+}
+
+.cellar-desc {
+  margin: 0.2rem 0 0;
+  font-size: 0.92rem;
+  color: rgba(246, 239, 223, 0.65);
+}
+
+.cellar-note {
+  margin: 1.25rem 0 0;
+  font-size: 0.92rem;
+  font-style: italic;
+  color: rgba(246, 239, 223, 0.6);
+}
+
+/* ============================ ANIMACE ============================ */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pour {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-title-row,
+  .hero-sub,
+  .hero-facts,
+  .tap,
+  .tap-beer {
+    animation: none;
+  }
+  .beer {
+    transition: none;
+  }
+}
+
+/* ============================ RESPONSIVE ============================ */
+
+@media (max-width: 860px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .beer {
+    grid-template-columns: 1fr auto;
+  }
+  .beer-tapno {
+    grid-column: 1 / -1;
+  }
+  .taps {
+    gap: 0.4rem;
+  }
+  .tap:nth-child(n) .tap-beer {
+    height: 28px;
+  }
+  .tap:nth-child(2) .tap-beer,
+  .tap:nth-child(6) .tap-beer {
+    height: 36px;
+  }
+  .hero {
+    min-height: auto;
+  }
+}
