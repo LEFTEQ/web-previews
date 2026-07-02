@@ -1,0 +1,483 @@
+/* =====================================================
+   ELEKTRO S LIDSKOU TVÁŘÍ — Olomouc
+   Paleta odvozená z dílny: modrý oblouk sváru, měď,
+   izolační žlutozelená pouze jako drobný signál.
+   ===================================================== */
+
+:root {
+  --noc: #10141c;        /* tmavá dílna po zhasnutí */
+  --papir: #eef1f4;      /* světle šedý štítek revizní zprávy */
+  --obl: #2f6df0;        /* modrý svářecí oblouk */
+  --obl-svit: #7aa8ff;   /* rozptýlené světlo oblouku */
+  --med: #c97b3d;        /* měděný vodič */
+  --inkoust: #1c2330;    /* text na světlé */
+  --seda: #5b6472;
+
+  --font-display: "Arial Black", "Segoe UI Black", Futura, "Helvetica Neue", Arial, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-util: "Courier New", Courier, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--inkoust);
+  background: var(--papir);
+}
+
+img, svg { display: block; max-width: 100%; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--obl);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.hero :focus-visible,
+.lide .vizitka :focus-visible {
+  outline-color: var(--obl-svit);
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  background:
+    radial-gradient(120% 90% at 85% -10%, rgba(47, 109, 240, 0.35), transparent 55%),
+    radial-gradient(80% 60% at 10% 110%, rgba(201, 123, 61, 0.18), transparent 60%),
+    var(--noc);
+  color: var(--papir);
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 9rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 3.5rem;
+}
+
+.brand-mark {
+  color: var(--obl-svit);
+  flex: none;
+}
+
+.brand-word {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.14em;
+  line-height: 1.1;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-word em {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--obl-svit);
+  text-transform: lowercase;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 9.5vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+}
+
+.hero-title .line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.35em);
+  animation: zapnout 0.55s ease-out forwards;
+}
+
+.hero-title .line-1 { animation-delay: 0.1s; }
+.hero-title .line-2 { animation-delay: 0.28s; color: var(--obl-svit); }
+.hero-title .line-3 { animation-delay: 0.46s; }
+
+.hero-title .spark { color: var(--med); }
+
+@keyframes zapnout {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-sub {
+  max-width: 34rem;
+  font-size: 1.15rem;
+  color: #c6cdd8;
+  margin: 0 0 2rem;
+  opacity: 0;
+  animation: zapnout 0.55s ease-out 0.7s forwards;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  opacity: 0;
+  animation: zapnout 0.55s ease-out 0.85s forwards;
+}
+
+.btn {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 0.95rem 1.6rem;
+  border-radius: 999px;
+  display: inline-block;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.btn-solid {
+  background: var(--obl);
+  color: #fff;
+}
+
+.btn-solid:hover { background: #4b83f5; }
+
+.btn-ghost {
+  border: 2px solid rgba(238, 241, 244, 0.4);
+  color: var(--papir);
+}
+
+.btn-ghost:hover {
+  border-color: var(--obl-svit);
+  color: var(--obl-svit);
+}
+
+.hero-loc {
+  font-family: var(--font-util);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: #8a94a3;
+  margin: 2.2rem 0 0;
+  opacity: 0;
+  animation: zapnout 0.55s ease-out 1s forwards;
+}
+
+/* --- signature: obvod, který se „zapojí“ --- */
+
+.circuit {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 180px;
+  pointer-events: none;
+}
+
+.circuit svg {
+  width: 100%;
+  height: 100%;
+}
+
+.circuit .wire {
+  stroke: var(--med);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-dasharray: 2600;
+  stroke-dashoffset: 2600;
+  animation: zapojit 1.6s ease-out 0.5s forwards;
+  filter: drop-shadow(0 0 6px rgba(201, 123, 61, 0.5));
+}
+
+.circuit .node {
+  fill: var(--obl-svit);
+  opacity: 0;
+  animation: rozsvitit 0.4s ease-out forwards;
+}
+
+.circuit .n1 { animation-delay: 1s; }
+.circuit .n2 { animation-delay: 1.4s; }
+.circuit .n3 { animation-delay: 1.8s; }
+
+@keyframes zapojit {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes rozsvitit {
+  to { opacity: 1; }
+}
+
+/* ================= SEKCE OBECNĚ ================= */
+
+section {
+  padding: 4.5rem 1.25rem;
+}
+
+.section-head {
+  max-width: 1080px;
+  margin: 0 auto 2.75rem;
+}
+
+.eyebrow {
+  font-family: var(--font-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--med);
+  margin: 0 0 0.6rem;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.08;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.9rem;
+}
+
+.section-lead {
+  max-width: 38rem;
+  color: var(--seda);
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* ================= SLUŽBY ================= */
+
+.sluzby {
+  background: var(--papir);
+}
+
+.karty {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: 1fr;
+}
+
+.karta {
+  background: #fff;
+  border: 1px solid #d8dde4;
+  border-radius: 14px;
+  padding: 1.6rem 1.5rem 1.4rem;
+  position: relative;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.karta:hover {
+  border-color: var(--obl);
+  box-shadow: 0 10px 30px rgba(47, 109, 240, 0.12);
+}
+
+.karta-kod {
+  font-family: var(--font-util);
+  font-weight: bold;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  color: var(--obl);
+  background: rgba(47, 109, 240, 0.08);
+  border: 1px solid rgba(47, 109, 240, 0.3);
+  border-radius: 6px;
+  padding: 0.25rem 0.55rem;
+  display: inline-block;
+  margin-bottom: 0.9rem;
+}
+
+.karta h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.2;
+  margin: 0 0 0.6rem;
+}
+
+.karta p {
+  margin: 0;
+  color: var(--seda);
+  font-size: 1rem;
+}
+
+.sluzby-pozn {
+  max-width: 1080px;
+  margin: 2rem auto 0;
+  font-style: italic;
+  color: var(--seda);
+}
+
+/* ================= LIDÉ / DŮVĚRA ================= */
+
+.lide {
+  background: var(--noc);
+  color: var(--papir);
+}
+
+.lide .section-lead { color: #a9b2c0; }
+
+.vizitky {
+  max-width: 1080px;
+  margin: 0 auto 2.5rem;
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: 1fr;
+}
+
+.vizitka {
+  border: 1px solid rgba(238, 241, 244, 0.15);
+  border-radius: 14px;
+  padding: 1.6rem 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.vizitka-faze {
+  font-family: var(--font-util);
+  font-weight: bold;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  color: var(--med);
+  border: 1px solid rgba(201, 123, 61, 0.5);
+  border-radius: 6px;
+  padding: 0.25rem 0.55rem;
+  display: inline-block;
+  margin-bottom: 0.9rem;
+}
+
+.vizitka h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  margin: 0 0 0.25rem;
+}
+
+.vizitka-role {
+  color: #a9b2c0;
+  margin: 0 0 1.1rem;
+  font-size: 0.98rem;
+}
+
+.vizitka-kontakty {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1.5rem;
+}
+
+.vizitka-kontakty a {
+  font-family: var(--font-util);
+  font-size: 0.95rem;
+  color: var(--obl-svit);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(122, 168, 255, 0.4);
+  padding-bottom: 2px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.vizitka-kontakty a:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+.zaruky {
+  max-width: 1080px;
+  margin: 0 auto 2.5rem;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: 1fr;
+}
+
+.zaruky li {
+  border-left: 3px solid var(--med);
+  padding-left: 1rem;
+  color: #c6cdd8;
+  font-size: 1rem;
+}
+
+.zaruky strong {
+  color: var(--papir);
+  font-family: var(--font-display);
+  font-weight: 900;
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 1.02rem;
+}
+
+.vtip {
+  max-width: 1080px;
+  margin: 0 auto;
+  border: 1px dashed rgba(122, 168, 255, 0.4);
+  border-radius: 14px;
+  padding: 1.4rem 1.5rem;
+}
+
+.vtip-label {
+  font-family: var(--font-util);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--obl-svit);
+  margin: 0 0 0.5rem;
+}
+
+.vtip-text {
+  margin: 0;
+  font-style: italic;
+  color: #c6cdd8;
+}
+
+/* ================= RESPONZIVITA ================= */
+
+@media (min-width: 640px) {
+  .karty { grid-template-columns: 1fr 1fr; }
+  .vizitky { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 960px) {
+  .hero-inner { padding-top: 3rem; }
+  .zaruky { grid-template-columns: repeat(3, 1fr); }
+  section { padding: 6rem 2rem; }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .hero-title .line,
+  .hero-sub,
+  .hero-cta,
+  .hero-loc {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .circuit .wire {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .circuit .node {
+    animation: none;
+    opacity: 1;
+  }
+
+  .btn,
+  .karta,
+  .vizitka-kontakty a {
+    transition: none;
+  }
+
+  .btn:hover { transform: none; }
+}
