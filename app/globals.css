@@ -1,0 +1,530 @@
+/* ============================================================
+   TIOX — ploty a oplocení, Liberec
+   Palette: ocelový pozink + antracit RAL 7016 + zelený RAL 6005
+   (barvy, ve kterých se ploty skutečně prodávají)
+   Type: system stack laděný na kondenzovaný, technický výraz
+   Signature: plotové pole z latí v hero (čistě CSS)
+   Prefix "tx-" (nekoliduje s "lv-" studia)
+   ============================================================ */
+
+:root {
+  --tx-antracit: #2b2f33;      /* RAL 7016-ish, panely antracit */
+  --tx-antracit-hl: #3a4046;
+  --tx-zinek: #e9ecee;         /* pozinkovaný povrch, světlé pozadí */
+  --tx-zinek-tm: #c8ced3;
+  --tx-zelen: #1f5c38;         /* RAL 6005, poplastované pletivo */
+  --tx-zelen-sv: #2e7a4c;
+  --tx-ink: #1b1e21;
+  --tx-white: #ffffff;
+
+  --tx-font: "Arial Narrow", "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+  --tx-font-body: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--tx-font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--tx-ink);
+  background: var(--tx-zinek);
+  -webkit-font-smoothing: antialiased;
+}
+
+.tx a:focus-visible,
+.tx button:focus-visible {
+  outline: 3px solid var(--tx-zelen);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ===================== HERO ===================== */
+
+.tx-hero {
+  position: relative;
+  background: var(--tx-antracit);
+  color: var(--tx-zinek);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 88vh;
+}
+
+/* jemná mřížka pletiva na pozadí antracitu */
+.tx-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(233, 236, 238, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(233, 236, 238, 0.045) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none;
+}
+
+.tx-hero-top {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(233, 236, 238, 0.18);
+}
+
+.tx-wordmark {
+  font-family: var(--tx-font);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: 0.14em;
+  color: var(--tx-white);
+}
+
+/* O jako oko pletiva — kroužek místo plného písmene */
+.tx-wordmark-x {
+  color: transparent;
+  position: relative;
+  display: inline-block;
+}
+
+.tx-wordmark-x::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: 0.72em;
+  height: 0.72em;
+  transform: translate(-50%, -50%) rotate(45deg);
+  border: 3px solid var(--tx-zelen-sv);
+}
+
+.tx-hero-loc {
+  font-family: var(--tx-font);
+  font-stretch: condensed;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.78rem;
+  color: var(--tx-zinek-tm);
+}
+
+.tx-hero-body {
+  position: relative;
+  z-index: 1;
+  max-width: 68rem;
+  margin: 0 auto;
+  width: 100%;
+  padding: 3.5rem 0 2.5rem;
+  flex: 1;
+}
+
+.tx-h1 {
+  font-family: var(--tx-font);
+  font-stretch: condensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 9vw, 6.4rem);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  margin: 0 0 1.5rem;
+  color: var(--tx-white);
+}
+
+.tx-h1-line {
+  display: block;
+}
+
+.tx-h1 em {
+  font-style: normal;
+  color: var(--tx-zelen-sv);
+  /* „rovně" podtržené vodováhou — přesnou rovnou linkou */
+  box-shadow: inset 0 -0.14em 0 0 var(--tx-zelen-sv);
+  padding-bottom: 0.02em;
+}
+
+.tx-hero-sub {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: var(--tx-zinek-tm);
+  margin: 0 0 2rem;
+}
+
+.tx-hero-cta {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.tx-btn {
+  display: inline-block;
+  font-family: var(--tx-font);
+  font-stretch: condensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 1rem;
+  text-decoration: none;
+  color: var(--tx-antracit);
+  background: var(--tx-white);
+  padding: 0.95rem 1.6rem;
+  border: 2px solid var(--tx-white);
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.tx-btn:hover {
+  background: var(--tx-zelen-sv);
+  border-color: var(--tx-zelen-sv);
+  color: var(--tx-white);
+  transform: translateY(-2px);
+}
+
+.tx-btn-ghost {
+  background: transparent;
+  color: var(--tx-zinek);
+  border-color: rgba(233, 236, 238, 0.45);
+}
+
+.tx-btn-ghost:hover {
+  background: transparent;
+  color: var(--tx-white);
+  border-color: var(--tx-white);
+}
+
+/* ---------- Signature: plotové pole ---------- */
+
+.tx-fence {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(6px, 1.4vw, 18px);
+  height: clamp(90px, 16vw, 170px);
+  max-width: 68rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tx-post {
+  width: clamp(10px, 1.6vw, 16px);
+  height: 100%;
+  background: var(--tx-zelen);
+  flex: none;
+}
+
+.tx-picket {
+  flex: 1;
+  height: 78%;
+  background: linear-gradient(180deg, var(--tx-zinek) 0%, var(--tx-zinek-tm) 100%);
+  transform-origin: bottom center;
+  animation: tx-raise 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+/* latě se zvedají od sloupku ke sloupku jako při montáži */
+.tx-picket.p1  { animation-delay: 0.55s; }
+.tx-picket.p2  { animation-delay: 0.62s; }
+.tx-picket.p3  { animation-delay: 0.69s; }
+.tx-picket.p4  { animation-delay: 0.76s; }
+.tx-picket.p5  { animation-delay: 0.83s; }
+.tx-picket.p6  { animation-delay: 0.90s; }
+.tx-picket.p7  { animation-delay: 0.97s; }
+.tx-picket.p8  { animation-delay: 1.04s; }
+.tx-picket.p9  { animation-delay: 1.11s; }
+.tx-picket.p10 { animation-delay: 1.18s; }
+.tx-picket.p11 { animation-delay: 1.25s; }
+.tx-picket.p12 { animation-delay: 1.32s; }
+.tx-picket.p13 { animation-delay: 1.39s; }
+.tx-picket.p14 { animation-delay: 1.46s; }
+
+/* na užších displejích schovej část latí, ať pole nezhoustne */
+@media (max-width: 640px) {
+  .tx-picket.p11,
+  .tx-picket.p12,
+  .tx-picket.p13,
+  .tx-picket.p14 {
+    display: none;
+  }
+}
+
+.tx-rail {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--tx-zelen);
+  opacity: 0.85;
+}
+
+.tx-rail-top {
+  top: 26%;
+}
+
+.tx-rail-bottom {
+  bottom: 12%;
+}
+
+@keyframes tx-raise {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* ---------- načítací sekvence textu ---------- */
+
+.tx-reveal {
+  animation: tx-up 0.6s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+.tx-d1 { animation-delay: 0.05s; }
+.tx-d2 { animation-delay: 0.15s; }
+.tx-d3 { animation-delay: 0.3s; }
+.tx-d4 { animation-delay: 0.42s; }
+
+@keyframes tx-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================== SEKCE ===================== */
+
+.tx-section {
+  padding: 4.5rem 1.25rem;
+}
+
+.tx-section-head {
+  max-width: 68rem;
+  margin: 0 auto 2.75rem;
+}
+
+.tx-eyebrow {
+  display: inline-block;
+  font-family: var(--tx-font);
+  font-stretch: condensed;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--tx-zelen);
+  border-left: 4px solid var(--tx-zelen);
+  padding-left: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.tx-eyebrow-light {
+  color: var(--tx-zelen-sv);
+  border-color: var(--tx-zelen-sv);
+}
+
+.tx-h2 {
+  font-family: var(--tx-font);
+  font-stretch: condensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.7rem, 4.5vw, 2.7rem);
+  line-height: 1.08;
+  margin: 0;
+}
+
+.tx-section-lead {
+  max-width: 36rem;
+  color: #4a5158;
+  margin: 0.9rem 0 0;
+}
+
+/* ---------- karty služeb ---------- */
+
+.tx-grid {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+
+@media (min-width: 700px) {
+  .tx-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.tx-card {
+  background: var(--tx-white);
+  border-top: 5px solid var(--tx-antracit);
+  padding: 1.6rem 1.5rem 1.4rem;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+}
+
+.tx-card:hover {
+  border-top-color: var(--tx-zelen);
+  transform: translateY(-3px);
+}
+
+.tx-card-tag {
+  display: inline-block;
+  font-family: var(--tx-font);
+  font-stretch: condensed;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--tx-zelen);
+  margin-bottom: 0.5rem;
+}
+
+.tx-h3 {
+  font-family: var(--tx-font);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 1.35rem;
+  margin: 0 0 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.tx-card-text {
+  margin: 0 0 1rem;
+  color: #3d444b;
+}
+
+.tx-card-detail {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #6a727a;
+  border-top: 1px dashed var(--tx-zinek-tm);
+  padding-top: 0.7rem;
+}
+
+/* ---------- tmavá sekce: postup + fakta ---------- */
+
+.tx-section-dark {
+  background: var(--tx-antracit);
+  color: var(--tx-zinek);
+}
+
+.tx-section-dark .tx-h2 {
+  color: var(--tx-white);
+}
+
+.tx-steps {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+
+@media (min-width: 820px) {
+  .tx-steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.tx-step {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.tx-step-num {
+  font-family: var(--tx-font);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--tx-antracit);
+  background: var(--tx-zelen-sv);
+  width: 2.2rem;
+  height: 2.2rem;
+  display: grid;
+  place-items: center;
+  flex: none;
+  color: var(--tx-white);
+}
+
+.tx-step .tx-h3 {
+  color: var(--tx-white);
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.tx-step-text {
+  margin: 0;
+  color: var(--tx-zinek-tm);
+  font-size: 0.98rem;
+}
+
+.tx-facts {
+  max-width: 68rem;
+  margin: 3rem auto 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+  border-top: 2px solid rgba(233, 236, 238, 0.18);
+  padding-top: 2rem;
+}
+
+@media (min-width: 700px) {
+  .tx-facts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.tx-fact-num {
+  font-family: var(--tx-font);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--tx-zelen-sv);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.tx-fact-text {
+  margin: 0;
+  color: var(--tx-zinek-tm);
+  font-size: 0.95rem;
+  max-width: 22rem;
+}
+
+/* ===================== REDUCED MOTION ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .tx-reveal,
+  .tx-picket {
+    animation: none;
+  }
+
+  .tx-btn,
+  .tx-card {
+    transition: none;
+  }
+
+  .tx-btn:hover,
+  .tx-card:hover {
+    transform: none;
+  }
+}
