@@ -1,0 +1,628 @@
+/* =====================================================
+   Tomáš Procházka — psychoterapie, Liberec
+   Palette (odvozeno z klidu terapeutické místnosti
+   a jizerskohorské mlhy nad Libercem):
+   --mlha      #EDF1EF  (světlé pozadí, mléčná mlha)
+   --smrk      #1E3B33  (hluboká zeleň jizerských smrků)
+   --jehlici   #3E6B5C  (střední zeleň, akcent)
+   --hlina     #C4763B  (teplá hlína — jediný teplý tón)
+   --inkoust   #16211D  (text)
+   Type: Fraunces (display, měkké optické serify)
+         + Karla (body, lidský grotesk)
+   Signature: půdorys dvou křesel naproti sobě
+   s „dechovými" soustřednými kruhy — jádro řemesla:
+   dva lidé, jeden rozhovor, klidný rytmus.
+   ===================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;700&display=swap");
+
+:root {
+  --mlha: #edf1ef;
+  --mlha-tmavsi: #dfe7e3;
+  --smrk: #1e3b33;
+  --jehlici: #3e6b5c;
+  --hlina: #c4763b;
+  --hlina-tmava: #a95f2b;
+  --inkoust: #16211d;
+  --bila: #f8faf9;
+
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Karla", "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--inkoust);
+  background: var(--mlha);
+  -webkit-font-smoothing: antialiased;
+}
+
+.tp img,
+.tp svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---------- Focus ---------- */
+.tp a:focus-visible,
+.tp button:focus-visible {
+  outline: 3px solid var(--hlina);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* =====================================================
+   HERO
+   ===================================================== */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 85% 10%, var(--mlha-tmavsi) 0%, transparent 55%),
+    var(--mlha);
+  padding: 2rem 1.25rem 4rem;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* --- wordmark --- */
+.wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  margin-bottom: 3.5rem;
+  border-left: 3px solid var(--jehlici);
+  padding-left: 0.75rem;
+}
+
+.wordmark-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: 0.01em;
+  color: var(--smrk);
+}
+
+.wordmark-sub {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--jehlici);
+  font-weight: 500;
+}
+
+/* --- title --- */
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 8.5vw, 6rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--smrk);
+  margin: 0 0 1.75rem;
+  max-width: 12ch;
+}
+
+.hero-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: hero-vzestup 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-line-1 { animation-delay: 0.1s; }
+.hero-line-2 { animation-delay: 0.28s; font-weight: 300; font-style: italic; }
+.hero-line-3 { animation-delay: 0.46s; font-weight: 600; }
+
+.tecka {
+  color: var(--hlina);
+}
+
+@keyframes hero-vzestup {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-lead {
+  max-width: 34rem;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--inkoust);
+  margin: 0 0 2.25rem;
+  opacity: 0;
+  animation: hero-vzestup 0.9s 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: translateY(0.4em);
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: hero-vzestup 0.9s 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: translateY(0.4em);
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.9rem 1.75rem;
+  border-radius: 999px;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-plna {
+  background: var(--smrk);
+  color: var(--bila);
+}
+
+.btn-plna:hover {
+  background: var(--jehlici);
+  transform: translateY(-2px);
+}
+
+.btn-tichy {
+  color: var(--smrk);
+  border: 1.5px solid var(--smrk);
+  background: transparent;
+}
+
+.btn-tichy:hover {
+  background: var(--smrk);
+  color: var(--bila);
+}
+
+.hero-fakta {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--jehlici);
+  font-weight: 500;
+  margin: 0;
+  opacity: 0;
+  animation: hero-vzestup 0.9s 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: translateY(0.4em);
+}
+
+/* --- signature: dvě křesla --- */
+.kresla {
+  position: absolute;
+  top: 50%;
+  right: -8%;
+  transform: translateY(-50%);
+  width: min(48vw, 560px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.kresla-svg {
+  display: block;
+  width: 100%;
+}
+
+.dech {
+  fill: none;
+  stroke: var(--jehlici);
+  stroke-width: 1;
+  opacity: 0;
+  transform-origin: 200px 200px;
+  animation: dech-objeveni 1.4s ease-out forwards;
+}
+
+.dech-1 { animation-delay: 0.5s; opacity: 0; }
+.dech-2 { animation-delay: 0.75s; }
+.dech-3 { animation-delay: 1s; }
+
+@keyframes dech-objeveni {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+}
+
+.kreslo path,
+.kreslo circle {
+  fill: none;
+  stroke: var(--smrk);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.kreslo {
+  opacity: 0;
+  animation: kreslo-objeveni 1s 1.2s ease-out forwards;
+}
+
+.kreslo-b { animation-delay: 1.4s; }
+
+@keyframes kreslo-objeveni {
+  to { opacity: 1; }
+}
+
+.linka-rozhovoru {
+  fill: none;
+  stroke: var(--hlina);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+  animation: linka-kresleni 1.2s 1.7s ease-out forwards;
+}
+
+@keyframes linka-kresleni {
+  to { stroke-dashoffset: 0; }
+}
+
+/* =====================================================
+   SEKCE — společné
+   ===================================================== */
+.sekce {
+  padding: 4.5rem 1.25rem;
+}
+
+.sekce-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--hlina);
+  margin: 0 0 1rem;
+}
+
+.eyebrow-svetly {
+  color: var(--hlina);
+}
+
+.sekce-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--smrk);
+  margin: 0 0 1.25rem;
+  max-width: 24ch;
+}
+
+.sekce-lead {
+  max-width: 36rem;
+  font-size: 1.1rem;
+  margin: 0 0 3rem;
+}
+
+/* =====================================================
+   TÉMATA
+   ===================================================== */
+.temata {
+  background: var(--bila);
+}
+
+.temata-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.tema {
+  background: var(--mlha);
+  border-radius: 18px;
+  padding: 1.75rem 1.5rem;
+  border-top: 3px solid var(--jehlici);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tema:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(30, 59, 51, 0.12);
+}
+
+.tema-nazev {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--smrk);
+  margin: 0 0 0.6rem;
+}
+
+.tema-text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.temata-pozn {
+  margin: 2.5rem 0 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--hlina);
+  max-width: 34rem;
+  font-size: 1rem;
+  color: var(--jehlici);
+  font-weight: 500;
+}
+
+/* =====================================================
+   PRŮBĚH + O MNĚ
+   ===================================================== */
+.prubeh {
+  background: var(--smrk);
+  color: var(--mlha);
+}
+
+.sekce-title-svetly {
+  color: var(--mlha);
+}
+
+.prubeh-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.kroky {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.krok {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.krok-cislo {
+  flex: 0 0 auto;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--hlina);
+  color: var(--hlina);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  display: grid;
+  place-items: center;
+}
+
+.krok-nazev {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.25rem;
+  margin: 0.2rem 0 0.4rem;
+  color: var(--bila);
+}
+
+.krok-text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: rgba(237, 241, 239, 0.82);
+}
+
+/* --- o mně --- */
+.o-mne {
+  background: rgba(248, 250, 249, 0.06);
+  border: 1px solid rgba(237, 241, 239, 0.18);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+}
+
+.o-mne-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: var(--bila);
+  margin: 0 0 1rem;
+}
+
+.o-mne-text {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: rgba(237, 241, 239, 0.85);
+}
+
+.o-mne-fakta {
+  margin: 1.5rem 0;
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(237, 241, 239, 0.18);
+  border-bottom: 1px solid rgba(237, 241, 239, 0.18);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.5rem;
+}
+
+.fakt dt {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--hlina);
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.fakt dd {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--mlha);
+}
+
+.reference {
+  margin: 0;
+  padding: 0;
+}
+
+.reference p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  color: var(--bila);
+  margin: 0 0 0.6rem;
+}
+
+.reference-autor {
+  font-size: 0.85rem;
+  color: rgba(237, 241, 239, 0.65);
+}
+
+/* =====================================================
+   MOBILNÍ CTA
+   ===================================================== */
+.mobil-cta {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 50;
+  text-align: center;
+  background: var(--hlina);
+  color: var(--bila);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  padding: 1rem;
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(22, 33, 29, 0.35);
+}
+
+.mobil-cta:hover {
+  background: var(--hlina-tmava);
+}
+
+/* =====================================================
+   RESPONZIVITA
+   ===================================================== */
+@media (min-width: 640px) {
+  .temata-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    padding: 3rem 2rem 6rem;
+    min-height: 88vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-inner {
+    width: 100%;
+  }
+
+  .sekce {
+    padding: 6.5rem 2rem;
+  }
+
+  .prubeh-layout {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .o-mne {
+    padding: 2.5rem 2.25rem;
+    position: sticky;
+    top: 2rem;
+  }
+
+  .mobil-cta {
+    display: none;
+  }
+}
+
+@media (max-width: 899px) {
+  .kresla {
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: none;
+    width: min(70vw, 320px);
+    margin: 2.5rem auto 0;
+  }
+
+  /* rezerva pro fixní mobilní CTA */
+  .prubeh {
+    padding-bottom: 7rem;
+  }
+}
+
+/* =====================================================
+   REDUCED MOTION
+   ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-line,
+  .hero-lead,
+  .hero-cta,
+  .hero-fakta {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .dech {
+    animation: none;
+    opacity: 0.35;
+    transform: none;
+  }
+
+  .kreslo {
+    animation: none;
+    opacity: 1;
+  }
+
+  .linka-rozhovoru {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .tema,
+  .btn {
+    transition: none;
+  }
+
+  .tema:hover {
+    transform: none;
+  }
+}
