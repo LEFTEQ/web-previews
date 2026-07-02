@@ -1,0 +1,562 @@
+:root {
+  /* Paleta kovodílny: ocelová tma, broušený nerez, rozžhavený kov, měď */
+  --ocel: #16191d;        /* tmavá ocel — pozadí hero */
+  --ocel-svetla: #23272d; /* karty na tmavé */
+  --nerez: #e8eaec;       /* broušený nerez — světlé pozadí */
+  --nerez-tmavy: #c6cbd0;
+  --zhavost: #ff5a1f;     /* rozžhavený kov — akcent */
+  --zhavost-zluta: #ffb347;
+  --med: #b87548;         /* měď — sekundární akcent */
+  --inkoust: #1a1d21;
+  --text-tlumeny: #5a6068;
+  --text-svetly: #a8adb4;
+
+  --pismo-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Impact, sans-serif;
+  --pismo-telo: Georgia, "Times New Roman", serif;
+  --pismo-mono: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--pismo-telo);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--inkoust);
+  background: var(--nerez);
+  -webkit-font-smoothing: antialiased;
+}
+
+.nk a:focus-visible,
+.nk .btn:focus-visible {
+  outline: 3px solid var(--zhavost);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+.hero {
+  position: relative;
+  background:
+    linear-gradient(160deg, #1b1f24 0%, var(--ocel) 55%, #101216 100%);
+  color: var(--nerez);
+  padding: 1.25rem 1.25rem 0;
+  overflow: hidden;
+}
+
+/* jemná textura broušeného kovu — svislé tahy */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.025) 0px,
+    rgba(255, 255, 255, 0.025) 1px,
+    transparent 1px,
+    transparent 7px
+  );
+  pointer-events: none;
+}
+
+.hero-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: stretch;
+  font-family: var(--pismo-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.wordmark-nk {
+  background: var(--zhavost);
+  color: var(--ocel);
+  padding: 0.35rem 0.5rem;
+  font-size: 1.15rem;
+}
+
+.wordmark-kovo {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-left: none;
+  padding: 0.35rem 0.55rem;
+  font-size: 1.15rem;
+  color: var(--nerez);
+}
+
+.hero-lokalita {
+  font-family: var(--pismo-mono);
+  font-size: 0.8rem;
+  color: var(--text-svetly);
+  letter-spacing: 0.05em;
+}
+
+.hero-tel {
+  margin-left: auto;
+  font-family: var(--pismo-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--zhavost-zluta);
+  text-decoration: none;
+  border-bottom: 2px solid var(--zhavost);
+  padding-bottom: 2px;
+}
+
+.hero-tel:hover {
+  color: #fff;
+}
+
+.hero-body {
+  position: relative;
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 3.5rem 0 3rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--pismo-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--med);
+  margin-bottom: 1.25rem;
+}
+
+.hero-titul {
+  font-family: var(--pismo-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(3.5rem, 14vw, 9.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-titul .radek {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: nastup 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.radek-1 { color: var(--nerez); animation-delay: 0.1s; }
+.radek-2 {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--nerez-tmavy);
+  animation-delay: 0.25s;
+}
+.radek-3 { color: var(--med); animation-delay: 0.4s; }
+.tecka { color: var(--zhavost); }
+
+@keyframes nastup {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-podtitul {
+  max-width: 34rem;
+  margin-top: 1.75rem;
+  font-size: 1.05rem;
+  color: var(--text-svetly);
+}
+
+.hero-akce {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--pismo-display);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 0.9rem 1.5rem;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-plna {
+  background: var(--zhavost);
+  color: var(--ocel);
+}
+
+.btn-plna:hover {
+  background: var(--zhavost-zluta);
+  transform: translateY(-2px);
+}
+
+.btn-obrys {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: var(--nerez);
+}
+
+.btn-obrys:hover {
+  border-color: var(--zhavost);
+  color: var(--zhavost-zluta);
+  transform: translateY(-2px);
+}
+
+/* ===== SIGNATURE: rozžhavený svarový šev ===== */
+.svar {
+  position: relative;
+  height: 6px;
+  margin: 0 -1.25rem;
+}
+
+.svar-linka {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #3a2418 0%,
+    var(--med) 20%,
+    var(--zhavost) 45%,
+    var(--zhavost-zluta) 50%,
+    var(--zhavost) 55%,
+    var(--med) 80%,
+    #3a2418 100%
+  );
+  background-size: 200% 100%;
+  animation: zhaveni 6s linear infinite;
+  box-shadow: 0 0 18px rgba(255, 90, 31, 0.55), 0 0 45px rgba(255, 90, 31, 0.25);
+}
+
+.svar-jiskra {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, var(--zhavost-zluta) 35%, transparent 70%);
+  animation: jiskra 6s linear infinite;
+}
+
+@keyframes zhaveni {
+  from { background-position: 0% 0; }
+  to { background-position: -200% 0; }
+}
+
+@keyframes jiskra {
+  from { left: -2%; }
+  to { left: 102%; }
+}
+
+/* pás materiálů pod švem */
+.hero-pas {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0.8rem 0;
+  font-family: var(--pismo-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  color: var(--text-svetly);
+  background: #101216;
+  margin: 0 -1.25rem;
+}
+
+/* ============ SEKCE OBECNĚ ============ */
+.sekce {
+  padding: 4rem 1.25rem;
+}
+
+.sekce-hlava {
+  max-width: 62rem;
+  margin: 0 auto 2.5rem;
+}
+
+.eyebrow {
+  font-family: var(--pismo-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--med);
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow-svetly {
+  color: var(--zhavost-zluta);
+}
+
+.sekce h2 {
+  font-family: var(--pismo-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.005em;
+}
+
+/* ============ SLUŽBY ============ */
+.sluzby {
+  background: var(--nerez);
+}
+
+.sluzby-mrizka {
+  list-style: none;
+  max-width: 62rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--nerez-tmavy);
+  border: 1px solid var(--nerez-tmavy);
+}
+
+.karta {
+  background: #f4f5f6;
+  padding: 1.75rem 1.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.karta:hover {
+  background: #fff;
+}
+
+.karta-hlava {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+}
+
+.karta-kod {
+  font-family: var(--pismo-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--ocel);
+  background: var(--nerez-tmavy);
+  padding: 0.2rem 0.5rem;
+}
+
+.karta:hover .karta-kod {
+  background: var(--zhavost);
+  color: #fff;
+}
+
+.karta-material {
+  font-family: var(--pismo-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--text-tlumeny);
+}
+
+.karta h3 {
+  font-family: var(--pismo-display);
+  font-size: 1.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.6rem;
+}
+
+.karta p {
+  color: var(--text-tlumeny);
+  font-size: 0.98rem;
+}
+
+.sluzby-pozn {
+  max-width: 62rem;
+  margin: 2rem auto 0;
+  font-size: 1rem;
+  color: var(--text-tlumeny);
+}
+
+.sluzby-pozn a {
+  color: var(--zhavost);
+  font-weight: 700;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.sluzby-pozn a:hover {
+  color: var(--med);
+}
+
+/* ============ DŮVĚRA ============ */
+.duvera {
+  background: var(--ocel);
+  color: var(--nerez);
+}
+
+.duvera h2 {
+  color: var(--nerez);
+}
+
+.duvera-obsah {
+  max-width: 62rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.casova-osa {
+  list-style: none;
+  position: relative;
+  padding-left: 1.5rem;
+  border-left: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.casova-osa li {
+  position: relative;
+  padding-bottom: 1.75rem;
+}
+
+.casova-osa li:last-child {
+  padding-bottom: 0;
+}
+
+.casova-osa li::before {
+  content: "";
+  position: absolute;
+  left: calc(-1.5rem - 6px);
+  top: 0.45rem;
+  width: 10px;
+  height: 10px;
+  background: var(--zhavost);
+  transform: rotate(45deg); /* kovaný hřeb */
+}
+
+.osa-rok {
+  font-family: var(--pismo-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  color: var(--zhavost-zluta);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.casova-osa p {
+  color: var(--text-svetly);
+  font-size: 0.98rem;
+}
+
+.zasady {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.zasada {
+  background: var(--ocel-svetla);
+  border-left: 4px solid var(--med);
+  padding: 1.25rem 1.4rem;
+}
+
+.zasada h3 {
+  font-family: var(--pismo-display);
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.4rem;
+  color: var(--nerez);
+}
+
+.zasada p {
+  color: var(--text-svetly);
+  font-size: 0.95rem;
+}
+
+.citace {
+  border-left: 4px solid var(--zhavost);
+  padding: 0.5rem 0 0.5rem 1.4rem;
+}
+
+.citace p {
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--nerez);
+}
+
+.citace cite {
+  display: block;
+  margin-top: 0.6rem;
+  font-family: var(--pismo-mono);
+  font-style: normal;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--text-svetly);
+}
+
+/* ============ RESPONSIVITA ============ */
+@media (min-width: 640px) {
+  .sluzby-mrizka {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    padding: 1.5rem 3rem 0;
+  }
+
+  .svar,
+  .hero-pas {
+    margin: 0 -3rem;
+  }
+
+  .sekce {
+    padding: 5.5rem 3rem;
+  }
+
+  .duvera-obsah {
+    grid-template-columns: 5fr 7fr;
+    gap: 4rem;
+  }
+}
+
+/* ============ REDUKOVANÝ POHYB ============ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-titul .radek {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .svar-linka {
+    animation: none;
+  }
+
+  .svar-jiskra {
+    display: none;
+  }
+
+  .btn,
+  .karta {
+    transition: none;
+  }
+}
