@@ -1,0 +1,524 @@
+/* =====================================================================
+   CHOLEVATOR — štukatérství Ostrava
+   Palette: sádrová bílá / mokrá sádra / grafitová břidlice / okr šablony
+   Type: system stack tuned — display = ultra-condensed grotesk feel via
+         Arial Narrow/system, body = Georgia-free humanist stack
+   Signature: schodovitý profil římsy (SVG) tažený přes celou šířku hero,
+   který se při načtení „vytáhne" zleva doprava jako šablonou.
+   ===================================================================== */
+
+:root {
+  --sadra: #f7f5f0;        /* suchá sádra */
+  --mokra: #dcd6c8;        /* mokrá sádra / stín profilu */
+  --grafit: #23282c;       /* břidlicově tmavá */
+  --grafit-2: #31383d;
+  --okr: #c8912f;          /* okr plechové šablony / mosaz */
+  --okr-tmavy: #a8761f;
+  --ink: #2a2d2f;
+
+  --f-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed",
+    Impact, sans-serif-condensed, Arial, sans-serif;
+  --f-body: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--f-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--sadra);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ch a:focus-visible,
+.ch button:focus-visible {
+  outline: 3px solid var(--okr);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =============================== HERO =============================== */
+
+.hero {
+  position: relative;
+  background: var(--sadra);
+  overflow: hidden;
+  /* jemná zrnitost sádry */
+  background-image: radial-gradient(
+      rgba(35, 40, 44, 0.035) 1px,
+      transparent 1px
+    );
+  background-size: 5px 5px;
+}
+
+.hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.4rem clamp(1.25rem, 5vw, 4rem) 0;
+}
+
+.wordmark {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--grafit);
+  line-height: 1;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.wordmark-cut {
+  color: var(--okr);
+}
+
+.wordmark-sub {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grafit-2);
+}
+
+.hero-tel {
+  font-family: var(--f-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--grafit);
+  text-decoration: none;
+  border-bottom: 2px solid var(--okr);
+  padding-bottom: 2px;
+}
+
+.hero-tel:hover {
+  color: var(--okr-tmavy);
+}
+
+.hero-body {
+  padding: clamp(2.5rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem)
+    clamp(2rem, 5vw, 3.5rem);
+  max-width: 62rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--okr-tmavy);
+  margin: 0 0 1.2rem;
+}
+
+.hero-title {
+  font-family: var(--f-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(3rem, 11vw, 8rem);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  margin: 0 0 1.6rem;
+  color: var(--grafit);
+  display: flex;
+  flex-direction: column;
+}
+
+/* schodovité odsazení řádků — jako stupně taženého profilu */
+.ht-2 {
+  padding-left: clamp(1.5rem, 6vw, 5rem);
+  color: var(--grafit-2);
+}
+
+.ht-3 {
+  padding-left: clamp(3rem, 12vw, 10rem);
+  color: var(--okr);
+}
+
+.ht-line {
+  opacity: 0;
+  transform: translateX(-24px);
+  animation: ht-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.ht-1 { animation-delay: 0.05s; }
+.ht-2 { animation-delay: 0.18s; }
+.ht-3 { animation-delay: 0.31s; }
+
+@keyframes ht-in {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-lead {
+  max-width: 34rem;
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  line-height: 1.65;
+  margin: 0 0 2rem;
+  color: var(--ink);
+}
+
+.hero-cta {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: 3px;
+  display: inline-block;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--grafit);
+  color: var(--sadra);
+}
+
+.btn-solid:hover {
+  background: var(--okr-tmavy);
+  transform: translateY(-2px);
+}
+
+.btn-line {
+  color: var(--grafit);
+  border: 2px solid var(--grafit);
+}
+
+.btn-line:hover {
+  border-color: var(--okr);
+  color: var(--okr-tmavy);
+  transform: translateY(-2px);
+}
+
+/* ---- signature: profil římsy ---- */
+
+.profile-band {
+  position: relative;
+  margin-top: clamp(1rem, 4vw, 3rem);
+}
+
+.profile-svg {
+  display: block;
+  width: 100%;
+  height: clamp(80px, 12vw, 140px);
+}
+
+.profile-fill {
+  fill: var(--grafit);
+}
+
+.profile-stroke {
+  fill: none;
+  stroke: var(--grafit);
+  stroke-width: 3;
+  stroke-linecap: square;
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: draw 1.4s ease-out forwards;
+}
+
+.p-a { animation-delay: 0.4s; }
+.p-b { animation-delay: 0.55s; stroke: var(--grafit-2); }
+.p-c { animation-delay: 0.7s; stroke: var(--okr); stroke-width: 4; }
+.p-d { animation-delay: 0.85s; stroke: var(--mokra); }
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.profile-note {
+  position: absolute;
+  right: clamp(1.25rem, 5vw, 4rem);
+  top: -1.4rem;
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grafit-2);
+}
+
+/* ============================== SLUŽBY ============================== */
+
+.sluzby {
+  background: var(--grafit);
+  color: var(--sadra);
+  padding: clamp(3.5rem, 8vw, 6.5rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.sec-head {
+  max-width: 46rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.sec-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--okr);
+  margin: 0 0 0.8rem;
+}
+
+.sec-title {
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 5vw, 3.2rem);
+  line-height: 1.05;
+  margin: 0 0 1rem;
+}
+
+.sec-lead {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--mokra);
+  max-width: 34rem;
+}
+
+.sluzby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+}
+
+@media (min-width: 700px) {
+  .sluzby-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.karta {
+  background: var(--grafit-2);
+  border-top: 4px solid var(--okr);
+  border-radius: 4px;
+  padding: 1.6rem 1.5rem 1.8rem;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  background: #383f45;
+}
+
+.karta-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.karta-tag {
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--okr);
+}
+
+.karta-mat {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--mokra);
+}
+
+.karta-title {
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 0.7rem;
+  color: var(--sadra);
+}
+
+.karta-text {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #cfd4d6;
+}
+
+/* =========================== POSTUP + REF =========================== */
+
+.duvera {
+  background: var(--sadra);
+  padding: clamp(3.5rem, 8vw, 6.5rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.sec-head-inv .sec-title {
+  color: var(--grafit);
+}
+
+.kroky {
+  list-style: none;
+  margin: 0 0 clamp(3rem, 6vw, 4.5rem);
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.4rem;
+  counter-reset: krok;
+}
+
+@media (min-width: 700px) {
+  .kroky {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1050px) {
+  .kroky {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.krok {
+  border-left: 3px solid var(--mokra);
+  padding: 0.2rem 0 0.4rem 1.1rem;
+  position: relative;
+}
+
+.krok:hover {
+  border-left-color: var(--okr);
+}
+
+.krok-cislo {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--okr-tmavy);
+}
+
+.krok-nazev {
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0.35rem 0 0.5rem;
+  color: var(--grafit);
+}
+
+.krok-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* reference */
+
+.ref-blok {
+  background: var(--mokra);
+  border-radius: 6px;
+  padding: clamp(1.6rem, 4vw, 2.6rem);
+}
+
+.ref-title {
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--grafit);
+  margin: 0 0 1.4rem;
+}
+
+.ref-list {
+  list-style: none;
+  margin: 0 0 1.4rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+}
+
+@media (min-width: 800px) {
+  .ref-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+  }
+}
+
+.ref-item {
+  border-top: 3px solid var(--grafit);
+  padding-top: 0.8rem;
+}
+
+.ref-misto {
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grafit);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.ref-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.ref-pozn {
+  margin: 0;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--grafit-2);
+  max-width: 40rem;
+}
+
+/* ======================== reduced motion ======================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ht-line {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .profile-stroke {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .btn,
+  .karta,
+  .krok {
+    transition: none;
+  }
+}
