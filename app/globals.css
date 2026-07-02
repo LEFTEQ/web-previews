@@ -1,0 +1,602 @@
+/* ==========================================================
+   BlackFox Art s.r.o. — výroba reklamy, Hradec Králové
+   Tokeny:
+   --bf-ink      #17140F  (černá liška — sytá, teplá čerň)
+   --bf-paper    #F7F5F0  (nepotištěná deska / bílá fólie)
+   --bf-fox      #E8611C  (fólie „oranžová 034“ — srst lišky)
+   --bf-uv       #2E4FE0  (UV lampa / signální modř plotru)
+   --bf-mist     #DAD5CB  (matná laminace)
+   Typ: Archivo (display, široké průmyslové grotesk řezy)
+        + system-ui pro tělo — rychlé, bez knihoven navíc.
+   Signature: ořezová dráha lišky — čárkovaná linka plotru,
+   která se při načtení „vyřeže“ kolem oranžové plochy.
+   ========================================================== */
+
+@font-face {
+  font-family: "ArchivoLocalFallback";
+  src: local("Arial Narrow"), local("Helvetica Neue");
+}
+
+:root {
+  --bf-ink: #17140f;
+  --bf-paper: #f7f5f0;
+  --bf-fox: #e8611c;
+  --bf-uv: #2e4fe0;
+  --bf-mist: #dad5cb;
+  --bf-display: "Archivo", "ArchivoLocalFallback", "Segoe UI", system-ui,
+    sans-serif;
+  --bf-body: system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bf-paper);
+  color: var(--bf-ink);
+  font-family: var(--bf-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.bf a:focus-visible,
+.bf button:focus-visible {
+  outline: 3px solid var(--bf-uv);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.bf-hero {
+  position: relative;
+  min-height: 92vh;
+  padding: 1.5rem 1.25rem 4rem;
+  background: var(--bf-ink);
+  color: var(--bf-paper);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* jemná mřížka řezací podložky */
+.bf-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      rgba(247, 245, 240, 0.045) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(247, 245, 240, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+}
+
+.bf-hero-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+}
+
+.bf-wordmark {
+  font-family: var(--bf-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: 0.06em;
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.bf-wordmark-black {
+  color: var(--bf-paper);
+}
+
+.bf-wordmark-fox {
+  color: var(--bf-fox);
+}
+
+.bf-wordmark-art {
+  margin-left: 0.45em;
+  font-weight: 400;
+  font-size: 0.7em;
+  letter-spacing: 0.35em;
+  color: var(--bf-mist);
+}
+
+.bf-hero-loc {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bf-mist);
+}
+
+.bf-hero-main {
+  position: relative;
+  z-index: 2;
+  max-width: 40rem;
+  margin-top: clamp(3rem, 10vh, 6rem);
+}
+
+.bf-hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--bf-fox);
+}
+
+.bf-hero-title {
+  margin: 0;
+  font-family: var(--bf-display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 8.5vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.bf-hero-title em {
+  font-style: normal;
+  color: var(--bf-fox);
+  /* „vyříznuté“ z fólie — obrys místo výplně na velkých displejích */
+}
+
+.bf-line {
+  display: block;
+}
+
+.bf-hero-sub {
+  margin: 1.5rem 0 0;
+  max-width: 34rem;
+  font-size: 1.05rem;
+  color: var(--bf-mist);
+}
+
+.bf-hero-cta {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.bf-btn {
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  font-family: var(--bf-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.bf-btn-solid {
+  background: var(--bf-fox);
+  color: var(--bf-ink);
+}
+
+.bf-btn-solid:hover {
+  transform: translateY(-2px);
+  background: #f0722f;
+}
+
+.bf-btn-line {
+  color: var(--bf-paper);
+  border: 2px solid var(--bf-mist);
+}
+
+.bf-btn-line:hover {
+  border-color: var(--bf-fox);
+  color: var(--bf-fox);
+}
+
+/* --- signature: ořezová dráha lišky --- */
+
+.bf-cutpath {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  align-self: flex-end;
+  width: min(34rem, 90%);
+  padding-top: 2rem;
+}
+
+.bf-cutpath-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.bf-fox-fill {
+  fill: var(--bf-fox);
+  opacity: 0;
+  animation: bf-fill-in 0.6s ease-out 1.9s forwards;
+}
+
+.bf-fox-cut {
+  fill: none;
+  stroke: var(--bf-paper);
+  stroke-width: 2.5;
+  stroke-dasharray: 10 8;
+  stroke-dashoffset: 2200;
+  animation: bf-cut 2s ease-in-out 0.3s forwards;
+}
+
+.bf-cut-marks {
+  stroke: var(--bf-uv);
+  stroke-width: 2;
+  opacity: 0;
+  animation: bf-fill-in 0.4s ease-out 2.3s forwards;
+}
+
+.bf-cutpath-label {
+  margin: 0.35rem 0 0;
+  text-align: right;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bf-mist);
+  opacity: 0;
+  animation: bf-fill-in 0.5s ease-out 2.4s forwards;
+}
+
+@keyframes bf-cut {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes bf-fill-in {
+  to {
+    opacity: 1;
+  }
+}
+
+/* nadpisové řádky přijíždějí jako materiál do plotru */
+.bf-line,
+.bf-hero-eyebrow,
+.bf-hero-sub,
+.bf-hero-cta {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: bf-feed 0.55s ease-out forwards;
+}
+
+.bf-hero-eyebrow {
+  animation-delay: 0.1s;
+}
+.bf-line-1 {
+  animation-delay: 0.2s;
+}
+.bf-line-2 {
+  animation-delay: 0.32s;
+}
+.bf-line-3 {
+  animation-delay: 0.44s;
+}
+.bf-hero-sub {
+  animation-delay: 0.6s;
+}
+.bf-hero-cta {
+  animation-delay: 0.72s;
+}
+
+@keyframes bf-feed {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============ SLUŽBY ============ */
+
+.bf-sluzby {
+  padding: 4.5rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.bf-section-head {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.bf-h2 {
+  margin: 0 0 0.75rem;
+  font-family: var(--bf-display);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.bf-section-lead {
+  margin: 0;
+  color: #4d473d;
+}
+
+.bf-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--bf-mist);
+  border: 1px solid var(--bf-mist);
+}
+
+.bf-card {
+  background: var(--bf-paper);
+  padding: 1.75rem 1.5rem;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.bf-card:hover {
+  background: #ffffff;
+}
+
+.bf-card:hover .bf-card-kod {
+  color: var(--bf-fox);
+}
+
+.bf-card-kod {
+  display: inline-block;
+  font-family: var(--bf-display);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--bf-uv);
+  border: 1.5px dashed currentColor;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  margin-bottom: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.bf-card-title {
+  margin: 0 0 0.5rem;
+  font-family: var(--bf-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+.bf-card-text {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: #4d473d;
+}
+
+.bf-card-material {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bf-fox);
+  font-weight: 600;
+}
+
+/* ============ DŮVĚRA / PROCES ============ */
+
+.bf-duvera {
+  background: var(--bf-ink);
+  color: var(--bf-paper);
+  padding: 4.5rem 1.25rem;
+}
+
+.bf-duvera-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.bf-h2-light {
+  color: var(--bf-paper);
+}
+
+.bf-kroky {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1.75rem;
+}
+
+.bf-krok {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+}
+
+.bf-krok-cislo {
+  flex: none;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-items: center;
+  font-family: var(--bf-display);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--bf-ink);
+  background: var(--bf-fox);
+  border-radius: 3px;
+}
+
+.bf-krok-titul {
+  margin: 0 0 0.3rem;
+  font-family: var(--bf-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.bf-krok-text {
+  margin: 0;
+  color: var(--bf-mist);
+  font-size: 0.95rem;
+  max-width: 30rem;
+}
+
+/* karta ateliéru */
+
+.bf-atelier {
+  background: rgba(247, 245, 240, 0.05);
+  border: 1.5px dashed rgba(247, 245, 240, 0.35);
+  border-radius: 6px;
+  padding: 1.75rem 1.5rem;
+  align-self: start;
+}
+
+.bf-atelier-title {
+  margin: 0 0 0.75rem;
+  font-family: var(--bf-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--bf-fox);
+}
+
+.bf-atelier-adresa {
+  margin: 0 0 1.25rem;
+  color: var(--bf-paper);
+}
+
+.bf-hodiny {
+  margin: 0 0 1.25rem;
+  font-size: 0.9rem;
+}
+
+.bf-hodiny-radek {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(247, 245, 240, 0.15);
+}
+
+.bf-hodiny-radek dt {
+  font-weight: 700;
+  color: var(--bf-mist);
+}
+
+.bf-hodiny-radek dd {
+  margin: 0;
+  color: var(--bf-paper);
+}
+
+.bf-atelier-kontakt {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.bf-kontakt-link {
+  color: var(--bf-fox);
+  font-family: var(--bf-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  align-self: flex-start;
+  transition: border-color 0.15s ease;
+}
+
+.bf-kontakt-link:hover {
+  border-bottom-color: var(--bf-fox);
+}
+
+.bf-atelier-pozn {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--bf-mist);
+}
+
+/* ============ RESPONSIVITA ============ */
+
+@media (min-width: 640px) {
+  .bf-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .bf-hero {
+    padding: 2rem 3rem 3rem;
+  }
+
+  .bf-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .bf-sluzby,
+  .bf-duvera {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .bf-duvera-inner {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 4rem;
+  }
+
+  /* na širokých displejích prostřední řádek titulku jen obrysem —
+     jako grafika vyříznutá z fólie před vylepením */
+  .bf-hero-title em {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--bf-fox);
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .bf-line,
+  .bf-hero-eyebrow,
+  .bf-hero-sub,
+  .bf-hero-cta,
+  .bf-fox-fill,
+  .bf-cut-marks,
+  .bf-cutpath-label {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .bf-fox-cut {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .bf-btn,
+  .bf-card,
+  .bf-card-kod,
+  .bf-kontakt-link {
+    transition: none;
+  }
+}
