@@ -1,0 +1,643 @@
+/* ============================================================
+   GIENGER Olomouc — velkoobchod TZB
+   Palette: sklad & mosaz
+   ink       #10233A  (hlubokomodrá — pracovní modrá montérek)
+   steel     #2C4A6B  (ocelová modř trubek)
+   paper     #F2F5F8  (světle šedomodrá, chlad skladové haly)
+   brass     #C89B3C  (mosazná fitinka — akcent)
+   flame     #E2542C  (plamen hořáku — jen pro drobné teplo)
+   Type: Archivo Narrow-ish přes system condensed fallback? Ne —
+   používáme systémové: display = "Arial Black"/black weights
+   (technický štítek), body = system-ui. Signature: DN štítky —
+   typografie převzatá z ražených štítků na potrubí.
+   ============================================================ */
+
+:root {
+  --gg-ink: #10233a;
+  --gg-steel: #2c4a6b;
+  --gg-paper: #f2f5f8;
+  --gg-brass: #c89b3c;
+  --gg-brass-deep: #a67c22;
+  --gg-flame: #e2542c;
+  --gg-white: #ffffff;
+  --gg-line: rgba(16, 35, 58, 0.14);
+  --gg-radius: 6px;
+  --gg-font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --gg-font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", system-ui, sans-serif;
+  --gg-font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--gg-font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--gg-ink);
+  background: var(--gg-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.gg img {
+  max-width: 100%;
+  display: block;
+}
+
+.gg a {
+  color: inherit;
+}
+
+.gg a:focus-visible,
+.gg button:focus-visible {
+  outline: 3px solid var(--gg-brass);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.gg-shell {
+  width: min(1120px, 100% - 2.5rem);
+  margin-inline: auto;
+}
+
+/* ---------- Signature: DN štítek (ražený štítek z potrubí) ---------- */
+
+.gg-dn {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+  padding: 0.35rem 0.75rem;
+  border: 2px solid var(--gg-brass);
+  border-radius: 3px;
+  background: linear-gradient(180deg, rgba(200, 155, 60, 0.16), rgba(200, 155, 60, 0.05));
+  font-family: var(--gg-font-mono);
+  letter-spacing: 0.08em;
+  width: fit-content;
+}
+
+.gg-dn-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--gg-brass-deep);
+}
+
+.gg-dn-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gg-ink);
+}
+
+.gg-dn-note {
+  font-family: var(--gg-font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0;
+  color: var(--gg-steel);
+}
+
+.gg-dn--hero {
+  background: rgba(16, 35, 58, 0.55);
+  border-color: var(--gg-brass);
+  backdrop-filter: blur(3px);
+}
+
+.gg-dn--hero .gg-dn-value {
+  color: var(--gg-brass);
+}
+
+.gg-dn--hero .gg-dn-label {
+  color: #e8d5a8;
+}
+
+.gg-dn--hero .gg-dn-note {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ---------- Hero ---------- */
+
+.gg-hero {
+  position: relative;
+  color: var(--gg-white);
+  overflow: hidden;
+  background: var(--gg-ink);
+}
+
+.gg-hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.gg-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gg-hero-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(105deg, rgba(16, 35, 58, 0.92) 0%, rgba(16, 35, 58, 0.72) 45%, rgba(16, 35, 58, 0.35) 100%);
+}
+
+.gg-hero-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 88vh;
+  padding: 1.25rem 0 0;
+}
+
+/* nav */
+
+.gg-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.gg-wordmark {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.gg-wordmark-main {
+  font-family: var(--gg-font-display);
+  font-weight: 900;
+  font-stretch: condensed;
+  font-size: 1.6rem;
+  letter-spacing: 0.22em;
+  color: var(--gg-white);
+}
+
+.gg-wordmark-main::after {
+  content: "·";
+  color: var(--gg-brass);
+  margin-left: 0.15em;
+}
+
+.gg-wordmark-sub {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.gg-nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.gg-nav-links a {
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: rgba(255, 255, 255, 0.9);
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.gg-nav-links a:hover {
+  color: var(--gg-white);
+  border-bottom-color: var(--gg-brass);
+}
+
+.gg-nav-tel {
+  font-family: var(--gg-font-mono);
+  color: var(--gg-brass) !important;
+}
+
+/* hero copy */
+
+.gg-hero-copy {
+  margin: auto 0;
+  padding: 3.5rem 0 2.5rem;
+  max-width: 40rem;
+  animation: gg-rise 0.7s ease-out both;
+}
+
+.gg-hero h1 {
+  margin: 0 0 1.1rem;
+  font-family: var(--gg-font-display);
+  font-weight: 900;
+  font-stretch: condensed;
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  line-height: 1.06;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.gg-hero h1 em {
+  font-style: normal;
+  color: var(--gg-brass);
+}
+
+.gg-hero-lead {
+  margin: 0 0 1.75rem;
+  font-size: 1.08rem;
+  max-width: 34rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.gg-hero-actions {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.gg-btn {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--gg-radius);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.gg-btn--fill {
+  background: var(--gg-brass);
+  color: var(--gg-ink);
+}
+
+.gg-btn--fill:hover {
+  background: #d9ad4f;
+  transform: translateY(-2px);
+}
+
+.gg-btn--line {
+  border: 2px solid rgba(255, 255, 255, 0.65);
+  color: var(--gg-white);
+}
+
+.gg-btn--line:hover {
+  border-color: var(--gg-white);
+  transform: translateY(-2px);
+}
+
+/* hero facts */
+
+.gg-hero-facts {
+  list-style: none;
+  margin: 0;
+  padding: 1.25rem 0 1.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.gg-hero-facts li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.gg-hero-facts strong {
+  font-family: var(--gg-font-display);
+  font-weight: 900;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 1.15rem;
+  color: var(--gg-brass);
+}
+
+.gg-hero-facts span {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ---------- Sekce obecně ---------- */
+
+.gg-section {
+  padding: 4.5rem 0;
+}
+
+.gg-eyebrow {
+  margin: 0 0 0.5rem;
+  font-family: var(--gg-font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--gg-brass-deep);
+}
+
+.gg-eyebrow--light {
+  color: var(--gg-brass);
+}
+
+.gg-section h2 {
+  margin: 0 0 0.85rem;
+  font-family: var(--gg-font-display);
+  font-weight: 900;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+.gg-section-head {
+  max-width: 42rem;
+  margin-bottom: 2.75rem;
+}
+
+.gg-section-lead {
+  margin: 0;
+  color: var(--gg-steel);
+}
+
+/* ---------- Regály (sortiment) ---------- */
+
+.gg-aisles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.gg-aisle {
+  background: var(--gg-white);
+  border: 1px solid var(--gg-line);
+  border-radius: var(--gg-radius);
+  padding: 1.6rem 1.6rem 1.4rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.gg-aisle:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(16, 35, 58, 0.12);
+  border-color: var(--gg-brass);
+}
+
+.gg-aisle h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--gg-font-display);
+  font-weight: 900;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 1.2rem;
+}
+
+.gg-aisle p:last-child {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--gg-steel);
+}
+
+/* figure */
+
+.gg-figure {
+  margin: 0;
+}
+
+.gg-figure img {
+  width: 100%;
+  border-radius: var(--gg-radius);
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+}
+
+.gg-figure figcaption {
+  margin-top: 0.6rem;
+  font-family: var(--gg-font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--gg-steel);
+}
+
+/* ---------- Logistika (tmavá sekce) ---------- */
+
+.gg-section--dark {
+  background: var(--gg-ink);
+  color: var(--gg-white);
+}
+
+.gg-split {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.gg-split-copy h2 {
+  color: var(--gg-white);
+}
+
+/* flow — objednávkový den */
+
+.gg-flow {
+  list-style: none;
+  margin: 2rem 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.gg-flow li {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 1.25rem;
+  padding: 1.35rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.gg-flow li:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.gg-flow-time {
+  font-family: var(--gg-font-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--gg-brass);
+  letter-spacing: 0.06em;
+  padding-top: 0.15rem;
+}
+
+.gg-flow h3 {
+  margin: 0 0 0.35rem;
+  font-family: var(--gg-font-display);
+  font-weight: 900;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 1.1rem;
+}
+
+.gg-flow p {
+  margin: 0;
+  font-size: 0.96rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* quote */
+
+.gg-quote {
+  margin: 2.25rem 0 0;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--gg-brass);
+}
+
+.gg-quote p {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.gg-quote cite {
+  font-style: normal;
+  font-family: var(--gg-font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--gg-brass);
+}
+
+/* split media */
+
+.gg-split-media {
+  position: sticky;
+  top: 2rem;
+}
+
+.gg-split-media img {
+  width: 100%;
+  border-radius: var(--gg-radius);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.gg-badge {
+  margin-top: -1.75rem;
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+  position: relative;
+  background: var(--gg-brass);
+  color: var(--gg-ink);
+  border-radius: var(--gg-radius);
+  padding: 0.9rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+.gg-badge-num {
+  font-family: var(--gg-font-mono);
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+}
+
+.gg-badge-txt {
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ---------- Animace ---------- */
+
+@keyframes gg-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .gg-hero-copy {
+    animation: none;
+  }
+  .gg *,
+  .gg *::before,
+  .gg *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Responzivita ---------- */
+
+@media (max-width: 860px) {
+  .gg-split {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+  .gg-split-media {
+    position: static;
+  }
+  .gg-split-media img {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 700px) {
+  .gg-hero-inner {
+    min-height: 0;
+  }
+  .gg-hero-copy {
+    padding: 2.75rem 0 2rem;
+  }
+  .gg-aisles {
+    grid-template-columns: 1fr;
+  }
+  .gg-hero-facts {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+  .gg-nav-links {
+    gap: 1rem;
+  }
+  .gg-nav-links a {
+    font-size: 0.88rem;
+  }
+  .gg-figure img {
+    aspect-ratio: 4 / 3;
+  }
+  .gg-flow li {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+  .gg-section {
+    padding: 3.25rem 0;
+  }
+  .gg-dn-note {
+    display: block;
+    width: 100%;
+  }
+  .gg-dn--hero {
+    flex-wrap: wrap;
+  }
+}
