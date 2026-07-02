@@ -1,0 +1,554 @@
+/* ==========================================================================
+   Victory Bartoš — PC servis Brno
+   Koncept: „diagnostická obrazovka, které rozumíte".
+   Palette: hluboká navy základna (deska plošného spoje po setmění),
+   fosforová zelená diagnostiky, měděná linka spoje, papírově světlé sekce.
+   Typ: Archivo (hranatý, technický grotesk) + JetBrains-like mono fallback
+   pro diagnostické výpisy. Signature: POST/BIOS panel v hero.
+   ========================================================================== */
+
+:root {
+  --vb-board: #0e1b2c;      /* navy — deska po setmění */
+  --vb-board-2: #13253c;    /* světlejší navy plocha */
+  --vb-phosphor: #4ade80;   /* fosforová zelená diagnostiky */
+  --vb-copper: #d98e4a;     /* měděná cesta na plošném spoji */
+  --vb-paper: #f2f5f9;      /* chladný světlý podklad sekcí */
+  --vb-ink: #17222f;        /* text na světlé */
+  --vb-mist: #9fb3c8;       /* tlumený text na tmavé */
+
+  --vb-font-sans: "Archivo", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --vb-font-mono: "JetBrains Mono", "Cascadia Code", "Consolas", "Menlo", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--vb-font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--vb-ink);
+  background: var(--vb-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.vb a:focus-visible,
+.vb button:focus-visible {
+  outline: 3px solid var(--vb-copper);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.vb-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ================= HERO ================= */
+
+.vb-hero {
+  position: relative;
+  background:
+    /* měděné "cesty" plošného spoje — jemná mřížka */
+    linear-gradient(90deg, rgba(217, 142, 74, 0.06) 1px, transparent 1px) 0 0 / 56px 56px,
+    linear-gradient(0deg, rgba(217, 142, 74, 0.06) 1px, transparent 1px) 0 0 / 56px 56px,
+    radial-gradient(ellipse 80% 60% at 75% 10%, #1a3050 0%, transparent 60%),
+    var(--vb-board);
+  color: #eaf1f8;
+  padding-bottom: 72px;
+  overflow: hidden;
+}
+
+/* měděná linka jako "cesta" vedoucí stránkou */
+.vb-hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--vb-copper) 0%, var(--vb-copper) 34%, var(--vb-phosphor) 34%, var(--vb-phosphor) 40%, var(--vb-copper) 40%);
+}
+
+.vb-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 0;
+  flex-wrap: wrap;
+}
+
+.vb-wordmark {
+  text-decoration: none;
+  color: inherit;
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.vb-wordmark-main {
+  font-weight: 800;
+  font-size: 1.45rem;
+  letter-spacing: 0.22em;
+}
+
+.vb-wordmark-main::after {
+  content: "_";
+  color: var(--vb-phosphor);
+}
+
+.vb-wordmark-sub {
+  font-family: var(--vb-font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+  color: var(--vb-mist);
+  margin-top: 4px;
+}
+
+.vb-topbar-tel {
+  text-decoration: none;
+  color: #fff;
+  font-family: var(--vb-font-mono);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-align: right;
+  display: inline-flex;
+  flex-direction: column;
+  border: 1px solid rgba(217, 142, 74, 0.5);
+  border-radius: 6px;
+  padding: 8px 14px;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.vb-topbar-tel:hover {
+  border-color: var(--vb-copper);
+  background: rgba(217, 142, 74, 0.1);
+}
+
+.vb-topbar-tel-label {
+  font-family: var(--vb-font-sans);
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--vb-mist);
+}
+
+.vb-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+  padding-top: 48px;
+}
+
+.vb-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--vb-font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--vb-phosphor);
+  margin: 0 0 20px;
+}
+
+.vb-led {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--vb-phosphor);
+  box-shadow: 0 0 10px var(--vb-phosphor);
+  animation: vb-led-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes vb-led-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.vb-hero-title {
+  font-size: clamp(2.4rem, 6.2vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0 0 22px;
+  text-wrap: balance;
+}
+
+.vb-hero-title-accent {
+  color: var(--vb-phosphor);
+}
+
+.vb-hero-lead {
+  max-width: 34rem;
+  font-size: 1.08rem;
+  color: #cfdcea;
+  margin: 0 0 30px;
+}
+
+.vb-hero-lead strong { color: #fff; }
+
+.vb-hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.vb-btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 26px;
+  border-radius: 6px;
+  transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+
+.vb-btn-primary {
+  background: var(--vb-phosphor);
+  color: var(--vb-board);
+}
+
+.vb-btn-primary:hover { transform: translateY(-2px); background: #6ee7a0; }
+
+.vb-btn-ghost {
+  color: #eaf1f8;
+  border: 1px solid rgba(159, 179, 200, 0.5);
+}
+
+.vb-btn-ghost:hover { border-color: var(--vb-copper); transform: translateY(-2px); }
+
+/* ---------- Signature: POST / diagnostický panel ---------- */
+
+.vb-post {
+  font-family: var(--vb-font-mono);
+  background: #081220;
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  border-radius: 10px;
+  box-shadow:
+    0 0 0 6px rgba(74, 222, 128, 0.05),
+    0 24px 60px rgba(0, 0, 0, 0.45);
+  padding: 20px 22px 18px;
+  font-size: 0.88rem;
+}
+
+.vb-post-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--vb-copper);
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  border-bottom: 1px dashed rgba(159, 179, 200, 0.3);
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.vb-post-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--vb-copper);
+}
+
+.vb-post-lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.vb-post-line {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: #d6e4f0;
+  opacity: 0;
+  animation: vb-boot 320ms ease-out forwards;
+  animation-delay: calc(180ms + var(--i, 0) * 140ms);
+}
+
+.vb-post-key { white-space: nowrap; }
+
+.vb-post-dots {
+  flex: 1;
+  border-bottom: 1px dotted rgba(159, 179, 200, 0.45);
+  transform: translateY(-4px);
+  min-width: 16px;
+}
+
+.vb-post-val {
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.vb-post-ok { color: var(--vb-phosphor); }
+
+.vb-post-footer {
+  margin: 16px 0 0;
+  color: var(--vb-mist);
+  font-size: 0.78rem;
+  opacity: 0;
+  animation: vb-boot 320ms ease-out forwards;
+  animation-delay: calc(180ms + var(--i, 6) * 140ms);
+}
+
+.vb-cursor {
+  color: var(--vb-phosphor);
+  animation: vb-blink 1.1s steps(1) infinite;
+}
+
+@keyframes vb-boot {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes vb-blink {
+  50% { opacity: 0; }
+}
+
+/* ================= SEKCE ================= */
+
+.vb-section {
+  padding: 72px 0;
+}
+
+.vb-section-alt {
+  background: #fff;
+  border-top: 3px solid var(--vb-copper);
+}
+
+.vb-section-head {
+  max-width: 44rem;
+  margin-bottom: 40px;
+}
+
+.vb-section-title {
+  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  margin: 0 0 14px;
+}
+
+.vb-section-lead {
+  font-size: 1.05rem;
+  color: #45566a;
+  margin: 0;
+}
+
+/* ---------- karty služeb ---------- */
+
+.vb-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.vb-card {
+  background: #fff;
+  border: 1px solid #dbe4ee;
+  border-radius: 10px;
+  padding: 24px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.vb-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(217, 142, 74, 0.6);
+  box-shadow: 0 14px 34px rgba(14, 27, 44, 0.1);
+}
+
+.vb-card-title {
+  font-size: 1.12rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.vb-card-text {
+  margin: 0;
+  color: #45566a;
+  font-size: 0.96rem;
+  flex: 1;
+}
+
+.vb-card-price {
+  margin: 6px 0 0;
+  font-family: var(--vb-font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--vb-board);
+  border-top: 1px dashed #cdd9e6;
+  padding-top: 12px;
+}
+
+.vb-remote {
+  margin: 36px auto 0;
+  max-width: 46rem;
+  background: var(--vb-board);
+  color: #d6e4f0;
+  border-left: 4px solid var(--vb-phosphor);
+  border-radius: 8px;
+  padding: 18px 22px;
+  font-size: 0.98rem;
+}
+
+.vb-remote strong { color: var(--vb-phosphor); }
+
+/* ---------- důvěra / kroky ---------- */
+
+.vb-trust-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.vb-trust-text {
+  color: #45566a;
+  font-size: 1.02rem;
+  margin: 0 0 18px;
+}
+
+.vb-quote {
+  margin: 28px 0 0;
+  padding: 20px 22px;
+  background: var(--vb-paper);
+  border-left: 4px solid var(--vb-copper);
+  border-radius: 8px;
+}
+
+.vb-quote p {
+  margin: 0 0 10px;
+  font-size: 1.02rem;
+  font-style: italic;
+  color: var(--vb-ink);
+}
+
+.vb-quote cite {
+  font-style: normal;
+  font-family: var(--vb-font-mono);
+  font-size: 0.8rem;
+  color: #62758b;
+}
+
+.vb-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.vb-step {
+  display: flex;
+  gap: 18px;
+  padding: 20px 0;
+  position: relative;
+}
+
+.vb-step + .vb-step {
+  border-top: 1px dashed #cdd9e6;
+}
+
+.vb-step-num {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  font-family: var(--vb-font-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--vb-phosphor);
+  background: var(--vb-board);
+  border-radius: 8px;
+}
+
+.vb-step-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 6px 0 6px;
+}
+
+.vb-step-text {
+  margin: 0;
+  color: #45566a;
+  font-size: 0.96rem;
+}
+
+/* ================= RESPONZIVITA ================= */
+
+@media (max-width: 900px) {
+  .vb-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-top: 32px;
+  }
+
+  .vb-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vb-trust-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .vb-section { padding: 56px 0; }
+
+  .vb-cards { grid-template-columns: 1fr; }
+
+  .vb-topbar { justify-content: center; text-align: center; }
+
+  .vb-topbar-tel { text-align: center; }
+
+  .vb-hero-actions .vb-btn {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+
+  .vb-post { font-size: 0.8rem; padding: 16px; }
+
+  .vb-post-key { white-space: normal; }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .vb-post-line,
+  .vb-post-footer {
+    animation: none;
+    opacity: 1;
+  }
+
+  .vb-led,
+  .vb-cursor {
+    animation: none;
+  }
+
+  .vb-btn,
+  .vb-card,
+  .vb-topbar-tel {
+    transition: none;
+  }
+
+  .vb-btn:hover,
+  .vb-card:hover {
+    transform: none;
+  }
+}
