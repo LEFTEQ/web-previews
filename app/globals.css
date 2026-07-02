@@ -1,0 +1,559 @@
+/* =====================================================================
+   JIFOS s.r.o. — daňoví poradci, České Budějovice
+   Koncept: „účetní kniha & paragraf". Paleta z prostředí kanceláře:
+   hluboká lahvově zelená (razítkový inkoust / desky spisů), papírově
+   chladná bílá, linky účetní osnovy, mosazný akcent razítka.
+   Signature: hero s obřím § vyrůstajícím z řádků daňového formuláře.
+   ===================================================================== */
+
+:root {
+  --jf-ink: #0e3b2e;        /* lahvová zeleň — razítkový inkoust */
+  --jf-ink-deep: #082information0;
+  --jf-paper: #f7f8f5;      /* chladný papír, ne krémová */
+  --jf-line: #ccd6cf;       /* linka účetní osnovy */
+  --jf-brass: #b98a2f;      /* mosaz razítka / číslice */
+  --jf-text: #1c2521;
+  --jf-muted: #55645c;
+}
+
+:root {
+  --jf-ink-deep: #082e23;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--jf-paper);
+  color: var(--jf-text);
+  font-family: "Source Serif 4", "Charter", "Georgia", "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.jf a {
+  color: inherit;
+}
+
+.jf :focus-visible {
+  outline: 3px solid var(--jf-brass);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- typografie ---------- */
+
+.jf-h1,
+.jf-h2,
+.jf-h3,
+.jf-wordmark,
+.jf-btn,
+.jf-eyebrow {
+  font-family: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+}
+
+.jf-eyebrow {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--jf-brass);
+  margin: 0 0 1rem;
+}
+
+/* ---------- HERO ---------- */
+
+.jf-hero {
+  background:
+    linear-gradient(160deg, var(--jf-ink) 0%, var(--jf-ink-deep) 78%);
+  color: #f2f5f0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemná mřížka účetního papíru přes celé hero */
+.jf-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 47px,
+      rgba(242, 245, 240, 0.05) 47px,
+      rgba(242, 245, 240, 0.05) 48px
+    );
+  pointer-events: none;
+}
+
+.jf-hero-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 0;
+  position: relative;
+}
+
+.jf-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(242, 245, 240, 0.18);
+}
+
+.jf-wordmark {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.jf-wordmark-par {
+  color: var(--jf-brass);
+  margin-left: 0.15em;
+  font-weight: 700;
+}
+
+.jf-topbar-loc {
+  font-size: 0.85rem;
+  color: rgba(242, 245, 240, 0.65);
+}
+
+.jf-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  padding: 3rem 0 2.5rem;
+}
+
+.jf-h1 {
+  margin: 0 0 1.4rem;
+  font-size: clamp(2.4rem, 7vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.03;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.jf-h1 span {
+  display: block;
+}
+
+.jf-h1 em {
+  font-style: normal;
+  color: var(--jf-brass);
+}
+
+.jf-hero-sub {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: rgba(242, 245, 240, 0.85);
+  margin: 0 0 2rem;
+}
+
+.jf-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.jf-btn {
+  display: inline-block;
+  padding: 0.9rem 1.6rem;
+  background: var(--jf-brass);
+  color: var(--jf-ink-deep);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.jf-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.jf-btn-ghost {
+  background: transparent;
+  color: #f2f5f0;
+  border: 1px solid rgba(242, 245, 240, 0.4);
+}
+
+.jf-btn-ghost:hover {
+  background: rgba(242, 245, 240, 0.08);
+}
+
+/* --- signature: formulářová kniha + obří § --- */
+
+.jf-hero-mark {
+  position: relative;
+  align-self: center;
+  justify-self: center;
+  width: min(100%, 380px);
+}
+
+.jf-ledger {
+  border: 1px solid rgba(242, 245, 240, 0.25);
+  border-radius: 6px;
+  background: rgba(242, 245, 240, 0.04);
+  padding: 1.1rem 1.2rem;
+  font-family: "Archivo", Arial, sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  color: rgba(242, 245, 240, 0.75);
+}
+
+.jf-ledger-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px dashed rgba(242, 245, 240, 0.18);
+}
+
+.jf-ledger-row:last-child {
+  border-bottom: none;
+}
+
+.jf-ledger-row span:first-child {
+  color: var(--jf-brass);
+  font-variant-numeric: tabular-nums;
+}
+
+.jf-ledger-strong {
+  color: #f2f5f0;
+  font-weight: 600;
+}
+
+.jf-ledger-sum {
+  color: var(--jf-brass);
+  font-weight: 700;
+  border-top: 2px solid rgba(185, 138, 47, 0.6);
+}
+
+.jf-par-glyph {
+  position: absolute;
+  top: 50%;
+  right: -0.35em;
+  transform: translateY(-52%);
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: clamp(11rem, 26vw, 17rem);
+  line-height: 1;
+  font-weight: 600;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(185, 138, 47, 0.75);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* --- termínová lišta --- */
+
+.jf-hero-terms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2.2rem;
+  padding: 1.2rem 0 1.6rem;
+  border-top: 1px solid rgba(242, 245, 240, 0.18);
+  font-size: 0.9rem;
+  color: rgba(242, 245, 240, 0.7);
+}
+
+.jf-term strong {
+  color: var(--jf-brass);
+  font-family: "Archivo", Arial, sans-serif;
+  font-weight: 700;
+  margin-right: 0.4em;
+}
+
+/* ---------- sekce obecně ---------- */
+
+.jf-section-head {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.jf-h2 {
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.9rem;
+  text-transform: uppercase;
+}
+
+.jf-section-sub {
+  max-width: 38rem;
+  color: var(--jf-muted);
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.jf-h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+}
+
+/* ---------- SLUŽBY ---------- */
+
+.jf-sluzby {
+  padding: 4.5rem 0 5rem;
+}
+
+.jf-sluzby-grid {
+  max-width: 1160px;
+  margin: 2.5rem auto 0;
+  padding: 0 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.jf-karta {
+  background: #fff;
+  border: 1px solid var(--jf-line);
+  border-radius: 8px;
+  padding: 1.6rem 1.5rem 1.4rem;
+  position: relative;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.jf-karta:hover {
+  border-color: var(--jf-ink);
+  box-shadow: 0 10px 28px rgba(14, 59, 46, 0.08);
+}
+
+.jf-karta-par {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px dashed var(--jf-line);
+}
+
+.jf-karta-znak {
+  font-family: "Archivo", Arial, sans-serif;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--jf-brass);
+  font-variant-numeric: tabular-nums;
+}
+
+.jf-karta-zakon {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--jf-muted);
+  font-family: "Archivo", Arial, sans-serif;
+}
+
+.jf-karta-popis {
+  margin: 0 0 0.8rem;
+  color: var(--jf-text);
+}
+
+.jf-karta-detail {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--jf-ink);
+  font-weight: 600;
+}
+
+/* ---------- PORADCI ---------- */
+
+.jf-lide {
+  background: var(--jf-ink);
+  color: #f2f5f0;
+  padding: 4.5rem 0 4rem;
+}
+
+.jf-lide-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.jf-lide .jf-section-head {
+  padding: 0;
+}
+
+.jf-lide .jf-section-sub {
+  color: rgba(242, 245, 240, 0.75);
+}
+
+.jf-lide-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.jf-poradce {
+  border: 1px solid rgba(242, 245, 240, 0.22);
+  border-radius: 8px;
+  padding: 1.5rem 1.4rem;
+  background: rgba(242, 245, 240, 0.04);
+}
+
+.jf-poradce-role {
+  margin: 0 0 0.8rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--jf-brass);
+  font-family: "Archivo", Arial, sans-serif;
+}
+
+.jf-poradce-popis {
+  margin: 0 0 1.1rem;
+  color: rgba(242, 245, 240, 0.8);
+  font-size: 0.97rem;
+}
+
+.jf-poradce-tel {
+  display: inline-block;
+  font-family: "Archivo", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #f2f5f0;
+  text-decoration: none;
+  border-bottom: 2px solid var(--jf-brass);
+  padding-bottom: 0.1rem;
+  font-variant-numeric: tabular-nums;
+  transition: color 160ms ease;
+}
+
+.jf-poradce-tel:hover {
+  color: var(--jf-brass);
+}
+
+/* --- fakta / rejstřík --- */
+
+.jf-fakta {
+  margin-top: 2.5rem;
+  border-top: 1px solid rgba(242, 245, 240, 0.22);
+  padding-top: 1.6rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+
+.jf-fakt {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.jf-fakt-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(242, 245, 240, 0.55);
+  font-family: "Archivo", Arial, sans-serif;
+}
+
+.jf-fakt-hodnota {
+  font-size: 0.98rem;
+}
+
+.jf-fakt-link {
+  text-decoration: underline;
+  text-decoration-color: var(--jf-brass);
+  text-underline-offset: 3px;
+}
+
+.jf-fakt-link:hover {
+  color: var(--jf-brass);
+}
+
+/* ---------- animace při načtení ---------- */
+
+@keyframes jf-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.jf-rise {
+  animation: jf-rise 640ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.jf-d1 { animation-delay: 60ms; }
+.jf-d2 { animation-delay: 140ms; }
+.jf-d3 { animation-delay: 220ms; }
+.jf-d4 { animation-delay: 300ms; }
+.jf-d5 { animation-delay: 400ms; }
+.jf-d6 { animation-delay: 500ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .jf-rise {
+    animation: none;
+  }
+  .jf-btn,
+  .jf-karta,
+  .jf-poradce-tel {
+    transition: none;
+  }
+  .jf-btn:hover {
+    transform: none;
+  }
+}
+
+/* ---------- responzivita: tablet a výš ---------- */
+
+@media (min-width: 720px) {
+  .jf-hero-inner {
+    padding: 2rem 2rem 0;
+  }
+
+  .jf-hero-grid {
+    grid-template-columns: 1.25fr 0.75fr;
+    align-items: center;
+    padding: 4.5rem 0 3rem;
+  }
+
+  .jf-sluzby-grid {
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2rem;
+  }
+
+  .jf-section-head,
+  .jf-lide-inner {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .jf-lide-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .jf-fakta {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1040px) {
+  .jf-hero-grid {
+    padding: 5.5rem 0 3.5rem;
+  }
+}
