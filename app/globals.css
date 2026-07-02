@@ -1,0 +1,575 @@
+/* =====================================================================
+   FASÁDY ŠIMEK — Olomouc, revitalizace bytových domů
+   Token system
+   ----------------------------------------------------------------
+   Barvy (svět stavby: polystyren, síťovina, omítka, beton, výstražná):
+     --fs-omitka   #EDEBE4  probarvená silikonová omítka (podklad)
+     --fs-beton    #23282C  syrový panel / grafit
+     --fs-sit      #3E5C50  zelená fasádní síťovina lešení (hlavní plocha)
+     --fs-vystraha #F2A33C  výstražná oranžová (vesty, pásky) — akcent
+     --fs-perlinka #C9CFC2  šedozelená perlinka — tlumený mezitón
+   Typo: Archivo (Black/Expanded pocit stavebního nápisu) + system stack
+         fallback; mono utility pro kódy služeb (dojem výkresu).
+   Signature: „řez fasádou“ — mřížka oken paneláku postavená čistě
+   z barevných buněk, s vysunutými lodžiemi; při načtení se dům
+   „zatepluje“ buňka po buňce.
+   ===================================================================== */
+
+:root {
+  --fs-omitka: #edebe4;
+  --fs-beton: #23282c;
+  --fs-sit: #3e5c50;
+  --fs-sit-tmava: #2f463d;
+  --fs-vystraha: #f2a33c;
+  --fs-perlinka: #c9cfc2;
+  --fs-max: 72rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--fs-omitka);
+  color: var(--fs-beton);
+  font-family: "Archivo", "Helvetica Neue", Arial, system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.fs a {
+  color: inherit;
+}
+
+.fs :focus-visible {
+  outline: 3px solid var(--fs-vystraha);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.fs-hero {
+  position: relative;
+  background: var(--fs-beton);
+  color: var(--fs-omitka);
+  padding: 1.25rem 1.25rem 4rem;
+  overflow: hidden;
+}
+
+.fs-hero-top {
+  max-width: var(--fs-max);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 2.5rem;
+}
+
+/* Wordmark: FASÁDY jako úzký technický řádek, ŠIMEK jako těžký blok
+   podtržený oranžovou „vrstvou omítky" */
+.fs-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  user-select: none;
+}
+
+.fs-wordmark-fasady {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.55em;
+  color: var(--fs-perlinka);
+}
+
+.fs-wordmark-simek {
+  font-size: 1.9rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  box-shadow: inset 0 -0.28em 0 0 var(--fs-vystraha);
+  align-self: flex-start;
+  padding: 0 0.05em;
+}
+
+.fs-hero-contact {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.fs-tel {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.fs-tel:hover {
+  color: var(--fs-vystraha);
+}
+
+.fs-tel-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fs-perlinka);
+}
+
+.fs-hero-body {
+  max-width: var(--fs-max);
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.fs-hero-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--fs-vystraha);
+  margin: 0 0 1.25rem;
+  animation: fs-rise 0.7s ease-out both;
+}
+
+.fs-hero-title {
+  margin: 0 0 1.5rem;
+  font-weight: 900;
+  font-size: clamp(2.6rem, 9vw, 6.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.fs-hero-line {
+  display: block;
+  animation: fs-rise 0.8s ease-out both;
+}
+
+.fs-hero-line-1 {
+  color: var(--fs-perlinka);
+  animation-delay: 0.08s;
+}
+
+.fs-hero-line-2 {
+  animation-delay: 0.2s;
+}
+
+.fs-hero-line-3 {
+  color: var(--fs-vystraha);
+  animation-delay: 0.32s;
+}
+
+.fs-comma {
+  color: var(--fs-vystraha);
+}
+
+.fs-hero-sub {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: var(--fs-perlinka);
+  margin: 0 0 2rem;
+  animation: fs-rise 0.8s ease-out 0.45s both;
+}
+
+.fs-hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  animation: fs-rise 0.8s ease-out 0.55s both;
+}
+
+.fs-btn {
+  display: inline-block;
+  padding: 0.9rem 1.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.fs-btn-solid {
+  background: var(--fs-vystraha);
+  color: var(--fs-beton);
+}
+
+.fs-btn-solid:hover {
+  transform: translateY(-2px);
+  background: #ffb956;
+}
+
+.fs-btn-line {
+  border: 2px solid var(--fs-perlinka);
+  color: var(--fs-omitka);
+}
+
+.fs-btn-line:hover {
+  border-color: var(--fs-vystraha);
+  color: var(--fs-vystraha);
+}
+
+/* --- Signature: řez fasádou ------------------------------------ */
+
+.fs-facade {
+  max-width: var(--fs-max);
+  margin: 3rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+  padding: 10px;
+  background: var(--fs-sit-tmava);
+  border-radius: 4px;
+  position: relative;
+}
+
+.fs-facade-cell {
+  aspect-ratio: 5 / 4;
+  background: var(--fs-sit);
+  border-radius: 2px;
+  animation: fs-panel 0.5s ease-out both;
+}
+
+/* vysunuté lodžie — světlé buňky s oranžovým zábradlím */
+.fs-facade-lodzie {
+  background: var(--fs-perlinka);
+  box-shadow: inset 0 -6px 0 0 var(--fs-vystraha);
+  transform: translateY(-4px);
+}
+
+/* rozsvícená okna — dům, kde se bydlí */
+.fs-facade-warm {
+  background: var(--fs-vystraha);
+}
+
+.fs-facade-caption {
+  position: absolute;
+  right: 10px;
+  bottom: -1.7rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fs-perlinka);
+}
+
+/* ================= SECTIONS (shared) ================= */
+
+.fs-section {
+  padding: 4.5rem 1.25rem;
+}
+
+.fs-section-head {
+  max-width: var(--fs-max);
+  margin: 0 auto 2.75rem;
+}
+
+.fs-eyebrow {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--fs-sit);
+  margin: 0 0 0.75rem;
+}
+
+.fs-eyebrow-light {
+  color: var(--fs-vystraha);
+}
+
+.fs-h2 {
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0;
+  max-width: 40rem;
+}
+
+.fs-h2-light {
+  color: var(--fs-omitka);
+}
+
+/* ================= SLUŽBY ================= */
+
+.fs-sluzby {
+  background: var(--fs-omitka);
+}
+
+.fs-sluzby-grid {
+  max-width: var(--fs-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.fs-karta {
+  background: #fff;
+  border: 1px solid #d8d5cb;
+  border-top: 5px solid var(--fs-sit);
+  border-radius: 4px;
+  padding: 1.75rem 1.5rem;
+  transition: transform 0.2s ease, border-top-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fs-karta:hover {
+  transform: translateY(-4px);
+  border-top-color: var(--fs-vystraha);
+  box-shadow: 0 12px 28px rgba(35, 40, 44, 0.1);
+}
+
+.fs-karta-kod {
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--fs-sit);
+  margin-bottom: 0.9rem;
+}
+
+.fs-karta-titulek {
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0 0 0.75rem;
+}
+
+.fs-karta-popis {
+  margin: 0 0 1.1rem;
+  color: #4a5054;
+}
+
+.fs-karta-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.fs-karta-list li {
+  padding: 0.45rem 0 0.45rem 1.4rem;
+  position: relative;
+  border-top: 1px dashed #d8d5cb;
+}
+
+.fs-karta-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.85rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  background: var(--fs-vystraha);
+  border-radius: 1px;
+}
+
+.fs-dotace {
+  max-width: var(--fs-max);
+  margin: 2rem auto 0;
+  background: var(--fs-beton);
+  color: var(--fs-omitka);
+  border-left: 6px solid var(--fs-vystraha);
+  border-radius: 4px;
+  padding: 1.4rem 1.5rem;
+}
+
+.fs-dotace p {
+  margin: 0;
+  max-width: 46rem;
+}
+
+.fs-dotace strong {
+  color: var(--fs-vystraha);
+}
+
+/* ================= DŮVĚRA + REFERENCE ================= */
+
+.fs-duvera {
+  background: var(--fs-sit);
+  color: var(--fs-omitka);
+}
+
+.fs-zaruky {
+  max-width: var(--fs-max);
+  margin: 0 auto 3.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.fs-zaruka {
+  border-top: 2px solid rgba(237, 235, 228, 0.3);
+  padding-top: 1.1rem;
+}
+
+.fs-zaruka-titulek {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem;
+  color: var(--fs-vystraha);
+}
+
+.fs-zaruka-text {
+  margin: 0;
+  color: rgba(237, 235, 228, 0.88);
+  font-size: 0.98rem;
+}
+
+.fs-ref-head {
+  max-width: var(--fs-max);
+  margin: 0 auto 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.fs-ref-h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.fs-ref-note {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fs-vystraha);
+  font-weight: 700;
+}
+
+.fs-ref-list {
+  max-width: var(--fs-max);
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  background: rgba(35, 40, 44, 0.25);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.fs-ref-item {
+  background: var(--fs-sit-tmava);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  transition: background-color 0.15s ease;
+}
+
+.fs-ref-item:hover {
+  background: #35513f;
+}
+
+.fs-ref-misto {
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.fs-ref-prace {
+  font-size: 0.88rem;
+  color: var(--fs-perlinka);
+}
+
+/* ================= ANIMACE ================= */
+
+@keyframes fs-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fs-panel {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* lodžie mají posun i po animaci */
+@keyframes fs-panel-lodzie {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+.fs-facade-lodzie {
+  animation-name: fs-panel-lodzie;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .fs-hero-eyebrow,
+  .fs-hero-line,
+  .fs-hero-sub,
+  .fs-hero-actions,
+  .fs-facade-cell {
+    animation: none !important;
+  }
+  .fs-btn,
+  .fs-karta,
+  .fs-ref-item {
+    transition: none !important;
+  }
+}
+
+/* ================= RESPONSIVITA ================= */
+
+@media (min-width: 40rem) {
+  .fs-hero {
+    padding: 1.75rem 2rem 5rem;
+  }
+  .fs-section {
+    padding: 5.5rem 2rem;
+  }
+  .fs-zaruky {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .fs-ref-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 60rem) {
+  .fs-sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .fs-facade {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .fs-ref-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
