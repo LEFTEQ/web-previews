@@ -1,0 +1,528 @@
+/* =====================================================================
+   OBUV SVOBODA — opravna obuvi, Brno
+   Paleta z dílny: tmavá poctivá useň, přírodní jádrová kůže, lněná nit,
+   ševcovská zelená (barva klasických krabic krémů na boty).
+   Typografie: Fraunces (měkký, „kožený" display serif s charakterem)
+   + system-ui grotesk pro věcný text. Signature: sedlářský steh —
+   přerušovaná linka, která prošívá hero i předěly sekcí.
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&display=swap");
+
+:root {
+  --usen: #2b2118;        /* tmavá useň — základ */
+  --usen-hl: #3a2d20;     /* světlejší useň — karty */
+  --jadro: #c8a06b;       /* jádrová kůže — akcent */
+  --nit: #e8ddc9;         /* lněná nit — světlý text/plocha */
+  --krem: #f2ead9;        /* papír na balení bot */
+  --sevc: #3f5a44;        /* ševcovská zelená */
+  --ink: #241b12;         /* text na světlé */
+
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--krem);
+  -webkit-font-smoothing: antialiased;
+}
+
+.os a:focus-visible,
+.os button:focus-visible {
+  outline: 3px solid var(--jadro);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ===== steh — sdílený vzor přerušované linky ===== */
+.os-seam {
+  height: 3px;
+  background-image: linear-gradient(90deg, var(--jadro) 0 14px, transparent 14px 26px);
+  background-size: 26px 3px;
+  opacity: 0.85;
+}
+
+/* =====================================================================
+   HERO
+   ===================================================================== */
+.os-hero {
+  position: relative;
+  background: var(--usen);
+  color: var(--nit);
+  overflow: hidden;
+}
+
+.os-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3.5rem;
+}
+
+/* --- wordmark --- */
+.os-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 3rem;
+  color: var(--jadro);
+}
+
+.os-brand-mark svg {
+  display: block;
+}
+
+.os-brand-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.01em;
+  color: var(--nit);
+}
+
+.os-brand-name em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--jadro);
+}
+
+/* --- eyebrow --- */
+.os-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--jadro);
+  margin: 0 0 1rem;
+}
+
+.os-eyebrow--light {
+  color: var(--jadro);
+}
+
+/* --- headline --- */
+.os-h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 8.5vw, 5.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.75rem;
+  max-width: 12ch;
+}
+
+.os-h1-line {
+  display: block;
+}
+
+.os-h1-line--2 {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--jadro);
+}
+
+/* steh pod klíčovým slovem */
+.os-h1-stitch {
+  position: relative;
+  white-space: nowrap;
+}
+
+.os-h1-stitch::after {
+  content: "";
+  position: absolute;
+  left: 0.02em;
+  right: 0.02em;
+  bottom: -0.08em;
+  height: 3px;
+  background-image: linear-gradient(90deg, var(--jadro) 0 12px, transparent 12px 22px);
+  background-size: 22px 3px;
+}
+
+.os-lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: rgba(232, 221, 201, 0.88);
+  margin: 0 0 2rem;
+}
+
+/* --- tlačítka --- */
+.os-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-bottom: 2.75rem;
+}
+
+.os-btn {
+  display: inline-block;
+  padding: 0.85rem 1.7rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.os-btn--primary {
+  background: var(--jadro);
+  color: var(--usen);
+  border: 2px solid var(--jadro);
+}
+
+.os-btn--primary:hover {
+  background: var(--nit);
+  border-color: var(--nit);
+  transform: translateY(-2px);
+}
+
+.os-btn--ghost {
+  color: var(--nit);
+  border: 2px dashed rgba(200, 160, 107, 0.65); /* i tlačítko nese steh */
+}
+
+.os-btn--ghost:hover {
+  border-style: solid;
+  border-color: var(--jadro);
+  color: var(--jadro);
+}
+
+/* --- fakta --- */
+.os-hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.75rem;
+  margin: 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(232, 221, 201, 0.18);
+  max-width: 34rem;
+}
+
+.os-hero-facts dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(232, 221, 201, 0.6);
+  margin-bottom: 0.15rem;
+}
+
+.os-hero-facts dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--nit);
+}
+
+/* --- signature: podešev prošitá stehem --- */
+.os-hero-sole {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: -4%;
+  transform: translateY(-50%) rotate(14deg);
+  width: clamp(220px, 26vw, 340px);
+  pointer-events: none;
+}
+
+.os-hero-sole svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.os-sole-fill {
+  fill: var(--usen-hl);
+  stroke: rgba(200, 160, 107, 0.4);
+  stroke-width: 2;
+}
+
+.os-sole-stitch {
+  fill: none;
+  stroke: var(--jadro);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 10 9;
+}
+
+/* animace: nit se „prošije" po načtení */
+@keyframes os-stitch-in {
+  from {
+    stroke-dashoffset: 600;
+    opacity: 0.3;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes os-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.os-sole-stitch {
+  animation: os-stitch-in 1.6s ease-out 0.35s backwards;
+}
+
+.os-h1-line--1 { animation: os-rise 0.6s ease-out 0.05s backwards; }
+.os-h1-line--2 { animation: os-rise 0.6s ease-out 0.15s backwards; }
+.os-h1-line--3 { animation: os-rise 0.6s ease-out 0.25s backwards; }
+.os-lead       { animation: os-rise 0.6s ease-out 0.35s backwards; }
+.os-hero-actions { animation: os-rise 0.6s ease-out 0.45s backwards; }
+.os-hero-facts { animation: os-rise 0.6s ease-out 0.55s backwards; }
+
+/* =====================================================================
+   SEKCE — OPRAVY
+   ===================================================================== */
+.os-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+}
+
+.os-section-head {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.os-h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 4.5vw, 2.7rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 1rem;
+  color: var(--ink);
+}
+
+.os-section-lead {
+  font-size: 1.05rem;
+  color: rgba(36, 27, 18, 0.78);
+  margin: 0;
+}
+
+.os-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.os-card {
+  background: #fff;
+  border: 1px solid rgba(43, 33, 24, 0.12);
+  border-radius: 10px;
+  padding: 1.5rem 1.4rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.os-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(43, 33, 24, 0.12);
+}
+
+.os-card-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 0;
+  color: var(--ink);
+}
+
+.os-card-text {
+  margin: 0;
+  font-size: 0.97rem;
+  color: rgba(36, 27, 18, 0.8);
+  flex-grow: 1;
+}
+
+.os-card-tag {
+  margin: 0.3rem 0 0;
+  padding-top: 0.7rem;
+  border-top: 2px dashed rgba(200, 160, 107, 0.6); /* steh i v kartě */
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sevc);
+}
+
+/* =====================================================================
+   SEKCE — PRODEJNA (ševcovská zelená)
+   ===================================================================== */
+.os-section--shop {
+  max-width: none;
+  background: var(--sevc);
+  color: var(--nit);
+  padding: 4.5rem 1.25rem;
+}
+
+.os-shop-cols {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.os-h2--light {
+  color: var(--nit);
+}
+
+.os-shop-text {
+  font-size: 1.05rem;
+  color: rgba(232, 221, 201, 0.9);
+  margin: 0 0 1rem;
+  max-width: 34rem;
+}
+
+.os-shop-note {
+  margin: 1.25rem 0 0;
+  font-weight: 600;
+  color: var(--jadro);
+}
+
+.os-shop-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.os-shop-item {
+  padding: 1.25rem 1.4rem;
+  border: 1px solid rgba(232, 221, 201, 0.25);
+  border-left: 4px solid var(--jadro);
+  border-radius: 8px;
+  background: rgba(43, 33, 24, 0.18);
+}
+
+.os-shop-item-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin: 0 0 0.35rem;
+  color: var(--nit);
+}
+
+.os-shop-item-text {
+  margin: 0;
+  font-size: 0.97rem;
+  color: rgba(232, 221, 201, 0.85);
+}
+
+/* --- citát --- */
+.os-quote {
+  max-width: 1100px;
+  margin: 3.5rem auto 0;
+  padding-top: 2.25rem;
+  border-top: 2px dashed rgba(200, 160, 107, 0.5);
+}
+
+.os-quote p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  line-height: 1.35;
+  margin: 0 0 0.75rem;
+  color: var(--nit);
+  max-width: 30ch;
+}
+
+.os-quote cite {
+  font-style: normal;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  color: var(--jadro);
+}
+
+/* =====================================================================
+   RESPONZIVITA
+   ===================================================================== */
+@media (min-width: 760px) {
+  .os-hero-inner {
+    padding: 2.5rem 2rem 5rem;
+  }
+
+  .os-section {
+    padding: 5rem 2rem;
+  }
+
+  .os-section--shop {
+    padding: 5.5rem 2rem;
+  }
+
+  .os-shop-cols {
+    grid-template-columns: 1.15fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+@media (max-width: 700px) {
+  /* podešev na mobilu ustoupí — jen jemně za textem */
+  .os-hero-sole {
+    width: 200px;
+    right: -70px;
+    top: 38%;
+    opacity: 0.35;
+  }
+
+  .os-h1 {
+    max-width: none;
+  }
+}
+
+/* =====================================================================
+   REDUCED MOTION
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .os-sole-stitch,
+  .os-h1-line--1,
+  .os-h1-line--2,
+  .os-h1-line--3,
+  .os-lead,
+  .os-hero-actions,
+  .os-hero-facts {
+    animation: none;
+  }
+
+  .os-btn,
+  .os-card {
+    transition: none;
+  }
+}
