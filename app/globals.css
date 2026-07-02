@@ -1,0 +1,610 @@
+/* ============================================================
+   SPORT SHOP PARDUBICE
+   Koncept: „prodejna u ledu" — chladná ledová bílá + hluboká
+   hokejová modř (barvy pardubického hokeje) + signální oranž
+   jako puk/značení dráhy. Signature: šikmé „dráhové" pruhy
+   a kurzívní kondenzovaný titulek jako start ze střelnice.
+   ============================================================ */
+
+:root {
+  --ice: #eef3f7;          /* ledová bílá — pozadí */
+  --ice-deep: #dfe8ef;     /* stín na ledu */
+  --navy: #0f2440;         /* hokejová hluboká modř */
+  --navy-soft: #1d3a63;    /* světlejší modř */
+  --signal: #ff5a1f;       /* signální oranž — puk, značení */
+  --steel: #4b5d70;        /* ocel bruslí — sekundární text */
+  --white: #ffffff;
+
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Impact, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-ui: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--ice);
+  color: var(--navy);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--navy); }
+
+:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Layout helpers ---------- */
+.ss-section-inner,
+.ss-hero-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.ss-hero {
+  position: relative;
+  background:
+    linear-gradient(160deg, var(--white) 0%, var(--ice) 55%, var(--ice-deep) 100%);
+  overflow: hidden;
+  padding-bottom: 64px;
+}
+
+/* Topbar */
+.ss-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0;
+  flex-wrap: wrap;
+}
+
+.ss-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  text-decoration: none;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.ss-wordmark-main {
+  font-size: 1.7rem;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: var(--navy);
+}
+
+.ss-wordmark-sub {
+  font-size: 1.7rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--signal);
+  letter-spacing: 0.02em;
+}
+
+.ss-wordmark-city {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  color: var(--steel);
+  align-self: center;
+  border-left: 2px solid var(--ice-deep);
+  padding-left: 8px;
+  margin-left: 2px;
+}
+
+.ss-nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+}
+
+.ss-nav a {
+  text-decoration: none;
+  color: var(--navy);
+  padding: 6px 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.ss-nav a:hover { border-bottom-color: var(--signal); }
+
+.ss-nav-tel {
+  font-weight: 700;
+  color: var(--signal) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hero grid */
+.ss-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  padding-top: 24px;
+  align-items: center;
+}
+
+.ss-hero-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--steel);
+  margin: 0 0 14px;
+}
+
+/* SIGNATURE: kondenzovaný kurzívní titulek — rychlost, střela,
+   každý řádek najíždí jako bruslař ze startu */
+.ss-hero-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.9rem, 9vw, 5.4rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin: 0 0 22px;
+}
+
+.ss-hero-title .ss-line {
+  display: block;
+}
+
+.ss-line-2 { color: var(--signal); padding-left: 0.6em; }
+.ss-line-3 { padding-left: 1.2em; }
+
+@keyframes ss-glide {
+  from { opacity: 0; transform: translateX(-36px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.ss-line-1 { animation: ss-glide 0.5s ease-out both; }
+.ss-line-2 { animation: ss-glide 0.5s 0.12s ease-out both; }
+.ss-line-3 { animation: ss-glide 0.5s 0.24s ease-out both; }
+
+.ss-hero-lead {
+  max-width: 34em;
+  color: var(--steel);
+  margin: 0 0 26px;
+  font-size: 1.05rem;
+}
+
+.ss-hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+/* Buttons — šikmý seřízlý roh jako čepel brusle */
+.ss-btn {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: 13px 26px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.ss-btn:hover { transform: translateX(3px); }
+
+.ss-btn-primary {
+  background: var(--signal);
+  color: var(--white);
+}
+.ss-btn-primary:hover { background: #e64a12; }
+
+.ss-btn-ghost {
+  background: transparent;
+  color: var(--navy);
+  box-shadow: inset 0 0 0 2px var(--navy);
+  clip-path: none;
+}
+
+.ss-btn-light {
+  background: var(--signal);
+  color: var(--white);
+}
+.ss-btn-light:hover { background: #e64a12; }
+
+.ss-btn-outline {
+  background: transparent;
+  color: var(--white);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.45);
+  clip-path: none;
+  font-weight: 400;
+}
+.ss-btn-outline:hover { box-shadow: inset 0 0 0 2px var(--white); }
+
+/* Hero facts */
+.ss-hero-facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  font-family: var(--font-ui);
+}
+
+.ss-hero-facts li {
+  display: flex;
+  flex-direction: column;
+  border-left: 3px solid var(--signal);
+  padding-left: 12px;
+}
+
+.ss-hero-facts strong {
+  font-size: 1rem;
+  color: var(--navy);
+}
+
+.ss-hero-facts span {
+  font-size: 0.82rem;
+  color: var(--steel);
+}
+
+/* Hero media */
+.ss-hero-media {
+  margin: 0;
+  position: relative;
+}
+
+.ss-hero-img {
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 24px 48px -24px rgba(15, 36, 64, 0.45);
+}
+
+.ss-hero-badge {
+  position: absolute;
+  left: -8px;
+  bottom: 22px;
+  background: var(--navy);
+  color: var(--white);
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+  max-width: 90%;
+}
+
+.ss-badge-big {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+}
+
+.ss-badge-small {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  opacity: 0.85;
+  padding-right: 14px;
+}
+
+/* SIGNATURE: běžecká/ledová dráha pod hero — tři pruhy jako lajny na hřišti */
+.ss-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transform: skewY(-1.2deg);
+}
+
+.ss-track-lane {
+  flex: 1;
+  background: var(--navy);
+  opacity: 0.9;
+}
+
+.ss-track-lane-mid { background: var(--signal); }
+
+/* ============================================================
+   SEKCE: SORTIMENT
+   ============================================================ */
+.ss-section { padding: 72px 0; }
+
+.ss-sortiment { background: var(--white); }
+
+.ss-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--signal);
+  margin: 0 0 10px;
+}
+
+.ss-h2 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.9rem, 5vw, 2.9rem);
+  line-height: 1.05;
+  margin: 0 0 16px;
+}
+
+.ss-section-head { max-width: 640px; margin-bottom: 44px; }
+
+.ss-section-lead {
+  color: var(--steel);
+  margin: 0;
+}
+
+.ss-season-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.ss-season {
+  padding: 28px 26px;
+  border-radius: 6px;
+}
+
+.ss-season-winter {
+  background: linear-gradient(170deg, var(--ice) 0%, var(--ice-deep) 100%);
+}
+
+.ss-season-summer {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.ss-season-summer .ss-list strong { color: var(--white); }
+.ss-season-summer .ss-list li { color: rgba(255, 255, 255, 0.78); }
+
+.ss-season-tag {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  background: var(--signal);
+  color: var(--white);
+  padding: 5px 12px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  margin-bottom: 14px;
+}
+
+.ss-season h3 {
+  font-family: var(--font-display);
+  font-style: italic;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  margin: 0 0 14px;
+  line-height: 1;
+}
+
+.ss-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.ss-list li {
+  color: var(--steel);
+  font-size: 0.98rem;
+  padding-left: 16px;
+  position: relative;
+}
+
+.ss-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 3px;
+  background: var(--signal);
+  transform: skewX(-20deg);
+}
+
+.ss-list strong {
+  color: var(--navy);
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+}
+
+.ss-season-media {
+  margin: 0;
+  min-height: 240px;
+}
+
+.ss-season-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.ss-note {
+  margin: 36px 0 0;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  color: var(--steel);
+  border-left: 3px solid var(--signal);
+  padding-left: 14px;
+}
+
+.ss-note a { color: var(--navy); font-weight: 700; }
+
+/* ============================================================
+   SEKCE: SERVIS
+   ============================================================ */
+.ss-servis {
+  background:
+    linear-gradient(165deg, var(--navy) 0%, var(--navy-soft) 100%);
+  color: var(--white);
+}
+
+.ss-servis-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.ss-servis-media { margin: 0; }
+
+.ss-servis-media img {
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.6);
+}
+
+.ss-servis-caption {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 10px;
+}
+
+.ss-eyebrow-light { color: var(--signal); }
+
+.ss-h2-light { color: var(--white); }
+
+.ss-servis-lead {
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0 0 30px;
+  max-width: 34em;
+}
+
+.ss-servis-list {
+  margin: 0 0 30px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.ss-servis-item {
+  border-left: 3px solid var(--signal);
+  padding-left: 14px;
+}
+
+.ss-servis-item dt {
+  font-family: var(--font-display);
+  font-style: italic;
+  text-transform: uppercase;
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+}
+
+.ss-servis-item dd {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.ss-quote {
+  margin: 0 0 30px;
+  padding: 22px 24px;
+  background: rgba(255, 255, 255, 0.06);
+  border-left: 4px solid var(--signal);
+  border-radius: 0 6px 6px 0;
+}
+
+.ss-quote p {
+  margin: 0 0 8px;
+  font-style: italic;
+  font-size: 1.02rem;
+}
+
+.ss-quote cite {
+  font-family: var(--font-ui);
+  font-style: normal;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.ss-servis-contact {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (min-width: 720px) {
+  .ss-hero-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    padding-top: 36px;
+  }
+
+  .ss-season-grid {
+    grid-template-columns: 1fr 0.9fr 1fr;
+  }
+
+  .ss-servis-grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 56px;
+  }
+
+  .ss-servis-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ss-servis-media {
+    position: sticky;
+    top: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ss-nav { gap: 14px; font-size: 0.85rem; }
+  .ss-hero-badge { position: static; margin-top: 12px; max-width: 100%; }
+  .ss-section { padding: 56px 0; }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .ss-line-1,
+  .ss-line-2,
+  .ss-line-3 {
+    animation: none;
+  }
+
+  .ss-btn,
+  .ss-btn:hover {
+    transition: none;
+    transform: none;
+  }
+}
