@@ -1,0 +1,631 @@
+/* =====================================================
+   Mělnická plastová okna — návrh nového webu
+   Paleta odvozená z místa i řemesla:
+   - půlnoční modrozelená (původní tmavě zelená značky, prohloubená)
+   - říční modř (soutok Labe a Vltavy pod mělnickým zámkem)
+   - bílá plastového profilu
+   - teplá slonová kost interiéru za oknem
+   ===================================================== */
+
+:root {
+  --profil: #f7f6f2;        /* bílý plast, teplý */
+  --papir: #eef0ec;
+  --smrk: #123f36;          /* prohloubená zeleň původní značky */
+  --smrk-tmavy: #0b2b25;
+  --reka: #2f6f8f;          /* říční modř */
+  --reka-svetla: #a8c8d8;   /* obloha nad soutokem */
+  --inkoust: #14231f;
+  --ram: #14231f;
+  --font-display: "Archivo Black", "Arial Black", "Franklin Gothic Heavy", sans-serif;
+  --font-body: "Georgia", "Times New Roman", serif;
+  --font-ui: "Archivo", "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--profil);
+  color: var(--inkoust);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mpo a:focus-visible,
+.mpo button:focus-visible {
+  outline: 3px solid var(--reka);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.mpo h1,
+.mpo h2,
+.mpo h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.05;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  background: var(--smrk);
+  color: var(--profil);
+  padding: 1.25rem 1.25rem 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0.5rem 0 2.5rem;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+/* miniaturní okenní kříž jako značka */
+.wordmark-frame {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3px;
+  width: 34px;
+  height: 34px;
+  padding: 3px;
+  background: var(--profil);
+  flex-shrink: 0;
+}
+
+.wordmark-frame span {
+  background: var(--smrk);
+}
+
+.wordmark-frame span:nth-child(3) {
+  background: var(--reka);
+}
+
+.wordmark-text {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero-tel {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--profil);
+  text-decoration: none;
+  border: 1px solid rgba(247, 246, 242, 0.45);
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.hero-tel:hover {
+  background: var(--profil);
+  color: var(--smrk);
+}
+
+.hero-grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  padding-bottom: 3.5rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--reka-svetla);
+  margin: 0 0 1.25rem;
+  animation: rise 0.7s ease both;
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 8vw, 5.2rem);
+  color: var(--profil);
+  animation: rise 0.7s 0.1s ease both;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--reka-svetla);
+}
+
+.hero-lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: rgba(247, 246, 242, 0.88);
+  margin: 1.5rem 0 2rem;
+  animation: rise 0.7s 0.2s ease both;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  animation: rise 0.7s 0.3s ease both;
+}
+
+.btn {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.9rem 1.5rem;
+  border-radius: 999px;
+  transition: transform 0.2s, background-color 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-solid {
+  background: var(--profil);
+  color: var(--smrk);
+}
+
+.btn-line {
+  color: var(--profil);
+  border: 1px solid rgba(247, 246, 242, 0.45);
+}
+
+.btn-line:hover {
+  border-color: var(--profil);
+}
+
+/* --- signature: typografické okno --- */
+
+.hero-window {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+  padding: 14px;
+  background: var(--profil);
+  border-radius: 4px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+  aspect-ratio: 4 / 5;
+  max-width: 460px;
+  width: 100%;
+  margin: 0 auto;
+  animation: rise 0.9s 0.35s ease both;
+}
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-radius: 2px;
+  min-height: 0;
+}
+
+.pane-sky {
+  background: linear-gradient(160deg, var(--reka-svetla), #7fa9bf);
+  color: var(--smrk-tmavy);
+}
+
+.pane-deep {
+  background: var(--smrk-tmavy);
+  color: var(--profil);
+}
+
+.pane-river {
+  background: linear-gradient(200deg, var(--reka), #1d4d66);
+  color: var(--profil);
+}
+
+.pane-light {
+  background: #e4e1d6;
+  color: var(--smrk-tmavy);
+}
+
+.pane-num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  line-height: 1;
+}
+
+.pane-label {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.4rem;
+  opacity: 0.85;
+}
+
+/* příčle okna */
+.mullion {
+  position: absolute;
+  background: var(--profil);
+}
+
+.mullion-v {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 12px;
+  transform: translateX(-50%);
+}
+
+.mullion-h {
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 12px;
+  transform: translateY(-50%);
+}
+
+/* klika */
+.handle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 46px;
+  background: var(--inkoust);
+  border-radius: 4px;
+  transform: translate(-50%, 8px);
+}
+
+/* běžící pruh profilů */
+.hero-strip {
+  margin: 0 -1.25rem;
+  padding: 0.85rem 1.25rem;
+  background: var(--smrk-tmavy);
+  color: rgba(247, 246, 242, 0.55);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* ================= SEKCE OBECNĚ ================= */
+
+.section {
+  padding: 4.5rem 1.25rem;
+}
+
+.eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--reka);
+  margin: 0 0 0.75rem;
+}
+
+.eyebrow-light {
+  color: var(--reka-svetla);
+}
+
+/* ================= SEKCE: OKNA ================= */
+
+.section-okna {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.section-head h2 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+}
+
+.section-lead {
+  max-width: 38rem;
+  font-size: 1.05rem;
+  margin: 1.25rem 0 0;
+}
+
+.okna-list {
+  margin-top: 3rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.okno-card {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 1.25rem;
+  background: #fff;
+  border: 1px solid #dcdad2;
+  border-radius: 6px;
+  padding: 1.5rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.okno-card:hover {
+  border-color: var(--reka);
+  box-shadow: 0 12px 30px rgba(18, 63, 54, 0.1);
+}
+
+/* mini rám okna u každé karty */
+.okno-frame {
+  position: relative;
+  background: linear-gradient(160deg, var(--reka-svetla), var(--reka));
+  border: 5px solid var(--smrk);
+  border-radius: 3px;
+  height: 90px;
+}
+
+.okno-frame-cross::before,
+.okno-frame-cross::after {
+  content: "";
+  position: absolute;
+  background: var(--smrk);
+}
+
+.okno-frame-cross::before {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 5px;
+  transform: translateX(-50%);
+}
+
+.okno-frame-cross::after {
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 5px;
+  transform: translateY(-50%);
+}
+
+.okno-label {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--reka);
+  margin: 0 0 0.4rem;
+}
+
+.okno-body h3 {
+  font-size: 1.25rem;
+}
+
+.okno-text {
+  margin: 0.75rem 0 1rem;
+}
+
+.okno-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  margin: 0;
+  border-top: 1px solid #e6e4dc;
+  padding-top: 0.9rem;
+}
+
+.okno-specs dt {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #6b6f66;
+}
+
+.okno-specs dd {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--smrk);
+}
+
+.dalsi-grid {
+  margin-top: 3rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.dalsi-item {
+  border-top: 3px solid var(--smrk);
+  padding-top: 1rem;
+}
+
+.dalsi-item h3 {
+  font-size: 1.05rem;
+}
+
+.dalsi-item p {
+  margin: 0.5rem 0 0;
+  font-size: 0.98rem;
+}
+
+/* ================= SEKCE: DŮVĚRA ================= */
+
+.section-duvera {
+  background: var(--smrk);
+  color: var(--profil);
+}
+
+.duvera-grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  gap: 3rem;
+}
+
+.duvera-intro h2 {
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  margin-bottom: 1.25rem;
+}
+
+.duvera-intro p {
+  color: rgba(247, 246, 242, 0.88);
+  max-width: 36rem;
+}
+
+.duvera-adresa {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-left: 3px solid var(--reka-svetla);
+  padding-left: 1rem;
+  margin-top: 1.75rem;
+}
+
+.duvera-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.75rem;
+  align-content: start;
+}
+
+.duvera-timeline li {
+  border-top: 1px solid rgba(247, 246, 242, 0.25);
+  padding-top: 1rem;
+}
+
+.timeline-rok {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  color: var(--reka-svetla);
+  display: block;
+}
+
+.duvera-timeline p {
+  margin: 0.5rem 0 0;
+  color: rgba(247, 246, 242, 0.85);
+  font-size: 0.98rem;
+}
+
+.duvera-cit {
+  max-width: 1180px;
+  margin: 3.5rem auto 0;
+  padding: 2rem;
+  background: var(--smrk-tmavy);
+  border-radius: 6px;
+  border-left: 5px solid var(--reka);
+}
+
+.duvera-cit p {
+  margin: 0;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--profil);
+}
+
+.duvera-cit cite {
+  display: block;
+  margin-top: 0.9rem;
+  font-family: var(--font-ui);
+  font-style: normal;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--reka-svetla);
+}
+
+/* ================= ANIMACE ================= */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-eyebrow,
+  .hero-title,
+  .hero-lead,
+  .hero-actions,
+  .hero-window {
+    animation: none;
+  }
+  .btn:hover {
+    transform: none;
+  }
+}
+
+/* ================= RESPONZIVITA ================= */
+
+@media (min-width: 720px) {
+  .okna-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .okno-card {
+    grid-template-columns: 1fr;
+  }
+  .okno-frame {
+    height: 110px;
+    max-width: 120px;
+  }
+  .dalsi-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .hero-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: 4rem;
+  }
+  .hero-window {
+    margin: 0;
+    justify-self: end;
+  }
+  .duvera-grid {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4.5rem;
+  }
+  .section {
+    padding: 6rem 2rem;
+  }
+  .hero {
+    padding: 1.5rem 2rem 0;
+  }
+  .hero-strip {
+    margin: 0 -2rem;
+  }
+}
