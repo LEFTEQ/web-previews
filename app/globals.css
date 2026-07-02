@@ -1,0 +1,569 @@
+/* =====================================================
+   UMAKOV CZ — ploty a oplocení, Hradec Králové
+   Palette: ocel po zinkování + bezpečnostní oranž
+   -----------------------------------------------------
+   --steel-900  #1B2228  (tmavá ocel — hero pozadí)
+   --steel-700  #2E3A42  (plechy, karty)
+   --zinc-100   #E8ECEE  (zinkový povlak — světlé pozadí)
+   --zinc-300   #C3CCD1  (sekundární text na tmavé)
+   --safety     #F25C1F  (bezpečnostní oranž — jediný akcent)
+   --weld       #FFB38A  (žhavý svar — jemné zvýraznění)
+   ===================================================== */
+
+:root {
+  --steel-900: #1b2228;
+  --steel-700: #2e3a42;
+  --steel-500: #4a5a64;
+  --zinc-100: #e8ecee;
+  --zinc-300: #c3ccd1;
+  --safety: #f25c1f;
+  --weld: #ffb38a;
+
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", system-ui, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-ui: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--zinc-100);
+  color: var(--steel-900);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.uk img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.uk a:focus-visible,
+.uk button:focus-visible {
+  outline: 3px solid var(--safety);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  background:
+    linear-gradient(160deg, #232c33 0%, var(--steel-900) 55%, #151b20 100%);
+  color: var(--zinc-100);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 92vh;
+}
+
+.hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  border-bottom: 1px solid rgba(232, 236, 238, 0.18);
+  padding-bottom: 1rem;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-stretch: condensed;
+}
+
+.wordmark-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.wordmark-cz {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--steel-900);
+  background: var(--safety);
+  padding: 0.15rem 0.4rem;
+  border-radius: 2px;
+  transform: translateY(-0.15rem);
+}
+
+.hero-loc {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--zinc-300);
+}
+
+.hero-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2.5rem 0 2rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.hero-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(3rem, 12vw, 8.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+
+.hero-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: hero-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.hero-line-1 { animation-delay: 0.05s; }
+.hero-line-2 {
+  animation-delay: 0.2s;
+  color: var(--safety);
+}
+.hero-line-3 {
+  animation-delay: 0.35s;
+  color: var(--zinc-300);
+  -webkit-text-stroke: 0;
+}
+
+@keyframes hero-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-side {
+  max-width: 34rem;
+}
+
+.hero-lead {
+  margin: 0 0 1.25rem;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--zinc-100);
+}
+
+.hero-facts {
+  list-style: none;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  color: var(--zinc-300);
+}
+
+.hero-facts li {
+  padding: 0.5rem 0 0.5rem 1.1rem;
+  position: relative;
+  border-bottom: 1px solid rgba(232, 236, 238, 0.12);
+}
+
+.hero-facts li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.85rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  background: var(--safety);
+}
+
+.hero-facts strong {
+  color: var(--zinc-100);
+}
+
+.hero-cta {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: var(--steel-900);
+  background: var(--safety);
+  padding: 0.9rem 1.8rem;
+  border-radius: 3px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.hero-cta:hover {
+  background: var(--weld);
+  transform: translateY(-2px);
+}
+
+/* --- Signature: plotové pole (CSS pickets) --- */
+
+.fence {
+  margin-top: auto;
+}
+
+.fence-rail {
+  height: 6px;
+  background: var(--steel-500);
+}
+
+.fence-rail-top {
+  background: linear-gradient(90deg, var(--steel-500), var(--zinc-300) 50%, var(--steel-500));
+}
+
+.fence-rail-bottom {
+  height: 10px;
+  background: var(--safety);
+}
+
+.fence-pickets {
+  display: flex;
+  justify-content: space-between;
+  height: clamp(3.5rem, 10vw, 7rem);
+  padding: 0 2%;
+}
+
+.picket {
+  width: clamp(6px, 1vw, 10px);
+  height: 100%;
+  background: linear-gradient(180deg, var(--zinc-300), var(--steel-500));
+  transform-origin: bottom center;
+  transform: scaleY(0);
+  animation: picket-up 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+
+.picket:nth-child(4n) {
+  background: linear-gradient(180deg, var(--weld), var(--safety));
+}
+
+@keyframes picket-up {
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@media (max-width: 700px) {
+  .picket:nth-child(n + 17) {
+    display: none;
+  }
+}
+
+/* ============ SEKCE OBECNĚ ============ */
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--safety);
+}
+
+.uk h2 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.8rem, 4.5vw, 2.9rem);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+
+.uk h3 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.35rem;
+  letter-spacing: 0.03em;
+}
+
+.uk h4 {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* ============ NABÍDKA ============ */
+
+.offer {
+  padding: 4.5rem 1.25rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-head {
+  max-width: 42rem;
+  margin-bottom: 2.5rem;
+}
+
+.section-lead {
+  margin: 0;
+  color: var(--steel-500);
+}
+
+.offer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 780px) {
+  .offer-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.offer-card {
+  background: #ffffff;
+  border: 1px solid #d5dde1;
+  border-top: 4px solid var(--steel-500);
+  border-radius: 4px;
+  padding: 1.5rem 1.4rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.offer-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(27, 34, 40, 0.12);
+}
+
+.offer-card-main {
+  border-top-color: var(--safety);
+}
+
+.offer-tag {
+  align-self: flex-start;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--steel-500);
+  background: var(--zinc-100);
+  padding: 0.25rem 0.55rem;
+  border-radius: 2px;
+  margin-bottom: 1rem;
+}
+
+.offer-card-main .offer-tag {
+  color: #fff;
+  background: var(--safety);
+}
+
+.offer-card p {
+  margin: 0 0 1rem;
+  font-size: 0.98rem;
+  color: var(--steel-700);
+}
+
+.offer-price {
+  margin-top: auto !important;
+  margin-bottom: 0 !important;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  color: var(--steel-900);
+  border-top: 1px dashed #d5dde1;
+  padding-top: 0.8rem;
+}
+
+/* --- postup --- */
+
+.offer-steps {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 780px) {
+  .offer-steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.step {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.step-n {
+  flex: 0 0 auto;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--zinc-100);
+  background: var(--steel-900);
+  border-radius: 2px;
+}
+
+.step p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--steel-500);
+}
+
+/* ============ DŮVĚRA ============ */
+
+.trust {
+  background: var(--steel-900);
+  color: var(--zinc-100);
+  padding: 4.5rem 1.25rem;
+}
+
+.trust-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .trust-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  }
+}
+
+.trust-figure {
+  margin: 0;
+}
+
+.trust-figure img {
+  width: 100%;
+  border-radius: 4px;
+  border-bottom: 5px solid var(--safety);
+}
+
+.trust-figure figcaption {
+  margin-top: 0.6rem;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--zinc-300);
+}
+
+.trust-copy h2 {
+  color: #fff;
+}
+
+.trust-copy > p {
+  color: var(--zinc-300);
+  max-width: 36rem;
+}
+
+.trust-stats {
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  border-top: 1px solid rgba(232, 236, 238, 0.18);
+  border-bottom: 1px solid rgba(232, 236, 238, 0.18);
+  padding: 1.25rem 0;
+}
+
+.trust-stats > div {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.trust-stats dt {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--zinc-300);
+}
+
+.trust-stats dd {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--safety);
+  line-height: 1;
+}
+
+@media (max-width: 560px) {
+  .trust-stats {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+.trust-quote {
+  margin: 0;
+  padding-left: 1.1rem;
+  border-left: 3px solid var(--safety);
+}
+
+.trust-quote p {
+  margin: 0 0 0.5rem;
+  font-style: italic;
+  color: var(--zinc-100);
+}
+
+.trust-quote cite {
+  font-family: var(--font-ui);
+  font-style: normal;
+  font-size: 0.85rem;
+  color: var(--zinc-300);
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-line,
+  .picket {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .hero-cta,
+  .offer-card {
+    transition: none;
+  }
+}
