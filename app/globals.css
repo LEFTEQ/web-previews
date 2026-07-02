@@ -1,0 +1,499 @@
+:root {
+  --steel: #0e1b2c;        /* tmavá ocelová modř – podvozek Liebherru za soumraku */
+  --steel-2: #16283f;
+  --crane: #ffc400;        /* žlutá autojeřábu – přesně ten lak */
+  --crane-deep: #e0a800;
+  --paper: #f6f7f9;        /* světlá technická šeď */
+  --ink: #101820;
+  --line: #d7dbe2;
+  --muted: #5b6674;
+
+  --font-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Consolas", "SFMono-Regular", "Roboto Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.aj a:focus-visible,
+.aj button:focus-visible {
+  outline: 3px solid var(--crane);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  background: linear-gradient(160deg, var(--steel) 0%, var(--steel-2) 70%, #1c3350 100%);
+  color: #fff;
+  overflow: hidden;
+  padding: 1.25rem 1.25rem 0;
+}
+
+/* jemný rastr – ocelový plech */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+}
+
+.hero-topbar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.wordmark-hook { color: var(--crane); display: inline-flex; }
+
+.wordmark-text {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+}
+
+.wordmark-text b { color: var(--crane); font-weight: inherit; }
+
+.hero-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.hero-call:hover {
+  border-color: var(--crane);
+  background: rgba(255, 196, 0, 0.1);
+}
+
+.hero-call-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--crane);
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3.5rem 0 4.5rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--crane);
+  margin: 0 0 1.25rem;
+}
+
+.hero-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  letter-spacing: -0.015em;
+}
+
+.hero-line { display: block; }
+
+.hero-line-2 {
+  color: var(--crane);
+  /* stín jako plátový lak stroje */
+  text-shadow: 0.06em 0.06em 0 rgba(0, 0, 0, 0.35);
+}
+
+.hero-line-3 {
+  font-size: 0.42em;
+  letter-spacing: 0.02em;
+  margin-top: 0.5rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hero-sub {
+  max-width: 34rem;
+  margin: 1.75rem 0 0;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.25rem;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: 6px;
+  transition: transform 0.15s, background-color 0.2s, border-color 0.2s;
+}
+
+.btn-primary {
+  background: var(--crane);
+  color: var(--steel);
+}
+
+.btn-primary:hover { background: var(--crane-deep); transform: translateY(-2px); }
+
+.btn-ghost {
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+.btn-ghost:hover { border-color: var(--crane); color: var(--crane); }
+
+/* Signature – výložník */
+.hero-boom {
+  position: absolute;
+  right: -2rem;
+  bottom: 0;
+  width: min(48vw, 560px);
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.hero-boom svg { width: 100%; height: 100%; }
+
+.boom-lattice {
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 0;
+  animation: boom-draw 1.4s ease-out both;
+}
+
+.boom-hook {
+  animation: hook-drop 1.1s cubic-bezier(0.22, 1.2, 0.36, 1) 0.6s both;
+}
+
+@keyframes boom-draw {
+  from { stroke-dashoffset: 1400; opacity: 0; }
+  to { stroke-dashoffset: 0; opacity: 1; }
+}
+
+@keyframes hook-drop {
+  from { transform: translateY(-140px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.hero-line-1, .hero-line-2, .hero-line-3, .hero-sub, .hero-actions, .hero-eyebrow {
+  animation: rise-in 0.7s ease-out both;
+}
+.hero-eyebrow { animation-delay: 0.05s; }
+.hero-line-1 { animation-delay: 0.12s; }
+.hero-line-2 { animation-delay: 0.22s; }
+.hero-line-3 { animation-delay: 0.32s; }
+.hero-sub { animation-delay: 0.45s; }
+.hero-actions { animation-delay: 0.55s; }
+
+@keyframes rise-in {
+  from { transform: translateY(18px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* nosnostní stupnice */
+.hero-scale {
+  position: relative;
+  z-index: 2;
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  border-top: 2px solid rgba(255, 196, 0, 0.5);
+  padding: 0.6rem 0 1rem;
+}
+
+.hero-scale span { position: relative; padding-top: 0.35rem; }
+
+.hero-scale span::before {
+  content: "";
+  position: absolute;
+  top: -0.6rem;
+  left: 50%;
+  width: 2px;
+  height: 0.5rem;
+  background: rgba(255, 196, 0, 0.7);
+}
+
+.hero-scale .scale-max { color: var(--crane); font-weight: 700; }
+
+/* ============ SEKCE: STROJE ============ */
+
+.fleet {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem;
+}
+
+.section-head { max-width: 40rem; margin-bottom: 2.75rem; }
+
+.section-head h2,
+.trust h2 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.1;
+  margin: 0 0 0.9rem;
+  letter-spacing: -0.01em;
+}
+
+.section-head p { color: var(--muted); margin: 0; }
+
+.fleet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.25rem;
+}
+
+.fleet-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.5rem 1.5rem 1.6rem;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.fleet-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(14, 27, 44, 0.1);
+  border-color: var(--crane);
+}
+
+.fleet-card-max {
+  background: var(--steel);
+  color: #fff;
+  border-color: var(--steel);
+}
+
+.fleet-card-max p { color: rgba(255, 255, 255, 0.75); }
+
+.fleet-cap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.fleet-cap-num {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--steel);
+}
+
+.fleet-card-max .fleet-cap-num { color: var(--crane); }
+
+.fleet-cap-num small {
+  font-size: 0.5em;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  margin-left: 0.2em;
+  color: var(--muted);
+}
+
+.fleet-card-max .fleet-cap-num small { color: rgba(255, 255, 255, 0.6); }
+
+.fleet-cap-bar {
+  display: block;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--crane), var(--crane-deep));
+}
+
+.fleet-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.fleet-card h3 em {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.85em;
+  color: var(--muted);
+}
+
+.fleet-card-max h3 em { color: rgba(255, 255, 255, 0.6); }
+
+.fleet-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* ============ SEKCE: DŮVĚRA ============ */
+
+.trust {
+  background: #fff;
+  border-top: 4px solid var(--crane);
+}
+
+.trust-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem;
+}
+
+.trust-lead { max-width: 42rem; margin-bottom: 3rem; }
+
+.trust-lead p { color: var(--muted); margin: 0; font-size: 1.05rem; }
+
+.trust-steps {
+  list-style: none;
+  counter-reset: step;
+  margin: 0 0 3.5rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.5rem;
+}
+
+.trust-steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 1.4rem 1.4rem 1.4rem 1.4rem;
+  border-left: 4px solid var(--crane);
+  background: var(--paper);
+  border-radius: 0 10px 10px 0;
+}
+
+.trust-steps li::before {
+  content: counter(step, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.1em;
+}
+
+.step-label {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+}
+
+.trust-steps p { margin: 0; font-size: 0.95rem; color: var(--muted); }
+
+.trust-facts {
+  list-style: none;
+  margin: 0;
+  padding: 2rem 0 0;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1.75rem 1.25rem;
+}
+
+.trust-facts li { display: flex; flex-direction: column; gap: 0.3rem; }
+
+.trust-facts strong {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--steel);
+}
+
+.trust-facts span {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 720px) {
+  .hero-boom {
+    width: 70vw;
+    right: -4rem;
+    opacity: 0.28;
+  }
+
+  .hero-body { padding: 2.75rem 0 3.5rem; }
+
+  .hero-scale span:nth-child(2),
+  .hero-scale span:nth-child(3) { display: none; }
+
+  .btn { width: 100%; text-align: center; }
+
+  .hero-call { font-size: 0.85rem; padding: 0.45rem 0.8rem; }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .boom-lattice,
+  .boom-hook,
+  .hero-eyebrow,
+  .hero-line-1,
+  .hero-line-2,
+  .hero-line-3,
+  .hero-sub,
+  .hero-actions {
+    animation: none;
+  }
+
+  .fleet-card:hover,
+  .btn-primary:hover {
+    transform: none;
+  }
+}
