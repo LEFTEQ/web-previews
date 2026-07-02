@@ -1,0 +1,558 @@
+/* ============================================================
+   Stanislav Chudo — revize elektro, Brno
+   Paleta odvozená z řemesla: izolační modř kabelu PEN? ne —
+   pracovní tmavá „rozvaděčová" šeď-modř, signální žluť výstražné
+   samolepky „POZOR ELEKTRICKÉ ZAŘÍZENÍ", měděný vodič jako akcent.
+   ============================================================ */
+
+:root {
+  --ink: #16212b;        /* rozvaděčový plech, skoro černá s modrým nádechem */
+  --ink-soft: #24313d;
+  --paper: #eef1f0;      /* světlá technická šeď, ne krémová */
+  --signal: #ffd028;     /* výstražná žluť z bezpečnostní tabulky */
+  --copper: #c96f3a;     /* měděný vodič */
+  --ok: #3fae6a;         /* zelená „VYHOVUJE" */
+  --line: #3a4a58;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ch h1,
+.ch h2,
+.ch h3,
+.ch .krok-cislo,
+.ch .karta-kod,
+.ch .wordmark-sig {
+  font-family: "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial,
+    sans-serif;
+  font-stretch: condensed;
+}
+
+.ch a:focus-visible,
+.ch .btn:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ===================== HERO ===================== */
+
+.hero {
+  background: var(--ink);
+  color: #f4f6f5;
+  padding: 1.25rem 1.25rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemná mřížka jako schéma zapojení */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.hero > * {
+  position: relative;
+}
+
+.hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding-top: 0.5rem;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.wordmark-sig {
+  display: grid;
+  place-items: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  background: var(--signal);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  /* výstražný trojúhelník? ne — kosý střih jako svorka */
+  clip-path: polygon(0 0, 100% 0, 100% 78%, 78% 100%, 0 100%);
+}
+
+.wordmark-text {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  font-size: 1rem;
+}
+
+.wordmark-text em {
+  display: block;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: #9fb0be;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-tel {
+  color: var(--signal);
+  text-decoration: none;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  border: 1px solid var(--line);
+  padding: 0.45rem 0.9rem;
+  border-radius: 2px;
+}
+
+.hero-tel:hover {
+  border-color: var(--signal);
+}
+
+.hero-body {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 3.5rem 0 2.5rem;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9fb0be;
+  animation: rise 0.6s ease both;
+}
+
+.hero-h1 {
+  margin: 0;
+  font-size: clamp(3rem, 11vw, 7.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  font-weight: 700;
+  animation: rise 0.6s 0.08s ease both;
+}
+
+.hero-h1-accent {
+  color: var(--signal);
+  /* podtrženo jako razítko revizního technika */
+  text-decoration: underline;
+  text-decoration-color: var(--copper);
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.12em;
+}
+
+.hero-lede {
+  max-width: 34rem;
+  margin: 1.5rem 0 0;
+  font-size: 1.1rem;
+  color: #cdd7de;
+  animation: rise 0.6s 0.16s ease both;
+}
+
+.hero-cta-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  animation: rise 0.6s 0.24s ease both;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 2px;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--signal);
+  color: var(--ink);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: #ffdd57;
+}
+
+.btn-ghost {
+  color: #f4f6f5;
+  border: 1px solid var(--line);
+}
+
+.btn-ghost:hover {
+  border-color: var(--signal);
+}
+
+/* ---- SIGNATURE: stupnice měřicího přístroje ---- */
+
+.scale {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding-bottom: 1.75rem;
+}
+
+.scale-track {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 34px;
+  border-bottom: 2px solid var(--line);
+}
+
+.tick {
+  width: 1px;
+  height: 10px;
+  background: #6b7d8c;
+}
+
+.tick-mid {
+  height: 17px;
+  background: #93a5b3;
+}
+
+.tick-major {
+  width: 2px;
+  height: 26px;
+  background: #d7dee3;
+}
+
+.scale-needle {
+  position: absolute;
+  bottom: 0;
+  left: 4%;
+  width: 3px;
+  height: 34px;
+  background: var(--copper);
+  box-shadow: 0 0 12px rgba(201, 111, 58, 0.8);
+  animation: sweep 1.6s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.scale-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: #9fb0be;
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+}
+
+.scale-ok {
+  color: var(--ok);
+  font-weight: 700;
+  animation: blinkIn 1.6s 1.9s steps(2, end) both;
+}
+
+@keyframes sweep {
+  from {
+    left: 4%;
+  }
+  to {
+    left: 87%;
+  }
+}
+
+@keyframes blinkIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ===================== SEKCE: SLUŽBY ===================== */
+
+.sluzby {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem;
+}
+
+.sec-head {
+  max-width: 36rem;
+  margin-bottom: 2.5rem;
+}
+
+.sec-head h2 {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.9rem, 5vw, 2.8rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.sec-head p {
+  margin: 0;
+  color: #4b5a66;
+}
+
+.karta-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.25rem;
+}
+
+.karta {
+  background: #fff;
+  border: 1px solid #d5dbd9;
+  border-top: 4px solid var(--signal);
+  padding: 1.4rem 1.4rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(22, 33, 43, 0.12);
+}
+
+.karta-kod {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--copper);
+}
+
+.karta h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.karta p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #4b5a66;
+  flex-grow: 1;
+}
+
+.karta-lhuta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem !important;
+  font-weight: 700;
+  color: var(--ink) !important;
+  flex-grow: 0 !important;
+  border-top: 1px dashed #ccd4d1;
+  padding-top: 0.75rem;
+  margin-top: 0.4rem !important;
+}
+
+.lhuta-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ok);
+  flex-shrink: 0;
+}
+
+/* ===================== SEKCE: PRŮBĚH + DŮVĚRA ===================== */
+
+.prubeh {
+  background: var(--ink-soft);
+  color: #eef1f0;
+  padding: 4.5rem 1.25rem;
+}
+
+.prubeh > * {
+  max-width: 68rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sec-head-inv p {
+  color: #aebcc7;
+}
+
+.kroky {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 2rem;
+  counter-reset: krok;
+}
+
+.krok {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.krok-cislo {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  flex-shrink: 0;
+  background: transparent;
+  border: 2px solid var(--signal);
+  color: var(--signal);
+  font-weight: 700;
+  font-size: 1.2rem;
+  border-radius: 50%;
+}
+
+.krok h3 {
+  margin: 0.2rem 0 0.4rem;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+}
+
+.krok p {
+  margin: 0;
+  font-size: 0.93rem;
+  color: #c3cfd8;
+}
+
+.duvera {
+  margin-top: 3.5rem;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  border-top: 1px solid var(--line);
+  padding-top: 2.5rem;
+}
+
+.citace {
+  margin: 0;
+  border-left: 4px solid var(--copper);
+  padding-left: 1.25rem;
+}
+
+.citace p {
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+  line-height: 1.55;
+}
+
+.citace footer {
+  font-size: 0.85rem;
+  color: #9fb0be;
+}
+
+.fakta {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.fakt dt {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9fb0be;
+  margin-bottom: 0.2rem;
+}
+
+.fakt dd {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--signal);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===================== RESPONSIVITA ===================== */
+
+@media (max-width: 720px) {
+  .hero-body {
+    padding: 2.5rem 0 2rem;
+  }
+
+  .duvera {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ===================== REDUCED MOTION ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-eyebrow,
+  .hero-h1,
+  .hero-lede,
+  .hero-cta-row,
+  .scale-needle,
+  .scale-ok {
+    animation: none;
+  }
+
+  .scale-needle {
+    left: 87%;
+  }
+
+  .karta:hover,
+  .btn-primary:hover {
+    transform: none;
+  }
+}
