@@ -1,0 +1,440 @@
+:root {
+  /* Paleta: plzeňská cihla, omítka, měděný okap, večerní okno */
+  --cihla: #9a3b28;
+  --cihla-tmava: #6e2a1c;
+  --omitka: #efe9df;
+  --papir: #faf7f2;
+  --inkoust: #26211c;
+  --okno-svit: #f2b64b;
+
+  --font-display: "Georgia", "Times New Roman", serif;
+  --font-body: "Trebuchet MS", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--inkoust);
+  background: var(--papir);
+  -webkit-font-smoothing: antialiased;
+}
+
+.sd a:focus-visible,
+.sd button:focus-visible {
+  outline: 3px solid var(--cihla);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  background: var(--inkoust);
+  color: var(--omitka);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 88vh;
+}
+
+.hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.25rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+/* mini fasáda 2×3 jako značka */
+.wm-mark {
+  display: grid;
+  grid-template-columns: repeat(3, 8px);
+  grid-auto-rows: 10px;
+  gap: 3px;
+  padding: 4px;
+  background: var(--cihla);
+}
+
+.wm-mark i {
+  background: var(--omitka);
+  display: block;
+}
+
+.wm-mark i:nth-child(5) {
+  background: var(--okno-svit);
+}
+
+.wm-text {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
+.wm-text b {
+  color: var(--okno-svit);
+  font-weight: 700;
+}
+
+.hero-tel {
+  color: var(--omitka);
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  border: 1px solid rgba(239, 233, 223, 0.35);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.hero-tel:hover {
+  border-color: var(--okno-svit);
+  color: var(--okno-svit);
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  padding: 3.5rem 1.25rem 2rem;
+  max-width: 720px;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--okno-svit);
+}
+
+.hero-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.9rem, 9.5vw, 6.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+}
+
+.ht-line {
+  display: block;
+}
+
+.ht-2 {
+  color: var(--okno-svit);
+}
+
+.hero-lead {
+  margin: 1.5rem 0 0;
+  font-size: clamp(1.05rem, 2.3vw, 1.25rem);
+  max-width: 34em;
+  color: rgba(239, 233, 223, 0.85);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 0.85rem 1.5rem;
+  border-radius: 4px;
+  transition: transform 0.15s, background-color 0.2s, color 0.2s;
+}
+
+.btn-solid {
+  background: var(--cihla);
+  color: #fff;
+}
+
+.btn-solid:hover {
+  background: var(--cihla-tmava);
+  transform: translateY(-2px);
+}
+
+.btn-line {
+  color: var(--omitka);
+  border: 1px solid rgba(239, 233, 223, 0.4);
+}
+
+.btn-line:hover {
+  border-color: var(--omitka);
+  transform: translateY(-2px);
+}
+
+/* ---- Signature: fasáda / okenní rastr ---- */
+
+.fasada {
+  margin-top: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.fasada-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(8px, 1.4vw, 18px);
+  padding: 0 1.25rem;
+  background: var(--cihla);
+  padding-top: clamp(16px, 2.5vw, 32px);
+  padding-bottom: clamp(16px, 2.5vw, 32px);
+}
+
+.okno {
+  display: block;
+  aspect-ratio: 3 / 4;
+  background: var(--cihla-tmava);
+  border-top: 3px solid rgba(38, 33, 28, 0.35);
+  animation: okno-in 0.7s ease both;
+}
+
+/* stupňovité rozsvěcení fasády při načtení */
+.okno:nth-child(3n) { animation-delay: 0.15s; }
+.okno:nth-child(3n + 1) { animation-delay: 0.3s; }
+.okno:nth-child(4n) { animation-delay: 0.45s; }
+
+.okno-svit {
+  background: var(--okno-svit);
+  box-shadow: 0 0 24px rgba(242, 182, 75, 0.45);
+  animation: okno-svit-in 1.1s ease both 0.6s;
+}
+
+.fasada-rimsa {
+  height: 10px;
+  background: var(--cihla-tmava);
+}
+
+@keyframes okno-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes okno-svit-in {
+  from {
+    opacity: 0;
+    box-shadow: none;
+  }
+  to {
+    opacity: 1;
+    box-shadow: 0 0 24px rgba(242, 182, 75, 0.45);
+  }
+}
+
+/* ================= SLUŽBY ================= */
+
+.sluzby {
+  padding: clamp(3.5rem, 8vw, 6.5rem) 1.25rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.sekce-hlava h2,
+.duvera h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+  line-height: 1.1;
+  margin: 0 0 0.75rem;
+}
+
+.sekce-hlava p {
+  margin: 0 0 2.5rem;
+  max-width: 38em;
+  color: rgba(38, 33, 28, 0.75);
+}
+
+.sluzby-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+
+.sluzba {
+  background: #fff;
+  border: 1px solid var(--omitka);
+  border-top: 4px solid var(--cihla);
+  padding: 1.5rem 1.5rem 1.25rem;
+  border-radius: 4px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.sluzba:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(38, 33, 28, 0.08);
+}
+
+.sluzba-stitek {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  background: var(--omitka);
+  color: var(--cihla-tmava);
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px;
+}
+
+.sluzba h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  margin: 0.85rem 0 0.5rem;
+}
+
+.sluzba p {
+  margin: 0;
+  color: rgba(38, 33, 28, 0.8);
+}
+
+.sluzba-detail {
+  margin-top: 1rem !important;
+  font-size: 0.85rem;
+  color: var(--cihla) !important;
+  letter-spacing: 0.02em;
+}
+
+/* ================= DŮVĚRA ================= */
+
+.duvera {
+  background: var(--omitka);
+  padding: clamp(3.5rem, 8vw, 6.5rem) 1.25rem;
+}
+
+.duvera-in {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1fr;
+}
+
+.duvera-text p {
+  max-width: 40em;
+  color: rgba(38, 33, 28, 0.85);
+}
+
+.reference {
+  margin: 2rem 0 0;
+  padding: 1.25rem 1.5rem;
+  background: #fff;
+  border-left: 4px solid var(--cihla);
+  border-radius: 0 4px 4px 0;
+}
+
+.reference p {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.reference footer {
+  font-size: 0.85rem;
+  color: rgba(38, 33, 28, 0.6);
+}
+
+.duvera-cisla {
+  margin: 0;
+  display: grid;
+  gap: 1.5rem;
+  align-content: start;
+}
+
+.cislo {
+  border-top: 2px solid var(--cihla);
+  padding-top: 0.75rem;
+}
+
+.cislo dt {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--cihla-tmava);
+  line-height: 1;
+}
+
+.cislo dd {
+  margin: 0.4rem 0 0;
+  color: rgba(38, 33, 28, 0.8);
+  max-width: 30em;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (min-width: 640px) {
+  .hero-top {
+    padding: 1.75rem 2.5rem 0;
+  }
+
+  .hero-body {
+    padding: 4.5rem 2.5rem 3rem;
+  }
+
+  .fasada-grid {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .sluzby-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 960px) {
+  .duvera-in {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 4rem;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .okno,
+  .okno-svit {
+    animation: none;
+  }
+
+  .btn,
+  .sluzba,
+  .hero-tel {
+    transition: none;
+  }
+
+  .btn:hover,
+  .sluzba:hover {
+    transform: none;
+  }
+}
