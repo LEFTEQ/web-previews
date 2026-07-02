@@ -1,0 +1,486 @@
+/* =====================================================
+   AUTO 3000 — odtahová služba Sokolov
+   Paleta odvozená z řemesla: noční asfalt, výstražná
+   žluť majáku/šraf, reflexní bílá, ocelová šeď.
+   ===================================================== */
+
+:root {
+  --asfalt: #14161a;        /* noční silnice */
+  --asfalt-2: #1d2026;      /* mokrý asfalt */
+  --zlut: #ffc400;          /* výstražná žluť odtahovky */
+  --zlut-tmava: #e0a800;
+  --reflex: #f5f6f4;        /* reflexní bílá */
+  --ocel: #8b929e;          /* ocel navijáku */
+  --linka: #2c3038;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--asfalt);
+  color: var(--reflex);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.a3-main a:focus-visible,
+.a3-main button:focus-visible {
+  outline: 3px solid var(--zlut);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ================= HERO ================= */
+
+.a3-hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 120% 60% at 85% -10%, rgba(255, 196, 0, 0.12), transparent 60%),
+    var(--asfalt);
+}
+
+/* jemná "vozovka" — přerušovaná středová čára silnice */
+.a3-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 12%;
+  width: 3px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(245, 246, 244, 0.10) 0 42px,
+    transparent 42px 84px
+  );
+  pointer-events: none;
+}
+
+.a3-hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--linka);
+}
+
+.a3-wordmark {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  font-style: italic; /* kurzíva = pohyb, jedeme */
+}
+
+.a3-wordmark em {
+  font-style: italic;
+  color: var(--asfalt);
+  background: var(--zlut);
+  padding: 0 0.3rem;
+  margin-left: 0.15rem;
+  border-radius: 2px;
+}
+
+.a3-hero-loc {
+  font-size: 0.85rem;
+  color: var(--ocel);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.a3-hero-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 0 3.5rem;
+  max-width: 62rem;
+}
+
+.a3-hero-eyebrow {
+  margin: 0 0 1.25rem;
+  color: var(--zlut);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  animation: a3-slide-in 0.7s ease-out both;
+}
+
+.a3-hero-title {
+  margin: 0;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  font-size: clamp(3rem, 11vw, 8.5rem);
+}
+
+.a3-line {
+  display: block;
+}
+
+.a3-line-1 {
+  color: var(--ocel);
+  animation: a3-slide-in 0.7s 0.1s ease-out both;
+}
+
+.a3-line-2 {
+  animation: a3-slide-in 0.7s 0.25s ease-out both;
+}
+
+.a3-line-2 b {
+  color: var(--zlut);
+}
+
+.a3-hero-sub {
+  max-width: 34rem;
+  margin: 1.75rem 0 0;
+  font-size: 1.1rem;
+  color: #c9cdd4;
+  animation: a3-slide-in 0.7s 0.4s ease-out both;
+}
+
+.a3-hero-cta {
+  margin-top: 2.25rem;
+  animation: a3-slide-in 0.7s 0.55s ease-out both;
+}
+
+.a3-call {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  background: var(--zlut);
+  color: var(--asfalt);
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 6px;
+  box-shadow: 0 10px 40px rgba(255, 196, 0, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.a3-call:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 48px rgba(255, 196, 0, 0.35);
+}
+
+.a3-call-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.a3-call-number {
+  font-size: clamp(1.5rem, 4.5vw, 2.1rem);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.a3-call-note {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+  color: var(--ocel);
+}
+
+/* ---- signature: šrafovaný výstražný pruh ---- */
+
+.a3-chevrons {
+  margin: 0 -1.25rem;
+}
+
+.a3-chevrons-strip {
+  height: 34px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--zlut) 0 26px,
+    var(--asfalt) 26px 52px
+  );
+  background-size: 200% 100%;
+  border-top: 3px solid var(--zlut);
+  animation: a3-chevron-move 18s linear infinite;
+}
+
+.a3-chevrons-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.6rem 1.25rem;
+  background: var(--asfalt-2);
+  border-top: 1px solid var(--linka);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--ocel);
+}
+
+@keyframes a3-chevron-move {
+  from { background-position: 0 0; }
+  to { background-position: -200% 0; }
+}
+
+@keyframes a3-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ================= SEKCE OBECNĚ ================= */
+
+.a3-section-head {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.a3-section-head h2 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+.a3-section-head p {
+  margin: 0;
+  color: var(--ocel);
+  font-size: 1.05rem;
+}
+
+/* ================= SLUŽBY ================= */
+
+.a3-sluzby {
+  background: var(--reflex);
+  color: var(--asfalt);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.a3-sluzby .a3-section-head p {
+  color: #565b64;
+}
+
+.a3-sluzby-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  max-width: 72rem;
+}
+
+.a3-karta {
+  background: #ffffff;
+  border: 1px solid #e2e4e0;
+  border-left: 5px solid var(--zlut);
+  border-radius: 8px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.a3-karta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(20, 22, 26, 0.10);
+}
+
+.a3-karta-tag {
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--asfalt);
+  background: var(--zlut);
+  padding: 0.2rem 0.55rem;
+  border-radius: 3px;
+}
+
+.a3-karta h3 {
+  margin: 0.25rem 0 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.a3-karta p {
+  margin: 0;
+  color: #464b53;
+  font-size: 0.98rem;
+}
+
+.a3-karta-detail {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a8f98;
+  border-top: 1px dashed #dcdeda;
+}
+
+/* ================= DŮVĚRA ================= */
+
+.a3-duvera {
+  background: var(--asfalt);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.a3-duvera-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  max-width: 72rem;
+}
+
+.a3-duvod {
+  background: var(--asfalt-2);
+  border: 1px solid var(--linka);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.a3-duvod-cislo {
+  display: block;
+  font-size: 2.4rem;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--zlut);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.a3-duvod p {
+  margin: 0;
+  color: #c9cdd4;
+  font-size: 0.98rem;
+}
+
+.a3-duvera-pruh {
+  max-width: 72rem;
+  height: 8px;
+  margin: 3rem 0 2.5rem;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--zlut) 0 14px,
+    transparent 14px 28px
+  );
+  opacity: 0.55;
+  border-radius: 4px;
+}
+
+.a3-citace {
+  margin: 0;
+  max-width: 44rem;
+}
+
+.a3-citace p {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.2rem, 3vw, 1.55rem);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.a3-citace cite {
+  font-style: normal;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ocel);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (min-width: 640px) {
+  .a3-hero {
+    padding: 2rem 3rem 0;
+  }
+
+  .a3-chevrons {
+    margin: 0 -3rem;
+  }
+
+  .a3-chevrons-meta {
+    padding: 0.6rem 3rem;
+  }
+
+  .a3-sluzby,
+  .a3-duvera {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .a3-sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .a3-duvera-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .a3-sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .a3-duvera-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .a3-hero-eyebrow,
+  .a3-line-1,
+  .a3-line-2,
+  .a3-hero-sub,
+  .a3-hero-cta {
+    animation: none;
+  }
+
+  .a3-chevrons-strip {
+    animation: none;
+  }
+
+  .a3-call,
+  .a3-karta {
+    transition: none;
+  }
+
+  .a3-call:hover,
+  .a3-karta:hover {
+    transform: none;
+  }
+}
