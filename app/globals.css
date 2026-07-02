@@ -1,0 +1,509 @@
+:root {
+  --ink: #1b1f26;
+  --paper: #eef0f3;
+  --tile: #b4402a;
+  --tile-deep: #7a2718;
+  --zinc: #8b94a3;
+  --rope: #e8b23a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Utility face pro čísla, štítky, tlačítka — „technický" hlas řemesla */
+.hero-eyebrow,
+.hero-tel,
+.btn-main,
+.hero-note,
+.sl-vyska,
+.wm-text em,
+.kryjeme-label,
+.ref figcaption {
+  font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.06em;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--tile);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.vp {
+  overflow-x: clip;
+}
+
+/* ============ HERO ============ */
+.hero {
+  position: relative;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 1.5rem 1.25rem 0;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 3;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.wm-x {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  background: var(--tile);
+  color: var(--paper);
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  /* tvar bobrovky */
+  border-radius: 0 0 50% 50%;
+}
+
+.wm-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.wm-text strong {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.wm-text em {
+  font-style: normal;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: var(--zinc);
+}
+
+.hero-tel {
+  color: var(--rope);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  border-bottom: 2px solid transparent;
+}
+
+.hero-tel:hover {
+  border-bottom-color: var(--rope);
+}
+
+.hero-body {
+  position: relative;
+  z-index: 3;
+  max-width: 40rem;
+  padding: 3rem 0 16rem;
+}
+
+.hero-eyebrow {
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  color: var(--rope);
+  margin-bottom: 1.4rem;
+}
+
+.hero-title {
+  font-weight: 400;
+  font-size: clamp(2.6rem, 8.5vw, 5.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+
+.ht-line {
+  display: block;
+}
+
+.ht-2 {
+  color: var(--tile);
+  font-style: italic;
+}
+
+.ht-3 {
+  font-size: 0.52em;
+  line-height: 1.2;
+  margin-top: 0.9rem;
+  color: var(--zinc);
+}
+
+.ht-4 {
+  font-size: 0.52em;
+  line-height: 1.2;
+  color: var(--paper);
+}
+
+.hero-sub {
+  margin-top: 1.5rem;
+  max-width: 34rem;
+  color: #c6ccd6;
+  font-size: 1.05rem;
+}
+
+.hero-actions {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.btn-main {
+  display: inline-block;
+  background: var(--tile);
+  color: var(--paper);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  padding: 0.95rem 1.6rem;
+  border-radius: 0 0 1.4rem 1.4rem; /* bobrovka */
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.btn-main:hover {
+  background: var(--tile-deep);
+  transform: translateY(2px);
+}
+
+.hero-note {
+  font-size: 0.85rem;
+  color: var(--zinc);
+  text-transform: uppercase;
+}
+
+/* — šikmá střecha s rastrem bobrovek — */
+.roofline {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: min(42vh, 380px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.roof-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* — lano s kotvením, spuštěné shora na střechu — */
+.rope {
+  position: absolute;
+  right: clamp(2rem, 14vw, 12rem);
+  top: -100svh;
+  bottom: 34%;
+  width: 3px;
+  z-index: 2;
+}
+
+.rope-line {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--rope) 0 10px,
+    #c4922b 10px 20px
+  );
+  transform-origin: top;
+  animation: rope-drop 900ms cubic-bezier(0.3, 1.2, 0.4, 1) both;
+  animation-delay: 300ms;
+}
+
+.rope-anchor {
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--rope);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  animation: anchor-in 300ms ease both;
+  animation-delay: 1100ms;
+}
+
+@keyframes rope-drop {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes anchor-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+/* orchestrace načtení hero textu */
+.hero-eyebrow,
+.ht-line,
+.hero-sub,
+.hero-actions {
+  animation: rise 600ms ease both;
+}
+
+.hero-eyebrow { animation-delay: 100ms; }
+.ht-1 { animation-delay: 200ms; }
+.ht-2 { animation-delay: 300ms; }
+.ht-3 { animation-delay: 400ms; }
+.ht-4 { animation-delay: 480ms; }
+.hero-sub { animation-delay: 600ms; }
+.hero-actions { animation-delay: 700ms; }
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============ SLUŽBY ============ */
+.sluzby {
+  padding: 4.5rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.sec-head {
+  max-width: 38rem;
+  margin-bottom: 2.8rem;
+}
+
+.sec-head h2,
+.duvera h2 {
+  font-weight: 400;
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.9rem;
+}
+
+.sec-head p {
+  color: #4a5261;
+}
+
+.sluzby-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+
+.sluzba {
+  background: #fff;
+  border-top: 4px solid var(--tile);
+  border-radius: 0 0 1.6rem 1.6rem; /* bobrovka jako karta */
+  padding: 1.4rem 1.5rem 1.7rem;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.sluzba:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(27, 31, 38, 0.12);
+}
+
+.sl-vyska {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--tile);
+  border: 1px solid var(--tile);
+  border-radius: 0 0 0.8rem 0.8rem;
+  padding: 0.15rem 0.6rem 0.25rem;
+  margin-bottom: 0.9rem;
+}
+
+.sluzba h3 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+}
+
+.sluzba p {
+  font-size: 0.98rem;
+  color: #4a5261;
+}
+
+/* ============ DŮVĚRA ============ */
+.duvera {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 4.5rem 1.25rem;
+}
+
+.duvera-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.fakta {
+  list-style: none;
+  margin-top: 1.8rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.fakta li {
+  padding-left: 1.2rem;
+  border-left: 3px solid var(--tile);
+  color: #c6ccd6;
+}
+
+.fakta strong {
+  display: block;
+  color: var(--paper);
+  font-size: 1.08rem;
+  margin-bottom: 0.25rem;
+}
+
+.duvera-refs {
+  display: grid;
+  gap: 1.5rem;
+  align-content: start;
+}
+
+.ref {
+  background: #242a34;
+  border-radius: 0 0 1.6rem 1.6rem;
+  padding: 1.5rem 1.6rem 1.7rem;
+}
+
+.ref blockquote {
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: #e4e8ee;
+}
+
+.ref figcaption {
+  margin-top: 0.9rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--rope);
+}
+
+.kryjeme {
+  border: 1px dashed var(--zinc);
+  border-radius: 0 0 1.6rem 1.6rem;
+  padding: 1.3rem 1.6rem 1.5rem;
+}
+
+.kryjeme-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--rope);
+  margin-bottom: 0.4rem;
+}
+
+.kryjeme p {
+  color: #c6ccd6;
+  font-size: 0.98rem;
+}
+
+/* ============ RESPONSIVITA ============ */
+@media (min-width: 640px) {
+  .sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .hero {
+    padding: 2rem 4vw 0;
+  }
+
+  .hero-body {
+    padding-bottom: 20rem;
+  }
+
+  .sluzby {
+    padding: 6rem 4vw;
+  }
+
+  .sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .duvera {
+    padding: 6rem 4vw;
+  }
+
+  .duvera-inner {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-eyebrow,
+  .ht-line,
+  .hero-sub,
+  .hero-actions,
+  .rope-line,
+  .rope-anchor {
+    animation: none;
+  }
+
+  .sluzba,
+  .btn-main {
+    transition: none;
+  }
+}
