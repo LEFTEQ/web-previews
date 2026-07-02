@@ -1,0 +1,636 @@
+/* ==========================================================
+   KLIMASERVIS OSTRAVA v.o.s. — návrh nového webu
+   Paleta: ocel + chlad. Ostravský industriál potkává chladivo.
+   --uhel   #131A21  (téměř černá ocel — Nová huť)
+   --ocel   #2A3947  (šedomodrý plech strojovny)
+   --led    #E9F1F4  (chladný vzduch, světlé pozadí)
+   --freon  #1FB6CE  (chladivo — akcent)
+   --med    #C4CFD6  (tlumená kovová šeď)
+   Typo: Archivo (grotesk s technickým, hranatým duchem) —
+   display v Black Expanded, body v regularu.
+   Signature: mřížka vzduchotechnické vyústky (lamely),
+   ze které při načtení „vyfoukne" nadpis.
+   ========================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Archivo+Mono&display=swap");
+
+:root {
+  --uhel: #131a21;
+  --ocel: #2a3947;
+  --led: #e9f1f4;
+  --freon: #1fb6ce;
+  --freon-tmavy: #0e8296;
+  --med: #c4cfd6;
+  --pismo: "Archivo", system-ui, sans-serif;
+  --mono: "Archivo Mono", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--pismo);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--uhel);
+  background: var(--led);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ks img {
+  max-width: 100%;
+}
+
+.ks a:focus-visible,
+.ks .btn:focus-visible {
+  outline: 3px solid var(--freon);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- tlačítka ---------- */
+
+.btn {
+  display: inline-block;
+  font-family: var(--pismo);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--freon);
+  color: var(--uhel);
+}
+
+.btn-primary:hover {
+  background: var(--freon-tmavy);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--led);
+  border: 2px solid var(--med);
+}
+
+.btn-ghost:hover {
+  border-color: var(--freon);
+  color: var(--freon);
+}
+
+/* ==========================================================
+   HERO — ocelová plocha, typografický statement, lamely
+   ========================================================== */
+
+.hero {
+  background: linear-gradient(160deg, var(--uhel) 0%, var(--ocel) 100%);
+  color: var(--led);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-bottom: 2.5rem;
+}
+
+/* --- wordmark: KLIMA plné / SERVIS obrysové = teplo→chlad --- */
+
+.wordmark {
+  font-weight: 900;
+  font-stretch: 110%;
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.wordmark-klima {
+  color: var(--led);
+}
+
+.wordmark-servis {
+  color: var(--freon);
+}
+
+.wordmark-mesto {
+  display: block;
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  color: var(--med);
+  margin-top: 0.35rem;
+  text-transform: uppercase;
+}
+
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--med);
+  margin: 0;
+}
+
+.hero-body {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1rem 0 3rem;
+}
+
+.hero-title {
+  margin: 0 0 2rem;
+  font-weight: 900;
+  font-stretch: 115%;
+  text-transform: uppercase;
+  font-size: clamp(2.4rem, 8.5vw, 6.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+}
+
+.hero-title .line {
+  display: block;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--freon);
+}
+
+.line-3,
+.line-4 {
+  font-weight: 300;
+  font-stretch: 90%;
+  font-size: 0.55em;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  color: var(--med);
+}
+
+.line-3 {
+  margin-top: 0.5em;
+}
+
+/* --- signature: lamely vyústky --- */
+
+.grille {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  max-width: 34rem;
+  margin: 0 0 2rem;
+}
+
+.lamela {
+  height: 5px;
+  border-radius: 3px;
+  background: var(--freon);
+  transform-origin: left center;
+}
+
+.lamela.l1 { width: 100%; opacity: 1; }
+.lamela.l2 { width: 86%; opacity: 0.85; }
+.lamela.l3 { width: 72%; opacity: 0.7; }
+.lamela.l4 { width: 58%; opacity: 0.55; }
+.lamela.l5 { width: 44%; opacity: 0.4; }
+.lamela.l6 { width: 30%; opacity: 0.27; }
+.lamela.l7 { width: 16%; opacity: 0.15; }
+
+.hero-lead {
+  max-width: 38rem;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--med);
+  margin: 0 0 2rem;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* --- fakta v pásu — struktura, ne dekorace --- */
+
+.hero-strip {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid rgba(196, 207, 214, 0.25);
+}
+
+.strip-item {
+  padding: 1.4rem 0;
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.strip-item + .strip-item {
+  border-top: 1px solid rgba(196, 207, 214, 0.15);
+}
+
+.strip-num {
+  font-family: var(--mono);
+  font-size: 1.6rem;
+  color: var(--freon);
+  min-width: 4.5rem;
+}
+
+.strip-label {
+  font-size: 0.92rem;
+  color: var(--med);
+}
+
+/* ==========================================================
+   SEKCE — společné
+   ========================================================== */
+
+.sekce {
+  padding: 4rem 1.25rem;
+}
+
+.sekce-hlava,
+.servis-mrizka,
+.pohotovost,
+.kroky,
+.znacky,
+.kredo {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--freon-tmavy);
+  margin: 0 0 1rem;
+}
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 2.2rem;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--freon);
+  margin-right: 0.7rem;
+  vertical-align: middle;
+}
+
+.sekce h2 {
+  font-weight: 800;
+  font-stretch: 105%;
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  line-height: 1.15;
+  max-width: 40rem;
+  margin: 0 0 1rem;
+}
+
+.sekce-perex {
+  max-width: 40rem;
+  font-size: 1.05rem;
+  margin: 0 0 2.5rem;
+}
+
+/* ---------- SERVIS ---------- */
+
+.sekce-servis {
+  background: var(--led);
+}
+
+.servis-mrizka {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.servis-karta {
+  background: #fff;
+  border: 1px solid #d5dee3;
+  border-radius: 6px;
+  padding: 1.5rem;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.servis-karta:hover {
+  transform: translateY(-3px);
+  border-color: var(--freon);
+}
+
+.karta-lamela {
+  display: block;
+  width: 2.2rem;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--freon);
+  margin-bottom: 1rem;
+  transition: width 0.25s ease;
+}
+
+.servis-karta:hover .karta-lamela {
+  width: 3.6rem;
+}
+
+.servis-karta h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  font-stretch: 105%;
+}
+
+.servis-karta p {
+  margin: 0;
+  font-size: 0.96rem;
+  color: #45535e;
+}
+
+.pohotovost {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: flex-start;
+  background: var(--uhel);
+  color: var(--led);
+  border-radius: 6px;
+  padding: 1.8rem;
+}
+
+.pohotovost-text {
+  margin: 0;
+  font-size: 1.05rem;
+  max-width: 34rem;
+}
+
+.pohotovost-text strong {
+  color: var(--freon);
+}
+
+/* ---------- DODÁVKY ---------- */
+
+.sekce-dodavky {
+  background: var(--ocel);
+  color: var(--led);
+}
+
+.sekce-dodavky .sekce-perex {
+  color: var(--med);
+}
+
+.eyebrow-svetla {
+  color: var(--freon);
+}
+
+.kroky {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 3rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  counter-reset: krok;
+}
+
+.krok {
+  display: flex;
+  gap: 1.2rem;
+  padding: 1.4rem 0;
+  border-top: 1px solid rgba(196, 207, 214, 0.25);
+}
+
+.krok:last-child {
+  border-bottom: 1px solid rgba(196, 207, 214, 0.25);
+}
+
+.krok-cislo {
+  font-family: var(--mono);
+  font-size: 1.3rem;
+  color: var(--freon);
+  line-height: 1.3;
+}
+
+.krok h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  font-stretch: 105%;
+}
+
+.krok p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--med);
+}
+
+.znacky {
+  margin-bottom: 3rem;
+}
+
+.znacky-titulek {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--med);
+  margin: 0 0 1rem;
+}
+
+.znacky-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.znacky-list li {
+  font-weight: 700;
+  font-stretch: 108%;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(196, 207, 214, 0.4);
+  border-radius: 4px;
+}
+
+.kredo {
+  margin: 0 auto;
+  padding: 0;
+  border-left: 5px solid var(--freon);
+  padding-left: 1.5rem;
+}
+
+.kredo p {
+  margin: 0 0 0.8rem;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  font-weight: 300;
+  max-width: 40rem;
+}
+
+.kredo cite {
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--med);
+}
+
+/* ==========================================================
+   Animace při načtení — nadpis „vyfoukne" z mřížky lamel
+   ========================================================== */
+
+@keyframes vyfouknuti {
+  from {
+    opacity: 0;
+    transform: translateX(-1.2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes lamelaRust {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.hero-title .line {
+  animation: vyfouknuti 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.line-1 { animation-delay: 0.05s; }
+.line-2 { animation-delay: 0.15s; }
+.line-3 { animation-delay: 0.3s; }
+.line-4 { animation-delay: 0.38s; }
+
+.lamela {
+  animation: lamelaRust 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.lamela.l1 { animation-delay: 0.45s; }
+.lamela.l2 { animation-delay: 0.5s; }
+.lamela.l3 { animation-delay: 0.55s; }
+.lamela.l4 { animation-delay: 0.6s; }
+.lamela.l5 { animation-delay: 0.65s; }
+.lamela.l6 { animation-delay: 0.7s; }
+.lamela.l7 { animation-delay: 0.75s; }
+
+.hero-lead,
+.hero-cta {
+  animation: vyfouknuti 0.7s ease 0.55s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-title .line,
+  .lamela,
+  .hero-lead,
+  .hero-cta {
+    animation: none;
+  }
+  .btn,
+  .servis-karta,
+  .karta-lamela {
+    transition: none;
+  }
+}
+
+/* ==========================================================
+   Responzivita — od 700 px nahoru
+   ========================================================== */
+
+@media (min-width: 700px) {
+  .hero {
+    padding: 2.5rem 3rem 0;
+  }
+
+  .sekce {
+    padding: 5.5rem 3rem;
+  }
+
+  .hero-strip {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .strip-item {
+    display: block;
+    padding: 2rem 0;
+  }
+
+  .strip-item + .strip-item {
+    border-top: none;
+  }
+
+  .strip-num {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .servis-mrizka {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .pohotovost {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 2.5rem;
+  }
+
+  .kroky {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3rem;
+  }
+
+  .krok:nth-child(2) {
+    border-top: 1px solid rgba(196, 207, 214, 0.25);
+  }
+
+  .krok:nth-last-child(2) {
+    border-bottom: 1px solid rgba(196, 207, 214, 0.25);
+  }
+}
+
+@media (min-width: 1024px) {
+  .servis-mrizka {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
