@@ -1,0 +1,470 @@
+/* ============================================================
+   TONERMAX — tonery a servis tiskáren, Hradec Králové
+   Koncept: svět tiskového archu. Papírově bílá plocha,
+   toner-černá typografie, CMYK jen jako kontrolní pruh —
+   přesně jak ho zná každý, kdo kdy viděl okraj tiskového archu.
+   Signature: kalibrační CMYK pruh + tečky za řádky titulku
+   (tečka = kapka toneru / bod rastru).
+   ============================================================ */
+
+:root {
+  --tm-paper: #fdfdfb;      /* papír z balíku, ne krémová */
+  --tm-ink: #16161a;        /* toner-černá, mírně studená */
+  --tm-grey: #55555e;
+  --tm-line: #e4e4e0;
+  --tm-cyan: #00a3d9;
+  --tm-magenta: #e5007d;
+  --tm-yellow: #ffd400;
+  --tm-dark: #1b1b20;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--tm-paper);
+  color: var(--tm-ink);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, ui-sans-serif, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tm a {
+  color: inherit;
+}
+
+.tm :focus-visible {
+  outline: 3px solid var(--tm-magenta);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- HERO ---------- */
+
+.tm-hero {
+  position: relative;
+  padding: 2rem 1.25rem 0;
+  /* jemný tiskový rastr — bodová mřížka jako polotónový tisk */
+  background-image: radial-gradient(circle, rgba(22, 22, 26, 0.07) 1px, transparent 1.4px);
+  background-size: 22px 22px;
+  overflow: hidden;
+}
+
+.tm-hero-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+}
+
+.tm-brandline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 1.25rem;
+  margin-bottom: 3.5rem;
+}
+
+.tm-wordmark {
+  font-weight: 900;
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
+  font-stretch: condensed;
+}
+
+.tm-wordmark em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--tm-ink);
+}
+
+.tm-brand-note {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--tm-grey);
+}
+
+.tm-h1 {
+  margin: 0 0 1.5rem;
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  line-height: 0.98;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.tm-h1-row {
+  display: block;
+}
+
+.tm-h1-accent {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--tm-ink);
+}
+
+/* tečka za řádkem = kapka toneru / rastrový bod */
+.tm-h1-dot {
+  display: inline-block;
+  width: 0.18em;
+  height: 0.18em;
+  border-radius: 50%;
+  margin-left: 0.12em;
+  vertical-align: baseline;
+}
+
+.tm-dot-c { background: var(--tm-cyan); }
+.tm-dot-m { background: var(--tm-magenta); }
+.tm-dot-y { background: var(--tm-yellow); }
+
+.tm-lede {
+  max-width: 34rem;
+  font-size: 1.15rem;
+  color: var(--tm-grey);
+  margin: 0 0 2.25rem;
+}
+
+.tm-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.tm-btn {
+  display: inline-block;
+  padding: 0.9rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 3px;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.tm-btn-primary {
+  background: var(--tm-ink);
+  color: var(--tm-paper);
+  box-shadow: 4px 4px 0 var(--tm-yellow);
+}
+
+.tm-btn-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--tm-yellow);
+}
+
+.tm-btn-ghost {
+  border: 2px solid var(--tm-ink);
+  color: var(--tm-ink);
+  background: transparent;
+}
+
+.tm-btn-ghost:hover {
+  background: var(--tm-ink);
+  color: var(--tm-paper);
+}
+
+/* Kalibrační CMYK pruh — signature prvek stránky */
+.tm-calibration {
+  display: flex;
+  height: 3.25rem;
+}
+
+.tm-cal {
+  flex: 1;
+}
+
+.tm-cal-c { background: var(--tm-cyan); }
+.tm-cal-m { background: var(--tm-magenta); }
+.tm-cal-y { background: var(--tm-yellow); }
+.tm-cal-k { background: var(--tm-ink); }
+
+.tm-regmarks {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.5rem 1.25rem;
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--tm-grey);
+  border-bottom: 1px solid var(--tm-line);
+  background: var(--tm-paper);
+}
+
+.tm-regmark-loc {
+  margin-left: auto;
+}
+
+/* ---------- SEKCE obecně ---------- */
+
+.tm-section {
+  padding: 4.5rem 1.25rem;
+}
+
+.tm-section-head {
+  max-width: 68rem;
+  margin: 0 auto 2.75rem;
+}
+
+.tm-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--tm-grey);
+}
+
+.tm-eyebrow-chip {
+  width: 1.4rem;
+  height: 0.65rem;
+  display: inline-block;
+}
+
+.tm-chip-k { background: var(--tm-ink); }
+.tm-chip-y { background: var(--tm-yellow); }
+
+.tm-h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  line-height: 1.15;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  max-width: 42rem;
+}
+
+.tm-h2-quiet {
+  font-weight: 400;
+  color: var(--tm-grey);
+}
+
+/* ---------- KARTY SLUŽEB ---------- */
+
+.tm-cards {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.tm-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--tm-line);
+  border-radius: 4px;
+  padding: 1.75rem 1.5rem 1.5rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.tm-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(22, 22, 26, 0.09);
+}
+
+/* barevný jazýček nahoře karty — jako štítek na krabici s tonerem */
+.tm-card-tab {
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  width: 3rem;
+  height: 0.5rem;
+}
+
+.tm-c { background: var(--tm-cyan); }
+.tm-m { background: var(--tm-magenta); }
+.tm-y { background: var(--tm-yellow); }
+
+.tm-card-title {
+  margin: 0 0 0.6rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.tm-card-text {
+  margin: 0 0 1rem;
+  color: var(--tm-grey);
+  font-size: 0.98rem;
+}
+
+.tm-card-detail {
+  margin: 0;
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--tm-ink);
+  border-top: 1px dashed var(--tm-line);
+  padding-top: 0.75rem;
+}
+
+/* ---------- TMAVÁ SEKCE (důvěra) ---------- */
+
+.tm-section-dark {
+  background: var(--tm-dark);
+  color: var(--tm-paper);
+}
+
+.tm-eyebrow-light {
+  color: #a8a8b3;
+}
+
+.tm-h2-light {
+  color: var(--tm-paper);
+}
+
+.tm-dark-lede {
+  max-width: 38rem;
+  color: #b9b9c2;
+  margin: 1.25rem 0 0;
+}
+
+.tm-facts {
+  max-width: 68rem;
+  margin: 0 auto 3rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem 2.5rem;
+}
+
+.tm-fact {
+  border-left: 4px solid var(--tm-yellow);
+  padding-left: 1.1rem;
+}
+
+.tm-fact:nth-child(2) { border-color: var(--tm-cyan); }
+.tm-fact:nth-child(3) { border-color: var(--tm-magenta); }
+.tm-fact:nth-child(4) { border-color: var(--tm-yellow); }
+
+.tm-fact-num {
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.02em;
+}
+
+.tm-fact-text {
+  margin: 0;
+  color: #b9b9c2;
+  font-size: 0.95rem;
+}
+
+.tm-quote {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 1.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+
+.tm-quote blockquote {
+  margin: 0 0 1rem;
+}
+
+.tm-quote blockquote p {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+
+.tm-quote figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.85rem;
+}
+
+.tm-quote figcaption strong {
+  color: var(--tm-paper);
+}
+
+.tm-quote figcaption span {
+  color: #8f8f9a;
+}
+
+/* ---------- ANIMACE při načtení ---------- */
+
+@keyframes tm-print-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0 0 -10% 0);
+  }
+}
+
+.tm-anim-1,
+.tm-anim-2,
+.tm-anim-3,
+.tm-anim-4,
+.tm-anim-5 {
+  animation: tm-print-in 0.55s cubic-bezier(0.25, 0.7, 0.3, 1) both;
+}
+
+.tm-anim-2 { animation-delay: 0.12s; }
+.tm-anim-3 { animation-delay: 0.24s; }
+.tm-anim-4 { animation-delay: 0.4s; }
+.tm-anim-5 { animation-delay: 0.52s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .tm-anim-1,
+  .tm-anim-2,
+  .tm-anim-3,
+  .tm-anim-4,
+  .tm-anim-5 {
+    animation: none;
+  }
+  .tm-btn,
+  .tm-card {
+    transition: none;
+  }
+}
+
+/* ---------- RESPONZIVITA ---------- */
+
+@media (min-width: 640px) {
+  .tm-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+  .tm-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 960px) {
+  .tm-hero {
+    padding-top: 3rem;
+  }
+  .tm-hero-inner {
+    padding-bottom: 6rem;
+  }
+  .tm-facts {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .tm-section {
+    padding: 6rem 2rem;
+  }
+  .tm-quote {
+    padding: 2.25rem 2.5rem;
+  }
+  .tm-quote blockquote p {
+    font-size: 1.25rem;
+  }
+}
