@@ -1,0 +1,569 @@
+/* =====================================================
+   V-PODLAHY, s.r.o. — podlahářství Pardubice
+   Koncept: podlaha jako materiál. Nadpis v hero se skládá
+   z „lamel“ na vazbu (posunuté spoje), sekce jsou vrstvy
+   skladby podlahy — od nášlapné vrstvy po podklad.
+   Paleta: dubová hnědá, přírodní papír, betonová šedá,
+   lněná okrová jako akcent.
+   ===================================================== */
+
+:root {
+  --dub: #5c4330;          /* tmavý dub — hlavní tmavá */
+  --dub-hloubka: #3e2d1f;  /* jádro dřeva — nejtmavší */
+  --papir: #f7f3ec;        /* světlý podklad, teplý ale ne krémově-šablonový */
+  --pisek: #e9dfd0;        /* světlá lamela */
+  --len: #c8912f;          /* lněný okr — akcent (ne terakota) */
+  --beton: #8b8478;        /* betonová stěrka — sekundární text */
+  --inkoust: #2a221b;      /* text */
+
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Impact, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-util: "Courier New", Courier, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--papir);
+  color: var(--inkoust);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* viditelný focus všude */
+:focus-visible {
+  outline: 3px solid var(--len);
+  outline-offset: 3px;
+}
+
+.vp {
+  display: block;
+}
+
+/* =========================================
+   HERO — typografické lamely na vazbu
+   ========================================= */
+
+.vp-hero {
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    linear-gradient(180deg, var(--papir) 0%, var(--pisek) 100%);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.vp-hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--dub);
+}
+
+.vp-wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dub-hloubka);
+}
+
+.vp-wordmark-v {
+  color: var(--len);
+}
+
+.vp-hero-loc {
+  font-family: var(--font-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--beton);
+  text-transform: uppercase;
+}
+
+.vp-hero-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 3rem 0 2.5rem;
+}
+
+/* Nadpis = tři „lamely“ podlahy, každá posunutá jako spoj na vazbu */
+.vp-hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.98;
+  font-size: clamp(2.9rem, 11vw, 8.5rem);
+  letter-spacing: 0.01em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.vp-plank {
+  display: block;
+  background: var(--dub);
+  color: var(--papir);
+  padding: 0.08em 0.25em 0.14em;
+  width: max-content;
+  max-width: 100%;
+  position: relative;
+  animation: vp-lay 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+/* spára lamely — světlá rýha na konci prkna */
+.vp-plank::after {
+  content: "";
+  position: absolute;
+  top: 0.12em;
+  bottom: 0.12em;
+  right: 0.09em;
+  width: 3px;
+  background: var(--pisek);
+  opacity: 0.55;
+}
+
+.vp-plank-1 {
+  animation-delay: 0.1s;
+}
+
+.vp-plank-2 {
+  margin-left: clamp(1.2rem, 7vw, 5.5rem); /* posunutý spoj — vazba 1/3 */
+  background: var(--dub-hloubka);
+  animation-delay: 0.28s;
+}
+
+.vp-plank-3 {
+  margin-left: clamp(0.4rem, 3vw, 2.2rem);
+  background: var(--len);
+  animation-delay: 0.46s;
+}
+
+.vp-plank-accent {
+  color: var(--dub-hloubka);
+}
+
+@keyframes vp-lay {
+  from {
+    opacity: 0;
+    transform: translateX(-2.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.vp-hero-side {
+  max-width: 34rem;
+  animation: vp-fade 0.8s ease 0.7s both;
+}
+
+@keyframes vp-fade {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vp-hero-lead {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--inkoust);
+}
+
+.vp-hero-facts {
+  list-style: none;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.vp-hero-facts li {
+  font-family: var(--font-util);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--dub);
+  padding-left: 1.4rem;
+  position: relative;
+}
+
+/* odrážka = průřez lamelou */
+.vp-hero-facts li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.42em;
+  width: 0.85rem;
+  height: 0.35rem;
+  background: var(--len);
+}
+
+/* pás dekorů dole v hero — jako vzorník lamel */
+.vp-hero-strip {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin: 0 -1.25rem;
+}
+
+.vp-strip-cell {
+  font-family: var(--font-util);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  text-align: center;
+  padding: 0.7rem 0.25rem;
+  color: var(--papir);
+}
+
+.vp-strip-cell:nth-child(1) { background: #6b4f37; }
+.vp-strip-cell:nth-child(2) { background: #7d5c40; }
+.vp-strip-cell:nth-child(3) { background: #5c4330; }
+.vp-strip-cell:nth-child(4) { background: #8a6a4b; }
+.vp-strip-cell:nth-child(5) { background: #4a3626; }
+.vp-strip-cell:nth-child(6) { background: #3e2d1f; }
+
+/* =========================================
+   SEKCE — společné
+   ========================================= */
+
+.vp-section {
+  padding: 4.5rem 1.25rem;
+}
+
+.vp-section-head {
+  max-width: 46rem;
+  margin-bottom: 3rem;
+}
+
+.vp-eyebrow {
+  font-family: var(--font-util);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--len);
+  margin-bottom: 0.9rem;
+}
+
+.vp-h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.9rem, 5.5vw, 3.4rem);
+  line-height: 1.05;
+  color: var(--dub-hloubka);
+}
+
+.vp-section-lead {
+  margin-top: 1.25rem;
+  font-size: 1.1rem;
+  color: var(--inkoust);
+  max-width: 38rem;
+}
+
+/* =========================================
+   SKLADBA PODLAHY — vrstvy 04 → 01
+   ========================================= */
+
+.vp-skladba {
+  background: var(--papir);
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.vp-vrstvy {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid var(--dub);
+}
+
+.vp-vrstva {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 1.25rem;
+  padding: 1.6rem 0;
+  border-bottom: 2px solid var(--dub);
+  align-items: start;
+}
+
+/* každá nižší vrstva je vizuálně „hlouběji“ — tmavší číslo */
+.vp-vrstva:nth-child(1) .vp-vrstva-num { color: var(--len); }
+.vp-vrstva:nth-child(2) .vp-vrstva-num { color: #a07a45; }
+.vp-vrstva:nth-child(3) .vp-vrstva-num { color: var(--beton); }
+.vp-vrstva:nth-child(4) .vp-vrstva-num { color: var(--dub-hloubka); }
+
+.vp-vrstva-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.vp-vrstva-nazev {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 1.25rem;
+  color: var(--dub-hloubka);
+  margin-bottom: 0.35rem;
+}
+
+.vp-vrstva-text p {
+  color: var(--inkoust);
+  max-width: 40rem;
+}
+
+/* nabídka — vzorník */
+
+.vp-nabidka {
+  margin-top: 4rem;
+}
+
+.vp-nabidka-title {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1.1rem;
+  color: var(--beton);
+  margin-bottom: 1.5rem;
+}
+
+.vp-nabidka-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.vp-karta {
+  background: var(--pisek);
+  padding: 1.5rem 1.4rem 1.6rem;
+  border-left: 5px solid var(--dub);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.vp-karta:hover {
+  border-left-color: var(--len);
+  transform: translateX(4px);
+}
+
+.vp-karta-tag {
+  font-family: var(--font-util);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--len);
+  margin-bottom: 0.5rem;
+}
+
+.vp-karta-nazev {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  letter-spacing: 0.03em;
+  color: var(--dub-hloubka);
+  margin-bottom: 0.5rem;
+}
+
+.vp-karta-popis {
+  font-size: 0.98rem;
+  color: var(--inkoust);
+}
+
+/* =========================================
+   DŮVĚRA — tmavá „spodní vrstva“ stránky
+   ========================================= */
+
+.vp-duvera {
+  background: var(--dub-hloubka);
+  color: var(--papir);
+}
+
+.vp-duvera > * {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vp-eyebrow-light {
+  color: var(--len);
+}
+
+.vp-h2-light {
+  color: var(--papir);
+}
+
+.vp-duvera .vp-section-head {
+  margin-bottom: 3rem;
+}
+
+.vp-cisla {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  border-top: 2px solid var(--len);
+  padding-top: 2rem;
+  margin-bottom: 3.5rem;
+}
+
+.vp-cislo-hodnota {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
+  line-height: 1;
+  color: var(--len);
+}
+
+.vp-cislo-text {
+  margin-top: 0.5rem;
+  color: var(--pisek);
+  max-width: 24rem;
+}
+
+.vp-reference {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.vp-ref {
+  background: rgba(247, 243, 236, 0.06);
+  border-top: 4px solid var(--len);
+  padding: 1.6rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.vp-ref-citace {
+  font-style: italic;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--papir);
+}
+
+.vp-ref-autor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.vp-ref-autor strong {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.95rem;
+  color: var(--len);
+}
+
+.vp-ref-autor span {
+  font-family: var(--font-util);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  color: var(--beton);
+}
+
+/* =========================================
+   RESPONZIVITA
+   ========================================= */
+
+@media (min-width: 640px) {
+  .vp-nabidka-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vp-cisla {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .vp-hero {
+    padding: 2rem 3.5rem 0;
+  }
+
+  .vp-hero-strip {
+    margin: 0 -3.5rem;
+  }
+
+  .vp-hero-body {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+
+  .vp-hero-side {
+    padding-bottom: 0.5rem;
+  }
+
+  .vp-section {
+    padding: 6rem 3.5rem;
+  }
+
+  .vp-nabidka-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .vp-reference {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .vp-vrstva {
+    grid-template-columns: 7rem 16rem 1fr;
+  }
+
+  .vp-vrstva-nazev {
+    grid-column: 2;
+  }
+
+  .vp-vrstva-text {
+    display: contents;
+  }
+
+  .vp-vrstva-text p {
+    grid-column: 3;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .vp-plank,
+  .vp-hero-side {
+    animation: none;
+  }
+
+  .vp-karta,
+  .vp-karta:hover {
+    transition: none;
+    transform: none;
+  }
+}
