@@ -1,0 +1,609 @@
+/* =====================================================================
+   ALCOM elektroservis — Karlovy Vary
+   Vizuální svět: rozvaděč, schémata obvodů, měděný vodič, izolace.
+   Paleta:
+     --al-izolace   #14202B  (tmavě modrá izolace kabelu / pozadí rozvaděče)
+     --al-panel     #EDF0EE  (šedobílý plast jističe)
+     --al-med       #C97B2E  (měděný vodič — akcent)
+     --al-faze      #F2B33D  (fázový vodič — žlutá, jen drobně)
+     --al-inkoust   #1B2833  (text)
+   Typografie: Archivo (široký groteskní displej — štítky v rozvaděči)
+               + system-ui pro tělo, mono pro technické popisky.
+   Signature: animované schéma obvodu jistič → pojistka → žárovka v heru.
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+:root {
+  --al-izolace: #14202b;
+  --al-izolace-2: #0e1username18;
+  --al-panel: #edf0ee;
+  --al-panel-2: #e2e7e3;
+  --al-med: #c97b2e;
+  --al-med-tmava: #a8621f;
+  --al-faze: #f2b33d;
+  --al-inkoust: #1b2833;
+  --al-seda: #5a6a76;
+
+  --al-font-display: "Archivo", "Arial Black", sans-serif;
+  --al-font-body: "Archivo", system-ui, sans-serif;
+  --al-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--al-font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--al-inkoust);
+  background: var(--al-panel);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Viditelný focus všude */
+.al-page a:focus-visible,
+.al-page button:focus-visible {
+  outline: 3px solid var(--al-faze);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============================ HERO ============================ */
+
+.al-hero {
+  position: relative;
+  background:
+    linear-gradient(180deg, #16232f 0%, var(--al-izolace) 60%, #101a23 100%);
+  color: var(--al-panel);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+/* jemná mřížka jako perforace montážní lišty */
+.al-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(237, 240, 238, 0.07) 1px,
+    transparent 0
+  );
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.al-hero-top {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.al-wordmark-name {
+  display: block;
+  font-family: var(--al-font-display);
+  font-weight: 900;
+  font-stretch: 115%;
+  font-size: 1.7rem;
+  letter-spacing: 0.04em;
+  color: var(--al-panel);
+}
+
+.al-wordmark-spark {
+  color: var(--al-faze);
+  margin: 0 0.05em;
+}
+
+.al-wordmark-sub {
+  display: block;
+  font-family: var(--al-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--al-med);
+  margin-top: 0.1rem;
+}
+
+.al-hero-tel {
+  text-decoration: none;
+  text-align: right;
+  color: var(--al-panel);
+  border: 1px solid rgba(237, 240, 238, 0.25);
+  border-radius: 8px;
+  padding: 0.5rem 0.9rem;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.al-hero-tel:hover {
+  border-color: var(--al-faze);
+  background: rgba(242, 179, 61, 0.08);
+}
+
+.al-hero-tel-label {
+  display: block;
+  font-family: var(--al-font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--al-med);
+}
+
+.al-hero-tel-num {
+  display: block;
+  font-family: var(--al-font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
+}
+
+.al-hero-main {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3.5rem 0 1rem;
+}
+
+.al-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--al-font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--al-med);
+  margin: 0 0 1.2rem;
+}
+
+.al-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--al-faze);
+  box-shadow: 0 0 12px var(--al-faze);
+  animation: al-blik 2.4s ease-in-out infinite;
+}
+
+@keyframes al-blik {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.al-hero-title {
+  margin: 0;
+  font-family: var(--al-font-display);
+  font-weight: 900;
+  font-stretch: 120%;
+  text-transform: uppercase;
+  font-size: clamp(2.4rem, 8.5vw, 5.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+}
+
+.al-hero-title .al-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: al-nabeh 640ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.al-hero-title .al-line-1 { animation-delay: 80ms; }
+.al-hero-title .al-line-2 { animation-delay: 220ms; }
+.al-hero-title .al-line-3 { animation-delay: 360ms; }
+
+.al-hero-title em {
+  font-style: normal;
+  color: var(--al-faze);
+  text-shadow: 0 0 32px rgba(242, 179, 61, 0.35);
+}
+
+@keyframes al-nabeh {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.al-hero-lead {
+  max-width: 34rem;
+  font-size: 1.06rem;
+  color: rgba(237, 240, 238, 0.82);
+  margin: 1.4rem 0 1.8rem;
+  opacity: 0;
+  animation: al-nabeh 640ms ease 520ms forwards;
+}
+
+.al-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  opacity: 0;
+  animation: al-nabeh 640ms ease 640ms forwards;
+}
+
+.al-btn {
+  display: inline-block;
+  font-family: var(--al-font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: 8px;
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+}
+
+.al-btn:hover {
+  transform: translateY(-2px);
+}
+
+.al-btn-primary {
+  background: var(--al-faze);
+  color: var(--al-izolace);
+}
+
+.al-btn-primary:hover {
+  background: #ffc44f;
+}
+
+.al-btn-ghost {
+  color: var(--al-panel);
+  border: 1px solid rgba(237, 240, 238, 0.35);
+}
+
+.al-btn-ghost:hover {
+  border-color: var(--al-med);
+  color: var(--al-faze);
+}
+
+/* ---- Signature: schéma obvodu ---- */
+
+.al-circuit {
+  position: relative;
+  max-width: 1120px;
+  margin: 2.5rem auto 0;
+  padding-bottom: 1rem;
+}
+
+.al-circuit-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.al-wire {
+  fill: none;
+  stroke: var(--al-med);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.al-sym circle,
+.al-sym rect,
+.al-sym line {
+  fill: none;
+  stroke: rgba(237, 240, 238, 0.75);
+  stroke-width: 3;
+}
+
+.al-sym circle[r="7"] {
+  fill: var(--al-med);
+  stroke: none;
+}
+
+.al-sym-label {
+  fill: rgba(237, 240, 238, 0.55);
+  font-family: var(--al-font-mono);
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+
+.al-pulse {
+  fill: var(--al-faze);
+  filter: drop-shadow(0 0 6px var(--al-faze));
+  animation: al-proud 4.5s linear infinite;
+}
+
+@keyframes al-proud {
+  0%   { transform: translateX(0); opacity: 0; }
+  4%   { opacity: 1; }
+  46%  { opacity: 1; }
+  50%  { transform: translateX(1200px); opacity: 0; }
+  100% { transform: translateX(1200px); opacity: 0; }
+}
+
+/* ============================ SEKCE OBECNĚ ============================ */
+
+.al-section-head {
+  max-width: 1120px;
+  margin: 0 auto 2.2rem;
+}
+
+.al-eyebrow {
+  font-family: var(--al-font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--al-med-tmava);
+  margin: 0 0 0.6rem;
+}
+
+.al-eyebrow-invert {
+  color: var(--al-med);
+}
+
+.al-h2 {
+  font-family: var(--al-font-display);
+  font-weight: 800;
+  font-stretch: 115%;
+  text-transform: uppercase;
+  font-size: clamp(1.7rem, 4.5vw, 2.7rem);
+  line-height: 1.06;
+  margin: 0;
+}
+
+.al-h2-invert {
+  color: var(--al-panel);
+}
+
+.al-section-lead {
+  max-width: 36rem;
+  color: var(--al-seda);
+  margin: 0.9rem 0 0;
+}
+
+/* ============================ SLUŽBY ============================ */
+
+.al-sluzby {
+  padding: 4rem 1.25rem 4.5rem;
+  background: var(--al-panel);
+}
+
+.al-sluzby-grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.1rem;
+}
+
+.al-karta {
+  background: #fff;
+  border: 1px solid #d5dcd6;
+  border-top: 4px solid var(--al-med);
+  border-radius: 10px;
+  padding: 1.4rem 1.3rem 1.5rem;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.al-karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(20, 32, 43, 0.12);
+}
+
+.al-karta:last-child {
+  border-top-color: var(--al-faze);
+}
+
+.al-karta-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+/* jistič — štítek jako v rozvaděči */
+.al-jistic {
+  display: inline-block;
+  font-family: var(--al-font-mono);
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: var(--al-panel);
+  background: var(--al-izolace);
+  padding: 0.25rem 0.6rem;
+  border-radius: 5px;
+  letter-spacing: 0.08em;
+}
+
+.al-jistic-n {
+  background: var(--al-med-tmava);
+}
+
+.al-karta-stitek {
+  font-family: var(--al-font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--al-seda);
+  text-align: right;
+}
+
+.al-karta-nazev {
+  font-family: var(--al-font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+}
+
+.al-karta-popis {
+  margin: 0;
+  color: var(--al-seda);
+  font-size: 0.96rem;
+}
+
+/* ============================ DŮVĚRA ============================ */
+
+.al-duvera {
+  background: var(--al-izolace);
+  color: var(--al-panel);
+  padding: 4rem 1.25rem 4.5rem;
+}
+
+.al-duvody {
+  max-width: 1120px;
+  margin: 0 auto 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0;
+  border-top: 1px solid rgba(237, 240, 238, 0.15);
+}
+
+.al-duvod {
+  padding: 1.6rem 1.4rem 1.6rem 0;
+  border-bottom: 1px solid rgba(237, 240, 238, 0.15);
+}
+
+.al-duvod-hodnota {
+  font-family: var(--al-font-display);
+  font-weight: 800;
+  font-stretch: 115%;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  color: var(--al-faze);
+  margin: 0 0 0.4rem;
+}
+
+.al-duvod-text {
+  margin: 0;
+  color: rgba(237, 240, 238, 0.78);
+  font-size: 0.96rem;
+}
+
+.al-reference {
+  max-width: 1120px;
+  margin: 0 auto 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.1rem;
+}
+
+.al-citace {
+  margin: 0;
+  background: rgba(237, 240, 238, 0.05);
+  border-left: 3px solid var(--al-med);
+  border-radius: 0 10px 10px 0;
+  padding: 1.3rem 1.4rem;
+}
+
+.al-citace blockquote {
+  margin: 0 0 0.8rem;
+}
+
+.al-citace blockquote p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: rgba(237, 240, 238, 0.9);
+}
+
+.al-citace figcaption {
+  font-family: var(--al-font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--al-med);
+}
+
+.al-adresa {
+  max-width: 1120px;
+  margin: 0 auto;
+  font-size: 1.02rem;
+  color: rgba(237, 240, 238, 0.82);
+}
+
+.al-adresa strong {
+  color: var(--al-panel);
+}
+
+.al-adresa a {
+  color: var(--al-faze);
+  text-decoration-color: rgba(242, 179, 61, 0.5);
+  text-underline-offset: 3px;
+}
+
+.al-adresa a:hover {
+  text-decoration-color: var(--al-faze);
+}
+
+/* ============================ MOBIL ============================ */
+
+@media (max-width: 640px) {
+  .al-hero-main {
+    padding-top: 2.5rem;
+  }
+
+  .al-hero-tel {
+    padding: 0.4rem 0.7rem;
+  }
+
+  .al-hero-tel-num {
+    font-size: 1rem;
+  }
+
+  .al-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .al-circuit {
+    margin-top: 1.8rem;
+  }
+
+  .al-sym-label {
+    font-size: 22px;
+  }
+
+  .al-duvod {
+    padding-right: 0;
+  }
+}
+
+/* ============================ REDUCED MOTION ============================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .al-hero-title .al-line,
+  .al-hero-lead,
+  .al-hero-actions {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .al-dot,
+  .al-pulse {
+    animation: none;
+  }
+
+  .al-pulse {
+    opacity: 0;
+  }
+
+  .al-karta,
+  .al-karta:hover,
+  .al-btn,
+  .al-btn:hover {
+    transition: none;
+    transform: none;
+  }
+}
