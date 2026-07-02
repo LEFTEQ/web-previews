@@ -1,0 +1,563 @@
+/* =====================================================
+   STĚHOVÁNÍ HANČ — Pardubice
+   Vizuální svět: přepravní deka (šedomodrá se šrafováním),
+   upínací popruh (oranžová), kartonová krabice, přepravní
+   štítky. Signature: šrafovaný "pás deky" s běžícím popruhem
+   v hero sekci.
+   ===================================================== */
+
+:root {
+  --deka: #2b3a4a;        /* šedomodrá přepravní deka */
+  --deka-tmava: #1e2a36;  /* stín pod nábytkem */
+  --popruh: #f08a1d;      /* oranžový upínací popruh */
+  --karton: #e8ddcb;      /* světlý karton */
+  --karton-tmavy: #c9b golden;
+  --papir: #f7f3ea;       /* balicí papír */
+  --inkoust: #22303d;
+}
+
+:root {
+  --deka: #2b3a4a;
+  --deka-tmava: #1e2a36;
+  --popruh: #f08a1d;
+  --karton: #e8ddcb;
+  --papir: #f7f3ea;
+  --inkoust: #22303d;
+  --font-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-stitek: "Courier New", Courier, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--inkoust);
+  background: var(--papir);
+}
+
+.hanc a:focus-visible,
+.hanc button:focus-visible {
+  outline: 3px solid var(--popruh);
+  outline-offset: 3px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  background: var(--deka);
+  color: var(--papir);
+  padding: 0 0 3.5rem;
+  overflow: hidden;
+}
+
+.hero-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid rgba(247, 243, 234, 0.18);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  color: var(--papir);
+}
+
+.wordmark b {
+  color: var(--popruh);
+  font-weight: 900;
+}
+
+.topbar-tel {
+  font-family: var(--font-stitek);
+  font-size: 0.85rem;
+  color: var(--papir);
+  text-decoration: none;
+  border: 1px solid rgba(247, 243, 234, 0.4);
+  padding: 0.45rem 0.8rem;
+  white-space: nowrap;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.topbar-tel:hover {
+  border-color: var(--popruh);
+  color: var(--popruh);
+}
+
+.hero-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 0;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-stitek);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--popruh);
+  margin-bottom: 1.25rem;
+  animation: vjezd 0.6s ease-out both;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  line-height: 1.02;
+  text-transform: none;
+}
+
+.hero-line {
+  display: block;
+  animation: vjezd 0.7s ease-out both;
+}
+
+.hero-line.l1 {
+  font-size: clamp(2.6rem, 10vw, 6.5rem);
+  letter-spacing: -0.02em;
+  color: var(--papir);
+  animation-delay: 0.05s;
+}
+
+.hero-line.l2,
+.hero-line.l3 {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.3rem, 4vw, 2.4rem);
+  color: rgba(247, 243, 234, 0.85);
+  line-height: 1.25;
+}
+
+.hero-line.l2 {
+  animation-delay: 0.18s;
+  margin-top: 0.6rem;
+}
+
+.hero-line.l3 {
+  animation-delay: 0.28s;
+}
+
+/* --- SIGNATURE: pás přepravní deky s popruhem --- */
+
+.deka-pas {
+  margin: 2.2rem -1.25rem;
+  animation: vjezd 0.8s ease-out 0.4s both;
+}
+
+.deka {
+  height: 46px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--deka-tmava) 0 14px,
+    #33475b 14px 28px
+  );
+  border-top: 2px solid rgba(247, 243, 234, 0.25);
+}
+
+.popruh {
+  background: var(--popruh);
+  color: var(--deka-tmava);
+  font-family: var(--font-stitek);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 0.55rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  gap: 4rem;
+}
+
+.popruh span {
+  flex-shrink: 0;
+  animation: popruh-jede 22s linear infinite;
+  padding-left: 4rem;
+}
+
+@keyframes popruh-jede {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes vjezd {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-sub {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: rgba(247, 243, 234, 0.85);
+  animation: vjezd 0.7s ease-out 0.5s both;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.8rem;
+  animation: vjezd 0.7s ease-out 0.6s both;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 0.95rem 1.6rem;
+  transition: transform 0.15s ease, background 0.2s, color 0.2s;
+}
+
+.btn-plna {
+  background: var(--popruh);
+  color: var(--deka-tmava);
+}
+
+.btn-plna:hover {
+  transform: translateY(-2px);
+  background: #ff9c33;
+}
+
+.btn-obrys {
+  border: 2px solid rgba(247, 243, 234, 0.5);
+  color: var(--papir);
+}
+
+.btn-obrys:hover {
+  border-color: var(--popruh);
+  color: var(--popruh);
+}
+
+.hero-fakta {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 2.6rem;
+  animation: vjezd 0.7s ease-out 0.7s both;
+}
+
+.hero-fakta li {
+  border-left: 3px solid var(--popruh);
+  padding-left: 0.9rem;
+}
+
+.hero-fakta strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+}
+
+.hero-fakta span {
+  font-size: 0.9rem;
+  color: rgba(247, 243, 234, 0.7);
+}
+
+/* ================= SLUŽBY ================= */
+
+.sluzby {
+  background: var(--karton);
+  padding: 4rem 1.25rem 4.5rem;
+}
+
+.sekce-hlava {
+  max-width: 68rem;
+  margin: 0 auto 2.5rem;
+}
+
+.sekce-eyebrow {
+  font-family: var(--font-stitek);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #a05c10;
+  margin-bottom: 0.7rem;
+}
+
+.sekce-hlava h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4.5vw, 2.4rem);
+  line-height: 1.15;
+  color: var(--inkoust);
+}
+
+.krabice-mrizka {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.krabice {
+  background: var(--papir);
+  border: 2px solid var(--inkoust);
+  padding: 1.4rem 1.4rem 1.6rem;
+  position: relative;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.krabice:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0 var(--popruh);
+}
+
+.krabice-stitek {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-stitek);
+  font-weight: 700;
+  border-bottom: 2px dashed var(--inkoust);
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.stitek-kod {
+  font-size: 1rem;
+  letter-spacing: 0.25em;
+  background: var(--inkoust);
+  color: var(--karton);
+  padding: 0.15rem 0.55rem;
+}
+
+.stitek-sipky {
+  color: var(--popruh);
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+}
+
+.krabice h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin-bottom: 0.6rem;
+}
+
+.krabice p {
+  font-size: 0.98rem;
+  color: #3d4a57;
+}
+
+.krabice-detail {
+  margin-top: 0.8rem;
+  font-family: var(--font-stitek);
+  font-size: 0.8rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #a05c10 !important;
+}
+
+/* --- Kroky --- */
+
+.kroky {
+  max-width: 68rem;
+  margin: 3.5rem auto 0;
+}
+
+.kroky-titul {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.kroky-seznam {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.kroky-seznam li {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.krok-cislo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  background: var(--popruh);
+  color: var(--deka-tmava);
+  width: 2.6rem;
+  height: 2.6rem;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.kroky-seznam strong {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.kroky-seznam p {
+  font-size: 0.95rem;
+  color: #3d4a57;
+}
+
+/* ================= DŮVĚRA ================= */
+
+.duvera {
+  background: var(--papir);
+  padding: 4rem 1.25rem 4.5rem;
+  border-top: 6px solid var(--deka);
+}
+
+.duvera-uvod {
+  max-width: 40rem;
+  margin-top: 1rem;
+  font-size: 1.05rem;
+  color: #3d4a57;
+}
+
+.reference-mrizka {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.reference {
+  background: var(--deka);
+  color: var(--papir);
+  padding: 1.6rem 1.5rem;
+  position: relative;
+}
+
+.reference::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  width: 3.5rem;
+  height: 6px;
+  background: var(--popruh);
+}
+
+.reference blockquote p {
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.reference figcaption {
+  margin-top: 1rem;
+  font-family: var(--font-stitek);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--popruh);
+}
+
+.duvera-cisla {
+  max-width: 68rem;
+  margin: 3rem auto 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.duvera-cisla div {
+  border-top: 2px solid var(--inkoust);
+  padding-top: 0.8rem;
+}
+
+.duvera-cisla dt {
+  font-family: var(--font-stitek);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #5a6875;
+}
+
+.duvera-cisla dd {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--deka);
+  margin-top: 0.2rem;
+}
+
+/* ================= RESPONZIVITA ================= */
+
+@media (min-width: 640px) {
+  .hero-fakta {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .krabice-mrizka {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .kroky-seznam {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .duvera-cisla {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .reference-mrizka {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .hero-inner {
+    padding-top: 4.5rem;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-eyebrow,
+  .hero-line,
+  .deka-pas,
+  .hero-sub,
+  .hero-cta,
+  .hero-fakta {
+    animation: none;
+  }
+  .popruh span {
+    animation: none;
+  }
+  .popruh {
+    justify-content: center;
+  }
+  .popruh span:nth-child(n + 2) {
+    display: none;
+  }
+  .krabice:hover,
+  .btn-plna:hover {
+    transform: none;
+  }
+}
