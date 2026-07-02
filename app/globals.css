@@ -1,0 +1,509 @@
+/* ============================================================
+   NORTH STAV a.s. — Ústí nad Labem
+   Koncept: průmyslová hala, trapézový plech, denní světlo.
+   Paleta odvozená z oboru + původní modré identity firmy:
+   ocelová tmavá modř, zinkově šedá, žluť bezpečnostní vesty,
+   světlíkově bílá. Signature: profil trapézového plechu.
+   ============================================================ */
+
+:root {
+  --ns-steel: #12263a;      /* ocelová noc — hlavní tmavá */
+  --ns-steel-2: #1b3a57;    /* modř konstrukce */
+  --ns-zinc: #e8ecef;       /* pozinkovaný plech — světlé pozadí */
+  --ns-white: #ffffff;
+  --ns-safety: #f5b301;     /* žluť výstražné vesty — akcent */
+  --ns-ink: #24303b;        /* text na světlé */
+  --ns-mist: #9db2c4;       /* tlumená na tmavé */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ns-ink);
+  background: var(--ns-zinc);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ns a:focus-visible,
+.ns :focus-visible {
+  outline: 3px solid var(--ns-safety);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   HERO — typografický statement na ocelové modré
+   ============================================================ */
+
+.ns-hero {
+  position: relative;
+  background: linear-gradient(168deg, var(--ns-steel) 0%, var(--ns-steel-2) 78%, #23507a 100%);
+  color: var(--ns-white);
+  padding: 1.5rem 1.25rem 7.5rem;
+  overflow: hidden;
+}
+
+.ns-hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+/* Wordmark — vlastní typografické logo: NORTH těžké, STAV obrysové */
+.ns-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-weight: 900;
+  font-size: 1.35rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.ns-wordmark-north {
+  color: var(--ns-white);
+}
+
+.ns-wordmark-stav {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ns-safety);
+}
+
+.ns-wordmark-as {
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--ns-mist);
+}
+
+.ns-hero-loc {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ns-mist);
+  white-space: nowrap;
+}
+
+.ns-hero-body {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-top: 4rem;
+}
+
+.ns-hero-eyebrow {
+  margin: 0 0 1.25rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ns-safety);
+  font-weight: 600;
+}
+
+.ns-hero-title {
+  margin: 0;
+  font-weight: 900;
+  font-size: clamp(2.6rem, 9vw, 6.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.ns-hero-title .ns-line {
+  display: block;
+}
+
+/* Odsazené řádky = půdorys skládaných panelů pláště */
+.ns-line-2 {
+  padding-left: clamp(1.5rem, 6vw, 5rem);
+}
+
+.ns-line-3 {
+  padding-left: clamp(3rem, 12vw, 10rem);
+}
+
+.ns-hero-title em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--ns-safety);
+}
+
+.ns-hero-sub {
+  max-width: 34rem;
+  margin: 2rem 0 0;
+  font-size: 1.05rem;
+  color: #cdd9e4;
+}
+
+.ns-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2.25rem;
+}
+
+.ns-btn {
+  display: inline-block;
+  padding: 0.9rem 1.75rem;
+  background: var(--ns-safety);
+  color: var(--ns-steel);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ns-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.ns-btn-ghost {
+  background: transparent;
+  color: var(--ns-white);
+  border: 2px solid rgba(255, 255, 255, 0.45);
+}
+
+.ns-btn-ghost:hover {
+  border-color: var(--ns-safety);
+  color: var(--ns-safety);
+}
+
+/* Signature — profil trapézového plechu na spodní hraně hero */
+.ns-trapez {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 110px;
+  pointer-events: none;
+}
+
+.ns-trapez-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ns-trapez-line {
+  fill: none;
+  stroke-width: 3;
+  stroke-linejoin: miter;
+}
+
+.ns-trapez-a {
+  stroke: var(--ns-safety);
+}
+
+.ns-trapez-b {
+  stroke: rgba(255, 255, 255, 0.28);
+}
+
+/* Načítací sekvence — trapéz se „montuje", titulek nastupuje po řádcích */
+@keyframes ns-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.2em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ns-draw {
+  from {
+    stroke-dashoffset: 2400;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ns-hero-title .ns-line,
+.ns-hero-eyebrow,
+.ns-hero-sub,
+.ns-hero-actions {
+  animation: ns-rise 0.65s cubic-bezier(0.22, 0.9, 0.3, 1) both;
+}
+
+.ns-hero-eyebrow { animation-delay: 0.05s; }
+.ns-line-1 { animation-delay: 0.15s; }
+.ns-line-2 { animation-delay: 0.27s; }
+.ns-line-3 { animation-delay: 0.39s; }
+.ns-hero-sub { animation-delay: 0.55s; }
+.ns-hero-actions { animation-delay: 0.65s; }
+
+.ns-trapez-line {
+  stroke-dasharray: 2400;
+  animation: ns-draw 1.6s ease-out 0.3s both;
+}
+
+/* ============================================================
+   SLUŽBY — zinkově světlá sekce, karty jako panely opláštění
+   ============================================================ */
+
+.ns-sluzby {
+  padding: 4.5rem 1.25rem 5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.ns-section-head {
+  max-width: 44rem;
+  margin-bottom: 3rem;
+}
+
+.ns-h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--ns-steel);
+}
+
+.ns-section-sub {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #4a5a68;
+}
+
+.ns-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.ns-card {
+  background: var(--ns-white);
+  border-left: 4px solid var(--ns-steel-2);
+  border-radius: 3px;
+  padding: 1.6rem 1.5rem 1.75rem;
+  box-shadow: 0 1px 3px rgba(18, 38, 58, 0.08);
+  transition: border-color 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ns-card:hover {
+  border-left-color: var(--ns-safety);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(18, 38, 58, 0.14);
+}
+
+.ns-card-kod {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ns-steel-2);
+  background: var(--ns-zinc);
+  padding: 0.25rem 0.6rem;
+  border-radius: 2px;
+  margin-bottom: 0.9rem;
+}
+
+.ns-card-nazev {
+  margin: 0 0 0.6rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--ns-steel);
+  line-height: 1.25;
+}
+
+.ns-card-popis {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #4a5a68;
+}
+
+/* ============================================================
+   REALIZACE + DŮVĚRA — návrat na ocelovou tmavou
+   ============================================================ */
+
+.ns-realizace {
+  background: var(--ns-steel);
+  color: var(--ns-white);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.ns-realizace > * {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ns-h2-light {
+  color: var(--ns-white);
+}
+
+.ns-section-sub-light {
+  color: var(--ns-mist);
+}
+
+.ns-ref-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-bottom: 3.5rem;
+}
+
+.ns-ref {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 3px;
+  padding: 1.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.ns-ref:hover {
+  border-color: var(--ns-safety);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.ns-ref-rok {
+  margin: 0 0 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ns-safety);
+  font-weight: 700;
+}
+
+.ns-ref-nazev {
+  margin: 0 0 0.25rem;
+  font-size: 1.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1.15;
+}
+
+.ns-ref-role {
+  margin: 0 0 0.8rem;
+  font-size: 0.95rem;
+  color: var(--ns-mist);
+  font-weight: 600;
+}
+
+.ns-ref-popis {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #c3d0dc;
+}
+
+.ns-duvera {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  padding-top: 2.5rem;
+}
+
+.ns-duvera-big {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ns-safety);
+}
+
+.ns-duvera-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #c3d0dc;
+}
+
+/* ============================================================
+   Responzivita — od tabletu výš
+   ============================================================ */
+
+@media (min-width: 640px) {
+  .ns-hero {
+    padding: 2rem 2.5rem 9rem;
+  }
+
+  .ns-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ns-sluzby,
+  .ns-realizace {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .ns-ref-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .ns-hero-body {
+    padding-top: 6rem;
+  }
+
+  .ns-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .ns-duvera {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .ns-ref {
+    padding: 2.25rem 2rem;
+  }
+}
+
+/* ============================================================
+   Redukovaný pohyb
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ns-hero-title .ns-line,
+  .ns-hero-eyebrow,
+  .ns-hero-sub,
+  .ns-hero-actions,
+  .ns-trapez-line {
+    animation: none;
+  }
+
+  .ns-trapez-line {
+    stroke-dasharray: none;
+  }
+
+  .ns-btn,
+  .ns-card,
+  .ns-ref {
+    transition: none;
+  }
+
+  .ns-btn:hover,
+  .ns-card:hover {
+    transform: none;
+  }
+}
