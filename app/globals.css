@@ -1,0 +1,526 @@
+/* =====================================================
+   PROTISK s.r.o. — Hradec Králové
+   Koncept: tiskový arch. Palette = CMYK procesní barvy
+   na papírově bílé; signature = rozjetý soutisk v hero.
+   Display: Archivo Black (plakátový grotesk, připomíná
+   sítotiskové šablony), body: systémový grotesk.
+   ===================================================== */
+
+:root {
+  --papir: #fdfdfb;
+  --papir-sed: #f1f1ee;
+  --tiskova-cerna: #171614; /* K — "key" */
+  --cyan: #00a3d9;
+  --magenta: #e5197e;
+  --zluta: #f5c400;
+  --inkoust-60: rgba(23, 22, 20, 0.62);
+  --linka: rgba(23, 22, 20, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--papir);
+  color: var(--tiskova-cerna);
+  font-family: "Helvetica Neue", Helvetica, Arial, "Segoe UI", system-ui,
+    sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pt a {
+  color: inherit;
+}
+
+.pt a:focus-visible,
+.pt :focus-visible {
+  outline: 3px solid var(--magenta);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  background: var(--papir);
+  overflow: hidden;
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 20px 0;
+}
+
+.hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--tiskova-cerna);
+}
+
+.wordmark {
+  font-family: "Archivo Black", "Arial Black", "Helvetica Neue", sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wordmark-tisk {
+  color: var(--magenta);
+}
+
+.wordmark-reg {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--inkoust-60);
+}
+
+.hero-tel {
+  font-family: "Archivo Black", "Arial Black", sans-serif;
+  font-size: 1rem;
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 3px solid var(--zluta);
+  padding-bottom: 2px;
+}
+
+.hero-tel:hover {
+  border-bottom-color: var(--magenta);
+}
+
+/* --- soutiskové značky v rozích archu --- */
+
+.reg-marks {
+  position: absolute;
+  inset: 96px 20px 24px;
+  pointer-events: none;
+}
+
+.reg {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+}
+
+.reg::before,
+.reg::after {
+  content: "";
+  position: absolute;
+  background: var(--tiskova-cerna);
+}
+
+.reg::before {
+  left: 50%;
+  top: 0;
+  width: 1.5px;
+  height: 100%;
+}
+
+.reg::after {
+  top: 50%;
+  left: 0;
+  height: 1.5px;
+  width: 100%;
+}
+
+.reg-tl { top: 0; left: 0; }
+.reg-tr { top: 0; right: 0; }
+.reg-bl { bottom: 0; left: 0; }
+.reg-br { bottom: 0; right: 0; }
+
+/* --- typografická scéna --- */
+
+.hero-stage {
+  padding: 72px 8px 56px;
+  max-width: 780px;
+}
+
+.hero-eyebrow {
+  margin: 0 0 20px;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--inkoust-60);
+}
+
+/* Signature: rozjetý soutisk — C, M, Y vrstvy pod K,
+   které se při načtení "srovnají" skoro do rejstříku. */
+
+.hero-title {
+  position: relative;
+  margin: 0;
+  font-family: "Archivo Black", "Arial Black", "Helvetica Neue", sans-serif;
+  font-size: clamp(2.9rem, 10.5vw, 6.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.pass {
+  display: block;
+}
+
+.pass-c,
+.pass-m,
+.pass-y {
+  position: absolute;
+  inset: 0;
+  user-select: none;
+}
+
+.pass-c { color: var(--cyan); }
+.pass-m { color: var(--magenta); mix-blend-mode: multiply; }
+.pass-y { color: var(--zluta); mix-blend-mode: multiply; }
+
+.pass-k {
+  position: relative;
+  color: var(--tiskova-cerna);
+}
+
+@keyframes soutisk-c {
+  from { transform: translate(-26px, 10px); opacity: 0; }
+  to { transform: translate(-6px, 3px); opacity: 1; }
+}
+
+@keyframes soutisk-m {
+  from { transform: translate(24px, -12px); opacity: 0; }
+  to { transform: translate(5px, -3px); opacity: 1; }
+}
+
+@keyframes soutisk-y {
+  from { transform: translate(-14px, -20px); opacity: 0; }
+  to { transform: translate(-3px, 6px); opacity: 1; }
+}
+
+@keyframes soutisk-k {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pass-c { animation: soutisk-c 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.pass-m { animation: soutisk-m 0.9s 0.12s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.pass-y { animation: soutisk-y 0.9s 0.24s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.pass-k { animation: soutisk-k 0.7s 0.38s ease-out both; }
+
+.hero-sub {
+  margin: 28px 0 0;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  max-width: 34em;
+  color: var(--tiskova-cerna);
+}
+
+.hero-tags {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hero-tags li {
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border: 1.5px solid var(--tiskova-cerna);
+  border-radius: 999px;
+  background: var(--papir);
+}
+
+/* --- kontrolní pás CMYK jako na okraji archu --- */
+
+.hero-strip {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 56px;
+  border-top: 2px solid var(--tiskova-cerna);
+  padding: 14px 8px 22px;
+}
+
+.chip {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Archivo Black", "Arial Black", sans-serif;
+  font-size: 0.75rem;
+  color: var(--papir);
+}
+
+.chip-c { background: var(--cyan); }
+.chip-m { background: var(--magenta); }
+.chip-y { background: var(--zluta); color: var(--tiskova-cerna); }
+.chip-k { background: var(--tiskova-cerna); }
+
+.strip-note {
+  margin-left: 16px;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--inkoust-60);
+}
+
+/* ================= SEKCE OBECNĚ ================= */
+
+.section-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 72px 20px;
+}
+
+.section-head {
+  max-width: 620px;
+  margin-bottom: 44px;
+}
+
+.section-eyebrow {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--magenta);
+  font-weight: 700;
+}
+
+.section-head h2 {
+  margin: 0;
+  font-family: "Archivo Black", "Arial Black", "Helvetica Neue", sans-serif;
+  font-size: clamp(1.7rem, 4.4vw, 2.6rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.section-lead {
+  margin: 16px 0 0;
+  color: var(--inkoust-60);
+  font-size: 1.05rem;
+}
+
+/* ================= SLUŽBY ================= */
+
+.sluzby {
+  background: var(--papir-sed);
+  border-top: 2px solid var(--tiskova-cerna);
+}
+
+.sluzby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2px;
+  background: var(--tiskova-cerna);
+  border: 2px solid var(--tiskova-cerna);
+}
+
+.karta {
+  background: var(--papir);
+  padding: 26px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.karta:hover {
+  background: #fffbe9;
+}
+
+.karta-kod {
+  font-family: "Archivo Black", "Arial Black", sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--papir);
+  background: var(--tiskova-cerna);
+  align-self: flex-start;
+  padding: 4px 10px;
+}
+
+.karta h3 {
+  margin: 4px 0 0;
+  font-size: 1.2rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.karta p {
+  margin: 0;
+  color: var(--inkoust-60);
+  font-size: 0.98rem;
+}
+
+.karta-detail {
+  margin-top: auto !important;
+  padding-top: 10px;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tiskova-cerna) !important;
+  border-top: 1.5px dashed var(--linka);
+}
+
+/* vzorníková karta */
+
+.karta-vzornik {
+  background: var(--tiskova-cerna);
+  color: var(--papir);
+}
+
+.karta-vzornik:hover {
+  background: var(--tiskova-cerna);
+}
+
+.karta-vzornik h3 {
+  color: var(--papir);
+}
+
+.karta-vzornik p {
+  color: rgba(253, 253, 251, 0.75);
+}
+
+.vzornik {
+  display: flex;
+  gap: 4px;
+}
+
+.vzornik .v {
+  width: 26px;
+  height: 26px;
+  display: inline-block;
+}
+
+.v-c { background: var(--cyan); }
+.v-m { background: var(--magenta); }
+.v-y { background: var(--zluta); }
+.v-k { background: var(--papir); }
+
+/* ================= DŮVĚRA ================= */
+
+.duvera {
+  background: var(--papir);
+}
+
+.duvody {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 36px 48px;
+}
+
+.duvod {
+  border-top: 2px solid var(--tiskova-cerna);
+  padding-top: 16px;
+}
+
+.duvod dt {
+  font-weight: 700;
+  font-size: 1.08rem;
+  margin-bottom: 8px;
+}
+
+.duvod dd {
+  margin: 0;
+  color: var(--inkoust-60);
+  font-size: 0.98rem;
+}
+
+.duvera-adresa {
+  margin-top: 56px;
+  border: 2px solid var(--tiskova-cerna);
+  padding: 22px 24px;
+  background: var(--papir-sed);
+}
+
+.adresa-radek {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.adresa-radek + .adresa-radek {
+  margin-top: 6px;
+}
+
+.adresa-radek a {
+  font-weight: 700;
+  text-decoration-color: var(--magenta);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.adresa-radek a:hover {
+  color: var(--magenta);
+}
+
+/* ================= RESPONZIVITA ================= */
+
+@media (max-width: 640px) {
+  .hero-stage {
+    padding: 52px 4px 40px;
+  }
+
+  .hero-top {
+    flex-wrap: wrap;
+  }
+
+  .reg-marks {
+    inset: 120px 12px 20px;
+  }
+
+  .section-inner {
+    padding: 52px 18px;
+  }
+
+  .hero-strip {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+
+  .strip-note {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .pass-c,
+  .pass-m,
+  .pass-y,
+  .pass-k {
+    animation: none;
+  }
+
+  .pass-c { transform: translate(-6px, 3px); }
+  .pass-m { transform: translate(5px, -3px); }
+  .pass-y { transform: translate(-3px, 6px); }
+
+  .karta {
+    transition: none;
+  }
+}
