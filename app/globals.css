@@ -1,0 +1,549 @@
+/* ============================================================
+   GEREX Liberec — PE potrubí pro plyn, vodu a kanalizaci
+   Paleta odvozená z řemesla: PE trubky pro plyn jsou žluté
+   (oranžovožlutý signální pruh), voda modrá, materiál černý
+   polyethylén. Signature: škála průřezů potrubí d25–d1600.
+   ============================================================ */
+
+:root {
+  --pe-black: #14181c;      /* černý polyethylén */
+  --pe-graphite: #232a31;   /* stěna trubky */
+  --gas-yellow: #f5b301;    /* signální žlutá plynového PE */
+  --water-blue: #2f7fd1;    /* pruh vodovodního PE */
+  --trench: #e9ebe6;        /* světlý beton / výkop */
+  --paper: #f7f8f6;
+  --ink: #1b2026;
+  --ink-soft: #4b545d;
+
+  --font-display: "Archivo Black", "Arial Black", "Arial", sans-serif;
+  --font-body: "Barlow", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=Barlow+Semi+Condensed:wght@500;600&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.gx a:focus-visible,
+.gx button:focus-visible {
+  outline: 3px solid var(--gas-yellow);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  background: var(--pe-black);
+  color: #fff;
+  padding: 1.5rem 1.25rem 3rem;
+  overflow: hidden;
+}
+
+/* signální pruhy plynového potrubí podél levé hrany */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 10px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--gas-yellow) 0 46px,
+    var(--pe-black) 46px 58px
+  );
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-left: 0.75rem;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55rem;
+}
+
+.wordmark-name {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  letter-spacing: 0.06em;
+  color: var(--gas-yellow);
+}
+
+.wordmark-city {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.hero-tel {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: #fff;
+  text-decoration: none;
+  border: 2px solid var(--gas-yellow);
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.hero-tel:hover {
+  background: var(--gas-yellow);
+  color: var(--pe-black);
+}
+
+.hero-body {
+  max-width: 62rem;
+  margin: 3.5rem auto 0;
+  padding-left: 0.75rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gas-yellow);
+  margin: 0 0 1.25rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 7.5vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.ht-line {
+  display: block;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--water-blue);
+  -webkit-text-stroke: 0;
+}
+
+.ht-1 {
+  color: #fff;
+}
+
+.ht-2 {
+  color: var(--gas-yellow);
+}
+
+.ht-3 {
+  color: #fff;
+}
+
+.hero-lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 1.75rem 0 0;
+}
+
+/* ---- Signature: škála průřezů potrubí ---- */
+
+.pipe-scale {
+  position: relative;
+  max-width: 62rem;
+  margin: 3.5rem auto 0;
+  padding: 1.5rem 0.75rem 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.pipe-rail {
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 3.1rem;
+  height: 2px;
+  background: linear-gradient(to right, var(--gas-yellow), var(--water-blue));
+  opacity: 0.5;
+}
+
+.pipe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  flex: 0 1 auto;
+}
+
+.pipe-ring {
+  display: block;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: var(--gas-yellow);
+  background: var(--pe-graphite);
+  display: grid;
+  place-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.pipe-bore {
+  display: block;
+  border-radius: 50%;
+  background: var(--pe-black);
+}
+
+/* rostoucí průřezy — tloušťka stěny roste s dimenzí, jako u skutečné trubky */
+.pipe-1 .pipe-ring { width: 26px; height: 26px; border-width: 4px; }
+.pipe-1 .pipe-bore { width: 12px; height: 12px; }
+.pipe-2 .pipe-ring { width: 42px; height: 42px; border-width: 5px; }
+.pipe-2 .pipe-bore { width: 22px; height: 22px; }
+.pipe-3 .pipe-ring { width: 64px; height: 64px; border-width: 7px; }
+.pipe-3 .pipe-bore { width: 36px; height: 36px; }
+.pipe-4 .pipe-ring { width: 96px; height: 96px; border-width: 10px; }
+.pipe-4 .pipe-bore { width: 56px; height: 56px; }
+.pipe-5 .pipe-ring { width: 140px; height: 140px; border-width: 14px; border-color: var(--water-blue); }
+.pipe-5 .pipe-bore { width: 84px; height: 84px; }
+
+.pipe-dim {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
+.pipe-note {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.hero-range {
+  max-width: 62rem;
+  margin: 2rem auto 0;
+  padding-left: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.hero-range strong {
+  color: var(--gas-yellow);
+  font-weight: 600;
+}
+
+/* ---- Načítací sekvence hera ---- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-eyebrow,
+  .ht-line,
+  .hero-lead,
+  .hero-range {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: gx-rise 0.65s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  }
+
+  .hero-eyebrow { animation-delay: 0.05s; }
+  .ht-1 { animation-delay: 0.15s; }
+  .ht-2 { animation-delay: 0.27s; }
+  .ht-3 { animation-delay: 0.39s; }
+  .hero-lead { animation-delay: 0.55s; }
+  .hero-range { animation-delay: 1.3s; }
+
+  .pipe {
+    opacity: 0;
+    transform: scale(0.7);
+    animation: gx-pop 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2) forwards;
+  }
+
+  .pipe-1 { animation-delay: 0.7s; }
+  .pipe-2 { animation-delay: 0.8s; }
+  .pipe-3 { animation-delay: 0.9s; }
+  .pipe-4 { animation-delay: 1s; }
+  .pipe-5 { animation-delay: 1.1s; }
+
+  @keyframes gx-rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes gx-pop {
+    to { opacity: 1; transform: scale(1); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-tel { transition: none; }
+}
+
+/* ============ SEKCE OBECNĚ ============ */
+
+.catalog,
+.trust {
+  padding: 4rem 1.25rem;
+}
+
+.section-head {
+  max-width: 62rem;
+  margin: 0 auto 2.5rem;
+}
+
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.section-sub {
+  max-width: 34rem;
+  color: var(--ink-soft);
+  margin: 0.9rem 0 0;
+}
+
+/* ============ KATALOG ============ */
+
+.catalog {
+  background: var(--paper);
+}
+
+.catalog .section-eyebrow {
+  color: var(--water-blue);
+}
+
+.catalog-grid {
+  max-width: 62rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #dfe3dd;
+  border-radius: 14px;
+  padding: 1.5rem 1.5rem 1.6rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+/* žlutý signální pruh — stejný jazyk jako hero */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 6px;
+  background: var(--gas-yellow);
+}
+
+.card:nth-child(2)::before { background: var(--water-blue); }
+.card:nth-child(3)::before { background: var(--pe-graphite); }
+.card:nth-child(4)::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--gas-yellow) 0 14px,
+    var(--pe-black) 14px 20px
+  );
+}
+
+.card:hover {
+  border-color: var(--pe-graphite);
+  transform: translateY(-2px);
+}
+
+.card-code {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  color: var(--ink-soft);
+  margin: 0 0 0.6rem;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.25;
+  margin: 0 0 0.6rem;
+}
+
+.card-text {
+  color: var(--ink-soft);
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+.catalog-strip {
+  max-width: 62rem;
+  margin: 1.5rem auto 0;
+  background: var(--pe-black);
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  font-size: 0.98rem;
+}
+
+.catalog-strip p { margin: 0; }
+
+.catalog-strip strong {
+  color: var(--gas-yellow);
+}
+
+/* ============ DŮVĚRA ============ */
+
+.trust {
+  background: var(--trench);
+}
+
+.trust .section-eyebrow {
+  color: var(--pe-graphite);
+}
+
+.trust-grid {
+  max-width: 62rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.facts {
+  margin: 0;
+  display: grid;
+  gap: 0;
+  border-top: 2px solid var(--pe-black);
+}
+
+.fact {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid #c9cec4;
+}
+
+.fact dt {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.fact dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.trust-text p {
+  margin: 0 0 1.1rem;
+  color: var(--ink);
+}
+
+.partner-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.partner-list li {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: #fff;
+  border: 1px solid #c9cec4;
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+}
+
+/* ============ RESPONSIVITA ============ */
+
+@media (min-width: 640px) {
+  .catalog-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    padding: 2rem 3rem 4rem;
+  }
+
+  .hero::before {
+    width: 14px;
+  }
+
+  .trust-grid {
+    grid-template-columns: 5fr 7fr;
+    gap: 4rem;
+  }
+
+  .catalog,
+  .trust {
+    padding: 5.5rem 3rem;
+  }
+}
+
+@media (max-width: 520px) {
+  /* na mobilu ukážeme jen 4 průřezy, největší se schová */
+  .pipe-note { display: none; }
+  .pipe-4 .pipe-ring { width: 72px; height: 72px; border-width: 8px; }
+  .pipe-4 .pipe-bore { width: 42px; height: 42px; }
+  .pipe-5 .pipe-ring { width: 96px; height: 96px; border-width: 10px; }
+  .pipe-5 .pipe-bore { width: 56px; height: 56px; }
+  .pipe-rail { bottom: 1.6rem; }
+}
