@@ -1,0 +1,489 @@
+/* =====================================================
+   WAZA SECURITY — Pardubice
+   Koncept: operační středisko / kniha hlášení.
+   Paleta odvozená z nočních směn a bezpečnostní služby:
+   uniformní tmavě modrá noc, reflexní jantar (výstražná
+   páska, majáky), studená ocel čidel a mříží.
+   Signature: skenovací světelný pruh v heru + LED status.
+   ===================================================== */
+
+:root {
+  --noc: #10151f;        /* noční směna — hlavní tmavá */
+  --noc-2: #1a2230;      /* panel operačního střediska */
+  --jantar: #f5a623;     /* reflexní jantar — výstraha, majáky */
+  --jantar-tma: #b87413; /* jantar na světlém podkladu (kontrast) */
+  --ocel: #8b97a8;       /* studená ocel, sekundární text na tmavé */
+  --den: #eef1f5;        /* denní hlášení — světlé pozadí */
+  --inkoust: #141a24;    /* text na světlé */
+  --linka: rgba(139, 151, 168, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--den);
+  color: var(--inkoust);
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Utility face pro kódy, štítky, logy — monospace jako
+   výpis z pultu centralizované ochrany */
+.wordmark,
+.hero-status,
+.hero-log,
+.eyebrow,
+.karta-kod,
+.karta-stav,
+.milnik-rok {
+  font-family: "Courier New", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.waza a {
+  color: inherit;
+}
+
+.waza a:focus-visible,
+.waza :focus-visible {
+  outline: 3px solid var(--jantar);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #0c1017 0%, var(--noc) 55%, #131b28 100%);
+  color: #f2f4f8;
+  padding: 1.5rem 1.25rem 3.5rem;
+}
+
+/* jemná mřížka čidel v pozadí */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--linka) 1px, transparent 1px),
+    linear-gradient(90deg, var(--linka) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* SIGNATURE: skenovací pruh — jantarové světlo přejede
+   hero jednou po načtení, jako reflektor hlídky */
+.hero-scan {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -30%;
+  width: 22%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(245, 166, 35, 0.14) 45%,
+    rgba(245, 166, 35, 0.32) 50%,
+    rgba(245, 166, 35, 0.14) 55%,
+    transparent
+  );
+  animation: scan 2.6s ease-in-out 0.4s 1 forwards;
+  pointer-events: none;
+}
+
+@keyframes scan {
+  from { transform: translateX(0); opacity: 1; }
+  85%  { opacity: 1; }
+  to   { transform: translateX(620%); opacity: 0; }
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+.hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--linka);
+}
+
+.wordmark {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+}
+
+.wordmark-dot {
+  color: var(--jantar);
+  margin: 0 0.15em;
+}
+
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ocel);
+}
+
+.status-led {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--jantar);
+  box-shadow: 0 0 8px 2px rgba(245, 166, 35, 0.55);
+  animation: led 2.4s ease-in-out infinite;
+}
+
+@keyframes led {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+
+.hero-title {
+  margin: 2.5rem 0 0;
+  font-size: clamp(2.4rem, 8.5vw, 5.6rem);
+  line-height: 1.03;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.hero-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.6em);
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.hero-line-1 { animation-delay: 0.15s; }
+.hero-line-2 { animation-delay: 0.35s; }
+
+.hero-line em {
+  font-style: italic;
+  color: var(--jantar);
+}
+
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-sub {
+  max-width: 34rem;
+  margin: 1.75rem 0 0;
+  font-size: 1.1rem;
+  color: #cdd4de;
+  opacity: 0;
+  animation: rise 0.7s ease 0.6s forwards;
+}
+
+/* výpis z pultu — provozní log */
+.hero-log {
+  margin: 2.5rem 0 0;
+  max-width: 40rem;
+  border: 1px solid var(--linka);
+  background: rgba(26, 34, 48, 0.75);
+  padding: 0.4rem 0;
+  font-size: 0.88rem;
+  opacity: 0;
+  animation: rise 0.7s ease 0.8s forwards;
+}
+
+.log-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  justify-content: space-between;
+  padding: 0.55rem 1rem;
+}
+
+.log-row + .log-row {
+  border-top: 1px dashed var(--linka);
+}
+
+.log-row dt {
+  color: var(--ocel);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.log-row dd {
+  margin: 0;
+  color: #f2f4f8;
+}
+
+.log-row dd a {
+  color: var(--jantar);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(245, 166, 35, 0.4);
+}
+
+.log-row dd a:hover {
+  border-bottom-color: var(--jantar);
+}
+
+/* ============ SEKCE — společné ============ */
+
+.section-head {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 0;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--jantar-tma);
+}
+
+.eyebrow::before {
+  content: "▸ ";
+}
+
+.eyebrow-dark {
+  color: var(--jantar);
+}
+
+.waza h2 {
+  margin: 0;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.section-lead {
+  max-width: 36rem;
+  margin: 1rem 0 0;
+  color: #45505f;
+}
+
+.section-lead-dark {
+  color: var(--ocel);
+}
+
+/* ============ SLUŽBY ============ */
+
+.sluzby {
+  background: var(--den);
+  padding-bottom: 4rem;
+}
+
+.sluzby-grid {
+  list-style: none;
+  max-width: 62rem;
+  margin: 2.5rem auto 0;
+  padding: 0 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.karta {
+  background: #ffffff;
+  border: 1px solid #d8dee6;
+  border-top: 3px solid var(--noc);
+  padding: 1.4rem 1.4rem 1.6rem;
+  transition: border-top-color 0.25s ease, transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.karta:hover {
+  border-top-color: var(--jantar);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(16, 21, 31, 0.1);
+}
+
+.karta-hlava {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.karta-kod {
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  color: var(--noc);
+  background: rgba(16, 21, 31, 0.07);
+  padding: 0.15rem 0.5rem;
+}
+
+.karta-stav {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--jantar-tma);
+}
+
+.karta h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.karta p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #3c4654;
+}
+
+/* ============ DŮVĚRA ============ */
+
+.duvera {
+  background: var(--noc-2);
+  color: #eef1f5;
+  padding-bottom: 4.5rem;
+}
+
+.section-head-dark h2 {
+  color: #f6f8fb;
+}
+
+.milniky {
+  list-style: none;
+  max-width: 62rem;
+  margin: 2.5rem auto 0;
+  padding: 0 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.milnik {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.4rem;
+  padding: 1.4rem 0;
+  border-top: 1px dashed var(--linka);
+}
+
+.milnik:last-child {
+  border-bottom: 1px dashed var(--linka);
+}
+
+.milnik-rok {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--jantar);
+}
+
+.milnik p {
+  margin: 0;
+  color: #cdd4de;
+  max-width: 42rem;
+}
+
+.reference {
+  max-width: 62rem;
+  margin: 3rem auto 0;
+  padding: 0 1.25rem;
+}
+
+.reference p {
+  margin: 0;
+  font-size: clamp(1.2rem, 3vw, 1.55rem);
+  line-height: 1.45;
+  font-style: italic;
+  max-width: 44rem;
+  border-left: 3px solid var(--jantar);
+  padding-left: 1.25rem;
+}
+
+.reference cite {
+  display: block;
+  margin-top: 1rem;
+  padding-left: calc(1.25rem + 3px);
+  font-style: normal;
+  font-size: 0.95rem;
+  color: var(--ocel);
+}
+
+.duvera-pozn {
+  max-width: 62rem;
+  margin: 2.5rem auto 0;
+  padding: 0 1.25rem;
+  font-size: 0.95rem;
+  color: var(--ocel);
+}
+
+/* ============ RESPONSIVITA ============ */
+
+@media (min-width: 700px) {
+  .hero {
+    padding: 2rem 2rem 5rem;
+  }
+
+  .sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .milnik {
+    grid-template-columns: 12rem 1fr;
+    gap: 2rem;
+    align-items: baseline;
+  }
+}
+
+@media (min-width: 1000px) {
+  .sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-scan {
+    animation: none;
+    display: none;
+  }
+
+  .status-led {
+    animation: none;
+  }
+
+  .hero-line,
+  .hero-sub,
+  .hero-log {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .karta,
+  .karta:hover {
+    transition: none;
+    transform: none;
+  }
+}
