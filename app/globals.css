@@ -1,0 +1,469 @@
+/* =====================================================================
+   STAVEBNÍ FIRMA TOMEK — Olomouc
+   Koncept: „panel a kámen“ — rastr prefabrikovaných panelů (firma sídlí
+   U Panelárny) + kamenická přesnost. Beton, žula, okrová výstražná barva
+   ze staveniště. Display: Archivo Black (blokové, betonové), text: system
+   grotesk pro rychlost. Žádné knihovny.
+   ===================================================================== */
+
+@font-face {
+  font-family: "tk-fallback";
+  src: local("Arial Black"), local("Arial-Black");
+}
+
+:root {
+  /* Paleta odvozená z reality firmy */
+  --beton: #2b2e31;        /* čerstvý beton ve stínu */
+  --beton-tma: #1c1e20;    /* spára mezi panely */
+  --zula: #e9e6df;         /* leštěná světlá žula */
+  --zula-zrno: #d5d1c7;    /* zrno kamene */
+  --okr: #e0a526;          /* výstražný okr stavebních strojů */
+  --okr-tma: #b8841a;
+
+  --pismo-display: "Archivo Black", "tk-fallback", "Arial Black", sans-serif;
+  --pismo-text: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --max: 72rem;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--pismo-text);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--beton);
+  background: var(--zula);
+  -webkit-font-smoothing: antialiased;
+}
+
+.tk a { color: inherit; }
+
+.tk :focus-visible {
+  outline: 3px solid var(--okr);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =========================== HERO =========================== */
+
+.tk-hero {
+  position: relative;
+  background: var(--beton);
+  color: var(--zula);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Signature: rastr betonových panelů — svislé spáry + posunuté desky.
+   Odkazuje na sídlo firmy „U Panelárny“ a na prefabrikované haly. */
+.tk-hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(90deg, var(--beton-tma) 2px, transparent 2px);
+  background-size: 25% 100%;
+  opacity: 0.9;
+}
+
+.tk-panel {
+  position: absolute;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0));
+  border-top: 2px solid var(--beton-tma);
+  animation: tk-panel-zvednuti 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.tk-panel-a { left: 0;   width: 25%; top: 18%; height: 82%; animation-delay: 0.05s; }
+.tk-panel-b { left: 25%; width: 25%; top: 42%; height: 58%; animation-delay: 0.18s; }
+.tk-panel-c { left: 50%; width: 25%; top: 28%; height: 72%; animation-delay: 0.30s; }
+.tk-panel-d { left: 75%; width: 25%; top: 55%; height: 45%; animation-delay: 0.42s; }
+
+@keyframes tk-panel-zvednuti {
+  from { transform: translateY(60px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+
+/* --- horní lišta --- */
+
+.tk-topbar {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.tk-wordmark {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.tk-wordmark-blok {
+  display: block;
+  font-family: var(--pismo-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  color: var(--zula);
+  border-bottom: 4px solid var(--okr);
+  padding-bottom: 0.2rem;
+}
+
+.tk-wordmark-pod {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--zula-zrno);
+  margin-top: 0.35rem;
+}
+
+.tk-nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.tk-nav a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--zula-zrno);
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.tk-nav a:hover { color: var(--zula); border-color: var(--okr); }
+
+.tk-nav-tel {
+  color: var(--okr) !important;
+  font-weight: 700;
+}
+
+/* --- obsah hera --- */
+
+.tk-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 4rem 1.25rem 4.5rem;
+}
+
+.tk-hero-eyebrow,
+.tk-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--okr);
+  margin: 0 0 1.5rem;
+  font-weight: 600;
+}
+
+.tk-eyebrow-mark {
+  display: inline-block;
+  width: 1.5rem;
+  height: 0.5rem;
+  background:
+    repeating-linear-gradient(-45deg, var(--okr) 0 4px, transparent 4px 8px);
+  flex: none;
+}
+
+.tk-hero-title {
+  font-family: var(--pismo-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0 0 1.75rem;
+}
+
+.tk-hero-line {
+  display: block;
+  animation: tk-radek 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.tk-hero-line-1 { animation-delay: 0.1s; }
+.tk-hero-line-2 { animation-delay: 0.22s; color: var(--zula-zrno); }
+.tk-hero-line-3 { animation-delay: 0.34s; }
+
+.tk-tecka { color: var(--okr); }
+
+@keyframes tk-radek {
+  from { transform: translateY(0.6em); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+.tk-hero-perex {
+  max-width: 34rem;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--zula-zrno);
+  margin: 0 0 2.25rem;
+}
+
+.tk-hero-cta {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-bottom: 3.5rem;
+}
+
+.tk-btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: 3px;
+  transition: transform 0.15s, background 0.2s, color 0.2s;
+}
+
+.tk-btn-hlavni {
+  background: var(--okr);
+  color: var(--beton-tma);
+}
+
+.tk-btn-hlavni:hover { background: var(--okr-tma); transform: translateY(-2px); }
+
+.tk-btn-vedlejsi {
+  border: 2px solid var(--zula-zrno);
+  color: var(--zula);
+}
+
+.tk-btn-vedlejsi:hover { border-color: var(--okr); color: var(--okr); transform: translateY(-2px); }
+
+.tk-hero-fakta {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  margin: 0;
+  border-top: 2px solid var(--beton-tma);
+  padding-top: 1.5rem;
+}
+
+.tk-hero-fakta dt {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--zula-zrno);
+  margin-bottom: 0.25rem;
+}
+
+.tk-hero-fakta dd {
+  margin: 0;
+  font-weight: 700;
+  color: var(--zula);
+}
+
+/* =========================== SLUŽBY =========================== */
+
+.tk-sluzby {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem;
+}
+
+.tk-sekce-hlava { max-width: 40rem; margin-bottom: 3rem; }
+
+.tk-sekce-titul {
+  font-family: var(--pismo-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+  text-transform: uppercase;
+  line-height: 1.05;
+  margin: 0 0 1rem;
+}
+
+.tk-sekce-perex {
+  margin: 0;
+  color: #55595d;
+  font-size: 1.0625rem;
+}
+
+.tk-sluzby-mriz {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 2px; /* spára mezi panely */
+  background: var(--zula-zrno);
+  border: 2px solid var(--zula-zrno);
+}
+
+.tk-karta {
+  background: #f6f4ef;
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.2s;
+}
+
+.tk-karta:hover { background: #fdfcf9; }
+
+.tk-karta-kod {
+  font-family: var(--pismo-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--okr-tma);
+  margin-bottom: 1.25rem;
+}
+
+.tk-karta-titul {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  margin: 0 0 0.75rem;
+  font-weight: 700;
+}
+
+.tk-karta-popis {
+  margin: 0 0 1.25rem;
+  color: #55595d;
+  flex: 1;
+}
+
+.tk-karta-seznam {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 2px solid var(--zula-zrno);
+  padding-top: 1rem;
+}
+
+.tk-karta-seznam li {
+  padding: 0.3rem 0 0.3rem 1.4rem;
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.tk-karta-seznam li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72rem;
+  width: 0.7rem;
+  height: 0.35rem;
+  background: repeating-linear-gradient(-45deg, var(--okr) 0 3px, transparent 3px 6px);
+}
+
+/* =========================== REFERENCE =========================== */
+
+.tk-reference {
+  background: var(--beton);
+  color: var(--zula);
+  padding: 4.5rem 0;
+}
+
+.tk-reference .tk-sekce-hlava,
+.tk-ref-seznam,
+.tk-ref-pruh {
+  max-width: var(--max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.tk-reference .tk-sekce-hlava { margin-bottom: 3rem; }
+.tk-reference .tk-sekce-perex { color: var(--zula-zrno); }
+
+.tk-ref-seznam {
+  list-style: none;
+  margin: 0 auto;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.tk-ref {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  padding: 2rem 1.25rem;
+  border-top: 2px solid var(--beton-tma);
+}
+
+.tk-ref:last-child { border-bottom: 2px solid var(--beton-tma); }
+
+.tk-ref-cislo {
+  font-family: var(--pismo-display);
+  font-size: 1.6rem;
+  color: var(--okr);
+  line-height: 1;
+  min-width: 3rem;
+}
+
+.tk-ref-titul {
+  margin: 0 0 0.3rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.tk-ref-rozsah {
+  margin: 0 0 0.7rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--okr);
+  font-weight: 600;
+}
+
+.tk-ref-text {
+  margin: 0;
+  color: var(--zula-zrno);
+  max-width: 42rem;
+}
+
+.tk-ref-pruh {
+  margin-top: 3rem;
+}
+
+.tk-ref-pruh p {
+  margin: 0;
+  background: var(--beton-tma);
+  border-left: 6px solid var(--okr);
+  padding: 1.25rem 1.5rem;
+  color: var(--zula-zrno);
+}
+
+.tk-ref-pruh strong { color: var(--zula); }
+
+/* =========================== RESPONZIVITA =========================== */
+
+@media (max-width: 640px) {
+  .tk-hero-inner { padding-top: 3rem; padding-bottom: 3.5rem; }
+  .tk-hero-fakta { gap: 1.5rem; }
+  .tk-ref { grid-template-columns: 1fr; gap: 0.5rem; }
+  .tk-btn { width: 100%; text-align: center; }
+}
+
+/* =========================== REDUCED MOTION =========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .tk-panel,
+  .tk-hero-line {
+    animation: none;
+  }
+  .tk-btn,
+  .tk-nav a,
+  .tk-karta {
+    transition: none;
+  }
+  .tk-btn-hlavni:hover,
+  .tk-btn-vedlejsi:hover { transform: none; }
+}
