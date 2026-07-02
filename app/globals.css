@@ -1,0 +1,510 @@
+/* ============================================================
+   EM STUDIO — kadeřnictví Pardubice
+   Palette:
+     --em-ink     #2B2226  (tmavá kakaová hněď — barva vlasů, ne černá)
+     --em-paper   #FBF7F4  (světlá pudrová — ručník, pěna, pleť)
+     --em-blush   #E8D5CE  (pudrově růžová — plášť, hřeben)
+     --em-copper  #B4633C  (měděná — barva, melír, teplý blond)
+     --em-deep    #7A4A3A  (hnědočervená — přeliv)
+   Type: display "Marcellus"-like via Georgia fallback? No — system stack
+         chosen deliberately: 'Cormorant Garamond' unavailable offline,
+         so: display = Georgia/'Times New Roman' with tight tracking + italic
+         accents; body = system-ui. Signature: the vertical "strih" strip
+         and the hairline underline that behaves like a parted hairline.
+   ============================================================ */
+
+:root {
+  --em-ink: #2b2226;
+  --em-paper: #fbf7f4;
+  --em-blush: #e8d5ce;
+  --em-copper: #b4633c;
+  --em-deep: #7a4a3a;
+  --em-max: 1120px;
+  --em-display: "Didot", "Bodoni MT", "Playfair Display", Georgia, "Times New Roman", serif;
+  --em-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--em-paper);
+  color: var(--em-ink);
+  font-family: var(--em-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--em-deep);
+}
+
+:focus-visible {
+  outline: 3px solid var(--em-copper);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.em {
+  overflow-x: clip;
+}
+
+/* ---------- HERO ---------- */
+
+.em-hero {
+  position: relative;
+  padding: 1.5rem 1.25rem 0;
+  max-width: var(--em-max);
+  margin: 0 auto;
+}
+
+.em-hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--em-blush);
+}
+
+.em-wordmark {
+  font-family: var(--em-display);
+  font-size: 1.75rem;
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  color: var(--em-ink);
+}
+
+.em-wordmark-em {
+  font-style: italic;
+  font-weight: 700;
+}
+
+.em-wordmark-dot {
+  width: 0.45em;
+  height: 0.45em;
+  border-radius: 50%;
+  background: var(--em-copper);
+  transform: translateY(-0.1em);
+}
+
+.em-wordmark-studio {
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.62em;
+}
+
+.em-hero-loc {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--em-deep);
+}
+
+.em-hero-grid {
+  display: grid;
+  gap: 2rem;
+  padding: 2.5rem 0 2rem;
+  align-items: center;
+}
+
+.em-hero-title {
+  font-family: var(--em-display);
+  font-weight: 500;
+  font-size: clamp(2.5rem, 7.5vw, 4.6rem);
+  line-height: 1.04;
+  margin: 0 0 1.4rem;
+  letter-spacing: -0.015em;
+}
+
+.em-hero-title em {
+  font-style: italic;
+  color: var(--em-copper);
+}
+
+.em-line {
+  display: block;
+}
+
+/* signature: „pěšinka" — hairline underline that grows on load,
+   like a comb parting hair */
+.em-line-2 {
+  position: relative;
+  width: fit-content;
+}
+
+.em-line-2::after {
+  content: "";
+  position: absolute;
+  left: 0.05em;
+  bottom: -0.06em;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--em-copper), var(--em-blush));
+  transform-origin: left;
+  animation: em-part 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+
+@keyframes em-part {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.em-line-1,
+.em-line-2,
+.em-line-3 {
+  animation: em-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.em-line-2 {
+  animation-delay: 0.12s;
+}
+
+.em-line-3 {
+  animation-delay: 0.24s;
+}
+
+@keyframes em-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.em-hero-sub {
+  max-width: 34rem;
+  margin: 0 0 1.8rem;
+  font-size: 1.05rem;
+  color: #4b3e42;
+}
+
+.em-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.em-btn {
+  display: inline-block;
+  background: var(--em-ink);
+  color: var(--em-paper);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.em-btn:hover {
+  background: var(--em-copper);
+  transform: translateY(-2px);
+}
+
+.em-btn-ghost {
+  background: transparent;
+  color: var(--em-ink);
+  box-shadow: inset 0 0 0 1.5px var(--em-ink);
+}
+
+.em-btn-ghost:hover {
+  background: var(--em-blush);
+  box-shadow: inset 0 0 0 1.5px var(--em-blush);
+  color: var(--em-ink);
+}
+
+.em-hero-media {
+  margin: 0;
+}
+
+.em-hero-media img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 50% 50% 12px 12px / 32% 32% 12px 12px; /* zrcadlo salonu */
+  border: 1px solid var(--em-blush);
+}
+
+.em-hero-caption {
+  margin-top: 0.7rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--em-deep);
+  text-align: center;
+}
+
+.em-hero-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--em-blush);
+  font-family: var(--em-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--em-deep);
+}
+
+.em-strip-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--em-copper);
+}
+
+/* ---------- SECTIONS ---------- */
+
+.em-section {
+  max-width: var(--em-max);
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem;
+}
+
+.em-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--em-copper);
+}
+
+.em-section h2 {
+  font-family: var(--em-display);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  line-height: 1.1;
+  margin: 0 0 0.9rem;
+  letter-spacing: -0.01em;
+}
+
+.em-section-lede {
+  max-width: 36rem;
+  margin: 0;
+  color: #4b3e42;
+}
+
+.em-section-head {
+  margin-bottom: 2.2rem;
+}
+
+/* ---------- SLUŽBY ---------- */
+
+.em-services {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.em-service {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1.4rem 0;
+  border-top: 1px solid var(--em-blush);
+  transition: background 0.25s ease, padding-left 0.25s ease;
+}
+
+.em-service:last-child {
+  border-bottom: 1px solid var(--em-blush);
+}
+
+.em-service:hover {
+  background: linear-gradient(90deg, rgba(232, 213, 206, 0.35), transparent 70%);
+  padding-left: 0.6rem;
+}
+
+.em-service h3 {
+  font-family: var(--em-display);
+  font-weight: 600;
+  font-size: 1.35rem;
+  margin: 0 0 0.3rem;
+}
+
+.em-service p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #4b3e42;
+  max-width: 34rem;
+}
+
+.em-service-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.em-price {
+  font-family: var(--em-display);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--em-copper);
+  white-space: nowrap;
+}
+
+.em-time {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--em-deep);
+  white-space: nowrap;
+}
+
+/* ---------- STUDIO ---------- */
+
+.em-section-studio {
+  background: linear-gradient(180deg, transparent, rgba(232, 213, 206, 0.35) 12%, rgba(232, 213, 206, 0.35) 88%, transparent);
+}
+
+.em-studio-grid {
+  display: grid;
+  gap: 2rem;
+  align-items: start;
+}
+
+.em-studio-media {
+  margin: 0;
+}
+
+.em-studio-media img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 12px 12px 50% 50% / 12px 12px 30% 30%;
+  border: 1px solid var(--em-blush);
+}
+
+.em-studio-text > p {
+  color: #4b3e42;
+  max-width: 36rem;
+}
+
+.em-facts {
+  list-style: none;
+  margin: 1.6rem 0;
+  padding: 0;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.em-facts li {
+  display: grid;
+  gap: 0.15rem;
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--em-copper);
+}
+
+.em-facts strong {
+  font-size: 1rem;
+}
+
+.em-facts span {
+  font-size: 0.92rem;
+  color: #4b3e42;
+}
+
+.em-quote {
+  margin: 2rem 0 0;
+  padding: 1.4rem 1.5rem;
+  background: var(--em-paper);
+  border: 1px solid var(--em-blush);
+  border-radius: 14px;
+}
+
+.em-quote p {
+  margin: 0 0 0.6rem;
+  font-family: var(--em-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.45;
+}
+
+.em-quote cite {
+  font-style: normal;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--em-deep);
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (min-width: 720px) {
+  .em-hero-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 3rem;
+    padding: 3.5rem 0 2.5rem;
+  }
+
+  .em-service {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .em-studio-grid {
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 3.5rem;
+  }
+
+  .em-section {
+    padding: 5rem 1.5rem;
+  }
+}
+
+@media (max-width: 719px) {
+  .em-hero-media img {
+    aspect-ratio: 4 / 4.4;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .em-line-1,
+  .em-line-2,
+  .em-line-3,
+  .em-line-2::after {
+    animation: none;
+  }
+
+  .em-btn,
+  .em-service {
+    transition: none;
+  }
+}
