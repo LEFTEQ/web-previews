@@ -1,0 +1,485 @@
+/* ============================================================
+   V-PODLAHY, s.r.o. — Plzeň — parkety
+   Palette (dřevo + dílna):
+   --dub-svetly  #E8D5B0   světlý dub (broušený)
+   --dub-medovy  #C89B5E   medový dub (olejovaný)
+   --orech       #8A5A33   ořech
+   --morena      #3E2A1A   mořené dřevo / téměř černá hnědá
+   --kost        #FAF6EE   kost / brusný prach
+   --zelen       #4F6B4A   lesní zeleň (akcent — štítek řeziva)
+   Type: display = Georgia/serif s těsným prostrkáním a kurzívním akcentem,
+         body = systémový grotesk. Signature = herringbone pruhy v hero.
+   ============================================================ */
+
+:root {
+  --dub-svetly: #e8d5b0;
+  --dub-medovy: #c89b5e;
+  --orech: #8a5a33;
+  --morena: #3e2a1a;
+  --kost: #faf6ee;
+  --zelen: #4f6b4a;
+
+  --font-display: Georgia, "Times New Roman", "Noto Serif", serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--morena);
+  background: var(--kost);
+  -webkit-font-smoothing: antialiased;
+}
+
+.vp img {
+  max-width: 100%;
+  height: auto;
+}
+
+.vp :focus-visible {
+  outline: 3px solid var(--zelen);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- HERO ---------- */
+
+.vp-hero {
+  background: var(--morena);
+  color: var(--kost);
+  padding: 1.5rem 1.25rem 3.5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.vp-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.vp-wordmark {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+}
+
+.vp-wordmark-v {
+  color: var(--dub-medovy);
+}
+
+.vp-hero-loc {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--dub-svetly);
+  opacity: 0.85;
+}
+
+/* --- signature: herringbone --- */
+
+.vp-herring {
+  margin: 0 -3rem 2rem;
+  transform: rotate(-2deg);
+}
+
+.vp-herring-row {
+  display: flex;
+  height: 44px;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.vp-herring-row span {
+  flex: 1 0 auto;
+  width: 12%;
+  border-radius: 2px;
+  transform: skewX(-38deg);
+  opacity: 0;
+  animation: vp-lay 0.55s ease forwards;
+}
+
+.vp-herring-row--alt span {
+  transform: skewX(38deg);
+}
+
+/* postupná pokládka — parketa po parketě */
+.vp-herring-row span:nth-child(1) { animation-delay: 0.05s; }
+.vp-herring-row span:nth-child(2) { animation-delay: 0.12s; }
+.vp-herring-row span:nth-child(3) { animation-delay: 0.19s; }
+.vp-herring-row span:nth-child(4) { animation-delay: 0.26s; }
+.vp-herring-row span:nth-child(5) { animation-delay: 0.33s; }
+.vp-herring-row span:nth-child(6) { animation-delay: 0.4s; }
+.vp-herring-row span:nth-child(7) { animation-delay: 0.47s; }
+.vp-herring-row span:nth-child(8) { animation-delay: 0.54s; }
+.vp-herring-row span:nth-child(9) { animation-delay: 0.61s; }
+.vp-herring-row span:nth-child(10) { animation-delay: 0.68s; }
+.vp-herring-row--alt span:nth-child(1) { animation-delay: 0.09s; }
+.vp-herring-row--alt span:nth-child(2) { animation-delay: 0.16s; }
+.vp-herring-row--alt span:nth-child(3) { animation-delay: 0.23s; }
+.vp-herring-row--alt span:nth-child(4) { animation-delay: 0.3s; }
+.vp-herring-row--alt span:nth-child(5) { animation-delay: 0.37s; }
+.vp-herring-row--alt span:nth-child(6) { animation-delay: 0.44s; }
+.vp-herring-row--alt span:nth-child(7) { animation-delay: 0.51s; }
+.vp-herring-row--alt span:nth-child(8) { animation-delay: 0.58s; }
+.vp-herring-row--alt span:nth-child(9) { animation-delay: 0.65s; }
+.vp-herring-row--alt span:nth-child(10) { animation-delay: 0.72s; }
+
+@keyframes vp-lay {
+  from {
+    opacity: 0;
+    translate: -14px 0;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* odstíny dřeva — s jemným letokruhovým gradientem */
+.h1a { background: linear-gradient(105deg, var(--dub-svetly), #dcc394); }
+.h2a { background: linear-gradient(105deg, var(--dub-medovy), #b3854a); }
+.h3a { background: linear-gradient(105deg, var(--orech), #74482a); }
+.h4a { background: linear-gradient(105deg, #5c3d24, #4a3019); }
+
+/* --- hero typografie --- */
+
+.vp-hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 7.5vw, 5.2rem);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.5rem;
+  max-width: 16ch;
+}
+
+.vp-hero-line {
+  display: block;
+  opacity: 0;
+  animation: vp-rise 0.7s ease 0.35s forwards;
+}
+
+.vp-hero-line--2 {
+  animation-delay: 0.55s;
+}
+
+.vp-hero-line em {
+  font-style: italic;
+  color: var(--dub-medovy);
+}
+
+@keyframes vp-rise {
+  from {
+    opacity: 0;
+    translate: 0 22px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.vp-hero-sub {
+  max-width: 34rem;
+  font-size: 1.05rem;
+  color: var(--dub-svetly);
+  margin: 0 0 2.5rem;
+  opacity: 0;
+  animation: vp-rise 0.7s ease 0.75s forwards;
+}
+
+.vp-hero-facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  border-top: 1px solid rgba(232, 213, 176, 0.25);
+  padding-top: 1.5rem;
+  opacity: 0;
+  animation: vp-rise 0.7s ease 0.95s forwards;
+}
+
+.vp-fact strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--kost);
+}
+
+.vp-fact span {
+  font-size: 0.85rem;
+  color: var(--dub-svetly);
+  opacity: 0.85;
+}
+
+/* ---------- SEKCE OBECNĚ ---------- */
+
+.vp-eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-weight: 600;
+  color: var(--zelen);
+  margin-bottom: 0.75rem;
+}
+
+.vp-section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0;
+  max-width: 24ch;
+}
+
+.vp-section-perex {
+  max-width: 36rem;
+  margin: 1rem 0 0;
+  color: rgba(62, 42, 26, 0.75);
+}
+
+/* ---------- SLUŽBY ---------- */
+
+.vp-sluzby {
+  padding: 4rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.vp-sluzby .vp-section-head {
+  margin-bottom: 2.5rem;
+}
+
+.vp-sluzby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.vp-karta {
+  background: #fff;
+  border: 1px solid rgba(138, 90, 51, 0.18);
+  border-left: 6px solid var(--dub-medovy);
+  border-radius: 6px;
+  padding: 1.5rem 1.5rem 1.75rem;
+  transition: border-left-color 0.25s ease, translate 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.vp-karta:hover {
+  border-left-color: var(--orech);
+  translate: 0 -3px;
+  box-shadow: 0 10px 28px rgba(62, 42, 26, 0.1);
+}
+
+.vp-karta-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.vp-karta-krok {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--orech);
+}
+
+.vp-karta-detail {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--zelen);
+  background: rgba(79, 107, 74, 0.1);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+}
+
+.vp-karta h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  line-height: 1.25;
+  margin: 0 0 0.5rem;
+}
+
+.vp-karta p {
+  margin: 0;
+  color: rgba(62, 42, 26, 0.78);
+  font-size: 0.98rem;
+}
+
+.vp-sluzby-note {
+  margin: 2.5rem 0 0;
+  padding: 1.25rem 1.5rem;
+  background: var(--dub-svetly);
+  border-radius: 6px;
+  font-size: 1rem;
+  max-width: 46rem;
+}
+
+/* ---------- REFERENCE ---------- */
+
+.vp-reference {
+  background: linear-gradient(180deg, #f1e6d0, var(--kost));
+  padding: 4rem 1.25rem 4.5rem;
+}
+
+.vp-reference .vp-section-head {
+  max-width: 72rem;
+  margin: 0 auto 2.5rem;
+}
+
+.vp-ref-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto 3rem;
+}
+
+.vp-ref {
+  margin: 0;
+  background: #fff;
+  border-radius: 6px;
+  padding: 1.5rem;
+  border-top: 6px solid var(--orech);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.vp-ref:nth-child(2) {
+  border-top-color: var(--dub-medovy);
+}
+
+.vp-ref:nth-child(3) {
+  border-top-color: var(--dub-svetly);
+}
+
+.vp-ref-misto {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  color: var(--zelen);
+}
+
+.vp-ref blockquote {
+  margin: 0;
+}
+
+.vp-ref blockquote p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  line-height: 1.5;
+  color: var(--morena);
+}
+
+.vp-ref-jmeno {
+  font-size: 0.9rem;
+  color: rgba(62, 42, 26, 0.65);
+}
+
+.vp-duvera {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  border-top: 2px solid var(--morena);
+  padding-top: 1.5rem;
+}
+
+.vp-duvera-item strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+
+.vp-duvera-item span {
+  font-size: 0.9rem;
+  color: rgba(62, 42, 26, 0.7);
+}
+
+/* ---------- RESPONZIVITA ---------- */
+
+@media (min-width: 640px) {
+  .vp-hero {
+    padding: 2rem 2.5rem 4.5rem;
+  }
+
+  .vp-hero-facts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .vp-sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vp-duvera {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .vp-hero {
+    padding: 2.5rem 4rem 5.5rem;
+  }
+
+  .vp-herring-row {
+    height: 58px;
+  }
+
+  .vp-sluzby,
+  .vp-reference {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .vp-ref-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------- REDUKOVANÝ POHYB ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .vp-herring-row span,
+  .vp-hero-line,
+  .vp-hero-sub,
+  .vp-hero-facts {
+    animation: none;
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  .vp-karta,
+  .vp-karta:hover {
+    transition: none;
+    translate: 0 0;
+  }
+}
