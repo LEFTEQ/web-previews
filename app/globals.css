@@ -1,0 +1,492 @@
+/* =====================================================================
+   GIENGER Tábor — fotovoltaika · Hradec Králové
+   Koncept: „bilance slunečního dne" — hluboká modř křemíkového panelu
+   + sluneční žluť. Signature: gt-sunband, denní křivka výroby FVE.
+   Typ: Archivo (display, technický grotesk s šířkovými řezy) + system body.
+   ===================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;0,800;1,700&family=Archivo+Expanded:wght@700;800&display=swap');
+
+:root {
+  --gt-cell: #0b1f3a;        /* hluboká modř FV článku */
+  --gt-cell-deep: #071426;   /* stín pod panelem */
+  --gt-sun: #ffc21a;         /* sluneční žluť */
+  --gt-sun-hot: #ff9d0a;     /* poledne */
+  --gt-sky: #eef3f9;         /* denní obloha, podklad */
+  --gt-ink: #14233a;         /* text */
+  --gt-mute: #55657e;        /* sekundární text */
+  --gt-line: #d4deea;
+
+  --gt-font-display: 'Archivo Expanded', 'Archivo', system-ui, sans-serif;
+  --gt-font-body: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--gt-font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--gt-ink);
+  background: var(--gt-sky);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+.gt a:focus-visible,
+.gt button:focus-visible {
+  outline: 3px solid var(--gt-sun);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- HERO ---------- */
+
+.gt-hero {
+  position: relative;
+  min-height: 92svh;
+  display: flex;
+  color: #fff;
+  background: var(--gt-cell-deep);
+  overflow: hidden;
+}
+
+.gt-hero__media { position: absolute; inset: 0; }
+
+.gt-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.gt-hero__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(12deg, rgba(7, 20, 38, 0.94) 22%, rgba(7, 20, 38, 0.55) 55%, rgba(11, 31, 58, 0.18) 100%);
+}
+
+.gt-hero__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.gt-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0 1.5rem;
+}
+
+.gt-wordmark {
+  font-family: var(--gt-font-display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.14em;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.gt-wordmark__dot { color: var(--gt-sun); margin: 0 0.15em; }
+
+.gt-wordmark__sub {
+  font-family: var(--gt-font-body);
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  font-size: 0.8em;
+  color: #b8c6da;
+}
+
+.gt-topbar__tel {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  border-bottom: 2px solid var(--gt-sun);
+  padding-bottom: 2px;
+}
+
+.gt-topbar__telnote {
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: #b8c6da;
+  margin-left: 0.35em;
+}
+
+.gt-hero__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 0 2.5rem;
+  max-width: 44rem;
+  animation: gt-rise 0.7s ease-out both;
+}
+
+.gt-hero__eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gt-sun);
+}
+
+.gt-hero__title {
+  margin: 0 0 1.25rem;
+  font-family: var(--gt-font-display);
+  font-weight: 800;
+  font-size: clamp(2.1rem, 6.5vw, 4.1rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.gt-hero__title em {
+  font-style: italic;
+  font-family: 'Archivo', var(--gt-font-body);
+  color: var(--gt-sun);
+}
+
+.gt-hero__lead {
+  margin: 0 0 2rem;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.65;
+  color: #dce5f0;
+  max-width: 36rem;
+}
+
+.gt-hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+.gt-btn {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  font-family: var(--gt-font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.gt-btn--solar {
+  background: var(--gt-sun);
+  color: var(--gt-cell-deep);
+}
+
+.gt-btn--solar:hover { background: var(--gt-sun-hot); transform: translateY(-2px); }
+
+.gt-btn--ghost {
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+}
+
+.gt-btn--ghost:hover { border-color: var(--gt-sun); color: var(--gt-sun); }
+
+/* ---- SIGNATURE: sluneční pásmo (denní křivka výroby) ---- */
+
+.gt-sunband {
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 1rem 0 1.25rem;
+}
+
+.gt-sunband__track {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(4px, 1.2vw, 12px);
+  height: 64px;
+}
+
+.gt-sunband__bar {
+  flex: 1;
+  height: var(--h, 20%);
+  background: linear-gradient(180deg, var(--gt-sun) 0%, var(--gt-sun-hot) 100%);
+  border-radius: 3px 3px 0 0;
+  opacity: 0.85;
+  transform-origin: bottom;
+  animation: gt-grow 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.gt-sunband__bar:nth-child(2) { animation-delay: 0.06s; }
+.gt-sunband__bar:nth-child(3) { animation-delay: 0.12s; }
+.gt-sunband__bar:nth-child(4) { animation-delay: 0.18s; }
+.gt-sunband__bar:nth-child(5) { animation-delay: 0.24s; }
+.gt-sunband__bar:nth-child(6) { animation-delay: 0.3s; }
+.gt-sunband__bar:nth-child(7) { animation-delay: 0.36s; }
+.gt-sunband__bar:nth-child(8) { animation-delay: 0.42s; }
+.gt-sunband__bar:nth-child(9) { animation-delay: 0.48s; }
+
+.gt-sunband__bar--peak {
+  opacity: 1;
+  box-shadow: 0 0 24px rgba(255, 194, 26, 0.55);
+}
+
+.gt-sunband__labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-top: 0.6rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: #b8c6da;
+  font-variant-numeric: tabular-nums;
+}
+
+.gt-sunband__peak {
+  text-align: center;
+  color: var(--gt-sun);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- SEKCE obecně ---------- */
+
+.gt-section { padding: clamp(3.5rem, 8vw, 6.5rem) 1.25rem; }
+
+.gt-section__head { max-width: 72rem; margin: 0 auto 2.5rem; }
+
+.gt-eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gt-sun-hot);
+}
+
+.gt-eyebrow--light { color: var(--gt-sun); }
+
+.gt-h2 {
+  margin: 0 0 1rem;
+  font-family: var(--gt-font-display);
+  font-weight: 800;
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  max-width: 34ch;
+  text-wrap: balance;
+}
+
+.gt-h2--light { color: #fff; }
+
+.gt-section__lead {
+  margin: 0;
+  max-width: 40rem;
+  color: var(--gt-mute);
+  font-size: 1.05rem;
+}
+
+.gt-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* ---------- SEKCE 1: sortiment ---------- */
+
+.gt-sortiment__grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 2rem;
+}
+
+.gt-sortiment__media {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.gt-sortiment__caption,
+.gt-partner__caption {
+  font-size: 0.85rem;
+  color: var(--gt-mute);
+  padding-left: 0.85rem;
+  border-left: 3px solid var(--gt-sun);
+  line-height: 1.5;
+}
+
+.gt-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.gt-card {
+  background: #fff;
+  border: 1px solid var(--gt-line);
+  border-radius: 8px;
+  padding: 1.4rem 1.5rem;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gt-card:hover {
+  border-color: var(--gt-sun);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(11, 31, 58, 0.1);
+}
+
+.gt-card__tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gt-cell);
+  background: rgba(255, 194, 26, 0.28);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.8rem;
+}
+
+.gt-card__title {
+  margin: 0 0 0.5rem;
+  font-family: var(--gt-font-display);
+  font-weight: 700;
+  font-size: 1.08rem;
+  line-height: 1.3;
+}
+
+.gt-card__text { margin: 0; color: var(--gt-mute); font-size: 0.95rem; }
+
+/* ---------- SEKCE 2: partnerství ---------- */
+
+.gt-partner {
+  background:
+    radial-gradient(80rem 40rem at 85% -10%, rgba(255, 194, 26, 0.12), transparent 60%),
+    var(--gt-cell);
+  color: #dce5f0;
+}
+
+.gt-partner__grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+}
+
+.gt-partner__text { margin: 0 0 2rem; max-width: 38rem; font-size: 1.05rem; }
+
+.gt-facts {
+  margin: 0 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+
+.gt-facts__item {
+  border-left: 3px solid var(--gt-sun);
+  padding-left: 1rem;
+}
+
+.gt-facts__item dt {
+  font-family: var(--gt-font-display);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+
+.gt-facts__item dd { margin: 0; font-size: 0.95rem; color: #b8c6da; }
+
+.gt-quote {
+  margin: 0;
+  padding: 1.4rem 1.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+}
+
+.gt-quote p {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #fff;
+  font-style: italic;
+}
+
+.gt-quote cite {
+  font-style: normal;
+  font-size: 0.85rem;
+  color: var(--gt-sun);
+}
+
+.gt-partner__media {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.gt-partner__caption { color: #b8c6da; }
+
+/* ---------- animace ---------- */
+
+@keyframes gt-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gt-grow {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+/* ---------- desktop ---------- */
+
+@media (min-width: 760px) {
+  .gt-hero__inner { padding: 1.5rem 2rem 0; }
+
+  .gt-sortiment__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: start;
+  }
+
+  .gt-cards { grid-template-columns: 1fr 1fr; }
+
+  .gt-partner__grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: center;
+  }
+
+  .gt-facts { grid-template-columns: 1fr 1fr; }
+
+  .gt-section { padding-left: 2rem; padding-right: 2rem; }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .gt-hero__content,
+  .gt-sunband__bar {
+    animation: none;
+  }
+
+  .gt-btn,
+  .gt-card {
+    transition: none;
+  }
+
+  .gt-card:hover,
+  .gt-btn--solar:hover {
+    transform: none;
+  }
+}
