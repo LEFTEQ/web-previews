@@ -1,0 +1,556 @@
+/* =====================================================
+   AUTO 3000 — odtahová služba Sokolov
+   Paleta: noční asfalt, výstražná žluť majáku, reflexní
+   šrafování odtahového vozu. Typografie: úzký těžký
+   grotesk jako nápis na bočnici tahače.
+   ===================================================== */
+
+:root {
+  --asfalt: #14161a;      /* noční silnice */
+  --asfalt-2: #1d2026;    /* mokrý asfalt */
+  --majak: #ffc400;       /* výstražná žluť */
+  --majak-tma: #b98a00;
+  --mlha: #eceef1;        /* světlo reflektorů */
+  --seda: #9aa0ab;        /* svodidla */
+  --cervena: #e23c2e;     /* trojúhelník */
+
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Impact, "Arial", sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--mlha);
+  background: var(--asfalt);
+  -webkit-font-smoothing: antialiased;
+}
+
+.a3 a:focus-visible,
+.a3 button:focus-visible {
+  outline: 3px solid var(--majak);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =============== HERO =============== */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(120% 90% at 85% -10%, rgba(255, 196, 0, 0.14), transparent 55%),
+    linear-gradient(180deg, var(--asfalt-2) 0%, var(--asfalt) 70%);
+  overflow: hidden;
+}
+
+/* Signature: reflexní šrafování odtahového vozu, šikmé
+   žluto-černé pruhy jako na zadním čele tahače */
+.hero-hazard {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: clamp(56px, 12vw, 160px);
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--majak) 0px,
+    var(--majak) 26px,
+    var(--asfalt) 26px,
+    var(--asfalt) 52px
+  );
+  border-left: 4px solid var(--majak);
+  animation: hazard-roll 2.6s linear infinite;
+}
+
+@keyframes hazard-roll {
+  to {
+    background-position: 0 73.5px;
+  }
+}
+
+.hero-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.4rem clamp(1.2rem, 5vw, 4rem);
+  padding-right: clamp(5rem, 16vw, 14rem);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: condensed;
+  letter-spacing: 0.04em;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+.wordmark-auto {
+  color: var(--mlha);
+}
+
+.wordmark-num {
+  color: var(--asfalt);
+  background: var(--majak);
+  padding: 0.05em 0.35em;
+  transform: skewX(-8deg);
+  display: inline-block;
+}
+
+.hero-top-tel {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  color: var(--majak);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.hero-top-tel:hover {
+  border-bottom-color: var(--majak);
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem clamp(1.2rem, 5vw, 4rem);
+  padding-right: clamp(5rem, 16vw, 14rem);
+  max-width: 62rem;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--seda);
+  animation: rise-in 0.7s ease-out both;
+}
+
+.blink-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--majak);
+  box-shadow: 0 0 12px 2px rgba(255, 196, 0, 0.7);
+  animation: beacon 1.4s ease-in-out infinite;
+  flex: none;
+}
+
+@keyframes beacon {
+  0%, 100% { opacity: 1; box-shadow: 0 0 14px 3px rgba(255, 196, 0, 0.8); }
+  50% { opacity: 0.35; box-shadow: 0 0 4px 0 rgba(255, 196, 0, 0.3); }
+}
+
+.hero-title {
+  margin: 0 0 1.4rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  line-height: 0.94;
+  letter-spacing: -0.01em;
+  font-size: clamp(3.2rem, 12vw, 8.5rem);
+  color: var(--mlha);
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-line-1 {
+  color: var(--seda);
+  animation: rise-in 0.7s 0.1s ease-out both;
+}
+
+.hero-line-2 {
+  animation: rise-in 0.7s 0.25s ease-out both;
+}
+
+.hero-line-2 em {
+  font-style: normal;
+  color: var(--majak);
+}
+
+.hero-sub {
+  margin: 0 0 2.2rem;
+  max-width: 34rem;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  color: var(--seda);
+  animation: rise-in 0.7s 0.4s ease-out both;
+}
+
+.hero-cta {
+  animation: rise-in 0.7s 0.55s ease-out both;
+}
+
+.btn-call {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.9rem 1.8rem 1rem;
+  background: var(--majak);
+  color: var(--asfalt);
+  text-decoration: none;
+  border-radius: 4px;
+  box-shadow: 0 6px 24px rgba(255, 196, 0, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-call:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 196, 0, 0.35);
+}
+
+.btn-call-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.btn-call-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+}
+
+.hero-cta-note {
+  margin: 0.9rem 0 0;
+  font-size: 0.9rem;
+  color: var(--seda);
+  max-width: 28rem;
+}
+
+.hero-strip {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem 1.1rem;
+  padding: 1rem clamp(1.2rem, 5vw, 4rem);
+  padding-right: clamp(5rem, 16vw, 14rem);
+  border-top: 1px solid rgba(236, 238, 241, 0.12);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
+  color: var(--seda);
+}
+
+.strip-sep {
+  color: var(--majak);
+  font-size: 0.6rem;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =============== SLUŽBY =============== */
+
+.sluzby {
+  background: var(--mlha);
+  color: var(--asfalt);
+  padding: clamp(3.5rem, 9vw, 7rem) clamp(1.2rem, 5vw, 4rem);
+}
+
+.section-head {
+  max-width: 44rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.section-eyebrow {
+  margin: 0 0 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--majak-tma);
+}
+
+.section-eyebrow-inv {
+  color: var(--majak);
+}
+
+.section-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  font-size: clamp(1.9rem, 5.5vw, 3.4rem);
+  line-height: 1.02;
+  color: var(--asfalt);
+}
+
+.section-title-inv {
+  color: var(--mlha);
+  max-width: 30ch;
+}
+
+.section-lede {
+  margin: 0;
+  color: #4b515c;
+  font-size: 1.05rem;
+}
+
+.sluzby-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  max-width: 56rem;
+}
+
+.sluzba {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.2rem;
+  padding: 1.6rem 0;
+  border-top: 2px solid var(--asfalt);
+}
+
+.sluzba:last-child {
+  border-bottom: 2px solid var(--asfalt);
+}
+
+.sluzba-marker {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1;
+  color: var(--asfalt);
+  background: var(--majak);
+  padding: 0.2em 0.3em;
+  align-self: start;
+  transform: skewX(-8deg);
+  min-width: 2.4em;
+  text-align: center;
+}
+
+.sluzba-nazev {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  font-size: clamp(1.25rem, 3vw, 1.7rem);
+  letter-spacing: 0.02em;
+}
+
+.sluzba-popis {
+  margin: 0 0 0.5rem;
+  color: #3c414b;
+  max-width: 44rem;
+}
+
+.sluzba-detail {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--majak-tma);
+}
+
+.sluzby-pozn {
+  margin: 1.6rem 0 0;
+  font-size: 0.95rem;
+  color: #6a707b;
+  max-width: 44rem;
+}
+
+/* =============== DŮVĚRA =============== */
+
+.duvera {
+  background:
+    radial-gradient(100% 70% at 15% 0%, rgba(255, 196, 0, 0.08), transparent 55%),
+    var(--asfalt);
+  color: var(--mlha);
+  padding: clamp(3.5rem, 9vw, 7rem) clamp(1.2rem, 5vw, 4rem);
+  border-top: 8px solid var(--majak);
+}
+
+.duvera-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem;
+  max-width: 72rem;
+}
+
+.duvera-karta {
+  background: var(--asfalt-2);
+  border: 1px solid rgba(236, 238, 241, 0.1);
+  border-radius: 6px;
+  padding: 1.6rem 1.4rem;
+}
+
+.duvera-cislo {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  line-height: 1;
+  color: var(--majak);
+  letter-spacing: 0.02em;
+}
+
+.duvera-titulek {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--mlha);
+}
+
+.duvera-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--seda);
+}
+
+.zakladna {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  padding: 1.6rem clamp(1.2rem, 3vw, 2.2rem);
+  border-left: 6px solid var(--majak);
+  background: rgba(255, 196, 0, 0.06);
+  max-width: 46rem;
+}
+
+.zakladna-label {
+  margin: 0 0 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--majak);
+}
+
+.zakladna-adresa {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.zakladna-pozn {
+  margin: 0;
+  color: var(--seda);
+  font-size: 0.95rem;
+}
+
+.zakladna-tel {
+  color: var(--majak);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(255, 196, 0, 0.4);
+}
+
+.zakladna-tel:hover {
+  border-bottom-color: var(--majak);
+}
+
+/* =============== RESPONSIVE =============== */
+
+@media (max-width: 640px) {
+  .hero-hazard {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: 28px;
+    border-left: none;
+    border-top: 3px solid var(--majak);
+  }
+
+  .hero-top,
+  .hero-body,
+  .hero-strip {
+    padding-right: clamp(1.2rem, 5vw, 4rem);
+  }
+
+  .hero-strip {
+    padding-bottom: 3.2rem;
+  }
+
+  .hero-top-tel {
+    font-size: 1rem;
+  }
+
+  .sluzba {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .sluzba-marker {
+    justify-self: start;
+    min-width: auto;
+  }
+}
+
+/* =============== REDUCED MOTION =============== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-hazard,
+  .blink-dot,
+  .hero-eyebrow,
+  .hero-line-1,
+  .hero-line-2,
+  .hero-sub,
+  .hero-cta {
+    animation: none;
+  }
+
+  .btn-call,
+  .btn-call:hover {
+    transform: none;
+    transition: none;
+  }
+}
