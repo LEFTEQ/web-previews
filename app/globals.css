@@ -1,0 +1,486 @@
+/* =====================================================
+   Jiří Čoupek — klimatizace Brno
+   Koncept: „provozní štítek a proud vzduchu“
+   Paleta:  hluboká strojní modř / ledový cyan / žár oranž
+   Typo:    Archivo (Expanded pro display) + Archivo pro text
+   Signature: horizontální lamely výdechu klimatizace,
+              teplotní kontrast 34 °C → 23 °C v heru
+   ===================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap");
+
+:root {
+  --strojni: #0b2431;      /* hluboká strojní modř */
+  --strojni-2: #0f3140;    /* o stupeň světlejší plocha */
+  --led: #6fd6e8;          /* ledový cyan — chlad */
+  --led-svetly: #d9f3f8;   /* ledová plocha na světlém pozadí */
+  --zar: #ff6a3d;          /* žár — horko, akce, telefon */
+  --papir: #f2f7f8;        /* chladný světlý podklad, ne krémový */
+  --inkoust: #12262f;
+  --seda: #57707b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Archivo", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--inkoust);
+  background: var(--papir);
+  -webkit-font-smoothing: antialiased;
+}
+
+.kl a:focus-visible,
+.kl .btn:focus-visible {
+  outline: 3px solid var(--zar);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  background: linear-gradient(168deg, var(--strojni) 0%, var(--strojni-2) 72%, #123a4c 100%);
+  color: #eef8fa;
+  padding: 1.25rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.hero-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.5rem 0 1rem;
+}
+
+.wordmark {
+  font-weight: 900;
+  font-stretch: 118%;
+  letter-spacing: 0.14em;
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.wordmark-sub {
+  display: block;
+  font-weight: 400;
+  font-stretch: 100%;
+  letter-spacing: 0.05em;
+  font-size: 0.72rem;
+  color: var(--led);
+  margin-top: 0.1rem;
+}
+
+.hero-tel {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  border-bottom: 2px solid var(--zar);
+  padding-bottom: 2px;
+}
+
+.hero-tel:hover {
+  color: var(--led);
+}
+
+.hero-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 0 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--led);
+}
+
+.hero-title {
+  margin: 0;
+  font-weight: 900;
+  font-stretch: 122%;
+  text-transform: uppercase;
+  line-height: 0.98;
+  font-size: clamp(2.6rem, 9.5vw, 6.5rem);
+  letter-spacing: -0.01em;
+}
+
+.hero-title .line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.5em);
+  animation: vyfouknuti 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.hero-title .l1 { animation-delay: 0.05s; }
+.hero-title .l2 { animation-delay: 0.22s; }
+.hero-title .l3 { animation-delay: 0.42s; }
+.hero-title .l4 { animation-delay: 0.62s; }
+
+@keyframes vyfouknuti {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.temp {
+  font-variant-numeric: tabular-nums;
+}
+
+.temp.hot {
+  color: var(--zar);
+}
+
+.temp.cold {
+  color: var(--led);
+}
+
+.hero-lead {
+  max-width: 34em;
+  margin: 1.75rem 0 0;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  color: #c9e2e9;
+}
+
+.hero-akce {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 6px;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.btn-plna {
+  background: var(--zar);
+  color: #26120a;
+}
+
+.btn-plna:hover {
+  background: #ff835c;
+  transform: translateY(-2px);
+}
+
+.btn-linka {
+  color: var(--led);
+  border: 2px solid rgba(111, 214, 232, 0.55);
+}
+
+.btn-linka:hover {
+  border-color: var(--led);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.hero-hodiny {
+  margin: 1.25rem 0 0;
+  font-size: 0.85rem;
+  color: #8fb4bf;
+}
+
+/* --- signature: lamely výdechu --- */
+
+.lamely {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  gap: 10px;
+  padding-bottom: 2.25rem;
+}
+
+.lam {
+  display: block;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--zar) 0%, #b77a6d 28%, var(--led) 62%, var(--led) 100%);
+  opacity: 0;
+  transform: translateX(-3%);
+  animation: proud 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.lam:nth-child(1) { width: 100%; animation-delay: 0.55s; }
+.lam:nth-child(2) { width: 88%;  animation-delay: 0.65s; opacity-final: 1; }
+.lam:nth-child(3) { width: 74%;  animation-delay: 0.75s; }
+.lam:nth-child(4) { width: 60%;  animation-delay: 0.85s; }
+.lam:nth-child(5) { width: 46%;  animation-delay: 0.95s; }
+.lam:nth-child(6) { width: 32%;  animation-delay: 1.05s; }
+.lam:nth-child(7) { width: 18%;  animation-delay: 1.15s; }
+
+@keyframes proud {
+  to {
+    opacity: 0.9;
+    transform: translateX(0);
+  }
+}
+
+/* ============ SLUŽBY ============ */
+
+.sluzby {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem 3rem;
+}
+
+.sekce-hlava h2,
+.duvera h2 {
+  margin: 0;
+  font-weight: 900;
+  font-stretch: 118%;
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+.sekce-pozn {
+  margin: 0.75rem 0 0;
+  color: var(--seda);
+  max-width: 38em;
+}
+
+.sluzby-mrizka {
+  list-style: none;
+  margin: 2.25rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.karta {
+  background: #fff;
+  border: 1px solid #dcebef;
+  border-top: 6px solid var(--led);
+  border-radius: 10px;
+  padding: 1.5rem 1.4rem 1.3rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(11, 36, 49, 0.12);
+}
+
+.karta-kod {
+  display: inline-block;
+  font-weight: 800;
+  font-stretch: 118%;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--strojni);
+  background: var(--led-svetly);
+  border-radius: 4px;
+  padding: 0.2rem 0.55rem;
+  margin-bottom: 0.9rem;
+}
+
+.karta h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.karta p {
+  margin: 0;
+  color: #3c545e;
+  font-size: 0.98rem;
+}
+
+.karta-detail {
+  margin-top: 1rem !important;
+  padding-top: 0.85rem;
+  border-top: 1px dashed #cfe3e9;
+  font-size: 0.85rem !important;
+  color: var(--seda) !important;
+}
+
+/* ============ DŮVĚRA ============ */
+
+.duvera {
+  background: #fff;
+  border-top: 1px solid #dcebef;
+  padding: 4rem 1.25rem;
+}
+
+.duvera-vnitrek {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.duvera-uvod {
+  margin: 1.25rem 0 0;
+  color: #3c545e;
+  max-width: 36em;
+}
+
+.duvody {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.duvody li {
+  padding-left: 1.1rem;
+  border-left: 4px solid var(--zar);
+}
+
+.duvody h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.02rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.duvody p {
+  margin: 0;
+  color: #3c545e;
+  font-size: 0.96rem;
+}
+
+/* provozní štítek — jako štítek na jednotce */
+
+.stitek {
+  background: var(--strojni);
+  color: #dff1f5;
+  border-radius: 12px;
+  padding: 1.75rem 1.5rem;
+  align-self: start;
+  box-shadow: 0 18px 40px rgba(11, 36, 49, 0.25);
+}
+
+.stitek-nadpis {
+  margin: 0 0 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--led);
+  border-bottom: 1px solid rgba(111, 214, 232, 0.3);
+  padding-bottom: 0.75rem;
+}
+
+.stitek dl {
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.stitek dt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #8fb4bf;
+  margin-bottom: 0.15rem;
+}
+
+.stitek dd {
+  margin: 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.stitek a {
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid var(--zar);
+}
+
+.stitek a:hover {
+  color: var(--led);
+}
+
+/* ============ RESPONZIVITA ============ */
+
+@media (min-width: 680px) {
+  .sluzby-mrizka {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .wordmark-sub {
+    display: inline;
+    margin-left: 0.6rem;
+  }
+}
+
+@media (min-width: 920px) {
+  .duvera-vnitrek {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 4rem;
+  }
+
+  .duvody {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-body {
+    padding-top: 3.5rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-title .line,
+  .lam {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .lam {
+    opacity: 0.9;
+  }
+
+  .btn,
+  .karta {
+    transition: none;
+  }
+
+  .btn:hover,
+  .karta:hover {
+    transform: none;
+  }
+}
