@@ -1,0 +1,457 @@
+/* ==========================================================================
+   ALIGERO — železářství Plzeň
+   Paleta odvozená z materiálů řemesla:
+   ocel (grafit), pozink (studená šeď), mosaz (žlutá signální), papír skladových
+   štítků (světlá). Signature: metrická závitová stupnice M3–M30 v heru.
+   ========================================================================== */
+
+:root {
+  --al-ocel: #23282e;        /* tmavá ocel — pozadí hera */
+  --al-ocel-hl: #2e343c;     /* světlejší ocel — karty na tmavé */
+  --al-pozink: #aeb6bd;      /* pozinkovaná šeď — sekundární text na tmavé */
+  --al-mosaz: #e8b420;       /* mosazná žlutá — akcent, štítky rozměrů */
+  --al-mosaz-dark: #b8880e;  /* tmavší mosaz pro text na světlé (kontrast) */
+  --al-stitek: #f0f2f4;      /* chladná světlá — pozadí obsahu */
+  --al-inkoust: #1b1f24;     /* text na světlé */
+
+  --al-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+  --al-body: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --al-mono: "Consolas", "SF Mono", "Roboto Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--al-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--al-inkoust);
+  background: var(--al-stitek);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus stavy — viditelné všude */
+.al a:focus-visible,
+.al button:focus-visible {
+  outline: 3px solid var(--al-mosaz);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ===================== HERO ===================== */
+
+.al-hero {
+  background:
+    linear-gradient(160deg, var(--al-ocel) 0%, #1a1e23 100%);
+  color: #fff;
+  padding: 1.5rem 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 92vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemná textura rýhovaného plechu — svislé linky */
+.al-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 79px,
+    rgba(255, 255, 255, 0.03) 79px,
+    rgba(255, 255, 255, 0.03) 80px
+  );
+  pointer-events: none;
+}
+
+.al-hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.al-wordmark {
+  font-family: var(--al-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.14em;
+  color: #fff;
+}
+
+.al-wordmark-bolt {
+  color: var(--al-mosaz);
+  display: inline-block;
+  transform: rotate(90deg) translateX(0.04em);
+  font-size: 0.9em;
+}
+
+.al-hero-loc {
+  font-family: var(--al-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--al-pozink);
+}
+
+.al-hero-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 62rem;
+  margin: 0 auto;
+  width: 100%;
+  padding: 3rem 0 2rem;
+  position: relative;
+}
+
+.al-hero-eyebrow {
+  font-family: var(--al-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--al-mosaz);
+  margin: 0 0 1rem;
+}
+
+.al-hero-title {
+  font-family: var(--al-display);
+  font-size: clamp(2.4rem, 9vw, 6.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+}
+
+.al-line { display: block; }
+
+.al-line-2, .al-line-3 { color: #fff; }
+
+.al-size-tag {
+  display: inline-block;
+  font-family: var(--al-mono);
+  font-size: 0.32em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: var(--al-mosaz);
+  color: var(--al-ocel);
+  padding: 0.25em 0.55em;
+  border-radius: 3px;
+  vertical-align: 0.55em;
+  margin-right: 0.25em;
+  transform: rotate(-4deg);
+}
+
+.al-size-tag-end {
+  margin-right: 0;
+  margin-left: 0.25em;
+  transform: rotate(3deg);
+}
+
+.al-hero-sub {
+  max-width: 34rem;
+  font-size: 1.05rem;
+  color: var(--al-pozink);
+  margin: 0 0 2rem;
+}
+
+.al-hero-cta {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.al-btn {
+  display: inline-block;
+  font-family: var(--al-body);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.al-btn-primary {
+  background: var(--al-mosaz);
+  color: var(--al-ocel);
+}
+
+.al-btn-primary:hover { background: #f5c43a; transform: translateY(-2px); }
+
+.al-btn-ghost {
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+.al-btn-ghost:hover { border-color: var(--al-mosaz); color: var(--al-mosaz); }
+
+/* --- Signature: závitová stupnice M3–M30 --- */
+
+.al-thread {
+  position: relative;
+  margin: 0 -1.25rem;
+  padding: 0 1.25rem 1.75rem;
+}
+
+.al-thread-rule {
+  height: 3px;
+  background: linear-gradient(90deg, var(--al-mosaz), rgba(232, 180, 32, 0.15));
+  margin-bottom: 0.6rem;
+}
+
+.al-thread-scale {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25rem;
+}
+
+.al-thread-mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  animation: al-tick-in 0.5s ease both;
+  animation-delay: calc(0.35s + var(--i) * 0.07s);
+}
+
+.al-thread-tick {
+  width: 2px;
+  /* výška ticku roste s velikostí závitu */
+  height: calc(8px + var(--i) * 2.4px);
+  background: var(--al-mosaz);
+  opacity: 0.85;
+}
+
+.al-thread-label {
+  font-family: var(--al-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--al-pozink);
+}
+
+/* na mobilu zobraz jen část stupnice, ať se labely nemačkají */
+@media (max-width: 640px) {
+  .al-thread-mark:nth-child(even) .al-thread-label { visibility: hidden; }
+}
+
+/* Page-load sekvence */
+@keyframes al-rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes al-tick-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.al-hero-eyebrow { animation: al-rise 0.55s ease both 0.05s; }
+.al-line-1 { animation: al-rise 0.55s ease both 0.12s; }
+.al-line-2 { animation: al-rise 0.55s ease both 0.2s; }
+.al-line-3 { animation: al-rise 0.55s ease both 0.28s; }
+.al-hero-sub { animation: al-rise 0.55s ease both 0.38s; }
+.al-hero-cta { animation: al-rise 0.55s ease both 0.46s; }
+
+/* ===================== SEKCE (společné) ===================== */
+
+.al-section {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+}
+
+.al-section-head { max-width: 40rem; margin-bottom: 2.5rem; }
+
+.al-h2 {
+  font-family: var(--al-display);
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  margin: 0 0 0.75rem;
+}
+
+.al-section-sub {
+  color: #4a525a;
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* ===================== SORTIMENT ===================== */
+
+.al-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 700px) {
+  .al-grid { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+}
+
+.al-card {
+  background: #fff;
+  border: 1px solid #dde1e5;
+  border-radius: 6px;
+  padding: 1.5rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.al-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(35, 40, 46, 0.1);
+}
+
+.al-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.75rem;
+}
+
+.al-din {
+  font-family: var(--al-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--al-mosaz-dark);
+  border: 1px solid var(--al-mosaz);
+  border-radius: 3px;
+  padding: 0.15rem 0.5rem;
+}
+
+.al-range {
+  font-family: var(--al-mono);
+  font-size: 0.78rem;
+  color: #6a737c;
+}
+
+.al-card-title {
+  font-family: var(--al-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 0 0 0.5rem;
+}
+
+.al-card-text { margin: 0; color: #3c434b; }
+
+.al-note {
+  margin: 2rem 0 0;
+  font-family: var(--al-mono);
+  font-size: 0.9rem;
+  color: #4a525a;
+  border-left: 3px solid var(--al-mosaz);
+  padding-left: 1rem;
+}
+
+/* ===================== DŮVĚRA ===================== */
+
+.al-duvera {
+  border-top: 3px solid var(--al-ocel);
+}
+
+.al-facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+@media (min-width: 700px) {
+  .al-facts { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+}
+
+.al-fact {
+  border-top: 3px solid var(--al-mosaz);
+  padding-top: 1rem;
+}
+
+.al-fact-num {
+  font-family: var(--al-display);
+  font-size: 2.2rem;
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--al-ocel);
+}
+
+.al-fact-text { margin: 0; color: #3c434b; font-size: 0.98rem; }
+
+.al-refs-title {
+  font-family: var(--al-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--al-mosaz-dark);
+  margin: 0 0 1.25rem;
+}
+
+.al-refs-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 860px) {
+  .al-refs-list { grid-template-columns: repeat(3, 1fr); }
+}
+
+.al-ref {
+  background: var(--al-ocel);
+  color: #e8ebee;
+  border-radius: 6px;
+  padding: 1.5rem;
+}
+
+.al-ref-quote { margin: 0; }
+
+.al-ref-quote p {
+  margin: 0 0 1rem;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.al-ref-autor {
+  font-family: var(--al-mono);
+  font-style: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--al-mosaz);
+}
+
+/* ===================== REDUCED MOTION ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .al-hero-eyebrow,
+  .al-line-1,
+  .al-line-2,
+  .al-line-3,
+  .al-hero-sub,
+  .al-hero-cta,
+  .al-thread-mark {
+    animation: none;
+  }
+
+  .al-btn,
+  .al-card {
+    transition: none;
+  }
+}
