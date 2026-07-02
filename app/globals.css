@@ -1,0 +1,581 @@
+/* =====================================================================
+   SBD Vítkovice — design system „Panelová mřížka"
+   Paleta odvozená z ostravského panelového sídliště po revitalizaci:
+   - beton (tmavě šedomodrá), omítka (světlá), zateplená fasáda (žlutá
+     okrová — typická barva revitalizovaných panelák�� v Ostravě),
+     rozsvícené okno (teplá žluť), spárořez (tmavá linka).
+   Typografie: těžký grotesk pro titulky (systémový stack s Arial Black /
+   Helvetica — odkaz na technické štítky a čísla vchodů), čitelný
+   humanistický grotesk pro text.
+   ===================================================================== */
+
+:root {
+  --beton: #232a33;        /* tmavý beton, hlavní tmavá */
+  --beton-hloubka: #1a2027;/* stín mezi panely */
+  --omitka: #f2f0eb;       /* světlá omítka, pozadí */
+  --fasada: #e8a33d;       /* okrová zateplené fasády — akcent */
+  --okno: #ffd58a;         /* rozsvícené okno */
+  --spara: #37414d;        /* linky, spáry mezi panely */
+  --text: #2b313a;
+  --text-mut: #5a636e;
+
+  --pismo-titul: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  --pismo-text: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--pismo-text);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--omitka);
+  -webkit-font-smoothing: antialiased;
+}
+
+.sbd a:focus-visible,
+.sbd .btn:focus-visible {
+  outline: 3px solid var(--fasada);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =========================== HERO =========================== */
+
+.hero {
+  background: var(--beton);
+  color: var(--omitka);
+  padding: 1.5rem 1.25rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemný spárořez panelů přes celé hero pozadí */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--spara) 1px, transparent 1px),
+    linear-gradient(90deg, var(--spara) 1px, transparent 1px);
+  background-size: 120px 120px;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.hero > * {
+  position: relative;
+}
+
+.hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-bottom: 2.5rem;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--pismo-titul);
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+}
+
+.wordmark-blok {
+  background: var(--fasada);
+  color: var(--beton-hloubka);
+  padding: 0.15rem 0.5rem;
+  line-height: 1.4;
+}
+
+.wordmark-text {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.95rem;
+}
+
+.hero-tag {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #9aa5b1;
+}
+
+.hero-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--fasada);
+  margin-bottom: 1.25rem;
+  animation: vjezd 0.6s ease-out both;
+}
+
+.hero-title {
+  font-family: var(--pismo-titul);
+  font-weight: 900;
+  font-size: clamp(2.4rem, 8vw, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.hero-line {
+  display: block;
+  animation: vjezd 0.6s ease-out both;
+}
+
+.hero-line:nth-child(2) { animation-delay: 0.12s; }
+.hero-line:nth-child(3) { animation-delay: 0.24s; }
+
+.hero-line-accent {
+  color: var(--fasada);
+}
+
+.hero-line-mut {
+  color: #7d8894;
+  font-size: 0.55em;
+  letter-spacing: 0.04em;
+  margin-top: 0.35em;
+}
+
+.hero-lead {
+  max-width: 34rem;
+  font-size: 1.06rem;
+  color: #c8cfd7;
+  margin-bottom: 2rem;
+  animation: vjezd 0.6s ease-out 0.32s both;
+}
+
+.hero-lead strong {
+  color: var(--omitka);
+}
+
+.hero-akce {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  animation: vjezd 0.6s ease-out 0.42s both;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--pismo-titul);
+  font-weight: 900;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  padding: 0.9rem 1.5rem;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-hlavni {
+  background: var(--fasada);
+  color: var(--beton-hloubka);
+}
+
+.btn-hlavni:hover {
+  background: var(--okno);
+  transform: translateY(-2px);
+}
+
+.btn-vedlejsi {
+  color: var(--omitka);
+  border: 2px solid var(--spara);
+}
+
+.btn-vedlejsi:hover {
+  border-color: var(--fasada);
+  color: var(--fasada);
+}
+
+/* --------- Signature: fasáda panelového domu --------- */
+
+.fasada {
+  align-self: end;
+  justify-self: center;
+  width: 100%;
+  max-width: 340px;
+  animation: vjezd 0.8s ease-out 0.3s both;
+}
+
+.fasada-okna {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  background: var(--beton-hloubka);
+  border: 8px solid var(--beton-hloubka);
+  border-bottom: none;
+}
+
+.okno {
+  aspect-ratio: 1 / 1.25;
+  background: var(--spara);
+  transition: background-color 0.3s ease;
+}
+
+.okno-svetlo {
+  background: var(--okno);
+  animation: rozsviceni 0.4s ease-out both;
+}
+
+/* okna se rozsvěcují postupně */
+.okno-svetlo:nth-of-type(4)  { animation-delay: 0.5s; }
+.okno-svetlo:nth-of-type(8)  { animation-delay: 0.7s; }
+.okno-svetlo:nth-of-type(13) { animation-delay: 0.9s; }
+.okno-svetlo:nth-of-type(17) { animation-delay: 1.05s; }
+.okno-svetlo:nth-of-type(22) { animation-delay: 1.2s; }
+.okno-svetlo:nth-of-type(27) { animation-delay: 1.3s; }
+.okno-svetlo:nth-of-type(31) { animation-delay: 1.4s; }
+.okno-svetlo:nth-of-type(35) { animation-delay: 1.5s; }
+.okno-svetlo:nth-of-type(42) { animation-delay: 1.6s; }
+.okno-svetlo:nth-of-type(46) { animation-delay: 1.7s; }
+.okno-svetlo:nth-of-type(51) { animation-delay: 1.78s; }
+.okno-svetlo:nth-of-type(56) { animation-delay: 1.86s; }
+.okno-svetlo:nth-of-type(59) { animation-delay: 1.94s; }
+
+.fasada-patro {
+  background: var(--fasada);
+  color: var(--beton-hloubka);
+  padding: 0.9rem 1.1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.fasada-cislo {
+  font-family: var(--pismo-titul);
+  font-weight: 900;
+  font-size: 1.7rem;
+  letter-spacing: -0.01em;
+}
+
+.fasada-popisek {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.hero-pas {
+  max-width: 1100px;
+  margin: 0 auto;
+  border-top: 1px solid var(--spara);
+  padding: 1rem 0 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.9rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9aa5b1;
+}
+
+.pas-delic {
+  color: var(--fasada);
+}
+
+/* =========================== SEKCE =========================== */
+
+.sekce {
+  padding: 4rem 1.25rem;
+}
+
+.sekce-hlava {
+  max-width: 1100px;
+  margin: 0 auto 2.5rem;
+}
+
+.sekce-eyebrow {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--fasada);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.sekce-titul {
+  font-family: var(--pismo-titul);
+  font-weight: 900;
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  max-width: 34ch;
+}
+
+/* --------- Služby --------- */
+
+.sluzby {
+  background: var(--omitka);
+}
+
+.sluzby-mrizka {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--spara); /* spáry mezi kartami = spárořez panelů */
+  border: 1px solid var(--spara);
+}
+
+.karta {
+  background: var(--omitka);
+  padding: 1.75rem 1.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.karta:hover {
+  background: #fff;
+}
+
+.karta-stitek {
+  display: inline-block;
+  font-family: var(--pismo-titul);
+  font-weight: 900;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  background: var(--beton);
+  color: var(--okno);
+  padding: 0.25rem 0.55rem;
+  margin-bottom: 1rem;
+}
+
+.karta-nazev {
+  font-family: var(--pismo-titul);
+  font-weight: 900;
+  font-size: 1.15rem;
+  line-height: 1.25;
+  margin-bottom: 0.6rem;
+}
+
+.karta-text {
+  color: var(--text-mut);
+  font-size: 0.98rem;
+}
+
+.sluzby-pozn {
+  max-width: 1100px;
+  margin: 2rem auto 0;
+  color: var(--text-mut);
+  font-size: 1rem;
+  max-width: 46rem;
+}
+
+/* --------- Důvěra / obvody --------- */
+
+.duvera {
+  background: #fff;
+  border-top: 6px solid var(--fasada);
+}
+
+.duvera-obsah {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.duvera-text p {
+  margin-bottom: 1.1rem;
+  max-width: 38rem;
+}
+
+.duvera-fakta {
+  list-style: none;
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.duvera-fakta li {
+  border-left: 4px solid var(--fasada);
+  padding-left: 0.9rem;
+  color: var(--text-mut);
+}
+
+.duvera-fakta strong {
+  font-family: var(--pismo-titul);
+  font-weight: 900;
+  color: var(--text);
+  font-size: 1.05rem;
+  margin-right: 0.35rem;
+}
+
+.obvody {
+  background: var(--beton);
+  color: var(--omitka);
+  padding: 1.75rem 1.5rem;
+}
+
+.obvody-titul {
+  font-family: var(--pismo-titul);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  color: var(--fasada);
+  margin-bottom: 1.25rem;
+}
+
+.obvod {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--spara);
+}
+
+.obvod-kod {
+  font-family: var(--pismo-titul);
+  font-weight: 900;
+  font-size: 0.95rem;
+  background: var(--spara);
+  color: var(--okno);
+  min-width: 3rem;
+  height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.obvod-info {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.obvod-nazev {
+  font-weight: 700;
+}
+
+.obvod-popis {
+  font-size: 0.9rem;
+  color: #9aa5b1;
+}
+
+.obvod-adresa {
+  font-size: 0.85rem;
+  color: #7d8894;
+}
+
+.obvody-kontakt {
+  border-top: 1px solid var(--spara);
+  padding-top: 1.25rem;
+  margin-top: 0.5rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.obvody-kontakt a {
+  color: var(--okno);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  width: fit-content;
+}
+
+.obvody-kontakt a:hover {
+  text-decoration: underline;
+}
+
+/* =========================== ANIMACE =========================== */
+
+@keyframes vjezd {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rozsviceni {
+  from {
+    background-color: var(--spara);
+  }
+  to {
+    background-color: var(--okno);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-eyebrow,
+  .hero-line,
+  .hero-lead,
+  .hero-akce,
+  .fasada,
+  .okno-svetlo {
+    animation: none;
+  }
+  .btn,
+  .okno,
+  .karta {
+    transition: none;
+  }
+}
+
+/* =========================== RESPONZIVITA =========================== */
+
+@media (min-width: 640px) {
+  .sluzby-mrizka {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    padding: 2rem 2rem 0;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1.4fr 1fr;
+    align-items: end;
+    gap: 4rem;
+  }
+
+  .sekce {
+    padding: 5.5rem 2rem;
+  }
+
+  .duvera-obsah {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+  }
+
+  .obvody {
+    padding: 2.25rem 2rem;
+  }
+}
