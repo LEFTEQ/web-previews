@@ -1,0 +1,619 @@
+/* =====================================================
+   Autoškola Korený — Olomouc
+   Vizuální svět: autoškolní "L", dopravní značení, jízdní
+   pruh s přerušovanou čárou jako signature prvek.
+   Paleta: asfaltová šedomodrá + signální modrá dopravních
+   značek + výstražná žluť tabulky autoškoly.
+   ===================================================== */
+
+:root {
+  --ak-asphalt: #23282e;      /* asfalt / tmavý text */
+  --ak-asphalt-2: #2d333b;    /* tmavá sekce */
+  --ak-sign-blue: #0b4ea2;    /* modrá dopravní značky (příkazová) */
+  --ak-sign-blue-dark: #093e81;
+  --ak-l-yellow: #ffd23f;     /* žluť tabulky "L" na střeše */
+  --ak-paper: #f7f8fa;        /* světlé pozadí, chladné, ne krémové */
+  --ak-white: #ffffff;
+  --ak-line: #dde2e8;
+  --ak-muted: #5b6672;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--ak-paper);
+  color: var(--ak-asphalt);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ak img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Viditelný focus všude */
+.ak a:focus-visible,
+.ak button:focus-visible {
+  outline: 3px solid var(--ak-l-yellow);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Typografie ---------- */
+.ak h1,
+.ak h2,
+.ak h3 {
+  font-family: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed",
+    Arial, sans-serif;
+  font-stretch: condensed;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+.ak-eyebrow {
+  display: inline-block;
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ak-sign-blue);
+  border-left: 4px solid var(--ak-l-yellow);
+  padding-left: 0.6rem;
+}
+
+.ak-eyebrow--light {
+  color: var(--ak-l-yellow);
+}
+
+.ak-h2 {
+  font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.ak-h2--light {
+  color: var(--ak-white);
+}
+
+/* ---------- HERO ---------- */
+.ak-hero {
+  position: relative;
+  background: var(--ak-white);
+  overflow: hidden;
+}
+
+.ak-hero__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* Wordmark: žlutá střešní tabulka s "L" + kondenzovaný název */
+.ak-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  color: var(--ak-asphalt);
+}
+
+.ak-wordmark__badge {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  background: var(--ak-l-yellow);
+  color: var(--ak-asphalt);
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  border-radius: 6px;
+  border: 2px solid var(--ak-asphalt);
+  box-shadow: 0 2px 0 var(--ak-asphalt);
+}
+
+.ak-wordmark__text {
+  font-family: "Arial Narrow", "Roboto Condensed", Arial, sans-serif;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ak-wordmark__text strong {
+  font-weight: 800;
+}
+
+.ak-hero__phone {
+  font-weight: 700;
+  color: var(--ak-sign-blue);
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 0.4rem 0.8rem;
+  border: 2px solid var(--ak-sign-blue);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.ak-hero__phone:hover {
+  background: var(--ak-sign-blue);
+  color: var(--ak-white);
+}
+
+.ak-hero__grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3.5rem;
+  display: grid;
+  gap: 2rem;
+}
+
+.ak-hero__title {
+  font-size: clamp(2.4rem, 7vw, 4.2rem);
+  line-height: 1.02;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.ak-hero__title-accent {
+  color: var(--ak-sign-blue);
+  /* žlutý podkres jako tabulka L */
+  background: linear-gradient(transparent 62%, var(--ak-l-yellow) 62%);
+  padding: 0 0.1em;
+}
+
+.ak-hero__lead {
+  max-width: 34rem;
+  margin: 1.25rem 0 1.75rem;
+  color: var(--ak-muted);
+  font-size: 1.05rem;
+}
+
+.ak-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.ak-btn {
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s;
+}
+
+.ak-btn--primary {
+  background: var(--ak-sign-blue);
+  color: var(--ak-white);
+  box-shadow: 0 3px 0 var(--ak-sign-blue-dark);
+}
+
+.ak-btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 0 var(--ak-sign-blue-dark);
+}
+
+.ak-btn--ghost {
+  color: var(--ak-asphalt);
+  border: 2px solid var(--ak-asphalt);
+}
+
+.ak-btn--ghost:hover {
+  background: var(--ak-asphalt);
+  color: var(--ak-white);
+}
+
+.ak-hero__facts {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.ak-hero__facts li {
+  border-top: 3px solid var(--ak-l-yellow);
+  padding-top: 0.5rem;
+}
+
+.ak-hero__facts strong {
+  display: block;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+}
+
+.ak-hero__facts span {
+  font-size: 0.85rem;
+  color: var(--ak-muted);
+}
+
+.ak-hero__media {
+  margin: 0;
+  position: relative;
+}
+
+.ak-hero__img {
+  width: 100%;
+  border-radius: 12px;
+  border: 3px solid var(--ak-asphalt);
+  box-shadow: 8px 8px 0 var(--ak-l-yellow);
+}
+
+/* SPZ štítek přes fotku — hravý detail z auta */
+.ak-hero__plate {
+  position: absolute;
+  bottom: -0.9rem;
+  left: 1.25rem;
+}
+
+.ak-plate {
+  display: inline-flex;
+  align-items: stretch;
+  background: var(--ak-white);
+  border: 2px solid var(--ak-asphalt);
+  border-radius: 5px;
+  overflow: hidden;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.ak-plate__eu {
+  background: var(--ak-sign-blue);
+  color: var(--ak-white);
+  font-size: 0.65rem;
+  display: grid;
+  place-items: center;
+  padding: 0 0.35rem;
+}
+
+.ak-plate__num {
+  padding: 0.25rem 0.7rem;
+  font-size: 1rem;
+}
+
+/* Signature: jízdní pruh s přerušovanou čárou pod hero */
+.ak-lane {
+  height: 3.25rem;
+  background: var(--ak-asphalt);
+  position: relative;
+  overflow: hidden;
+}
+
+.ak-lane__dashes {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 200%;
+  height: 6px;
+  transform: translateY(-50%);
+  background: repeating-linear-gradient(
+    90deg,
+    var(--ak-white) 0 48px,
+    transparent 48px 96px
+  );
+  animation: ak-drive 6s linear infinite;
+}
+
+@keyframes ak-drive {
+  from {
+    transform: translate(0, -50%);
+  }
+  to {
+    transform: translate(-96px, -50%);
+  }
+}
+
+/* ---------- Sekce ---------- */
+.ak-section {
+  padding: 4rem 1.25rem;
+}
+
+.ak-section__head {
+  max-width: 1180px;
+  margin: 0 auto 2.5rem;
+}
+
+.ak-section__intro {
+  max-width: 36rem;
+  color: var(--ak-muted);
+  margin: 0.75rem 0 0;
+}
+
+/* ---------- Karty kurzů ---------- */
+.ak-cards {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.ak-card {
+  background: var(--ak-white);
+  border: 1px solid var(--ak-line);
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem 1.5rem;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ak-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(35, 40, 46, 0.1);
+}
+
+/* Značka skupiny jako dopravní značka */
+.ak-card__sign {
+  width: 3.2rem;
+  height: 3.2rem;
+  display: grid;
+  place-items: center;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.ak-card__sign--b,
+.ak-card__sign--a {
+  border-radius: 50%;
+  background: var(--ak-sign-blue);
+  color: var(--ak-white);
+  border: 3px solid var(--ak-white);
+  box-shadow: 0 0 0 2px var(--ak-sign-blue);
+}
+
+.ak-card__sign--k {
+  border-radius: 8px;
+  background: var(--ak-l-yellow);
+  color: var(--ak-asphalt);
+  border: 2px solid var(--ak-asphalt);
+}
+
+.ak-card__title {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.ak-card__desc {
+  color: var(--ak-muted);
+  margin: 0 0 1rem;
+  font-size: 0.97rem;
+}
+
+.ak-card__list {
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+  font-size: 0.95rem;
+}
+
+.ak-card__list li {
+  padding: 0.35rem 0 0.35rem 1.4rem;
+  position: relative;
+}
+
+.ak-card__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  width: 0.8rem;
+  height: 4px;
+  background: var(--ak-l-yellow);
+  border-radius: 2px;
+}
+
+.ak-card__price {
+  margin: 0;
+  border-top: 2px dashed var(--ak-line);
+  padding-top: 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.ak-card__price strong {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-size: 1.5rem;
+  color: var(--ak-sign-blue);
+}
+
+.ak-card__price span {
+  font-size: 0.85rem;
+  color: var(--ak-muted);
+}
+
+/* ---------- Tmavá sekce: trasa ---------- */
+.ak-section--dark {
+  background: var(--ak-asphalt-2);
+  color: #cfd6dd;
+}
+
+.ak-route {
+  max-width: 1180px;
+  margin: 0 auto 3rem;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+}
+
+/* Zastávky na trase — svislá přerušovaná čára jako na vozovce */
+.ak-route__stop {
+  position: relative;
+  padding: 0 0 2rem 2.5rem;
+}
+
+.ak-route__stop::before {
+  content: "";
+  position: absolute;
+  left: 0.65rem;
+  top: 1.6rem;
+  bottom: 0;
+  width: 4px;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.55) 0 14px,
+    transparent 14px 26px
+  );
+}
+
+.ak-route__stop:last-child::before {
+  display: none;
+}
+
+.ak-route__dot {
+  position: absolute;
+  left: 0;
+  top: 0.3rem;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  background: var(--ak-sign-blue);
+  border: 3px solid var(--ak-white);
+}
+
+.ak-route__dot--finish {
+  background: var(--ak-l-yellow);
+  /* šachovnice cíle */
+  background-image: conic-gradient(
+    var(--ak-asphalt) 0 25%,
+    var(--ak-l-yellow) 25% 50%,
+    var(--ak-asphalt) 50% 75%,
+    var(--ak-l-yellow) 75%
+  );
+}
+
+.ak-route__stop h3 {
+  color: var(--ak-white);
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.ak-route__stop p {
+  margin: 0;
+  max-width: 38rem;
+  font-size: 0.97rem;
+}
+
+/* ---------- Reference ---------- */
+.ak-quotes {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.ak-quote {
+  margin: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid var(--ak-l-yellow);
+  border-radius: 0 10px 10px 0;
+  padding: 1.25rem 1.5rem;
+}
+
+.ak-quote p {
+  margin: 0 0 0.75rem;
+  color: var(--ak-white);
+  font-size: 1rem;
+}
+
+.ak-quote cite {
+  font-style: normal;
+  font-size: 0.85rem;
+  color: var(--ak-l-yellow);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ---------- Responzivita ---------- */
+@media (min-width: 720px) {
+  .ak-hero__grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    padding-top: 2.5rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .ak-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .ak-quotes {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ak-route {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3rem;
+  }
+}
+
+@media (max-width: 719px) {
+  .ak-hero__facts {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .ak-hero__facts li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    border-top: none;
+    border-left: 3px solid var(--ak-l-yellow);
+    padding: 0 0 0 0.6rem;
+  }
+
+  .ak-btn {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ak-lane__dashes {
+    animation: none;
+  }
+
+  .ak-card,
+  .ak-btn,
+  .ak-hero__phone {
+    transition: none;
+  }
+
+  .ak-card:hover,
+  .ak-btn--primary:hover {
+    transform: none;
+  }
+}
