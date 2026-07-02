@@ -1,0 +1,610 @@
+/* =====================================================
+   KLS ELEKTRO — České Budějovice
+   Palette: rozvaděčová šeď + signální oranž fáze L1
+   Type: Archivo (display, wide caps) + system sans body
+   Signature: schéma zapojení (jednopólové schéma) jako
+   živý vodič mezi hero a obsahem
+   ===================================================== */
+
+:root {
+  --kls-ink: #14181d;        /* skoro černá — plášť kabelu */
+  --kls-steel: #2b333c;      /* rozvaděčová ocel */
+  --kls-panel: #e9ecef;      /* lakovaný plech skříně */
+  --kls-paper: #f7f8f9;      /* světlé pozadí */
+  --kls-phase: #ff7a1a;      /* fáze L1 — signální oranž */
+  --kls-phase-deep: #d95f00;
+  --kls-copper: #b8743a;     /* měď vodiče */
+  --kls-line: #c9ced4;
+}
+
+@font-face {
+  font-family: "kls-fallback";
+  src: local("Arial");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--kls-ink);
+  background: var(--kls-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.kls img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.kls a:focus-visible,
+.kls .btn:focus-visible {
+  outline: 3px solid var(--kls-phase);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+  position: relative;
+  min-height: 92svh;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  overflow: hidden;
+  background: var(--kls-ink);
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85);
+}
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    112deg,
+    rgba(20, 24, 29, 0.92) 0%,
+    rgba(20, 24, 29, 0.78) 42%,
+    rgba(20, 24, 29, 0.35) 100%
+  );
+}
+
+.hero-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem clamp(1.25rem, 5vw, 4rem);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  font-size: 1.35rem;
+  text-transform: uppercase;
+  font-stretch: expanded;
+}
+
+.wordmark-kls {
+  color: #fff;
+}
+
+.wordmark-bolt {
+  color: var(--kls-phase);
+  display: inline-flex;
+  transform: translateY(1px);
+}
+
+.wordmark-elektro {
+  color: rgba(255, 255, 255, 0.62);
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  font-size: 0.85rem;
+}
+
+.hero-phone {
+  text-decoration: none;
+  color: #fff;
+  text-align: right;
+  line-height: 1.25;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 6px;
+  padding: 0.45rem 0.85rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.hero-phone:hover {
+  border-color: var(--kls-phase);
+  background: rgba(255, 122, 26, 0.12);
+}
+
+.hero-phone-label {
+  display: block;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--kls-phase);
+}
+
+.hero-phone-num {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-size: 1.05rem;
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem clamp(1.25rem, 5vw, 4rem) 4.5rem;
+  max-width: 62rem;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1.1rem;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.75);
+  animation: kls-rise 0.7s ease both;
+}
+
+.live-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--kls-phase);
+  box-shadow: 0 0 0 0 rgba(255, 122, 26, 0.6);
+  animation: kls-pulse 2.4s ease-out infinite;
+}
+
+.hero-title {
+  margin: 0 0 1.25rem;
+  font-size: clamp(2rem, 5.6vw, 4rem);
+  line-height: 1.06;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  animation: kls-rise 0.7s 0.12s ease both;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--kls-phase);
+}
+
+.hero-lead {
+  margin: 0 0 2rem;
+  max-width: 34rem;
+  font-size: clamp(1.02rem, 1.7vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.85);
+  animation: kls-rise 0.7s 0.24s ease both;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  animation: kls-rise 0.7s 0.36s ease both;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--kls-phase);
+  color: var(--kls-ink);
+}
+
+.btn-primary:hover {
+  background: #ff8c3d;
+}
+
+.btn-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.btn-ghost:hover {
+  border-color: #fff;
+}
+
+/* signature — jednopólové schéma jako spodní linka hero */
+.schematic {
+  position: relative;
+  z-index: 2;
+  color: var(--kls-phase);
+  height: 56px;
+  margin-top: auto;
+}
+
+.schematic svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.schematic-wire {
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: kls-current 2.2s 0.5s ease-out forwards;
+}
+
+.schematic-node {
+  opacity: 0;
+  animation: kls-node 0.4s 2.2s ease forwards;
+}
+
+/* ---------- SECTION SHARED ---------- */
+
+.section-head {
+  max-width: 46rem;
+  margin: 0 auto 2.75rem;
+  text-align: center;
+  padding: 0 1.25rem;
+}
+
+.section-eyebrow {
+  margin: 0 0 0.8rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  font-weight: 700;
+  color: var(--kls-phase-deep);
+}
+
+.section-eyebrow--light {
+  color: var(--kls-phase);
+}
+
+.section-title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.55rem, 3.6vw, 2.4rem);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.section-title--light {
+  color: #fff;
+}
+
+.section-lead {
+  margin: 0;
+  color: #4a535d;
+  font-size: 1.05rem;
+}
+
+.section-lead--light {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* ---------- SLUŽBY ---------- */
+
+.sluzby {
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem);
+  background:
+    linear-gradient(180deg, #fff 0%, var(--kls-paper) 100%);
+}
+
+.sluzby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.sluzba {
+  background: #fff;
+  border: 1px solid var(--kls-line);
+  border-radius: 10px;
+  padding: 1.6rem 1.5rem 1.5rem;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.sluzba:hover {
+  transform: translateY(-4px);
+  border-color: var(--kls-phase);
+  box-shadow: 0 14px 30px -18px rgba(20, 24, 29, 0.35);
+}
+
+.sluzba-kod {
+  display: inline-grid;
+  place-items: center;
+  min-width: 3rem;
+  height: 3rem;
+  padding: 0 0.5rem;
+  border-radius: 6px;
+  background: var(--kls-steel);
+  color: var(--kls-phase);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.sluzba-nazev {
+  margin: 0 0 0.55rem;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.sluzba-popis {
+  margin: 0;
+  color: #4a535d;
+  font-size: 0.96rem;
+}
+
+.sluzby-figure {
+  max-width: 72rem;
+  margin: 2.5rem auto 0;
+}
+
+.figure-img {
+  width: 100%;
+  border-radius: 12px;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+}
+
+.figure-caption {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: #5a636d;
+  border-left: 3px solid var(--kls-phase);
+  padding-left: 0.8rem;
+}
+
+/* ---------- REFERENCE ---------- */
+
+.refs {
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem);
+  background: var(--kls-ink);
+  color: #fff;
+}
+
+.refs-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.refs-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ref {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 1.1rem;
+  padding: 1.35rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.ref:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.ref-rok {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--kls-phase);
+  font-variant-numeric: tabular-nums;
+  padding-top: 0.25rem;
+}
+
+.ref-stavba {
+  margin: 0 0 0.3rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.ref-rozsah {
+  margin: 0;
+  font-size: 0.94rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.refs-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.refs-img {
+  aspect-ratio: 4 / 3;
+}
+
+.refs-fakta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.fakt {
+  border-left: 3px solid var(--kls-phase);
+  padding-left: 0.9rem;
+}
+
+.fakt-cislo {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.fakt-popis {
+  display: block;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.4;
+}
+
+/* ---------- ANIMACE ---------- */
+
+@keyframes kls-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes kls-current {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes kls-node {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes kls-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 122, 26, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 9px rgba(255, 122, 26, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 122, 26, 0);
+  }
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (min-width: 860px) {
+  .refs-layout {
+    grid-template-columns: 1.15fr 1fr;
+    align-items: start;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-phone-label {
+    display: none;
+  }
+
+  .hero-phone {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .figure-img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .ref {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .refs-fakta {
+    grid-template-columns: 1fr;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-eyebrow,
+  .hero-title,
+  .hero-lead,
+  .hero-actions {
+    animation: none;
+  }
+
+  .schematic-wire {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+
+  .schematic-node {
+    opacity: 1;
+    animation: none;
+  }
+
+  .live-dot {
+    animation: none;
+  }
+
+  .btn,
+  .sluzba,
+  .hero-phone {
+    transition: none;
+  }
+
+  .btn:hover,
+  .sluzba:hover {
+    transform: none;
+  }
+}
