@@ -1,0 +1,533 @@
+/* =====================================================
+   Zubní lékařství Bašová — dentální hygiena, Hradec Králové
+   Palette: „klinická mint & inkoust" — čistota bez sterility
+   ===================================================== */
+
+:root {
+  --dh-ink: #123332;        /* tmavý petrolejový inkoust — text */
+  --dh-mint: #d7efe6;       /* světlá mint — plochy */
+  --dh-mint-deep: #0e7d6b;  /* sytá zeleň dásně/mint — akcent */
+  --dh-enamel: #fdfcf8;     /* sklovina — teplá bílá */
+  --dh-coral: #e2634f;      /* korál (dáseň) — jen pro drobné signály */
+  --dh-sand: #eef3ef;       /* pozadí sekcí */
+  --dh-radius: 18px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--dh-enamel);
+  color: var(--dh-ink);
+  font-family: "Gill Sans", "Trebuchet MS", "Segoe UI", -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dh-main a:focus-visible,
+.dh-main button:focus-visible {
+  outline: 3px solid var(--dh-mint-deep);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.dh-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---------- Typografie ---------- */
+
+.dh-h1, .dh-h2, .dh-h3, .dh-wordmark {
+  font-family: "Avenir Next", "Futura", "Century Gothic", "Segoe UI", sans-serif;
+}
+
+.dh-h1 {
+  font-size: clamp(2.4rem, 7.5vw, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  margin: 0.4em 0 0.45em;
+}
+
+.dh-h1-accent {
+  color: var(--dh-mint-deep);
+  position: relative;
+  white-space: nowrap;
+}
+
+.dh-h1-accent::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.02em;
+  height: 0.14em;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--dh-mint-deep) 0 10px,
+    transparent 10px 16px
+  );
+  border-radius: 2px;
+  opacity: 0.55;
+}
+
+.dh-h2 {
+  font-size: clamp(1.7rem, 4.2vw, 2.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+  margin: 0 0 0.5em;
+}
+
+.dh-h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0.2em 0 0.35em;
+  letter-spacing: -0.005em;
+}
+
+/* ---------- Hero ---------- */
+
+.dh-hero {
+  background:
+    radial-gradient(1200px 600px at 85% -10%, var(--dh-mint) 0%, transparent 60%),
+    var(--dh-enamel);
+  border-bottom: 1px solid #dfe8e2;
+  overflow: hidden;
+}
+
+.dh-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 0 8px;
+}
+
+.dh-wordmark {
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.dh-wordmark-dot {
+  color: var(--dh-coral);
+  font-style: normal;
+  font-size: 1.5em;
+  line-height: 0;
+  transform: translateY(0.1em);
+}
+
+.dh-wordmark-sub {
+  font-family: "Gill Sans", "Trebuchet MS", sans-serif;
+  font-weight: 400;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dh-mint-deep);
+}
+
+.dh-topcall {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--dh-ink);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.dh-topcall:hover { background: var(--dh-mint); }
+
+.dh-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  padding: 36px 0 56px;
+}
+
+.dh-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #3d5a55;
+}
+
+.dh-eyebrow-tick {
+  width: 26px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--dh-mint-deep);
+  flex: none;
+}
+
+.dh-lead {
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  max-width: 34em;
+  margin: 0 0 1.6em;
+  color: #29433f;
+}
+
+.dh-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.dh-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 14px 26px;
+  border-radius: 999px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s;
+}
+
+.dh-btn-primary {
+  background: var(--dh-mint-deep);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(14, 125, 107, 0.28);
+}
+
+.dh-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(14, 125, 107, 0.34);
+}
+
+.dh-btn-ghost {
+  background: transparent;
+  color: var(--dh-ink);
+  border: 2px solid #b9d6cb;
+}
+
+.dh-btn-ghost:hover { background: var(--dh-mint); border-color: var(--dh-mint); }
+
+/* ---------- Signature: interdentální diagram ---------- */
+/* Zuby jako zaoblené sloupce, mezizubní prostory zvýrazněné „nití" —
+   grafický motiv odvozený přímo z práce dentální hygienistky. */
+
+.dh-hero-visual {
+  align-self: end;
+}
+
+.dh-gumline {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  height: clamp(170px, 26vw, 260px);
+  padding-top: 20px;
+  position: relative;
+}
+
+.dh-tooth {
+  flex: 1;
+  background: #fff;
+  border: 2px solid var(--dh-ink);
+  border-bottom: none;
+  border-radius: 46% 46% 0 0 / 34% 34% 0 0;
+  position: relative;
+  min-width: 0;
+  animation: dh-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.dh-tooth-1 { height: 78%; animation-delay: 0.15s; }
+.dh-tooth-2 { height: 100%; animation-delay: 0.3s; }
+.dh-tooth-3 { height: 92%; animation-delay: 0.45s; }
+.dh-tooth-4 { height: 72%; animation-delay: 0.6s; }
+
+/* pigmentace — skvrnka, kterou hygiena odstraní */
+.dh-plaque {
+  position: absolute;
+  top: 18%;
+  left: 18%;
+  width: 22%;
+  height: 12%;
+  border-radius: 50%;
+  background: #c9a06a;
+  opacity: 0.55;
+}
+
+.dh-plaque-b {
+  top: 30%;
+  left: auto;
+  right: 16%;
+  width: 16%;
+  background: var(--dh-coral);
+  opacity: 0.4;
+}
+
+.dh-gap {
+  width: clamp(14px, 2.4vw, 24px);
+  position: relative;
+  flex: none;
+  animation: dh-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.dh-gap-1 { height: 70%; animation-delay: 0.25s; }
+.dh-gap-2 { height: 88%; animation-delay: 0.4s; }
+.dh-gap-3 { height: 66%; animation-delay: 0.55s; }
+
+/* zubní nit v mezizubí */
+.dh-floss {
+  position: absolute;
+  inset: 0 45% 0 45%;
+  background: repeating-linear-gradient(
+    180deg,
+    var(--dh-mint-deep) 0 8px,
+    transparent 8px 14px
+  );
+  border-radius: 3px;
+  opacity: 0.85;
+}
+
+/* linie dásně pod zuby */
+.dh-gumline::after {
+  content: "";
+  position: absolute;
+  left: -6px;
+  right: -6px;
+  bottom: -2px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--dh-coral);
+}
+
+.dh-gumline-caption {
+  margin: 18px 0 0;
+  font-size: 0.92rem;
+  color: #3d5a55;
+  max-width: 30em;
+}
+
+@keyframes dh-rise {
+  from { transform: translateY(24px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ---------- Sekce: péče ---------- */
+
+.dh-section { padding: 68px 0; }
+
+.dh-section-care { background: var(--dh-sand); }
+
+.dh-section-head { max-width: 42em; margin-bottom: 40px; }
+
+.dh-section-lead {
+  font-size: 1.08rem;
+  color: #29433f;
+  margin: 0;
+}
+
+.dh-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  counter-reset: step;
+}
+
+.dh-step {
+  background: #fff;
+  border-radius: var(--dh-radius);
+  padding: 26px 24px 22px;
+  border: 1px solid #dfe8e2;
+  position: relative;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.dh-step:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(18, 51, 50, 0.09);
+}
+
+.dh-step p { margin: 0; color: #29433f; font-size: 0.98rem; }
+
+.dh-step-no {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 46% 46% 30% 30% / 34% 34% 40% 40%; /* tvar zubu */
+  border: 2px solid var(--dh-mint-deep);
+  color: var(--dh-mint-deep);
+  font-family: "Avenir Next", "Futura", "Century Gothic", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 10px;
+  background: var(--dh-mint);
+}
+
+.dh-extras {
+  margin-top: 36px;
+  background: var(--dh-ink);
+  color: var(--dh-mint);
+  border-radius: var(--dh-radius);
+  padding: 26px 26px 22px;
+}
+
+.dh-extras-label {
+  margin: 0 0 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.dh-extras-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  font-size: 0.95rem;
+}
+
+.dh-extras-list li {
+  padding: 7px 14px;
+  border: 1px solid rgba(215, 239, 230, 0.35);
+  border-radius: 999px;
+}
+
+/* ---------- Sekce: důvěra ---------- */
+
+.dh-trust-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+.dh-trust-copy p { color: #29433f; max-width: 36em; }
+
+.dh-facts {
+  margin: 28px 0 0;
+  display: grid;
+  gap: 14px;
+}
+
+.dh-fact {
+  border-left: 3px solid var(--dh-mint-deep);
+  padding-left: 14px;
+}
+
+.dh-fact dt {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dh-mint-deep);
+  font-weight: 600;
+}
+
+.dh-fact dd { margin: 2px 0 0; }
+
+.dh-fact a { color: var(--dh-ink); font-weight: 600; text-decoration-color: var(--dh-mint-deep); }
+
+.dh-quotes {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+.dh-quote {
+  margin: 0;
+  background: var(--dh-mint);
+  border-radius: var(--dh-radius);
+  padding: 22px 22px 18px;
+}
+
+.dh-quote blockquote {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.dh-quote figcaption {
+  font-size: 0.85rem;
+  color: var(--dh-mint-deep);
+  font-weight: 600;
+}
+
+/* ---------- Mobilní rychlé volání ---------- */
+
+.dh-mobilecall {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--dh-coral);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 13px 20px;
+  border-radius: 999px;
+  box-shadow: 0 8px 22px rgba(226, 99, 79, 0.4);
+}
+
+/* ---------- Responzivita ---------- */
+
+@media (min-width: 760px) {
+  .dh-hero-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: end;
+    gap: 48px;
+    padding: 48px 0 72px;
+  }
+
+  .dh-steps { grid-template-columns: repeat(2, 1fr); }
+
+  .dh-trust-grid { grid-template-columns: 1.1fr 0.9fr; gap: 56px; }
+
+  .dh-mobilecall { display: none; }
+
+  .dh-section { padding: 88px 0; }
+}
+
+@media (min-width: 1020px) {
+  .dh-steps { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .dh-tooth,
+  .dh-gap {
+    animation: none;
+  }
+
+  .dh-btn,
+  .dh-step,
+  .dh-topcall {
+    transition: none;
+  }
+
+  .dh-btn-primary:hover,
+  .dh-step:hover {
+    transform: none;
+  }
+}
