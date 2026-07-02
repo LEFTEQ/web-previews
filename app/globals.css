@@ -1,0 +1,604 @@
+:root {
+  /* Paleta: půlnoční inkoust střihového papíru, len, krejčovská křída, špulka nitě */
+  --ink: #22252e;        /* tmavý podklad — kabinet ateliéru */
+  --ink-soft: #2c303b;
+  --linen: #ece5d8;      /* přírodní len — hlavní světlá plocha */
+  --linen-dim: #d8cfbe;
+  --chalk: #f6f2ea;      /* krejčovská křída — text na tmavé */
+  --thread: #c94f6d;     /* růžovočervená nit — akcent */
+  --thread-deep: #a83a56;
+  --pin: #8b93a7;        /* ocelový špendlík — tlumený detail */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--ink);
+  background: var(--linen);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.atelier {
+  overflow-x: hidden;
+}
+
+/* Focus stavy */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--thread);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =============== HERO =============== */
+
+.hero {
+  position: relative;
+  background:
+    radial-gradient(120% 90% at 15% 0%, var(--ink-soft) 0%, var(--ink) 60%);
+  color: var(--chalk);
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.25rem 0;
+}
+
+/* Jemný vzor střihového papíru — tečkovaná mřížka */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(246, 242, 234, 0.07) 1px, transparent 1px);
+  background-size: 34px 34px;
+  pointer-events: none;
+}
+
+.hero-topbar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed rgba(246, 242, 234, 0.25);
+}
+
+.wordmark {
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.wordmark-dot {
+  color: var(--thread);
+  font-style: normal;
+  margin: 0 0.35rem;
+}
+
+.wordmark-sub {
+  font-size: 0.85rem;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--pin);
+}
+
+.hero-city {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pin);
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: auto 0;
+  padding: 3rem 0 2.5rem;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--thread);
+  margin-bottom: 1.5rem;
+}
+
+/* „steh“ — krátká přerušovaná linka nitě */
+.stitch {
+  display: inline-block;
+  width: 3.2rem;
+  height: 0;
+  border-top: 2px dashed var(--thread);
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 8.5vw, 5.6rem);
+  line-height: 1.04;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.75rem;
+}
+
+.hero-title .line {
+  display: block;
+}
+
+.hero-title .line-2 {
+  padding-left: 0.9em;
+}
+
+.hero-title .line-3 {
+  padding-left: 0.35em;
+}
+
+/* „křídou podtrženo“ — kurzíva s nitkovým podtržením */
+.chalk {
+  font-style: italic;
+  color: var(--thread);
+  position: relative;
+  white-space: nowrap;
+}
+
+.chalk::after {
+  content: "";
+  position: absolute;
+  left: 0.02em;
+  right: 0.02em;
+  bottom: 0.02em;
+  border-bottom: 3px dashed rgba(201, 79, 109, 0.65);
+}
+
+.hero-lead {
+  max-width: 34em;
+  font-size: 1.06rem;
+  color: rgba(246, 242, 234, 0.82);
+  margin-bottom: 2.25rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.95rem 1.8rem;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.btn-solid {
+  background: var(--thread);
+  color: var(--chalk);
+  border: 2px solid var(--thread);
+}
+
+.btn-solid:hover {
+  background: var(--thread-deep);
+  border-color: var(--thread-deep);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--chalk);
+  border: 2px dashed rgba(246, 242, 234, 0.45);
+}
+
+.btn-ghost:hover {
+  border-color: var(--chalk);
+  border-style: solid;
+  transform: translateY(-2px);
+}
+
+/* ---- Signature: svislý krejčovský metr u pravého okraje ---- */
+.tape {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 58px;
+  background: var(--linen);
+  color: var(--ink);
+  overflow: hidden;
+  border-left: 2px solid var(--ink);
+  box-shadow: -6px 0 22px rgba(0, 0, 0, 0.35);
+  z-index: 3;
+}
+
+.tape-inner {
+  display: flex;
+  flex-direction: column;
+  animation: tape-roll 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes tape-roll {
+  from { transform: translateY(-140px); }
+  to   { transform: translateY(0); }
+}
+
+.tape-unit {
+  position: relative;
+  height: 80px;
+  border-bottom: 2px solid var(--ink);
+  flex: none;
+}
+
+.tape-num {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+/* drobné dílky metru */
+.tape-ticks {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 6px,
+    var(--ink) 6px,
+    var(--ink) 7px
+  );
+  background-size: 100% 8px;
+  clip-path: inset(28px 60% 0 0);
+  opacity: 0.75;
+}
+
+/* spodní lem hera */
+.hero-hem {
+  position: relative;
+  z-index: 2;
+  margin-right: 58px;
+  padding: 0.9rem 0;
+  border-top: 1px dashed rgba(246, 242, 234, 0.25);
+}
+
+.hem-label {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--pin);
+}
+
+/* Vstupní animace hera */
+.hero-eyebrow,
+.hero-title .line,
+.hero-lead,
+.hero-actions {
+  animation: rise 0.7s ease both;
+}
+
+.hero-title .line-1 { animation-delay: 0.08s; }
+.hero-title .line-2 { animation-delay: 0.18s; }
+.hero-title .line-3 { animation-delay: 0.28s; }
+.hero-lead          { animation-delay: 0.42s; }
+.hero-actions       { animation-delay: 0.54s; }
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =============== SLUŽBY =============== */
+
+.services {
+  padding: 4.5rem 1.25rem;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.section-head {
+  max-width: 620px;
+  margin-bottom: 2.75rem;
+}
+
+.services h2,
+.trust h2 {
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.9rem;
+}
+
+.section-note {
+  color: #5c5648;
+  font-size: 1rem;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.service-card {
+  background: var(--chalk);
+  border: 1px solid var(--linen-dim);
+  border-radius: 4px;
+  padding: 1.75rem 1.5rem 1.4rem;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(34, 37, 46, 0.12);
+}
+
+/* špendlíková hlavička karty */
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 1.5rem;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--thread);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.service-tag {
+  display: inline-block;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--thread-deep);
+  margin-bottom: 0.7rem;
+}
+
+.service-card h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.6rem;
+}
+
+.service-card p {
+  color: #4a4538;
+  font-size: 0.98rem;
+}
+
+.service-meta {
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--linen-dim);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.08em;
+  color: #6b6455 !important;
+}
+
+/* =============== DŮVĚRA =============== */
+
+.trust {
+  background: var(--ink);
+  color: var(--chalk);
+  padding: 4.5rem 1.25rem;
+  position: relative;
+}
+
+.trust::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-top: 3px dashed var(--thread);
+  opacity: 0.7;
+}
+
+.trust-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.75rem;
+}
+
+.trust-text p {
+  color: rgba(246, 242, 234, 0.82);
+  max-width: 36em;
+  margin-bottom: 1.5rem;
+}
+
+.trust-list {
+  list-style: none;
+}
+
+.trust-list li {
+  padding: 0.9rem 0 0.9rem 1.4rem;
+  border-bottom: 1px dashed rgba(246, 242, 234, 0.2);
+  position: relative;
+  color: rgba(246, 242, 234, 0.82);
+  font-size: 0.98rem;
+}
+
+.trust-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.45rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--thread);
+}
+
+.trust-list strong {
+  color: var(--chalk);
+}
+
+.trust-quotes {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.quote {
+  background: var(--ink-soft);
+  border-left: 3px solid var(--thread);
+  border-radius: 0 4px 4px 0;
+  padding: 1.4rem 1.5rem;
+}
+
+.quote blockquote {
+  font-style: italic;
+  font-size: 1.02rem;
+  color: var(--chalk);
+  margin-bottom: 0.75rem;
+}
+
+.quote figcaption {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pin);
+}
+
+.trust-fact {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  padding: 1rem 0.25rem 0;
+}
+
+.fact-num {
+  font-size: 3rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--thread);
+  line-height: 1;
+}
+
+.fact-label {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pin);
+  max-width: 14em;
+}
+
+/* =============== RESPONSIVITA =============== */
+
+@media (min-width: 640px) {
+  .service-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 2.5rem 0;
+    padding-right: calc(2.5rem + 58px);
+  }
+
+  .hero-hem {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .tape {
+    width: 34px;
+  }
+
+  .tape-num {
+    font-size: 0.62rem;
+  }
+
+  .tape-ticks {
+    clip-path: inset(24px 45% 0 0);
+  }
+
+  .hero {
+    padding-right: calc(1.25rem + 34px);
+  }
+
+  .hero-hem {
+    margin-right: 34px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (min-width: 900px) {
+  .services {
+    padding: 6rem 2.5rem;
+  }
+
+  .trust {
+    padding: 6rem 2.5rem;
+  }
+
+  .trust-inner {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+  }
+}
+
+/* =============== REDUCED MOTION =============== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-eyebrow,
+  .hero-title .line,
+  .hero-lead,
+  .hero-actions,
+  .tape-inner {
+    animation: none;
+  }
+
+  .btn,
+  .service-card {
+    transition: none;
+  }
+}
