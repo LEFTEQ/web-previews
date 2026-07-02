@@ -1,0 +1,554 @@
+/* ============================================================
+   CREAS s.r.o. — velkoobchod papírem, Olomouc
+   Token systém:
+   --paper   #F7F6F2  (nenatíraný ofsetový arch)
+   --ink     #1B2430  (tiskařská čerň s modrým podtónem)
+   --cyan    #0069A8  (procesní cyan, ztmavený pro kontrast)
+   --magenta #C4256E  (procesní magenta, ztlumená)
+   --yellow  #E8B830  (procesní žlutá)
+   --edge    #D9D5CC  (hrana stohu papíru)
+   Typo: Archivo (display, široké řezy) + Georgia/serif nahrazeno
+         systémovým stackem — bez externích knihoven používáme
+         font-stretch schopné systémové fonty + pečlivý tracking.
+   Signature: stoh archů v hero — vrstvené CMYK hrany papíru.
+   ============================================================ */
+
+:root {
+  --paper: #f7f6f2;
+  --ink: #1b2430;
+  --cyan: #0069a8;
+  --magenta: #c4256e;
+  --yellow: #e8b830;
+  --edge: #d9d5cc;
+  --font-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial,
+    sans-serif;
+  --font-body: "Helvetica Neue", Helvetica, Arial, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas,
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.cr a:focus-visible,
+.cr button:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- HERO ---------- */
+
+.cr-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+  padding: 1.25rem 1.25rem 4rem;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.cr-hero-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--ink);
+}
+
+.cr-wordmark {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.cr-wordmark-x {
+  color: var(--magenta);
+}
+
+.cr-wordmark-sub {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.cr-hero-loc {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* --- signature: stoh CMYK archů --- */
+
+.cr-hero-stack {
+  position: absolute;
+  top: 4.5rem;
+  right: -18vw;
+  width: 70vw;
+  max-width: 620px;
+  aspect-ratio: 1 / 1.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cr-sheet {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  border: 1.5px solid var(--edge);
+  box-shadow: -14px 14px 30px rgba(27, 36, 48, 0.08);
+  transform-origin: 85% 90%;
+  animation: cr-fan 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cr-sheet-1 {
+  transform: rotate(-14deg);
+  background: var(--cyan);
+  animation-delay: 0.05s;
+}
+.cr-sheet-2 {
+  transform: rotate(-9.5deg);
+  background: var(--magenta);
+  animation-delay: 0.12s;
+}
+.cr-sheet-3 {
+  transform: rotate(-5deg);
+  background: var(--yellow);
+  animation-delay: 0.19s;
+}
+.cr-sheet-4 {
+  transform: rotate(-1.5deg);
+  background: var(--ink);
+  animation-delay: 0.26s;
+}
+.cr-sheet-5 {
+  transform: rotate(2deg);
+  background: #ffffff;
+  animation-delay: 0.33s;
+}
+
+@keyframes cr-fan {
+  from {
+    opacity: 0;
+    transform: rotate(8deg) translateY(30px);
+  }
+}
+
+.cr-sheet-1 {
+  --r: -14deg;
+}
+.cr-sheet-2 {
+  --r: -9.5deg;
+}
+.cr-sheet-3 {
+  --r: -5deg;
+}
+.cr-sheet-4 {
+  --r: -1.5deg;
+}
+.cr-sheet-5 {
+  --r: 2deg;
+}
+
+.cr-sheet-1,
+.cr-sheet-2,
+.cr-sheet-3,
+.cr-sheet-4,
+.cr-sheet-5 {
+  animation-name: cr-fan-var;
+}
+
+@keyframes cr-fan-var {
+  from {
+    opacity: 0;
+    transform: rotate(calc(var(--r) + 10deg)) translateY(36px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(var(--r)) translateY(0);
+  }
+}
+
+/* --- hero text --- */
+
+.cr-hero-body {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding-top: 3.5rem;
+  max-width: 40rem;
+}
+
+.cr-hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin: 0 0 0.75rem;
+}
+
+.cr-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 11vw, 7.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.cr-line {
+  animation: cr-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.cr-line-1 {
+  animation-delay: 0.15s;
+}
+.cr-line-2 {
+  animation-delay: 0.25s;
+  color: var(--magenta);
+}
+.cr-line-3 {
+  animation-delay: 0.35s;
+}
+
+@keyframes cr-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cr-hero-lead {
+  font-size: 1.1rem;
+  max-width: 32rem;
+  margin: 0 0 1.75rem;
+}
+
+.cr-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.25rem;
+}
+
+.cr-btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border: 2px solid var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease, color 0.15s ease;
+}
+
+.cr-btn-solid {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.cr-btn-solid:hover {
+  background: var(--cyan);
+  border-color: var(--cyan);
+  transform: translateY(-2px);
+  box-shadow: -4px 4px 0 var(--yellow);
+}
+
+.cr-btn-line {
+  background: transparent;
+  color: var(--ink);
+}
+
+.cr-btn-line:hover {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateY(-2px);
+  box-shadow: -4px 4px 0 var(--magenta);
+}
+
+.cr-hero-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  margin: 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--edge);
+}
+
+.cr-hero-specs dt {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--cyan);
+  margin-bottom: 0.2rem;
+}
+
+.cr-hero-specs dd {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* ---------- SEKCE OBECNĚ ---------- */
+
+.cr-section {
+  padding: 4.5rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.cr-section-head {
+  max-width: 38rem;
+  margin-bottom: 2.75rem;
+}
+
+.cr-section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 5vw, 2.8rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin: 0 0 1rem;
+}
+
+.cr-section-head p {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* ---------- SORTIMENT ---------- */
+
+.cr-papers {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--ink);
+  border: 2px solid var(--ink);
+}
+
+.cr-paper {
+  background: #fff;
+  padding: 1.75rem 1.5rem;
+  position: relative;
+  transition: transform 0.15s ease;
+}
+
+.cr-paper::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: var(--edge);
+  transition: background-color 0.15s ease;
+}
+
+.cr-paper:nth-child(1):hover::before {
+  background: var(--cyan);
+}
+.cr-paper:nth-child(2):hover::before {
+  background: var(--magenta);
+}
+.cr-paper:nth-child(3):hover::before {
+  background: var(--yellow);
+}
+.cr-paper:nth-child(4):hover::before {
+  background: var(--ink);
+}
+
+.cr-paper-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--cyan);
+}
+
+.cr-paper-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  text-transform: uppercase;
+  margin: 0.5rem 0 0.15rem;
+}
+
+.cr-paper-gsm {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--magenta);
+}
+
+.cr-paper-desc {
+  margin: 0.75rem 0 0;
+  font-size: 0.98rem;
+}
+
+.cr-section-note {
+  margin: 2rem 0 0;
+  padding: 1.25rem 1.5rem;
+  border-left: 6px solid var(--yellow);
+  background: #fff;
+  font-size: 1rem;
+  max-width: 44rem;
+}
+
+/* ---------- DŮVĚRA ---------- */
+
+.cr-section-dark {
+  max-width: none;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.cr-section-dark > * {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cr-section-dark .cr-section-head {
+  margin-bottom: 2.75rem;
+  margin-left: 0;
+}
+
+.cr-section-dark .cr-section-head p {
+  color: #c8ccd4;
+}
+
+.cr-promises {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.cr-promise h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.5rem;
+  padding-top: 0.85rem;
+  border-top: 3px solid var(--yellow);
+}
+
+.cr-promise:nth-child(1) h3 {
+  border-top-color: var(--cyan);
+}
+.cr-promise:nth-child(2) h3 {
+  border-top-color: var(--magenta);
+}
+.cr-promise:nth-child(3) h3 {
+  border-top-color: var(--yellow);
+}
+
+.cr-promise p {
+  margin: 0;
+  color: #c8ccd4;
+  font-size: 0.98rem;
+}
+
+.cr-quote {
+  margin: 3rem auto 0;
+  padding: 2rem 1.5rem;
+  background: rgba(247, 246, 242, 0.05);
+  border-left: 6px solid var(--magenta);
+}
+
+.cr-quote p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin: 0 0 0.75rem;
+}
+
+.cr-quote cite {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: #9aa3af;
+}
+
+/* ---------- TABLET / DESKTOP ---------- */
+
+@media (min-width: 640px) {
+  .cr-papers {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cr-promises {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .cr-hero {
+    padding: 1.75rem 3rem 5rem;
+  }
+  .cr-hero-stack {
+    right: -6vw;
+    top: 6rem;
+    width: 42vw;
+  }
+  .cr-section {
+    padding: 6rem 3rem;
+  }
+  .cr-papers {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .cr-sheet,
+  .cr-line {
+    animation: none !important;
+    opacity: 1;
+  }
+  .cr-btn,
+  .cr-paper,
+  .cr-paper::before {
+    transition: none;
+  }
+  .cr-btn:hover {
+    transform: none;
+  }
+}
