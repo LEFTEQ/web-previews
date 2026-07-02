@@ -1,0 +1,380 @@
+/* =====================================================
+   TRUHLÁŘSTVÍ MORGENSTERN — Plzeň
+   Paleta odvozená z dílny: vyzrálý dub, včelí vosk,
+   modrá tesařská křída (rýsování), saze z kamen.
+   Signature: rybinový spoj — značka i řez mezi sekcemi.
+   ===================================================== */
+
+:root {
+  --wood-deep: #2b1f16;   /* tmavé jádro ořechu / saze */
+  --wood-mid: #5c4530;    /* vyzrálý dub */
+  --shaving: #f3ead9;     /* čerstvá hoblina */
+  --paper: #faf5ea;       /* pauzovací papír na nákresy */
+  --chalk: #2456a6;       /* tesařská modrá křída */
+  --wax: #d9a441;         /* včelí vosk / mosaz kování */
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--wood-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mst img { display: block; max-width: 100%; height: auto; }
+
+.mst a:focus-visible,
+.mst .btn:focus-visible {
+  outline: 3px solid var(--chalk);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- typografická utilita ---------- */
+.eyebrow {
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--chalk);
+  margin: 0 0 0.75rem;
+}
+
+.mst h1, .mst h2, .mst h3 {
+  font-family: Georgia, serif;
+  line-height: 1.12;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+/* =====================================================
+   HERO — fotka dílny + panel "nákres na pauzáku"
+   ===================================================== */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--wood-deep);
+}
+
+.hero-media { position: relative; min-height: 42vh; }
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  min-height: 42vh;
+  object-fit: cover;
+}
+
+.hero-panel {
+  padding: 2.5rem 1.4rem 3rem;
+  background:
+    linear-gradient(0deg, rgba(43,31,22,0.03), rgba(43,31,22,0.03)),
+    var(--paper);
+  /* jemný rastr rýsovacího papíru */
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(36,86,166,0.07) 31px 32px),
+    repeating-linear-gradient(90deg, transparent 0 31px, rgba(36,86,166,0.05) 31px 32px);
+  animation: hero-in 0.7s ease-out both;
+}
+
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- wordmark --- */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+.brand-mark { color: var(--wood-mid); flex: none; }
+.brand-word {
+  font-family: Georgia, serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+  line-height: 1.1;
+  display: flex;
+  flex-direction: column;
+}
+.brand-word b { display: contents; }
+.brand-word b, .brand-word { color: var(--wood-deep); }
+.brand-word small {
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--chalk);
+  margin-top: 0.25rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  max-width: 14ch;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--chalk);
+  /* podtržení jako tah tesařskou tužkou */
+  background: linear-gradient(transparent 82%, rgba(36,86,166,0.35) 82%);
+}
+
+.hero-lead {
+  max-width: 46ch;
+  font-size: 1.06rem;
+  color: var(--wood-mid);
+  margin: 1.25rem 0 2rem;
+}
+
+.hero-acts { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+
+.btn {
+  display: inline-block;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: 3px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.btn-solid {
+  background: var(--wood-deep);
+  color: var(--shaving);
+  box-shadow: 3px 3px 0 var(--wax);
+}
+.btn-solid:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--wax); }
+.btn-line {
+  color: var(--wood-deep);
+  border: 2px solid var(--wood-deep);
+}
+.btn-line:hover { background: rgba(43,31,22,0.06); }
+
+.hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  margin: 2.25rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px dashed rgba(36,86,166,0.4); /* křídová čára */
+}
+.hero-facts dt {
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--chalk);
+}
+.hero-facts dd { margin: 0.15rem 0 0; font-weight: 700; }
+
+/* =====================================================
+   SIGNATURE — rybinový řez mezi sekcemi
+   ===================================================== */
+.work, .trust { position: relative; }
+
+.work {
+  background: var(--wood-deep);
+  color: var(--shaving);
+  padding: 4.5rem 1.4rem 4rem;
+  /* rybinové zuby nahoře: světlá sekce "zapadá" do tmavé */
+  clip-path: polygon(
+    0 0, 4% 0, 7% 34px, 13% 34px, 16% 0,
+    24% 0, 27% 34px, 33% 34px, 36% 0,
+    44% 0, 47% 34px, 53% 34px, 56% 0,
+    64% 0, 67% 34px, 73% 34px, 76% 0,
+    84% 0, 87% 34px, 93% 34px, 96% 0,
+    100% 0, 100% 100%, 0 100%
+  );
+  margin-top: -1px;
+}
+
+.trust {
+  background: var(--paper);
+  padding: 4.5rem 1.4rem 4rem;
+  clip-path: polygon(
+    0 0, 4% 0, 7% 34px, 13% 34px, 16% 0,
+    24% 0, 27% 34px, 33% 34px, 36% 0,
+    44% 0, 47% 34px, 53% 34px, 56% 0,
+    64% 0, 67% 34px, 73% 34px, 76% 0,
+    84% 0, 87% 34px, 93% 34px, 96% 0,
+    100% 0, 100% 100%, 0 100%
+  );
+  margin-top: -34px;
+  padding-top: 5.5rem;
+}
+
+/* =====================================================
+   SEKCE: SLUŽBY
+   ===================================================== */
+.section-head { max-width: 1100px; margin: 0 auto 2.5rem; }
+.work .eyebrow { color: var(--wax); }
+.work h2 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--shaving);
+  max-width: 24ch;
+}
+
+.work-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+}
+
+.work-photo { margin: 0; }
+.work-photo img {
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 6px 6px 0 rgba(217,164,65,0.35);
+}
+.work-photo figcaption,
+.trust-photo figcaption {
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  margin-top: 0.7rem;
+  opacity: 0.75;
+}
+
+.work-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.75rem;
+}
+.work-list li {
+  border-left: 3px solid var(--wax);
+  padding-left: 1.1rem;
+  position: relative;
+}
+.work-dim {
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--wax);
+}
+.work-list h3 { font-size: 1.25rem; margin: 0.2rem 0 0.4rem; }
+.work-list p { margin: 0; color: #d8ccbc; font-size: 0.98rem; }
+
+/* --- kroky zakázky (skutečná sekvence → číslování oprávněné) --- */
+.steps {
+  max-width: 1100px;
+  margin: 3.5rem auto 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: krok;
+  display: grid;
+  gap: 1.25rem;
+  border-top: 1px dashed rgba(243,234,217,0.3);
+  padding-top: 2.5rem;
+}
+.steps li {
+  counter-increment: krok;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.4rem 1rem;
+  align-items: baseline;
+}
+.steps li::before {
+  content: counter(krok) ".";
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--wax);
+  grid-row: span 2;
+}
+.steps b { font-size: 1.05rem; }
+.steps span { grid-column: 2; color: #d8ccbc; font-size: 0.95rem; }
+
+/* =====================================================
+   SEKCE: DŮVĚRA / O DÍLNĚ
+   ===================================================== */
+.trust-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+}
+.trust h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); max-width: 24ch; }
+.trust-text > p { max-width: 58ch; color: var(--wood-mid); }
+.trust-text strong { color: var(--wood-deep); }
+
+.trust-photo { margin: 0; }
+.trust-photo img {
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 6px 6px 0 rgba(36,86,166,0.25);
+}
+
+.quotes {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+.quotes blockquote {
+  margin: 0;
+  font-style: italic;
+  font-size: 1.05rem;
+  border-left: 3px solid var(--chalk);
+  padding-left: 1.1rem;
+}
+.quotes cite {
+  display: block;
+  font-style: normal;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--chalk);
+  margin-top: 0.5rem;
+  padding-left: 1.1rem;
+}
+
+/* =====================================================
+   RESPONZIVITA — desktop
+   ===================================================== */
+@media (min-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr 1fr;
+    min-height: 92vh;
+  }
+  .hero-media { order: 2; }
+  .hero-media img { height: 100%; }
+  .hero-panel {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3.5rem 4rem;
+  }
+
+  .work-grid { grid-template-columns: 5fr 6fr; align-items: start; }
+  .work-list { grid-template-columns: 1fr 1fr; gap: 2rem 2.5rem; }
+  .steps { grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+
+  .trust-grid { grid-template-columns: 7fr 5fr; align-items: start; }
+  .trust-photo { position: sticky; top: 3rem; }
+}
+
+/* =====================================================
+   REDUKOVANÝ POHYB
+   ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-panel { animation: none; }
+  .btn { transition: none; }
+  .btn-solid:hover { transform: none; }
+}
