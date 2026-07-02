@@ -1,0 +1,574 @@
+/* =====================================================================
+   REHA — Bc. Barbora Knoblochová, rehabilitační praxe, Plzeň-Bory
+   Paleta odvozená z prostředí ordinace a těla:
+   --inkoust  #1E2E2B  hluboká zelenočerná (klid ordinace)
+   --eukalypt #3E6F63  eukalyptová zelená (hlavní barva praxe)
+   --salvie   #A9C3B4  světlá šalvějová (plochy, klid)
+   --len      #FAFBF7  lněná bílá (pozadí, čistota)
+   --tape     #D96C3F  „kineziotape" oranžová (akcent, CTA)
+   Typo: Fraunces (display, měkké lidské patky) + Sora (věcný grotesk)
+   Signature: svislá „páteř" z obratlových segmentů v hero
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,560;9..144,640&family=Sora:wght@400;500;600&display=swap");
+
+:root {
+  --inkoust: #1e2e2b;
+  --eukalypt: #3e6f63;
+  --salvie: #a9c3b4;
+  --len: #fafbf7;
+  --tape: #d96c3f;
+  --tape-tmava: #b9542c;
+
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Sora", "Segoe UI", system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--len);
+  color: var(--inkoust);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.reha a {
+  color: inherit;
+}
+
+.reha :focus-visible {
+  outline: 3px solid var(--tape);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Tlačítka ---------- */
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  transition: transform 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+}
+
+.btn-primary {
+  background: var(--tape);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--tape-tmava);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  border: 2px solid var(--eukalypt);
+  color: var(--eukalypt);
+  background: transparent;
+}
+
+.btn-ghost:hover {
+  background: var(--eukalypt);
+  color: var(--len);
+}
+
+/* =====================================================================
+   HERO
+   ===================================================================== */
+
+.hero {
+  background: var(--len);
+  padding: 1.5rem 1.25rem 4rem;
+  overflow: hidden;
+}
+
+.hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 68rem;
+  margin: 0 auto 3rem;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 640;
+  font-size: 1.6rem;
+  letter-spacing: 0.14em;
+  color: var(--inkoust);
+}
+
+.wordmark-dot {
+  color: var(--tape);
+}
+
+.hero-loc {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--eukalypt);
+  letter-spacing: 0.04em;
+}
+
+.hero-body {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+/* ---------- Signature: páteř ---------- */
+
+.spine {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  padding-top: 0.4rem;
+}
+
+.vert {
+  display: block;
+  width: 26px;
+  background: var(--salvie);
+  border-radius: 9px;
+  flex: 1 1 auto;
+  min-height: 34px;
+  animation: vert-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* obratle se směrem dolů „srovnávají" — od vychýlení k ose */
+.v1 { transform-origin: center; animation-delay: 0.05s; }
+.v2 { animation-delay: 0.13s; }
+.v3 { animation-delay: 0.21s; background: var(--eukalypt); }
+.v4 { animation-delay: 0.29s; background: var(--eukalypt); width: 30px; }
+.v5 { animation-delay: 0.37s; background: var(--eukalypt); }
+.v6 { animation-delay: 0.45s; }
+.v7 { animation-delay: 0.53s; background: var(--tape); }
+
+@keyframes vert-in {
+  from {
+    opacity: 0;
+    transform: translateX(-14px) rotate(-8deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) rotate(0);
+  }
+}
+
+/* ---------- Hero text ---------- */
+
+.hero-text {
+  max-width: 44rem;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--eukalypt);
+  animation: fade-up 0.6s ease 0.15s both;
+}
+
+.hero-title {
+  margin: 0 0 1.4rem;
+  font-family: var(--font-display);
+  font-weight: 560;
+  font-size: clamp(2.6rem, 8.5vw, 5.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+
+.hero-title .line {
+  display: block;
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-title .l1 { animation-delay: 0.2s; }
+.hero-title .l2 { animation-delay: 0.34s; }
+.hero-title .l3 { animation-delay: 0.48s; }
+
+.hero-title .accent {
+  color: var(--eukalypt);
+  font-style: italic;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-sub {
+  margin: 0 0 2rem;
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: #40514c;
+  animation: fade-up 0.7s ease 0.55s both;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  animation: fade-up 0.7s ease 0.65s both;
+}
+
+.hero-note {
+  margin: 1.1rem 0 0;
+  font-size: 0.85rem;
+  color: #5e6f6a;
+  animation: fade-up 0.7s ease 0.75s both;
+}
+
+/* =====================================================================
+   SEKCE OBECNĚ
+   ===================================================================== */
+
+.sekce {
+  padding: 4.5rem 1.25rem;
+}
+
+.sekce-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  margin: 0 0 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--tape);
+}
+
+.h2 {
+  margin: 0 0 2.5rem;
+  font-family: var(--font-display);
+  font-weight: 560;
+  font-size: clamp(1.7rem, 4.2vw, 2.6rem);
+  line-height: 1.15;
+  max-width: 40rem;
+}
+
+.h3 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 560;
+  font-size: 1.5rem;
+}
+
+/* ---------- Sekce 1: problémy ---------- */
+
+.sekce-sluzby {
+  background: #eef3ec;
+}
+
+.problemy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+.problem-karta {
+  background: var(--len);
+  border-radius: 18px;
+  padding: 1.5rem 1.4rem;
+  border-top: 5px solid var(--salvie);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.problem-karta:hover {
+  border-top-color: var(--tape);
+  transform: translateY(-3px);
+}
+
+.problem-titul {
+  margin: 0 0 0.7rem;
+  font-family: var(--font-display);
+  font-weight: 560;
+  font-size: 1.25rem;
+  color: var(--eukalypt);
+}
+
+.problem-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.95rem;
+  color: #3c4b46;
+}
+
+.problem-list li {
+  padding-left: 1.1rem;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.problem-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--tape);
+}
+
+/* ---------- Ceník ---------- */
+
+.cenik-blok {
+  background: var(--len);
+  border-radius: 22px;
+  padding: 2rem 1.5rem;
+}
+
+.cenik-head {
+  margin-bottom: 1.5rem;
+}
+
+.cenik-pozn {
+  margin: 0;
+  max-width: 36rem;
+  color: #4c5c56;
+  font-size: 0.95rem;
+}
+
+.cenik-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cenik-radek {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 0.5rem 1.2rem;
+  align-items: baseline;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid #dbe5dc;
+}
+
+.cenik-radek:last-child {
+  border-bottom: 0;
+}
+
+.cenik-nazev {
+  font-weight: 500;
+}
+
+.cenik-em {
+  font-style: normal;
+  font-size: 0.85rem;
+  color: var(--tape-tmava);
+}
+
+.cenik-cas {
+  font-size: 0.9rem;
+  color: #5e6f6a;
+  white-space: nowrap;
+}
+
+.cenik-cena {
+  font-family: var(--font-display);
+  font-weight: 640;
+  font-size: 1.15rem;
+  color: var(--eukalypt);
+  white-space: nowrap;
+  text-align: right;
+  min-width: 6ch;
+}
+
+/* ---------- Sekce 2: o nás / důvěra ---------- */
+
+.sekce-onas {
+  background: var(--inkoust);
+  color: #e9f0ea;
+}
+
+.eyebrow-svetly {
+  color: var(--salvie);
+}
+
+.h2-svetly {
+  color: #f4f8f3;
+}
+
+.onas-perex {
+  max-width: 42rem;
+  margin: -1.2rem 0 2.8rem;
+  font-size: 1.05rem;
+  color: #c3d2c6;
+}
+
+.duvera-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.8rem 2rem;
+  margin: 0 0 3rem;
+}
+
+.duvera-bod {
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.duvera-znak {
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  width: 6px;
+  height: 2.2rem;
+  border-radius: 3px;
+  background: var(--tape);
+}
+
+.duvera-t {
+  font-family: var(--font-display);
+  font-weight: 560;
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0 0 0.35rem;
+}
+
+.duvera-d {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #b3c4b7;
+}
+
+.onas-kontakt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.6rem;
+  border-top: 1px solid #35443f;
+  padding-top: 2rem;
+}
+
+.onas-kontakt-text {
+  margin: 0;
+  color: #c3d2c6;
+  max-width: 26rem;
+}
+
+/* =====================================================================
+   RESPONZIVITA
+   ===================================================================== */
+
+@media (max-width: 640px) {
+  .hero {
+    padding-bottom: 3rem;
+  }
+
+  .hero-top {
+    margin-bottom: 2rem;
+  }
+
+  .hero-loc {
+    display: none;
+  }
+
+  .hero-body {
+    grid-template-columns: 1fr;
+  }
+
+  /* páteř se na mobilu položí vodorovně nad titulek */
+  .spine {
+    flex-direction: row;
+    padding-top: 0;
+    margin-bottom: 1.6rem;
+    height: 26px;
+  }
+
+  .vert {
+    width: auto;
+    min-height: 0;
+    height: 26px;
+    min-width: 30px;
+  }
+
+  .v4 {
+    width: auto;
+    height: 26px;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .cenik-radek {
+    grid-template-columns: 1fr auto;
+  }
+
+  .cenik-nazev {
+    grid-column: 1 / -1;
+  }
+
+  .cenik-cas {
+    grid-row: 2;
+  }
+
+  .cenik-cena {
+    grid-row: 2;
+  }
+}
+
+/* =====================================================================
+   REDUKOVANÝ POHYB
+   ===================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .vert,
+  .hero-eyebrow,
+  .hero-title .line,
+  .hero-sub,
+  .hero-cta,
+  .hero-note {
+    animation: none;
+  }
+
+  .btn,
+  .problem-karta {
+    transition: none;
+  }
+
+  .btn-primary:hover,
+  .problem-karta:hover {
+    transform: none;
+  }
+}
