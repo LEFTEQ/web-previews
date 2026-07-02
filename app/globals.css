@@ -1,0 +1,559 @@
+/* =====================================================
+   RAL PNEU Olomouc — „Stopa pneumatiky"
+   Paleta z dílny:
+   --asfalt   #17191C  (mokrý asfalt, pozadí hero)
+   --guma     #24272B  (pryž, karty)
+   --krida    #F2F0EB  (křídová značení na dílně, světlé pozadí)
+   --papir    #FFFFFF
+   --chrom    #FFC93C  (výstražná žluť zvedáků a stojanů)
+   --olej     #6E7680  (šedý kov, sekundární text)
+   ===================================================== */
+
+:root {
+  --asfalt: #17191c;
+  --guma: #24272b;
+  --krida: #f2f0eb;
+  --papir: #ffffff;
+  --chrom: #ffc93c;
+  --olej: #6e7680;
+  --ink: #1c1e22;
+
+  --font-display: "Arial Black", "Archivo Black", Futura, "Helvetica Neue",
+    Arial, sans-serif;
+  --font-body: "Trebuchet MS", "Segoe UI", Verdana, system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--krida);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.rp a:focus-visible,
+.rp button:focus-visible {
+  outline: 3px solid var(--chrom);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- HERO ---------- */
+
+.rp-hero {
+  background: var(--asfalt);
+  color: var(--krida);
+  overflow: hidden;
+  position: relative;
+}
+
+.rp-hero-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 0;
+}
+
+.rp-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(242, 240, 235, 0.14);
+}
+
+.rp-wordmark {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--papir);
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.rp-wordmark b {
+  color: var(--chrom);
+  font-weight: inherit;
+  display: inline;
+}
+
+.rp-wordmark > b {
+  display: inline;
+}
+
+.rp-wordmark-sub {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--olej);
+  margin-top: 0.35rem;
+}
+
+.rp-topbar-place {
+  color: var(--krida);
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border: 1px solid rgba(242, 240, 235, 0.3);
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.rp-topbar-place:hover {
+  border-color: var(--chrom);
+  color: var(--chrom);
+}
+
+.rp-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding: 3rem 0 3.5rem;
+  position: relative;
+}
+
+/* Dezénový pás — signature prvek */
+.rp-tread {
+  position: absolute;
+  top: -2rem;
+  right: -1.25rem;
+  width: 90px;
+  height: 120%;
+  color: rgba(255, 201, 60, 0.16);
+  pointer-events: none;
+  animation: tread-roll 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes tread-roll {
+  from {
+    transform: translateY(-46px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.rp-hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+}
+
+.rp-hero-eyebrow {
+  margin: 0 0 1.25rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--chrom);
+  font-weight: 700;
+}
+
+.rp-hero-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.9rem, 9.5vw, 5.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: var(--papir);
+}
+
+.rp-line {
+  display: block;
+  animation: line-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rp-line-1 { animation-delay: 0.05s; }
+.rp-line-2 { animation-delay: 0.18s; }
+.rp-line-3 { animation-delay: 0.31s; }
+
+.rp-line-accent {
+  color: var(--chrom);
+}
+
+@keyframes line-in {
+  from {
+    transform: translateX(-28px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.rp-hero-lead {
+  margin: 1.75rem 0 0;
+  max-width: 34rem;
+  font-size: 1.08rem;
+  color: rgba(242, 240, 235, 0.82);
+  animation: line-in 0.7s 0.44s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rp-hero-actions {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  animation: line-in 0.7s 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Tlačítka */
+.rp-btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s ease, background-color 0.2s ease,
+    color 0.2s ease, border-color 0.2s ease;
+}
+
+.rp-btn:hover {
+  transform: translateY(-2px);
+}
+
+.rp-btn-primary {
+  background: var(--chrom);
+  color: var(--asfalt);
+}
+
+.rp-btn-primary:hover {
+  background: #ffd868;
+}
+
+.rp-btn-ghost {
+  color: var(--krida);
+  border: 1px solid rgba(242, 240, 235, 0.35);
+}
+
+.rp-btn-ghost:hover {
+  border-color: var(--chrom);
+  color: var(--chrom);
+}
+
+.rp-btn-outline {
+  color: var(--asfalt);
+  border: 2px solid var(--asfalt);
+}
+
+.rp-btn-outline:hover {
+  background: var(--asfalt);
+  color: var(--chrom);
+}
+
+/* Výstražný pás pod hero — jako žlutočerné pásky na zvedáku */
+.rp-hero-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  align-items: center;
+  justify-content: center;
+  background: var(--chrom);
+  color: var(--asfalt);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.26em;
+  padding: 0.7rem 1rem;
+  margin: 0 -1.25rem;
+  text-transform: uppercase;
+}
+
+.rp-dot {
+  font-size: 0.5rem;
+  letter-spacing: 0;
+}
+
+/* ---------- SEKCE HLAVIČKY ---------- */
+
+.rp-section-head {
+  max-width: 640px;
+  margin-bottom: 2.75rem;
+}
+
+.rp-section-head h2 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.5rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.rp-section-head h2 em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1.5px currentColor;
+}
+
+.rp-section-head p {
+  margin: 0;
+  color: var(--olej);
+  font-size: 1.05rem;
+}
+
+.rp-section-head-invert p {
+  color: rgba(242, 240, 235, 0.7);
+}
+
+/* ---------- SLUŽBY ---------- */
+
+.rp-sluzby {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem;
+}
+
+.rp-sluzby-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.rp-karta {
+  background: var(--papir);
+  border: 1px solid rgba(23, 25, 28, 0.1);
+  border-radius: 6px;
+  padding: 1.6rem 1.5rem 1.7rem;
+  position: relative;
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.rp-karta::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.3rem;
+  bottom: 1.3rem;
+  width: 4px;
+  background: var(--chrom);
+  border-radius: 0 2px 2px 0;
+  transform: scaleY(0.4);
+  transform-origin: top;
+  transition: transform 0.2s ease;
+}
+
+.rp-karta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(23, 25, 28, 0.1);
+  border-color: rgba(23, 25, 28, 0.2);
+}
+
+.rp-karta:hover::before {
+  transform: scaleY(1);
+}
+
+.rp-karta-stroj {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--olej);
+  background: var(--krida);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.rp-karta h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.rp-karta p {
+  margin: 0;
+  color: #4a4f56;
+  font-size: 0.98rem;
+}
+
+/* ---------- DŮVĚRA ---------- */
+
+.rp-duvera {
+  background: var(--asfalt);
+  color: var(--krida);
+}
+
+.rp-duvera-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.rp-duvody {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: rgba(242, 240, 235, 0.14);
+  border: 1px solid rgba(242, 240, 235, 0.14);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 0 3rem;
+}
+
+.rp-duvod {
+  background: var(--guma);
+  padding: 1.8rem 1.5rem;
+}
+
+.rp-duvod dt {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.rp-duvod-cislo {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--chrom);
+  letter-spacing: -0.02em;
+}
+
+.rp-duvod-jednotka {
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--olej);
+  font-weight: 700;
+}
+
+.rp-duvod dd {
+  margin: 0;
+  color: rgba(242, 240, 235, 0.82);
+  font-size: 0.98rem;
+}
+
+/* Kontaktní pás */
+.rp-kontakt-pas {
+  background: var(--chrom);
+  color: var(--asfalt);
+  border-radius: 8px;
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.rp-kontakt-veta {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  line-height: 1.3;
+  text-transform: uppercase;
+  max-width: 34rem;
+}
+
+.rp-kontakt-akce {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.rp-kontakt-akce .rp-btn-primary {
+  background: var(--asfalt);
+  color: var(--chrom);
+}
+
+.rp-kontakt-akce .rp-btn-primary:hover {
+  background: #2c2f34;
+}
+
+/* ---------- RESPONSIVITA ---------- */
+
+@media (min-width: 700px) {
+  .rp-sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .rp-duvody {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .rp-tread {
+    width: 120px;
+    right: 0;
+  }
+}
+
+@media (min-width: 1020px) {
+  .rp-sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .rp-duvody {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .rp-kontakt-pas {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.4rem 2.5rem;
+  }
+
+  .rp-tread {
+    width: 150px;
+    right: 2rem;
+    color: rgba(255, 201, 60, 0.22);
+  }
+
+  .rp-hero-grid {
+    padding: 4.5rem 0 5rem;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rp-tread,
+  .rp-line,
+  .rp-hero-lead,
+  .rp-hero-actions {
+    animation: none;
+  }
+
+  .rp-btn,
+  .rp-karta,
+  .rp-karta::before {
+    transition: none;
+  }
+
+  .rp-btn:hover,
+  .rp-karta:hover {
+    transform: none;
+  }
+}
