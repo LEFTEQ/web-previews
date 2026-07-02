@@ -1,0 +1,665 @@
+/* ============================================================
+   VaKo montáže s.r.o. — zámečnictví Ostrava
+   Palety a tvary odvozené z dílny: ocelový plech, okuje,
+   žhavý svar, křídová značka na jeklu.
+   ------------------------------------------------------------
+   TOKENY
+   ocel-tmava   #1B2228  (pozadí tmavých ploch — plech po válcování)
+   ocel-svetla  #E8EAEA  (světlá plocha — pozinkovaný plech)
+   grafit       #2E3840  (text na světlé)
+   svar         #F5A623 → #FF5C1F (žhavá housenka — jediný akcent)
+   krida        #F2F4F3  (křídové popisky, kódy zakázek)
+   ============================================================ */
+
+:root {
+  --ocel-tmava: #1b2228;
+  --ocel-tmava-2: #232d35;
+  --ocel-svetla: #e8eaea;
+  --ocel-svetla-2: #dfe3e3;
+  --grafit: #2e3840;
+  --grafit-mek: #55616b;
+  --svar-a: #f5a623;
+  --svar-b: #ff5c1f;
+  --krida: #f2f4f3;
+  --weld-gradient: linear-gradient(90deg, var(--svar-a), var(--svar-b));
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--ocel-svetla);
+  color: var(--grafit);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.vk a {
+  color: inherit;
+}
+
+.vk :focus-visible {
+  outline: 3px solid var(--svar-b);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.vk-hero {
+  position: relative;
+  background:
+    /* jemná textura válcovaného plechu */
+    repeating-linear-gradient(
+      100deg,
+      transparent 0px,
+      transparent 46px,
+      rgba(255, 255, 255, 0.025) 46px,
+      rgba(255, 255, 255, 0.025) 48px
+    ),
+    radial-gradient(1200px 600px at 85% -10%, #2b3archive, transparent),
+    var(--ocel-tmava);
+  background:
+    repeating-linear-gradient(
+      100deg,
+      transparent 0px,
+      transparent 46px,
+      rgba(255, 255, 255, 0.025) 46px,
+      rgba(255, 255, 255, 0.025) 48px
+    ),
+    radial-gradient(1200px 600px at 85% -10%, #2c3944, transparent 70%),
+    var(--ocel-tmava);
+  color: var(--krida);
+  padding: 1.25rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.vk-hero-topbar {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Wordmark: VA | KO spojené "svarem" */
+.vk-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  font-weight: 800;
+  font-size: 1.45rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.vk-wordmark-weld {
+  display: inline-block;
+  width: 0.55em;
+  height: 0.16em;
+  margin: 0 0.12em;
+  background: var(--weld-gradient);
+  border-radius: 999px;
+  align-self: center;
+  transform: rotate(-8deg);
+}
+
+.vk-wordmark-sub {
+  font-weight: 400;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  margin-left: 0.7em;
+  color: rgba(242, 244, 243, 0.65);
+  text-transform: uppercase;
+}
+
+.vk-hero-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  font-size: 0.92rem;
+}
+
+.vk-hero-nav a {
+  color: rgba(242, 244, 243, 0.85);
+  text-decoration: none;
+  padding: 0.3rem 0;
+  border-bottom: 2px solid transparent;
+}
+
+.vk-hero-nav a:hover {
+  border-bottom-color: var(--svar-a);
+}
+
+.vk-hero-tel {
+  font-weight: 700;
+  color: var(--krida) !important;
+}
+
+.vk-hero-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 0 2.5rem;
+}
+
+.vk-hero-eyebrow {
+  margin: 0 0 1.2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--svar-a);
+  font-weight: 600;
+}
+
+.vk-hero-title {
+  margin: 0;
+  font-size: clamp(2.6rem, 9vw, 6.2rem);
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  font-stretch: condensed;
+  font-family: "Arial Narrow", "Segoe UI", Arial, sans-serif;
+}
+
+.vk-line {
+  display: block;
+}
+
+.vk-line-2 {
+  position: relative;
+  display: inline-block;
+  background: var(--weld-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 0.3em;
+}
+
+.vk-spark {
+  position: absolute;
+  right: -0.05em;
+  top: 0.1em;
+  width: 0.22em;
+  height: 0.22em;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, var(--svar-a) 45%, transparent 70%);
+}
+
+.vk-hero-lead {
+  max-width: 34rem;
+  margin: 1.6rem 0 2rem;
+  font-size: 1.1rem;
+  color: rgba(242, 244, 243, 0.82);
+}
+
+.vk-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.vk-btn {
+  display: inline-block;
+  padding: 0.95rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 3px;
+  letter-spacing: 0.02em;
+}
+
+.vk-btn-primary {
+  background: var(--weld-gradient);
+  color: #1b1006;
+  box-shadow: 0 0 24px rgba(255, 92, 31, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.vk-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 32px rgba(255, 92, 31, 0.5);
+}
+
+.vk-btn-ghost {
+  border: 1px solid rgba(242, 244, 243, 0.35);
+  color: var(--krida);
+  transition: border-color 0.15s ease;
+}
+
+.vk-btn-ghost:hover {
+  border-color: var(--svar-a);
+}
+
+/* ---- SIGNATURE: svarová housenka ---- */
+
+.vk-weldline {
+  position: relative;
+  max-width: 1100px;
+  margin: 1.5rem auto 0;
+  height: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.vk-weld-bead {
+  display: block;
+  width: 100%;
+  height: 7px;
+  border-radius: 999px;
+  background:
+    /* šupiny housenky */
+    repeating-radial-gradient(
+      circle at 6px 50%,
+      rgba(255, 255, 255, 0.35) 0 1.5px,
+      transparent 2px 12px
+    ),
+    var(--weld-gradient);
+  background-size: 12px 100%, 200% 100%;
+  box-shadow:
+    0 0 10px rgba(245, 166, 35, 0.7),
+    0 0 34px rgba(255, 92, 31, 0.45);
+  transform-origin: left center;
+  animation: vk-weld-draw 1.4s cubic-bezier(0.6, 0, 0.2, 1) 0.2s both;
+}
+
+.vk-weld-label {
+  position: absolute;
+  right: 0;
+  top: -1.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(242, 244, 243, 0.5);
+  animation: vk-fade-in 0.6s ease 1.4s both;
+}
+
+@keyframes vk-weld-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes vk-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.vk-hero-body > * {
+  animation: vk-rise 0.7s ease both;
+}
+
+.vk-hero-body > *:nth-child(1) { animation-delay: 0.05s; }
+.vk-hero-body > *:nth-child(2) { animation-delay: 0.15s; }
+.vk-hero-body > *:nth-child(3) { animation-delay: 0.3s; }
+.vk-hero-body > *:nth-child(4) { animation-delay: 0.45s; }
+
+@keyframes vk-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vk-hero-facts {
+  max-width: 1100px;
+  margin: 0 auto;
+  list-style: none;
+  padding: 1.8rem 0 2.2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.vk-hero-facts li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  border-left: 2px solid rgba(245, 166, 35, 0.5);
+  padding-left: 0.9rem;
+}
+
+.vk-hero-facts strong {
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.vk-hero-facts span {
+  font-size: 0.85rem;
+  color: rgba(242, 244, 243, 0.6);
+}
+
+/* ============ SEKCE OBECNĚ ============ */
+
+.vk-section {
+  padding: 4.5rem 1.25rem;
+}
+
+.vk-section-head {
+  max-width: 1100px;
+  margin: 0 auto 2.8rem;
+}
+
+.vk-section-head h2 {
+  margin: 0 0 0.8rem;
+  font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  font-weight: 800;
+  font-family: "Arial Narrow", "Segoe UI", Arial, sans-serif;
+  font-stretch: condensed;
+  position: relative;
+  padding-bottom: 0.7rem;
+}
+
+.vk-section-head h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 4.5rem;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--weld-gradient);
+}
+
+.vk-section-head p {
+  max-width: 38rem;
+  margin: 0;
+  color: var(--grafit-mek);
+}
+
+/* ============ SLUŽBY ============ */
+
+.vk-sluzby {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.vk-sluzba {
+  background: #fff;
+  border: 1px solid var(--ocel-svetla-2);
+  border-radius: 4px;
+  padding: 1.5rem 1.4rem 1.6rem;
+  position: relative;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.vk-sluzba:hover {
+  border-color: var(--svar-a);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(27, 34, 40, 0.08);
+}
+
+.vk-sluzba-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.9rem;
+  font-family: "Courier New", monospace;
+  font-size: 0.8rem;
+}
+
+/* kód zakázky jako křídová značka na jeklu */
+.vk-sluzba-kod {
+  background: var(--ocel-tmava);
+  color: var(--krida);
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+}
+
+.vk-sluzba-profil {
+  color: var(--grafit-mek);
+  letter-spacing: 0.06em;
+}
+
+.vk-sluzba h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.vk-sluzba p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--grafit-mek);
+}
+
+.vk-sluzba p a {
+  color: var(--svar-b);
+  font-weight: 600;
+}
+
+.vk-sluzba-plna {
+  background: var(--ocel-tmava);
+  border-color: var(--ocel-tmava);
+  color: var(--krida);
+}
+
+.vk-sluzba-plna h3 {
+  color: var(--krida);
+}
+
+.vk-sluzba-plna p {
+  color: rgba(242, 244, 243, 0.75);
+}
+
+.vk-sluzba-plna .vk-sluzba-kod {
+  background: var(--weld-gradient);
+  color: #1b1006;
+}
+
+.vk-sluzba-plna .vk-sluzba-profil {
+  color: rgba(242, 244, 243, 0.6);
+}
+
+.vk-sluzba-plna p a {
+  color: var(--svar-a);
+}
+
+/* ============ ZAKÁZKY / DŮVĚRA ============ */
+
+.vk-section-dark {
+  background: var(--ocel-tmava);
+  color: var(--krida);
+}
+
+.vk-section-dark .vk-section-head p {
+  color: rgba(242, 244, 243, 0.65);
+}
+
+.vk-zakazky {
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+}
+
+.vk-zakazka {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1.5rem;
+  padding: 1.4rem 0;
+  border-top: 1px solid rgba(242, 244, 243, 0.12);
+  align-items: start;
+}
+
+.vk-zakazka:last-child {
+  border-bottom: 1px solid rgba(242, 244, 243, 0.12);
+}
+
+.vk-zakazka-stamp {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.vk-zakazka-misto {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.vk-zakazka-rok {
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+  color: var(--svar-a);
+  letter-spacing: 0.15em;
+}
+
+.vk-zakazka p {
+  margin: 0;
+  color: rgba(242, 244, 243, 0.8);
+  font-size: 0.98rem;
+}
+
+.vk-reference {
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+  padding: 1.8rem 1.6rem;
+  border-left: 5px solid;
+  border-image: linear-gradient(180deg, var(--svar-a), var(--svar-b)) 1;
+  background: var(--ocel-tmava-2);
+}
+
+.vk-reference p {
+  margin: 0 0 0.7rem;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  font-style: italic;
+  color: var(--krida);
+}
+
+.vk-reference footer {
+  font-size: 0.85rem;
+  color: rgba(242, 244, 243, 0.55);
+  letter-spacing: 0.05em;
+}
+
+.vk-duvera {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.vk-duvera-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-top: 3px solid;
+  border-image: var(--weld-gradient) 1;
+  padding-top: 0.9rem;
+}
+
+.vk-duvera-item strong {
+  font-size: 1rem;
+}
+
+.vk-duvera-item span {
+  font-size: 0.88rem;
+  color: rgba(242, 244, 243, 0.65);
+}
+
+/* ============ RESPONSIVITA ============ */
+
+@media (max-width: 900px) {
+  .vk-sluzby {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vk-duvera {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .vk-hero-nav {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .vk-hero-body {
+    padding: 2.2rem 0 2rem;
+  }
+
+  .vk-hero-facts {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .vk-sluzby {
+    grid-template-columns: 1fr;
+  }
+
+  .vk-zakazka {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .vk-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .vk-section {
+    padding: 3.2rem 1.1rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .vk-weld-bead,
+  .vk-weld-label,
+  .vk-hero-body > * {
+    animation: none !important;
+  }
+
+  .vk-sluzba,
+  .vk-btn-primary {
+    transition: none;
+  }
+
+  .vk-sluzba:hover,
+  .vk-btn-primary:hover {
+    transform: none;
+  }
+}
