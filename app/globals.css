@@ -1,0 +1,569 @@
+/* ============================================================
+   SONADOS Trans — zemní práce Brno
+   Paleta: řez terénem
+   --jil       #4A3226  tmavý brněnský jíl (základ)
+   --ornice    #2B211B  téměř černá ornice (hero pozadí)
+   --sterk     #C9BFB2  světlý štěrk / beton (světlé sekce)
+   --papir     #EDE7DD  vápenný podklad
+   --stroj     #F2B90F  výstražná žlutá bagru (akcent, jen CTA + kóty)
+   --linka     #8A7360  vybledlá hlína pro drobné texty
+   Typo: display = system condensed stack (Arial Narrow / Impact-like via
+   font-stretch fallback) → těžké, úzké, jako výstražné značení strojů;
+   body = Georgia/serif NE — body je systémový grotesk, věcný jako stavební deník.
+   ============================================================ */
+
+:root {
+  --jil: #4a3226;
+  --ornice: #241b15;
+  --sterk: #c9bfb2;
+  --papir: #ede7dd;
+  --stroj: #f2b90f;
+  --linka: #8a7360;
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed",
+    Impact, "Arial Black", sans-serif;
+  --font-body: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ornice);
+  background: var(--papir);
+  -webkit-font-smoothing: antialiased;
+}
+
+.sn a:focus-visible,
+.sn button:focus-visible {
+  outline: 3px solid var(--stroj);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+  position: relative;
+  background: var(--ornice);
+  color: var(--papir);
+  overflow: hidden;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.hero__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.5rem 0 2.5rem;
+}
+
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.wordmark__main {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: condensed;
+  font-size: 1.6rem;
+  letter-spacing: 0.14em;
+  color: var(--stroj);
+}
+
+.wordmark__sub {
+  font-size: 0.62rem;
+  letter-spacing: 0.32em;
+  color: var(--sterk);
+  margin-top: 0.35rem;
+}
+
+.hero__tel {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--papir);
+  text-decoration: none;
+  border: 2px solid var(--linka);
+  padding: 0.55rem 1rem;
+  white-space: nowrap;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.hero__tel:hover {
+  border-color: var(--stroj);
+  color: var(--stroj);
+}
+
+.hero__body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-bottom: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.hero__eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--stroj);
+  margin: 0 0 1.25rem;
+  animation: sn-up 0.6s 0.1s both;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  font-size: clamp(3.2rem, 12vw, 8.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero__line {
+  display: block;
+  animation: sn-dig 0.7s both;
+}
+
+/* každý řádek titulku se „zakopává" o kus hlouběji — jako lžíce bagru */
+.hero__line--1 {
+  animation-delay: 0.15s;
+}
+.hero__line--2 {
+  padding-left: 0.6em;
+  color: var(--sterk);
+  animation-delay: 0.3s;
+}
+.hero__line--3 {
+  padding-left: 1.2em;
+  animation-delay: 0.45s;
+}
+
+.hero__dot {
+  color: var(--stroj);
+}
+
+.hero__lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: var(--sterk);
+  margin: 0 0 2rem;
+  animation: sn-up 0.6s 0.55s both;
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  animation: sn-up 0.6s 0.65s both;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  transition: transform 0.15s, background 0.2s, color 0.2s;
+}
+
+.btn--yellow {
+  background: var(--stroj);
+  color: var(--ornice);
+}
+
+.btn--yellow:hover {
+  transform: translateY(-2px);
+  background: #ffd23d;
+}
+
+.btn--ghost {
+  color: var(--papir);
+  border: 2px solid var(--linka);
+}
+
+.btn--ghost:hover {
+  border-color: var(--papir);
+}
+
+/* --- signature: geologický profil s kótami --- */
+
+.hero__profil {
+  max-width: 1100px;
+  margin: 0 auto;
+  border-left: 3px solid var(--stroj);
+}
+
+.vrstva {
+  position: relative;
+  padding: 0.6rem 0 0.6rem 1rem;
+}
+
+.vrstva--ornice {
+  background: repeating-linear-gradient(
+    -45deg,
+    #3a2c22,
+    #3a2c22 10px,
+    #322419 10px,
+    #322419 20px
+  );
+}
+
+.vrstva--jil {
+  background: repeating-linear-gradient(
+    0deg,
+    #4a3226,
+    #4a3226 6px,
+    #543b2c 6px,
+    #543b2c 12px
+  );
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+}
+
+.vrstva--sterk {
+  background: radial-gradient(circle at 12% 40%, #6b5a48 0 3px, transparent 4px),
+    radial-gradient(circle at 38% 70%, #6b5a48 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 63% 30%, #6b5a48 0 3px, transparent 4px),
+    radial-gradient(circle at 87% 60%, #6b5a48 0 2.5px, transparent 3.5px),
+    #59493a;
+  background-size: 90px 40px;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+}
+
+.vrstva__kota {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--stroj);
+  background: var(--ornice);
+  padding: 0.15rem 0.5rem;
+}
+
+/* zubatá linie výkopu */
+
+.zub {
+  display: block;
+  width: 100%;
+  height: 34px;
+  margin: 0 -1.25rem;
+  width: calc(100% + 2.5rem);
+}
+
+.hero .zub path {
+  fill: var(--papir);
+}
+
+.zub--flip {
+  transform: scaleY(-1);
+}
+
+.predel {
+  background: var(--jil);
+  line-height: 0;
+}
+
+.predel .zub {
+  margin: 0;
+  width: 100%;
+}
+
+.predel .zub path {
+  fill: var(--papir);
+}
+
+/* ---------- SEKCE společné ---------- */
+
+.sekce__hlava {
+  max-width: 1100px;
+  margin: 0 auto 2.5rem;
+}
+
+.sekce__eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--linka);
+  margin: 0 0 0.75rem;
+}
+
+.sekce__eyebrow--svetly {
+  color: var(--stroj);
+}
+
+.sekce__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  line-height: 1;
+  margin: 0;
+  color: var(--jil);
+}
+
+.sekce__title--svetly {
+  color: var(--papir);
+}
+
+/* ---------- SLUŽBY ---------- */
+
+.sluzby {
+  padding: 4rem 1.25rem 4.5rem;
+  background: var(--papir);
+}
+
+.sluzby__list {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1100px;
+}
+
+.sluzba {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+  border-top: 2px solid var(--sterk);
+}
+
+.sluzba:last-child {
+  border-bottom: 2px solid var(--sterk);
+}
+
+.sluzba__hloubka {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-left: 3px solid var(--stroj);
+  padding-left: 0.75rem;
+}
+
+.sluzba__cislo {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: condensed;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--jil);
+}
+
+.sluzba__label {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--linka);
+  margin-top: 0.3rem;
+}
+
+.sluzba__nazev {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.4rem;
+  color: var(--ornice);
+}
+
+.sluzba__popis {
+  margin: 0;
+  color: #4d4038;
+  max-width: 42rem;
+}
+
+.sluzby__pozn {
+  max-width: 1100px;
+  margin: 2rem auto 0;
+  padding: 1rem 1.25rem;
+  background: var(--sterk);
+  color: var(--ornice);
+  font-size: 0.95rem;
+  border-left: 4px solid var(--stroj);
+}
+
+/* ---------- DŮVĚRA ---------- */
+
+.duvera {
+  background: var(--jil);
+  color: var(--papir);
+  padding: 4rem 1.25rem 4.5rem;
+}
+
+.duvody {
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.duvod {
+  border-top: 3px solid var(--stroj);
+  padding-top: 1rem;
+}
+
+.duvod__cislo {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: condensed;
+  font-size: 3.2rem;
+  line-height: 1;
+  margin: 0 0 0.5rem;
+  color: var(--stroj);
+}
+
+.duvod__jednotka {
+  font-size: 1.2rem;
+  color: var(--sterk);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.duvod__text {
+  margin: 0;
+  color: var(--sterk);
+  font-size: 0.98rem;
+}
+
+.reference {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.ref {
+  background: rgba(0, 0, 0, 0.22);
+  padding: 1.5rem;
+}
+
+.ref__misto {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--stroj);
+  margin: 0 0 0.4rem;
+}
+
+.ref__prace {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  font-size: 1.05rem;
+  margin: 0 0 0.8rem;
+  color: var(--papir);
+}
+
+.ref__citace {
+  margin: 0 0 0.8rem;
+  font-style: italic;
+  color: var(--sterk);
+  font-size: 0.98rem;
+}
+
+.ref__jmeno {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--linka);
+}
+
+/* ---------- animace ---------- */
+
+@keyframes sn-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sn-dig {
+  from {
+    opacity: 0;
+    transform: translateY(-22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero__eyebrow,
+  .hero__line,
+  .hero__lead,
+  .hero__cta {
+    animation: none;
+  }
+  .btn,
+  .hero__tel {
+    transition: none;
+  }
+  .btn--yellow:hover {
+    transform: none;
+  }
+}
+
+/* ---------- responzivita ---------- */
+
+@media (min-width: 700px) {
+  .duvody {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .reference {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .sluzba {
+    grid-template-columns: 8rem 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__tel {
+    display: none;
+  }
+  .hero__line--2 {
+    padding-left: 0.35em;
+  }
+  .hero__line--3 {
+    padding-left: 0.7em;
+  }
+}
