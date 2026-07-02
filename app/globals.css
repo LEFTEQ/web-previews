@@ -1,0 +1,608 @@
+/* ============================================================
+   VODÁK sport — Brno
+   Koncept: dvě sezóny, jedna prodejna. Voda ↔ sníh.
+   Paleta:
+     --reka      #0B3B52  hluboká říční modř (pozadí hero)
+     --hladina   #12546F  světlejší tón vody
+     --kajak     #FF8A3D  oranžový PE plast nafukovacích lodí (akcent)
+     --pena      #EAF4F4  ledová bílá — zimní sekce
+     --skluznice #10222E  téměř černá, text v zimě
+     --vosk      #C9E3E8  chladná modrošedá pro linky
+   Typo: Archivo Narrow-ish přes systémový stack? Ne — používáme
+   system stack s výraznými váhami a kondenzovaným trackingem,
+   bez externích knihoven (rychlost). Display: těžké, těsné,
+   uppercase s vlnovým akcentem.
+   ============================================================ */
+
+:root {
+  --reka: #0b3b52;
+  --hladina: #12546f;
+  --kajak: #ff8a3d;
+  --kajak-tmavy: #d96a24;
+  --pena: #eaf4f4;
+  --skluznice: #10222e;
+  --vosk: #c9e3e8;
+  --font-stack: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial,
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-stack);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--skluznice);
+  background: var(--pena);
+  -webkit-font-smoothing: antialiased;
+}
+
+.vs a {
+  color: var(--hladina);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.vs a:focus-visible,
+.vs :focus-visible {
+  outline: 3px solid var(--kajak);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ===================== HERO ===================== */
+
+.vs-hero {
+  position: relative;
+  background: linear-gradient(175deg, var(--reka) 0%, var(--hladina) 78%, #1a6484 100%);
+  color: #f2fbff;
+  padding: 1.5rem 1.25rem 7.5rem;
+  overflow: hidden;
+}
+
+.vs-hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+/* Wordmark — vlastní typografické logo: Á jako vlna v oranžové kajakové */
+.vs-wordmark {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.vs-wordmark-vlna {
+  color: var(--kajak);
+  display: inline-block;
+  transform: translateY(-2px);
+}
+
+.vs-wordmark-sport {
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.18em;
+  margin-left: 0.4em;
+  color: var(--vosk);
+}
+
+.vs-hero-nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.vs-hero-nav a {
+  color: var(--vosk);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+}
+
+.vs-hero-nav a:hover {
+  color: #fff;
+  border-bottom-color: var(--kajak);
+}
+
+.vs-hero-body {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding-top: 3.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.vs-hero-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--kajak);
+  margin: 0 0 1rem;
+}
+
+.vs-hero-title {
+  font-size: clamp(2.75rem, 9.5vw, 6.5rem);
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.vs-hero-line {
+  display: block;
+  animation: vs-vynoreni 0.7s ease-out both;
+}
+
+.vs-hero-line-2 {
+  color: var(--vosk);
+  animation-delay: 0.18s;
+  /* zimní řádek: světlý jako sníh, mírně odsazený jako druhá stopa */
+  margin-left: clamp(0.5rem, 4vw, 3.5rem);
+}
+
+@keyframes vs-vynoreni {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vs-hero-perex {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: #d8ecf3;
+  margin: 0 0 2rem;
+  animation: vs-vynoreni 0.7s 0.32s ease-out both;
+}
+
+.vs-hero-akce {
+  display: inline-block;
+  background: var(--kajak);
+  color: #2b1503;
+  font-size: 1rem;
+  padding: 0.9rem 1.2rem;
+  border-radius: 6px;
+  max-width: 34rem;
+  animation: vs-vynoreni 0.7s 0.45s ease-out both;
+}
+
+.vs-hero-akce strong {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Signature — tři vlny řeky, jemně plují */
+.vs-hero-reka {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 7rem;
+  pointer-events: none;
+}
+
+.vs-vlna {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  height: 100%;
+}
+
+.vs-vlna-1 {
+  color: rgba(255, 138, 61, 0.9);
+  bottom: 2.4rem;
+  animation: vs-plyne 9s ease-in-out infinite alternate;
+}
+
+.vs-vlna-2 {
+  color: rgba(201, 227, 232, 0.55);
+  bottom: 1.2rem;
+  animation: vs-plyne 12s ease-in-out infinite alternate-reverse;
+}
+
+.vs-vlna-3 {
+  color: rgba(234, 244, 244, 0.9);
+  bottom: 0;
+  animation: vs-plyne 15s ease-in-out infinite alternate;
+}
+
+@keyframes vs-plyne {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(4%);
+  }
+}
+
+/* ===================== SEKCE — společné ===================== */
+
+.vs-sekce {
+  padding: 4rem 1.25rem;
+}
+
+.vs-sekce-hlava {
+  max-width: 68rem;
+  margin: 0 auto 2.5rem;
+}
+
+.vs-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--kajak-tmavy);
+  margin: 0 0 0.6rem;
+}
+
+.vs-sekce h2 {
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.8rem;
+  max-width: 30ch;
+}
+
+.vs-sekce-perex {
+  max-width: 38rem;
+  margin: 0;
+  color: #33505f;
+}
+
+/* ===================== LODĚ ===================== */
+
+.vs-lode {
+  background: var(--pena);
+}
+
+.vs-lode-mrizka {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 68rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.vs-lod {
+  background: #ffffff;
+  border: 1px solid var(--vosk);
+  border-radius: 10px;
+  padding: 1.4rem 1.4rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-top: 5px solid var(--kajak);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vs-lod:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(11, 59, 82, 0.12);
+}
+
+.vs-lod-hlava h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--reka);
+}
+
+.vs-lod-typ {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--kajak-tmavy);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.vs-lod-popis {
+  margin: 0;
+  color: #33505f;
+  flex-grow: 1;
+}
+
+.vs-lod-parametry {
+  margin: 0;
+  display: flex;
+  gap: 1.5rem;
+  border-top: 1px dashed var(--vosk);
+  padding-top: 0.75rem;
+}
+
+.vs-lod-parametry dt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #5a7482;
+}
+
+.vs-lod-parametry dd {
+  margin: 0;
+  font-weight: 700;
+  color: var(--reka);
+}
+
+.vs-lode-pozn {
+  max-width: 68rem;
+  margin: 2rem auto 0;
+  background: #dcedf0;
+  border-left: 5px solid var(--hladina);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+}
+
+.vs-lode-pozn p {
+  margin: 0;
+  color: #24414f;
+}
+
+/* ===================== ZIMA / SLUŽBY ===================== */
+
+.vs-zima {
+  background: var(--skluznice);
+  color: var(--pena);
+  position: relative;
+  padding-top: 5rem;
+}
+
+/* stopa běžek — dvojitá rovnoběžná linka místo vlny: řeka zamrzla */
+.vs-stopa {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.vs-stopa-linka {
+  display: block;
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--vosk) 0,
+    var(--vosk) 44px,
+    transparent 44px,
+    transparent 60px
+  );
+  opacity: 0.5;
+}
+
+.vs-eyebrow-zima {
+  color: var(--kajak);
+}
+
+.vs-zima h2 {
+  color: #ffffff;
+}
+
+.vs-sluzby {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 68rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid rgba(201, 227, 232, 0.25);
+}
+
+.vs-sluzba {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(201, 227, 232, 0.25);
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 1.25rem;
+}
+
+.vs-sluzba-sezona {
+  grid-row: 1 / 3;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--kajak);
+  padding-top: 0.35rem;
+}
+
+.vs-sluzba h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.vs-sluzba p {
+  margin: 0;
+  color: #b8d2da;
+  max-width: 44rem;
+}
+
+/* ---------- akce / aktuality ---------- */
+
+.vs-zima-akce {
+  max-width: 68rem;
+  margin: 3.5rem auto 0;
+}
+
+.vs-zima-akce-titul {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0 0 1.5rem;
+  color: #ffffff;
+}
+
+.vs-akce-seznam {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.vs-akce {
+  background: rgba(234, 244, 244, 0.06);
+  border: 1px solid rgba(201, 227, 232, 0.2);
+  border-radius: 10px;
+  padding: 1.25rem;
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+}
+
+.vs-akce-datum {
+  flex: 0 0 auto;
+  background: var(--kajak);
+  color: #2b1503;
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.6rem;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.vs-akce-telo h4 {
+  margin: 0 0 0.2rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.vs-akce-kde {
+  margin: 0 0 0.4rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--vosk);
+}
+
+.vs-akce-telo p:last-child {
+  margin: 0;
+  color: #b8d2da;
+}
+
+.vs-zima-kontakt {
+  margin: 2rem 0 0;
+  color: #b8d2da;
+  max-width: 44rem;
+}
+
+.vs-zima-kontakt a {
+  color: var(--kajak);
+  font-weight: 700;
+}
+
+/* ===================== RESPONZIVITA ===================== */
+
+@media (min-width: 640px) {
+  .vs-lode-mrizka {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .vs-hero {
+    padding: 2rem 2.5rem 9rem;
+  }
+
+  .vs-sekce {
+    padding: 5.5rem 2.5rem;
+  }
+
+  .vs-akce-seznam {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .vs-akce {
+    flex-direction: column;
+  }
+
+  .vs-sluzba {
+    grid-template-columns: 9rem 18rem 1fr;
+    grid-template-rows: auto;
+    align-items: baseline;
+  }
+
+  .vs-sluzba-sezona {
+    grid-row: auto;
+    padding-top: 0;
+  }
+
+  .vs-sluzba h3 {
+    margin: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .vs-hero-nav {
+    display: none;
+  }
+
+  .vs-akce {
+    flex-direction: column;
+  }
+}
+
+/* ===================== REDUCED MOTION ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .vs-hero-line,
+  .vs-hero-perex,
+  .vs-hero-akce {
+    animation: none;
+  }
+
+  .vs-vlna-1,
+  .vs-vlna-2,
+  .vs-vlna-3 {
+    animation: none;
+  }
+
+  .vs-lod {
+    transition: none;
+  }
+
+  .vs-lod:hover {
+    transform: none;
+  }
+}
