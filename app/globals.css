@@ -1,0 +1,476 @@
+/* =========================================================
+   ELEKTRO ŠTĚPÁN — elektroservis, Františkovy Lázně
+   Paleta odvozená z řemesla:
+   - izolační modř (PVC izolace vodičů, pracovní modrá montérek)
+   - měď (jádro vodiče) jako jediný teplý akcent
+   - signální žlutozelená jen v drobných detailech (vodič PE)
+   ========================================================= */
+
+:root {
+  --es-ink: #101b2d;        /* hluboká izolační modř — pozadí hero */
+  --es-ink-2: #16243c;      /* o stupeň světlejší plocha */
+  --es-paper: #f7f8fa;      /* chladný technický papír, ne krémová */
+  --es-copper: #c96f2f;     /* měděné jádro — akcent */
+  --es-copper-hot: #e28a45; /* měď pod proudem — hover */
+  --es-pe: #b8d631;         /* žlutozelená PE — jen mikrodetaily */
+  --es-steel: #8a97ab;      /* popisky, sekundární text na tmavé */
+  --es-text: #26303f;       /* text na světlé */
+  --es-line: #d7dce4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--es-paper);
+  color: var(--es-text);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.es a:focus-visible,
+.es button:focus-visible {
+  outline: 3px solid var(--es-copper);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* =================== HERO =================== */
+
+.es-hero {
+  position: relative;
+  background:
+    linear-gradient(160deg, var(--es-ink) 0%, var(--es-ink-2) 70%, #1a2c49 100%);
+  color: #eef1f6;
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.es-hero-top {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 2.5rem;
+}
+
+.es-wordmark {
+  font-family: "Arial Narrow", "Segoe UI", sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.14em;
+  font-weight: 400;
+  color: #fff;
+  border-bottom: 3px solid var(--es-copper);
+  padding-bottom: 0.2rem;
+}
+
+.es-wordmark b {
+  font-weight: 800;
+  color: var(--es-copper-hot);
+}
+
+.es-hero-loc {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--es-steel);
+}
+
+.es-hero-body {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1rem 0 3rem;
+}
+
+.es-hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--es-pe);
+  font-weight: 600;
+}
+
+/* Titulek: tři fáze, tři řádky, měděná tečka jako svorka */
+.es-hero-title {
+  margin: 0 0 1.5rem;
+  font-family: "Arial Black", "Arial Narrow", Arial, sans-serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 11vw, 7.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.es-line {
+  display: block;
+  opacity: 0;
+  transform: translateX(-24px);
+  animation: es-phase-in 0.6s ease-out forwards;
+}
+
+.es-line-1 { animation-delay: 0.1s; color: #ffffff; }
+.es-line-2 { animation-delay: 0.35s; color: var(--es-steel); }
+.es-line-3 { animation-delay: 0.6s; color: var(--es-copper); }
+
+.es-dot {
+  color: var(--es-pe);
+}
+
+@keyframes es-phase-in {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.es-hero-sub {
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  font-size: 1.1rem;
+  color: #c6cedb;
+}
+
+.es-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.es-btn {
+  display: inline-block;
+  padding: 0.9rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.es-btn-primary {
+  background: var(--es-copper);
+  color: #14100a;
+}
+
+.es-btn-primary:hover {
+  background: var(--es-copper-hot);
+}
+
+.es-btn-ghost {
+  border: 2px solid #3a4a66;
+  color: #eef1f6;
+}
+
+.es-btn-ghost:hover {
+  border-color: var(--es-copper);
+  color: var(--es-copper-hot);
+}
+
+/* Signature: schéma třífázového vedení pod hero textem */
+.es-circuit {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-bottom: 1.25rem;
+}
+
+.es-circuit svg {
+  display: block;
+  width: 100%;
+  height: 90px;
+}
+
+.es-wire {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: es-wire-draw 1.6s ease-out forwards;
+}
+
+.es-wire-l1 { stroke: var(--es-copper); animation-delay: 0.2s; }
+.es-wire-l2 { stroke: #4a5f85; animation-delay: 0.45s; }
+.es-wire-l3 { stroke: var(--es-pe); stroke-width: 2; animation-delay: 0.7s; }
+
+@keyframes es-wire-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+.es-node {
+  fill: var(--es-ink);
+  stroke: var(--es-copper-hot);
+  stroke-width: 2;
+}
+
+.es-circuit-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--es-steel);
+  padding-top: 0.4rem;
+}
+
+/* =================== SEKCE =================== */
+
+.es-section {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+}
+
+.es-section-head {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.es-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--es-copper);
+}
+
+.es-section h2 {
+  margin: 0 0 0.75rem;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--es-ink);
+  text-transform: uppercase;
+}
+
+.es-section-lead {
+  margin: 0;
+  color: #4c5766;
+  font-size: 1.05rem;
+}
+
+/* ---- karty služeb ---- */
+
+.es-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.es-card {
+  background: #fff;
+  border: 1px solid var(--es-line);
+  border-top: 4px solid var(--es-copper);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.es-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(16, 27, 45, 0.12);
+}
+
+.es-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.es-faze {
+  flex: 0 0 auto;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: var(--es-copper);
+  border: 2px solid var(--es-copper);
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  letter-spacing: 0.05em;
+}
+
+.es-card h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--es-ink);
+}
+
+.es-card-text {
+  margin: 0 0 1rem;
+  color: #4c5766;
+}
+
+.es-card-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.es-card-list li {
+  padding: 0.45rem 0 0.45rem 1.4rem;
+  border-top: 1px dashed var(--es-line);
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.es-card-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.95rem;
+  width: 0.7rem;
+  height: 2px;
+  background: var(--es-pe);
+}
+
+.es-note {
+  margin: 2rem 0 0;
+  padding: 1.1rem 1.4rem;
+  background: var(--es-ink);
+  color: #dbe2ec;
+  border-radius: 8px;
+  border-left: 5px solid var(--es-pe);
+  font-size: 1rem;
+}
+
+.es-note strong {
+  color: var(--es-pe);
+}
+
+/* ---- důvěra ---- */
+
+.es-duvera {
+  border-top: 1px solid var(--es-line);
+}
+
+.es-duvody {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem 2.5rem;
+}
+
+.es-duvod dt {
+  font-family: "Arial Black", Arial, sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.9rem;
+  color: var(--es-ink);
+  margin-bottom: 0.35rem;
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.es-duvod dt::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--es-copper);
+}
+
+.es-duvod dd {
+  margin: 0;
+  color: #4c5766;
+}
+
+.es-quote {
+  margin: 3rem 0 0;
+  padding: 0 0 0 1.5rem;
+  border-left: 4px solid var(--es-copper);
+}
+
+.es-quote blockquote {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: var(--es-ink);
+  font-style: italic;
+}
+
+.es-quote figcaption {
+  font-size: 0.9rem;
+  color: #6a7686;
+  letter-spacing: 0.04em;
+}
+
+/* =================== RESPONSIVITA =================== */
+
+@media (min-width: 700px) {
+  .es-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .es-duvody {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .es-hero {
+    padding: 2rem 2rem 0;
+  }
+
+  .es-section {
+    padding: 5rem 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .es-hero-loc {
+    display: none;
+  }
+
+  .es-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .es-circuit-labels span:nth-child(2) {
+    display: none;
+  }
+}
+
+/* =================== REDUCED MOTION =================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .es-line {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .es-wire {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .es-card,
+  .es-card:hover {
+    transition: none;
+    transform: none;
+  }
+}
