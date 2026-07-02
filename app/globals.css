@@ -1,0 +1,538 @@
+/* ============================================================
+   HUTNÍK s.r.o. — železářství, Praha
+   Paleta: ocel + signální oranž (ochranné nátěry kovů), zinek
+   Typo: Archivo Black-like display přes system stack? Ne —
+   používáme systémové fonty s pečlivým nastavením:
+   display = ultra-kondenzovaný grotesk (Arial Narrow / system),
+   body = system-ui. Signature: profil metrického závitu.
+   ============================================================ */
+
+:root {
+  --ocel-tmava: #1c2228;   /* temná ocel, pozadí hera */
+  --ocel: #2e3842;         /* ocelový plát */
+  --zinek: #e8ebee;        /* pozinkovaný povrch, světlé pozadí */
+  --zinek-tmavsi: #cfd6dc; /* stín na zinku */
+  --minium: #e8541e;       /* suřík / signální oranž ochranných nátěrů */
+  --minium-tmavy: #c23f0e;
+  --inkoust: #171c21;      /* text na světlé */
+  --papir: #f7f8f9;
+
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", var(--font-body);
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--inkoust);
+  background: var(--papir);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ht a:focus-visible,
+.ht button:focus-visible {
+  outline: 3px solid var(--minium);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  background:
+    linear-gradient(160deg, var(--ocel-tmava) 0%, var(--ocel) 78%, #38434e 100%);
+  color: var(--zinek);
+  padding: 1.5rem 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 92svh;
+  overflow: hidden;
+}
+
+/* jemná textura válcovaného plechu */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 118px,
+    rgba(255, 255, 255, 0.025) 118px,
+    rgba(255, 255, 255, 0.025) 120px
+  );
+  pointer-events: none;
+}
+
+.hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1160px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: condensed;
+  font-size: 1.7rem;
+  letter-spacing: 0.06em;
+  color: #fff;
+  border: 3px solid var(--minium);
+  padding: 0.15rem 0.6rem 0.2rem;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  line-height: 1.1;
+}
+
+.wordmark-sro {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--minium);
+}
+
+.hero-top-note {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(232, 235, 238, 0.65);
+  white-space: nowrap;
+}
+
+.hero-body {
+  max-width: 1160px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3.5rem 0 2.5rem;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--minium);
+  margin: 0 0 1.25rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: clamp(3.4rem, 13vw, 9.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0 0 1.75rem;
+  color: #fff;
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-line em {
+  font-style: normal;
+  color: var(--minium);
+  position: relative;
+}
+
+.hero-line em::after {
+  content: "";
+  position: absolute;
+  left: 0.04em;
+  right: 0.04em;
+  bottom: -0.06em;
+  height: 0.07em;
+  background: var(--minium);
+}
+
+.hero-sub {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: rgba(232, 235, 238, 0.88);
+  margin: 0 0 2.25rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.9rem;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.btn-primary {
+  background: var(--minium);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--minium-tmavy);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--zinek);
+  border: 2px solid rgba(232, 235, 238, 0.4);
+}
+
+.btn-ghost:hover {
+  border-color: var(--zinek);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* --- Signature: profil závitu --- */
+
+.thread {
+  position: relative;
+  z-index: 2;
+  margin: 0 -1.5rem;
+}
+
+.thread-svg {
+  display: block;
+  width: 100%;
+  height: clamp(42px, 7vw, 90px);
+}
+
+.thread-path {
+  fill: var(--zinek);
+  stroke: var(--minium);
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.thread-label {
+  position: absolute;
+  top: -1.9rem;
+  right: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: rgba(232, 235, 238, 0.55);
+}
+
+/* --- animace načtení hera --- */
+
+@keyframes ht-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ht-thread-in {
+  from {
+    transform: translateX(-6%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.hero-eyebrow,
+.hero-line,
+.hero-sub,
+.hero-actions {
+  animation: ht-rise 640ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-eyebrow { animation-delay: 80ms; }
+.hero-line-1 { animation-delay: 160ms; }
+.hero-line-2 { animation-delay: 260ms; }
+.hero-line-3 { animation-delay: 360ms; }
+.hero-sub { animation-delay: 480ms; }
+.hero-actions { animation-delay: 580ms; }
+
+.thread-svg {
+  animation: ht-thread-in 900ms cubic-bezier(0.2, 0.7, 0.2, 1) 300ms both;
+}
+
+/* ============ SORTIMENT ============ */
+
+.sortiment {
+  background: var(--zinek);
+  padding: 4.5rem 1.5rem 4rem;
+}
+
+.section-head {
+  max-width: 1160px;
+  margin: 0 auto 3rem;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: clamp(2.1rem, 5.5vw, 3.4rem);
+  line-height: 1.02;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  margin: 0 0 1rem;
+  color: var(--inkoust);
+}
+
+.section-lead {
+  max-width: 38rem;
+  font-size: 1.05rem;
+  margin: 0;
+  color: #3a444d;
+}
+
+.katalog {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1160px;
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 2px solid var(--inkoust);
+}
+
+.katalog-item {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding: 1.4rem 0.25rem;
+  border-bottom: 1px solid var(--zinek-tmavsi);
+  transition: background-color 140ms ease;
+}
+
+.katalog-item:hover {
+  background: rgba(232, 84, 30, 0.06);
+}
+
+.katalog-kod {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--minium-tmavy);
+  border: 1px solid var(--minium);
+  padding: 0.2rem 0.5rem;
+  justify-self: start;
+  margin-top: 0.35rem;
+  white-space: nowrap;
+}
+
+.katalog-text h3 {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 1.45rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 0 0 0.35rem;
+}
+
+.katalog-text p {
+  margin: 0;
+  color: #3a444d;
+  max-width: 46rem;
+}
+
+.sortiment-note {
+  max-width: 1160px;
+  margin: 2.25rem auto 0;
+  font-size: 0.95rem;
+  color: #3a444d;
+  border-left: 4px solid var(--minium);
+  padding-left: 1rem;
+}
+
+/* ============ O NÁS ============ */
+
+.onas {
+  background: var(--ocel-tmava);
+  color: var(--zinek);
+  padding: 4.5rem 1.5rem 4.5rem;
+}
+
+.section-head-inverse h2 {
+  color: #fff;
+}
+
+.section-head-inverse .section-lead {
+  color: rgba(232, 235, 238, 0.8);
+}
+
+.duvody {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.duvod {
+  background: var(--ocel);
+  border-top: 4px solid var(--minium);
+  padding: 1.75rem 1.5rem 1.6rem;
+}
+
+.duvod-cislo {
+  display: block;
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--minium);
+  margin-bottom: 0.75rem;
+}
+
+.duvod h3 {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.5rem;
+  color: #fff;
+}
+
+.duvod p {
+  margin: 0;
+  color: rgba(232, 235, 238, 0.82);
+  font-size: 0.98rem;
+}
+
+.citace {
+  max-width: 1160px;
+  margin: 3rem auto 0;
+  padding: 0;
+}
+
+.citace blockquote {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+  line-height: 1.5;
+  font-style: italic;
+  color: #fff;
+  max-width: 46rem;
+}
+
+.citace figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--minium);
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (min-width: 720px) {
+  .hero {
+    padding: 2rem 3rem 0;
+  }
+
+  .thread {
+    margin: 0 -3rem;
+  }
+
+  .sortiment,
+  .onas {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .katalog {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 3rem;
+  }
+
+  .duvody {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-top-note {
+    display: none;
+  }
+
+  .katalog-item {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .katalog-kod {
+    margin-top: 0;
+  }
+
+  .thread-label {
+    right: 1rem;
+    font-size: 0.62rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-eyebrow,
+  .hero-line,
+  .hero-sub,
+  .hero-actions,
+  .thread-svg {
+    animation: none;
+  }
+
+  .btn-primary:hover,
+  .btn-ghost:hover {
+    transform: none;
+  }
+}
