@@ -1,0 +1,631 @@
+/* ============================================================
+   PJ Bohemia servis — topenářství Plzeň
+   Palette: kotelna. Tmavá litina, mosaz, plamen, měď.
+   Type: Archivo (display, úzké těžké řezy jako ražba na kotli)
+         + system sans pro tělo — rychlé, bez webfontové latence.
+   Signature: manometry v hero + barevně kódované "okruhy"
+   (červená = topení, modrá = voda, žlutá = plyn) — přesně tak,
+   jak se značí trubky v reálné kotelně (ČSN 13 0072).
+   ============================================================ */
+
+:root {
+  --iron: #16181d;        /* litina — základ */
+  --iron-2: #1f232b;      /* panel */
+  --steam: #eef0f3;       /* pára — světlé plochy */
+  --steam-dim: #b9bec9;
+  --flame: #ff5a1f;       /* plamen hořáku */
+  --brass: #c9a24b;       /* mosazná armatura */
+  --copper: #b0662f;      /* měděná trubka */
+  --pipe-red: #e04a3a;    /* okruh topení */
+  --pipe-blue: #3d7dd8;   /* okruh vody */
+  --pipe-yellow: #e2b83c; /* okruh plynu */
+  --radius: 10px;
+  --font-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src: local("Archivo");
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--iron);
+  background: var(--steam);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--flame);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+  position: relative;
+  background: var(--iron);
+  color: var(--steam);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-media,
+.hero-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-media img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg, rgba(22, 24, 29, 0.94) 0%, rgba(22, 24, 29, 0.78) 45%, rgba(22, 24, 29, 0.35) 100%),
+    linear-gradient(to top, rgba(22, 24, 29, 0.9) 0%, rgba(22, 24, 29, 0) 40%);
+}
+
+.topbar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem clamp(1.25rem, 5vw, 4rem);
+  border-bottom: 1px solid rgba(238, 240, 243, 0.14);
+}
+
+.wordmark {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  column-gap: 0.55rem;
+  align-items: baseline;
+  text-decoration: none;
+}
+
+.wm-mono {
+  grid-row: 1 / 3;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.9rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--iron);
+  background: var(--brass);
+  padding: 0.15em 0.28em 0.1em;
+  border-radius: 4px;
+  align-self: center;
+}
+
+.wm-rest {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.wm-sub {
+  grid-column: 2;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--steam-dim);
+}
+
+.topbar-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: var(--steam);
+  border: 1px solid rgba(238, 240, 243, 0.35);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  transition: border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.topbar-call:hover {
+  border-color: var(--flame);
+  background: rgba(255, 90, 31, 0.12);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: clamp(3rem, 9vw, 6.5rem) clamp(1.25rem, 5vw, 4rem) clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.2rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brass);
+  animation: rise 0.7s ease both;
+}
+
+.flame {
+  width: 11px;
+  height: 15px;
+  background: var(--flame);
+  border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+  box-shadow: 0 0 14px rgba(255, 90, 31, 0.8);
+  animation: flicker 1.6s ease-in-out infinite alternate;
+}
+
+.hero-title {
+  margin: 0 0 1.2rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.4rem, 7.5vw, 4.8rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  max-width: 15ch;
+  animation: rise 0.7s 0.08s ease both;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--flame);
+}
+
+.hero-lede {
+  margin: 0 0 1.8rem;
+  max-width: 34rem;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  color: var(--steam-dim);
+  animation: rise 0.7s 0.16s ease both;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  animation: rise 0.7s 0.24s ease both;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.btn-fire {
+  background: var(--flame);
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(255, 90, 31, 0.35);
+}
+
+.btn-fire:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 90, 31, 0.45);
+}
+
+.btn-ghost {
+  border: 1px solid rgba(238, 240, 243, 0.4);
+  color: var(--steam);
+}
+
+.btn-ghost:hover {
+  background: rgba(238, 240, 243, 0.1);
+}
+
+/* --- signature: manometry --- */
+
+.gauge-strip {
+  list-style: none;
+  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+  padding: 1.4rem 0 0;
+  border-top: 1px solid rgba(238, 240, 243, 0.16);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.4rem;
+  animation: rise 0.7s 0.34s ease both;
+}
+
+.gauge-strip li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 0.85rem;
+  align-items: center;
+}
+
+.gauge-dial {
+  grid-row: 1 / 3;
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--brass);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(238, 240, 243, 0.08) 0 60%, transparent 61%),
+    conic-gradient(from 210deg, var(--pipe-blue) 0deg, var(--brass) 80deg, var(--flame) 130deg, transparent 150deg 360deg);
+}
+
+.gauge-dial::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: var(--iron-2);
+}
+
+.gauge-dial i {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  width: 2px;
+  height: 19px;
+  margin-left: -1px;
+  background: var(--flame);
+  transform-origin: 50% 100%;
+  border-radius: 2px;
+  z-index: 1;
+  animation: needle 1.4s 0.5s cubic-bezier(0.34, 1.4, 0.44, 1) both;
+}
+
+.gauge-strip strong {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.gauge-strip li > span:last-child {
+  font-size: 0.82rem;
+  color: var(--steam-dim);
+  line-height: 1.35;
+}
+
+/* ---------- EYEBROWS / HLAVIČKY SEKCÍ ---------- */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+.pipe-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 3px solid currentColor;
+}
+
+/* ---------- SEKCE: OKRUHY ---------- */
+
+.okruhy {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 9vw, 6.5rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.section-head h2 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  max-width: 22ch;
+}
+
+.section-lede {
+  margin: 0 0 2.5rem;
+  max-width: 38rem;
+  color: #4a4f59;
+}
+
+.okruh-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1.4rem;
+}
+
+.okruh {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 1.6rem 1.5rem 1.7rem;
+  border: 1px solid #dde0e6;
+  box-shadow: 0 1px 3px rgba(22, 24, 29, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.okruh:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(22, 24, 29, 0.1);
+}
+
+/* barevné kódování trubek dle okruhu */
+.okruh-topeni { --okruh: var(--pipe-red); }
+.okruh-voda   { --okruh: var(--pipe-blue); }
+.okruh-plyn   { --okruh: var(--pipe-yellow); }
+
+.okruh-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.1rem;
+}
+
+.okruh-line {
+  flex: 0 0 42px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--okruh);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.18), inset 0 2px 0 rgba(255, 255, 255, 0.35);
+}
+
+.okruh-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6a707c;
+}
+
+.okruh h3 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: -0.01em;
+}
+
+.okruh p {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: #4a4f59;
+}
+
+.okruh ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.okruh ul li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.45rem;
+  font-size: 0.92rem;
+}
+
+.okruh ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--okruh);
+}
+
+/* ---------- SEKCE: DŮVĚRA ---------- */
+
+.duvera {
+  background: var(--iron);
+  color: var(--steam);
+}
+
+.duvera-grid {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 9vw, 6.5rem) clamp(1.25rem, 5vw, 4rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+@media (min-width: 860px) {
+  .duvera-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  }
+  .duvera-media {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+.duvera-media {
+  margin: 0;
+}
+
+.duvera-media img {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid rgba(238, 240, 243, 0.15);
+}
+
+.duvera-media figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.82rem;
+  color: var(--steam-dim);
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--copper);
+}
+
+.eyebrow-light { color: var(--brass); }
+
+.duvera-body h2 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.duvera-body > p {
+  color: var(--steam-dim);
+  max-width: 36rem;
+}
+
+.duvera-fakta {
+  margin: 1.8rem 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.duvera-fakta > div {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--iron-2);
+  border-radius: var(--radius);
+  border-left: 4px solid var(--brass);
+}
+
+.duvera-fakta dt {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.duvera-fakta dd {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--steam);
+}
+
+.duvera-citat {
+  margin: 2rem 0;
+  padding: 0;
+}
+
+.duvera-citat p {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.45;
+  color: var(--steam);
+}
+
+.duvera-citat cite {
+  font-style: normal;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+.duvera-kontakty {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.duvera-kontakty a {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  border: 1px solid rgba(238, 240, 243, 0.3);
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.duvera-kontakty a:hover {
+  border-color: var(--flame);
+  background: rgba(255, 90, 31, 0.12);
+}
+
+/* ---------- ANIMACE ---------- */
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes flicker {
+  0%   { transform: scaleY(1) rotate(-2deg); opacity: 0.9; }
+  100% { transform: scaleY(1.15) rotate(2deg); opacity: 1; }
+}
+
+@keyframes needle {
+  from { transform: rotate(-60deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-kicker,
+  .hero-title,
+  .hero-lede,
+  .hero-actions,
+  .gauge-strip {
+    animation: none;
+  }
+  .flame { animation: none; }
+  .gauge-dial i { animation: none; }
+  .okruh,
+  .btn,
+  .okruh:hover,
+  .btn-fire:hover {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* ---------- MOBIL ---------- */
+
+@media (max-width: 560px) {
+  .wm-sub { display: none; }
+  .topbar-call { font-size: 0.85rem; padding: 0.45rem 0.85rem; }
+  .hero-actions .btn { width: 100%; text-align: center; }
+  .duvera-kontakty a { width: 100%; text-align: center; }
+}
