@@ -1,0 +1,551 @@
+/* =====================================================
+   MAKOVEC a.s. — řeznictví & uzenářství
+   Paleta odvozená z řeznického světa:
+   - masná červeň (čerstvý řez), špalek/uzené dřevo,
+   - papír na balení masa, křída na cedulkách.
+   ===================================================== */
+
+:root {
+  --mk-red: #9e1b1b;        /* masná červeň */
+  --mk-red-deep: #6e0f12;   /* zaschlá krev / uzené */
+  --mk-paper: #f7efe3;      /* balicí papír */
+  --mk-paper-warm: #efe2cd; /* starší papír */
+  --mk-smoke: #2b1d18;      /* udírna, špalek */
+  --mk-chalk: #fdf9f0;      /* křída */
+  --mk-fat: #e9c99a;        /* prorostlý tuk / provázek */
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--mk-paper);
+  color: var(--mk-smoke);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mk img { max-width: 100%; height: auto; display: block; }
+
+.mk a:focus-visible,
+.mk button:focus-visible {
+  outline: 3px solid var(--mk-red);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- typografická vrstva ---------- */
+
+.mk h1, .mk h2, .mk h3,
+.mk-eyebrow, .mk-btn, .mk-nav, .mk-wordmark,
+.mk-tag, .mk-cut__kind, .mk-cut__tag, .mk-steps__label, .mk-stamp {
+  font-family: "Arial Narrow", "Helvetica Neue Condensed", Impact, "Franklin Gothic Medium", Arial, sans-serif;
+}
+
+/* ================= HERO ================= */
+
+.mk-hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  color: var(--mk-chalk);
+  overflow: hidden;
+}
+
+.mk-hero__media {
+  position: absolute;
+  inset: 0;
+}
+
+.mk-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mk-hero__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(105deg, rgba(30, 14, 10, 0.88) 0%, rgba(30, 14, 10, 0.62) 45%, rgba(110, 15, 18, 0.35) 100%);
+}
+
+.mk-hero__inner {
+  position: relative;
+  z-index: 1;
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- topbar --- */
+
+.mk-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(253, 249, 240, 0.25);
+}
+
+.mk-wordmark {
+  text-decoration: none;
+  color: var(--mk-chalk);
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.mk-wordmark__name {
+  font-weight: 900;
+  font-size: 1.8rem;
+  letter-spacing: 0.14em;
+}
+
+.mk-wordmark__trade {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mk-fat);
+  margin-top: 0.25rem;
+}
+
+.mk-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.mk-nav a {
+  color: var(--mk-chalk);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease;
+}
+
+.mk-nav a:hover { border-bottom-color: var(--mk-fat); }
+
+/* --- copy --- */
+
+.mk-hero__copy {
+  margin-top: auto;
+  padding-top: 3.5rem;
+  max-width: 40rem;
+  animation: mk-rise 0.7s ease-out both;
+}
+
+.mk-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1rem;
+  padding: 0.35rem 0.8rem;
+  border: 2px solid var(--mk-fat);
+  border-radius: 999px;
+  color: var(--mk-fat);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  font-weight: 700;
+  transform: rotate(-1.5deg);
+}
+
+.mk-stamp__dot { font-size: 0.5rem; }
+
+.mk-hero__title {
+  margin: 0 0 1rem;
+  font-size: clamp(2.4rem, 6.5vw, 4.4rem);
+  line-height: 0.98;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  font-weight: 900;
+}
+
+.mk-hero__title em {
+  font-style: normal;
+  color: var(--mk-fat);
+}
+
+.mk-hero__lede {
+  margin: 0 0 1.75rem;
+  font-size: 1.05rem;
+  max-width: 34rem;
+  color: rgba(253, 249, 240, 0.92);
+}
+
+.mk-hero__actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.mk-btn {
+  display: inline-block;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 3px;
+  transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.mk-btn:hover { transform: translateY(-2px); }
+
+.mk-btn--primary {
+  background: var(--mk-red);
+  color: var(--mk-chalk);
+  border: 2px solid var(--mk-red);
+}
+
+.mk-btn--primary:hover { background: var(--mk-red-deep); border-color: var(--mk-red-deep); }
+
+.mk-btn--ghost {
+  border: 2px solid var(--mk-chalk);
+  color: var(--mk-chalk);
+}
+
+.mk-btn--ghost:hover { background: rgba(253, 249, 240, 0.12); }
+
+/* --- signature: řeznická cedulka --- */
+
+.mk-tag {
+  position: absolute;
+  right: clamp(1rem, 4vw, 3.5rem);
+  bottom: clamp(1.5rem, 6vh, 4rem);
+  width: 15.5rem;
+  background: var(--mk-chalk);
+  color: var(--mk-smoke);
+  padding: 1.9rem 1.3rem 1.2rem;
+  transform: rotate(2.5deg);
+  box-shadow: 0 14px 30px rgba(20, 8, 5, 0.45);
+  border-radius: 2px;
+  animation: mk-swing 0.9s ease-out 0.35s both;
+}
+
+.mk-tag::before {
+  /* provázek */
+  content: "";
+  position: absolute;
+  top: -2.4rem;
+  left: 50%;
+  width: 2px;
+  height: 2.4rem;
+  background: var(--mk-fat);
+  transform: translateX(-50%) rotate(-2.5deg);
+}
+
+.mk-tag__hole {
+  position: absolute;
+  top: 0.55rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.7rem;
+  height: 0.7rem;
+  margin: 0;
+  border-radius: 50%;
+  background: var(--mk-paper-warm);
+  box-shadow: inset 0 0 0 2px rgba(43, 29, 24, 0.35);
+}
+
+.mk-tag__label {
+  margin: 0 0 0.4rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: var(--mk-red);
+  font-weight: 700;
+  text-align: center;
+}
+
+.mk-tag__item {
+  margin: 0 0 0.3rem;
+  font-weight: 900;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.mk-tag__price {
+  margin: 0 0 0.5rem;
+  text-align: center;
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: var(--mk-red);
+  line-height: 1;
+}
+
+.mk-tag__price span {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--mk-smoke);
+}
+
+.mk-tag__note {
+  margin: 0;
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: rgba(43, 29, 24, 0.7);
+  border-top: 1px dashed rgba(43, 29, 24, 0.3);
+  padding-top: 0.5rem;
+}
+
+/* ================= SEKCE OBECNĚ ================= */
+
+.mk-section {
+  padding: clamp(3.5rem, 8vw, 6rem) 1.25rem;
+}
+
+.mk-section__head {
+  width: min(1120px, 100%);
+  margin: 0 auto 2.5rem;
+}
+
+.mk-eyebrow {
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--mk-red);
+}
+
+.mk-section h2 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  text-transform: uppercase;
+  line-height: 1.05;
+  font-weight: 900;
+}
+
+.mk-section__lede {
+  margin: 0;
+  max-width: 36rem;
+  color: rgba(43, 29, 24, 0.8);
+}
+
+/* ================= SEKCE 1: PULT ================= */
+
+.mk-cuts {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.1rem;
+}
+
+.mk-cut {
+  background: var(--mk-chalk);
+  border: 1px solid rgba(43, 29, 24, 0.14);
+  border-top: 4px solid var(--mk-red);
+  border-radius: 3px;
+  padding: 1.4rem 1.3rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.mk-cut:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(43, 29, 24, 0.14);
+}
+
+.mk-cut__kind {
+  margin: 0 0 0.5rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--mk-red);
+  font-weight: 700;
+}
+
+.mk-cut h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.15rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.mk-cut p { margin: 0; font-size: 0.95rem; color: rgba(43, 29, 24, 0.82); }
+
+.mk-cut__tag {
+  margin-top: auto !important;
+  padding-top: 0.9rem;
+  font-size: 0.72rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(43, 29, 24, 0.6) !important;
+  font-weight: 700;
+}
+
+/* ================= SEKCE 2: CESTA ================= */
+
+.mk-cesta {
+  background: var(--mk-smoke);
+  color: var(--mk-chalk);
+}
+
+.mk-cesta .mk-eyebrow { color: var(--mk-fat); }
+.mk-cesta .mk-section__lede { color: rgba(253, 249, 240, 0.8); }
+
+.mk-cesta__grid {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.mk-cesta__media {
+  margin: 0;
+}
+
+.mk-cesta__media img {
+  width: 100%;
+  border-radius: 3px;
+  border: 4px solid var(--mk-chalk);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+}
+
+.mk-cesta__media figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  color: var(--mk-fat);
+  font-style: italic;
+}
+
+.mk-steps {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  counter-reset: mk-step;
+}
+
+.mk-steps li {
+  counter-increment: mk-step;
+  position: relative;
+  padding: 1rem 0 1rem 3.4rem;
+  border-top: 1px dashed rgba(253, 249, 240, 0.25);
+}
+
+.mk-steps li::before {
+  content: counter(mk-step);
+  position: absolute;
+  left: 0;
+  top: 1rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: grid;
+  place-items: center;
+  background: var(--mk-red);
+  color: var(--mk-chalk);
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  border-radius: 50%;
+}
+
+.mk-steps__label {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--mk-fat);
+  margin-bottom: 0.2rem;
+}
+
+.mk-steps p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(253, 249, 240, 0.85);
+}
+
+.mk-quote {
+  margin: 2.2rem 0 0;
+  padding: 1.2rem 1.4rem;
+  background: rgba(253, 249, 240, 0.06);
+  border-left: 4px solid var(--mk-red);
+  border-radius: 2px;
+}
+
+.mk-quote p {
+  margin: 0 0 0.5rem;
+  font-style: italic;
+  font-size: 1.02rem;
+}
+
+.mk-quote cite {
+  font-style: normal;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  color: var(--mk-fat);
+}
+
+/* ================= ANIMACE ================= */
+
+@keyframes mk-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mk-swing {
+  0% { opacity: 0; transform: rotate(7deg) translateY(-10px); }
+  60% { opacity: 1; transform: rotate(0.5deg); }
+  100% { opacity: 1; transform: rotate(2.5deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .mk-hero__copy, .mk-tag { animation: none; }
+  .mk-btn, .mk-cut, .mk-nav a { transition: none; }
+  .mk-btn:hover, .mk-cut:hover { transform: none; }
+}
+
+/* ================= RESPONZIVITA ================= */
+
+@media (min-width: 860px) {
+  .mk-cesta__grid {
+    grid-template-columns: 5fr 6fr;
+    gap: 3.5rem;
+  }
+  .mk-cesta__media {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .mk-hero { min-height: auto; }
+
+  .mk-hero__inner { padding-bottom: 2rem; }
+
+  .mk-hero__copy { padding-top: 2.5rem; }
+
+  .mk-tag {
+    position: static;
+    margin: 2.2rem auto 0;
+    transform: rotate(-1.5deg);
+  }
+
+  .mk-tag::before { display: none; }
+
+  .mk-nav { gap: 1rem; }
+  .mk-nav a { font-size: 0.78rem; }
+}
