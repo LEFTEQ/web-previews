@@ -1,0 +1,514 @@
+/* =====================================================
+   KAMENICTVÍ VIVA — Praha
+   Paleta odvozená z kamene samotného:
+   --bridlice  #23262A  (mokrá břidlice — základ)
+   --zula      #4A5158  (šedá žula — plochy)
+   --mramor    #E9E6E0  (leštěný mramor — světlo)
+   --piskovec  #C7B9A3  (pískovec — teplý tón)
+   --zlato     #B8912F  (plátkové zlato v sekané liteře — akcent)
+   Typografie: display = úzký, kamenně vysoký grotesk s rozpalem
+   (jako litery sekané do desky), text = humanistický serif.
+   ===================================================== */
+
+:root {
+  --bridlice: #23262a;
+  --zula: #4a5158;
+  --mramor: #e9e6e0;
+  --piskovec: #c7b9a3;
+  --zlato: #b8912f;
+  --zlato-svetle: #d4b661;
+
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", Haettenschweiler, "Franklin Gothic Medium", Arial, sans-serif;
+  --font-text: Georgia, "Times New Roman", serif;
+  --font-util: "Helvetica Neue", Arial, sans-serif;
+
+  --max: 72rem;
+  --pad: clamp(1.25rem, 4vw, 3rem);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--mramor);
+  color: var(--bridlice);
+  font-family: var(--font-text);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* ---------- fokus ---------- */
+.kam a:focus-visible,
+.kam .btn:focus-visible {
+  outline: 3px solid var(--zlato);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =====================================================
+   HERO
+   ===================================================== */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  color: var(--mramor);
+  background: var(--bridlice);
+  overflow: hidden;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(35, 38, 42, 0.55) 0%, rgba(35, 38, 42, 0.25) 40%, rgba(35, 38, 42, 0.82) 100%);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 1.5rem var(--pad) 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- horní lišta --- */
+.topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(233, 230, 224, 0.25);
+}
+
+.wordmark {
+  text-decoration: none;
+  color: var(--mramor);
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.wordmark-viva {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: 0.32em;
+  margin-right: -0.32em;
+  text-transform: uppercase;
+  /* vysekaná litera: světlá hrana nahoře, stín dole */
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6), 0 -1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.wordmark-sub {
+  font-family: var(--font-util);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--piskovec);
+}
+
+.topnav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-family: var(--font-util);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.topnav a {
+  color: var(--mramor);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.topnav a:hover { border-bottom-color: var(--zlato); }
+
+.topnav-call {
+  color: var(--zlato-svetle) !important;
+}
+
+/* --- hlavní sdělení --- */
+.hero-copy {
+  margin: auto 0;
+  padding: clamp(3rem, 10vh, 6rem) 0 clamp(2rem, 6vh, 4rem);
+  max-width: 42rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--piskovec);
+  margin: 0 0 1.25rem;
+}
+
+/* SIGNATURE: titulek jako litery sekané do kamene —
+   úzký vysoký grotesk, velký rozpal, reliéfní stín,
+   řádky se "odsekávají" postupně při načtení */
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.1rem, 7.2vw, 4.6rem);
+  line-height: 1.04;
+  letter-spacing: 0.06em;
+  margin: 0 0 1.5rem;
+}
+
+.hero-title .line {
+  display: block;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.55), 0 -1px 0 rgba(255, 255, 255, 0.22);
+  opacity: 0;
+  transform: translateY(0.35em);
+  animation: chisel 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.hero-title .line-1 { animation-delay: 0.15s; }
+.hero-title .line-2 { animation-delay: 0.45s; }
+.hero-title .line-3 {
+  animation-delay: 0.75s;
+  color: var(--zlato-svetle);
+  font-size: 0.52em;
+  letter-spacing: 0.18em;
+  margin-top: 0.5em;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+@keyframes chisel {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-lede {
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  line-height: 1.6;
+  color: rgba(233, 230, 224, 0.92);
+  max-width: 34rem;
+  margin: 0 0 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-util);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.95rem 1.75rem;
+  border-radius: 2px;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--zlato);
+  color: var(--bridlice);
+  font-weight: 700;
+}
+
+.btn-solid:hover { background: var(--zlato-svetle); transform: translateY(-2px); }
+
+.btn-ghost {
+  color: var(--mramor);
+  border: 1px solid rgba(233, 230, 224, 0.55);
+}
+
+.btn-ghost:hover { border-color: var(--zlato); color: var(--zlato-svetle); }
+
+/* --- spodní geologické vrstvy --- */
+.hero-strata {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  font-family: var(--font-util);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.stratum {
+  padding: 0.7rem 0.5rem 0.9rem;
+  text-align: center;
+  border-top: 3px solid;
+}
+
+.s-zula { border-color: var(--zula); color: rgba(233, 230, 224, 0.8); }
+.s-mramor { border-color: var(--mramor); color: var(--mramor); }
+.s-piskovec { border-color: var(--piskovec); color: var(--piskovec); }
+
+/* =====================================================
+   SEKCE: CO DĚLÁME
+   ===================================================== */
+.prace {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(3.5rem, 9vw, 6.5rem) var(--pad);
+}
+
+.section-head { max-width: 40rem; margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+
+.eyebrow {
+  font-family: var(--font-util);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--zlato);
+  margin: 0 0 0.75rem;
+}
+
+.prace h2,
+.dilna h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  line-height: 1.12;
+  margin: 0 0 1rem;
+}
+
+.section-lede {
+  margin: 0;
+  color: var(--zula);
+  font-size: 1.05rem;
+}
+
+.prace-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: clamp(1.25rem, 3vw, 2rem);
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.karta {
+  background: #fff;
+  border: 1px solid rgba(74, 81, 88, 0.18);
+  border-radius: 3px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.karta h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 1.15rem;
+  margin: 1rem 0 0.6rem;
+}
+
+.karta p { margin: 0 0 0.85rem; color: var(--zula); font-size: 0.98rem; }
+
+.karta-fakt {
+  margin-top: auto !important;
+  font-family: var(--font-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bridlice) !important;
+  border-top: 1px solid rgba(74, 81, 88, 0.18);
+  padding-top: 0.85rem;
+}
+
+/* vzorky kamene — barevné pruhy jako reálné texturní tóny */
+.karta-vzorek {
+  height: 0.6rem;
+  border-radius: 2px;
+}
+
+.vzorek-zula {
+  background: repeating-linear-gradient(90deg, #4a5158 0 6px, #5c646c 6px 9px, #3b4147 9px 14px);
+}
+
+.vzorek-mramor {
+  background: linear-gradient(100deg, #e9e6e0 0%, #cfcac0 30%, #e9e6e0 55%, #d8d3c9 80%, #e9e6e0 100%);
+  border: 1px solid rgba(74, 81, 88, 0.25);
+}
+
+.vzorek-piskovec {
+  background: repeating-linear-gradient(90deg, #c7b9a3 0 8px, #b6a68c 8px 12px, #cfc2ad 12px 18px);
+}
+
+.prace-figura {
+  margin: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.prace-figura img {
+  width: 100%;
+  border-radius: 3px;
+}
+
+.prace-figura figcaption {
+  font-family: var(--font-util);
+  font-size: 0.88rem;
+  color: var(--zula);
+  max-width: 36rem;
+  border-left: 3px solid var(--zlato);
+  padding-left: 0.9rem;
+}
+
+/* =====================================================
+   SEKCE: DÍLNA
+   ===================================================== */
+.dilna {
+  background: var(--bridlice);
+  color: var(--mramor);
+}
+
+.dilna-grid {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(3.5rem, 9vw, 6.5rem) var(--pad);
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+@media (min-width: 56rem) {
+  .dilna-grid { grid-template-columns: 5fr 6fr; }
+  .dilna-media { position: sticky; top: 2rem; }
+}
+
+.dilna-media img {
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid rgba(233, 230, 224, 0.15);
+}
+
+.dilna-copy .eyebrow { color: var(--zlato-svetle); }
+
+.dilna-copy h2 {
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6), 0 -1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.dilna-copy p {
+  color: rgba(233, 230, 224, 0.88);
+  margin: 0 0 1.1rem;
+}
+
+.dilna-fakta {
+  list-style: none;
+  padding: 0;
+  margin: 1.75rem 0;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid rgba(233, 230, 224, 0.2);
+}
+
+.dilna-fakta li {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(233, 230, 224, 0.2);
+}
+
+.dilna-fakta strong {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 1.35rem;
+  color: var(--zlato-svetle);
+  min-width: 7.5rem;
+}
+
+.dilna-fakta span {
+  font-family: var(--font-util);
+  font-size: 0.92rem;
+  color: rgba(233, 230, 224, 0.85);
+}
+
+.reference {
+  margin: 2rem 0 0;
+  padding: 1.4rem 1.5rem;
+  background: rgba(233, 230, 224, 0.06);
+  border-left: 3px solid var(--zlato);
+  border-radius: 2px;
+}
+
+.reference p {
+  margin: 0 0 0.75rem;
+  font-style: italic;
+  font-size: 1.02rem;
+}
+
+.reference footer {
+  font-family: var(--font-util);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--piskovec);
+}
+
+/* =====================================================
+   RESPONZIVITA — mobil
+   ===================================================== */
+@media (max-width: 40rem) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .topnav { gap: 1.1rem; font-size: 0.8rem; }
+
+  .hero-actions .btn {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+
+  .hero-strata { font-size: 0.62rem; letter-spacing: 0.16em; }
+
+  .dilna-fakta strong { min-width: 6rem; font-size: 1.15rem; }
+}
+
+/* =====================================================
+   PREFERS-REDUCED-MOTION
+   ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .hero-title .line {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .btn,
+  .topnav a {
+    transition: none;
+  }
+
+  .btn-solid:hover { transform: none; }
+}
