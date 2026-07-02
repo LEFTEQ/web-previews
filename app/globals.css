@@ -1,0 +1,611 @@
+/* ============================================================
+   Vytisknuti.cz — návrh nového webu
+   Koncept: tiskový arch. Bílý papír, CMYK soutisk jako podpis.
+   Palette:
+     --papir   #FDFDFB  (arch papíru)
+     --inkoust #17161C  (tisková čerň / Key)
+     --cyan    #00A5D8
+     --magenta #E5007D
+     --zluta   #FFCC00
+   Typo: Archivo (Black/Expanded pro display), systémový grotesk pro text
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,900;1,400&family=Archivo+Black&display=swap");
+
+:root {
+  --papir: #fdfdfb;
+  --papir-tmavsi: #f3f2ee;
+  --inkoust: #17161c;
+  --inkoust-70: rgba(23, 22, 28, 0.72);
+  --cyan: #00a5d8;
+  --magenta: #e5007d;
+  --zluta: #ffcc00;
+  --font-display: "Archivo Black", "Archivo", "Arial Black", sans-serif;
+  --font-text: "Archivo", -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--papir);
+  color: var(--inkoust);
+  font-family: var(--font-text);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* viditelný focus všude */
+.vt a:focus-visible,
+.vt button:focus-visible {
+  outline: 3px solid var(--magenta);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    /* jemná tisková mřížka — rastr */
+    radial-gradient(rgba(23, 22, 28, 0.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-color: var(--papir);
+  overflow: hidden;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 5vw;
+  border-bottom: 2px solid var(--inkoust);
+  background: var(--papir);
+}
+
+/* --- wordmark --- */
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.wm-mark {
+  display: inline-grid;
+  grid-template-columns: repeat(2, 11px);
+  grid-template-rows: repeat(2, 11px);
+  gap: 3px;
+}
+
+.wm-mark i {
+  display: block;
+  border-radius: 50%;
+}
+
+.wm-c { background: var(--cyan); }
+.wm-m { background: var(--magenta); }
+.wm-y { background: var(--zluta); }
+.wm-k { background: var(--inkoust); }
+
+.wm-text {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.wm-text em {
+  font-style: normal;
+  color: var(--magenta);
+}
+
+.hero-tel {
+  font-weight: 600;
+  color: var(--inkoust);
+  text-decoration: none;
+  border-bottom: 2px solid var(--zluta);
+  padding-bottom: 2px;
+  white-space: nowrap;
+}
+
+.hero-tel:hover {
+  border-bottom-color: var(--magenta);
+}
+
+/* --- hero tělo --- */
+.hero-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3.5rem 5vw 4rem;
+  max-width: 68rem;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--inkoust-70);
+  animation: vstup 0.6s ease both;
+}
+
+/* registrační značka — křížek ze soutisku */
+.reg-mark {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  border: 2px solid var(--inkoust);
+  border-radius: 50%;
+}
+
+.reg-mark::before,
+.reg-mark::after {
+  content: "";
+  position: absolute;
+  background: var(--inkoust);
+}
+
+.reg-mark::before {
+  left: 50%;
+  top: -4px;
+  bottom: -4px;
+  width: 2px;
+  transform: translateX(-50%);
+}
+
+.reg-mark::after {
+  top: 50%;
+  left: -4px;
+  right: -4px;
+  height: 2px;
+  transform: translateY(-50%);
+}
+
+.hero-title {
+  margin: 0 0 1.75rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  font-size: clamp(2.6rem, 8.5vw, 6.4rem);
+  text-transform: uppercase;
+}
+
+.ht-line {
+  display: block;
+  animation: vstup 0.7s ease both;
+}
+
+.ht-1 { animation-delay: 0.08s; }
+.ht-2 { animation-delay: 0.2s; }
+.ht-3 {
+  animation-delay: 0.32s;
+  font-size: 0.42em;
+  letter-spacing: 0.01em;
+  margin-top: 0.5em;
+  color: var(--inkoust-70);
+  font-family: var(--font-text);
+  font-weight: 600;
+  text-transform: none;
+}
+
+/* signature: slovo „tisk." s posunutým CMYK soutiskem */
+.ht-cmyk {
+  position: relative;
+  display: inline-block;
+  color: var(--inkoust);
+  z-index: 1;
+}
+
+.ht-cmyk::before,
+.ht-cmyk::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  animation: soutisk 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+}
+
+.ht-cmyk::before {
+  color: var(--cyan);
+  --posun-x: -0.06em;
+  --posun-y: 0.05em;
+}
+
+.ht-cmyk::after {
+  color: var(--magenta);
+  --posun-x: 0.06em;
+  --posun-y: -0.04em;
+}
+
+@keyframes soutisk {
+  from {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate(var(--posun-x), var(--posun-y));
+    opacity: 1;
+  }
+}
+
+@keyframes vstup {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-perex {
+  max-width: 34rem;
+  margin: 0 0 2.25rem;
+  font-size: 1.1rem;
+  color: var(--inkoust-70);
+  animation: vstup 0.7s ease 0.4s both;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  animation: vstup 0.7s ease 0.5s both;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.95rem 1.9rem;
+  font-family: var(--font-text);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--inkoust);
+  color: var(--papir);
+  box-shadow: 4px 4px 0 var(--zluta);
+}
+
+.btn-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--magenta);
+}
+
+.btn-ghost {
+  border: 2px solid var(--inkoust);
+  color: var(--inkoust);
+  background: transparent;
+}
+
+.btn-ghost:hover {
+  background: var(--inkoust);
+  color: var(--papir);
+}
+
+/* --- CMYK lišta pod hero --- */
+.cmyk-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 2px solid var(--inkoust);
+}
+
+.cb {
+  padding: 0.55rem 0;
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.cb-c { background: var(--cyan); color: var(--inkoust); }
+.cb-m { background: var(--magenta); color: #fff; }
+.cb-y { background: var(--zluta); color: var(--inkoust); }
+.cb-k { background: var(--inkoust); color: #fff; }
+
+/* ============ SEKCE obecně ============ */
+
+.sekce {
+  padding: 5rem 5vw;
+}
+
+.sekce-head {
+  max-width: 42rem;
+  margin-bottom: 3rem;
+}
+
+.sekce-eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--magenta);
+}
+
+.sekce-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.7rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.sekce-perex {
+  margin: 0;
+  color: var(--inkoust-70);
+  font-size: 1.05rem;
+}
+
+/* ============ SEKCE 1: nabídka ============ */
+
+.nabidka {
+  background: var(--papir-tmavsi);
+}
+
+.karty {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.karta {
+  position: relative;
+  background: var(--papir);
+  border: 2px solid var(--inkoust);
+  border-radius: 4px;
+  padding: 1.75rem 1.5rem 1.5rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.karta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  border-radius: 2px 2px 0 0;
+}
+
+.karta-c::before { background: var(--cyan); }
+.karta-m::before { background: var(--magenta); }
+.karta-y::before { background: var(--zluta); }
+.karta-k::before { background: var(--inkoust); }
+
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 5px 5px 0 rgba(23, 22, 28, 0.18);
+}
+
+.karta-kod {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  line-height: 1;
+  margin-bottom: 0.9rem;
+}
+
+.karta-c .karta-kod { color: var(--cyan); }
+.karta-m .karta-kod { color: var(--magenta); }
+.karta-y .karta-kod { color: var(--zluta); }
+.karta-k .karta-kod { color: var(--inkoust); }
+
+.karta-nazev {
+  margin: 0 0 0.6rem;
+  font-size: 1.15rem;
+  font-weight: 900;
+  font-family: var(--font-text);
+  letter-spacing: -0.01em;
+}
+
+.karta-popis {
+  margin: 0 0 1.1rem;
+  font-size: 0.95rem;
+  color: var(--inkoust-70);
+}
+
+.karta-detail {
+  margin: 0;
+  padding-top: 0.8rem;
+  border-top: 1px dashed rgba(23, 22, 28, 0.3);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--inkoust-70);
+}
+
+.nabidka-pozn {
+  margin: 2.5rem 0 0;
+  font-size: 1rem;
+  color: var(--inkoust-70);
+}
+
+.nabidka-pozn a {
+  color: var(--inkoust);
+  font-weight: 600;
+  text-decoration-color: var(--magenta);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.nabidka-pozn a:hover {
+  color: var(--magenta);
+}
+
+/* ============ SEKCE 2: důvěra ============ */
+
+.duvera {
+  background: var(--inkoust);
+  color: var(--papir);
+  background-image: radial-gradient(rgba(253, 253, 251, 0.05) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.sekce-eyebrow-svetly {
+  color: var(--zluta);
+}
+
+.sekce-title-svetly {
+  color: var(--papir);
+}
+
+.fakta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0;
+  margin: 0 0 3.5rem;
+  border: 1px solid rgba(253, 253, 251, 0.25);
+}
+
+.fakt {
+  padding: 1.5rem 1.4rem;
+  border-right: 1px solid rgba(253, 253, 251, 0.25);
+  border-bottom: 1px solid rgba(253, 253, 251, 0.25);
+}
+
+.fakt-cislo {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  line-height: 1;
+  margin-bottom: 0.6rem;
+  color: var(--zluta);
+}
+
+.fakt:nth-child(2) .fakt-cislo { color: var(--cyan); }
+.fakt:nth-child(3) .fakt-cislo { color: var(--magenta); }
+.fakt:nth-child(4) .fakt-cislo { color: var(--papir); }
+
+.fakt-popis {
+  margin: 0;
+  font-size: 0.92rem;
+  color: rgba(253, 253, 251, 0.75);
+}
+
+.recenze {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+
+.recenze-karta {
+  margin: 0;
+  padding: 1.5rem;
+  background: rgba(253, 253, 251, 0.05);
+  border: 1px solid rgba(253, 253, 251, 0.18);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.stars {
+  color: var(--zluta);
+  letter-spacing: 0.15em;
+  font-size: 0.9rem;
+}
+
+.recenze-text {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: rgba(253, 253, 251, 0.9);
+  flex: 1;
+}
+
+.recenze-autor {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.recenze-zdroj {
+  font-weight: 400;
+  color: rgba(253, 253, 251, 0.55);
+}
+
+/* ============ RESPONZIVITA ============ */
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: auto;
+  }
+
+  .hero-body {
+    padding: 2.75rem 6vw 3.25rem;
+  }
+
+  .hero-tel {
+    font-size: 0.9rem;
+  }
+
+  .cmyk-bar .cb {
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+  }
+
+  .sekce {
+    padding: 3.5rem 6vw;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-eyebrow,
+  .ht-line,
+  .hero-perex,
+  .hero-cta {
+    animation: none;
+  }
+
+  .ht-cmyk::before,
+  .ht-cmyk::after {
+    animation: none;
+    opacity: 1;
+    transform: translate(var(--posun-x), var(--posun-y));
+  }
+
+  .karta,
+  .btn {
+    transition: none;
+  }
+
+  .karta:hover,
+  .btn-primary:hover {
+    transform: none;
+  }
+}
