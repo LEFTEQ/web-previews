@@ -1,0 +1,581 @@
+/* ============================================================
+   CH&S — rámování obrazů, Ostrava
+   Paleta odvozená z dílny: ořechové dřevo, plátno, zlatý plátek,
+   grafitová tuš. Signature: dvojitý „rámový profil" kolem hero.
+   ============================================================ */
+
+:root {
+  --tus: #241d18;        /* grafitová tuš / tmavý ořech */
+  --orech: #5b3a26;      /* ořechová lišta */
+  --platno: #f0e9dc;     /* napnuté plátno */
+  --platno-svetle: #f7f3ea;
+  --zlato: #b8863b;      /* zlatý plátek */
+  --zlato-svetle: #d9a955;
+  --zelen: #3d4a3a;      /* patina, měděnka na starém rámu */
+
+  --font-display: "Bodoni Moda", "Playfair Display", Didot, "Times New Roman", serif;
+  --font-body: "Karla", "Segoe UI", -apple-system, Arial, sans-serif;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400;1,6..96,700&family=Karla:wght@400;500;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--tus);
+  background: var(--platno-svetle);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ram-page a:focus-visible,
+.ram-page button:focus-visible {
+  outline: 3px solid var(--zlato);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 70% 20%, rgba(184, 134, 59, 0.10), transparent 55%),
+    var(--platno);
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(2.5rem, 7vw, 6.5rem);
+  overflow: hidden;
+}
+
+/* --- Signature: rámový profil — dvě linky + rohové klínky (jako
+       sesazená lišta s řezem 45°) obepínající celý hero --- */
+
+.hero-frame {
+  position: absolute;
+  inset: clamp(0.9rem, 2.5vw, 1.8rem);
+  pointer-events: none;
+}
+
+.hf {
+  position: absolute;
+  background: var(--orech);
+}
+
+.hf::after {
+  content: "";
+  position: absolute;
+  background: var(--zlato);
+}
+
+.hf-top,
+.hf-bottom {
+  left: 0;
+  right: 0;
+  height: 3px;
+  transform: scaleX(0);
+  animation: kresli-x 1.1s cubic-bezier(0.7, 0, 0.2, 1) 0.15s forwards;
+}
+
+.hf-top { top: 0; transform-origin: left; }
+.hf-bottom { bottom: 0; transform-origin: right; }
+
+.hf-top::after,
+.hf-bottom::after {
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.hf-top::after { top: 7px; }
+.hf-bottom::after { bottom: 7px; }
+
+.hf-left,
+.hf-right {
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  transform: scaleY(0);
+  animation: kresli-y 1.1s cubic-bezier(0.7, 0, 0.2, 1) 0.15s forwards;
+}
+
+.hf-left { left: 0; transform-origin: bottom; }
+.hf-right { right: 0; transform-origin: top; }
+
+.hf-left::after,
+.hf-right::after {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+
+.hf-left::after { left: 7px; }
+.hf-right::after { right: 7px; }
+
+/* rohové klínky = pokosový řez 45° */
+.hf-corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  opacity: 0;
+  animation: objev 0.5s ease 1.15s forwards;
+}
+
+.hf-corner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--zlato) 0%, var(--zlato) 48%, transparent 48%);
+}
+
+.hf-tl { top: -3px; left: -3px; }
+.hf-tr { top: -3px; right: -3px; transform: rotate(90deg); }
+.hf-br { bottom: -3px; right: -3px; transform: rotate(180deg); }
+.hf-bl { bottom: -3px; left: -3px; transform: rotate(270deg); }
+
+@keyframes kresli-x { to { transform: scaleX(1); } }
+@keyframes kresli-y { to { transform: scaleY(1); } }
+@keyframes objev { to { opacity: 1; } }
+
+/* --- obsah hero --- */
+
+.hero-inner {
+  position: relative;
+  max-width: 52rem;
+  text-align: center;
+}
+
+.wordmark {
+  margin: 0 0 clamp(1.5rem, 4vh, 3rem);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  opacity: 0;
+  animation: objev 0.7s ease 0.4s forwards;
+}
+
+.wm-ch,
+.wm-s {
+  display: none;
+}
+
+.wordmark::before {
+  content: "CH & S";
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  letter-spacing: 0.35em;
+  color: var(--orech);
+}
+
+.wm-amp {
+  display: none;
+}
+
+.wm-sub {
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--zelen);
+  font-weight: 500;
+}
+
+.hero-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.7rem, 8.5vw, 6.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: var(--tus);
+}
+
+.ht-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: nastup 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.ht-1 { animation-delay: 0.55s; }
+.ht-2 { animation-delay: 0.75s; }
+
+.ht-2 em {
+  font-style: italic;
+  color: var(--zlato);
+}
+
+@keyframes nastup {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-lead {
+  margin: clamp(1.4rem, 3vh, 2.2rem) auto 0;
+  max-width: 36rem;
+  font-size: clamp(1.02rem, 1.6vw, 1.18rem);
+  color: #4a4038;
+  opacity: 0;
+  animation: objev 0.8s ease 1s forwards;
+}
+
+.hero-meta {
+  margin-top: clamp(1.6rem, 3.5vh, 2.6rem);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem 0.9rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--zelen);
+  font-weight: 500;
+  opacity: 0;
+  animation: objev 0.8s ease 1.15s forwards;
+}
+
+.hm-dot {
+  color: var(--zlato);
+  font-size: 0.55rem;
+}
+
+.hero-cta {
+  display: inline-block;
+  margin-top: clamp(1.8rem, 4vh, 3rem);
+  padding: 0.85rem 2rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: var(--platno-svetle);
+  background: var(--tus);
+  text-decoration: none;
+  border: 1px solid var(--tus);
+  box-shadow: 4px 4px 0 var(--zlato);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+  animation: objev 0.8s ease 1.3s forwards;
+}
+
+.hero-cta:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--zlato);
+}
+
+/* ================= SEKCE: SLUŽBY ================= */
+
+.sluzby {
+  padding: clamp(4rem, 9vw, 7.5rem) clamp(1.25rem, 5vw, 4rem);
+  max-width: 74rem;
+  margin: 0 auto;
+}
+
+.section-head {
+  max-width: 40rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.eyebrow {
+  margin: 0 0 0.8rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--zlato);
+}
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 2rem;
+  height: 2px;
+  background: var(--zlato);
+  vertical-align: middle;
+  margin-right: 0.7rem;
+}
+
+.sluzby h2,
+.duvera h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  line-height: 1.1;
+}
+
+.section-note {
+  margin: 1rem 0 0;
+  color: #5b5147;
+}
+
+.sluzby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+  gap: 1.25rem;
+}
+
+.karta {
+  background: #fff;
+  border: 1px solid #e2d9c8;
+  padding: 1.75rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(36, 29, 24, 0.1);
+}
+
+.karta-hlava {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+
+.karta-label {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--zlato);
+}
+
+/* profil lišty: přibývající vrstvy = vrstvy zakázky */
+.karta-profil {
+  display: flex;
+  gap: 3px;
+}
+
+.karta-profil i {
+  display: block;
+  width: 4px;
+  height: 1.4rem;
+  background: var(--orech);
+}
+
+.karta-profil i:last-child {
+  background: var(--zlato);
+}
+
+.karta h3 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+.karta p {
+  margin: 0;
+  font-size: 0.97rem;
+  color: #4a4038;
+  flex-grow: 1;
+}
+
+.karta-detail {
+  margin-top: 1.2rem !important;
+  padding-top: 0.9rem;
+  border-top: 1px dashed #d8cdb8;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--zelen) !important;
+  flex-grow: 0 !important;
+}
+
+/* ================= SEKCE: DŮVĚRA ================= */
+
+.duvera {
+  background: var(--tus);
+  color: var(--platno);
+  padding: clamp(4rem, 9vw, 7.5rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.duvera-inner {
+  max-width: 74rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.eyebrow-svetly {
+  color: var(--zlato-svetle);
+}
+
+.eyebrow-svetly::before {
+  background: var(--zlato-svetle);
+}
+
+.duvera h2 {
+  color: var(--platno-svetle);
+}
+
+.duvera-lead {
+  margin: 1.2rem 0 0;
+  color: #c9beac;
+  font-size: 1.05rem;
+}
+
+.duvera-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: duvera;
+}
+
+.duvera-list li {
+  counter-increment: duvera;
+  position: relative;
+  padding: 1.5rem 0 1.5rem 3.4rem;
+  border-top: 1px solid rgba(240, 233, 220, 0.15);
+}
+
+.duvera-list li:last-child {
+  border-bottom: 1px solid rgba(240, 233, 220, 0.15);
+}
+
+.duvera-list li::before {
+  content: counter(duvera, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 1.65rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--zlato-svetle);
+}
+
+.duvera-list h3 {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--platno-svetle);
+}
+
+.duvera-list p {
+  margin: 0;
+  font-size: 0.97rem;
+  color: #c9beac;
+}
+
+.citat {
+  grid-column: 1 / -1;
+  margin: clamp(1.5rem, 4vw, 3rem) auto 0;
+  max-width: 44rem;
+  text-align: center;
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+  border: 1px solid rgba(217, 169, 85, 0.4);
+  outline: 1px solid rgba(217, 169, 85, 0.4);
+  outline-offset: 6px;
+}
+
+.citat p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  line-height: 1.5;
+  color: var(--platno-svetle);
+}
+
+.citat-autor {
+  margin-top: 1.2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--zlato-svetle);
+  font-weight: 500;
+}
+
+/* ================= RESPONSIVITA ================= */
+
+@media (max-width: 860px) {
+  .duvera-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 16px;
+  }
+
+  .hero {
+    padding: 4.5rem 1.9rem;
+  }
+
+  .hero-frame {
+    inset: 0.7rem;
+  }
+
+  .hf-corner {
+    width: 18px;
+    height: 18px;
+  }
+
+  .hero-meta {
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .hm-dot {
+    display: none;
+  }
+
+  .duvera-list li {
+    padding-left: 2.9rem;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hf-top,
+  .hf-bottom,
+  .hf-left,
+  .hf-right,
+  .hf-corner,
+  .wordmark,
+  .ht-line,
+  .hero-lead,
+  .hero-meta,
+  .hero-cta {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hf-tr { transform: rotate(90deg); }
+  .hf-br { transform: rotate(180deg); }
+  .hf-bl { transform: rotate(270deg); }
+
+  .karta,
+  .hero-cta {
+    transition: none;
+  }
+}
