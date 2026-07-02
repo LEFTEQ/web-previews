@@ -1,0 +1,572 @@
+:root {
+  --wood: #a97e4f;        /* dub z dílny */
+  --wood-deep: #7c5732;
+  --lak: #f6f4ef;         /* bílá supermat */
+  --uhel: #22201c;        /* korpus / grafit */
+  --uhel-soft: #35322c;
+  --salvej: #8a9a84;      /* lakovaný akcent */
+  --ink: #2a2620;
+  --paper: #fbfaf7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.gk {
+  display: block;
+}
+
+.gk h1,
+.gk h2,
+.gk h3,
+.gk .wordmark,
+.gk .btn,
+.gk .karta-tag,
+.gk .krok-cislo,
+.gk .hero-eyebrow,
+.gk .vzornik-head,
+.gk .hero-rule,
+.gk .nav-tel {
+  font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  background: var(--uhel);
+  color: var(--lak);
+  padding: 1.25rem 1.25rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemná textura dýhy — svislé letokruhy */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 46px,
+    rgba(169, 126, 79, 0.07) 46px,
+    rgba(169, 126, 79, 0.07) 48px
+  );
+  pointer-events: none;
+}
+
+.hero > * {
+  position: relative;
+}
+
+.hero-nav {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0.5rem 0 2.5rem;
+}
+
+.wordmark {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.wordmark em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--wood);
+  margin-left: 0.15em;
+}
+
+.nav-tel {
+  color: var(--lak);
+  text-decoration: none;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  border-bottom: 2px solid var(--wood);
+  padding-bottom: 2px;
+}
+
+.nav-tel:hover {
+  color: var(--wood);
+}
+
+.hero-grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 3rem;
+  padding-bottom: 3rem;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1.25rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--wood);
+}
+
+.hero-title {
+  margin: 0 0 1.5rem;
+  font-size: clamp(2.6rem, 9vw, 5.6rem);
+  line-height: 0.98;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.hero-title .line {
+  display: block;
+}
+
+.hero-title .line-2 {
+  color: var(--wood);
+}
+
+.hero-title .stroke {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--lak);
+}
+
+.hero-sub {
+  margin: 0 0 2rem;
+  max-width: 30rem;
+  font-size: 1.1rem;
+  color: rgba(246, 244, 239, 0.85);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 1.5rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: 2px solid var(--wood);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-solid {
+  background: var(--wood);
+  color: var(--uhel);
+}
+
+.btn-solid:hover {
+  background: var(--lak);
+  border-color: var(--lak);
+}
+
+.btn-ghost {
+  color: var(--lak);
+}
+
+.btn-ghost:hover {
+  background: rgba(169, 126, 79, 0.18);
+}
+
+/* --- Signature: vzorník z lakovny --- */
+
+.vzornik {
+  background: var(--uhel-soft);
+  border: 1px solid rgba(169, 126, 79, 0.35);
+  padding: 1.5rem;
+  align-self: start;
+}
+
+.vzornik-head {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--wood);
+}
+
+.vzornik-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.25rem;
+}
+
+.vzorek {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 0.6rem;
+  align-items: center;
+  animation: vzorek-in 0.5s ease both;
+  animation-delay: calc(0.35s + var(--i) * 0.09s);
+}
+
+.vzorek-barva {
+  grid-row: 1 / 3;
+  width: 2.6rem;
+  height: 2.6rem;
+  background: var(--swatch);
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.vzorek:hover .vzorek-barva {
+  transform: rotate(-4deg) scale(1.08);
+}
+
+.vzorek-name {
+  font-size: 0.92rem;
+  color: var(--lak);
+  line-height: 1.25;
+}
+
+.vzorek-note {
+  font-size: 0.78rem;
+  color: rgba(246, 244, 239, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.vzornik-foot {
+  margin: 1.25rem 0 0;
+  font-size: 0.9rem;
+  color: rgba(246, 244, 239, 0.7);
+  font-style: italic;
+}
+
+/* pásek s kroky pod hero */
+.hero-rule {
+  border-top: 1px solid rgba(169, 126, 79, 0.4);
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1rem 0 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.75rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(246, 244, 239, 0.55);
+  counter-reset: fáze;
+}
+
+.hero-rule span::before {
+  counter-increment: fáze;
+  content: counter(fáze, decimal-leading-zero) " ";
+  color: var(--wood);
+}
+
+/* animace hero při načtení */
+.hero-eyebrow,
+.hero-title .line,
+.hero-sub,
+.hero-actions {
+  animation: rise 0.6s ease both;
+}
+
+.hero-title .line-1 { animation-delay: 0.08s; }
+.hero-title .line-2 { animation-delay: 0.16s; }
+.hero-title .line-3 { animation-delay: 0.24s; }
+.hero-sub { animation-delay: 0.34s; }
+.hero-actions { animation-delay: 0.42s; }
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes vzorek-in {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ================= PROVEDENÍ ================= */
+
+.provedeni {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.section-head {
+  max-width: 40rem;
+  margin-bottom: 2.75rem;
+}
+
+.section-head h2 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  text-transform: uppercase;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+.section-head p {
+  margin: 0;
+  color: rgba(42, 38, 32, 0.75);
+}
+
+.karty {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.karta {
+  border: 1px solid rgba(42, 38, 32, 0.15);
+  border-top: 4px solid var(--wood);
+  background: #fff;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(34, 32, 28, 0.12);
+}
+
+.karta:nth-child(2) {
+  border-top-color: var(--uhel);
+}
+
+.karta:nth-child(3) {
+  border-top-color: var(--salvej);
+}
+
+.karta-tag {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--wood-deep);
+  font-weight: 700;
+}
+
+.karta h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.3rem;
+  line-height: 1.25;
+}
+
+.karta-desc {
+  margin: 0 0 1.25rem;
+  color: rgba(42, 38, 32, 0.78);
+  font-size: 0.98rem;
+}
+
+.karta-detail {
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-top: 0.9rem;
+  border-top: 1px dashed rgba(42, 38, 32, 0.25);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.provedeni-pozn {
+  margin: 2rem 0 0;
+  font-style: italic;
+  color: rgba(42, 38, 32, 0.7);
+  max-width: 38rem;
+}
+
+/* ================= PROCES + DŮVĚRA ================= */
+
+.proces {
+  background: var(--lak);
+  border-top: 1px solid rgba(42, 38, 32, 0.1);
+  padding: 4.5rem 1.25rem 4.5rem;
+}
+
+.proces > * {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-head--dark {
+  margin-bottom: 2.75rem;
+}
+
+.kroky {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.krok {
+  border-left: 3px solid var(--wood);
+  padding-left: 1.25rem;
+}
+
+.krok-cislo {
+  display: block;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--wood-deep);
+  font-weight: 700;
+}
+
+.krok h3 {
+  margin: 0.2rem 0 0.4rem;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.krok p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(42, 38, 32, 0.78);
+}
+
+.reference {
+  margin: 3.5rem auto 0;
+  background: var(--uhel);
+  color: var(--lak);
+  padding: 2.25rem 1.75rem;
+  position: relative;
+}
+
+.reference::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1.75rem;
+  width: 4rem;
+  height: 4px;
+  background: var(--wood);
+}
+
+.reference blockquote {
+  margin: 0 0 1rem;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  font-style: italic;
+}
+
+.reference figcaption {
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--wood);
+  font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ================= FOCUS ================= */
+
+.gk a:focus-visible,
+.gk .btn:focus-visible {
+  outline: 3px solid var(--salvej);
+  outline-offset: 3px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (min-width: 700px) {
+  .karty {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .kroky {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 3rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .hero {
+    padding: 1.5rem 2.5rem 0;
+  }
+
+  .hero-grid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .kroky {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem 2rem;
+  }
+
+  .reference blockquote {
+    font-size: 1.35rem;
+    max-width: 52rem;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-eyebrow,
+  .hero-title .line,
+  .hero-sub,
+  .hero-actions,
+  .vzorek {
+    animation: none;
+  }
+
+  .karta,
+  .vzorek-barva,
+  .btn {
+    transition: none;
+  }
+
+  .karta:hover {
+    transform: none;
+  }
+
+  .vzorek:hover .vzorek-barva {
+    transform: none;
+  }
+}
