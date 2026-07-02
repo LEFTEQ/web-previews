@@ -1,0 +1,439 @@
+/* =====================================================================
+   METROSTAV STAVEBNINY — sádrokartonář, Praha
+   Koncept: „suchá stavba“ — paleta vychází přímo z materiálu:
+   bílý karton desky, šedé sádrové jádro, modrý potisk hrany desky
+   (tím modrým se na SDK desky tisknou popisy), tužková grafitová.
+   Signature: „rastr desky“ — vodorovné měřítko s kotevními body
+   po 250 mm, jako rozteč šroubů při montáži. Typografie: Archivo
+   (stlačený technický grotesk pro titulky) + Sora pro text.
+   ===================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75,500..800&family=Sora:wght@400;600&display=swap');
+
+:root {
+  --karton: #f7f6f2;      /* lícový karton desky — teplá, ne krémová bílá */
+  --jadro: #b9bcc0;       /* sádrové jádro — chladná světlá šedá */
+  --grafit: #23272b;      /* tužka / profil — téměř černá s modrým podtónem */
+  --potisk: #1f5fd6;      /* modrý potisk hrany SDK desky — jediný akcent */
+  --potisk-tmavy: #17439a;
+  --papir-stin: #e8e6df;
+
+  --font-display: 'Archivo', 'Arial Narrow', sans-serif;
+  --font-body: 'Sora', 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--grafit);
+  background: var(--karton);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+.sdk a:focus-visible,
+.sdk .btn:focus-visible {
+  outline: 3px solid var(--potisk);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+  position: relative;
+  min-height: 92svh;
+  display: flex;
+  align-items: flex-end;
+  color: #fff;
+  overflow: hidden;
+}
+
+.hero-media { position: absolute; inset: 0; }
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(20, 24, 28, 0.92) 0%,
+    rgba(20, 24, 28, 0.55) 45%,
+    rgba(20, 24, 28, 0.15) 100%
+  );
+}
+
+.hero-inner {
+  position: relative;
+  width: min(72rem, 100%);
+  margin: 0 auto;
+  padding: 7rem 1.25rem 3.5rem;
+}
+
+.brandline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 1.25rem;
+  margin-bottom: 2.75rem;
+}
+
+/* Vlastní wordmark — úzký grotesk, kontrast tučné/tenké jako
+   potisk na hraně desky */
+.wordmark {
+  font-family: var(--font-display);
+  font-stretch: 75%;
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  border-left: 5px solid var(--potisk);
+  padding-left: 0.7rem;
+}
+
+.wordmark-thin { font-weight: 500; }
+
+.wordmark-sub {
+  display: block;
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  margin-top: 0.3rem;
+  color: var(--jadro);
+}
+
+.brand-loc {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-stretch: 75%;
+  font-weight: 750;
+  font-size: clamp(2.6rem, 8.5vw, 5.6rem);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+  max-width: 18ch;
+}
+
+.hero-line { display: block; }
+
+.hero-line-3 { color: var(--potisk); color: #6f9ef0; }
+
+.hero-lead {
+  max-width: 34rem;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0 0 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-bottom: 3rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-stretch: 75%;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.95rem 1.6rem;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--potisk);
+  color: #fff;
+}
+
+.btn-solid:hover { background: var(--potisk-tmavy); transform: translateY(-2px); }
+
+.btn-ghost {
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+}
+
+.btn-ghost:hover { border-color: #fff; transform: translateY(-2px); }
+
+/* Signature: kotevní rastr — značky po „250 mm“ */
+.stud-ruler {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  padding-top: 0.8rem;
+  max-width: 44rem;
+}
+
+.stud-tick {
+  width: 2.6rem;
+  height: 0.8rem;
+  border-left: 2px solid var(--potisk);
+  border-left-color: #6f9ef0;
+  flex: none;
+}
+
+.stud-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  padding-left: 0.6rem;
+}
+
+/* Načítací sekvence — tři řádky titulku jako tři vrstvy tmelu */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(1.2rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-line, .hero-lead, .hero-actions, .stud-ruler, .brandline {
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.brandline    { animation-delay: 0.05s; }
+.hero-line-1  { animation-delay: 0.15s; }
+.hero-line-2  { animation-delay: 0.28s; }
+.hero-line-3  { animation-delay: 0.41s; }
+.hero-lead    { animation-delay: 0.55s; }
+.hero-actions { animation-delay: 0.65s; }
+.stud-ruler   { animation-delay: 0.8s; }
+
+/* ---------- SPOLEČNÉ ---------- */
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-stretch: 75%;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--potisk);
+  margin: 0 0 0.8rem;
+}
+
+.eyebrow-light { color: #6f9ef0; }
+
+.sdk h2 {
+  font-family: var(--font-display);
+  font-stretch: 75%;
+  font-weight: 750;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin: 0 0 1rem;
+}
+
+.section-lead {
+  max-width: 40rem;
+  color: #4b5158;
+  margin: 0;
+}
+
+.photo {
+  width: 100%;
+  border-radius: 6px;
+}
+
+figure { margin: 0; }
+
+figcaption {
+  font-size: 0.85rem;
+  color: #5a6067;
+  padding-top: 0.7rem;
+  border-top: 2px solid var(--potisk);
+  margin-top: 0.9rem;
+  max-width: 36rem;
+}
+
+/* ---------- SEKCE 1: CO STAVÍME ---------- */
+
+.work {
+  width: min(72rem, 100%);
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.section-head { margin-bottom: 2.5rem; }
+
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+  margin-bottom: 3rem;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--papir-stin);
+  border-radius: 6px;
+  padding: 1.5rem 1.4rem 1.3rem;
+  position: relative;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.card::before {
+  /* hrana desky — modrý potisk nahoře */
+  content: '';
+  position: absolute;
+  top: 0; left: 1.4rem; right: 1.4rem;
+  height: 3px;
+  background: var(--potisk);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(35, 39, 43, 0.1);
+}
+
+.card-spec {
+  font-family: var(--font-display);
+  font-stretch: 75%;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--potisk-tmavy);
+  margin: 0 0 0.5rem;
+}
+
+.card h3 {
+  font-family: var(--font-display);
+  font-stretch: 75%;
+  font-weight: 750;
+  font-size: 1.35rem;
+  line-height: 1.1;
+  margin: 0 0 0.6rem;
+}
+
+.card p:last-child {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #4b5158;
+}
+
+/* ---------- SEKCE 2: DŮVĚRA ---------- */
+
+.trust {
+  background: var(--grafit);
+  color: #e9eaec;
+}
+
+.trust-inner {
+  width: min(72rem, 100%);
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.trust h2 { color: #fff; }
+
+.trust-text > p { color: #c3c7cc; max-width: 36rem; }
+
+.trust-list {
+  list-style: none;
+  margin: 2rem 0;
+  padding: 0;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.trust-list li {
+  padding-left: 1.3rem;
+  border-left: 3px solid var(--potisk);
+  color: #c3c7cc;
+  font-size: 0.97rem;
+}
+
+.trust-list strong {
+  display: block;
+  color: #fff;
+  font-family: var(--font-display);
+  font-stretch: 75%;
+  font-weight: 700;
+  font-size: 1.08rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+}
+
+.quote {
+  margin: 2.5rem 0 0;
+  padding: 1.5rem 1.4rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  border-left: 4px solid var(--potisk);
+}
+
+.quote p {
+  margin: 0 0 0.7rem;
+  font-size: 1.05rem;
+  color: #f2f3f4;
+}
+
+.quote cite {
+  font-style: normal;
+  font-size: 0.85rem;
+  color: #9aa0a7;
+}
+
+.trust-photo figcaption {
+  color: #9aa0a7;
+  border-top-color: #6f9ef0;
+}
+
+/* ---------- RESPONZIVITA ---------- */
+
+@media (min-width: 640px) {
+  .work-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 960px) {
+  .hero-inner { padding-bottom: 4.5rem; }
+  .trust-inner {
+    grid-template-columns: 7fr 5fr;
+    align-items: start;
+    gap: 4rem;
+  }
+  .trust-photo { position: sticky; top: 3rem; }
+  .work { padding-top: 6rem; }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-line, .hero-lead, .hero-actions, .stud-ruler, .brandline {
+    animation: none;
+  }
+  .card, .btn { transition: none; }
+  .card:hover, .btn-solid:hover, .btn-ghost:hover { transform: none; }
+}
