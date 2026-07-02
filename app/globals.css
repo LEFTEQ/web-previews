@@ -1,0 +1,352 @@
+/* ==========================================================================
+   Dana Michlová — rámování obrazů, Vršovice
+   Paleta odvozená z dílny: mořený ořech, zlacený lístek, pH-neutrální karton,
+   plátěná pasparta. Signature: rám v rámu — rohy z pokosových profilů.
+   ========================================================================== */
+
+:root {
+  --orech: #2b1e16;        /* mořený ořech — hluboké dřevo */
+  --orech-svetly: #4a3527; /* světlejší tón dřeva */
+  --zlato: #c2913f;        /* zlacený plátek */
+  --zlato-svetle: #e3c47f; /* leštěná hrana zlacení */
+  --karton: #f7f3e8;       /* pH-neutrální karton pasparty */
+  --platno: #e9e0cd;       /* plátěná pasparta */
+  --inkoust: #241a12;      /* text na světlé */
+
+  --font-display: "Bodoni Moda", "Didot", "Playfair Display", Georgia, serif;
+  --font-body: "Karla", "Gill Sans", "Trebuchet MS", Verdana, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--inkoust);
+  background: var(--karton);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fonty přes systémový fallback stack — bez externích knihoven kód drží,
+   pokud projekt fonty nemá, spadne elegantně na Didot/Georgia + Gill Sans. */
+
+img { max-width: 100%; height: auto; }
+
+a { color: inherit; }
+
+:where(a, button, [tabindex]):focus-visible {
+  outline: 3px solid var(--zlato);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ————————————————————————— HERO ————————————————————————— */
+
+.hero {
+  background:
+    radial-gradient(120% 90% at 85% 10%, #3a2a1d 0%, transparent 55%),
+    var(--orech);
+  padding: clamp(1rem, 4vw, 3.5rem);
+}
+
+/* Rám v rámu: vnější „lišta“ (dvojitá zlatá linka) kolem celého hera */
+.hero-frame {
+  position: relative;
+  border: 1px solid rgba(227, 196, 127, 0.55);
+  box-shadow: inset 0 0 0 6px var(--orech), inset 0 0 0 7px rgba(194, 145, 63, 0.65);
+  padding: clamp(2.5rem, 7vw, 6rem) clamp(1.25rem, 6vw, 5.5rem);
+  color: var(--karton);
+}
+
+/* Pokosové rohy — profil rámařské lišty seříznutý na 45° */
+.corner {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  pointer-events: none;
+}
+.corner::before,
+.corner::after {
+  content: "";
+  position: absolute;
+  background: linear-gradient(90deg, var(--zlato) 0%, var(--zlato-svetle) 45%, var(--zlato) 100%);
+}
+.corner::before { top: 0; left: 0; width: 100%; height: 8px; }
+.corner::after  { top: 0; left: 0; width: 8px; height: 100%; }
+/* pokosový řez naznačený seříznutím rohu */
+.corner { clip-path: polygon(0 0, 100% 0, 100% 8px, 22px 8px, 8px 22px, 8px 100%, 0 100%); }
+
+.c-tl { top: -8px; left: -8px; }
+.c-tr { top: -8px; right: -8px; transform: rotate(90deg); }
+.c-br { bottom: -8px; right: -8px; transform: rotate(180deg); }
+.c-bl { bottom: -8px; left: -8px; transform: rotate(270deg); }
+
+.wordmark {
+  margin: 0 0 clamp(2rem, 6vw, 3.5rem);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.04em;
+  color: var(--zlato-svetle);
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.wordmark-dot { color: var(--zlato); }
+.wordmark-sub {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: rgba(247, 243, 232, 0.65);
+}
+
+.hero-title {
+  margin: 0 0 1.75rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.9rem, 10vw, 7.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+}
+.ht-line { display: block; }
+.ht-2 {
+  font-style: italic;
+  color: var(--zlato-svetle);
+  padding-left: clamp(0.5rem, 6vw, 5rem); /* schodovitá kompozice = pokos */
+}
+.ht-3 { padding-left: clamp(1rem, 12vw, 10rem); }
+
+.hero-lead {
+  max-width: 34rem;
+  margin: 0 0 2.25rem;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  color: rgba(247, 243, 232, 0.88);
+}
+
+.hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.75rem;
+  margin-bottom: 2rem;
+}
+.hero-facts span {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(194, 145, 63, 0.5);
+  color: var(--zlato-svetle);
+  white-space: nowrap;
+}
+
+.hero-hours {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(247, 243, 232, 0.6);
+}
+
+/* Načtení hera: řádky titulku nastupují jako skládání lišt */
+@keyframes ram-nastup {
+  from { opacity: 0; transform: translateY(0.6em); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.ht-line, .hero-lead, .hero-facts, .hero-hours, .wordmark {
+  animation: ram-nastup 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.wordmark  { animation-delay: 0.05s; }
+.ht-1      { animation-delay: 0.15s; }
+.ht-2      { animation-delay: 0.28s; }
+.ht-3      { animation-delay: 0.41s; }
+.hero-lead { animation-delay: 0.55s; }
+.hero-facts{ animation-delay: 0.65s; }
+.hero-hours{ animation-delay: 0.75s; }
+
+/* ————————————————————————— SEKCE OBECNĚ ————————————————————————— */
+
+.section-head { max-width: 46rem; margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--zlato);
+  font-weight: 700;
+}
+
+.section-head h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+  line-height: 1.15;
+}
+
+/* ————————————————————————— NABÍDKA ————————————————————————— */
+
+.nabidka {
+  padding: clamp(3.5rem, 8vw, 6.5rem) clamp(1.25rem, 6vw, 5.5rem);
+  background: var(--karton);
+}
+
+.nabidka-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.5rem), 1fr));
+  gap: 1.25rem;
+}
+
+.karta {
+  background: var(--platno);
+  border: 1px solid rgba(43, 30, 22, 0.12);
+  /* pasparta: silné rovnoměrné okraje kolem obsahu jako výřez pasparty */
+  padding: 1.5rem;
+  box-shadow: inset 0 0 0 8px var(--karton), inset 0 0 0 9px rgba(43, 30, 22, 0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    inset 0 0 0 8px var(--karton),
+    inset 0 0 0 9px var(--zlato),
+    0 12px 24px rgba(43, 30, 22, 0.12);
+}
+
+.karta-cislo {
+  margin: 0.5rem 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.2rem);
+  line-height: 1;
+  color: var(--orech);
+}
+.karta-cislo small {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--zlato);
+  font-weight: 700;
+}
+
+.karta h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.karta-text {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  color: rgba(36, 26, 18, 0.82);
+}
+
+/* ————————————————————————— DÍLNA + CESTA ————————————————————————— */
+
+.dilna {
+  background: var(--orech);
+  color: var(--karton);
+  padding: clamp(3.5rem, 8vw, 6.5rem) clamp(1.25rem, 6vw, 5.5rem);
+}
+
+.section-head--light h2 { color: var(--karton); }
+
+.dilna-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.prace-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.prace-list li {
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(194, 145, 63, 0.35);
+}
+.prace-list li:last-child { border-bottom: 1px solid rgba(194, 145, 63, 0.35); }
+
+.prace-list h3 {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.35rem;
+  color: var(--zlato-svetle);
+}
+.prace-list p {
+  margin: 0;
+  max-width: 34rem;
+  color: rgba(247, 243, 232, 0.85);
+}
+
+.dilna-cesta {
+  background: rgba(247, 243, 232, 0.05);
+  border: 1px solid rgba(194, 145, 63, 0.45);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.cesta-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--zlato-svetle);
+}
+
+.cesta-adresa {
+  margin: 0 0 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.cesta-dl { margin: 0; }
+.cesta-dl > div { margin-bottom: 1.25rem; }
+.cesta-dl > div:last-child { margin-bottom: 0; }
+
+.cesta-dl dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--zlato);
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.cesta-dl dd {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(247, 243, 232, 0.85);
+}
+
+.cesta-tel, .cesta-mail {
+  color: var(--karton);
+  text-decoration-color: var(--zlato);
+  text-underline-offset: 3px;
+}
+.cesta-tel { font-size: 1.15rem; font-weight: 700; }
+.cesta-tel:hover, .cesta-mail:hover { color: var(--zlato-svetle); }
+
+/* ————————————————————————— RESPONZIVITA ————————————————————————— */
+
+@media (max-width: 780px) {
+  .dilna-wrap { grid-template-columns: 1fr; }
+  .corner { width: 40px; height: 40px; }
+  .ht-2 { padding-left: 0.75rem; }
+  .ht-3 { padding-left: 1.5rem; }
+}
+
+/* ————————————————————————— REDUCED MOTION ————————————————————————— */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ht-line, .hero-lead, .hero-facts, .hero-hours, .wordmark {
+    animation: none;
+  }
+  .karta, .karta:hover { transition: none; transform: none; }
+}
