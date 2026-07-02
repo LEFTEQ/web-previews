@@ -1,0 +1,400 @@
+/* ============================================================
+   Zemědělské stavby a.s. — Ústí nad Labem
+   Paleta odvozená z řemesla: ocelová šeď konstrukcí, beton,
+   žluť stavební techniky, tmavá zeleň polí Ústecka.
+   ============================================================ */
+
+:root {
+  --zs-steel: #22303c;      /* ocelově tmavá — konstrukce */
+  --zs-steel-deep: #17222c; /* stín pod vazníkem */
+  --zs-concrete: #e9ebe6;   /* beton / světlé pozadí */
+  --zs-machine: #f2b705;    /* žluť stavební techniky — akcent */
+  --zs-field: #3e5c3f;      /* zeleň polí kolem Ústí */
+  --zs-ink: #1d2429;
+  --zs-paper: #f7f7f3;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--zs-ink);
+  background: var(--zs-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.zs a:focus-visible,
+.zs button:focus-visible {
+  outline: 3px solid var(--zs-machine);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =================== HERO =================== */
+
+.zs-hero {
+  position: relative;
+  background:
+    linear-gradient(180deg, var(--zs-steel) 0%, var(--zs-steel-deep) 100%);
+  color: var(--zs-concrete);
+  overflow: hidden;
+  padding: 2rem 1.25rem 0;
+}
+
+.zs-hero-inner {
+  max-width: 62rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  padding-bottom: 3rem;
+}
+
+/* Wordmark */
+.zs-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+}
+
+.zs-brand-mark {
+  color: var(--zs-machine);
+  display: inline-flex;
+}
+
+.zs-brand-word {
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.22em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.zs-brand-word em {
+  font-style: normal;
+  color: var(--zs-machine);
+  letter-spacing: 0.1em;
+}
+
+.zs-hero-eyebrow {
+  font-size: 0.85rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--zs-machine);
+  margin: 0 0 1rem;
+  font-weight: 700;
+}
+
+.zs-hero-title {
+  margin: 0 0 1.5rem;
+  font-weight: 900;
+  font-size: clamp(2.4rem, 8vw, 5.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.zs-hero-title .zs-line {
+  display: block;
+}
+
+.zs-accent {
+  color: var(--zs-machine);
+  /* podtržení jako pruh výstražné pásky */
+  background: linear-gradient(transparent 78%, rgba(242, 183, 5, 0.35) 78%);
+}
+
+.zs-hero-lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: #c6cdd2;
+  margin: 0 0 2rem;
+}
+
+.zs-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.zs-btn {
+  display: inline-block;
+  padding: 0.95rem 1.6rem;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 3px solid var(--zs-machine);
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.zs-btn-solid {
+  background: var(--zs-machine);
+  color: var(--zs-steel-deep);
+}
+
+.zs-btn-solid:hover { background: #ffd83d; border-color: #ffd83d; }
+
+.zs-btn-ghost {
+  color: var(--zs-machine);
+  background: transparent;
+}
+
+.zs-btn-ghost:hover {
+  background: rgba(242, 183, 5, 0.12);
+}
+
+.zs-btn:hover { transform: translateY(-2px); }
+
+/* Signature: hala z vazníků a trapézového plechu */
+.zs-hero-hall {
+  position: relative;
+  margin-top: -1rem;
+}
+
+.zs-hall-svg {
+  display: block;
+  width: 100%;
+  height: clamp(120px, 24vw, 300px);
+}
+
+.zs-hall-a { fill: #2d3d4b; }
+.zs-hall-b { fill: #28394650; fill: #283946; }
+
+.zs-hall-truss path {
+  stroke: var(--zs-machine);
+  stroke-width: 2.5;
+  opacity: 0.85;
+}
+
+.zs-hall-trapez rect {
+  fill: #3a4c5b;
+}
+
+/* Page-load: hala „vyroste“, řádky titulku najedou */
+@keyframes zs-rise {
+  from { transform: translateY(60px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes zs-slide {
+  from { transform: translateX(-24px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+.zs-hero-hall { animation: zs-rise 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
+.zs-line-1 { animation: zs-slide 500ms 100ms ease-out both; }
+.zs-line-2 { animation: zs-slide 500ms 220ms ease-out both; }
+.zs-line-3 { animation: zs-slide 500ms 340ms ease-out both; }
+.zs-hero-lead, .zs-hero-cta { animation: zs-slide 500ms 480ms ease-out both; }
+
+/* =================== SEKCE =================== */
+
+.zs-section {
+  padding: 4rem 1.25rem;
+  max-width: 70rem;
+  margin: 0 auto;
+}
+
+.zs-section h2 {
+  font-size: clamp(1.7rem, 4.5vw, 2.5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  color: var(--zs-steel);
+}
+
+.zs-section-head {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.zs-section-head p {
+  margin: 0;
+  color: #4a555e;
+}
+
+/* Karty služeb */
+.zs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.25rem;
+}
+
+.zs-card {
+  background: #fff;
+  border: 1px solid #d8dcd4;
+  border-top: 5px solid var(--zs-machine);
+  padding: 1.6rem 1.5rem;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.zs-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(34, 48, 60, 0.12);
+}
+
+.zs-card-icon {
+  color: var(--zs-field);
+  margin-bottom: 1rem;
+}
+
+.zs-card h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--zs-steel);
+}
+
+.zs-card p {
+  margin: 0 0 0.9rem;
+  color: #4a555e;
+  font-size: 0.98rem;
+}
+
+.zs-card-tag {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--zs-field);
+  border: 1.5px solid var(--zs-field);
+  padding: 0.25rem 0.6rem;
+  margin: 0;
+}
+
+/* Fakta pod kartami */
+.zs-facts {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+
+.zs-facts li {
+  padding: 1rem 1.2rem;
+  background: var(--zs-concrete);
+  border-left: 5px solid var(--zs-machine);
+  color: #39434b;
+  font-size: 0.97rem;
+}
+
+.zs-facts strong { color: var(--zs-steel); }
+
+/* =================== DŮVĚRA =================== */
+
+.zs-trust {
+  max-width: none;
+  background: var(--zs-steel);
+  color: var(--zs-concrete);
+}
+
+.zs-trust-grid,
+.zs-quotes {
+  max-width: 70rem;
+  margin: 0 auto;
+}
+
+.zs-trust h2 { color: #fff; }
+
+.zs-trust-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.zs-trust-text p { color: #c6cdd2; }
+
+.zs-stats {
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.zs-stat {
+  border-left: 5px solid var(--zs-machine);
+  padding: 0.4rem 0 0.4rem 1.2rem;
+}
+
+.zs-stat dt {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #9fabb4;
+}
+
+.zs-stat dd {
+  margin: 0.15rem 0 0;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--zs-machine);
+  line-height: 1;
+}
+
+.zs-quotes {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.25rem;
+}
+
+.zs-quote {
+  margin: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 1.5rem;
+}
+
+.zs-quote blockquote {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: #e6eaed;
+}
+
+.zs-quote figcaption {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--zs-machine);
+  font-weight: 700;
+}
+
+/* =================== RESPONZIVITA =================== */
+
+@media (max-width: 760px) {
+  .zs-hero { padding-top: 1.5rem; }
+  .zs-brand { margin-bottom: 2rem; }
+  .zs-trust-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .zs-btn { width: 100%; text-align: center; }
+  .zs-section { padding: 3rem 1.1rem; }
+}
+
+/* =================== REDUCED MOTION =================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .zs-hero-hall,
+  .zs-line-1, .zs-line-2, .zs-line-3,
+  .zs-hero-lead, .zs-hero-cta {
+    animation: none;
+  }
+  .zs-btn, .zs-card {
+    transition: none;
+  }
+}
