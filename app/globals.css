@@ -1,0 +1,634 @@
+/* ============================================================
+   DOSY CB — elektroinstalace, České Budějovice
+   Koncept: schéma zapojení / rozvaděč
+   Paleta:
+     --dc-noc      #14181F  (izolace, tmavě grafitová)
+     --dc-papir    #EDF0F2  (schematický papír, chladná šedobílá)
+     --dc-med      #C97B2D  (měď — vodič, akcent č. 1)
+     --dc-faze     #2E5EAA  (fázová modř — pracovní barva elektrikáře)
+     --dc-signal   #E8B84B  (signálka / výstražná žluť, jen drobné akcenty)
+   Typo: Archivo Narrow-like přes system stack? Ne — používáme
+     display: "Barlow Condensed"-charakter přes font shorthand fallback:
+     zúžený grotesk pro titulky (technické štítky), humanistický
+     grotesk pro text. Bez externích fontů → pečlivě laděný stack.
+   ============================================================ */
+
+:root {
+  --dc-noc: #14181f;
+  --dc-noc-2: #1d232c;
+  --dc-papir: #edf0f2;
+  --dc-papir-2: #e2e6ea;
+  --dc-med: #c97b2d;
+  --dc-med-svetla: #e0954a;
+  --dc-faze: #2e5eaa;
+  --dc-signal: #e8b84b;
+  --dc-ink: #1a1f27;
+  --dc-ink-mekka: #4b5563;
+
+  --dc-font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed",
+    "Liberation Sans Narrow", system-ui, sans-serif;
+  --dc-font-text: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --dc-font-mono: "Cascadia Mono", "SF Mono", "Consolas", "Liberation Mono", monospace;
+
+  --dc-max: 72rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--dc-papir);
+  color: var(--dc-ink);
+  font-family: var(--dc-font-text);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* viditelný focus všude */
+:focus-visible {
+  outline: 3px solid var(--dc-faze);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.dc-main {
+  display: block;
+}
+
+/* ============================================================
+   HERO — tmavý "rozvaděč", typografie + jistič
+   ============================================================ */
+
+.dc-hero {
+  position: relative;
+  background: var(--dc-noc);
+  color: var(--dc-papir);
+  overflow: hidden;
+  padding: 1.5rem 1.25rem 4.5rem;
+  /* jemná mřížka schematického papíru */
+  background-image: linear-gradient(rgba(237, 240, 242, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(237, 240, 242, 0.045) 1px, transparent 1px);
+  background-size: 3rem 3rem;
+}
+
+.dc-hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 3.5rem;
+}
+
+/* wordmark — svorkovnicový štítek */
+.dc-wordmark {
+  display: inline-flex;
+  align-items: stretch;
+  font-family: var(--dc-font-display);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.dc-wordmark-name {
+  background: var(--dc-papir);
+  color: var(--dc-noc);
+  padding: 0.45rem 0.6rem 0.35rem;
+}
+
+.dc-wordmark-cb {
+  background: var(--dc-med);
+  color: var(--dc-noc);
+  padding: 0.45rem 0.6rem 0.35rem;
+}
+
+.dc-hero-locale {
+  margin: 0;
+  font-family: var(--dc-font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: rgba(237, 240, 242, 0.65);
+  text-transform: uppercase;
+}
+
+.dc-hero-body {
+  position: relative;
+  z-index: 2;
+  max-width: 46rem;
+}
+
+.dc-hero-eyebrow {
+  margin: 0 0 1.25rem;
+  font-family: var(--dc-font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(237, 240, 242, 0.7);
+}
+
+.dc-term {
+  display: inline-block;
+  min-width: 1.9em;
+  text-align: center;
+  border: 1px solid var(--dc-med);
+  color: var(--dc-med-svetla);
+  padding: 0.1em 0.25em;
+  margin-right: 0.3em;
+}
+
+.dc-hero-title {
+  margin: 0 0 1.5rem;
+  font-family: var(--dc-font-display);
+  font-weight: 700;
+  font-size: clamp(2.75rem, 9vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.dc-hero-title em {
+  font-style: normal;
+  color: var(--dc-signal);
+  position: relative;
+}
+
+/* podtržení "drží" jako vodič s uzly */
+.dc-hero-title em::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.08em;
+  height: 3px;
+  background: var(--dc-med);
+}
+
+.dc-line {
+  display: block;
+}
+
+.dc-hero-sub {
+  margin: 0 0 2.25rem;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  max-width: 36rem;
+  color: rgba(237, 240, 242, 0.85);
+}
+
+.dc-hero-actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.dc-btn {
+  display: inline-block;
+  font-family: var(--dc-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-size: 1.05rem;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border: 2px solid transparent;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.dc-btn:active {
+  transform: translateY(1px);
+}
+
+.dc-btn-primary {
+  background: var(--dc-med);
+  color: var(--dc-noc);
+}
+
+.dc-btn-primary:hover {
+  background: var(--dc-med-svetla);
+}
+
+.dc-btn-ghost {
+  border-color: rgba(237, 240, 242, 0.4);
+  color: var(--dc-papir);
+}
+
+.dc-btn-ghost:hover {
+  border-color: var(--dc-papir);
+}
+
+/* --- jistič (signature) --- */
+.dc-breaker {
+  position: absolute;
+  top: 0;
+  right: 4%;
+  bottom: 0;
+  width: min(20rem, 32vw);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.dc-breaker-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dc-wire {
+  stroke: var(--dc-med);
+  stroke-width: 4;
+}
+
+.dc-wire-out {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 0;
+  animation: dc-flow 1.2s ease 0.9s both;
+}
+
+.dc-node {
+  fill: var(--dc-noc);
+  stroke: var(--dc-papir);
+  stroke-width: 3;
+}
+
+.dc-lever {
+  stroke: var(--dc-papir);
+  stroke-width: 5;
+  stroke-linecap: round;
+  transform-origin: 160px 158px;
+  animation: dc-switch-on 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.4) 0.5s both;
+}
+
+.dc-breaker-label {
+  font-family: var(--dc-font-mono);
+  font-size: 15px;
+  fill: rgba(237, 240, 242, 0.55);
+  letter-spacing: 0.08em;
+}
+
+.dc-breaker-state {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--dc-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--dc-signal);
+  border: 1px solid var(--dc-signal);
+  padding: 0.2rem 0.6rem;
+  animation: dc-fade-in 0.4s ease 1s both;
+}
+
+/* svislá lišta technických údajů */
+.dc-hero-rail {
+  margin-top: 4rem;
+  display: flex;
+  gap: 2rem;
+  font-family: var(--dc-font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  color: rgba(237, 240, 242, 0.45);
+  text-transform: uppercase;
+}
+
+/* --- vstupní animace hero textu --- */
+.dc-line-1 { animation: dc-rise 0.55s ease 0.05s both; }
+.dc-line-2 { animation: dc-rise 0.55s ease 0.18s both; }
+.dc-line-3 { animation: dc-rise 0.55s ease 0.31s both; }
+.dc-hero-sub { animation: dc-fade-in 0.6s ease 0.5s both; }
+.dc-hero-actions { animation: dc-fade-in 0.6s ease 0.65s both; }
+
+@keyframes dc-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dc-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dc-switch-on {
+  from {
+    transform: rotate(-38deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes dc-flow {
+  from {
+    stroke-dashoffset: 200;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ============================================================
+   SEKCE — společné
+   ============================================================ */
+
+.dc-sekce {
+  padding: 4.5rem 1.25rem;
+}
+
+.dc-sekce-head {
+  max-width: var(--dc-max);
+  margin: 0 auto 3rem;
+}
+
+.dc-sekce-eyebrow {
+  margin: 0 0 0.75rem;
+  font-family: var(--dc-font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dc-med);
+}
+
+.dc-sekce-title {
+  margin: 0 0 1rem;
+  font-family: var(--dc-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.9rem, 5vw, 3.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.dc-sekce-lead {
+  margin: 0;
+  max-width: 40rem;
+  font-size: 1.05rem;
+  color: var(--dc-ink-mekka);
+}
+
+/* ============================================================
+   SEKCE 1 — ČINNOST (tři fáze L1/L2/L3)
+   ============================================================ */
+
+.dc-cinnost {
+  background: var(--dc-papir);
+}
+
+.dc-faze-grid {
+  max-width: var(--dc-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.dc-faze {
+  background: #fff;
+  border-top: 4px solid var(--dc-med);
+  padding: 1.75rem 1.5rem 1.5rem;
+  box-shadow: 0 1px 0 rgba(20, 24, 31, 0.08), 0 8px 24px -18px rgba(20, 24, 31, 0.35);
+}
+
+.dc-faze:nth-child(2) {
+  border-top-color: var(--dc-faze);
+}
+
+.dc-faze:nth-child(3) {
+  border-top-color: var(--dc-signal);
+}
+
+.dc-faze-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.dc-faze-kod {
+  flex: none;
+  font-family: var(--dc-font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--dc-noc);
+  border: 2px solid currentColor;
+  padding: 0.25rem 0.45rem;
+  line-height: 1;
+  margin-top: 0.2rem;
+}
+
+.dc-faze-nazev {
+  margin: 0;
+  font-family: var(--dc-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.35rem;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+}
+
+.dc-faze-popis {
+  margin: 0 0 1.25rem;
+  color: var(--dc-ink-mekka);
+  font-size: 0.98rem;
+}
+
+.dc-faze-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dc-faze-list li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.4rem;
+  border-top: 1px solid var(--dc-papir-2);
+  font-size: 0.95rem;
+}
+
+/* odrážka = svorka (kroužek s tečkou) */
+.dc-faze-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.95rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 2px solid var(--dc-med);
+  border-radius: 50%;
+}
+
+/* ============================================================
+   SEKCE 2 — DŮVĚRA (svorkovnice zásad)
+   ============================================================ */
+
+.dc-duvera {
+  background: var(--dc-noc-2);
+  color: var(--dc-papir);
+}
+
+.dc-sekce-head-invert .dc-sekce-lead {
+  color: rgba(237, 240, 242, 0.7);
+}
+
+.dc-svorky {
+  max-width: var(--dc-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border: 1px solid rgba(237, 240, 242, 0.18);
+}
+
+.dc-svorka {
+  padding: 1.5rem 1.4rem;
+  border-bottom: 1px solid rgba(237, 240, 242, 0.18);
+}
+
+.dc-svorka:last-child {
+  border-bottom: none;
+}
+
+.dc-svorka-head {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: var(--dc-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.6rem;
+}
+
+.dc-svorka-stitek {
+  flex: none;
+  font-family: var(--dc-font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: var(--dc-med);
+  color: var(--dc-noc);
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+}
+
+.dc-svorka-text {
+  margin: 0;
+  color: rgba(237, 240, 242, 0.78);
+  font-size: 0.98rem;
+}
+
+.dc-duvera-pozn {
+  max-width: var(--dc-max);
+  margin: 2.5rem auto 0;
+  padding-left: 1.1rem;
+  border-left: 3px solid var(--dc-med);
+  font-size: 0.98rem;
+  color: rgba(237, 240, 242, 0.75);
+}
+
+/* ============================================================
+   Responzivita
+   ============================================================ */
+
+@media (max-width: 47.99rem) {
+  /* na mobilu jistič ustoupí za text a zprůhlední, ať nepřekáží čtení */
+  .dc-breaker {
+    right: -18%;
+    width: 16rem;
+    opacity: 0.28;
+  }
+
+  .dc-breaker-state {
+    display: none;
+  }
+
+  .dc-hero-rail {
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .dc-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (min-width: 48rem) {
+  .dc-hero {
+    padding: 2rem 3rem 5.5rem;
+  }
+
+  .dc-sekce {
+    padding: 6rem 3rem;
+  }
+
+  .dc-faze-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+  }
+
+  .dc-svorky {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dc-svorka {
+    border-right: 1px solid rgba(237, 240, 242, 0.18);
+    padding: 2rem 1.9rem;
+  }
+
+  .dc-svorka:nth-child(even) {
+    border-right: none;
+  }
+
+  .dc-svorka:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+}
+
+@media (min-width: 64rem) {
+  .dc-hero-body {
+    max-width: 52rem;
+  }
+}
+
+/* ============================================================
+   Redukovaný pohyb
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .dc-line-1,
+  .dc-line-2,
+  .dc-line-3,
+  .dc-hero-sub,
+  .dc-hero-actions,
+  .dc-lever,
+  .dc-wire-out,
+  .dc-breaker-state {
+    animation: none;
+  }
+
+  .dc-btn {
+    transition: none;
+  }
+}
