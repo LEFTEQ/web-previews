@@ -1,0 +1,586 @@
+/* =====================================================
+   INSTINKT REALITY · Plzeň
+   Koncept: katastrální mapa jako signature prvek.
+   Paleta odvozená z map katastru a plzeňské cihly:
+   ---------------------------------------------------- */
+:root {
+  --ir-inkoust: #1b2a33;   /* katastrální inkoust – tmavá modrošedá */
+  --ir-papir: #f7f5ef;     /* mapový papír – teplá světlá */
+  --ir-cihla: #c4532e;     /* plzeňská cihla / razítko */
+  --ir-mosaz: #b98a3c;     /* mosazný hraniční hřeb */
+  --ir-linka: #8fa3ad;     /* linky parcel */
+  --ir-bila: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Georgia", "Times New Roman", serif;
+  background: var(--ir-papir);
+  color: var(--ir-inkoust);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ir a:focus-visible,
+.ir .ir-btn:focus-visible {
+  outline: 3px solid var(--ir-cihla);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ Typografická utilita ============ */
+.ir-eyebrow {
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ir-cihla);
+  font-weight: 700;
+}
+
+.ir-eyebrow-svetly {
+  color: var(--ir-mosaz);
+}
+
+/* =====================================================
+   HERO
+   ==================================================== */
+.ir-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(175deg, var(--ir-papir) 0%, #efeadf 100%);
+  padding: 1.5rem 1.25rem 0;
+  border-bottom: 4px solid var(--ir-inkoust);
+}
+
+.ir-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 1120px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.ir-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.ir-wordmark-main {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.26em;
+  color: var(--ir-inkoust);
+}
+
+.ir-wordmark-sub {
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ir-cihla);
+  margin-top: 0.35rem;
+}
+
+.ir-phone {
+  text-decoration: none;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.ir-phone-label {
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ir-linka);
+}
+
+.ir-phone-number {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--ir-inkoust);
+}
+
+.ir-phone:hover .ir-phone-number {
+  color: var(--ir-cihla);
+}
+
+.ir-hero-body {
+  position: relative;
+  z-index: 2;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3.5rem 0 3rem;
+}
+
+.ir-h1 {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 8.5vw, 5.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin: 1rem 0 1.5rem;
+  max-width: 12ch;
+}
+
+.ir-h1-line {
+  display: block;
+  animation: ir-vyjet 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.ir-h1-line:nth-child(2) { animation-delay: 0.12s; }
+.ir-h1-line:nth-child(3) { animation-delay: 0.24s; }
+
+.ir-h1-accent {
+  color: var(--ir-cihla);
+  font-style: italic;
+}
+
+@keyframes ir-vyjet {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ir-hero-lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: #3c4d58;
+  animation: ir-vyjet 0.7s 0.36s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.ir-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  animation: ir-vyjet 0.7s 0.48s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.ir-btn {
+  display: inline-block;
+  font-family: "Courier New", ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 2px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.ir-btn-solid {
+  background: var(--ir-cihla);
+  color: var(--ir-bila);
+  border: 2px solid var(--ir-cihla);
+}
+
+.ir-btn-solid:hover {
+  background: #a84325;
+  border-color: #a84325;
+  transform: translateY(-2px);
+}
+
+.ir-btn-ghost {
+  border: 2px solid var(--ir-inkoust);
+  color: var(--ir-inkoust);
+  background: transparent;
+}
+
+.ir-btn-ghost:hover {
+  background: var(--ir-inkoust);
+  color: var(--ir-papir);
+  transform: translateY(-2px);
+}
+
+/* ---------- Signature: katastrální mapa ---------- */
+.ir-katastr {
+  position: absolute;
+  top: 0;
+  right: -8%;
+  width: min(58vw, 640px);
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.ir-katastr-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ir-parcely path {
+  fill: none;
+  stroke: var(--ir-linka);
+  stroke-width: 1.5;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: ir-kreslit 2.2s 0.3s ease-out forwards;
+  opacity: 0.55;
+}
+
+.ir-parcely path:nth-child(2) { animation-delay: 0.45s; }
+.ir-parcely path:nth-child(3) { animation-delay: 0.6s; }
+.ir-parcely path:nth-child(4) { animation-delay: 0.75s; }
+.ir-parcely path:nth-child(5) { animation-delay: 0.9s; }
+.ir-parcely path:nth-child(6) { animation-delay: 1.05s; }
+.ir-parcely path:nth-child(7) { animation-delay: 1.2s; }
+
+@keyframes ir-kreslit {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ir-parcela-nase {
+  fill: rgba(196, 83, 46, 0.14);
+  stroke: var(--ir-cihla);
+  stroke-width: 2.5;
+  animation: ir-objevit 0.8s 1.5s ease-out both;
+}
+
+@keyframes ir-objevit {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ir-parcela-cisla text {
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 15px;
+  fill: var(--ir-linka);
+  opacity: 0.8;
+}
+
+.ir-parcela-znacka text {
+  text-anchor: middle;
+  animation: ir-objevit 0.8s 1.8s ease-out both;
+}
+
+.ir-znacka-cislo {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: 30px;
+  fill: var(--ir-cihla);
+}
+
+.ir-znacka-text {
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  fill: var(--ir-inkoust);
+}
+
+/* ---------- pásek pod hero ---------- */
+.ir-hero-strip {
+  position: relative;
+  z-index: 2;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.9rem;
+  padding: 1rem 0 1.25rem;
+  border-top: 1px solid rgba(27, 42, 51, 0.18);
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #5c6f7a;
+}
+
+/* =====================================================
+   SEKCE OBECNĚ
+   ==================================================== */
+.ir-sekce {
+  padding: 4.5rem 1.25rem;
+}
+
+.ir-sekce-hlava {
+  max-width: 1120px;
+  margin: 0 auto 2.5rem;
+}
+
+.ir-h2 {
+  font-family: Georgia, serif;
+  font-size: clamp(1.8rem, 4.5vw, 2.9rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-top: 0.6rem;
+}
+
+/* =====================================================
+   SLUŽBY
+   ==================================================== */
+.ir-sluzby {
+  background: var(--ir-bila);
+}
+
+.ir-sluzby-list {
+  list-style: none;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px;
+  background: rgba(27, 42, 51, 0.18);
+  border: 1px solid rgba(27, 42, 51, 0.18);
+}
+
+.ir-sluzba {
+  background: var(--ir-bila);
+  padding: 1.75rem 1.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.ir-sluzba:hover {
+  background: var(--ir-papir);
+}
+
+.ir-sluzba-tag {
+  display: inline-block;
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ir-bila);
+  background: var(--ir-inkoust);
+  padding: 0.25rem 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.ir-sluzba-nazev {
+  font-family: Georgia, serif;
+  font-size: 1.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.ir-sluzba-popis {
+  color: #4a5b66;
+  font-size: 0.98rem;
+}
+
+.ir-sluzba-cta {
+  background: var(--ir-inkoust);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.ir-sluzba-cta:hover {
+  background: var(--ir-inkoust);
+}
+
+.ir-sluzba-cta-text {
+  color: var(--ir-papir);
+  font-size: 1.05rem;
+  font-style: italic;
+}
+
+/* =====================================================
+   SPECIALIZACE / DŮVĚRA
+   ==================================================== */
+.ir-spec {
+  background: var(--ir-inkoust);
+  color: var(--ir-papir);
+}
+
+.ir-spec-uvod {
+  max-width: 1120px;
+  margin: 0 auto 3rem;
+}
+
+.ir-h2-svetly {
+  color: var(--ir-papir);
+}
+
+.ir-spec-lead {
+  max-width: 38rem;
+  margin-top: 1.2rem;
+  color: #b8c4cc;
+  font-size: 1.05rem;
+}
+
+.ir-spec-fakta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  margin-top: 2.2rem;
+}
+
+.ir-fakt {
+  display: flex;
+  flex-direction: column;
+}
+
+.ir-fakt-cislo {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--ir-mosaz);
+  line-height: 1.1;
+}
+
+.ir-fakt-popis {
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #8fa3ad;
+  margin-top: 0.35rem;
+}
+
+.ir-spec-list {
+  list-style: none;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.ir-spec-polozka {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 1.25rem;
+  padding: 1.6rem 0;
+  border-top: 1px dashed rgba(143, 163, 173, 0.4);
+}
+
+.ir-spec-polozka:last-child {
+  border-bottom: 1px dashed rgba(143, 163, 173, 0.4);
+}
+
+.ir-spec-parcela {
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--ir-mosaz);
+  padding-top: 0.35rem;
+}
+
+.ir-spec-nazev {
+  font-family: Georgia, serif;
+  font-size: 1.3rem;
+  margin-bottom: 0.4rem;
+}
+
+.ir-spec-popis {
+  color: #b8c4cc;
+  font-size: 0.98rem;
+  max-width: 44rem;
+}
+
+.ir-citace {
+  max-width: 1120px;
+  margin: 3rem auto 0;
+  border-left: 4px solid var(--ir-cihla);
+  padding: 0.5rem 0 0.5rem 1.5rem;
+}
+
+.ir-citace p {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  line-height: 1.45;
+  color: var(--ir-papir);
+  max-width: 42rem;
+}
+
+.ir-citace cite {
+  display: block;
+  margin-top: 1rem;
+  font-family: "Courier New", ui-monospace, monospace;
+  font-style: normal;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #8fa3ad;
+}
+
+/* =====================================================
+   RESPONZIVITA
+   ==================================================== */
+@media (max-width: 720px) {
+  .ir-katastr {
+    position: absolute;
+    right: -30%;
+    width: 90vw;
+    opacity: 0.28;
+  }
+
+  .ir-hero-body {
+    padding: 2.75rem 0 2.25rem;
+  }
+
+  .ir-phone-label {
+    display: none;
+  }
+
+  .ir-spec-polozka {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .ir-sekce {
+    padding: 3.25rem 1.25rem;
+  }
+}
+
+/* =====================================================
+   REDUCED MOTION
+   ==================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ir-h1-line,
+  .ir-hero-lead,
+  .ir-hero-actions,
+  .ir-parcela-nase,
+  .ir-parcela-znacka text {
+    animation: none;
+    opacity: 1;
+  }
+
+  .ir-parcely path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .ir-btn,
+  .ir-sluzba {
+    transition: none;
+  }
+
+  .ir-btn-solid:hover,
+  .ir-btn-ghost:hover {
+    transform: none;
+  }
+}
