@@ -1,0 +1,595 @@
+/* ============================================================
+   EKO KOMÍNY s.r.o. — komíny a vložkování, Praha 8-Libeň
+   Paleta odvozená z řemesla: kartáčovaný nerez vložek,
+   pálená cihla komínového zdiva, saze průduchu, žár spalin.
+   ============================================================ */
+
+:root {
+  --saze: #1c1a18;        /* saze v průduchu — hlavní tmavá */
+  --nerez: #e9ebec;       /* kartáčovaný nerez — světlé pozadí */
+  --nerez-stin: #c8ccce;  /* stín na plášti vložky */
+  --cihla: #b0492b;       /* pálená cihla zdiva — akcent */
+  --cihla-tmava: #8a3720; /* spára / hover */
+  --zar: #e8a13c;         /* žár spalin — drobný akcent */
+  --papir: #f7f6f4;       /* revizní zpráva — podklad služeb */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--nerez);
+  color: var(--saze);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ek a:focus-visible,
+.ek .btn:focus-visible {
+  outline: 3px solid var(--zar);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ====================== HERO ====================== */
+
+.hero {
+  position: relative;
+  background:
+    linear-gradient(160deg, var(--saze) 0%, #262320 55%, #2e2a25 100%);
+  color: var(--nerez);
+  padding: 1.5rem 1.25rem 4rem;
+  overflow: hidden;
+}
+
+/* jemné vodorovné "spáry" zdiva na pozadí hero */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 71px,
+    rgba(233, 235, 236, 0.05) 71px,
+    rgba(233, 235, 236, 0.05) 72px
+  );
+  pointer-events: none;
+}
+
+.hero-top {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  max-width: 1120px;
+  margin: 0 auto 3rem;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0.04em;
+}
+
+.wordmark-eko {
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--cihla);
+}
+
+.wordmark-kominy {
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--nerez);
+}
+
+.wordmark-sro {
+  font-size: 0.8rem;
+  color: var(--nerez-stin);
+  letter-spacing: 0.12em;
+}
+
+.hero-tel {
+  text-align: right;
+  text-decoration: none;
+  color: var(--nerez);
+  line-height: 1.25;
+}
+
+.hero-tel-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--zar);
+}
+
+.hero-tel-num {
+  font-weight: 700;
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-tel:hover .hero-tel-num {
+  color: var(--zar);
+}
+
+.hero-body {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+}
+
+/* --- signature: technický průřez komínem --- */
+
+.prurez {
+  position: relative;
+  max-width: 340px;
+  margin: 0 auto;
+  animation: prurez-vjezd 0.9s ease-out both;
+}
+
+.prurez-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pr-zdivo {
+  fill: var(--cihla);
+}
+
+.pr-spara {
+  fill: none;
+  stroke: var(--cihla-tmava);
+  stroke-width: 3;
+}
+
+.pr-mezera {
+  fill: #33302c;
+}
+
+.pr-vlozka {
+  fill: var(--nerez-stin);
+}
+
+.pr-pruduch {
+  fill: var(--saze);
+}
+
+.pr-tah {
+  fill: none;
+  stroke: var(--zar);
+  stroke-width: 2;
+  stroke-dasharray: 10 14;
+  animation: tah-toceni 14s linear infinite;
+  transform-origin: 240px 240px;
+}
+
+.pr-kota {
+  stroke: rgba(233, 235, 236, 0.55);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 5;
+}
+
+.prurez-popisky {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.pr-pop {
+  position: absolute;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--nerez-stin);
+  background: rgba(28, 26, 24, 0.75);
+  padding: 0.15rem 0.45rem;
+}
+
+.pr-pop-1 {
+  top: 4%;
+  left: 4%;
+}
+
+.pr-pop-2 {
+  top: 24%;
+  right: 0;
+}
+
+.pr-pop-3 {
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--zar);
+}
+
+@keyframes tah-toceni {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes prurez-vjezd {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- hero text --- */
+
+.hero-text {
+  animation: text-vjezd 0.7s 0.25s ease-out both;
+}
+
+@keyframes text-vjezd {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--zar);
+}
+
+.hero-h1 {
+  margin: 0 0 1.25rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.4rem, 7vw, 4.4rem);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.hero-h1 em {
+  font-style: italic;
+  color: var(--zar);
+}
+
+.hero-perex {
+  margin: 0 0 1.75rem;
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: var(--nerez-stin);
+}
+
+.hero-akce {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn-plna {
+  background: var(--cihla);
+  color: #fff;
+  border: 2px solid var(--cihla);
+}
+
+.btn-plna:hover {
+  background: var(--cihla-tmava);
+  border-color: var(--cihla-tmava);
+}
+
+.btn-obrys {
+  background: transparent;
+  color: var(--nerez);
+  border: 2px solid var(--nerez-stin);
+}
+
+.btn-obrys:hover {
+  border-color: var(--zar);
+  color: var(--zar);
+}
+
+.btn-mensi {
+  padding: 0.7rem 1.3rem;
+  font-size: 0.95rem;
+}
+
+.hero-adresa {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--nerez-stin);
+  letter-spacing: 0.02em;
+}
+
+/* ====================== SLUŽBY ====================== */
+
+.sluzby {
+  background: var(--papir);
+  padding: 4rem 1.25rem;
+}
+
+.sekce-hlava {
+  max-width: 1120px;
+  margin: 0 auto 2.5rem;
+}
+
+.sekce-h2 {
+  margin: 0 0 0.75rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.sekce-h2::after {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: 4px;
+  margin-top: 0.75rem;
+  background: var(--cihla);
+}
+
+.sekce-h2-svetla::after {
+  background: var(--zar);
+}
+
+.sekce-perex {
+  margin: 0;
+  max-width: 38rem;
+  color: #4a4642;
+}
+
+.sluzby-mrizka {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1120px;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+
+.sluzba {
+  background: #fff;
+  border: 1px solid #e3e0dc;
+  border-top: 4px solid var(--nerez-stin);
+  border-radius: 4px;
+  padding: 1.5rem 1.5rem 1.4rem;
+  transition: border-top-color 0.2s, transform 0.2s;
+}
+
+.sluzba:hover {
+  border-top-color: var(--cihla);
+  transform: translateY(-3px);
+}
+
+.sluzba-znacka {
+  display: inline-block;
+  margin-bottom: 0.9rem;
+}
+
+.zn-vnejsi {
+  fill: none;
+  stroke: var(--cihla);
+  stroke-width: 2;
+}
+
+.zn-vnitrni {
+  fill: var(--saze);
+}
+
+.sluzba-nazev {
+  margin: 0 0 0.6rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.sluzba-popis {
+  margin: 0 0 0.9rem;
+  color: #4a4642;
+  font-size: 0.98rem;
+}
+
+.sluzba-detail {
+  margin: 0;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cihla);
+  font-weight: 700;
+}
+
+.sluzba-vyzva {
+  background: var(--saze);
+  color: var(--nerez);
+  border-color: var(--saze);
+  border-top-color: var(--zar);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.sluzba-vyzva:hover {
+  border-top-color: var(--zar);
+}
+
+.sluzba-vyzva .sluzba-popis {
+  color: var(--nerez-stin);
+}
+
+.sluzba-vyzva .btn {
+  margin-top: auto;
+}
+
+/* ====================== DŮVĚRA ====================== */
+
+.duvera {
+  background: var(--saze);
+  color: var(--nerez);
+  padding: 4rem 1.25rem;
+}
+
+.duvera-vnitrek {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 1fr;
+}
+
+.sekce-h2-svetla {
+  color: var(--nerez);
+}
+
+.duvera-perex {
+  margin: 0 0 1.25rem;
+  max-width: 38rem;
+  color: var(--nerez-stin);
+}
+
+.duvera-citace {
+  margin: 2rem 0 0;
+  padding-left: 1.25rem;
+  border-left: 4px solid var(--cihla);
+}
+
+.duvera-citace p {
+  margin: 0 0 0.5rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--nerez);
+}
+
+.duvera-citace cite {
+  font-style: normal;
+  font-size: 0.85rem;
+  color: var(--nerez-stin);
+}
+
+.duvera-cisla {
+  margin: 0;
+  display: grid;
+  gap: 1.75rem;
+  align-content: start;
+}
+
+.cislo-blok {
+  border-top: 1px solid rgba(233, 235, 236, 0.2);
+  padding-top: 1.25rem;
+}
+
+.cislo-hodnota {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--zar);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.cislo-popis {
+  margin: 0.5rem 0 0;
+  color: var(--nerez-stin);
+  font-size: 0.95rem;
+  max-width: 22rem;
+}
+
+/* ====================== RESPONZIVITA ====================== */
+
+@media (min-width: 640px) {
+  .sluzby-mrizka {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    padding: 2rem 2rem 5.5rem;
+  }
+
+  .hero-body {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+  }
+
+  .prurez {
+    order: 2;
+    max-width: 440px;
+    margin: 0;
+    justify-self: end;
+  }
+
+  .hero-text {
+    order: 1;
+  }
+
+  .sluzby-mrizka {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .duvera-vnitrek {
+    grid-template-columns: 1.4fr 1fr;
+  }
+}
+
+/* ====================== REDUCED MOTION ====================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .prurez,
+  .hero-text {
+    animation: none;
+  }
+
+  .pr-tah {
+    animation: none;
+  }
+
+  .sluzba,
+  .btn {
+    transition: none;
+  }
+
+  .sluzba:hover {
+    transform: none;
+  }
+}
