@@ -1,0 +1,516 @@
+/* ============================================================
+   TANKER s.r.o. — cisternová autodoprava, České Budějovice
+   Paleta: asfaltová čerň, betonová šeď, ADR oranžová (výstražná
+   tabulka cisterny), reflexní bílá. Typografie: kondenzovaný
+   grotesk jako z boku cisterny + technický mono pro kódy.
+   ============================================================ */
+
+:root {
+  --asfalt: #16181c;        /* mokrý asfalt */
+  --asfalt-2: #1f2229;      /* tmavá sekce */
+  --beton: #eceae5;         /* světlé pozadí — beton, ne krémová */
+  --adr: #f07f13;           /* oranž ADR výstražné tabulky */
+  --adr-tmava: #c96408;
+  --reflex: #ffffff;
+  --inkoust: #23252b;
+  --sed: #6b6e77;
+  --linka: #d6d3cc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--beton);
+  color: var(--inkoust);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tk a {
+  color: inherit;
+}
+
+.tk :focus-visible {
+  outline: 3px solid var(--adr);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- HERO ---------- */
+
+.tk-hero {
+  position: relative;
+  background: var(--asfalt);
+  color: var(--reflex);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 92svh;
+}
+
+.tk-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.4rem clamp(1.25rem, 5vw, 4rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.tk-wordmark {
+  font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  font-stretch: condensed;
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.tk-wordmark-dot {
+  color: var(--adr);
+  font-size: 0.7em;
+  vertical-align: 0.15em;
+  margin-left: 0.15em;
+}
+
+.tk-topbar-loc {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.tk-hero-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2.5rem, 7vw, 5rem) clamp(1.25rem, 5vw, 4rem) clamp(2rem, 4vw, 3rem);
+  max-width: 68rem;
+}
+
+.tk-hero-eyebrow {
+  margin: 0 0 1.2rem;
+  font-family: "Consolas", "SFMono-Regular", "Courier New", monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--adr);
+}
+
+.tk-hero-title {
+  margin: 0;
+  font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  font-stretch: condensed;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(3.1rem, 11.5vw, 8.2rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+
+.tk-line {
+  display: block;
+  opacity: 0;
+  transform: translateX(-2.5rem);
+  animation: tk-drive-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.tk-line-1 { animation-delay: 0.05s; }
+.tk-line-2 { animation-delay: 0.18s; color: rgba(255, 255, 255, 0.55); }
+.tk-line-3 { animation-delay: 0.31s; }
+
+.tk-title-dot {
+  color: var(--adr);
+}
+
+@keyframes tk-drive-in {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.tk-hero-sub {
+  margin: 1.8rem 0 0;
+  max-width: 34rem;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.78);
+  opacity: 0;
+  animation: tk-fade 0.8s ease 0.55s forwards;
+}
+
+.tk-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2.2rem;
+  opacity: 0;
+  animation: tk-fade 0.8s ease 0.7s forwards;
+}
+
+@keyframes tk-fade {
+  to { opacity: 1; }
+}
+
+.tk-btn {
+  display: inline-block;
+  padding: 0.95rem 1.7rem;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.tk-btn-solid {
+  background: var(--adr);
+  color: var(--asfalt);
+  border: 2px solid var(--adr);
+}
+
+.tk-btn-solid:hover {
+  background: var(--adr-tmava);
+  border-color: var(--adr-tmava);
+  transform: translateY(-2px);
+}
+
+.tk-btn-ghost {
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  color: var(--reflex);
+}
+
+.tk-btn-ghost:hover {
+  border-color: var(--reflex);
+  transform: translateY(-2px);
+}
+
+/* ---------- SIGNATURE: silnice s přerušovanou čárou + ADR tabulka ---------- */
+
+.tk-road {
+  position: relative;
+  height: 8.5rem;
+  background: #101216;
+  border-top: 4px solid var(--adr);
+  overflow: hidden;
+}
+
+.tk-road-stripes {
+  position: absolute;
+  top: 50%;
+  left: -12rem;
+  right: -12rem;
+  height: 0.55rem;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 3.5rem;
+  animation: tk-road-move 2.6s linear infinite;
+}
+
+.tk-road-stripes span {
+  flex: 0 0 6rem;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 2px;
+}
+
+@keyframes tk-road-move {
+  from { transform: translate(0, -50%); }
+  to { transform: translate(-9.5rem, -50%); }
+}
+
+/* ADR výstražná tabulka 33/1203 (hořlavá kapalina / benzín) —
+   poznávací znamení každé cisterny této firmy */
+.tk-adr {
+  position: absolute;
+  right: clamp(1.25rem, 6vw, 5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8.2rem;
+  background: var(--adr);
+  border: 3px solid #101216;
+  border-radius: 4px;
+  box-shadow: 0 6px 24px rgba(240, 127, 19, 0.35);
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-stretch: condensed;
+  font-weight: 800;
+  color: #101216;
+  text-align: center;
+  line-height: 1;
+}
+
+.tk-adr-top,
+.tk-adr-bottom {
+  display: block;
+  padding: 0.45rem 0;
+  font-size: 1.7rem;
+  letter-spacing: 0.12em;
+}
+
+.tk-adr-top {
+  border-bottom: 3px solid #101216;
+}
+
+/* ---------- SEKCE ---------- */
+
+.tk-section {
+  padding: clamp(3.5rem, 9vw, 6.5rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.tk-section-head {
+  max-width: 46rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.tk-section-tag {
+  display: inline-block;
+  font-family: "Consolas", "SFMono-Regular", "Courier New", monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--adr-tmava);
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  padding: 0.3rem 0.7rem;
+  margin-bottom: 1.1rem;
+}
+
+.tk-section-tag-light {
+  color: var(--adr);
+}
+
+.tk-h2 {
+  margin: 0;
+  font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  font-stretch: condensed;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  line-height: 1.02;
+  color: var(--asfalt);
+}
+
+.tk-h2-light {
+  color: var(--reflex);
+}
+
+.tk-section-lead {
+  margin: 1.1rem 0 0;
+  color: var(--sed);
+  max-width: 38rem;
+}
+
+/* karty služeb */
+
+.tk-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+  gap: 1.1rem;
+}
+
+.tk-card {
+  background: var(--reflex);
+  border: 1px solid var(--linka);
+  border-radius: 4px;
+  padding: 1.6rem 1.5rem 1.8rem;
+  position: relative;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.tk-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--adr);
+  box-shadow: 0 12px 28px rgba(22, 24, 28, 0.1);
+}
+
+.tk-card-plate {
+  display: inline-block;
+  font-family: "Consolas", "SFMono-Regular", "Courier New", monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--asfalt);
+  background: var(--adr);
+  border-radius: 2px;
+  padding: 0.25rem 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.tk-card-title {
+  margin: 0 0 0.6rem;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-stretch: condensed;
+  font-weight: 800;
+  font-size: 1.3rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.tk-card-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--sed);
+}
+
+/* ---------- DŮVĚRA / TMAVÁ SEKCE ---------- */
+
+.tk-section-dark {
+  background: var(--asfalt-2);
+  color: var(--reflex);
+}
+
+.tk-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 2rem 2.5rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.tk-fact {
+  border-top: 4px solid var(--adr);
+  padding-top: 1.1rem;
+}
+
+.tk-fact-num {
+  display: block;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-stretch: condensed;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  line-height: 1;
+  color: var(--reflex);
+}
+
+.tk-fact-unit {
+  display: block;
+  margin-top: 0.35rem;
+  font-family: "Consolas", "SFMono-Regular", "Courier New", monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--adr);
+}
+
+.tk-fact-text {
+  margin: 0.8rem 0 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* citace */
+
+.tk-quote {
+  margin: 0;
+  max-width: 52rem;
+  border-left: 4px solid var(--adr);
+  padding-left: clamp(1.2rem, 3vw, 2rem);
+}
+
+.tk-quote blockquote {
+  margin: 0;
+}
+
+.tk-quote blockquote p {
+  margin: 0;
+  font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.tk-quote figcaption {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.tk-quote figcaption strong {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1rem;
+}
+
+.tk-quote figcaption span {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.tk-owner {
+  margin: clamp(2rem, 5vw, 3rem) 0 0;
+  max-width: 40rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.tk-owner strong {
+  color: var(--reflex);
+}
+
+/* ---------- MOBIL ---------- */
+
+@media (max-width: 640px) {
+  .tk-topbar {
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-start;
+  }
+
+  .tk-road {
+    height: 6.5rem;
+  }
+
+  .tk-adr {
+    width: 6.4rem;
+  }
+
+  .tk-adr-top,
+  .tk-adr-bottom {
+    font-size: 1.3rem;
+    padding: 0.35rem 0;
+  }
+
+  .tk-hero-actions .tk-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ---------- REDUKOVANÝ POHYB ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .tk-line,
+  .tk-hero-sub,
+  .tk-hero-actions {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .tk-road-stripes {
+    animation: none;
+  }
+
+  .tk-btn,
+  .tk-card {
+    transition: none;
+  }
+}
