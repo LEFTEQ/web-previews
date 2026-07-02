@@ -1,0 +1,580 @@
+/* ============================================================
+   SKALIMAR — klenotnictví, České Budějovice
+   Palette:
+     --sk-ink     #1C2430  (temná ocel — zlatnické nástroje)
+     --sk-paper   #FBFAF7  (leštěná kost / sametová podložka)
+     --sk-gold    #B08D3E  (zlato 585, tlumené, ne křiklavé)
+     --sk-gold-2  #D9BE7F  (světlý odlesk zlata)
+     --sk-slate   #45505E  (šedý grafit — text)
+     --sk-velvet  #10161F  (noční samet vitríny)
+   Type: Cormorant Garamond (display) + Sora (body)
+   Signature: brusný diagram kamene — čárová konstrukce faset
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Sora:wght@300;400;600&display=swap");
+
+:root {
+  --sk-ink: #1c2430;
+  --sk-paper: #fbfaf7;
+  --sk-gold: #b08d3e;
+  --sk-gold-2: #d9be7f;
+  --sk-slate: #45505e;
+  --sk-velvet: #10161f;
+  --sk-display: "Cormorant Garamond", "Georgia", serif;
+  --sk-body: "Sora", "Segoe UI", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--sk-paper);
+  color: var(--sk-ink);
+  font-family: var(--sk-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sk-page a:focus-visible,
+.sk-page button:focus-visible {
+  outline: 3px solid var(--sk-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- HERO ---------- */
+
+.sk-hero {
+  position: relative;
+  background:
+    radial-gradient(
+      120% 90% at 85% 15%,
+      rgba(176, 141, 62, 0.1) 0%,
+      rgba(176, 141, 62, 0) 55%
+    ),
+    var(--sk-paper);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.sk-hero-top {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(28, 36, 48, 0.12);
+}
+
+.sk-wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.sk-wordmark-name {
+  font-family: var(--sk-display);
+  font-weight: 600;
+  font-size: 1.55rem;
+  letter-spacing: 0.34em;
+  line-height: 1;
+}
+
+.sk-wordmark-name::first-letter {
+  color: var(--sk-gold);
+}
+
+.sk-wordmark-sub {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sk-slate);
+}
+
+.sk-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.sk-nav a {
+  color: var(--sk-ink);
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 0.2rem;
+  transition: border-color 0.25s ease;
+}
+
+.sk-nav a:hover {
+  border-bottom-color: var(--sk-gold);
+}
+
+.sk-hero-body {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 2.5rem 0 3rem;
+  align-items: center;
+}
+
+/* Signature — brusný diagram */
+.sk-facet {
+  width: min(60vw, 260px);
+  margin: 0 auto;
+  display: block;
+  order: -1;
+}
+
+.sk-facet-lines polygon,
+.sk-facet-lines line {
+  fill: none;
+  stroke: var(--sk-gold);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: sk-draw 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.sk-facet-lines line:nth-child(odd) {
+  animation-delay: 0.5s;
+  stroke: var(--sk-gold-2);
+}
+
+.sk-facet-lines line:nth-child(even) {
+  animation-delay: 0.9s;
+}
+
+.sk-facet-culet {
+  fill: var(--sk-gold);
+  opacity: 0;
+  animation: sk-spark 1s ease 2.4s forwards;
+}
+
+@keyframes sk-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes sk-spark {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+    transform-origin: 200px 370px;
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.6);
+    transform-origin: 200px 370px;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    transform-origin: 200px 370px;
+  }
+}
+
+.sk-hero-text {
+  text-align: left;
+}
+
+.sk-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sk-gold);
+  margin: 0 0 0.75rem;
+  font-weight: 600;
+}
+
+.sk-eyebrow-light {
+  color: var(--sk-gold-2);
+}
+
+.sk-h1 {
+  font-family: var(--sk-display);
+  font-weight: 500;
+  font-size: clamp(2.5rem, 7.5vw, 4.6rem);
+  line-height: 1.05;
+  margin: 0 0 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.sk-h1-line {
+  display: block;
+  animation: sk-rise 0.8s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+.sk-h1-em {
+  font-style: italic;
+  color: var(--sk-gold);
+  animation-delay: 0.18s;
+}
+
+@keyframes sk-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sk-lead {
+  max-width: 34rem;
+  color: var(--sk-slate);
+  font-size: 1.05rem;
+  font-weight: 300;
+  margin: 0 0 1.75rem;
+  animation: sk-rise 0.8s cubic-bezier(0.2, 0.7, 0.3, 1) 0.32s both;
+}
+
+.sk-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  animation: sk-rise 0.8s cubic-bezier(0.2, 0.7, 0.3, 1) 0.45s both;
+}
+
+.sk-btn {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.85rem 1.6rem;
+  border-radius: 2px;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.sk-btn:hover {
+  transform: translateY(-2px);
+}
+
+.sk-btn-solid {
+  background: var(--sk-ink);
+  color: var(--sk-paper);
+}
+
+.sk-btn-solid:hover {
+  background: var(--sk-gold);
+  color: var(--sk-velvet);
+}
+
+.sk-btn-line {
+  color: var(--sk-ink);
+  border: 1px solid rgba(28, 36, 48, 0.35);
+  background: transparent;
+}
+
+.sk-btn-line:hover {
+  border-color: var(--sk-gold);
+  color: var(--sk-gold);
+}
+
+.sk-hero-strip {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem 1rem;
+  padding: 1rem 0 1.4rem;
+  border-top: 1px solid rgba(28, 36, 48, 0.12);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sk-slate);
+}
+
+.sk-strip-dot {
+  color: var(--sk-gold);
+  font-size: 0.6rem;
+  align-self: center;
+}
+
+/* ---------- SEKCE OBECNĚ ---------- */
+
+.sk-section {
+  padding: 4.5rem 1.25rem;
+}
+
+.sk-section-head {
+  max-width: 72rem;
+  margin: 0 auto 3rem;
+}
+
+.sk-h2 {
+  font-family: var(--sk-display);
+  font-weight: 500;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  line-height: 1.1;
+  margin: 0 0 1rem;
+}
+
+.sk-section-lead {
+  max-width: 38rem;
+  color: var(--sk-slate);
+  font-weight: 300;
+  margin: 0;
+}
+
+/* ---------- KARTY SLUŽEB ---------- */
+
+.sk-cards {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.sk-card {
+  background: #fff;
+  border: 1px solid rgba(28, 36, 48, 0.1);
+  border-top: 3px solid var(--sk-gold-2);
+  border-radius: 3px;
+  padding: 1.75rem 1.5rem;
+  transition: border-top-color 0.25s ease, box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.sk-card:hover {
+  border-top-color: var(--sk-gold);
+  box-shadow: 0 14px 30px -18px rgba(28, 36, 48, 0.35);
+  transform: translateY(-3px);
+}
+
+.sk-card-mark {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+}
+
+.sk-card-mark svg {
+  width: 100%;
+  height: 100%;
+  stroke: var(--sk-gold);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sk-card h3 {
+  font-family: var(--sk-display);
+  font-weight: 600;
+  font-size: 1.35rem;
+  margin: 0 0 0.6rem;
+  line-height: 1.2;
+}
+
+.sk-card p {
+  color: var(--sk-slate);
+  font-size: 0.95rem;
+  font-weight: 300;
+  margin: 0 0 1rem;
+}
+
+.sk-card-note {
+  font-size: 0.75rem !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sk-gold) !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+}
+
+/* ---------- TMAVÁ SEKCE (DÍLNA) ---------- */
+
+.sk-section-dark {
+  background:
+    radial-gradient(
+      100% 80% at 10% 0%,
+      rgba(176, 141, 62, 0.14) 0%,
+      rgba(176, 141, 62, 0) 50%
+    ),
+    var(--sk-velvet);
+  color: var(--sk-paper);
+}
+
+.sk-dark-grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.sk-section-dark .sk-h2 {
+  color: var(--sk-paper);
+}
+
+.sk-dark-lead {
+  color: rgba(251, 250, 247, 0.75);
+  font-weight: 300;
+  margin: 0 0 1.75rem;
+  max-width: 34rem;
+}
+
+.sk-proof {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.sk-proof li {
+  position: relative;
+  padding-left: 1.6rem;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: rgba(251, 250, 247, 0.75);
+}
+
+.sk-proof li::before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  color: var(--sk-gold);
+  font-size: 0.7rem;
+}
+
+.sk-proof strong {
+  display: block;
+  color: var(--sk-paper);
+  font-weight: 600;
+  font-size: 0.98rem;
+  margin-bottom: 0.15rem;
+}
+
+.sk-quotes {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
+
+.sk-quote {
+  margin: 0;
+  border-left: 2px solid var(--sk-gold);
+  padding: 0.35rem 0 0.35rem 1.25rem;
+}
+
+.sk-quote blockquote {
+  margin: 0 0 0.6rem;
+  font-family: var(--sk-display);
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: rgba(251, 250, 247, 0.92);
+}
+
+.sk-quote figcaption {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sk-gold-2);
+}
+
+/* ---------- RESPONZIVITA ---------- */
+
+@media (min-width: 700px) {
+  .sk-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .sk-hero {
+    padding: 2rem 3rem 0;
+  }
+
+  .sk-hero-body {
+    grid-template-columns: 1.2fr 0.8fr;
+    padding: 4rem 0 4.5rem;
+  }
+
+  .sk-facet {
+    order: 2;
+    width: min(32vw, 360px);
+    margin: 0;
+    justify-self: end;
+  }
+
+  .sk-section {
+    padding: 6rem 3rem;
+  }
+
+  .sk-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .sk-dark-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sk-hero-top {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .sk-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .sk-facet-lines polygon,
+  .sk-facet-lines line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .sk-facet-culet {
+    animation: none;
+    opacity: 1;
+  }
+
+  .sk-h1-line,
+  .sk-lead,
+  .sk-hero-actions {
+    animation: none;
+  }
+
+  .sk-btn,
+  .sk-card {
+    transition: none;
+  }
+
+  .sk-btn:hover,
+  .sk-card:hover {
+    transform: none;
+  }
+}
