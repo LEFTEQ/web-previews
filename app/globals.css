@@ -1,0 +1,601 @@
+/* ============================================================
+   Tiles4you — velkoformátová keramika, Olomouc
+   Palette: kaolinová bílá / grafitová spára / terracotta cotto
+            / travertinová šedobéžová / smaltová modř (chip)
+   Type:    display — systémová condensed sazba (Arial Narrow /
+            Helvetica Condensed stack) = úzké, deskové, jako
+            popisky formátů na paletách; body — Georgia-less,
+            čistý grotesk.
+   Signature: nepravidelná spárová mřížka v hero — kladečský
+              plán velkoformátů vykreslený čistě CSS plochami.
+   ============================================================ */
+
+:root {
+  --kaolin: #f7f6f2;
+  --porcelan: #ffffff;
+  --grafit: #23211e;
+  --spara: #55504a;
+  --cotto: #b3502e;
+  --cotto-tmava: #8f3d20;
+  --travertin: #d8d2c6;
+  --smalt: #1e4d5c;
+
+  --font-display: "Archivo Narrow", "Arial Narrow", "Helvetica Neue Condensed",
+    "Roboto Condensed", Impact, sans-serif-condensed, Arial, sans-serif;
+  --font-body: "Helvetica Neue", Helvetica, Arial, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--kaolin);
+  color: var(--grafit);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.t4y a {
+  color: inherit;
+}
+
+.t4y :focus-visible {
+  outline: 3px solid var(--cotto);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--kaolin);
+  min-height: 92vh;
+  display: flex;
+  align-items: stretch;
+}
+
+/* --- signature: spárová mřížka / kladečský plán --- */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* jemné spáry přes celou plochu */
+  background-image: linear-gradient(var(--travertin) 1px, transparent 1px),
+    linear-gradient(90deg, var(--travertin) 1px, transparent 1px);
+  background-size: 100% 25%, 25% 100%;
+}
+
+.hero-grid .tile {
+  position: absolute;
+  display: block;
+  animation: tile-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* velkoformáty — barevné plochy jako desky opřené ve vzorkovně */
+.tile-a {
+  right: -6%;
+  top: 0;
+  width: 30%;
+  height: 58%;
+  background: linear-gradient(160deg, var(--cotto) 0%, var(--cotto-tmava) 100%);
+  animation-delay: 0.15s;
+}
+
+.tile-b {
+  right: 26%;
+  top: 0;
+  width: 13%;
+  height: 34%;
+  background: var(--travertin);
+  animation-delay: 0.3s;
+}
+
+.tile-c {
+  right: -6%;
+  top: 60%;
+  width: 19%;
+  height: 45%;
+  background: var(--grafit);
+  animation-delay: 0.45s;
+}
+
+.tile-d {
+  right: 15%;
+  top: 60%;
+  width: 8%;
+  height: 26%;
+  background: var(--smalt);
+  animation-delay: 0.6s;
+}
+
+.tile-e {
+  left: -4%;
+  bottom: -8%;
+  width: 14%;
+  height: 30%;
+  background: var(--travertin);
+  animation-delay: 0.7s;
+}
+
+@keyframes tile-in {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 24px 56px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-bottom: clamp(48px, 10vh, 110px);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+}
+
+.wordmark em {
+  font-style: normal;
+  color: var(--cotto);
+  padding: 0 1px;
+}
+
+.hero-meta {
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--spara);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(46px, 9vw, 118px);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0 0 28px;
+  max-width: 12ch;
+}
+
+.hero-title .line {
+  display: block;
+  animation: line-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.line-1 { animation-delay: 0.2s; }
+.line-2 { animation-delay: 0.35s; color: var(--cotto); }
+.line-3 { animation-delay: 0.5s; }
+
+@keyframes line-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.format-chip {
+  display: inline-block;
+  background: var(--grafit);
+  color: var(--kaolin);
+  padding: 0.02em 0.22em 0.06em;
+  letter-spacing: 0.01em;
+}
+
+.hero-lead {
+  max-width: 46ch;
+  font-size: clamp(17px, 2vw, 20px);
+  color: var(--spara);
+  margin: 0 0 36px;
+  animation: line-in 0.8s 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 48px;
+  animation: line-in 0.8s 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.btn {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 15px 26px;
+  border: 2px solid var(--grafit);
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-solid {
+  background: var(--grafit);
+  color: var(--kaolin);
+}
+
+.btn-solid:hover {
+  background: var(--cotto);
+  border-color: var(--cotto);
+}
+
+.btn-line {
+  background: transparent;
+  color: var(--grafit);
+}
+
+.btn-line:hover {
+  background: var(--grafit);
+  color: var(--kaolin);
+}
+
+.hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 44px;
+  margin: auto 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--travertin);
+  animation: line-in 0.8s 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-facts dt {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--spara);
+  margin: 0 0 2px;
+}
+
+.hero-facts dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* ================= SEKCE — společné ================= */
+
+.sec-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(64px, 10vw, 120px) 24px;
+}
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--cotto);
+  margin: 0 0 14px;
+}
+
+.sec h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(32px, 5vw, 58px);
+  line-height: 1.04;
+  margin: 0 0 20px;
+  letter-spacing: -0.005em;
+}
+
+.sec-lead {
+  max-width: 52ch;
+  color: var(--spara);
+  margin: 0 0 48px;
+}
+
+/* ================= MATERIÁLY ================= */
+
+.sec-materialy {
+  background: var(--porcelan);
+  border-top: 1px solid var(--travertin);
+}
+
+.mat-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mat-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 140px;
+  gap: 20px;
+  align-items: baseline;
+  padding: 26px 0;
+  border-top: 1px solid var(--travertin);
+  transition: background-color 0.2s ease, padding-left 0.2s ease;
+}
+
+.mat-row:last-child {
+  border-bottom: 1px solid var(--travertin);
+}
+
+.mat-row:hover {
+  background: var(--kaolin);
+  padding-left: 12px;
+}
+
+.mat-kat {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--cotto);
+  font-size: 17px;
+}
+
+.mat-body h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.mat-body p {
+  margin: 0;
+  color: var(--spara);
+  max-width: 60ch;
+}
+
+.mat-format {
+  justify-self: end;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--grafit);
+  background: var(--travertin);
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.mat-note {
+  margin: 36px 0 0;
+  padding: 18px 22px;
+  background: var(--kaolin);
+  border-left: 4px solid var(--cotto);
+  max-width: 70ch;
+  color: var(--spara);
+}
+
+.mat-note strong {
+  color: var(--grafit);
+}
+
+/* ================= DŮVĚRA ================= */
+
+.sec-duvera {
+  background: var(--grafit);
+  color: var(--kaolin);
+}
+
+.eyebrow-light {
+  color: #d98a6a;
+}
+
+.sec-duvera h2 {
+  color: var(--kaolin);
+}
+
+.duvody {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--spara);
+  border: 1px solid var(--spara);
+  margin: 44px 0 56px;
+}
+
+.duvod {
+  background: var(--grafit);
+  padding: 30px 26px 34px;
+}
+
+.duvod-cislo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(40px, 4.5vw, 58px);
+  line-height: 1;
+  color: var(--cotto);
+  margin: 0 0 14px;
+  text-transform: uppercase;
+}
+
+.duvod h3 {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0 0 10px;
+  line-height: 1.2;
+}
+
+.duvod p {
+  margin: 0;
+  color: #c9c4bc;
+  font-size: 16px;
+}
+
+.ref-blok {
+  border-top: 1px solid var(--spara);
+  padding-top: 40px;
+}
+
+.ref-titulek {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #d98a6a;
+  margin: 0 0 18px;
+}
+
+.ref-list {
+  list-style: none;
+  margin: 0 0 32px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px 32px;
+}
+
+.ref-list li {
+  border-left: 3px solid var(--cotto);
+  padding-left: 16px;
+}
+
+.ref-list strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.ref-list span {
+  color: #c9c4bc;
+  font-size: 15px;
+}
+
+.ref-osoba {
+  max-width: 62ch;
+  margin: 0;
+  color: #c9c4bc;
+}
+
+.ref-osoba strong {
+  color: var(--kaolin);
+}
+
+.ref-osoba a {
+  color: #d98a6a;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.ref-osoba a:hover {
+  color: var(--kaolin);
+}
+
+/* ================= RESPONZIVITA ================= */
+
+@media (max-width: 900px) {
+  .duvody {
+    grid-template-columns: 1fr;
+  }
+
+  .mat-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .mat-format {
+    justify-self: start;
+  }
+
+  .tile-b,
+  .tile-d,
+  .tile-e {
+    display: none;
+  }
+
+  .tile-a {
+    width: 42%;
+    height: 40%;
+  }
+
+  .tile-c {
+    width: 30%;
+    top: 72%;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    min-height: auto;
+  }
+
+  .hero-top {
+    margin-bottom: 40px;
+  }
+
+  .hero-title {
+    max-width: none;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .ref-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-grid .tile,
+  .hero-title .line,
+  .hero-lead,
+  .hero-actions,
+  .hero-facts {
+    animation: none;
+  }
+
+  .btn,
+  .mat-row {
+    transition: none;
+  }
+}
