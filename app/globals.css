@@ -1,0 +1,518 @@
+/* =====================================================
+   SKLO LEOPOLD — sklenářství Brno
+   Paleta: sklo proti světlu (chladná zeleno-modrá hrana
+   floatu), grafitová dílna, měděný diamant řezáku.
+   ===================================================== */
+
+:root {
+  --ink: #10181c;          /* grafit dílny */
+  --ink-soft: #3d4c53;
+  --glass-edge: #7fd6c2;   /* zelenkavá hrana tabule floatu */
+  --glass-deep: #14545c;   /* hloubka silného skla */
+  --paper: #f2f7f6;        /* světlo přes matované sklo */
+  --copper: #c96f3b;       /* měděná hlava řezáku */
+  --line: rgba(20, 84, 92, 0.18);
+
+  --font-display: "Archivo Black", "Arial Black", "Franklin Gothic Medium", sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-mono: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.gl a:focus-visible,
+.gl button:focus-visible {
+  outline: 3px solid var(--copper);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =================== HERO =================== */
+
+.hero {
+  position: relative;
+  min-height: 92svh;
+  display: flex;
+  align-items: flex-end;
+  color: #f4fbf9;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(12deg, rgba(11, 22, 26, 0.92) 22%, rgba(11, 22, 26, 0.45) 55%, rgba(20, 84, 92, 0.25) 100%);
+}
+
+.hero-inner {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: clamp(5rem, 10vh, 8rem) clamp(1.25rem, 5vw, 3rem) clamp(3.5rem, 8vh, 6rem);
+}
+
+/* --- wordmark --- */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(2.5rem, 8vh, 5rem);
+}
+
+.brand-mark {
+  color: var(--glass-edge);
+  display: inline-flex;
+}
+
+.brand-word {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.14em;
+}
+
+.brand-word em {
+  font-style: normal;
+  color: var(--glass-edge);
+}
+
+.brand-loc {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(244, 251, 249, 0.75);
+  border-left: 1px solid rgba(127, 214, 194, 0.5);
+  padding-left: 0.7rem;
+}
+
+/* --- titulek: řádky se "vysouvají" jako tabule z regálu --- */
+
+.hero-title {
+  font-size: clamp(2.6rem, 8.5vw, 6rem);
+  text-transform: uppercase;
+  max-width: 14ch;
+}
+
+.hero-title .line {
+  display: block;
+  opacity: 0;
+  transform: translateX(-24px);
+  animation: slide-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.hero-title .line-1 { animation-delay: 0.1s; }
+.hero-title .line-2 { animation-delay: 0.25s; color: var(--glass-edge); }
+.hero-title .line-3 { animation-delay: 0.4s; }
+
+.cut-dot {
+  color: var(--copper);
+}
+
+@keyframes slide-in {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-lead {
+  max-width: 52ch;
+  margin: 1.5rem 0 2rem;
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  color: rgba(244, 251, 249, 0.9);
+}
+
+/* --- CTA --- */
+
+.hero-cta {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.95rem 1.6rem;
+  display: inline-block;
+  border-radius: 3px;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-solid {
+  background: var(--copper);
+  color: #fff;
+}
+
+.btn-solid:hover {
+  background: #a95526;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--glass-edge);
+  border: 1px solid rgba(127, 214, 194, 0.6);
+  background: rgba(20, 84, 92, 0.2);
+}
+
+.btn-ghost:hover {
+  background: rgba(127, 214, 194, 0.15);
+  transform: translateY(-2px);
+}
+
+/* --- fakta --- */
+
+.hero-facts {
+  display: flex;
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+  flex-wrap: wrap;
+  margin: 2.8rem 0 0;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(127, 214, 194, 0.35);
+}
+
+.hero-facts dt {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(244, 251, 249, 0.65);
+}
+
+.hero-facts dd {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--glass-edge);
+}
+
+/* --- SIGNATURE: šikmá linie řezu na hraně hero ---
+   Spodní hrana hero je "říznutá" diamantem: tenká měděná
+   rýha s odleskem, sekce pod ní na ni navazuje šikmým klipem. */
+
+.cut-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(3rem, 6vw, 5rem);
+  background: var(--paper);
+  clip-path: polygon(0 78%, 100% 12%, 100% 100%, 0 100%);
+}
+
+.cut-line::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 76%, 100% 10%, 100% 14%, 0 80%);
+  background: linear-gradient(90deg, var(--copper), var(--glass-edge) 65%, #fff);
+}
+
+/* =================== SLUŽBY =================== */
+
+.sluzby {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: clamp(3.5rem, 9vh, 6.5rem) clamp(1.25rem, 5vw, 3rem);
+}
+
+.section-head {
+  max-width: 46rem;
+  margin-bottom: clamp(2rem, 5vh, 3.5rem);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--glass-deep);
+  margin: 0 0 0.8rem;
+}
+
+.section-head h2,
+.dilna-text h2 {
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  text-transform: uppercase;
+}
+
+.section-lead {
+  color: var(--ink-soft);
+  margin: 1rem 0 0;
+}
+
+/* karty jako štítky na tabulích skla */
+
+.karty {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 1.2rem;
+}
+
+.karta {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--glass-edge);
+  border-radius: 4px;
+  padding: 1.5rem 1.4rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px -18px rgba(20, 84, 92, 0.45);
+}
+
+.karta-kod {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--glass-deep);
+  background: rgba(127, 214, 194, 0.16);
+  align-self: flex-start;
+  padding: 0.25rem 0.55rem;
+  border-radius: 2px;
+}
+
+.karta h3 {
+  font-size: 1.15rem;
+}
+
+.karta p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  flex-grow: 1;
+}
+
+.karta-detail {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--copper);
+  letter-spacing: 0.06em;
+  border-top: 1px dashed var(--line);
+  padding-top: 0.7rem;
+}
+
+/* =================== DÍLNA =================== */
+
+.dilna {
+  background: var(--ink);
+  color: #eef6f4;
+  padding: clamp(3.5rem, 9vh, 6.5rem) clamp(1.25rem, 5vw, 3rem);
+}
+
+.dilna-grid {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+@media (min-width: 880px) {
+  .dilna-grid {
+    grid-template-columns: 5fr 6fr;
+  }
+  .dilna-media {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+.dilna-media {
+  margin: 0;
+}
+
+.dilna-img {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid rgba(127, 214, 194, 0.3);
+}
+
+.dilna-media figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: rgba(238, 246, 244, 0.6);
+  margin-top: 0.7rem;
+}
+
+.dilna-text .eyebrow {
+  color: var(--glass-edge);
+}
+
+.dilna-lead {
+  color: rgba(238, 246, 244, 0.85);
+  margin: 1.2rem 0 2rem;
+}
+
+/* kroky — skutečná sekvence zakázky, proto číslování */
+
+.kroky {
+  list-style: none;
+  margin: 0 0 2.5rem;
+  padding: 0;
+  display: grid;
+  gap: 1.4rem;
+}
+
+.kroky li {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid rgba(127, 214, 194, 0.2);
+}
+
+.kroky li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.krok-cislo {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--glass-edge);
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transform: rotate(45deg);
+}
+
+.krok-cislo,
+.kroky h3 {
+  margin-top: 0.15rem;
+}
+
+.krok-cislo::first-line {
+  transform: rotate(-45deg);
+}
+
+.kroky h3 {
+  font-size: 1.05rem;
+  margin: 0 0 0.35rem;
+}
+
+.kroky p {
+  margin: 0;
+  color: rgba(238, 246, 244, 0.78);
+  font-size: 0.97rem;
+}
+
+/* reference */
+
+.reference {
+  margin: 0;
+  padding: 1.4rem 1.5rem;
+  background: rgba(20, 84, 92, 0.35);
+  border-left: 4px solid var(--copper);
+  border-radius: 0 4px 4px 0;
+}
+
+.reference p {
+  margin: 0 0 0.6rem;
+  font-size: 1.05rem;
+  font-style: italic;
+}
+
+.reference cite {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--glass-edge);
+}
+
+/* =================== MOBIL =================== */
+
+@media (max-width: 560px) {
+  .hero-inner {
+    padding-top: 3.5rem;
+  }
+  .hero-facts {
+    gap: 1.2rem 2rem;
+  }
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* =================== REDUCED MOTION =================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-title .line {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .karta,
+  .btn {
+    transition: none;
+  }
+  .karta:hover,
+  .btn:hover {
+    transform: none;
+  }
+}
