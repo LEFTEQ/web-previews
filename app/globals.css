@@ -1,0 +1,582 @@
+/* =====================================================================
+   BISTRODENT — zubní ordinace, Olomouc
+   Palette: „mátový porcelán" — odvozeno z reality zubní ordinace:
+     --sklovina  #F6FBF9  (porcelánově bílá s nádechem máty — barva skloviny)
+     --mata      #DCF2EA  (mátová ústní voda / rukavice)
+     --hlubina   #0E3B43  (tmavý petrolej — plášť ordinace, důvěra)
+     --nerez     #3E7C74  (nerezové nástroje v zeleném odstínu)
+     --korall    #F26B5E  (dáseň / korálová — teplý lidský akcent)
+   Type: Fraunces (display, měkké serify — rodinná vřelost)
+         + system sans pro tělo (rychlost, klinická čistota).
+   Signature: okluzní linka — profil zubních korunek jedním tahem SVG,
+   který se při načtení „vykreslí" jako zubní záznam.
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap");
+
+:root {
+  --sklovina: #f6fbf9;
+  --mata: #dcf2ea;
+  --hlubina: #0e3b43;
+  --nerez: #3e7c74;
+  --korall: #f26b5e;
+  --inkoust: #16333a;
+
+  --pismo-display: "Fraunces", "Georgia", serif;
+  --pismo-telo: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--pismo-telo);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--inkoust);
+  background: var(--sklovina);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus — viditelný, korálový, všude */
+.bd a:focus-visible,
+.bd button:focus-visible {
+  outline: 3px solid var(--korall);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============================= HERO ============================= */
+
+.bd-hero {
+  background: linear-gradient(180deg, var(--mata) 0%, var(--sklovina) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.bd-hero-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 0;
+}
+
+.bd-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 2.5rem;
+}
+
+.bd-wordmark {
+  font-family: var(--pismo-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  color: var(--hlubina);
+}
+
+.bd-wordmark em {
+  font-style: normal;
+  color: var(--nerez);
+}
+
+.bd-topbar-tel {
+  font-weight: 600;
+  color: var(--hlubina);
+  text-decoration: none;
+  border-bottom: 2px solid var(--korall);
+  padding-bottom: 1px;
+  font-variant-numeric: tabular-nums;
+}
+
+.bd-topbar-tel:hover {
+  color: var(--korall);
+}
+
+.bd-hero-main {
+  max-width: 40rem;
+  padding: 1rem 0 0.5rem;
+}
+
+.bd-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--nerez);
+}
+
+.bd-hero-title {
+  margin: 0 0 1.25rem;
+  font-family: var(--pismo-display);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 8.5vw, 4.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: var(--hlubina);
+}
+
+.bd-hero-title .bd-line {
+  display: block;
+}
+
+.bd-line-2 {
+  color: var(--nerez);
+}
+
+.bd-tecka {
+  color: var(--korall);
+}
+
+.bd-hero-sub {
+  margin: 0 0 1.75rem;
+  font-size: 1.1rem;
+  max-width: 34rem;
+  color: var(--inkoust);
+}
+
+.bd-hero-akce {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-bottom: 1rem;
+}
+
+.bd-btn {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.bd-btn-plna {
+  background: var(--hlubina);
+  color: var(--sklovina);
+  box-shadow: 0 4px 14px rgba(14, 59, 67, 0.25);
+}
+
+.bd-btn-plna:hover {
+  background: var(--korall);
+  transform: translateY(-2px);
+}
+
+.bd-btn-obrys {
+  border: 2px solid var(--hlubina);
+  color: var(--hlubina);
+}
+
+.bd-btn-obrys:hover {
+  border-color: var(--korall);
+  color: var(--korall);
+  transform: translateY(-2px);
+}
+
+/* ---- Signature: okluzní linka ---- */
+
+.bd-okluze {
+  margin: 1.5rem -1.25rem 0;
+}
+
+.bd-okluze svg {
+  display: block;
+  width: 100%;
+  height: clamp(70px, 12vw, 140px);
+}
+
+.bd-okluze-path {
+  stroke: var(--hlubina);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-dasharray: 2600;
+  stroke-dashoffset: 2600;
+  animation: bd-kresli 2.2s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+}
+
+@keyframes bd-kresli {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---- fakta pod linkou ---- */
+
+.bd-hero-fakta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1.5rem 0 2.5rem;
+  border-top: 1px solid rgba(14, 59, 67, 0.12);
+}
+
+.bd-fakt {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.bd-fakt-cislo {
+  font-family: var(--pismo-display);
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: var(--korall);
+  line-height: 1.1;
+}
+
+.bd-fakt-text {
+  font-size: 0.9rem;
+  color: var(--inkoust);
+}
+
+/* Page-load sekvence — jemné vyplavání hero obsahu */
+
+.bd-eyebrow,
+.bd-hero-title .bd-line,
+.bd-hero-sub,
+.bd-hero-akce,
+.bd-hero-fakta {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: bd-vyplav 0.7s ease forwards;
+}
+
+.bd-eyebrow { animation-delay: 0.05s; }
+.bd-line-1 { animation-delay: 0.15s; }
+.bd-line-2 { animation-delay: 0.28s; }
+.bd-hero-sub { animation-delay: 0.45s; }
+.bd-hero-akce { animation-delay: 0.6s; }
+.bd-hero-fakta { animation-delay: 0.9s; }
+
+@keyframes bd-vyplav {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================= SEKCE ============================= */
+
+.bd-sekce-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+}
+
+.bd-sekce-hlava {
+  max-width: 38rem;
+  margin-bottom: 2.5rem;
+}
+
+.bd-sekce-titul {
+  margin: 0 0 0.75rem;
+  font-family: var(--pismo-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 5vw, 2.75rem);
+  line-height: 1.1;
+  color: var(--hlubina);
+}
+
+.bd-sekce-perex {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--inkoust);
+}
+
+/* ---- Služby ---- */
+
+.bd-sluzby {
+  background: var(--sklovina);
+}
+
+.bd-sluzby-mrizka {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.bd-sluzba {
+  background: #ffffff;
+  border: 1px solid rgba(14, 59, 67, 0.1);
+  border-radius: 18px;
+  padding: 1.6rem 1.5rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.bd-sluzba:hover {
+  transform: translateY(-4px);
+  border-color: var(--nerez);
+  box-shadow: 0 12px 28px rgba(14, 59, 67, 0.1);
+}
+
+.bd-sluzba-zub {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 0.9rem;
+}
+
+.bd-sluzba-zub svg {
+  width: 100%;
+  height: 100%;
+}
+
+.bd-sluzba-zub path {
+  stroke: var(--nerez);
+  stroke-width: 2;
+}
+
+.bd-sluzba:hover .bd-sluzba-zub path {
+  stroke: var(--korall);
+}
+
+.bd-sluzba-nazev {
+  margin: 0 0 0.5rem;
+  font-family: var(--pismo-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--hlubina);
+}
+
+.bd-sluzba-text {
+  margin: 0;
+  font-size: 0.97rem;
+  color: var(--inkoust);
+}
+
+/* ---- Tým + praktické ---- */
+
+.bd-tym {
+  background: var(--hlubina);
+}
+
+.bd-titul-svetly {
+  color: var(--sklovina);
+}
+
+.bd-perex-svetly {
+  color: rgba(246, 251, 249, 0.75);
+}
+
+.bd-tym-mrizka {
+  list-style: none;
+  margin: 0 0 3rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.bd-lekar {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+  background: rgba(246, 251, 249, 0.06);
+  border: 1px solid rgba(246, 251, 249, 0.12);
+  border-radius: 18px;
+  padding: 1.4rem;
+}
+
+.bd-lekar-monogram {
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--mata);
+  color: var(--hlubina);
+  font-family: var(--pismo-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.bd-lekar-jmeno {
+  margin: 0;
+  font-family: var(--pismo-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--sklovina);
+}
+
+.bd-lekar-role {
+  margin: 0.1rem 0 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--korall);
+}
+
+.bd-lekar-popis {
+  margin: 0 0 0.6rem;
+  font-size: 0.95rem;
+  color: rgba(246, 251, 249, 0.8);
+}
+
+.bd-lekar-mail {
+  font-size: 0.9rem;
+  color: var(--mata);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(220, 242, 234, 0.4);
+  word-break: break-all;
+}
+
+.bd-lekar-mail:hover {
+  color: var(--korall);
+  border-bottom-color: var(--korall);
+}
+
+/* ---- praktické bloky ---- */
+
+.bd-prakticke {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+  border-top: 1px solid rgba(246, 251, 249, 0.15);
+  padding-top: 2.5rem;
+}
+
+.bd-prakticke-titul {
+  margin: 0 0 1rem;
+  font-family: var(--pismo-display);
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--sklovina);
+}
+
+.bd-doba {
+  width: 100%;
+  max-width: 22rem;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.bd-doba th,
+.bd-doba td {
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(246, 251, 249, 0.12);
+  font-size: 0.97rem;
+}
+
+.bd-doba th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--sklovina);
+}
+
+.bd-doba td {
+  text-align: right;
+  color: var(--mata);
+}
+
+.bd-prakticke-pozn {
+  margin: 0.9rem 0 0;
+  font-size: 0.88rem;
+  color: rgba(246, 251, 249, 0.6);
+  max-width: 24rem;
+}
+
+.bd-prakticke-text {
+  margin: 0 0 0.9rem;
+  font-size: 0.97rem;
+  color: rgba(246, 251, 249, 0.85);
+  max-width: 28rem;
+}
+
+.bd-prakticke-text strong {
+  color: var(--sklovina);
+}
+
+.bd-prakticke-text a {
+  color: var(--mata);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(220, 242, 234, 0.4);
+  white-space: nowrap;
+}
+
+.bd-prakticke-text a:hover {
+  color: var(--korall);
+  border-bottom-color: var(--korall);
+}
+
+/* ============================= MOBIL ============================= */
+
+@media (max-width: 640px) {
+  .bd-hero-fakta {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  .bd-fakt {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+
+  .bd-fakt-cislo {
+    font-size: 1.3rem;
+    min-width: 3.2rem;
+  }
+
+  .bd-sekce-inner {
+    padding: 3rem 1.25rem;
+  }
+
+  .bd-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .bd-lekar {
+    flex-direction: column;
+  }
+}
+
+/* ====================== REDUCED MOTION ====================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .bd-okluze-path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .bd-eyebrow,
+  .bd-hero-title .bd-line,
+  .bd-hero-sub,
+  .bd-hero-akce,
+  .bd-hero-fakta {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .bd-btn,
+  .bd-sluzba {
+    transition: none;
+  }
+
+  .bd-btn:hover,
+  .bd-sluzba:hover {
+    transform: none;
+  }
+}
