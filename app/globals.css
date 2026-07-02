@@ -1,0 +1,538 @@
+/* =========================================================
+   Parket&pandomo — Praha
+   Palette: hluboký ořech / dubová jantarová / stěrková šeď /
+            kostní bílá / mosaz
+   Type: "Marcellus"-like serif via system stack fallback →
+         use Georgia-family display + system sans body
+   Signature: „parketový" chevron rytmus — nadpisy a karty
+   nesené diagonálním vzorem rybí kosti (herringbone)
+   ========================================================= */
+
+:root {
+  --orech: #2b201a;        /* hluboký ořech — základ */
+  --orech-2: #3a2c23;      /* světlejší ořech pro plochy */
+  --jantar: #c98e4a;       /* dubová jantarová — dřevo */
+  --sterka: #b7b3ab;       /* stěrková šeď — panDOMO */
+  --kost: #f1ece3;         /* kostní bílá — text na tmavé */
+  --mosaz: #a3762f;        /* mosaz — detaily, linky */
+  --font-display: "Marcellus", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --font-body: "Avenir Next", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--kost);
+  color: var(--orech);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+.pp a { color: inherit; }
+
+.pp a:focus-visible,
+.pp .pp-btn:focus-visible {
+  outline: 3px solid var(--jantar);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.pp-hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  color: var(--kost);
+  overflow: hidden;
+  background: var(--orech);
+}
+
+.pp-hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.pp-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pp-hero-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(12deg, rgba(43, 32, 26, 0.94) 30%, rgba(43, 32, 26, 0.55) 62%, rgba(43, 32, 26, 0.25) 100%);
+}
+
+.pp-hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px 20px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- topbar / wordmark --- */
+
+.pp-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(241, 236, 227, 0.22);
+}
+
+.pp-wordmark {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.18em;
+}
+
+.pp-wm-parket {
+  color: var(--kost);
+}
+
+.pp-wm-amp {
+  color: var(--jantar);
+  font-style: italic;
+  font-size: 1.15em;
+  transform: translateY(1px);
+}
+
+.pp-wm-pandomo {
+  color: var(--sterka);
+  letter-spacing: 0.14em;
+  text-transform: lowercase;
+}
+
+.pp-topbar-tel {
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  color: var(--kost);
+  border-bottom: 1px solid var(--jantar);
+  padding-bottom: 2px;
+  white-space: nowrap;
+}
+
+.pp-topbar-tel:hover { color: var(--jantar); }
+
+/* --- hero copy --- */
+
+.pp-hero-copy {
+  margin: auto 0;
+  padding: 56px 0 40px;
+  max-width: 640px;
+}
+
+.pp-hero-eyebrow {
+  margin: 0 0 18px;
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--jantar);
+}
+
+.pp-hero-title {
+  margin: 0 0 24px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 7.5vw, 5rem);
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+}
+
+/* Signature: řádky nadpisu „pokládané" jako parkety —
+   střídavý diagonální posun rybí kosti */
+.pp-hero-title .pp-line {
+  display: block;
+  opacity: 0;
+  animation: pp-lay 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.pp-line-1 { animation-delay: 0.1s; --shift: -28px; padding-left: 0; }
+.pp-line-2 { animation-delay: 0.28s; --shift: 28px; padding-left: 0.9em; color: var(--jantar); }
+.pp-line-3 { animation-delay: 0.46s; --shift: -28px; padding-left: 1.8em; }
+
+@keyframes pp-lay {
+  from { opacity: 0; transform: translateX(var(--shift)); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.pp-hero-lead {
+  margin: 0 0 32px;
+  max-width: 33em;
+  font-size: 1.08rem;
+  color: rgba(241, 236, 227, 0.88);
+}
+
+.pp-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.pp-btn {
+  display: inline-block;
+  padding: 14px 26px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.pp-btn-solid {
+  background: var(--jantar);
+  color: var(--orech);
+  border: 1px solid var(--jantar);
+}
+
+.pp-btn-solid:hover {
+  background: var(--kost);
+  border-color: var(--kost);
+}
+
+.pp-btn-ghost {
+  border: 1px solid rgba(241, 236, 227, 0.5);
+  color: var(--kost);
+}
+
+.pp-btn-ghost:hover {
+  border-color: var(--jantar);
+  color: var(--jantar);
+}
+
+/* --- hero strip --- */
+
+.pp-hero-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  padding: 18px 0 26px;
+  border-top: 1px solid rgba(241, 236, 227, 0.22);
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+  color: rgba(241, 236, 227, 0.85);
+}
+
+.pp-strip-dot {
+  color: var(--mosaz);
+  font-size: 0.6rem;
+}
+
+/* ============ SEKCE — společné ============ */
+
+.pp-section {
+  padding: 80px 20px;
+}
+
+.pp-section-head {
+  max-width: 1180px;
+  margin: 0 auto 48px;
+}
+
+.pp-section-title {
+  margin: 0 0 16px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 4.5vw, 2.7rem);
+  line-height: 1.15;
+  position: relative;
+  padding-top: 22px;
+}
+
+/* Signature marker: mini rybí kost místo obyčejné linky */
+.pp-section-title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 64px;
+  height: 10px;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      var(--jantar) 0 5px,
+      transparent 5px 10px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      var(--mosaz) 0 5px,
+      transparent 5px 10px
+    );
+  background-size: 20px 10px;
+}
+
+.pp-section-sub {
+  margin: 0;
+  max-width: 42em;
+  color: rgba(43, 32, 26, 0.78);
+}
+
+/* ============ SEKCE 1 — NABÍDKA ============ */
+
+.pp-offer {
+  background: var(--kost);
+}
+
+.pp-offer-grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.pp-offer-card {
+  padding: 30px 26px 32px;
+  border-radius: 4px;
+  border-top: 6px solid;
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(43, 32, 26, 0.08), 0 10px 30px -18px rgba(43, 32, 26, 0.25);
+}
+
+.pp-offer-wood { border-top-color: var(--jantar); }
+.pp-offer-pandomo { border-top-color: var(--sterka); }
+.pp-offer-truhlarna { border-top-color: var(--mosaz); }
+
+.pp-offer-tag {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mosaz);
+}
+
+.pp-offer-name {
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 1.2;
+}
+
+.pp-offer-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pp-offer-list li {
+  position: relative;
+  padding: 8px 0 8px 24px;
+  border-bottom: 1px solid rgba(43, 32, 26, 0.1);
+  font-size: 0.98rem;
+}
+
+.pp-offer-list li:last-child { border-bottom: 0; }
+
+/* chevron odrážka — jedna lamela rybí kosti */
+.pp-offer-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15px;
+  width: 11px;
+  height: 4px;
+  background: var(--jantar);
+  transform: skewX(-30deg);
+}
+
+.pp-offer-pandomo .pp-offer-list li::before { background: var(--sterka); }
+.pp-offer-truhlarna .pp-offer-list li::before { background: var(--mosaz); }
+
+/* --- figure --- */
+
+.pp-offer-figure {
+  max-width: 1180px;
+  margin: 52px auto 0;
+}
+
+.pp-offer-figure img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.pp-offer-figure figcaption {
+  margin-top: 14px;
+  font-size: 0.9rem;
+  color: rgba(43, 32, 26, 0.65);
+  border-left: 3px solid var(--jantar);
+  padding-left: 14px;
+}
+
+/* ============ SEKCE 2 — SHOWROOM ============ */
+
+.pp-showroom {
+  background: var(--orech);
+  color: var(--kost);
+}
+
+.pp-showroom .pp-section-title {
+  color: var(--kost);
+}
+
+.pp-showroom-grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+.pp-showroom-lead {
+  margin: 0 0 36px;
+  max-width: 36em;
+  font-size: 1.08rem;
+  color: rgba(241, 236, 227, 0.88);
+}
+
+.pp-facts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+}
+
+.pp-fact dt {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--jantar);
+  margin-bottom: 6px;
+}
+
+.pp-fact dd {
+  margin: 0;
+  font-size: 1rem;
+  color: rgba(241, 236, 227, 0.92);
+}
+
+.pp-fact dd a {
+  color: var(--kost);
+  text-decoration-color: var(--jantar);
+  text-underline-offset: 3px;
+}
+
+.pp-fact dd a:hover { color: var(--jantar); }
+
+/* --- aside --- */
+
+.pp-showroom-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.pp-quote {
+  margin: 0;
+  padding: 28px 26px;
+  background: var(--orech-2);
+  border-radius: 4px;
+  border-left: 4px solid var(--jantar);
+}
+
+.pp-quote p {
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--kost);
+}
+
+.pp-quote cite {
+  font-style: normal;
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  color: var(--sterka);
+}
+
+.pp-poradna {
+  padding: 24px 26px;
+  border: 1px solid rgba(241, 236, 227, 0.25);
+  border-radius: 4px;
+}
+
+.pp-poradna h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: var(--jantar);
+}
+
+.pp-poradna p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: rgba(241, 236, 227, 0.85);
+}
+
+.pp-babybox {
+  margin: 0;
+  font-size: 0.88rem;
+  color: rgba(241, 236, 227, 0.6);
+  border-top: 1px solid rgba(241, 236, 227, 0.18);
+  padding-top: 18px;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (min-width: 720px) {
+  .pp-offer-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .pp-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 960px) {
+  .pp-section { padding: 110px 32px; }
+  .pp-hero-inner { padding: 32px 32px 0; }
+  .pp-showroom-grid {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 72px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pp-line-2 { padding-left: 0.4em; }
+  .pp-line-3 { padding-left: 0.8em; }
+  .pp-btn { width: 100%; text-align: center; }
+}
+
+/* ============ MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .pp-hero-title .pp-line {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .pp-btn { transition: none; }
+}
