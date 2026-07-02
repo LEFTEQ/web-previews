@@ -1,0 +1,496 @@
+/* =====================================================
+   ORTOPEDIE LIBEREC — rehabilitace
+   Palette:
+   --ink        #14233C  hluboká klinická modř (text, plochy)
+   --paper      #F6F9FB  chladný klinický bílý podklad
+   --arc        #2E6FE0  rozsahová modrá (signature, akce)
+   --arc-soft   #DCE8FA  světlá modrá plocha
+   --pulse      #E8563F  fyzio-korál (jen drobné akcenty)
+   Type: Archivo (display, wide/black) + Source Serif 4-ish fallback? ne —
+         body: "Instrument Sans"-like system stack; use Google-free: system.
+   ===================================================== */
+
+:root {
+  --ink: #14233c;
+  --ink-soft: #3c4d6b;
+  --paper: #f6f9fb;
+  --arc: #2e6fe0;
+  --arc-deep: #1d4fae;
+  --arc-soft: #dce8fa;
+  --pulse: #e8563f;
+  --radius: 14px;
+  --font-display: "Archivo Black", "Arial Black", "Segoe UI", sans-serif;
+  --font-body: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.reha a:focus-visible,
+.reha button:focus-visible {
+  outline: 3px solid var(--pulse);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+  position: relative;
+  background: var(--ink);
+  color: var(--paper);
+  overflow: hidden;
+  padding: 1.5rem 1.25rem 0;
+}
+
+.hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 72rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.wordmark-orto {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.22em;
+}
+
+.wordmark-lbc {
+  font-size: 0.8rem;
+  letter-spacing: 0.55em;
+  text-transform: uppercase;
+  color: var(--arc-soft);
+  margin-top: 0.3rem;
+}
+
+.hero-nav {
+  display: flex;
+  gap: 1.4rem;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.hero-nav a {
+  color: var(--arc-soft);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+}
+
+.hero-nav a:hover { border-bottom-color: var(--arc); color: #fff; }
+
+.hero-nav-tel {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: #fff !important;
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3.5rem 0 2.5rem;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--arc-soft);
+}
+
+.hero-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 9vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.hero-line { display: block; }
+
+.hero-line-2 { color: var(--arc); }
+
+.hero-lead {
+  max-width: 34rem;
+  margin: 1.6rem 0 0;
+  font-size: 1.1rem;
+  color: #cdd9ec;
+}
+
+.hero-lead strong { color: #fff; }
+
+.hero-cta {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.95rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--arc);
+  color: #fff;
+}
+
+.btn-solid:hover { background: var(--pulse); transform: translateY(-2px); }
+
+.btn-ghost {
+  border: 2px solid var(--arc-soft);
+  color: var(--arc-soft);
+}
+
+.btn-ghost:hover { border-color: #fff; color: #fff; transform: translateY(-2px); }
+
+/* Signature: goniometr — stupnice rozsahu pohybu */
+
+.gonio {
+  position: absolute;
+  right: -4rem;
+  bottom: -4rem;
+  width: clamp(280px, 42vw, 560px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.gonio-svg { width: 100%; height: auto; display: block; }
+
+.gonio-ticks line {
+  stroke: #2b3d5e;
+  stroke-width: 1.5;
+}
+
+.gonio-arc {
+  fill: none;
+  stroke: var(--arc);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: gonio-draw 1.4s ease-out forwards;
+}
+
+.gonio-arc-2 { stroke: var(--arc-deep); animation-delay: 0.35s; }
+.gonio-arc-3 { stroke: var(--pulse); animation-delay: 0.7s; }
+
+.gonio-arm {
+  stroke: var(--arc-soft);
+  stroke-width: 4;
+  stroke-linecap: round;
+  transform-origin: 560px 560px;
+  animation: gonio-sweep 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.gonio-pivot { fill: var(--arc-soft); }
+.gonio-dot { fill: var(--pulse); }
+
+.gonio-label {
+  margin: 0.4rem 0 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #5a6f94;
+  text-align: right;
+  padding-right: 6rem;
+}
+
+@keyframes gonio-draw { to { stroke-dashoffset: 0; } }
+
+@keyframes gonio-sweep {
+  from { transform: rotate(-32deg); }
+  to { transform: rotate(0deg); }
+}
+
+/* Notice — stěhování (nahrazuje modal starého webu) */
+
+.hero-notice {
+  position: relative;
+  z-index: 2;
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  border-top: 1px solid #2b3d5e;
+  padding: 1.2rem 0 1.6rem;
+  font-size: 0.95rem;
+  color: #cdd9ec;
+}
+
+.hero-notice p { margin: 0; max-width: 44rem; }
+
+.hero-notice-badge {
+  flex: none;
+  background: var(--pulse);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+}
+
+/* ---------- SEKCE: REHABILITACE ---------- */
+
+.care {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 3rem;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin: 0 0 0.8rem;
+}
+
+.section-head p {
+  max-width: 40rem;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+.care-grid {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+}
+
+.care-card {
+  background: #fff;
+  border: 1px solid #e2eaf4;
+  border-radius: var(--radius);
+  padding: 1.6rem 1.5rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.care-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(20, 35, 60, 0.1);
+  border-color: var(--arc);
+}
+
+.care-deg {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--arc);
+  letter-spacing: 0.02em;
+  border-bottom: 3px solid var(--arc-soft);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.care-card h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+
+.care-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.97rem;
+}
+
+.care-meta {
+  margin-top: auto !important;
+  padding-top: 1rem;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--arc-deep) !important;
+  font-weight: 600;
+}
+
+/* ---------- SEKCE: TÝM / DŮVĚRA ---------- */
+
+.trust {
+  background: var(--arc-soft);
+  padding: 4rem 1.25rem 4.5rem;
+}
+
+.trust-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.trust-text h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+}
+
+.trust-text p {
+  color: var(--ink-soft);
+  max-width: 38rem;
+  margin: 0 0 1rem;
+  font-size: 1.02rem;
+}
+
+.trust-list {
+  list-style: none;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.trust-list li {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 0.9rem 1.2rem;
+  font-size: 0.97rem;
+  color: var(--ink-soft);
+  border-left: 5px solid var(--arc);
+}
+
+.trust-list li span {
+  font-family: var(--font-display);
+  color: var(--ink);
+  margin-right: 0.5rem;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.trust-quotes {
+  display: grid;
+  gap: 1.2rem;
+  align-content: start;
+}
+
+.quote {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--radius);
+  padding: 1.8rem 1.6rem 1.5rem;
+  position: relative;
+}
+
+.quote::before {
+  content: "„";
+  position: absolute;
+  top: -0.4rem;
+  left: 1.1rem;
+  font-family: var(--font-display);
+  font-size: 3.4rem;
+  color: var(--pulse);
+  line-height: 1;
+}
+
+.quote blockquote {
+  margin: 0 0 0.9rem;
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+
+.quote figcaption {
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #93a8c9;
+}
+
+/* ---------- Reveal on load ---------- */
+
+.hero-eyebrow,
+.hero-line,
+.hero-lead,
+.hero-cta,
+.hero-notice {
+  animation: rise 0.7s ease-out backwards;
+}
+
+.hero-line-1 { animation-delay: 0.08s; }
+.hero-line-2 { animation-delay: 0.18s; }
+.hero-lead { animation-delay: 0.3s; }
+.hero-cta { animation-delay: 0.42s; }
+.hero-notice { animation-delay: 0.55s; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Responsive ---------- */
+
+@media (min-width: 640px) {
+  .care-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 960px) {
+  .hero { padding: 2rem 2.5rem 0; }
+  .hero-body { padding: 5.5rem 0 4rem; }
+  .care { padding: 6rem 2.5rem 4rem; }
+  .trust { padding: 5.5rem 2.5rem 6rem; }
+  .trust-inner { grid-template-columns: 1.15fr 0.85fr; gap: 4rem; }
+  .care-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 700px) {
+  .gonio { right: -6rem; bottom: -3rem; opacity: 0.55; }
+  .gonio-label { display: none; }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-eyebrow,
+  .hero-line,
+  .hero-lead,
+  .hero-cta,
+  .hero-notice { animation: none; }
+  .gonio-arc { animation: none; stroke-dashoffset: 0; }
+  .gonio-arm { animation: none; transform: none; }
+  .btn,
+  .care-card { transition: none; }
+}
