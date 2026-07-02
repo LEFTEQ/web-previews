@@ -1,0 +1,440 @@
+:root {
+  /* Paleta odvozená ze stavby: pálená cihla, čerstvý beton, vápenná bílá, tesařská tužka */
+  --rv-cihla: #b5432a;
+  --rv-cihla-tmava: #8f3120;
+  --rv-beton: #d9d6cf;
+  --rv-vapno: #f7f5f0;
+  --rv-tuzka: #26221e;
+  --rv-malta: #eae7df;
+
+  --rv-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+  --rv-body: Georgia, "Times New Roman", serif;
+  --rv-util: "Courier New", Courier, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--rv-vapno);
+  color: var(--rv-tuzka);
+  font-family: var(--rv-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.rv a:focus-visible,
+.rv button:focus-visible {
+  outline: 3px solid var(--rv-cihla);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.rv-hero {
+  position: relative;
+  background: var(--rv-vapno);
+  overflow: hidden;
+}
+
+.rv-hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 20px 56px;
+}
+
+.rv-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 40px;
+}
+
+.rv-wordmark {
+  font-family: var(--rv-display);
+  font-weight: 900;
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
+  color: var(--rv-tuzka);
+}
+
+.rv-wordmark-cb {
+  color: var(--rv-cihla);
+}
+
+.rv-topbar-tel {
+  font-family: var(--rv-util);
+  font-size: 0.95rem;
+  color: var(--rv-tuzka);
+  text-decoration: none;
+  border-bottom: 2px solid var(--rv-cihla);
+  padding-bottom: 2px;
+  white-space: nowrap;
+}
+
+.rv-topbar-tel:hover {
+  color: var(--rv-cihla);
+}
+
+.rv-hero-title {
+  font-family: var(--rv-display);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 9vw, 6.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0 0 28px;
+  max-width: 14ch;
+}
+
+.rv-line {
+  display: block;
+}
+
+.rv-line-2 {
+  color: var(--rv-cihla);
+}
+
+.rv-line-3 {
+  position: relative;
+  display: inline-block;
+}
+
+.rv-hero-mark {
+  position: absolute;
+  right: -0.55em;
+  bottom: 0.12em;
+  width: 0.32em;
+  height: 0.32em;
+  background: var(--rv-cihla);
+}
+
+.rv-hero-sub {
+  font-size: 0.42em;
+  letter-spacing: 0.02em;
+  margin-top: 0.7em;
+  color: var(--rv-tuzka);
+  text-transform: none;
+  font-family: var(--rv-body);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.rv-hero-text {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  margin: 0 0 32px;
+}
+
+.rv-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.rv-btn {
+  display: inline-block;
+  font-family: var(--rv-display);
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  background: var(--rv-cihla);
+  color: #fff;
+  padding: 15px 26px;
+  border: 2px solid var(--rv-cihla);
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.rv-btn:hover {
+  background: var(--rv-cihla-tmava);
+  border-color: var(--rv-cihla-tmava);
+  transform: translateY(-2px);
+}
+
+.rv-btn-ghost {
+  background: transparent;
+  color: var(--rv-tuzka);
+  border-color: var(--rv-tuzka);
+}
+
+.rv-btn-ghost:hover {
+  background: var(--rv-tuzka);
+  color: var(--rv-vapno);
+}
+
+/* Signature: běhounová zdicí vazba — cihly kladené na vazbu jako patka hera */
+.rv-brickwall {
+  margin-top: 48px;
+}
+
+.rv-brickrow {
+  height: 34px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--rv-cihla) 0,
+    var(--rv-cihla) 112px,
+    var(--rv-malta) 112px,
+    var(--rv-malta) 122px
+  );
+  border-bottom: 8px solid var(--rv-malta);
+  animation: rv-lay 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rv-br-b {
+  background-position: 61px 0;
+}
+
+.rv-brickrow:nth-child(1) { animation-delay: 0.55s; }
+.rv-brickrow:nth-child(2) { animation-delay: 0.45s; }
+.rv-brickrow:nth-child(3) { animation-delay: 0.35s; }
+.rv-brickrow:nth-child(4) { animation-delay: 0.25s; }
+.rv-brickrow:nth-child(5) { animation-delay: 0.15s; }
+
+@keyframes rv-lay {
+  from {
+    transform: translateX(-40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Hero page-load sequence */
+.rv-line-1, .rv-line-2, .rv-line-3, .rv-line-4,
+.rv-hero-text, .rv-hero-cta {
+  animation: rv-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rv-line-1 { animation-delay: 0.05s; }
+.rv-line-2 { animation-delay: 0.15s; }
+.rv-line-3 { animation-delay: 0.25s; }
+.rv-line-4 { animation-delay: 0.35s; }
+.rv-hero-text { animation-delay: 0.45s; }
+.rv-hero-cta { animation-delay: 0.55s; }
+
+@keyframes rv-rise {
+  from {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ============ SLUŽBY ============ */
+
+.rv-sluzby {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 72px 20px;
+}
+
+.rv-eyebrow {
+  font-family: var(--rv-util);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--rv-cihla);
+  margin: 0 0 10px;
+}
+
+.rv-h2 {
+  font-family: var(--rv-display);
+  font-weight: 900;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px;
+  max-width: 22ch;
+}
+
+.rv-section-lead {
+  max-width: 38rem;
+  margin: 0 0 40px;
+  font-size: 1.05rem;
+}
+
+.rv-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.rv-card {
+  background: #fff;
+  border: 1px solid var(--rv-beton);
+  border-top: 5px solid var(--rv-cihla);
+  padding: 22px 22px 24px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.rv-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(38, 34, 30, 0.1);
+}
+
+.rv-card-tag {
+  display: inline-block;
+  font-family: var(--rv-util);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  background: var(--rv-malta);
+  padding: 4px 10px;
+  margin-bottom: 12px;
+}
+
+.rv-card-title {
+  font-family: var(--rv-display);
+  font-size: 1.15rem;
+  font-weight: 900;
+  margin: 0 0 8px;
+  line-height: 1.25;
+}
+
+.rv-card-text {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #45403a;
+}
+
+/* ============ DŮVĚRA ============ */
+
+.rv-duvera {
+  background: var(--rv-tuzka);
+  color: var(--rv-vapno);
+}
+
+.rv-duvera-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 72px 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+.rv-eyebrow-light {
+  color: #e58a72;
+}
+
+.rv-h2-light {
+  color: var(--rv-vapno);
+}
+
+.rv-duvera-p {
+  max-width: 38rem;
+  margin: 0 0 18px;
+  color: #d8d4cc;
+}
+
+.rv-fakta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 24px;
+  margin: 32px 0 0;
+}
+
+.rv-fakt dt {
+  font-family: var(--rv-util);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #e58a72;
+  margin-bottom: 4px;
+}
+
+.rv-fakt dd {
+  margin: 0;
+  font-family: var(--rv-display);
+  font-weight: 900;
+  font-size: 1.05rem;
+  color: var(--rv-vapno);
+}
+
+.rv-quote {
+  margin: 0 0 24px;
+  padding: 20px 22px;
+  background: #322d27;
+  border-left: 5px solid var(--rv-cihla);
+}
+
+.rv-quote p {
+  margin: 0 0 10px;
+  font-style: italic;
+  color: #ece9e2;
+}
+
+.rv-quote footer {
+  font-family: var(--rv-util);
+  font-size: 0.82rem;
+  color: #b3ada3;
+}
+
+.rv-adresa {
+  font-family: var(--rv-util);
+  font-size: 0.82rem;
+  color: #8f8a80;
+  margin: 28px 0 0;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (min-width: 640px) {
+  .rv-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .rv-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .rv-duvera-inner {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+  }
+
+  .rv-hero-inner {
+    padding-top: 32px;
+    padding-bottom: 72px;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rv-line-1, .rv-line-2, .rv-line-3, .rv-line-4,
+  .rv-hero-text, .rv-hero-cta, .rv-brickrow {
+    animation: none;
+  }
+
+  .rv-card,
+  .rv-btn {
+    transition: none;
+  }
+
+  .rv-card:hover,
+  .rv-btn:hover {
+    transform: none;
+  }
+}
