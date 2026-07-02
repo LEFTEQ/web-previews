@@ -1,0 +1,541 @@
+/* ============================================================
+   DŘEVO TRUST — koncept „Nářez"
+   Paleta odvozená z reality skladu plošných materiálů:
+   - dřevotřísková surová (jádro desky)
+   - lamino "slate green" (Fundermax 2370 z jejich sortimentu)
+   - ABS hrana signální žlutá (bezpečnostní značení pil)
+   - papírově bílá plocha melaminu
+   Typografie: úzký groteskní display (kondenzovaný, jako popisky
+   na hranách desek) + čitelný systémový grotesk pro text.
+   ============================================================ */
+
+:root {
+  --deska: #f7f5f0;        /* melamin bílá s teplým nádechem */
+  --jadro: #b89a6e;        /* dřevotřísková surová */
+  --lamino: #2f4a3e;       /* slate green — dekor z jejich katalogu */
+  --lamino-tmave: #21362d;
+  --hrana: #f2b705;        /* signální žlutá řezné linky */
+  --inkoust: #1c1a16;      /* tužka truhláře */
+  --tuzka: #6d675c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--deska);
+  color: var(--inkoust);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dt a:focus-visible,
+.dt button:focus-visible {
+  outline: 3px solid var(--hrana);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ————— HLAVIČKA ————— */
+
+.dt-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem clamp(1rem, 5vw, 3.5rem);
+  border-bottom: 3px solid var(--inkoust);
+}
+
+.dt-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Arial Narrow", "Helvetica Neue Condensed", Impact, sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.14em;
+}
+
+.dt-wm-drevo {
+  color: var(--lamino);
+}
+
+.dt-wm-trust {
+  color: var(--inkoust);
+}
+
+/* řezná spára ve wordmarku */
+.dt-wm-cut {
+  width: 3px;
+  height: 1.4em;
+  background: var(--hrana);
+  transform: skewX(-18deg);
+}
+
+.dt-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.9rem, 3vw, 2rem);
+}
+
+.dt-nav a {
+  color: var(--inkoust);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.dt-nav a:hover {
+  color: var(--lamino);
+}
+
+.dt-nav-tel {
+  padding: 0.45rem 0.9rem;
+  border: 2px solid var(--inkoust);
+  font-variant-numeric: tabular-nums;
+}
+
+.dt-nav-tel:hover {
+  background: var(--hrana);
+  color: var(--inkoust) !important;
+}
+
+@media (max-width: 560px) {
+  .dt-nav a:not(.dt-nav-tel) {
+    display: none;
+  }
+}
+
+/* ————— HERO: nářezový plán ————— */
+
+.dt-hero {
+  position: relative;
+  padding: clamp(3.5rem, 9vw, 7rem) clamp(1rem, 5vw, 3.5rem)
+    clamp(3rem, 7vw, 5.5rem);
+  overflow: hidden;
+  /* jemná mřížka technického výkresu */
+  background-image: linear-gradient(
+      to right,
+      rgba(28, 26, 22, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(28, 26, 22, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* kóty jako z nářezového plánu */
+.dt-hero-plan .dt-dim {
+  position: absolute;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--tuzka);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.dt-dim-top {
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 1rem;
+}
+
+.dt-dim-top::before,
+.dt-dim-top::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: clamp(40px, 18vw, 220px);
+  height: 1px;
+  background: var(--tuzka);
+}
+
+.dt-dim-top::before {
+  right: 100%;
+}
+
+.dt-dim-top::after {
+  left: 100%;
+}
+
+.dt-dim-side {
+  top: 50%;
+  right: 0.6rem;
+  transform: rotate(90deg) translateX(-50%);
+  transform-origin: right center;
+}
+
+@media (max-width: 700px) {
+  .dt-dim-side {
+    display: none;
+  }
+}
+
+/* SIGNATURE: řezná linka pily projíždějící herem */
+.dt-saw-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: clamp(58%, 62vw, 68%);
+  width: 3px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--hrana) 0 14px,
+    transparent 14px 24px
+  );
+  animation: dt-rez 1.4s cubic-bezier(0.65, 0, 0.35, 1) both;
+  animation-delay: 0.5s;
+}
+
+.dt-saw-line-2 {
+  left: auto;
+  right: clamp(6%, 10vw, 14%);
+  width: 2px;
+  opacity: 0.45;
+  animation-delay: 0.8s;
+}
+
+@keyframes dt-rez {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.dt-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--lamino);
+  margin-bottom: 1.4rem;
+  animation: dt-vstup 0.7s ease-out both;
+}
+
+.dt-hero-title {
+  font-family: "Arial Narrow", "Helvetica Neue Condensed", Impact, sans-serif;
+  font-weight: 700;
+  font-size: clamp(3.2rem, 12vw, 8.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  max-width: 12ch;
+}
+
+.dt-hero-title .dt-line {
+  display: block;
+  animation: dt-vstup 0.7s ease-out both;
+}
+
+.dt-line-1 {
+  color: var(--jadro);
+  animation-delay: 0.1s;
+}
+
+.dt-line-2 {
+  color: var(--lamino);
+  animation-delay: 0.25s;
+  padding-left: clamp(1.5rem, 8vw, 6rem); /* posun jako dílec na plánu */
+}
+
+.dt-line-3 {
+  color: var(--inkoust);
+  animation-delay: 0.4s;
+}
+
+.dt-dot {
+  color: var(--hrana);
+}
+
+@keyframes dt-vstup {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dt-hero-sub {
+  max-width: 34rem;
+  margin-top: 1.8rem;
+  font-size: 1.1rem;
+  color: var(--tuzka);
+  animation: dt-vstup 0.7s ease-out 0.55s both;
+}
+
+.dt-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2.2rem;
+  animation: dt-vstup 0.7s ease-out 0.7s both;
+}
+
+.dt-btn {
+  display: inline-block;
+  padding: 0.95rem 1.8rem;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  border: 2px solid var(--inkoust);
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.dt-btn-primary {
+  background: var(--inkoust);
+  color: var(--deska);
+}
+
+.dt-btn-primary:hover {
+  background: var(--lamino);
+  border-color: var(--lamino);
+  transform: translateY(-2px);
+}
+
+.dt-btn-ghost {
+  background: transparent;
+  color: var(--inkoust);
+}
+
+.dt-btn-ghost:hover {
+  background: var(--hrana);
+  border-color: var(--hrana);
+  transform: translateY(-2px);
+}
+
+.dt-hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+  margin-top: clamp(2.5rem, 6vw, 4.5rem);
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--inkoust);
+  max-width: 42rem;
+  animation: dt-vstup 0.7s ease-out 0.85s both;
+}
+
+.dt-hero-facts dt {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--tuzka);
+}
+
+.dt-hero-facts dd {
+  font-family: "Arial Narrow", Impact, sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 700;
+  color: var(--lamino);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ————— SEKCE: SORTIMENT (kusovník) ————— */
+
+.dt-sortiment {
+  padding: clamp(3.5rem, 8vw, 6.5rem) clamp(1rem, 5vw, 3.5rem);
+  border-top: 3px solid var(--inkoust);
+}
+
+.dt-section-head {
+  max-width: 44rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.dt-section-head h2 {
+  font-family: "Arial Narrow", "Helvetica Neue Condensed", Impact, sans-serif;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.05;
+  color: var(--inkoust);
+}
+
+.dt-section-head p {
+  margin-top: 1rem;
+  color: var(--tuzka);
+  font-size: 1.05rem;
+}
+
+.dt-kusovnik {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+  gap: 0;
+  border: 2px solid var(--inkoust);
+}
+
+.dt-polozka {
+  padding: 1.8rem 1.6rem 1.6rem;
+  border: 1px dashed var(--jadro); /* dílce oddělené řeznou spárou */
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  background: #fff;
+  transition: background-color 0.2s ease;
+}
+
+.dt-polozka:hover {
+  background: #fbf7ec;
+}
+
+.dt-polozka-kod {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--jadro);
+}
+
+.dt-polozka h3 {
+  font-family: "Arial Narrow", Impact, sans-serif;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--lamino);
+}
+
+.dt-polozka-popis {
+  color: var(--tuzka);
+  font-size: 0.98rem;
+  flex-grow: 1;
+}
+
+.dt-polozka-detail {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--inkoust);
+  padding-top: 0.7rem;
+  border-top: 3px solid var(--hrana); /* olepená ABS hrana */
+  font-variant-numeric: tabular-nums;
+}
+
+.dt-sortiment-pozn {
+  margin-top: 1.8rem;
+  max-width: 44rem;
+  font-size: 0.95rem;
+  color: var(--tuzka);
+}
+
+/* ————— SEKCE: PROČ K NÁM (kóty) ————— */
+
+.dt-proc {
+  background: var(--lamino-tmave);
+  color: var(--deska);
+  padding: clamp(3.5rem, 8vw, 6.5rem) clamp(1rem, 5vw, 3.5rem);
+}
+
+.dt-section-head-inverse h2 {
+  color: var(--deska);
+}
+
+.dt-section-head-inverse p {
+  color: rgba(247, 245, 240, 0.75);
+}
+
+.dt-mirky {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: clamp(2rem, 5vw, 3.5rem);
+}
+
+.dt-mirka-cislo {
+  font-family: "Arial Narrow", Impact, sans-serif;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 700;
+  color: var(--hrana);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* kóta pod číslem — čárka s šipkami jako na výkresu */
+.dt-mirka-kota {
+  display: block;
+  position: relative;
+  height: 1px;
+  background: rgba(247, 245, 240, 0.4);
+  margin: 1.1rem 0;
+  max-width: 180px;
+}
+
+.dt-mirka-kota::before,
+.dt-mirka-kota::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  width: 1px;
+  height: 9px;
+  background: rgba(247, 245, 240, 0.4);
+}
+
+.dt-mirka-kota::before {
+  left: 0;
+}
+
+.dt-mirka-kota::after {
+  right: 0;
+}
+
+.dt-mirka-text {
+  color: rgba(247, 245, 240, 0.85);
+  font-size: 0.98rem;
+}
+
+.dt-reference {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border-left: 4px solid var(--hrana);
+  background: rgba(247, 245, 240, 0.05);
+  max-width: 46rem;
+}
+
+.dt-reference p {
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  line-height: 1.55;
+  font-style: italic;
+}
+
+.dt-reference cite {
+  display: block;
+  margin-top: 1rem;
+  font-style: normal;
+  font-size: 0.9rem;
+  color: rgba(247, 245, 240, 0.65);
+  letter-spacing: 0.05em;
+}
+
+/* ————— REDUCED MOTION ————— */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .dt-saw-line,
+  .dt-saw-line-2,
+  .dt-eyebrow,
+  .dt-hero-title .dt-line,
+  .dt-hero-sub,
+  .dt-hero-cta,
+  .dt-hero-facts {
+    animation: none;
+  }
+  .dt-btn,
+  .dt-polozka {
+    transition: none;
+  }
+}
