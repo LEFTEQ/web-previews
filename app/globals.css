@@ -1,0 +1,490 @@
+/* =====================================================
+   V-STAV GROUP · Olomouc — zemní práce, inženýrské sítě
+   Paleta vychází z reality řemesla:
+   - jíl / rozkopaná zem, žlutý lak stavebních strojů,
+     šedý beton, signální oranžová výstražných prvků
+   Signature: „svahová linka“ — lomená kontura terénu,
+   která odděluje sekce jako profil výkopu.
+   ===================================================== */
+
+:root {
+  --zem: #2b2118;        /* tmavý jíl — pozadí tmavé sekce */
+  --zem-svetla: #efe9df;  /* vysušená hlína — světlé pozadí */
+  --stroj: #f2b705;       /* žlutý lak Kaiseru — signature akcent */
+  --beton: #565049;       /* šedohnědý beton — sekundární text */
+  --papir: #fffdf8;       /* karty, plochy */
+  --inkoust: #1d1710;     /* hlavní text */
+
+  --font-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-util: "Courier New", Courier, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--inkoust);
+  background: var(--zem-svetla);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--stroj);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--papir);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(29,23,16,0.55) 0%, rgba(29,23,16,0.25) 40%, rgba(29,23,16,0.78) 100%);
+}
+
+.hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.wordmark-dash { color: var(--stroj); }
+
+.wordmark-sub {
+  font-family: var(--font-util);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,253,248,0.85);
+}
+
+.hero-tel {
+  font-family: var(--font-util);
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-bottom: 2px solid var(--stroj);
+  padding-bottom: 2px;
+  white-space: nowrap;
+}
+
+.hero-body {
+  margin-top: auto;
+  padding: 3rem 1.25rem 6.5rem;
+  max-width: 44rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--stroj);
+  margin: 0 0 1rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 7.5vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem;
+}
+
+.hero-title .line { display: block; }
+
+.hero-title em {
+  font-style: normal;
+  color: var(--stroj);
+}
+
+.hero-lead {
+  font-size: 1.1rem;
+  max-width: 34rem;
+  margin: 0 0 1.75rem;
+  color: rgba(255,253,248,0.92);
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn {
+  font-family: var(--font-util);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 0.9rem 1.4rem;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.btn-solid {
+  background: var(--stroj);
+  color: var(--inkoust);
+  font-weight: 700;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.btn-solid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(242,183,5,0.35);
+}
+
+.btn-line {
+  border: 2px solid rgba(255,253,248,0.6);
+  color: var(--papir);
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.btn-line:hover {
+  border-color: var(--stroj);
+  background: rgba(242,183,5,0.12);
+}
+
+/* Signature: lomená svahová linka na spodní hraně hera */
+.hero-slope {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: clamp(36px, 6vw, 90px);
+  display: block;
+}
+
+.hero-slope path { fill: var(--zem-svetla); }
+
+/* page-load: jediný orchestrovaný moment */
+.hero-eyebrow,
+.hero-title .line-1,
+.hero-title .line-2,
+.hero-lead,
+.hero-cta {
+  animation: vystoupit 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-title .line-1 { animation-delay: 120ms; }
+.hero-title .line-2 { animation-delay: 240ms; }
+.hero-lead { animation-delay: 360ms; }
+.hero-cta { animation-delay: 480ms; }
+
+@keyframes vystoupit {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= SEKCE — společné ================= */
+
+.sec { padding: 4rem 1.25rem; }
+
+.sec-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+.sec-eyebrow {
+  font-family: var(--font-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--beton);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1rem;
+}
+
+.tick {
+  width: 2.2rem;
+  height: 0.55rem;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--stroj) 0 6px,
+    var(--inkoust) 6px 12px
+  );
+  border-radius: 2px;
+  flex: none;
+}
+
+.tick-light {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--stroj) 0 6px,
+    rgba(255,253,248,0.85) 6px 12px
+  );
+}
+
+.sec-eyebrow-light { color: rgba(255,253,248,0.7); }
+
+.sec-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  line-height: 1.08;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  margin: 0 0 1rem;
+}
+
+.sec-title-light { color: var(--papir); }
+
+.sec-lead {
+  max-width: 38rem;
+  color: var(--beton);
+  margin: 0 0 2.25rem;
+}
+
+.sec-lead-light { color: rgba(255,253,248,0.85); }
+
+.sec-img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.sec-caption {
+  font-family: var(--font-util);
+  font-size: 0.8rem;
+  color: var(--beton);
+  margin-top: 0.6rem;
+  line-height: 1.5;
+}
+
+.sec-caption-light { color: rgba(255,253,248,0.65); }
+
+/* ================= SEKCE 1: STROJE ================= */
+
+.sec-stroje { background: var(--zem-svetla); }
+
+.stroj-list {
+  list-style: none;
+  margin: 0 0 2.75rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.stroj {
+  background: var(--papir);
+  border: 1px solid rgba(43,33,24,0.12);
+  border-left: 5px solid var(--stroj);
+  border-radius: 4px;
+  padding: 1.25rem 1.25rem 1.1rem;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.stroj:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(43,33,24,0.12);
+}
+
+.stroj-head { margin-bottom: 0.5rem; }
+
+.stroj-tag {
+  font-family: var(--font-util);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--zem);
+  color: var(--stroj);
+  padding: 0.25rem 0.55rem;
+  border-radius: 2px;
+  display: inline-block;
+  margin-bottom: 0.55rem;
+}
+
+.stroj-nazev {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.25;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.stroj-popis {
+  margin: 0 0 0.85rem;
+  color: var(--beton);
+  font-size: 0.96rem;
+}
+
+.stroj-cena {
+  font-family: var(--font-util);
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0;
+  border-top: 1px dashed rgba(43,33,24,0.25);
+  padding-top: 0.7rem;
+}
+
+.sec-figure { margin: 0; }
+
+/* ================= SEKCE 2: PRÁCE / DŮVĚRA ================= */
+
+.sec-prace {
+  background: var(--zem);
+  color: var(--papir);
+  position: relative;
+}
+
+/* svahová linka i na přechodu do tmavé sekce */
+.sec-prace::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: clamp(24px, 4vw, 56px);
+  background: var(--zem-svetla);
+  clip-path: polygon(0 0, 100% 0, 100% 30%, 72% 30%, 55% 100%, 30% 100%, 18% 40%, 0 40%);
+}
+
+.sec-prace .sec-inner { padding-top: clamp(24px, 4vw, 56px); }
+
+.sec-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.prace-list {
+  list-style: none;
+  margin: 0 0 2.5rem;
+  padding: 0;
+}
+
+.prace-item {
+  padding: 0.7rem 0 0.7rem 1.9rem;
+  border-bottom: 1px solid rgba(255,253,248,0.14);
+  position: relative;
+  font-size: 0.98rem;
+}
+
+.prace-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.05rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  background: var(--stroj);
+  clip-path: polygon(0 100%, 50% 0, 100% 100%); /* zub lžíce bagru */
+}
+
+.duvera {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.duvera-blok {
+  border-left: 4px solid var(--stroj);
+  padding-left: 1rem;
+}
+
+.duvera-cislo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  display: block;
+  line-height: 1.1;
+}
+
+.duvera-pop {
+  font-family: var(--font-util);
+  font-size: 0.8rem;
+  color: rgba(255,253,248,0.7);
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.split-figure { margin: 0; }
+
+/* ================= RESPONZIVITA ================= */
+
+@media (min-width: 640px) {
+  .hero-top { padding: 1.75rem 2.5rem 0; }
+  .hero-body { padding: 3rem 2.5rem 7.5rem; }
+  .sec { padding: 5rem 2.5rem; }
+  .stroj-list { grid-template-columns: 1fr 1fr; }
+  .duvera { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 960px) {
+  .sec-split {
+    grid-template-columns: 3fr 2fr;
+    gap: 3.5rem;
+    align-items: start;
+  }
+  .split-figure {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-eyebrow,
+  .hero-title .line-1,
+  .hero-title .line-2,
+  .hero-lead,
+  .hero-cta {
+    animation: none;
+  }
+  .stroj,
+  .btn-solid,
+  .btn-line {
+    transition: none;
+  }
+  .stroj:hover,
+  .btn-solid:hover {
+    transform: none;
+  }
+}
