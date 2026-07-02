@@ -1,0 +1,622 @@
+/* =====================================================
+   HOLINA sádrokartony — Liberec
+   Koncept: „deska a profil" — bílá sádrokartonová plocha,
+   pozinkovaná ocelová mřížka CD/UD profilů jako signature,
+   modrá pracovní barva (Knauf vernacular) jako akcent.
+   ===================================================== */
+
+:root {
+  --board: #f7f6f2;        /* povrch sádrokartonové desky */
+  --board-edge: #e8e5dd;   /* hrana desky / spára */
+  --gypsum: #ffffff;       /* jádro po broušení */
+  --graphite: #23282d;     /* popis tužkou / text */
+  --steel: #9aa3ab;        /* pozinkovaný profil */
+  --work-blue: #1855c0;    /* pracovní modrá (potisk desek, křída) */
+  --work-blue-dark: #103a85;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--board);
+  color: var(--graphite);
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Nadpisy a UI sázíme kondenzovaným groteskem — písmo,
+   které se píše tužkou na desku: úzké, technické, jisté. */
+.sdk h1,
+.sdk h2,
+.sdk h3,
+.sdk .btn,
+.sdk .wordmark,
+.sdk .topbar-tel,
+.sdk .section-eyebrow,
+.sdk .hero-eyebrow,
+.sdk .hero-facts,
+.sdk .marker-profile,
+.sdk .postup-num,
+.sdk .sluzba-tag {
+  font-family: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Arial, sans-serif;
+}
+
+.sdk a {
+  color: var(--work-blue);
+}
+
+.sdk :focus-visible {
+  outline: 3px solid var(--work-blue);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ===================== TOPBAR ===================== */
+
+.topbar {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.wordmark {
+  text-decoration: none;
+  color: var(--graphite);
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.wordmark-holina {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+/* podtržení jako tah řezákem podle latě */
+.wordmark-holina::after {
+  content: "";
+  display: block;
+  height: 3px;
+  margin-top: 3px;
+  background: linear-gradient(90deg, var(--work-blue) 0 68%, var(--steel) 68% 100%);
+}
+
+.wordmark-sub {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 0.8rem;
+  color: #5a6169;
+  margin-top: 4px;
+}
+
+.topbar-tel {
+  text-decoration: none;
+  text-align: right;
+  line-height: 1.15;
+  color: var(--graphite);
+}
+
+.topbar-tel-label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--work-blue);
+}
+
+.topbar-tel-num {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* ===================== HERO ===================== */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, var(--gypsum) 0%, var(--board) 100%);
+  border-bottom: 1px solid var(--board-edge);
+}
+
+/* Signature: odhalený rastr CD/UD profilů — konstrukce,
+   kterou zákazník nikdy nevidí, protože ji zakryje deska. */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.rail {
+  position: absolute;
+  background: linear-gradient(90deg, #b9c1c8, #dfe4e8 45%, #98a1a9);
+}
+
+.rail-v {
+  top: 0;
+  bottom: 0;
+  width: 14px;
+  box-shadow: 2px 0 6px rgba(35, 40, 45, 0.08);
+}
+
+.rail-h {
+  left: 0;
+  right: 0;
+  height: 14px;
+  background: linear-gradient(180deg, #b9c1c8, #dfe4e8 45%, #98a1a9);
+  box-shadow: 0 2px 6px rgba(35, 40, 45, 0.08);
+}
+
+/* rozteč 62,5 cm — skutečný rastr sádrokartonu, přeneseně */
+.rv1 { left: 12%; }
+.rv2 { left: 50%; }
+.rv3 { left: 88%; }
+.rh1 { top: 22%; }
+.rh2 { top: 78%; }
+
+/* rychlošrouby TN v křížení profilů */
+.screw {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #7d868e, #40474d);
+  transform: translate(-50%, -50%) translateX(7px);
+}
+
+.screw::before {
+  content: "";
+  position: absolute;
+  inset: 3.5px 1px;
+  background: #23282d;
+  transform: rotate(45deg);
+}
+
+.s1 { left: 12%; top: calc(22% + 7px); }
+.s2 { left: 50%; top: calc(22% + 7px); }
+.s3 { left: 88%; top: calc(22% + 7px); }
+.s4 { left: 12%; top: calc(78% + 7px); }
+.s5 { left: 50%; top: calc(78% + 7px); }
+.s6 { left: 88%; top: calc(78% + 7px); }
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 4rem;
+  /* „deska" položená přes rastr */
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(247, 246, 242, 0.92));
+}
+
+.hero-eyebrow,
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--work-blue);
+}
+
+.eyebrow-tick {
+  width: 26px;
+  height: 3px;
+  background: var(--work-blue);
+  flex: none;
+}
+
+.hero-title {
+  margin: 0 0 1.4rem;
+  font-size: clamp(2.5rem, 7.5vw, 5rem);
+  line-height: 1.02;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.hero-title .line {
+  display: block;
+}
+
+.hero-title .line-2 {
+  color: var(--steel);
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--work-blue);
+  /* podtržení tahem širokou špachtlí */
+  background: linear-gradient(180deg, transparent 78%, rgba(24, 85, 192, 0.18) 78%);
+}
+
+.hero-text {
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  font-size: 1.1rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.75rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.95rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  border: 2px solid var(--work-blue);
+  border-radius: 3px;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.btn-primary {
+  background: var(--work-blue);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--work-blue-dark);
+  border-color: var(--work-blue-dark);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--work-blue);
+}
+
+.btn-ghost:hover {
+  background: rgba(24, 85, 192, 0.08);
+  transform: translateY(-2px);
+}
+
+.hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 3rem;
+  margin: 0;
+  padding: 1.25rem 0 0;
+  list-style: none;
+  border-top: 1px solid var(--board-edge);
+}
+
+.hero-facts li {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.hero-facts strong {
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
+}
+
+.hero-facts span {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #5a6169;
+}
+
+/* orchestrovaná sekvence načtení: nejdřív rastr, pak deska s textem */
+@keyframes rail-drop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes board-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-grid .rail,
+.hero-grid .screw {
+  animation: rail-drop 500ms ease-out both;
+}
+
+.hero-grid .screw {
+  animation-delay: 250ms;
+}
+
+.hero-eyebrow { animation: board-up 550ms ease-out 150ms both; }
+.hero-title .line-1 { animation: board-up 550ms ease-out 250ms both; }
+.hero-title .line-2 { animation: board-up 550ms ease-out 350ms both; }
+.hero-title .line-3 { animation: board-up 550ms ease-out 450ms both; }
+.hero-text { animation: board-up 550ms ease-out 560ms both; }
+.hero-actions { animation: board-up 550ms ease-out 660ms both; }
+.hero-facts { animation: board-up 550ms ease-out 760ms both; }
+
+/* ===================== SEKCE OBECNĚ ===================== */
+
+.section-head {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.sdk h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.12;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  max-width: 30ch;
+}
+
+/* ===================== SLUŽBY ===================== */
+
+.sluzby {
+  padding: 4.5rem 0 5rem;
+}
+
+.sluzby-list {
+  max-width: 1120px;
+  margin: 2.25rem auto 0;
+  padding: 0 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--board-edge); /* spáry mezi deskami */
+  border-top: 1px solid var(--board-edge);
+  border-bottom: 1px solid var(--board-edge);
+}
+
+.sluzba {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.75rem 1.25rem;
+  background: var(--gypsum);
+  transition: background-color 160ms ease;
+}
+
+.sluzba:hover {
+  background: #fdfdfb;
+}
+
+.sluzba-marker {
+  flex: none;
+}
+
+/* štítek profilu — jako ražba na pozinkovaném CD/UD/CW profilu */
+.marker-profile {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #40474d;
+  background: linear-gradient(135deg, #e6eaee, #c3cbd2 55%, #dde2e7);
+  border: 1px solid #aeb7bf;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 #fff;
+}
+
+.sluzba-body h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.sluzba-body p {
+  margin: 0 0 0.75rem;
+  max-width: 56ch;
+}
+
+.sluzba-tag {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--work-blue);
+}
+
+/* ===================== DŮVĚRA ===================== */
+
+.duvera {
+  /* rub desky: šedý karton s modrým potiskem — tmavá sekce */
+  background: #262c33;
+  color: #e9ecef;
+  padding: 4.5rem 0 5rem;
+}
+
+.duvera h2 {
+  color: #fff;
+}
+
+.duvera-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.section-eyebrow-light {
+  color: #7fa4e8;
+}
+
+.eyebrow-tick-light {
+  background: #7fa4e8;
+}
+
+.duvera-text p {
+  max-width: 56ch;
+  color: #c8cdd3;
+}
+
+.postup {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 1.5rem;
+  align-content: start;
+}
+
+.postup li {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+}
+
+.postup-num {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--work-blue);
+  border-radius: 3px;
+}
+
+.postup h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+}
+
+.postup p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #b6bcc3;
+}
+
+.reference {
+  max-width: 1120px;
+  margin: 3rem auto 0;
+  padding: 0 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: #3a424b; /* spáry i v tmavé sekci */
+}
+
+.reference figure {
+  margin: 0;
+  padding: 1.5rem 1.4rem;
+  background: #2d343c;
+  border-top: 3px solid var(--work-blue);
+}
+
+.reference blockquote {
+  margin: 0 0 0.75rem;
+  font-style: italic;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: #eef1f4;
+}
+
+.reference figcaption {
+  font-family: "Arial Narrow", "Roboto Condensed", Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #8b939c;
+}
+
+/* ===================== RESPONSIVITA ===================== */
+
+@media (min-width: 700px) {
+  .hero-inner {
+    padding: 5.5rem 2rem 5rem;
+  }
+
+  .topbar,
+  .section-head,
+  .sluzby-list,
+  .duvera-inner,
+  .reference {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .sluzby-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sluzba {
+    padding: 2rem 1.75rem;
+  }
+
+  .reference {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .duvera-inner {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rv1 { left: 8%; }
+  .rv3 { left: 92%; }
+  .s1, .s4 { left: 8%; }
+  .s3, .s6 { left: 92%; }
+
+  .topbar-tel-label {
+    display: none;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ===================== REDUCED MOTION ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .sdk *,
+  .sdk *::before,
+  .sdk *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
