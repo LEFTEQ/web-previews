@@ -1,0 +1,637 @@
+/* =====================================================
+   AUTOSERVIS ZÁBRAHA — Plzeň, Rokycanská
+   Tokeny:
+   --noc      #10151C  asfalt po dešti / montérková tmavá
+   --dilna    #1B2430  stín dílny
+   --papir    #EEF1F4  zakázkový list (studená bílá, ne krémová)
+   --bosch    #1C69D4  diagnostická modrá (kývnutí k Bosch, vlastní tón)
+   --vystraha #F5A300  výstražný maják odtahovky — jediný teplý tón
+   --ocel     #8C97A6  popisky, kóty
+   Typ: Archivo (display, široké verzálky = nápis na hale)
+        + system-ui/Barlow-like pro tělo; mono pro kódy zakázek.
+   Signature: zavěšený servisní štítek v hero + "zakázkové kódy"
+   (DIAG/MECH/PNEU…) jako strukturní prvek karet.
+   ===================================================== */
+
+:root {
+  --noc: #10151c;
+  --dilna: #1b2430;
+  --papir: #eef1f4;
+  --bosch: #1c69d4;
+  --bosch-svetla: #4d8fe8;
+  --vystraha: #f5a300;
+  --ocel: #8c97a6;
+  --ocel-tmava: #55606e;
+
+  --f-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Barlow", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --max: 72rem;
+  --pad: clamp(1.25rem, 4vw, 3rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--papir);
+  color: var(--noc);
+  font-family: var(--f-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--vystraha);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  overflow: hidden;
+  background: var(--noc);
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      12deg,
+      rgba(16, 21, 28, 0.96) 22%,
+      rgba(16, 21, 28, 0.62) 55%,
+      rgba(16, 21, 28, 0.28) 100%
+    );
+}
+
+.hero-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: var(--pad);
+  max-width: var(--max);
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* wordmark: verzálky na modré "SPZ" desce */
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.wordmark-plate {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-stretch: condensed;
+  letter-spacing: 0.14em;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  background: var(--bosch);
+  color: #fff;
+  padding: 0.3rem 0.7rem 0.25rem;
+  border-radius: 4px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  width: fit-content;
+}
+
+.wordmark-sub {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ocel);
+}
+
+.hero-tel {
+  text-decoration: none;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.hero-tel-label {
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--vystraha);
+}
+
+.hero-tel-num {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max);
+  width: 100%;
+  margin: auto auto 0;
+  padding: var(--pad);
+  padding-top: clamp(3rem, 10vh, 6rem);
+  padding-bottom: clamp(6rem, 14vh, 9rem);
+}
+
+.hero-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bosch-svetla);
+  margin: 0 0 1.25rem;
+}
+
+.hero-title {
+  margin: 0 0 1.25rem;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  font-size: clamp(2.4rem, 8vw, 5.2rem);
+}
+
+.hero-title-line {
+  display: block;
+}
+
+.hero-title-accent {
+  color: var(--vystraha);
+}
+
+.hero-lead {
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--f-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--vystraha);
+  color: var(--noc);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: #ffb61f;
+}
+
+.btn-ghost {
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+}
+
+.btn-ghost:hover {
+  border-color: #fff;
+  transform: translateY(-2px);
+}
+
+/* --- SIGNATURE: zavěšený servisní štítek --- */
+
+.hero-tag {
+  position: absolute;
+  z-index: 3;
+  right: clamp(1rem, 6vw, 5rem);
+  top: clamp(5.5rem, 14vh, 8rem);
+  background: var(--papir);
+  color: var(--noc);
+  border-radius: 6px;
+  padding: 1.4rem 1.2rem 1.1rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  transform: rotate(3deg);
+  transform-origin: top center;
+  animation: tag-swing 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: 0.4s;
+}
+
+.hero-tag::before {
+  /* poutko / šňůrka */
+  content: "";
+  position: absolute;
+  top: -2.2rem;
+  left: 50%;
+  width: 2px;
+  height: 2.2rem;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.hero-tag-hole {
+  position: absolute;
+  top: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--noc);
+  box-shadow: inset 0 0 0 2px var(--ocel);
+}
+
+.hero-tag-grid {
+  display: flex;
+  gap: 1.4rem;
+  margin: 0.4rem 0 0;
+}
+
+.hero-tag-grid dt {
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ocel-tmava);
+  margin-bottom: 0.15rem;
+}
+
+.hero-tag-grid dd {
+  margin: 0;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+@keyframes tag-swing {
+  0% {
+    transform: rotate(-7deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(3deg);
+    opacity: 1;
+  }
+}
+
+/* ================= SEKCE — společné ================= */
+
+.section-head {
+  max-width: 44rem;
+}
+
+.section-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--bosch);
+  margin: 0 0 0.75rem;
+}
+
+.section-title {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  line-height: 1.05;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  margin: 0 0 1rem;
+}
+
+.section-lead {
+  margin: 0;
+  color: var(--ocel-tmava);
+  font-size: 1.05rem;
+}
+
+.section-head--light .section-lead {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.section-head--light .section-eyebrow {
+  color: var(--vystraha);
+}
+
+/* ================= SLUŽBY ================= */
+
+.sluzby {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(3.5rem, 9vw, 6.5rem) var(--pad);
+}
+
+.sluzby-grid {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem;
+}
+
+.karta {
+  background: #fff;
+  border: 1px solid #dde3ea;
+  border-left: 4px solid var(--bosch);
+  border-radius: 6px;
+  padding: 1.4rem 1.4rem 1.5rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.karta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(16, 21, 28, 0.1);
+}
+
+.karta-kod {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: var(--bosch);
+  border: 1px solid #c9d8ef;
+  background: #eef4fc;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.karta-nazev {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin: 0.8rem 0 0.4rem;
+  line-height: 1.2;
+}
+
+.karta-popis {
+  margin: 0;
+  color: var(--ocel-tmava);
+  font-size: 0.96rem;
+}
+
+.sluzby-figure {
+  margin: 2.5rem 0 0;
+}
+
+.figure-img {
+  width: 100%;
+  height: clamp(14rem, 40vw, 24rem);
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.figure-cap {
+  font-family: var(--f-mono);
+  font-size: 0.78rem;
+  color: var(--ocel-tmava);
+  margin-top: 0.7rem;
+  letter-spacing: 0.02em;
+}
+
+/* ================= DŮVĚRA / ODTAH / O NÁS ================= */
+
+.duvera {
+  background: var(--noc);
+  color: #fff;
+}
+
+.duvera-odtah {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(3.5rem, 9vw, 6rem) var(--pad) clamp(2.5rem, 6vw, 4rem);
+}
+
+.kroky {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.5rem;
+}
+
+.krok {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  border-top: 2px solid var(--dilna);
+  padding-top: 1.25rem;
+}
+
+.krok-cislo {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--vystraha);
+  min-width: 1.6rem;
+}
+
+.krok-titulek {
+  font-family: var(--f-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 1rem;
+  margin: 0.15rem 0 0.35rem;
+}
+
+.krok-text {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.95rem;
+}
+
+/* --- O nás --- */
+
+.duvera-onas {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad) clamp(3.5rem, 9vw, 6rem);
+  display: grid;
+  gap: 2rem;
+  align-items: start;
+}
+
+.onas-figure {
+  margin: 0;
+}
+
+.onas-figure .figure-img {
+  height: clamp(13rem, 34vw, 26rem);
+}
+
+.onas-title {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  line-height: 1.1;
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  margin: 0 0 1rem;
+}
+
+.onas-text p {
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 1rem;
+}
+
+.onas-kontakt {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.8rem;
+  border-top: 2px solid var(--dilna);
+  padding-top: 1.5rem;
+}
+
+.onas-blok-h {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--vystraha);
+  margin: 0 0 0.6rem;
+}
+
+.onas-adresa {
+  font-weight: 600;
+  color: #fff !important;
+}
+
+.onas-link {
+  color: var(--bosch-svetla);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(77, 143, 232, 0.4);
+}
+
+.onas-link:hover {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+.doba {
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  width: 100%;
+  max-width: 16rem;
+}
+
+.doba th {
+  text-align: left;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
+  padding: 0.2rem 1rem 0.2rem 0;
+}
+
+.doba td {
+  font-family: var(--f-mono);
+  font-size: 0.85rem;
+  color: #fff;
+  padding: 0.2rem 0;
+  white-space: nowrap;
+}
+
+/* ================= RESPONZIVITA ================= */
+
+@media (min-width: 52rem) {
+  .duvera-onas {
+    grid-template-columns: 5fr 7fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 40rem) {
+  .hero-tag {
+    position: static;
+    margin: 0 var(--pad) 1.5rem;
+    width: fit-content;
+    transform: rotate(1.5deg);
+    order: 3;
+  }
+
+  .hero-tag::before {
+    display: none;
+  }
+
+  .hero-body {
+    padding-bottom: 2rem;
+  }
+
+  .hero-tel {
+    text-align: left;
+    align-items: flex-end;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-tag {
+    animation: none;
+  }
+
+  .btn,
+  .karta {
+    transition: none;
+  }
+
+  .btn-primary:hover,
+  .btn-ghost:hover,
+  .karta:hover {
+    transform: none;
+  }
+}
