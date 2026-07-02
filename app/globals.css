@@ -1,0 +1,506 @@
+:root {
+  /* Paleta: klinická běloba + hluboký petrolej (voda, klid, medicína)
+     + korálový akcent (kinesio tejp) + inkoust */
+  --plast: #f7fafa;        /* světlé pozadí — omyvatelná bílá ordinace */
+  --petrolej: #0e3b43;     /* hluboký petrolej — hlavní tmavá */
+  --petrolej-hl: #12525d;  /* světlejší petrolej pro plochy */
+  --koral: #ff6a5c;        /* korálová — barva kinesio tejpu */
+  --mlha: #d8e6e6;         /* jemná šedozelená pro linky a štítky */
+  --inkoust: #10262b;      /* text na světlém pozadí */
+
+  --pismo-display: "Archivo Black", "Arial Black", "Franklin Gothic Medium", sans-serif;
+  --pismo-text: "Georgia", "Times New Roman", serif;
+  --pismo-util: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--plast);
+  color: var(--inkoust);
+  font-family: var(--pismo-text);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.djk a:focus-visible,
+.djk .btn:focus-visible {
+  outline: 3px solid var(--koral);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  background:
+    linear-gradient(180deg, #ffffff 0%, var(--plast) 70%, #edf4f4 100%);
+  border-bottom: 4px solid var(--petrolej);
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+/* Wordmark: DJK v petroleji, „fyzio“ jako korálový tejp-proužek */
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-bottom: 3rem;
+}
+
+.wordmark-djk {
+  font-family: var(--pismo-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.14em;
+  color: var(--petrolej);
+}
+
+.wordmark-fyzio {
+  font-family: var(--pismo-util);
+  font-size: 0.95rem;
+  letter-spacing: 0.2em;
+  text-transform: lowercase;
+  color: #fff;
+  background: var(--koral);
+  padding: 0.15rem 0.55rem;
+  transform: rotate(-2deg);
+  border-radius: 2px;
+}
+
+.hero-eyebrow {
+  font-family: var(--pismo-util);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--petrolej-hl);
+  margin-bottom: 1rem;
+}
+
+.hero-title {
+  font-family: var(--pismo-display);
+  font-size: clamp(2.75rem, 9vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--petrolej);
+  margin-bottom: 1.5rem;
+}
+
+.hero-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.5em);
+  animation: hero-vstup 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.hero-line-1 { animation-delay: 0.05s; }
+.hero-line-2 {
+  animation-delay: 0.18s;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--petrolej);
+}
+.hero-line-3 {
+  animation-delay: 0.31s;
+  color: var(--koral);
+  font-size: 0.55em;
+  letter-spacing: 0.02em;
+}
+
+@keyframes hero-vstup {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Signature: goniometr ---- */
+
+.gonio {
+  margin: 1rem 0 2rem;
+  max-width: 26rem;
+}
+
+.gonio-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gonio-arc {
+  stroke: var(--petrolej);
+  stroke-width: 2;
+}
+
+.gonio-tick {
+  stroke: var(--petrolej-hl);
+  stroke-width: 1.5;
+}
+
+.gonio-tick-major {
+  stroke: var(--petrolej);
+  stroke-width: 2.5;
+}
+
+.gonio-num {
+  font-family: var(--pismo-util);
+  font-size: 14px;
+  fill: var(--petrolej-hl);
+}
+
+.gonio-arm {
+  stroke-width: 5;
+  stroke-linecap: round;
+  transform-origin: 200px 200px;
+}
+
+.gonio-arm-fixed {
+  stroke: var(--mlha);
+}
+
+.gonio-arm-moving {
+  stroke: var(--koral);
+  animation: gonio-zdvih 2.2s cubic-bezier(0.3, 0, 0.2, 1) 0.6s forwards;
+  transform: rotate(0deg);
+}
+
+@keyframes gonio-zdvih {
+  0% { transform: rotate(0deg); }
+  55% { transform: rotate(-148deg); }
+  75% { transform: rotate(-130deg); }
+  100% { transform: rotate(-135deg); }
+}
+
+.gonio-pivot {
+  fill: var(--petrolej);
+}
+
+.gonio-caption {
+  font-family: var(--pismo-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--petrolej-hl);
+  border-left: 3px solid var(--koral);
+  padding-left: 0.7rem;
+  margin-top: 0.5rem;
+  max-width: 24rem;
+}
+
+.hero-lead {
+  max-width: 38rem;
+  font-size: 1.15rem;
+  margin-bottom: 2rem;
+}
+
+.hero-akce {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--pismo-util);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 3px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-plna {
+  background: var(--petrolej);
+  color: #fff;
+}
+
+.btn-obrys {
+  border: 2px solid var(--petrolej);
+  color: var(--petrolej);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(14, 59, 67, 0.18);
+}
+
+/* ============ SEKCE OBECNĚ ============ */
+
+.sekce-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+}
+
+.sekce-eyebrow {
+  font-family: var(--pismo-util);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--koral);
+  margin-bottom: 0.8rem;
+}
+
+.sekce-title {
+  font-family: var(--pismo-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.7rem);
+  line-height: 1.12;
+  text-transform: uppercase;
+  color: var(--petrolej);
+  margin-bottom: 1.2rem;
+  max-width: 42rem;
+}
+
+.sekce-uvod {
+  max-width: 38rem;
+  margin-bottom: 2.5rem;
+  color: #2c4a50;
+}
+
+/* ============ TERAPIE ============ */
+
+.terapie-mrizka {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+
+.terapie-karta {
+  background: #fff;
+  border: 1px solid var(--mlha);
+  border-radius: 6px;
+  padding: 1.5rem 1.4rem 1.6rem;
+  position: relative;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.terapie-karta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(14, 59, 67, 0.1);
+}
+
+.terapie-stitek {
+  display: inline-block;
+  font-family: var(--pismo-util);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+  margin-bottom: 0.85rem;
+  transform: rotate(-1.5deg);
+}
+
+/* Štítky = barevné kinesio proužky podle typu terapie */
+.stitek-ruce {
+  background: var(--petrolej);
+  color: #fff;
+}
+
+.stitek-přístroj {
+  background: var(--koral);
+  color: #fff;
+}
+
+.stitek-aktivní {
+  background: var(--mlha);
+  color: var(--petrolej);
+}
+
+.terapie-nazev {
+  font-family: var(--pismo-display);
+  font-size: 1.1rem;
+  line-height: 1.25;
+  color: var(--petrolej);
+  margin-bottom: 0.55rem;
+}
+
+.terapie-popis {
+  font-size: 0.98rem;
+  color: #33484d;
+}
+
+.terapie-karta-poukaz {
+  background: var(--petrolej);
+  border-color: var(--petrolej);
+}
+
+.terapie-karta-poukaz .terapie-nazev {
+  color: #fff;
+}
+
+.terapie-karta-poukaz .terapie-popis {
+  color: #cfe3e3;
+}
+
+/* ============ DŮVĚRA ============ */
+
+.sekce-duvera {
+  background: var(--petrolej);
+}
+
+.sekce-eyebrow-svetly {
+  color: var(--koral);
+}
+
+.sekce-title-svetly {
+  color: #fff;
+}
+
+.pilire {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 2.5rem 0 3rem;
+  border-top: 1px solid rgba(216, 230, 230, 0.25);
+}
+
+.pilir {
+  padding: 1.8rem 0;
+  border-bottom: 1px solid rgba(216, 230, 230, 0.25);
+}
+
+.pilir-znacka {
+  font-family: var(--pismo-util);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--koral);
+  margin-bottom: 0.6rem;
+}
+
+.pilir-titulek {
+  font-family: var(--pismo-display);
+  font-size: 1.35rem;
+  color: #fff;
+  margin-bottom: 0.6rem;
+}
+
+.pilir-text {
+  color: #c8dcdc;
+  max-width: 34rem;
+}
+
+.prakticke {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+
+.prakticke-blok {
+  background: var(--petrolej-hl);
+  border-radius: 6px;
+  padding: 1.4rem 1.3rem;
+}
+
+.prakticke-h {
+  font-family: var(--pismo-util);
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.prakticke-p {
+  font-size: 0.97rem;
+  color: #d3e5e5;
+}
+
+/* ============ RESPONZIVITA ============ */
+
+@media (min-width: 640px) {
+  .terapie-mrizka {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .prakticke {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 960px) {
+  .hero-inner {
+    padding-top: 2.5rem;
+    padding-bottom: 5rem;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-areas:
+      "znacka znacka"
+      "eyebrow eyebrow"
+      "titul gonio"
+      "lead gonio"
+      "akce gonio";
+    column-gap: 3rem;
+    align-items: start;
+  }
+
+  .wordmark { grid-area: znacka; }
+  .hero-eyebrow { grid-area: eyebrow; }
+  .hero-title { grid-area: titul; }
+  .gonio {
+    grid-area: gonio;
+    align-self: center;
+    margin: 0;
+    max-width: 100%;
+  }
+  .hero-lead { grid-area: lead; }
+  .hero-akce { grid-area: akce; }
+
+  .terapie-mrizka {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .pilire {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0 2.5rem;
+  }
+
+  .prakticke {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ============ REDUKOVANÝ POHYB ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-line {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .gonio-arm-moving {
+    animation: none;
+    transform: rotate(-135deg);
+  }
+
+  .btn,
+  .terapie-karta {
+    transition: none;
+  }
+
+  .btn:hover,
+  .terapie-karta:hover {
+    transform: none;
+  }
+}
