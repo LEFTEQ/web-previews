@@ -1,0 +1,662 @@
+/* =========================================================
+   STANDARD NEMOVITOSTI — Plzeň / Přeštice / Klatovy
+   Koncept: katastrální mapa. Palety a značení vychází
+   z katastrálních map (parcelní čísla, křížky souřadnicové
+   sítě, červené hranice parcel) — vizuální svět, ve kterém
+   se realitní kancelář pohybuje každý den.
+   Tokeny:
+   --sn-mapa      #10322E  hluboká lahvová zeleň (razítko, mapový tisk)
+   --sn-papir     #FBFAF6  papír katastrální mapy
+   --sn-parcela   #C8402A  červeň hranic parcel (akcent)
+   --sn-tuz       #21272B  inkoust textu
+   --sn-sit       #DDE3DC  souřadnicová síť
+   --sn-mosaz     #B99857  mosaz klíčů / geodetický hřeb
+   ========================================================= */
+
+:root {
+  --sn-mapa: #10322e;
+  --sn-papir: #fbfaf6;
+  --sn-parcela: #c8402a;
+  --sn-tuz: #21272b;
+  --sn-sit: #dde3dc;
+  --sn-mosaz: #b99857;
+  --sn-max: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--sn-papir);
+  color: var(--sn-tuz);
+  font-family: "Source Serif 4", "Charter", "Iowan Old Style", Georgia, serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sn img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.sn h1,
+.sn h2,
+.sn h3 {
+  font-family: "Archivo", "Franklin Gothic Medium", "Arial Narrow", Arial,
+    sans-serif;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.sn a {
+  color: inherit;
+}
+
+.sn :focus-visible {
+  outline: 3px solid var(--sn-parcela);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- horní lišta ---------- */
+
+.sn-top {
+  max-width: var(--sn-max);
+  margin: 0 auto;
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.sn-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+}
+
+/* značka: parcela s geodetickým bodem */
+.sn-wordmark-parcela {
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--sn-parcela);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.sn-wordmark-tecka {
+  width: 8px;
+  height: 8px;
+  background: var(--sn-mapa);
+  border-radius: 50%;
+}
+
+.sn-wordmark-text {
+  font-family: "Archivo", Arial, sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.01em;
+  color: var(--sn-mapa);
+}
+
+.sn-wordmark-text em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--sn-parcela);
+}
+
+.sn-top-tel {
+  font-family: "Archivo", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: var(--sn-mapa);
+  border-bottom: 2px solid var(--sn-parcela);
+  padding-bottom: 2px;
+  white-space: nowrap;
+}
+
+.sn-top-tel:hover {
+  color: var(--sn-parcela);
+}
+
+/* ---------- eyebrow ve stylu katastrálního označení ---------- */
+
+.sn-katastr {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: "Archivo", Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sn-mapa);
+  margin: 0 0 1rem;
+}
+
+.sn-katastr-svetly {
+  color: var(--sn-sit);
+}
+
+/* křížek souřadnicové sítě katastrální mapy */
+.sn-katastr-znak {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  background:
+    linear-gradient(var(--sn-parcela), var(--sn-parcela)) center / 100% 2px
+      no-repeat,
+    linear-gradient(var(--sn-parcela), var(--sn-parcela)) center / 2px 100%
+      no-repeat;
+}
+
+/* štítek parcelního čísla u fotek — signature prvek */
+.sn-parcelni-cislo {
+  display: inline-block;
+  font-family: "Archivo", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--sn-papir);
+  background: var(--sn-parcela);
+  padding: 0.15rem 0.5rem;
+  margin-right: 0.6rem;
+}
+
+/* ---------- HERO ---------- */
+
+.sn-hero {
+  position: relative;
+  overflow: hidden;
+  border-top: 3px solid var(--sn-mapa);
+  border-bottom: 3px solid var(--sn-mapa);
+}
+
+/* souřadnicová síť katastrální mapy přes celý hero */
+.sn-hero-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      to right,
+      var(--sn-sit) 0,
+      var(--sn-sit) 1px,
+      transparent 1px,
+      transparent 72px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      var(--sn-sit) 0,
+      var(--sn-sit) 1px,
+      transparent 1px,
+      transparent 72px
+    );
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+
+.sn-hero-inner {
+  position: relative;
+  max-width: var(--sn-max);
+  margin: 0 auto;
+  padding: 2.75rem 1.25rem 3rem;
+  display: grid;
+  gap: 2.5rem;
+}
+
+.sn-hero h1 {
+  font-size: clamp(1.85rem, 4.6vw, 3.3rem);
+  font-weight: 800;
+  color: var(--sn-mapa);
+  animation: sn-vzestup 0.7s ease-out both;
+}
+
+/* zvýraznění tahem „červené tužky geodeta" */
+.sn-hero-zvyraz {
+  background: linear-gradient(
+    to top,
+    rgba(200, 64, 42, 0.22) 0 38%,
+    transparent 38%
+  );
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.sn-hero-perex {
+  max-width: 34rem;
+  font-size: 1.06rem;
+  margin: 1.25rem 0 1.75rem;
+  animation: sn-vzestup 0.7s ease-out 0.12s both;
+}
+
+.sn-hero-akce {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  animation: sn-vzestup 0.7s ease-out 0.22s both;
+}
+
+.sn-btn {
+  font-family: "Archivo", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 0.85rem 1.4rem;
+  display: inline-block;
+  transition: background-color 0.18s ease, color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.sn-btn-plna {
+  background: var(--sn-parcela);
+  color: var(--sn-papir);
+}
+
+.sn-btn-plna:hover {
+  background: var(--sn-mapa);
+  transform: translateY(-2px);
+}
+
+.sn-btn-linka {
+  border: 2px solid var(--sn-mapa);
+  color: var(--sn-mapa);
+}
+
+.sn-btn-linka:hover {
+  background: var(--sn-mapa);
+  color: var(--sn-papir);
+}
+
+.sn-hero-fakta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 2rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--sn-sit);
+  animation: sn-vzestup 0.7s ease-out 0.32s both;
+}
+
+.sn-hero-fakta dt {
+  font-family: "Archivo", Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sn-parcela);
+}
+
+.sn-hero-fakta dd {
+  margin: 0.15rem 0 0;
+  font-family: "Archivo", Arial, sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--sn-mapa);
+}
+
+.sn-hero-obraz {
+  margin: 0;
+  animation: sn-vzestup 0.7s ease-out 0.18s both;
+}
+
+.sn-hero-obraz img,
+.sn-nabidka-foto img,
+.sn-postup-foto img {
+  width: 100%;
+  border: 2px solid var(--sn-mapa);
+}
+
+.sn-hero-obraz figcaption,
+.sn-nabidka-foto figcaption,
+.sn-postup-foto figcaption {
+  font-family: "Archivo", Arial, sans-serif;
+  font-size: 0.82rem;
+  margin-top: 0.6rem;
+  color: var(--sn-tuz);
+}
+
+@keyframes sn-vzestup {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- sekce obecně ---------- */
+
+.sn-sekce {
+  padding: 3.5rem 1.25rem;
+}
+
+.sn-sekce-hlava,
+.sn-nabidka-foto,
+.sn-listy,
+.sn-nabidka-vse {
+  max-width: var(--sn-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sn-sekce h2 {
+  font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+  font-weight: 800;
+  color: var(--sn-mapa);
+}
+
+.sn-sekce-perex {
+  max-width: 38rem;
+  margin: 0.9rem 0 0;
+}
+
+/* ---------- SEKCE 1: nabídka ---------- */
+
+.sn-nabidka-foto {
+  margin-top: 2rem;
+}
+
+.sn-listy {
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto 0;
+  display: grid;
+  gap: 1px;
+  background: var(--sn-sit);
+  border: 1px solid var(--sn-sit);
+}
+
+.sn-list {
+  background: var(--sn-papir);
+  padding: 1.4rem 1.4rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  position: relative;
+  transition: background-color 0.18s ease;
+}
+
+.sn-list::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background-color 0.18s ease;
+}
+
+.sn-list:hover {
+  background: #fff;
+}
+
+.sn-list:hover::before {
+  background: var(--sn-parcela);
+}
+
+.sn-list-typ {
+  font-family: "Archivo", Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--sn-parcela);
+  margin: 0;
+}
+
+.sn-list h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--sn-tuz);
+}
+
+.sn-list-detail {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #545c58;
+}
+
+.sn-list-pata {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--sn-sit);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.sn-list-cena {
+  font-family: "Archivo", Arial, sans-serif;
+  font-weight: 800;
+  font-size: 1.08rem;
+  color: var(--sn-mapa);
+}
+
+.sn-list-lokalita {
+  font-family: "Archivo", Arial, sans-serif;
+  font-size: 0.78rem;
+  color: #545c58;
+}
+
+.sn-nabidka-vse {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* ---------- SEKCE 2: postup + důvěra (mapový tisk inverzně) ---------- */
+
+.sn-postup {
+  background: var(--sn-mapa);
+  color: #e9ede8;
+  background-image: repeating-linear-gradient(
+      to right,
+      rgba(251, 250, 246, 0.05) 0,
+      rgba(251, 250, 246, 0.05) 1px,
+      transparent 1px,
+      transparent 72px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(251, 250, 246, 0.05) 0,
+      rgba(251, 250, 246, 0.05) 1px,
+      transparent 1px,
+      transparent 72px
+    );
+}
+
+.sn-postup h2 {
+  color: var(--sn-papir);
+}
+
+.sn-sekce-perex-svetly {
+  color: #c3cdc5;
+}
+
+.sn-postup-inner {
+  max-width: var(--sn-max);
+  margin: 0 auto;
+  display: grid;
+  gap: 2.75rem;
+}
+
+.sn-kroky {
+  list-style: none;
+  margin: 2.25rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1.75rem;
+}
+
+.sn-kroky li {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+}
+
+.sn-krok-cislo {
+  font-family: "Archivo", Arial, sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--sn-papir);
+  border: 2px solid var(--sn-parcela);
+  width: 2.4rem;
+  height: 2.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.sn-kroky h3 {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--sn-papir);
+}
+
+.sn-kroky p {
+  margin: 0.35rem 0 0;
+  font-size: 0.98rem;
+  color: #c3cdc5;
+}
+
+.sn-postup-foto {
+  margin: 0;
+}
+
+.sn-postup-foto img {
+  border-color: var(--sn-mosaz);
+}
+
+.sn-postup-foto figcaption {
+  color: #c3cdc5;
+}
+
+.sn-cisla {
+  margin: 2rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgba(251, 250, 246, 0.18);
+  border: 1px solid rgba(251, 250, 246, 0.18);
+}
+
+.sn-cisla > div {
+  background: var(--sn-mapa);
+  padding: 1rem 1.1rem;
+}
+
+.sn-cisla dt {
+  font-family: "Archivo", Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9fb0a6;
+}
+
+.sn-cisla dd {
+  margin: 0.2rem 0 0;
+  font-family: "Archivo", Arial, sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--sn-mosaz);
+}
+
+.sn-citace {
+  margin: 2rem 0 0;
+  padding-left: 1.1rem;
+  border-left: 3px solid var(--sn-parcela);
+}
+
+.sn-citace p {
+  margin: 0;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--sn-papir);
+}
+
+.sn-citace cite {
+  display: block;
+  margin-top: 0.6rem;
+  font-style: normal;
+  font-family: "Archivo", Arial, sans-serif;
+  font-size: 0.82rem;
+  color: #9fb0a6;
+}
+
+/* ---------- responzivita ---------- */
+
+@media (min-width: 640px) {
+  .sn-listy {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 920px) {
+  .sn-hero-inner {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    padding-top: 4rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .sn-listy {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sn-postup-inner {
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: start;
+  }
+
+  .sn-sekce {
+    padding: 5rem 1.25rem;
+  }
+}
+
+/* ---------- omezený pohyb ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .sn h1,
+  .sn-hero-perex,
+  .sn-hero-akce,
+  .sn-hero-fakta,
+  .sn-hero-obraz {
+    animation: none;
+  }
+
+  .sn-btn,
+  .sn-list,
+  .sn-list::before {
+    transition: none;
+  }
+
+  .sn-btn-plna:hover {
+    transform: none;
+  }
+}
