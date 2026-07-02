@@ -1,0 +1,585 @@
+/* ============================================================
+   VETERINA SKŘIVÁNEK · Ústí nad Labem
+   Tokeny:
+   --vs-inkoust  #1E3A34  hluboká lesní zeleň (klid ordinace)
+   --vs-mech     #2E5A4E  sekundární zeleň
+   --vs-papir    #FAFBF7  chladný bílý papír zdravotní karty
+   --vs-mata     #E4EFE6  světlá mátová plocha
+   --vs-puls     #E8590C  oranžový puls EKG (jediný teplý tón)
+   --vs-slunce   #F2C14E  skřivánčí žluť (drobné akcenty)
+   Typo: Archivo (display, široké verzálky) + Source Serif / Georgia (tělo)
+   Signature: EKG linka — puls zvířecího srdce, motiv celé stránky
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap");
+
+:root {
+  --vs-inkoust: #1e3a34;
+  --vs-mech: #2e5a4e;
+  --vs-papir: #fafbf7;
+  --vs-mata: #e4efe6;
+  --vs-puls: #e8590c;
+  --vs-slunce: #f2c14e;
+
+  --vs-display: "Archivo", "Arial Narrow", sans-serif;
+  --vs-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--vs-papir);
+  color: var(--vs-inkoust);
+  font-family: var(--vs-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.vs a:focus-visible,
+.vs button:focus-visible {
+  outline: 3px solid var(--vs-puls);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ===== Hlavička ===== */
+.vs-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem clamp(1.25rem, 5vw, 4rem);
+}
+
+.vs-wordmark {
+  text-decoration: none;
+  color: var(--vs-inkoust);
+  font-family: var(--vs-display);
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.vs-wordmark-vet {
+  font-weight: 900;
+  font-stretch: 115%;
+  letter-spacing: 0.28em;
+  font-size: 0.78rem;
+}
+
+.vs-wordmark-skr {
+  font-weight: 500;
+  font-stretch: 75%;
+  font-size: 1.55rem;
+  letter-spacing: 0.01em;
+  color: var(--vs-mech);
+}
+
+.vs-top-tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--vs-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--vs-inkoust);
+  text-decoration: none;
+  border: 2px solid var(--vs-inkoust);
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.vs-top-tel:hover {
+  background: var(--vs-inkoust);
+  color: var(--vs-papir);
+}
+
+/* ===== HERO ===== */
+.vs-hero {
+  position: relative;
+  padding: clamp(2.5rem, 7vw, 5.5rem) clamp(1.25rem, 5vw, 4rem) clamp(3rem, 8vw, 6rem);
+  max-width: 72rem;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* Signature: EKG linka přes celý hero, kreslí se při načtení */
+.vs-ekg {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: clamp(90px, 16vw, 180px);
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.vs-ekg svg {
+  width: 100%;
+  height: 100%;
+}
+
+.vs-ekg-path {
+  stroke: var(--vs-puls);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 2600;
+  stroke-dashoffset: 2600;
+  animation: vs-kresli 2.4s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+}
+
+@keyframes vs-kresli {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.vs-hero-eyebrow {
+  font-family: var(--vs-display);
+  font-weight: 700;
+  font-stretch: 110%;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--vs-mech);
+  margin: 0 0 1.2rem;
+  animation: vs-nahoru 0.7s ease-out both;
+}
+
+.vs-hero-title {
+  font-family: var(--vs-display);
+  font-weight: 850;
+  font-stretch: 78%;
+  font-size: clamp(2.4rem, 7.5vw, 5.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.4rem;
+  max-width: 18ch;
+  text-wrap: balance;
+  animation: vs-nahoru 0.7s ease-out 0.1s both;
+}
+
+.vs-hero-title em {
+  font-style: normal;
+  color: var(--vs-puls);
+  position: relative;
+  display: inline-block;
+}
+
+.vs-underline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.18em;
+  width: 100%;
+  height: 0.28em;
+}
+
+.vs-underline path {
+  stroke: var(--vs-slunce);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vs-hero-lead {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  animation: vs-nahoru 0.7s ease-out 0.2s both;
+}
+
+.vs-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 2.2rem;
+  animation: vs-nahoru 0.7s ease-out 0.3s both;
+}
+
+.vs-btn {
+  font-family: var(--vs-display);
+  font-weight: 800;
+  font-stretch: 105%;
+  font-size: 1.02rem;
+  text-decoration: none;
+  padding: 0.9rem 1.8rem;
+  border-radius: 999px;
+  transition: transform 0.15s, background 0.2s, color 0.2s;
+}
+
+.vs-btn:hover {
+  transform: translateY(-2px);
+}
+
+.vs-btn-primary {
+  background: var(--vs-puls);
+  color: #fff;
+}
+
+.vs-btn-primary:hover {
+  background: #cf4d09;
+}
+
+.vs-btn-ghost {
+  color: var(--vs-inkoust);
+  border: 2px solid var(--vs-inkoust);
+}
+
+.vs-btn-ghost:hover {
+  background: var(--vs-inkoust);
+  color: var(--vs-papir);
+}
+
+.vs-hero-hours {
+  margin: 0;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 2rem;
+  padding: 0.9rem 1.3rem;
+  background: var(--vs-mata);
+  border-radius: 12px;
+  animation: vs-nahoru 0.7s ease-out 0.4s both;
+  position: relative;
+  z-index: 1;
+}
+
+.vs-hours-row {
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+}
+
+.vs-hours-row dt {
+  font-family: var(--vs-display);
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vs-mech);
+}
+
+.vs-hours-row dd {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+@keyframes vs-nahoru {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Společné pro sekce ===== */
+.vs-section-head {
+  max-width: 40rem;
+  margin-bottom: clamp(2rem, 5vw, 3.2rem);
+}
+
+.vs-eyebrow {
+  font-family: var(--vs-display);
+  font-weight: 700;
+  font-stretch: 110%;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--vs-puls);
+  margin: 0 0 0.7rem;
+}
+
+.vs-eyebrow-svetly {
+  color: var(--vs-slunce);
+}
+
+.vs-section-head h2 {
+  font-family: var(--vs-display);
+  font-weight: 850;
+  font-stretch: 80%;
+  font-size: clamp(1.7rem, 4.5vw, 2.7rem);
+  line-height: 1.08;
+  margin: 0 0 0.8rem;
+  text-wrap: balance;
+}
+
+.vs-section-lead {
+  margin: 0;
+  font-size: 1.08rem;
+}
+
+/* ===== SEKCE: SLUŽBY ===== */
+.vs-sluzby {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.vs-sluzby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.vs-karta {
+  border-radius: 16px;
+  padding: 1.8rem 1.6rem;
+  background: var(--vs-mata);
+}
+
+.vs-karta-operace {
+  background: var(--vs-inkoust);
+  color: var(--vs-papir);
+}
+
+.vs-karta h3 {
+  font-family: var(--vs-display);
+  font-weight: 850;
+  font-stretch: 90%;
+  font-size: 1.4rem;
+  margin: 0 0 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.vs-karta-znak {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  background: var(--vs-puls);
+  color: #fff;
+  flex: none;
+}
+
+.vs-karta-operace .vs-karta-znak {
+  background: var(--vs-slunce);
+  color: var(--vs-inkoust);
+}
+
+.vs-karta-pozn {
+  margin: 0 0 1rem;
+  font-size: 0.98rem;
+  opacity: 0.85;
+}
+
+.vs-karta ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.vs-karta li {
+  padding-left: 1.3rem;
+  position: relative;
+}
+
+.vs-karta li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--vs-puls);
+}
+
+.vs-karta-operace li::before {
+  background: var(--vs-slunce);
+}
+
+/* Přístroje — pás štítků jako na zdravotní kartě */
+.vs-pristroje {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1.2rem;
+  border-top: 3px solid var(--vs-inkoust);
+  padding-top: 1.4rem;
+}
+
+.vs-pristroj p {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+}
+
+.vs-pristroj-tag {
+  font-family: var(--vs-display);
+  font-weight: 900;
+  font-stretch: 115%;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  background: var(--vs-inkoust);
+  color: var(--vs-slunce);
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+/* ===== SEKCE: TÝM ===== */
+.vs-tym {
+  background: var(--vs-inkoust);
+  color: var(--vs-papir);
+  padding: clamp(3rem, 7vw, 5.5rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.vs-tym > * {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vs-tym .vs-section-head {
+  max-width: 44rem;
+  margin-left: 0;
+}
+
+@media (min-width: 72rem) {
+  .vs-tym .vs-section-head {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 72rem;
+  }
+  .vs-tym .vs-section-head > * {
+    max-width: 44rem;
+  }
+}
+
+.vs-tym-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1.2rem;
+}
+
+.vs-osoba {
+  border: 1px solid rgba(250, 251, 247, 0.22);
+  border-radius: 14px;
+  padding: 1.4rem 1.4rem 1.5rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.vs-osoba:hover {
+  border-color: var(--vs-slunce);
+  background: rgba(250, 251, 247, 0.05);
+}
+
+.vs-osoba-role {
+  font-family: var(--vs-display);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--vs-slunce);
+  margin: 0 0 0.4rem;
+}
+
+.vs-osoba h3 {
+  font-family: var(--vs-display);
+  font-weight: 800;
+  font-stretch: 88%;
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem;
+}
+
+.vs-osoba-popis {
+  margin: 0;
+  font-size: 0.96rem;
+  opacity: 0.88;
+}
+
+/* Útulek / důvěra */
+.vs-utulek {
+  margin-top: 2.4rem;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  background: rgba(250, 251, 247, 0.06);
+  border-left: 4px solid var(--vs-puls);
+  border-radius: 0 14px 14px 0;
+  padding: 1.3rem 1.5rem;
+}
+
+.vs-utulek-ekg {
+  flex: none;
+  width: 5.5rem;
+  height: 1.4rem;
+}
+
+.vs-utulek-ekg path {
+  stroke: var(--vs-puls);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vs-utulek p {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+/* ===== Mobil ===== */
+@media (max-width: 40rem) {
+  .vs-top {
+    flex-wrap: wrap;
+  }
+
+  .vs-hero-hours {
+    display: grid;
+    gap: 0.35rem;
+    width: 100%;
+  }
+
+  .vs-btn {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  .vs-utulek {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+}
+
+/* ===== Redukovaný pohyb ===== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .vs-ekg-path {
+    animation: none;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+
+  .vs-hero-eyebrow,
+  .vs-hero-title,
+  .vs-hero-lead,
+  .vs-hero-actions,
+  .vs-hero-hours {
+    animation: none;
+  }
+
+  .vs-btn:hover {
+    transform: none;
+  }
+}
