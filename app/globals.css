@@ -1,0 +1,600 @@
+/* ============================================================
+   MOTOTECHNA DRIVE — autopůjčovna Brno
+   Tokeny:
+   --md-asphalt  #16181D  (mokrý asfalt — základ)
+   --md-paper    #EEF0F2  (světlá karoserie / papír smlouvy)
+   --md-signal   #FFB400  (výstražná/taxi žlutá — signage půjčoven)
+   --md-steel    #8B939E  (ocel, popisky)
+   --md-line     #2A2E36  (dělicí linky na tmavé)
+   Typo: Archivo Narrow-like přes system stack? Ne — používáme
+   system stack s výraznou kondenzací přes font-stretch fallback:
+   Display: "Arial Narrow", "Helvetica Neue Condensed" fallback →
+   dopravní/SPZ estetika. Body: system-ui.
+   Signature: SPZ štítek + žlutý "jízdní pruh" vedený levým okrajem.
+   ============================================================ */
+
+:root {
+  --md-asphalt: #16181d;
+  --md-asphalt-2: #1d2026;
+  --md-paper: #eef0f2;
+  --md-white: #ffffff;
+  --md-signal: #ffb400;
+  --md-steel: #8b939e;
+  --md-line: #2a2e36;
+  --md-ink: #1a1c21;
+
+  --md-display: "Arial Narrow", "Helvetica Neue", "Segoe UI", Arial,
+    sans-serif;
+  --md-body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --md-mono: "DIN Alternate", "Bahnschrift", "Arial Narrow", monospace;
+
+  --md-max: 72rem;
+  --md-pad: clamp(1.25rem, 4vw, 3rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--md-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--md-ink);
+  background: var(--md-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Focus — žlutý "pruh" kolem prvku, viditelný na světlé i tmavé */
+.md a:focus-visible,
+.md button:focus-visible {
+  outline: 3px solid var(--md-signal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.md-hero {
+  position: relative;
+  min-height: 92svh;
+  display: flex;
+  flex-direction: column;
+  color: var(--md-white);
+  overflow: hidden;
+  background: var(--md-asphalt);
+  /* signature: žlutý jízdní pruh po levé straně celé stránky */
+  border-left: 6px solid var(--md-signal);
+}
+
+.md-hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.md-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.md-hero-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      to top,
+      rgba(22, 24, 29, 0.95) 0%,
+      rgba(22, 24, 29, 0.55) 45%,
+      rgba(22, 24, 29, 0.25) 100%
+    );
+}
+
+.md-hero-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem var(--md-pad);
+}
+
+/* Wordmark — kondenzované, dvě váhy, žlutý blok jako SPZ držák */
+.md-wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--md-display);
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.md-wordmark-main {
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.md-wordmark-sub {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--md-asphalt);
+  background: var(--md-signal);
+  padding: 0.15em 0.45em 0.1em;
+  border-radius: 3px;
+}
+
+.md-hero-phone {
+  font-family: var(--md-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: var(--md-white);
+  text-decoration: none;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 3px;
+  padding: 0.5em 1em;
+  white-space: nowrap;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.md-hero-phone:hover {
+  border-color: var(--md-signal);
+  background: rgba(255, 180, 0, 0.12);
+}
+
+.md-hero-body {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  padding: 0 var(--md-pad) clamp(2rem, 6vw, 4rem);
+  max-width: 46rem;
+}
+
+/* SPZ štítek — signature prvek */
+.md-plate {
+  display: inline-flex;
+  align-items: stretch;
+  margin: 0 0 1.25rem;
+  border: 2px solid var(--md-white);
+  border-radius: 6px;
+  overflow: hidden;
+  font-family: var(--md-mono);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  background: var(--md-white);
+  color: var(--md-asphalt);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+.md-plate-eu {
+  background: #003399;
+  color: var(--md-white);
+  font-size: 0.7rem;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.35em 0.45em 0.25em;
+}
+
+.md-plate-txt {
+  padding: 0.3em 0.7em 0.2em;
+  font-size: 1.05rem;
+}
+
+.md-hero-title {
+  font-family: var(--md-display);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 8vw, 4.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+}
+
+.md-hero-title em {
+  font-style: normal;
+  color: var(--md-signal);
+}
+
+.md-hero-lead {
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 36rem;
+  margin: 0 0 1.75rem;
+}
+
+.md-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.md-btn {
+  font-family: var(--md-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85em 1.6em;
+  border-radius: 3px;
+  display: inline-block;
+  transition: transform 160ms ease, background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.md-btn-solid {
+  background: var(--md-signal);
+  color: var(--md-asphalt);
+}
+
+.md-btn-solid:hover {
+  transform: translateY(-2px);
+  background: #ffc22e;
+}
+
+.md-btn-ghost {
+  color: var(--md-white);
+  border: 2px solid rgba(255, 255, 255, 0.55);
+}
+
+.md-btn-ghost:hover {
+  border-color: var(--md-signal);
+  transform: translateY(-2px);
+}
+
+.md-hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 2.5rem;
+  margin: 0;
+  padding: 1rem 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.md-hero-facts div {
+  min-width: 8rem;
+}
+
+.md-hero-facts dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--md-steel);
+  margin: 0 0 0.15rem;
+}
+
+.md-hero-facts dd {
+  margin: 0;
+  font-family: var(--md-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+/* Načtení hero — jedna orchestrace, žádné konfety */
+@media (prefers-reduced-motion: no-preference) {
+  .md-plate,
+  .md-hero-title,
+  .md-hero-lead,
+  .md-hero-cta,
+  .md-hero-facts {
+    animation: md-rise 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .md-hero-title {
+    animation-delay: 80ms;
+  }
+  .md-hero-lead {
+    animation-delay: 160ms;
+  }
+  .md-hero-cta {
+    animation-delay: 240ms;
+  }
+  .md-hero-facts {
+    animation-delay: 320ms;
+  }
+}
+
+@keyframes md-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============ SEKCE — společné ============ */
+
+.md-section {
+  padding: clamp(3rem, 8vw, 5.5rem) var(--md-pad);
+  border-left: 6px solid var(--md-signal);
+}
+
+.md-section > * {
+  max-width: var(--md-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.md-eyebrow {
+  font-family: var(--md-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #8a6300;
+  margin: 0 0 0.5rem;
+}
+
+.md-eyebrow-light {
+  color: var(--md-signal);
+}
+
+.md-h2 {
+  font-family: var(--md-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  margin: 0 0 0.75rem;
+}
+
+.md-section-head {
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.md-section-lead {
+  max-width: 38rem;
+  color: #4a4f57;
+  margin: 0;
+}
+
+.md-img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* ============ SEKCE 1 — flotila ============ */
+
+.md-fleet {
+  display: grid;
+  gap: 2rem;
+}
+
+.md-fleet-media {
+  margin: 0;
+}
+
+.md-fleet-media figcaption {
+  font-size: 0.85rem;
+  color: #5a5f66;
+  margin-top: 0.5rem;
+  font-family: var(--md-display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.md-rates {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.md-rate {
+  padding: 1.25rem 0;
+  border-top: 1px solid #cfd3d8;
+}
+
+.md-rate:last-child {
+  border-bottom: 1px solid #cfd3d8;
+}
+
+.md-rate-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.md-rate h3 {
+  font-family: var(--md-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+.md-rate-price {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #4a4f57;
+}
+
+.md-rate-price strong {
+  font-family: var(--md-display);
+  font-size: 1.25rem;
+  color: var(--md-ink);
+  background: linear-gradient(transparent 62%, rgba(255, 180, 0, 0.55) 62%);
+  padding: 0 0.1em;
+}
+
+.md-rate-desc {
+  margin: 0.4rem 0 0;
+  color: #4a4f57;
+  max-width: 34rem;
+}
+
+/* ============ SEKCE 2 — tmavá / důvěra ============ */
+
+.md-section-dark {
+  background: var(--md-asphalt);
+  color: var(--md-paper);
+}
+
+.md-section-dark .md-h2 {
+  color: var(--md-white);
+}
+
+.md-steps {
+  list-style: none;
+  margin: 0 auto clamp(2.5rem, 6vw, 4rem);
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.md-step {
+  border-top: 2px solid var(--md-line);
+  padding-top: 1rem;
+}
+
+/* Markery P/R/D = řadicí páka: Parkování → Rezervace… ne, poctivě:
+   písmena z voliče automatu (P-R-D) — vizuální vtip z interiéru auta */
+.md-step-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  border: 2px solid var(--md-signal);
+  color: var(--md-signal);
+  font-family: var(--md-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.md-step h3 {
+  font-family: var(--md-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.4rem;
+  color: var(--md-white);
+}
+
+.md-step p {
+  margin: 0;
+  color: #b9bec6;
+  max-width: 30rem;
+}
+
+.md-trust {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.md-trust-media {
+  margin: 0;
+}
+
+.md-quote {
+  margin: 0 0 1.5rem;
+  border-left: 4px solid var(--md-signal);
+  padding-left: 1.25rem;
+}
+
+.md-quote p {
+  margin: 0 0 0.6rem;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  color: var(--md-white);
+}
+
+.md-quote footer {
+  font-size: 0.9rem;
+  color: var(--md-steel);
+}
+
+.md-trust-facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+  color: #b9bec6;
+}
+
+.md-trust-facts strong {
+  font-family: var(--md-display);
+  font-weight: 700;
+  color: var(--md-signal);
+  font-size: 1.1rem;
+  margin-right: 0.35rem;
+}
+
+/* ============ RESPONZIVITA ============ */
+
+@media (min-width: 46rem) {
+  .md-steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 60rem) {
+  .md-fleet {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3.5rem;
+    align-items: start;
+  }
+
+  .md-trust {
+    grid-template-columns: 1fr 1.1fr;
+    gap: 3.5rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  .md-hero-phone {
+    font-size: 0.85rem;
+    padding: 0.45em 0.8em;
+  }
+
+  .md-hero {
+    border-left-width: 4px;
+  }
+
+  .md-section {
+    border-left-width: 4px;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .md *,
+  .md *::before,
+  .md *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
