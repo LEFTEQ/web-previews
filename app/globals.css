@@ -1,0 +1,488 @@
+/* ============================================================
+   EUC Klinika Liberec — audiologie / sluchadla
+   Palette: klinická modř EUC světa + teplá "kůže tvarovky"
+   ------------------------------------------------------------
+   --ink        #123047  hluboká petrolejová modř (text)
+   --paper      #F6FAFC  chladný, čistý klinický podklad
+   --pool       #DCEDF4  světlá "kabinová" modř (plochy)
+   --signal     #0E7C9E  signální audiologická modř (akce)
+   --earmold    #E8B08C  teplá karamelová — barva ušní tvarovky
+   --line       #B8D3DE  linky audiogramu
+   ============================================================ */
+
+:root {
+  --ink: #123047;
+  --paper: #f6fafc;
+  --pool: #dcedf4;
+  --signal: #0e7c9e;
+  --signal-dark: #0a617c;
+  --earmold: #e8b08c;
+  --line: #b8d3de;
+
+  --font-display: "Trebuchet MS", "Segoe UI", Verdana, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---------- Focus ---------- */
+.audio-page a:focus-visible,
+.audio-page button:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Wordmark ---------- */
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 2rem;
+  font-family: var(--font-display);
+}
+
+.wordmark-euc {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--signal);
+}
+
+.wordmark-sep {
+  width: 34px;
+  height: 2px;
+  background: var(--earmold);
+  flex: none;
+}
+
+.wordmark-place {
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.75;
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  background: linear-gradient(175deg, var(--pool) 0%, var(--paper) 78%);
+  padding: 2.5rem 1.25rem 3.5rem;
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.3rem, 7vw, 4rem);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.25rem;
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-line-2 {
+  color: var(--signal);
+}
+
+.hero-line-3 {
+  color: var(--signal-dark);
+}
+
+/* page-load: řádky titulku "nabíhají" jako tóny audiometrie */
+.hero-line {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: tone-in 0.6s ease-out forwards;
+}
+.hero-line-1 { animation-delay: 0.05s; }
+.hero-line-2 { animation-delay: 0.2s; }
+.hero-line-3 { animation-delay: 0.35s; }
+
+@keyframes tone-in {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-lead {
+  max-width: 34em;
+  margin: 0 0 1.75rem;
+  font-size: 1.125rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.hero-note {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.65;
+  margin: 0;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--signal);
+  color: #fff;
+}
+
+.btn-solid:hover {
+  background: var(--signal-dark);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  border: 2px solid var(--signal);
+  color: var(--signal-dark);
+  background: transparent;
+}
+
+.btn-ghost:hover {
+  background: rgba(14, 124, 158, 0.08);
+}
+
+/* ---------- Hero figure + audiogram (signature) ---------- */
+.hero-figure {
+  margin: 0;
+  position: relative;
+}
+
+.hero-img {
+  width: 100%;
+  border-radius: 20px 20px 20px 90px; /* echo tvaru ušní tvarovky */
+  box-shadow: 0 24px 48px rgba(18, 48, 71, 0.18);
+}
+
+.audiogram {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: -1.4rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.9rem 1.1rem 0.6rem;
+  box-shadow: 0 12px 28px rgba(18, 48, 71, 0.14);
+}
+
+.audiogram-svg {
+  width: 100%;
+  height: 58px;
+  display: block;
+}
+
+.audiogram-line {
+  stroke: var(--signal);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 460;
+  stroke-dashoffset: 460;
+  animation: draw-curve 1.6s ease-out 0.55s forwards;
+}
+
+@keyframes draw-curve {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.audiogram-dots circle {
+  fill: var(--earmold);
+  opacity: 0;
+  animation: tone-in 0.4s ease-out forwards;
+}
+.audiogram-dots circle:nth-child(1) { animation-delay: 0.9s; }
+.audiogram-dots circle:nth-child(2) { animation-delay: 1.2s; }
+.audiogram-dots circle:nth-child(3) { animation-delay: 1.5s; }
+.audiogram-dots circle:nth-child(4) { animation-delay: 1.8s; }
+
+.audiogram-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--signal-dark);
+  padding-top: 0.35rem;
+  border-top: 1px dashed var(--line);
+}
+
+/* ---------- Sections common ---------- */
+.section-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin: 0 0 0.75rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.15;
+  margin: 0 0 1.5rem;
+  max-width: 22em;
+}
+
+/* ---------- Journey (cesta ke sluchadlu) ---------- */
+.journey {
+  padding: 5rem 0 3.5rem;
+}
+
+.journey-list {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.journey-step {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.5rem 1.5rem 1.4rem;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.journey-step:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(18, 48, 71, 0.12);
+}
+
+/* frekvenční markery místo obecného číslování — kroky sledují
+   frekvence audiogramu, stejná osa jako křivka v hero */
+.step-freq {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--signal-dark);
+  background: var(--pool);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.step-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem;
+}
+
+.step-text {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* ---------- Trust section ---------- */
+.trust {
+  background: var(--pool);
+  padding: 4rem 0 4.5rem;
+}
+
+.trust-grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.trust-figure {
+  margin: 0;
+}
+
+.trust-img {
+  width: 100%;
+  border-radius: 90px 20px 20px 20px;
+  box-shadow: 0 20px 40px rgba(18, 48, 71, 0.16);
+}
+
+.trust-caption {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  opacity: 0.7;
+  margin-top: 0.75rem;
+}
+
+.trust-lead {
+  max-width: 36em;
+  margin: 0 0 1.5rem;
+}
+
+.trust-points {
+  list-style: none;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.trust-points li {
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.trust-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--earmold);
+}
+
+.trust-points strong {
+  font-family: var(--font-display);
+}
+
+.trust-quote {
+  margin: 0 0 1.75rem;
+  padding: 1.25rem 1.5rem;
+  background: #fff;
+  border-left: 5px solid var(--earmold);
+  border-radius: 0 14px 14px 0;
+}
+
+.trust-quote p {
+  margin: 0 0 0.5rem;
+  font-style: italic;
+}
+
+.trust-quote cite {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+}
+
+.trust-mail {
+  margin: 1rem 0 0;
+  font-size: 0.95rem;
+}
+
+.trust-mail a {
+  color: var(--signal-dark);
+  font-weight: 700;
+  text-decoration-thickness: 2px;
+}
+
+/* ---------- Desktop layout ---------- */
+@media (min-width: 760px) {
+  .hero {
+    padding: 3.5rem 2rem 5rem;
+  }
+
+  .hero-inner {
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    gap: 3.5rem;
+  }
+
+  .journey-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .trust-grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: start;
+    gap: 3.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .journey-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-line,
+  .audiogram-dots circle {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .audiogram-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .btn,
+  .journey-step {
+    transition: none;
+  }
+}
