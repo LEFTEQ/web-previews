@@ -1,0 +1,610 @@
+/* ==========================================================================
+   MARON CZ — markýzy, Praha 10-Malešice
+   Koncept: stín jako materiál. Paleta z reality řemesla:
+   - inkoustově modrá noc pod markýzou (#1B2A41)
+   - sluncem prohřátá okrová plátna (#E8A13D)
+   - denní světlo (#FAF6EE — teplé, ale ne krémová šablona: nese ji modrá)
+   - stínová modř (#31517A) a plátěná bílá (#FFFDF7)
+   Typo: Archivo/„system grotesk" pro display v extra tučném řezu (markýzová
+   plachta = plné, široké tvary), Georgia/serif pro perexy (řemeslná důvěra).
+   Signature: lamely plátna, které se při načtení VYSOUVAJÍ přes hero —
+   pohyb markýzy převedený do typografické kompozice.
+   ========================================================================== */
+
+:root {
+  --noc: #1b2a41;
+  --stin: #31517a;
+  --slunce: #e8a13d;
+  --slunce-tmave: #c77f1e;
+  --den: #faf6ee;
+  --platno: #fffdf7;
+  --pismo-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial,
+    sans-serif;
+  --pismo-text: Georgia, "Times New Roman", serif;
+  --pismo-ui: "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--den);
+  color: var(--noc);
+  font-family: var(--pismo-text);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mk img {
+  max-width: 100%;
+}
+
+.mk a:focus-visible,
+.mk button:focus-visible {
+  outline: 3px solid var(--slunce);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =================== HERO =================== */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--noc);
+  color: var(--platno);
+  padding: 1.5rem 1.25rem 3.5rem;
+}
+
+.hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Wordmark: O nahrazeno půlkruhem — profil vysunuté markýzy */
+.wordmark {
+  font-family: var(--pismo-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.14em;
+  display: inline-flex;
+  align-items: center;
+}
+
+.wordmark-o {
+  display: inline-block;
+  width: 0.95em;
+  height: 0.52em;
+  margin: 0 0.06em;
+  border-radius: 0.95em 0.95em 0 0;
+  background: var(--slunce);
+  transform: translateY(0.08em);
+}
+
+.hero-lokalita {
+  font-family: var(--pismo-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 253, 247, 0.65);
+}
+
+/* --- signature: lamely markýzy --- */
+
+.awning {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.lam {
+  position: absolute;
+  left: 0;
+  height: 12%;
+  width: 100%;
+  transform-origin: left center;
+  animation: vysun 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.lam-1 {
+  top: 0;
+  background: var(--slunce);
+  animation-delay: 0.05s;
+}
+.lam-2 {
+  top: 12%;
+  background: var(--platno);
+  opacity: 0.12;
+  animation-delay: 0.15s;
+}
+.lam-3 {
+  top: 24%;
+  background: var(--stin);
+  opacity: 0.5;
+  animation-delay: 0.25s;
+}
+.lam-4 {
+  bottom: 12%;
+  background: var(--platno);
+  opacity: 0.06;
+  animation-delay: 0.35s;
+}
+.lam-5 {
+  bottom: 0;
+  background: var(--slunce);
+  height: 6px;
+  animation-delay: 0.45s;
+}
+
+/* Lamely jsou jen barevné pásy s nízkou výškou — dekorativní vrstva */
+.lam-1 {
+  height: 8px;
+}
+.lam-2 {
+  height: 60px;
+  top: 8px;
+}
+.lam-3 {
+  height: 0;
+}
+.lam-4 {
+  height: 90px;
+  bottom: 0;
+}
+
+@keyframes vysun {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.hero-titulek {
+  position: relative;
+  z-index: 2;
+  font-family: var(--pismo-display);
+  font-size: clamp(2.4rem, 9vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.5rem;
+  text-transform: uppercase;
+}
+
+.radek {
+  display: block;
+  animation: naznak 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.radek-slunce {
+  color: var(--platno);
+  animation-delay: 0.5s;
+}
+
+/* „Stín ano." — sluneční pás jako vysunuté plátno pod textem */
+.radek-stin {
+  color: var(--noc);
+  background: var(--slunce);
+  display: inline-block;
+  padding: 0.05em 0.25em 0.08em;
+  margin-top: 0.12em;
+  animation-delay: 0.75s;
+  box-shadow: 0.15em 0.25em 0 rgba(0, 0, 0, 0.35);
+}
+
+@keyframes naznak {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-perex {
+  position: relative;
+  z-index: 2;
+  max-width: 34rem;
+  font-size: 1.15rem;
+  color: rgba(255, 253, 247, 0.85);
+  margin: 0 0 2rem;
+  animation: naznak 0.9s 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-akce {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.75rem;
+  animation: naznak 0.9s 1.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.btn {
+  font-family: var(--pismo-ui);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px 999px 4px 4px; /* profil markýzy */
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.btn-plna {
+  background: var(--slunce);
+  color: var(--noc);
+}
+
+.btn-plna:hover {
+  background: var(--platno);
+  transform: translateY(-2px);
+}
+
+.btn-linka {
+  color: var(--platno);
+  border: 2px solid rgba(255, 253, 247, 0.4);
+}
+
+.btn-linka:hover {
+  border-color: var(--slunce);
+  color: var(--slunce);
+  transform: translateY(-2px);
+}
+
+.hero-fakta {
+  position: relative;
+  z-index: 2;
+  list-style: none;
+  margin: 0;
+  padding: 1.25rem 0 0;
+  border-top: 1px solid rgba(255, 253, 247, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 3rem;
+  animation: naznak 0.9s 1.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-fakta li {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-fakta strong {
+  font-family: var(--pismo-display);
+  font-size: 1.35rem;
+  color: var(--slunce);
+  letter-spacing: 0.02em;
+}
+
+.hero-fakta span {
+  font-family: var(--pismo-ui);
+  font-size: 0.85rem;
+  color: rgba(255, 253, 247, 0.7);
+}
+
+/* =================== SEKCE OBECNĚ =================== */
+
+.sekce {
+  padding: 4rem 1.25rem;
+}
+
+.sekce-hlava {
+  max-width: 46rem;
+  margin: 0 auto 2.75rem;
+  text-align: center;
+}
+
+.eyebrow {
+  font-family: var(--pismo-ui);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--slunce-tmave);
+  margin: 0 0 0.75rem;
+}
+
+.eyebrow::before,
+.eyebrow::after {
+  content: "—";
+  margin: 0 0.6em;
+  color: currentColor;
+  opacity: 0.5;
+}
+
+.sekce h2 {
+  font-family: var(--pismo-display);
+  font-size: clamp(1.7rem, 5vw, 2.75rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin: 0 0 1rem;
+}
+
+.sekce-perex {
+  font-size: 1.1rem;
+  color: var(--stin);
+  margin: 0;
+}
+
+/* =================== SEKCE 1: NABÍDKA =================== */
+
+.mrizka {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.karta {
+  background: var(--platno);
+  border: 1px solid rgba(27, 42, 65, 0.12);
+  border-top: 6px solid var(--slunce); /* pás plátna nad každou kartou */
+  border-radius: 14px 14px 6px 6px;
+  padding: 1.5rem 1.5rem 1.6rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(27, 42, 65, 0.12);
+}
+
+.karta-stitek {
+  font-family: var(--pismo-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--stin);
+}
+
+.karta h3 {
+  font-family: var(--pismo-display);
+  font-size: 1.25rem;
+  margin: 0.5rem 0 0.6rem;
+  line-height: 1.2;
+}
+
+.karta p {
+  margin: 0;
+  color: #3d4c63;
+  font-size: 0.98rem;
+}
+
+.novinka {
+  max-width: 68rem;
+  margin: 2rem auto 0;
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  background: var(--noc);
+  color: var(--platno);
+  border-radius: 999px 14px 14px 14px;
+  padding: 1.5rem 1.75rem;
+}
+
+.novinka-znak {
+  flex: none;
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  background: var(--slunce);
+  color: var(--noc);
+  border-radius: 50%;
+  font-size: 1.4rem;
+}
+
+.novinka h3 {
+  font-family: var(--pismo-display);
+  font-size: 1.15rem;
+  margin: 0 0 0.4rem;
+}
+
+.novinka p {
+  margin: 0;
+  color: rgba(255, 253, 247, 0.85);
+  font-size: 0.98rem;
+}
+
+/* =================== SEKCE 2: DŮVĚRA =================== */
+
+.sekce-duvera {
+  background: var(--stin);
+  color: var(--platno);
+}
+
+.sekce-duvera h2 {
+  color: var(--platno);
+}
+
+.eyebrow-svetly {
+  color: var(--slunce);
+}
+
+.kroky {
+  list-style: none;
+  max-width: 68rem;
+  margin: 0 auto 3.5rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  counter-reset: krok;
+}
+
+.kroky-polozka {
+  background: rgba(27, 42, 65, 0.45);
+  border-radius: 12px;
+  padding: 1.4rem 1.5rem;
+  border-left: 4px solid var(--slunce);
+}
+
+.kroky-cislo {
+  font-family: var(--pismo-display);
+  font-size: 1.9rem;
+  color: var(--slunce);
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.kroky-polozka h3 {
+  font-family: var(--pismo-display);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.5rem;
+}
+
+.kroky-polozka p {
+  margin: 0;
+  font-size: 0.96rem;
+  color: rgba(255, 253, 247, 0.85);
+}
+
+.realizace {
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+.realizace-titulek {
+  font-family: var(--pismo-display);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+  text-align: center;
+}
+
+.realizace-seznam {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.realizace-polozka {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(255, 253, 247, 0.18);
+}
+
+.realizace-polozka:first-child {
+  border-top: 1px solid rgba(255, 253, 247, 0.18);
+}
+
+.realizace-misto {
+  flex: none;
+  font-family: var(--pismo-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--slunce);
+  color: var(--noc);
+  border-radius: 999px 999px 4px 4px;
+  padding: 0.35rem 0.75rem;
+  margin-top: 0.15rem;
+  min-width: 5.5rem;
+  text-align: center;
+}
+
+.realizace-polozka strong {
+  font-family: var(--pismo-ui);
+  font-size: 1.02rem;
+  display: block;
+}
+
+.realizace-polozka p {
+  margin: 0.25rem 0 0;
+  font-size: 0.94rem;
+  color: rgba(255, 253, 247, 0.8);
+}
+
+.realizace-pozn {
+  margin: 1.75rem 0 0;
+  text-align: center;
+  font-style: italic;
+  color: rgba(255, 253, 247, 0.85);
+}
+
+/* =================== RESPONZIVITA =================== */
+
+@media (min-width: 640px) {
+  .hero {
+    padding: 2rem 3rem 4.5rem;
+  }
+
+  .sekce {
+    padding: 5rem 3rem;
+  }
+
+  .mrizka {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .kroky {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    padding: 2.5rem 5rem 5.5rem;
+  }
+
+  .mrizka {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .kroky {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* =================== REDUKOVANÝ POHYB =================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .lam,
+  .radek,
+  .hero-perex,
+  .hero-akce,
+  .hero-fakta {
+    animation: none !important;
+  }
+
+  .btn,
+  .karta {
+    transition: none !important;
+  }
+
+  .btn:hover,
+  .karta:hover {
+    transform: none;
+  }
+}
