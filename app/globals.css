@@ -1,0 +1,605 @@
+/* ============================================================
+   JINÁ ZAHRADA — zahradní centra Chabařovice & Debř
+   Koncept: "řádkovaný záhon" — svislé brázdy, ze kterých raší
+   listy; hluboká lesní zelená + světlá skleníková plocha,
+   akcent hortenziová růžová. Typografie: široký grotesk pro
+   titulky, klidný humanist pro text.
+   ============================================================ */
+
+:root {
+  --jz-les: #1e3d2b;        /* hluboká lesní zelená */
+  --jz-mech: #3f6b46;       /* mechová střední zelená */
+  --jz-vyhonek: #9dc98a;    /* světlý výhonek */
+  --jz-sklenik: #f2f6ec;    /* světlé skleníkové pozadí */
+  --jz-hortenzie: #e0679b;  /* hortenziová růžová — akcent */
+  --jz-hlina: #2a2620;      /* tmavý text / hlína */
+
+  --pismo-titul: "Arial Black", "Avenir Next", "Segoe UI", Arial, sans-serif;
+  --pismo-text: Georgia, "Times New Roman", serif;
+  --pismo-util: "Segoe UI", Avenir, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--jz-sklenik);
+  color: var(--jz-hlina);
+  font-family: var(--pismo-text);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.jz a:focus-visible,
+.jz .btn:focus-visible {
+  outline: 3px solid var(--jz-hortenzie);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* =================== HERO =================== */
+
+.hero {
+  position: relative;
+  background: var(--jz-les);
+  color: var(--jz-sklenik);
+  overflow: hidden;
+  padding: 1.5rem 1.25rem 0;
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.wordmark {
+  font-family: var(--pismo-titul);
+  font-size: 1.35rem;
+  letter-spacing: 0.01em;
+  color: var(--jz-sklenik);
+}
+
+.wordmark em {
+  font-style: normal;
+  color: var(--jz-vyhonek);
+}
+
+.hero-note {
+  font-family: var(--pismo-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--jz-vyhonek);
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  max-width: 46rem;
+  padding: 3.5rem 0 2rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--pismo-util);
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--jz-vyhonek);
+  margin: 0 0 1.25rem;
+}
+
+.hero-title {
+  font-family: var(--pismo-titul);
+  font-size: clamp(2.6rem, 9vw, 5.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.5rem;
+  text-transform: uppercase;
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-line em {
+  font-style: normal;
+  color: var(--jz-hortenzie);
+}
+
+.hero-line-2 {
+  padding-left: 0.6em;
+}
+
+.hero-lead {
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  max-width: 34rem;
+  color: #dfe9d6;
+  margin: 0 0 2rem;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn {
+  font-family: var(--pismo-util);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  display: inline-block;
+  transition: transform 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+}
+
+.btn-primary {
+  background: var(--jz-hortenzie);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #c9528a;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--jz-sklenik);
+  border: 2px solid var(--jz-vyhonek);
+}
+
+.btn-ghost:hover {
+  background: var(--jz-vyhonek);
+  color: var(--jz-les);
+  transform: translateY(-2px);
+}
+
+/* --------- Signature: řádkovaný záhon --------- */
+
+.zahon {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  height: 11rem;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4vw;
+  padding: 0 6vw;
+  align-items: end;
+}
+
+.brazda {
+  position: relative;
+  width: 3px;
+  height: 100%;
+  margin: 0 auto;
+  background: linear-gradient(to top, var(--jz-mech), rgba(63, 107, 70, 0));
+  border-radius: 2px;
+}
+
+/* každá brázda "vyroste" jinak vysoko */
+.b1 { height: 55%; }
+.b2 { height: 80%; }
+.b3 { height: 100%; }
+.b4 { height: 65%; }
+.b5 { height: 90%; }
+.b6 { height: 72%; }
+.b7 { height: 58%; }
+
+.list {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  background: var(--jz-vyhonek);
+  border-radius: 0 70% 0 70%; /* tvar listu */
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.list-kvet {
+  background: var(--jz-hortenzie);
+  border-radius: 50% 50% 50% 0;
+}
+
+/* --------- Animace načtení (rašení) --------- */
+
+@keyframes jz-vzrust {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes jz-fadeup {
+  from {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.brazda {
+  transform-origin: bottom center;
+  animation: jz-vzrust 0.9s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.b1 { animation-delay: 0.15s; }
+.b2 { animation-delay: 0.3s; }
+.b3 { animation-delay: 0.45s; }
+.b4 { animation-delay: 0.55s; }
+.b5 { animation-delay: 0.7s; }
+.b6 { animation-delay: 0.85s; }
+.b7 { animation-delay: 1s; }
+
+.hero-eyebrow,
+.hero-line-1,
+.hero-line-2,
+.hero-line-3,
+.hero-lead,
+.hero-cta {
+  animation: jz-fadeup 0.7s ease-out backwards;
+}
+
+.hero-eyebrow { animation-delay: 0.05s; }
+.hero-line-1 { animation-delay: 0.15s; }
+.hero-line-2 { animation-delay: 0.28s; }
+.hero-line-3 { animation-delay: 0.4s; }
+.hero-lead { animation-delay: 0.55s; }
+.hero-cta { animation-delay: 0.7s; }
+
+/* =================== SEKCE — společné =================== */
+
+.sekce {
+  padding: 4.5rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.sekce-hlava {
+  max-width: 42rem;
+  margin-bottom: 2.75rem;
+}
+
+.eyebrow {
+  font-family: var(--pismo-util);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--jz-mech);
+  margin: 0 0 0.75rem;
+}
+
+.sekce h2 {
+  font-family: var(--pismo-titul);
+  font-size: clamp(1.8rem, 4.5vw, 2.7rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: var(--jz-les);
+  margin: 0 0 1rem;
+}
+
+.sekce-perex {
+  font-size: 1.1rem;
+  color: #4a4438;
+  margin: 0;
+}
+
+/* =================== SORTIMENT =================== */
+
+.karty {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.karta {
+  background: #fff;
+  border: 1px solid #dde5d2;
+  border-radius: 14px;
+  padding: 1.5rem 1.5rem 1.6rem;
+  position: relative;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(30, 61, 43, 0.12);
+}
+
+.karta-znacka {
+  display: inline-block;
+  font-family: var(--pismo-util);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--jz-les);
+  background: #e4efdb;
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  margin-bottom: 0.9rem;
+}
+
+.karta h3 {
+  font-family: var(--pismo-util);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--jz-les);
+  margin: 0 0 0.5rem;
+}
+
+.karta p {
+  margin: 0;
+  color: #4a4438;
+  font-size: 1rem;
+}
+
+/* --------- Sezónní pás --------- */
+
+.sezona {
+  margin-top: 3rem;
+  background: var(--jz-les);
+  color: var(--jz-sklenik);
+  border-radius: 18px;
+  padding: 2rem 1.5rem;
+}
+
+.sezona-titul {
+  font-family: var(--pismo-util);
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--jz-vyhonek);
+  margin: 0 0 1.5rem;
+}
+
+.sezona-pas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.sezona-pas li {
+  border-left: 3px solid var(--jz-hortenzie);
+  padding-left: 1rem;
+}
+
+.sezona-pas strong {
+  font-family: var(--pismo-util);
+  display: block;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #fff;
+  margin-bottom: 0.3rem;
+}
+
+.sezona-pas p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #d8e3cd;
+}
+
+.sezona-pozn {
+  margin: 1.75rem 0 0;
+  font-size: 0.95rem;
+  color: #cfe0c2;
+}
+
+.sezona-pozn strong {
+  color: var(--jz-vyhonek);
+}
+
+/* =================== PRODEJNY =================== */
+
+.prodejny {
+  padding-top: 1rem;
+}
+
+.prodejny-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.prodejna {
+  background: #fff;
+  border-top: 6px solid var(--jz-mech);
+  border-radius: 0 0 14px 14px;
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 2px 10px rgba(30, 61, 43, 0.06);
+}
+
+.prodejna:nth-child(2) {
+  border-top-color: var(--jz-hortenzie);
+}
+
+.prodejna-stitek {
+  font-family: var(--pismo-util);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--jz-mech);
+  margin: 0 0 0.6rem;
+}
+
+.prodejna h3 {
+  font-family: var(--pismo-titul);
+  font-size: 1.45rem;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--jz-les);
+  margin: 0 0 0.75rem;
+}
+
+.prodejna p {
+  margin: 0 0 1rem;
+  color: #4a4438;
+}
+
+.prodejna-fakta {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.prodejna-fakta li {
+  font-family: var(--pismo-util);
+  font-size: 0.95rem;
+  padding: 0.45rem 0 0.45rem 1.6rem;
+  position: relative;
+  border-top: 1px dashed #dde5d2;
+}
+
+.prodejna-fakta li::before {
+  content: "";
+  position: absolute;
+  left: 0.2rem;
+  top: 0.85rem;
+  width: 12px;
+  height: 12px;
+  background: var(--jz-vyhonek);
+  border-radius: 0 70% 0 70%;
+  transform: rotate(45deg);
+}
+
+/* --------- Důvěra --------- */
+
+.duvera {
+  list-style: none;
+  margin: 2.75rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.duvera li {
+  background: #e9f1e0;
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+}
+
+.duvera strong {
+  font-family: var(--pismo-util);
+  display: block;
+  font-size: 1rem;
+  color: var(--jz-les);
+  margin-bottom: 0.2rem;
+}
+
+.duvera span {
+  font-size: 0.95rem;
+  color: #4a4438;
+}
+
+/* =================== RESPONSIVITA =================== */
+
+@media (min-width: 640px) {
+  .hero {
+    padding: 2rem 3rem 0;
+  }
+
+  .karty {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sezona-pas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .duvera {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .sekce {
+    padding: 5.5rem 3rem;
+  }
+
+  .karty {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .sezona {
+    padding: 2.5rem 2.5rem;
+  }
+
+  .sezona-pas {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .prodejny-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .duvera {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .zahon {
+    height: 14rem;
+    gap: 2.5vw;
+  }
+}
+
+/* =================== REDUCED MOTION =================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .brazda,
+  .hero-eyebrow,
+  .hero-line-1,
+  .hero-line-2,
+  .hero-line-3,
+  .hero-lead,
+  .hero-cta {
+    animation: none;
+  }
+
+  .btn,
+  .karta {
+    transition: none;
+  }
+
+  .btn-primary:hover,
+  .btn-ghost:hover,
+  .karta:hover {
+    transform: none;
+  }
+}
