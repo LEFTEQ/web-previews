@@ -1,0 +1,539 @@
+/* ============================================================
+   Pharmacentrum NIKOS — zubní ordinace, Hradec Králové
+   Palette:
+   --nk-ink    #10312E  hluboká lékařská zeleň (klid, sterilita bez chladu)
+   --nk-mint   #DDEFE9  bledá máta (ordinace, ústní voda)
+   --nk-paper  #FBFDFC  téměř bílá s nádechem zeleně (papír zdravotní karty)
+   --nk-enamel #F4F9F7  sklovina
+   --nk-coral  #E8604C  korálová (dáseň / značka na zubním kříži) — akcent
+   Typ: Display = systémový geometrický stack s ultra-tight trackingem,
+        tělo = humanistický sans. Signature: zubní kříž (dental chart).
+   ============================================================ */
+
+:root {
+  --nk-ink: #10312e;
+  --nk-ink-soft: #35544f;
+  --nk-mint: #ddefe9;
+  --nk-paper: #fbfdfc;
+  --nk-enamel: #f4f9f7;
+  --nk-coral: #e8604c;
+  --nk-line: #c4ddd4;
+
+  --nk-font-display: "Avenir Next", "Futura", "Segoe UI", "Trebuchet MS",
+    system-ui, sans-serif;
+  --nk-font-body: "Seravek", "Gill Sans", "Segoe UI", system-ui, -apple-system,
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--nk-paper);
+  color: var(--nk-ink);
+  font-family: var(--nk-font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.nk a:focus-visible,
+.nk button:focus-visible {
+  outline: 3px solid var(--nk-coral);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ===================== HERO ===================== */
+
+.nk-hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(175deg, var(--nk-enamel) 0%, var(--nk-mint) 100%);
+  padding: 1.5rem 1.25rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.nk-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 72rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.nk-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  font-family: var(--nk-font-display);
+}
+
+.nk-wordmark-pharma {
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
+  color: var(--nk-ink-soft);
+  text-transform: lowercase;
+}
+
+.nk-wordmark-nikos {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: var(--nk-ink);
+}
+
+.nk-wordmark-nikos::after {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-left: 0.35em;
+  border-radius: 50% 50% 45% 45%;
+  background: var(--nk-coral);
+  transform: translateY(-0.1em);
+}
+
+.nk-hero-loc {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--nk-ink-soft);
+}
+
+.nk-hero-body {
+  max-width: 72rem;
+  width: 100%;
+  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 0 2.5rem;
+}
+
+.nk-hero-title {
+  font-family: var(--nk-font-display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  margin: 0 0 2.25rem;
+  text-wrap: balance;
+}
+
+.nk-hero-title em {
+  font-style: normal;
+  color: var(--nk-coral);
+}
+
+.nk-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.35em);
+  animation: nk-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.nk-line-2 {
+  animation-delay: 0.15s;
+}
+
+@keyframes nk-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Signature: zubní kříž (dental chart) --- */
+
+.nk-chart {
+  margin: 0 0 2.25rem;
+  max-width: 40rem;
+}
+
+.nk-chart-row {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  gap: clamp(3px, 0.7vw, 8px);
+}
+
+.nk-tooth {
+  height: clamp(18px, 3.2vw, 30px);
+  border-radius: 45% 45% 30% 30%;
+  background: #fff;
+  border: 2px solid var(--nk-ink);
+  opacity: 0;
+  animation: nk-tooth-in 0.45s ease forwards;
+}
+
+.nk-tooth-low {
+  border-radius: 30% 30% 45% 45%;
+}
+
+.nk-tooth-mark {
+  background: var(--nk-coral);
+  border-color: var(--nk-coral);
+}
+
+.nk-tooth-fill {
+  background: var(--nk-ink);
+}
+
+@keyframes nk-tooth-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.nk-chart-axis {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.1rem;
+  font-family: var(--nk-font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--nk-ink-soft);
+  border-top: 1px solid var(--nk-line);
+  border-bottom: 1px solid var(--nk-line);
+  margin: 0.5rem 0;
+}
+
+.nk-chart-label {
+  text-transform: uppercase;
+}
+
+.nk-hero-sub {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: var(--nk-ink-soft);
+  margin: 0 0 2rem;
+}
+
+.nk-hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.nk-btn {
+  display: inline-block;
+  font-family: var(--nk-font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 0.9rem 1.75rem;
+  border-radius: 999px;
+  transition: transform 0.2s ease, background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.nk-btn-primary {
+  background: var(--nk-ink);
+  color: var(--nk-paper);
+}
+
+.nk-btn-primary:hover {
+  background: var(--nk-coral);
+  transform: translateY(-2px);
+}
+
+.nk-btn-ghost {
+  color: var(--nk-ink);
+  border: 2px solid var(--nk-ink);
+}
+
+.nk-btn-ghost:hover {
+  background: var(--nk-ink);
+  color: var(--nk-paper);
+  transform: translateY(-2px);
+}
+
+.nk-hero-strip {
+  max-width: 72rem;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--nk-line);
+  font-family: var(--nk-font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--nk-ink-soft);
+}
+
+.nk-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--nk-coral);
+}
+
+/* ===================== SEKCE ===================== */
+
+.nk-section {
+  padding: 5rem 1.25rem;
+}
+
+.nk-section-head {
+  max-width: 72rem;
+  margin: 0 auto 3rem;
+}
+
+.nk-eyebrow {
+  font-family: var(--nk-font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--nk-coral);
+  margin: 0 0 0.75rem;
+}
+
+.nk-h2 {
+  font-family: var(--nk-font-display);
+  font-weight: 800;
+  font-size: clamp(1.7rem, 4.5vw, 2.9rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem;
+  text-wrap: balance;
+}
+
+.nk-section-lead {
+  max-width: 36rem;
+  color: var(--nk-ink-soft);
+  margin: 0;
+}
+
+/* --- služby --- */
+
+.nk-services {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 72rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.nk-service {
+  background: var(--nk-enamel);
+  border: 1px solid var(--nk-line);
+  border-radius: 18px 18px 12px 12px; /* echo tvaru zubu */
+  padding: 1.5rem 1.5rem 1.35rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.nk-service:hover {
+  transform: translateY(-3px);
+  border-color: var(--nk-coral);
+}
+
+.nk-service-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.nk-service-name {
+  font-family: var(--nk-font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.nk-service-tag {
+  font-family: var(--nk-font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--nk-ink);
+  background: #fff;
+  border: 1px solid var(--nk-line);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  white-space: nowrap;
+}
+
+.nk-service-desc {
+  margin: 0;
+  color: var(--nk-ink-soft);
+  font-size: 0.98rem;
+}
+
+/* --- ordinace / důvěra --- */
+
+.nk-section-alt {
+  background: var(--nk-ink);
+  color: var(--nk-enamel);
+}
+
+.nk-about {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.nk-eyebrow-light {
+  color: var(--nk-coral);
+}
+
+.nk-h2-light {
+  color: #fff;
+}
+
+.nk-about-lead {
+  color: var(--nk-mint);
+  max-width: 34rem;
+  margin: 0 0 2rem;
+}
+
+.nk-facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+  margin: 0;
+}
+
+.nk-fact dt {
+  font-family: var(--nk-font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nk-coral);
+  margin-bottom: 0.2rem;
+}
+
+.nk-fact dd {
+  margin: 0;
+  color: var(--nk-enamel);
+}
+
+.nk-principles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid rgba(221, 239, 233, 0.25);
+}
+
+.nk-principle {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid rgba(221, 239, 233, 0.25);
+}
+
+.nk-principle-no {
+  font-family: var(--nk-font-display);
+  font-weight: 800;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: var(--nk-coral);
+  min-width: 2.2rem;
+}
+
+.nk-principle-title {
+  font-family: var(--nk-font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin: 0.15rem 0 0.4rem;
+  color: #fff;
+}
+
+.nk-principle-text {
+  margin: 0;
+  color: var(--nk-mint);
+  font-size: 0.98rem;
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (min-width: 700px) {
+  .nk-services {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nk-facts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1020px) {
+  .nk-hero {
+    padding: 2rem 3rem 0;
+  }
+
+  .nk-section {
+    padding: 6.5rem 3rem;
+  }
+
+  .nk-services {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .nk-about {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4.5rem;
+    align-items: start;
+  }
+}
+
+/* ===================== REDUCED MOTION ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .nk-line,
+  .nk-tooth {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .nk-btn,
+  .nk-service {
+    transition: none;
+  }
+
+  .nk-btn:hover,
+  .nk-service:hover {
+    transform: none;
+  }
+}
