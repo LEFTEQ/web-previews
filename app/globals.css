@@ -1,0 +1,592 @@
+/* ————————————————————————————————————————
+   KVĚTINY ROSA · Ústí nad Labem
+   Palette:
+   --rosa-ink     #2E1F2B  (tmavá lilková — stonky za soumraku)
+   --rosa-petal   #E4507A  (sytá růžová — okvětní plátek růže)
+   --rosa-blush   #FBE9EE  (bledě růžový papír na balení)
+   --rosa-leaf    #3E6B4F  (list eukalyptu)
+   --rosa-paper   #FFF9F6  (bílý floristický papír)
+   Type: Cormorant Infant (display, květinově organický)
+         + system sans pro provozní texty
+   Signature: růže kreslená jedinou spirálovou linkou
+———————————————————————————————————————— */
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,500;0,600;0,700;1,500&display=swap");
+
+:root {
+  --rosa-ink: #2e1f2b;
+  --rosa-petal: #e4507a;
+  --rosa-petal-deep: #b93a60;
+  --rosa-blush: #fbe9ee;
+  --rosa-leaf: #3e6b4f;
+  --rosa-paper: #fff9f6;
+  --font-display: "Cormorant Infant", "Georgia", serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--rosa-ink);
+  background: var(--rosa-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.rosa a:focus-visible,
+.rosa button:focus-visible {
+  outline: 3px solid var(--rosa-petal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ————— HERO ————— */
+
+.hero {
+  position: relative;
+  background: linear-gradient(
+    160deg,
+    var(--rosa-blush) 0%,
+    var(--rosa-paper) 55%,
+    #fdf2f0 100%
+  );
+  overflow: hidden;
+}
+
+.hero-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem clamp(1.25rem, 5vw, 4rem);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.6rem;
+  letter-spacing: 0.01em;
+  color: var(--rosa-ink);
+}
+
+.wordmark em {
+  font-style: italic;
+  color: var(--rosa-petal);
+  margin-left: 0.15em;
+}
+
+.nav-tel {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--rosa-petal-deep);
+  text-decoration: none;
+  border-bottom: 2px solid var(--rosa-petal);
+  padding-bottom: 2px;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.nav-tel:hover {
+  color: var(--rosa-ink);
+  border-color: var(--rosa-ink);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 4rem)
+    clamp(2.5rem, 5vw, 4rem);
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 56rem) {
+  .hero-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: 3rem;
+  }
+}
+
+.eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--rosa-leaf);
+  margin: 0 0 1rem;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3rem, 10vw, 6.25rem);
+  line-height: 0.95;
+  margin: 0 0 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.h1-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: bloom-up 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.h1-a {
+  animation-delay: 100ms;
+}
+
+.h1-b {
+  animation-delay: 240ms;
+  font-style: italic;
+  color: var(--rosa-petal);
+}
+
+.h1-c {
+  animation-delay: 380ms;
+}
+
+@keyframes bloom-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-lead {
+  font-size: 1.125rem;
+  max-width: 32rem;
+  margin: 0 0 1.75rem;
+  opacity: 0;
+  animation: bloom-up 700ms cubic-bezier(0.22, 1, 0.36, 1) 520ms forwards;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  opacity: 0;
+  animation: bloom-up 700ms cubic-bezier(0.22, 1, 0.36, 1) 640ms forwards;
+}
+
+.btn {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  transition: transform 160ms ease, background 160ms ease, color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.btn-primary {
+  background: var(--rosa-petal);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(228, 80, 122, 0.35);
+}
+
+.btn-primary:hover {
+  background: var(--rosa-petal-deep);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--rosa-ink);
+  border: 2px solid var(--rosa-ink);
+}
+
+.btn-ghost:hover {
+  background: var(--rosa-ink);
+  color: var(--rosa-paper);
+}
+
+.hero-note {
+  font-size: 0.9rem;
+  color: rgba(46, 31, 43, 0.7);
+  margin: 0;
+  opacity: 0;
+  animation: bloom-up 700ms ease 760ms forwards;
+}
+
+/* Signature: růže jednou linkou */
+
+.hero-rose {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rose-big {
+  width: clamp(14rem, 32vw, 22rem);
+  height: auto;
+  color: var(--rosa-petal);
+}
+
+.rose-big path {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: draw-rose 2.4s cubic-bezier(0.5, 0, 0.2, 1) 300ms forwards;
+}
+
+.rose-big path:last-child {
+  stroke: var(--rosa-leaf);
+  animation-delay: 1.6s;
+  animation-duration: 1.2s;
+}
+
+@keyframes draw-rose {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.rose-caption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: rgba(46, 31, 43, 0.65);
+  text-align: center;
+  line-height: 1.4;
+  opacity: 0;
+  animation: bloom-up 900ms ease 1.4s forwards;
+}
+
+/* Ticker: co právě kvete */
+
+.hero-ticker {
+  border-top: 1px solid rgba(46, 31, 43, 0.12);
+  overflow: hidden;
+  padding: 0.85rem 0;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.ticker-track {
+  display: flex;
+  gap: 2rem;
+  white-space: nowrap;
+  width: max-content;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--rosa-ink);
+  animation: ticker 28s linear infinite;
+}
+
+.ticker-track .dot {
+  color: var(--rosa-petal);
+  font-style: normal;
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ————— SLUŽBY ————— */
+
+.sluzby {
+  padding: clamp(3rem, 8vw, 5.5rem) clamp(1.25rem, 5vw, 4rem);
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.section-head {
+  max-width: 38rem;
+  margin-bottom: 2.5rem;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.05;
+  margin: 0 0 0.75rem;
+}
+
+.section-head p {
+  font-size: 1.075rem;
+  margin: 0;
+  color: rgba(46, 31, 43, 0.75);
+}
+
+.sluzby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 40rem) {
+  .sluzby-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.karta {
+  background: #fff;
+  border: 1px solid rgba(46, 31, 43, 0.08);
+  border-radius: 18px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  box-shadow: 0 2px 10px rgba(46, 31, 43, 0.04);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(228, 80, 122, 0.14);
+}
+
+.karta-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.karta h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin: 0;
+}
+
+.stitek {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--rosa-leaf);
+  background: rgba(62, 107, 79, 0.1);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.karta p {
+  margin: 0 0 1rem;
+  color: rgba(46, 31, 43, 0.85);
+}
+
+.karta-detail {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--rosa-petal-deep);
+  margin: 0;
+}
+
+/* Sezónní pás */
+
+.sezona {
+  margin-top: 3rem;
+  background: var(--rosa-blush);
+  border-radius: 22px;
+  padding: 1.75rem clamp(1.25rem, 3vw, 2.25rem);
+}
+
+.sezona-h {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin: 0 0 1.25rem;
+}
+
+.sezona-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 48rem) {
+  .sezona-list {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+.sezona-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-left: 3px solid var(--rosa-petal);
+  padding-left: 0.85rem;
+}
+
+.sezona-mesice {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--rosa-petal-deep);
+  letter-spacing: 0.06em;
+}
+
+.sezona-kvetiny {
+  font-size: 0.92rem;
+  color: rgba(46, 31, 43, 0.8);
+}
+
+/* ————— DŮVĚRA ————— */
+
+.duvera {
+  background: var(--rosa-ink);
+  color: #f6ecef;
+  padding: clamp(3rem, 8vw, 5.5rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.section-head-light {
+  max-width: 40rem;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+}
+
+.section-head-light h2 {
+  color: #fff;
+}
+
+.section-head-light p {
+  color: rgba(246, 236, 239, 0.75);
+}
+
+.duvera-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 72rem;
+  margin: 0 auto 3rem;
+}
+
+@media (min-width: 56rem) {
+  .duvera-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.citace {
+  margin: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(228, 80, 122, 0.3);
+  border-radius: 18px;
+  padding: 1.75rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.citace-rose {
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--rosa-petal);
+}
+
+.citace p {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.citace cite {
+  font-style: normal;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: rgba(246, 236, 239, 0.65);
+}
+
+.fakta {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 60rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+@media (min-width: 40rem) {
+  .fakta {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.fakta li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fakta strong {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--rosa-petal);
+}
+
+.fakta span {
+  font-size: 0.95rem;
+  color: rgba(246, 236, 239, 0.8);
+}
+
+/* ————— Reduced motion ————— */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .h1-line,
+  .hero-lead,
+  .hero-cta,
+  .hero-note,
+  .rose-caption {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .rose-big path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .ticker-track {
+    animation: none;
+    flex-wrap: wrap;
+    white-space: normal;
+    width: auto;
+    padding: 0 1.25rem;
+    justify-content: center;
+  }
+
+  .karta,
+  .btn {
+    transition: none;
+  }
+}
