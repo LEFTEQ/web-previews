@@ -1,0 +1,428 @@
+/* ============================================================
+   STUDIO 071 — grafické studio, Ústí nad Labem
+   Koncept: tiskový soutisk. Bílý „papír", inkoustová čerň,
+   procesní azurová + magenta jako přetiskové vrstvy.
+   Signature: misregistrace vrstev na čísle 071 a slově „sedí".
+   ============================================================ */
+
+:root {
+  --paper: #fdfdfa;
+  --ink: #14131b;
+  --cyan: #00a8e0;
+  --magenta: #e6007e;
+  --ghost: #e9e8e2;
+  --step: 8px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Helvetica Neue", "Arial", "Liberation Sans", sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.s71 { overflow-x: clip; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* viditelný focus všude */
+.s71 a:focus-visible,
+.s71 button:focus-visible {
+  outline: 3px solid var(--magenta);
+  outline-offset: 3px;
+}
+
+/* ===================== HERO ===================== */
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(20px, 4vw, 56px);
+  border-bottom: 3px solid var(--ink);
+}
+
+.hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+
+.wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.wordmark-studio {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+}
+
+.wordmark-num {
+  position: relative;
+  display: inline-block;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.wordmark-num .layer {
+  font-weight: 900;
+  font-style: normal;
+  letter-spacing: 0.02em;
+}
+
+.wordmark-num .layer-c,
+.wordmark-num .layer-m {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: multiply;
+}
+
+.wordmark-num .layer-c { color: var(--cyan); transform: translate(-2px, -2px); }
+.wordmark-num .layer-m { color: var(--magenta); transform: translate(2px, 2px); }
+.wordmark-num .layer-k { position: relative; color: var(--ink); }
+
+.hero-loc {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.loc-dot {
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 8px;
+  vertical-align: 2px;
+  color: var(--magenta);
+}
+
+.hero-title {
+  margin: clamp(32px, 6vh, 72px) 0;
+  font-size: clamp(44px, 10.5vw, 148px);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+.hero-line { display: block; }
+
+/* orchestrovaný nájezd — vrstvy „najíždějí do soutisku" */
+.hero-line {
+  opacity: 0;
+  transform: translateY(0.35em);
+  animation: settle 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+.hero-line-1 { animation-delay: 0.05s; }
+.hero-line-2 { animation-delay: 0.15s; }
+.hero-line-3 { animation-delay: 0.25s; }
+.hero-line-4 { animation-delay: 0.35s; }
+
+@keyframes settle {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* SIGNATURE: přetiskové slovo — C a M vrstvy vedle K vrstvy,
+   při načtení se „srovnají do pasu" (téměř, schválně ne úplně) */
+.overprint {
+  position: relative;
+  font-style: normal;
+  display: inline-block;
+}
+
+.overprint::before,
+.overprint::after {
+  content: attr(data-word);
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: multiply;
+  animation: register 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.45s both;
+}
+
+.overprint::before {
+  color: var(--cyan);
+  --tx: -0.05em; --ty: -0.045em;
+}
+
+.overprint::after {
+  color: var(--magenta);
+  --tx: 0.05em; --ty: 0.045em;
+}
+
+@keyframes register {
+  from { transform: translate(calc(var(--tx) * 4), calc(var(--ty) * 4)); opacity: 0; }
+  to { transform: translate(var(--tx), var(--ty)); opacity: 1; }
+}
+
+.hero-foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.hero-claim {
+  margin: 0;
+  max-width: 44ch;
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.6;
+}
+
+.reg-mark {
+  flex: 0 0 auto;
+  color: var(--ink);
+  animation: spinIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s both;
+}
+
+@keyframes spinIn {
+  from { transform: rotate(-90deg); opacity: 0; }
+  to { transform: rotate(0); opacity: 1; }
+}
+
+/* výřezové (crop) značky v rozích hero */
+.crop {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+}
+.crop-tl {
+  top: 0; left: 0;
+  border-left: 3px solid var(--ink);
+  border-top: 3px solid var(--ink);
+}
+.crop-br {
+  bottom: -3px; right: 0;
+  border-right: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+}
+
+/* ===================== SEKCE OBECNĚ ===================== */
+
+.section-head {
+  padding: clamp(48px, 8vh, 96px) clamp(20px, 4vw, 56px) clamp(24px, 4vh, 48px);
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--magenta);
+}
+
+.section-head h2 {
+  margin: 0;
+  font-size: clamp(30px, 5vw, 56px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  max-width: 18ch;
+}
+
+/* ===================== SLUŽBY ===================== */
+
+.services {
+  border-bottom: 3px solid var(--ink);
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.service {
+  padding: clamp(24px, 3vw, 44px);
+  border-top: 3px solid var(--ink);
+}
+
+.service + .service {
+  border-left: 3px solid var(--ink);
+}
+
+/* barevný štítek dle procesní barvy — C / M / K opravdu odpovídá tiskové vrstvě */
+.service-tag {
+  margin: 0 0 20px;
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--paper);
+}
+
+.service-c .service-tag { background: var(--cyan); }
+.service-m .service-tag { background: var(--magenta); }
+.service-k .service-tag { background: var(--ink); }
+
+.service h3 {
+  margin: 0 0 12px;
+  font-size: clamp(21px, 2vw, 26px);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.service p {
+  margin: 0 0 18px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.service ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service li {
+  padding: 9px 0;
+  font-size: 15px;
+  font-weight: 600;
+  border-top: 1px solid var(--ghost);
+}
+
+.service li::before {
+  content: "—";
+  margin-right: 10px;
+}
+
+.service-c li::before { color: var(--cyan); }
+.service-m li::before { color: var(--magenta); }
+.service-k li::before { color: var(--ink); }
+
+/* ===================== DŮVĚRA ===================== */
+
+.trust {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.section-head-inverse .eyebrow { color: var(--cyan); }
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  padding: 0 clamp(20px, 4vw, 56px) clamp(48px, 8vh, 96px);
+}
+
+.trust-text p {
+  margin: 0 0 20px;
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.65;
+  max-width: 52ch;
+}
+
+.trust-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.trust-steps li {
+  counter-increment: step;
+  padding: 20px 0;
+  border-top: 1px solid rgba(253, 253, 250, 0.25);
+}
+
+.step-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.step-label::before {
+  content: counter(step, decimal-leading-zero) " / ";
+  color: var(--magenta);
+}
+
+.trust-steps p {
+  margin: 8px 0 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(253, 253, 250, 0.85);
+}
+
+/* spodní pásek s pasovacími terči */
+.trust-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  padding: 20px clamp(20px, 4vw, 56px);
+  border-top: 1px solid rgba(253, 253, 250, 0.25);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+}
+
+.strip-reg {
+  color: var(--magenta);
+  font-size: 11px;
+  letter-spacing: 0;
+}
+
+/* ===================== RESPONZIVITA ===================== */
+
+@media (max-width: 900px) {
+  .service-grid { grid-template-columns: 1fr; }
+  .service + .service { border-left: none; }
+  .trust-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .hero { min-height: 88vh; }
+  .hero-foot { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .reg-mark svg { width: 44px; height: 44px; }
+  .hero-title { letter-spacing: -0.015em; }
+}
+
+/* ===================== REDUCED MOTION ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-line,
+  .reg-mark {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .overprint::before,
+  .overprint::after {
+    animation: none;
+    opacity: 1;
+    transform: translate(var(--tx), var(--ty));
+  }
+}
