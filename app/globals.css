@@ -1,0 +1,602 @@
+/* ==========================================================================
+   SKLENÁŘSTVÍ JENÍK — Praha
+   Paleta odvozená ze skla: hrana tabule skla je zelenkavá (float glass edge),
+   plocha je chladně světlá, fazeta láme světlo. Žádná šablonová terakota.
+   ------------------------------------------------------------------------
+   --led      #EDF3F2  světlá plocha skla (pozadí)
+   --hlubina  #0E2A2B  tmavá zeleň hrany silného skla (text, hero)
+   --hrana    #2E7D6B  zelená hrana float skla (akcent, akce)
+   --fazeta   #9FD8CC  světlý lom světla na fazetě (detaily, linky)
+   --pisek    #C9D6D3  matné pískované sklo (sekundární plochy)
+   ========================================================================== */
+
+:root {
+  --led: #edf3f2;
+  --hlubina: #0e2a2b;
+  --hrana: #2e7d6b;
+  --fazeta: #9fd8cc;
+  --pisek: #c9d6d3;
+  --ink: #16302f;
+
+  --font-display: "Big Shoulders Display", "Arial Narrow", "Oswald", system-ui, sans-serif;
+  --font-body: "Georgia", "Charter", "Times New Roman", serif;
+  --font-ui: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+@font-face {
+  font-family: "Big Shoulders Display";
+  src: local("Big Shoulders Display"), local("BigShouldersDisplay");
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--led);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Viditelný focus pro klávesnici — světlý lom na fazetě */
+:focus-visible {
+  outline: 3px solid var(--hrana);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.hero :focus-visible {
+  outline-color: var(--fazeta);
+}
+
+/* ==========================================================================
+   HERO — tmavá zeleň hrany skla, typografický statement + pravítko tlouštěk
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  background:
+    linear-gradient(160deg, #0e2a2b 0%, #123634 55%, #17453f 100%);
+  color: var(--led);
+  overflow: hidden;
+}
+
+/* jemné svislé „tabule skla" v pozadí — opřené o stěnu dílny */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    100deg,
+    transparent 0,
+    transparent 140px,
+    rgba(159, 216, 204, 0.05) 140px,
+    rgba(159, 216, 204, 0.05) 143px
+  );
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4.5rem;
+}
+
+.hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 2.5rem;
+}
+
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.wordmark-jenik {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.7rem;
+  letter-spacing: 0.22em;
+  line-height: 1;
+  color: var(--led);
+  /* „fazeta" v logu: horní hrana písma chytá světlo */
+  text-shadow: 0 -1px 0 rgba(159, 216, 204, 0.65);
+}
+
+.wordmark-sub {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fazeta);
+}
+
+.hero-tel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-decoration: none;
+  color: var(--led);
+}
+
+.hero-tel-label {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fazeta);
+}
+
+.hero-tel-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.08em;
+  border-bottom: 2px solid transparent;
+  transition: border-color 160ms ease;
+}
+
+.hero-tel:hover .hero-tel-num {
+  border-bottom-color: var(--fazeta);
+}
+
+.hero-main {
+  max-width: 46rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fazeta);
+  margin: 0 0 1.25rem;
+  animation: rise 600ms ease-out both;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 9vw, 5.4rem);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+  color: var(--led);
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--fazeta);
+}
+
+.hero-line {
+  display: block;
+  animation: rise 700ms ease-out both;
+}
+.hero-line-1 { animation-delay: 80ms; }
+.hero-line-2 { animation-delay: 200ms; }
+.hero-line-3 {
+  animation-delay: 320ms;
+  /* třetí řádek „pod řezem": tenká linie diamantového řezu nad ním */
+  position: relative;
+  padding-top: 0.35rem;
+}
+.hero-line-3::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0.05em;
+  width: 5.5em;
+  height: 2px;
+  background: linear-gradient(90deg, var(--fazeta), transparent);
+}
+
+.hero-lede {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 34rem;
+  color: rgba(237, 243, 242, 0.85);
+  margin: 0 0 2rem;
+  animation: rise 700ms 440ms ease-out both;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  animation: rise 700ms 540ms ease-out both;
+}
+
+.btn {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: 3px;
+  transition: transform 160ms ease, background 160ms ease, color 160ms ease;
+}
+
+.btn-primary {
+  background: var(--fazeta);
+  color: var(--hlubina);
+}
+.btn-primary:hover {
+  background: #b9e4da;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--led);
+  border: 1px solid rgba(159, 216, 204, 0.5);
+}
+.btn-ghost:hover {
+  border-color: var(--fazeta);
+  color: var(--fazeta);
+}
+
+/* --------------------------------------------------------------------------
+   SIGNATURE: pravítko tlouštěk skla 2–12 mm
+   Sloupky rostou úměrně skutečné tloušťce — struktura nese informaci
+   (reálný skladový sortiment dílny), ne dekoraci.
+   -------------------------------------------------------------------------- */
+
+.gauge {
+  margin-top: 3.5rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.gauge-label {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fazeta);
+  padding-bottom: 0.35rem;
+  white-space: nowrap;
+}
+
+.gauge-track {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(0.4rem, 2vw, 1rem);
+  border-bottom: 1px solid rgba(159, 216, 204, 0.4);
+  padding: 0 0.25rem;
+  flex: 1 1 auto;
+  min-width: 260px;
+}
+
+.gauge-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  animation: rise 500ms ease-out both;
+  animation-delay: calc(650ms + var(--i) * 60ms);
+}
+
+.gauge-bar {
+  display: block;
+  width: calc(var(--mm) * 2.2px);
+  height: clamp(34px, 6vw, 56px);
+  background: linear-gradient(
+    180deg,
+    rgba(159, 216, 204, 0.95) 0%,
+    rgba(46, 125, 107, 0.85) 100%
+  );
+  border-radius: 1px 1px 0 0;
+  box-shadow: inset 1px 0 0 rgba(237, 243, 242, 0.5);
+}
+
+.gauge-bar-plus {
+  width: 30px;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(159, 216, 204, 0.55) 0 4px,
+    transparent 4px 8px
+  );
+  box-shadow: none;
+}
+
+.gauge-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--led);
+}
+
+/* šikmý řez na spodní hraně hero — jako diamantový řez tabulí */
+.hero-cut {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: clamp(28px, 5vw, 56px);
+  background: var(--led);
+  clip-path: polygon(0 100%, 100% 100%, 100% 0);
+}
+
+/* ==========================================================================
+   SLUŽBY
+   ========================================================================== */
+
+.sluzby {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem 3rem;
+}
+
+.section-head {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.section-head h2,
+.duvera h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  line-height: 1.05;
+  margin: 0 0 0.75rem;
+  color: var(--hlubina);
+}
+
+.section-head p {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #3b5250;
+}
+
+.sluzby-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+
+.karta {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #d8e2e0;
+  border-radius: 4px;
+  padding: 1.5rem 1.4rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+/* „hrana skla" karty — zelený proužek jako pohled na hranu tabule */
+.karta-hrana {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 4px 0 0 4px;
+  background: linear-gradient(180deg, var(--fazeta), var(--hrana));
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px -18px rgba(14, 42, 43, 0.45);
+}
+
+.karta h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 1.15rem;
+  margin: 0;
+  color: var(--hlubina);
+}
+
+.karta p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #3b5250;
+  flex: 1;
+}
+
+.karta-stitek {
+  align-self: flex-start;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hrana);
+  background: rgba(159, 216, 204, 0.25);
+  padding: 0.3rem 0.6rem;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   DŮVĚRA / REFERENCE
+   ========================================================================== */
+
+.duvera {
+  background: var(--pisek);
+  /* pískované sklo: jemná matná textura */
+  background-image: radial-gradient(rgba(14, 42, 43, 0.05) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+.duvera-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 3rem;
+}
+
+.duvera-text p {
+  margin: 0 0 1.1rem;
+  color: #2c4442;
+}
+
+.duvera-body {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.duvera-body li {
+  position: relative;
+  padding-left: 1.4rem;
+  color: #2c4442;
+}
+
+.duvera-body li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 0.6rem;
+  height: 3px;
+  background: var(--hrana);
+}
+
+.duvera-body strong {
+  color: var(--hlubina);
+}
+
+.refs-title {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--hrana);
+  margin: 0.4rem 0 1.25rem;
+}
+
+.ref {
+  margin: 0 0 1.25rem;
+  background: rgba(255, 255, 255, 0.75);
+  border-left: 4px solid var(--hrana);
+  border-radius: 0 4px 4px 0;
+  padding: 1.1rem 1.25rem;
+}
+
+.ref blockquote {
+  margin: 0 0 0.5rem;
+  font-style: italic;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.ref figcaption {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: #4a625f;
+}
+
+.refs-note {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: #4a625f;
+  margin: 1.5rem 0 0;
+}
+
+/* ==========================================================================
+   ANIMACE + REDUKOVANÝ POHYB
+   ========================================================================== */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .karta:hover,
+  .btn-primary:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   RESPONZIVITA
+   ========================================================================== */
+
+@media (max-width: 860px) {
+  .duvera-inner {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-inner {
+    padding-bottom: 3.5rem;
+  }
+  .hero-top {
+    padding-bottom: 1.75rem;
+  }
+  .hero-tel {
+    align-items: flex-start;
+  }
+  .gauge {
+    gap: 0.5rem;
+  }
+  .gauge-label-end {
+    order: 3;
+    width: 100%;
+    padding-top: 0.4rem;
+  }
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+  .sluzby-grid {
+    grid-template-columns: 1fr;
+  }
+}
