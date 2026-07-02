@@ -1,0 +1,574 @@
+/* ==========================================================================
+   STEPOK s.r.o. — pokrývačství, České Budějovice
+   Palette: břidlicová modrošedá + pálená taška + vápenná bílá
+   Type: Archivo Black-like heavy display via system stack fallback? No —
+   we use locally-safe stacks: display = "Arial Black"/system heavy,
+   refined with tight tracking; body = Georgia? -> chosen: humanist sans.
+   ========================================================================== */
+
+:root {
+  --slate-900: #232a33;   /* mokrá břidlice — základní tmavá */
+  --slate-700: #39434f;   /* suchá břidlice */
+  --tile-500: #c4502a;    /* pálená bobrovka — akcent */
+  --tile-600: #a83f1f;    /* taška ve stínu */
+  --lime-050: #f7f5f0;    /* vápenná omítka — pozadí */
+  --zinc-300: #b9c0c7;    /* titanzinek — sekundární text na tmavé */
+  --ink: #1c2128;
+
+  --font-display: "Archivo Black", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+
+  --max-w: 72rem;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--lime-050);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus visible — high contrast on both light & dark */
+.str-page a:focus-visible,
+.str-page button:focus-visible {
+  outline: 3px solid var(--tile-500);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.str-trust a:focus-visible {
+  outline-color: #ffb08f;
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+
+.str-hero {
+  position: relative;
+  background: var(--slate-900);
+  color: #fff;
+  overflow: hidden;
+  /* jemná textura falcovaného plechu — svislé drážky */
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 71px,
+    rgba(255, 255, 255, 0.035) 71px,
+    rgba(255, 255, 255, 0.035) 72px
+  );
+}
+
+.str-hero-top {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Wordmark: STEPOK se "stříškou" nad E — vlastní typografické logo */
+.str-wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.str-wordmark-name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  position: relative;
+  display: inline-block;
+  padding-top: 0.55rem;
+}
+
+/* stříška nad wordmarkem */
+.str-wordmark-name::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.5rem;
+  height: 0.75rem;
+  border-top: 3px solid var(--tile-500);
+  border-left: 3px solid var(--tile-500);
+  transform: rotate(45deg) translateX(0.35rem);
+}
+
+.str-wordmark-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--zinc-300);
+}
+
+.str-hero-tel {
+  text-decoration: none;
+  color: #fff;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.str-hero-tel-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--zinc-300);
+}
+
+.str-hero-tel-num {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+}
+
+.str-hero-tel:hover .str-hero-tel-num { color: var(--tile-500); }
+
+.str-hero-main {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.str-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.25rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  color: var(--tile-500);
+}
+
+.str-eyebrow-light { color: #ffab85; }
+
+/* tick ve tvaru stříšky */
+.str-eyebrow-tick {
+  width: 0.85rem;
+  height: 0.45rem;
+  border-top: 2px solid currentColor;
+  border-left: 2px solid currentColor;
+  transform: rotate(45deg);
+  flex: none;
+}
+
+.str-h1 {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 9vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+}
+
+.str-h1-line { display: block; }
+
+/* schodovité odsazení řádků = kladení tašek s převazbou */
+.str-h1-line-2 { padding-left: 0.6em; color: var(--zinc-300); }
+.str-h1-line-3 { padding-left: 1.2em; color: var(--tile-500); }
+
+.str-hero-lead {
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  font-size: 1.125rem;
+  color: #dde2e7;
+}
+
+.str-hero-cta {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.str-btn {
+  display: inline-block;
+  padding: 0.9rem 1.6rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: transform 140ms ease, background-color 140ms ease, color 140ms ease;
+}
+
+.str-btn-solid {
+  background: var(--tile-500);
+  color: #fff;
+}
+.str-btn-solid:hover { background: var(--tile-600); transform: translateY(-2px); }
+
+.str-btn-ghost {
+  color: #fff;
+  border: 2px solid var(--slate-700);
+}
+.str-btn-ghost:hover { border-color: var(--tile-500); color: var(--tile-500); }
+
+/* --------------------------------------------------------------------------
+   SIGNATURE: řady bobrovek na spodní hraně hero
+   Dvě překryté řady půlkruhových "šupin" — přesně vzor bobrovkové krytiny.
+   Přední řada je posunutá o půl tašky (převazba) a v barvě pálené tašky.
+   -------------------------------------------------------------------------- */
+
+.str-shingles {
+  position: relative;
+  height: 88px;
+  margin-top: 1.5rem;
+}
+
+.str-shingle-row {
+  position: absolute;
+  left: -30px;
+  right: -30px;
+  bottom: 0;
+  display: flex;
+}
+
+.str-shingle {
+  flex: 1 0 auto;
+  min-width: 60px;
+  height: 76px;
+  border-radius: 0 0 999px 999px;
+}
+
+.str-shingle-row-back { bottom: 26px; }
+.str-shingle-row-back .str-shingle {
+  background: var(--slate-700);
+}
+
+.str-shingle-row-front {
+  bottom: 0;
+  transform: translateX(30px); /* převazba o půl tašky */
+}
+.str-shingle-row-front .str-shingle {
+  background: linear-gradient(180deg, var(--tile-600) 0%, var(--tile-500) 55%);
+  box-shadow: inset 0 6px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* každá třetí taška lehce vybledlá — jak stárne krytina na skutečné střeše */
+.str-shingle-row-front .str-shingle:nth-child(3n) {
+  background: linear-gradient(180deg, #b5502f 0%, #d0603a 55%);
+}
+.str-shingle-row-front .str-shingle:nth-child(5n) {
+  background: linear-gradient(180deg, #97371a 0%, #b74a25 55%);
+}
+
+/* Page-load: hero řádky nastupují jako kladení tašek zdola */
+@keyframes str-rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.str-hero .str-eyebrow,
+.str-h1-line,
+.str-hero-lead,
+.str-hero-cta {
+  animation: str-rise 560ms cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+
+.str-h1-line-1 { animation-delay: 90ms; }
+.str-h1-line-2 { animation-delay: 180ms; }
+.str-h1-line-3 { animation-delay: 270ms; }
+.str-hero-lead { animation-delay: 380ms; }
+.str-hero-cta { animation-delay: 470ms; }
+
+@keyframes str-lay {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.str-shingle-row-back { animation: str-lay 700ms 250ms cubic-bezier(0.22, 0.8, 0.3, 1) both; }
+.str-shingle-row-front {
+  animation: str-lay 700ms 420ms cubic-bezier(0.22, 0.8, 0.3, 1) both;
+  /* keep the overlap offset */
+  animation-fill-mode: both;
+}
+
+/* ==========================================================================
+   SEKCE: SLUŽBY
+   ========================================================================== */
+
+.str-section {
+  padding: 4.5rem 1.25rem;
+}
+
+.str-services {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.str-section-head {
+  max-width: 42rem;
+  margin-bottom: 2.75rem;
+}
+
+.str-h2 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--slate-900);
+}
+
+.str-h2-light { color: #fff; }
+
+.str-section-lead {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #4a545f;
+}
+
+.str-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+  gap: 1.25rem;
+}
+
+.str-card {
+  background: #fff;
+  border: 1px solid #e4e1da;
+  border-radius: 4px;
+  padding: 1.75rem 1.5rem 1.4rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+/* horní hrana karty = hřebenáč */
+.str-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--slate-900);
+  transition: background-color 160ms ease;
+}
+
+.str-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(35, 42, 51, 0.12);
+}
+.str-card:hover::before { background: var(--tile-500); }
+
+.str-card-mark {
+  color: var(--tile-500);
+  margin-bottom: 1rem;
+}
+
+.str-card-title {
+  margin: 0 0 0.6rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  line-height: 1.3;
+}
+
+.str-card-text {
+  margin: 0 0 1rem;
+  font-size: 0.98rem;
+  color: #4a545f;
+}
+
+.str-card-note {
+  margin: 0;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-weight: 700;
+  color: var(--tile-600);
+  border-top: 1px dashed #e4e1da;
+  padding-top: 0.75rem;
+}
+
+/* ==========================================================================
+   SEKCE: DŮVĚRA
+   ========================================================================== */
+
+.str-trust {
+  background: var(--slate-900);
+  color: #e8ebee;
+  /* stejná plechová textura jako hero — konzistence materiálu */
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 71px,
+    rgba(255, 255, 255, 0.03) 71px,
+    rgba(255, 255, 255, 0.03) 72px
+  );
+}
+
+.str-trust-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.str-trust-text {
+  margin: 0 0 1.5rem;
+  font-size: 1.05rem;
+  color: #c8cfd6;
+}
+
+.str-trust-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.str-trust-list li {
+  position: relative;
+  padding-left: 1.6rem;
+  color: #dde2e7;
+}
+
+/* odrážka = stříška */
+.str-trust-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.7rem;
+  height: 0.38rem;
+  border-top: 2px solid var(--tile-500);
+  border-left: 2px solid var(--tile-500);
+  transform: rotate(45deg);
+}
+
+.str-trust-refs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.str-ref {
+  margin: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid var(--tile-500);
+  border-radius: 0 4px 4px 0;
+  padding: 1.4rem 1.5rem;
+}
+
+.str-ref blockquote {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: #fff;
+  font-style: italic;
+}
+
+.str-ref figcaption {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--zinc-300);
+}
+
+.str-trust-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--slate-700);
+  padding-top: 1.5rem;
+}
+
+.str-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.str-stat-num {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--tile-500);
+}
+
+.str-stat-label {
+  font-size: 0.82rem;
+  color: var(--zinc-300);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 56rem) {
+  .str-trust-inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 40rem) {
+  .str-section { padding: 3.25rem 1.1rem; }
+
+  .str-hero-main { padding-top: 2.75rem; }
+
+  .str-hero-tel { text-align: left; }
+
+  .str-btn {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 1.25rem;
+  }
+
+  .str-shingles { height: 64px; }
+  .str-shingle { min-width: 46px; height: 56px; }
+  .str-shingle-row-back { bottom: 20px; }
+  .str-shingle-row-front { transform: translateX(23px); }
+
+  .str-trust-stats { grid-template-columns: 1fr 1fr; }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .str-hero .str-eyebrow,
+  .str-h1-line,
+  .str-hero-lead,
+  .str-hero-cta,
+  .str-shingle-row-back,
+  .str-shingle-row-front {
+    animation: none;
+  }
+
+  .str-card,
+  .str-btn {
+    transition: none;
+  }
+  .str-card:hover { transform: none; }
+  .str-btn-solid:hover { transform: none; }
+}
