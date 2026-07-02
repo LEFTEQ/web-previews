@@ -1,0 +1,394 @@
+/* ==========================================================================
+   2000 On-Line — cukrárna / zmrzlinové stroje, Ústí nad Labem
+   Paleta odvozená z řemesla: vanilkový krém, malinová poleva, vaflový kornout,
+   tmavá čokoláda. Signature: typografický vír točené zmrzliny v heru.
+   ========================================================================== */
+
+:root {
+  --choc: #3b241c;        /* tmavá čokoláda — text */
+  --vanilla: #fff6e9;     /* vanilkový krém — podklad */
+  --cream: #ffe9c9;       /* šlehačka / světlá plocha */
+  --raspberry: #e64672;   /* malinová poleva — akcent, CTA */
+  --waffle: #d99a4e;      /* vaflový kornout — sekundární akcent */
+  --pistachio: #7ba05b;   /* pistácie — drobný doplněk (víno/zeleň) */
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--vanilla);
+  color: var(--choc);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ol h1, .ol h2, .ol h3, .ol .wordmark, .ol .btn, .ol .card-badge,
+.ol .hero-eyebrow, .ol .topbar-call, .ol dt {
+  font-family: "Arial Rounded MT Bold", "Trebuchet MS", Verdana, sans-serif;
+}
+
+.ol a { color: inherit; }
+
+.ol :focus-visible {
+  outline: 3px solid var(--raspberry);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(1100px 600px at 85% -10%, var(--cream) 0%, transparent 60%),
+    var(--vanilla);
+  padding: 0 1.25rem 3.5rem;
+}
+
+.topbar {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.25rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+}
+
+.wm-2000 { font-weight: 700; }
+
+.wm-swirl {
+  color: var(--raspberry);
+  display: inline-flex;
+  transform: translateY(-2px);
+}
+
+.wm-online {
+  color: var(--waffle);
+  font-weight: 700;
+}
+
+.topbar-call {
+  text-decoration: none;
+  text-align: right;
+  line-height: 1.25;
+}
+
+.topbar-call-label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--waffle);
+}
+
+.topbar-call-num {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--raspberry);
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--waffle);
+}
+
+.hero-title {
+  margin: 0;
+  font-size: clamp(2.6rem, 8.5vw, 5.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  max-width: 12ch;
+}
+
+.ht-line { display: block; }
+
+.hero-title em {
+  font-style: normal;
+  color: var(--raspberry);
+}
+
+.hero-lead {
+  max-width: 34rem;
+  margin: 1.5rem 0 2rem;
+  font-size: 1.1rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.btn-solid {
+  background: var(--raspberry);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(230, 70, 114, 0.35);
+}
+
+.btn-solid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(230, 70, 114, 0.4);
+}
+
+.btn-ghost {
+  border: 2px solid var(--choc);
+  color: var(--choc);
+}
+
+.btn-ghost:hover { background: var(--cream); }
+
+/* --- signature: vír točené zmrzliny --- */
+
+.swirl-stage {
+  position: absolute;
+  right: -40px;
+  bottom: -60px;
+  width: min(46vw, 420px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.swirl { display: block; width: 100%; height: auto; }
+
+.sw-cone {
+  fill: var(--waffle);
+}
+
+.sw-waffle path {
+  stroke: rgba(59, 36, 28, 0.35);
+  stroke-width: 3;
+  fill: none;
+}
+
+.sw-r, .sw-tip {
+  fill: none;
+  stroke: var(--raspberry);
+  stroke-width: 22;
+  stroke-linecap: round;
+}
+
+.sw-r5, .sw-r6 { stroke-width: 20; }
+.sw-tip { stroke-width: 16; }
+
+/* orchestrace: zmrzlina se "natočí" zdola nahoru při načtení */
+@media (prefers-reduced-motion: no-preference) {
+  .sw-r, .sw-tip {
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    animation: sw-draw 500ms ease-out forwards;
+  }
+  .sw-r1 { animation-delay: 200ms; }
+  .sw-r2 { animation-delay: 340ms; }
+  .sw-r3 { animation-delay: 480ms; }
+  .sw-r4 { animation-delay: 620ms; }
+  .sw-r5 { animation-delay: 760ms; }
+  .sw-r6 { animation-delay: 900ms; }
+  .sw-tip { animation-delay: 1040ms; }
+
+  .hero-eyebrow, .hero-title, .hero-lead, .hero-actions {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: rise 600ms ease-out forwards;
+  }
+  .hero-title { animation-delay: 90ms; }
+  .hero-lead { animation-delay: 180ms; }
+  .hero-actions { animation-delay: 270ms; }
+}
+
+@keyframes sw-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ol *, .ol *::before, .ol *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============ SLUŽBY ============ */
+
+.services {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem 3rem;
+}
+
+.section-head { max-width: 40rem; }
+
+.section-head h2, .trust h2 {
+  font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+  line-height: 1.15;
+  margin: 0 0 0.75rem;
+}
+
+.section-head p { margin: 0 0 2.25rem; }
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 1.6rem 1.5rem;
+  border-top: 6px solid var(--raspberry);
+  box-shadow: 0 4px 14px rgba(59, 36, 28, 0.07);
+}
+
+.card-wine { border-top-color: var(--pistachio); }
+
+.card-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--waffle);
+  margin-bottom: 0.6rem;
+}
+
+.card h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.2rem;
+  line-height: 1.25;
+}
+
+.card p { margin: 0 0 0.75rem; font-size: 0.97rem; }
+
+.card-note {
+  color: var(--raspberry);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.card-wine .card-note { color: var(--pistachio); }
+
+/* ============ DŮVĚRA ============ */
+
+.trust {
+  background: var(--choc);
+  color: var(--vanilla);
+  padding: 4rem 1.25rem;
+}
+
+.trust-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.trust-copy p { max-width: 36rem; }
+
+.trust-quote {
+  margin: 2rem 0 0;
+  padding: 1.4rem 1.5rem;
+  background: rgba(255, 246, 233, 0.07);
+  border-left: 5px solid var(--raspberry);
+  border-radius: 0 16px 16px 0;
+}
+
+.trust-quote p {
+  margin: 0 0 0.6rem;
+  font-style: italic;
+  font-size: 1.05rem;
+}
+
+.trust-quote footer {
+  font-size: 0.85rem;
+  color: var(--waffle);
+}
+
+.trust-facts {
+  margin: 0;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.fact {
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(255, 246, 233, 0.18);
+}
+
+.fact dt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--waffle);
+  margin-bottom: 0.25rem;
+}
+
+.fact dd {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.fact a { color: var(--raspberry); text-decoration-thickness: 2px; }
+
+/* ============ RESPONZIVITA ============ */
+
+@media (max-width: 860px) {
+  .trust-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .swirl-stage { width: 52vw; right: -70px; bottom: -80px; opacity: 0.9; }
+}
+
+@media (max-width: 560px) {
+  .hero { padding-bottom: 2.5rem; }
+  .hero-inner { padding-top: 2rem; }
+  .hero-lead { font-size: 1.02rem; }
+  .hero-actions .btn { width: 100%; text-align: center; }
+  .swirl-stage {
+    position: static;
+    width: 240px;
+    margin: 2rem auto -3.5rem;
+    opacity: 1;
+  }
+  .topbar-call-label { display: none; }
+}
