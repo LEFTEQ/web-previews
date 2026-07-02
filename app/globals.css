@@ -1,0 +1,418 @@
+/* =====================================================
+   RIDERA SPORT — Ostrava-Vítkovice
+   Palette: antuka (kurty) + hluboká zeleň (green) + křída
+   Type: Archivo (display, sportovní kondenz) + system body
+   Signature: křídové lajny kurtu vedené přes hero
+   ===================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..900&family=Archivo:ital,wght@0,400;0,600;1,400&display=swap");
+
+:root {
+  --antuka: #c8552c;        /* antukový prach */
+  --antuka-deep: #a63f1d;
+  --green: #123f2e;         /* golfový green za soumraku */
+  --green-ink: #0b2a1f;
+  --chalk: #f7f3ec;         /* křída lajn */
+  --chalk-dim: #e8e0d2;
+  --ink: #17211c;
+  --maxw: 1120px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Archivo", "Segoe UI", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--chalk);
+}
+
+.rs a:focus-visible,
+.rs .btn:focus-visible {
+  outline: 3px solid var(--antuka);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(200, 85, 44, 0.35), transparent 60%),
+    linear-gradient(160deg, var(--green) 0%, var(--green-ink) 100%);
+  color: var(--chalk);
+  padding: 1.5rem 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 92vh;
+}
+
+.hero-topbar {
+  max-width: var(--maxw);
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.wordmark {
+  font-weight: 900;
+  font-stretch: 80%;
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.wordmark-dot {
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  background: var(--antuka);
+  display: inline-block;
+  transform: translateY(0.05em);
+}
+
+.hero-loc {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  text-align: right;
+}
+
+/* --- signature: křídové lajny kurtu --- */
+.hero-court {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.court-line {
+  position: absolute;
+  background: rgba(247, 243, 236, 0.22);
+}
+
+.court-v {
+  top: 0;
+  bottom: 0;
+  right: 18%;
+  width: 3px;
+  transform-origin: top;
+  animation: chalk-v 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+.court-h {
+  left: 0;
+  right: 0;
+  top: 62%;
+  height: 3px;
+  transform-origin: left;
+  animation: chalk-h 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+
+.court-circle {
+  position: absolute;
+  top: 62%;
+  right: 18%;
+  width: 340px;
+  height: 340px;
+  transform: translate(50%, -50%);
+  border: 3px solid rgba(200, 85, 44, 0.55);
+  border-radius: 50%;
+  animation: chalk-fade 1s ease 0.9s both;
+}
+
+@keyframes chalk-v { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes chalk-h { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes chalk-fade { from { opacity: 0; scale: 0.92; } to { opacity: 1; scale: 1; } }
+
+.hero-body {
+  max-width: var(--maxw);
+  width: 100%;
+  margin: auto;
+  padding: 4rem 0 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--chalk-dim);
+  margin-bottom: 1.25rem;
+}
+
+.hero-title {
+  font-weight: 900;
+  font-stretch: 78%;
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+}
+
+.hero-title .line { display: block; }
+
+.line-accent {
+  color: var(--antuka);
+  -webkit-text-stroke: 0;
+}
+
+.hero-sub {
+  max-width: 34rem;
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  color: var(--chalk-dim);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.btn-solid {
+  background: var(--antuka);
+  color: var(--chalk);
+}
+
+.btn-solid:hover { background: var(--antuka-deep); transform: translateY(-2px); }
+
+.btn-line {
+  border: 2px solid rgba(247, 243, 236, 0.5);
+  color: var(--chalk);
+}
+
+.btn-line:hover { border-color: var(--chalk); transform: translateY(-2px); }
+
+.hero-ticker {
+  position: relative;
+  z-index: 2;
+  max-width: var(--maxw);
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.1rem 0;
+  border-top: 1px solid rgba(247, 243, 236, 0.25);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.9rem;
+  font-size: 0.9rem;
+  color: var(--chalk-dim);
+}
+
+.ticker-item strong { color: var(--chalk); font-weight: 700; }
+.ticker-sep { color: var(--antuka); }
+
+/* --- load reveal --- */
+.reveal {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.r1 { animation-delay: 0.1s; }
+.r2 { animation-delay: 0.2s; }
+.r3 { animation-delay: 0.32s; }
+.r4 { animation-delay: 0.44s; }
+.r5 { animation-delay: 0.6s; }
+.r6 { animation-delay: 0.72s; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ SECTIONS ============ */
+
+.section {
+  padding: 4.5rem 1.25rem;
+}
+
+.section-head {
+  max-width: var(--maxw);
+  margin: 0 auto 2.5rem;
+}
+
+.section h2 {
+  font-weight: 900;
+  font-stretch: 80%;
+  text-transform: uppercase;
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  line-height: 1.05;
+  margin-bottom: 0.9rem;
+}
+
+.section-lede {
+  max-width: 38rem;
+  font-size: 1.05rem;
+  color: #45514b;
+}
+
+/* --- sportoviště --- */
+
+.section-courts { background: var(--chalk); }
+
+.court-grid {
+  list-style: none;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.court-card {
+  background: #fff;
+  border: 1px solid var(--chalk-dim);
+  border-radius: 14px;
+  padding: 1.6rem 1.5rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.court-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--antuka);
+  box-shadow: 0 14px 30px rgba(23, 33, 28, 0.1);
+}
+
+.court-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--antuka);
+}
+
+.court-card h3 {
+  font-weight: 900;
+  font-stretch: 82%;
+  text-transform: uppercase;
+  font-size: 1.35rem;
+}
+
+.court-card p {
+  font-size: 0.98rem;
+  color: #45514b;
+  flex-grow: 1;
+}
+
+.court-info {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--green);
+  border-top: 2px solid var(--chalk-dim);
+  padding-top: 0.7rem;
+}
+
+/* --- proč Ridera --- */
+
+.section-why {
+  background: var(--green);
+  color: var(--chalk);
+}
+
+.section-why .section-lede { color: var(--chalk-dim); }
+
+.why-grid {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem 2.5rem;
+}
+
+.why-card h3 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  margin: 0.3rem 0 0.6rem;
+}
+
+.why-num {
+  font-weight: 900;
+  font-stretch: 76%;
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  line-height: 1;
+  color: var(--antuka);
+}
+
+.why-text {
+  font-size: 0.98rem;
+  color: var(--chalk-dim);
+}
+
+.why-quote {
+  max-width: var(--maxw);
+  margin: 3.5rem auto 0;
+  padding: 1.8rem 0 0 1.5rem;
+  border-left: 4px solid var(--antuka);
+}
+
+.why-quote p {
+  font-style: italic;
+  font-size: 1.15rem;
+  max-width: 42rem;
+}
+
+.why-quote cite {
+  display: block;
+  margin-top: 0.8rem;
+  font-style: normal;
+  font-size: 0.9rem;
+  color: var(--chalk-dim);
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 640px) {
+  .hero { min-height: auto; padding-bottom: 0; }
+  .hero-body { padding: 3.5rem 0 2.5rem; }
+  .hero-loc { display: none; }
+  .court-circle { width: 200px; height: 200px; }
+  .section { padding: 3.25rem 1.25rem; }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal,
+  .court-v,
+  .court-h,
+  .court-circle {
+    animation: none !important;
+  }
+  .btn,
+  .court-card {
+    transition: none;
+  }
+  .court-card:hover,
+  .btn:hover {
+    transform: none;
+  }
+}
