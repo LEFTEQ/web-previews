@@ -1,0 +1,525 @@
+/* ==========================================================================
+   EKOAQUA ochrana vod, s.r.o. — Ostrava
+   Koncept: „hladina" — vodní horizont s měrnou latí jako signature prvek.
+   Paleta z reality oboru: hluboká voda, technická azurová, vápencově světlé
+   pozadí protokolů, signální oranžová měrné latě.
+   Typografie: geometrický grotesk s technickým charakterem (systémový stack
+   laděný do „úředního razítka" pomocí šířek a prostrkání).
+   ========================================================================== */
+
+:root {
+  --ea-deep: #0b3a4a;      /* hluboká voda / usazovací nádrž */
+  --ea-navy: #072633;      /* dno */
+  --ea-cyan: #2fb8c6;      /* technická azurová — vyčištěná voda */
+  --ea-paper: #eef3f2;     /* papír protokolu */
+  --ea-ink: #14232a;       /* text */
+  --ea-signal: #e8712e;    /* signální oranžová měrné latě */
+
+  --ea-font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", system-ui, sans-serif;
+  --ea-font-body: "Georgia", "Charter", "Iowan Old Style", serif;
+  --ea-font-mono: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--ea-paper);
+  color: var(--ea-ink);
+  font-family: var(--ea-font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ea-main a:focus-visible,
+.ea-main button:focus-visible {
+  outline: 3px solid var(--ea-signal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ===================== HERO ===================== */
+
+.ea-hero {
+  position: relative;
+  background: linear-gradient(178deg, var(--ea-navy) 0%, var(--ea-deep) 72%);
+  color: var(--ea-paper);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.ea-hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.ea-wordmark {
+  font-family: var(--ea-font-display);
+  text-transform: uppercase;
+  line-height: 1;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.ea-wm-eko,
+.ea-wm-aqua {
+  font-size: 1.5rem;
+  letter-spacing: 0.22em;
+  font-weight: 700;
+}
+
+.ea-wm-eko {
+  color: var(--ea-paper);
+}
+
+.ea-wm-aqua {
+  color: var(--ea-cyan);
+  margin-top: 0.1rem;
+}
+
+.ea-wm-sub {
+  font-family: var(--ea-font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(238, 243, 242, 0.65);
+  margin-top: 0.45rem;
+}
+
+.ea-hero-tel {
+  font-family: var(--ea-font-mono);
+  font-size: 0.85rem;
+  color: var(--ea-cyan);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(47, 184, 198, 0.5);
+  padding-bottom: 0.1rem;
+  white-space: nowrap;
+}
+
+.ea-hero-tel:hover {
+  color: var(--ea-paper);
+  border-bottom-color: var(--ea-paper);
+}
+
+.ea-hero-body {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3.5rem 0 2rem;
+}
+
+.ea-hero-eyebrow {
+  font-family: var(--ea-font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ea-cyan);
+  margin: 0 0 1.25rem;
+}
+
+.ea-hero-title {
+  font-family: var(--ea-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 6.5vw, 4.5rem);
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+  margin: 0 0 1.5rem;
+  max-width: 18ch;
+}
+
+.ea-hero-title .ea-line {
+  display: block;
+}
+
+.ea-hero-title em {
+  font-style: normal;
+  color: var(--ea-cyan);
+}
+
+.ea-line-3 {
+  color: var(--ea-signal);
+}
+
+.ea-hero-lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: rgba(238, 243, 242, 0.85);
+  margin: 0 0 2rem;
+}
+
+.ea-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.ea-btn {
+  font-family: var(--ea-font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: 3px;
+  display: inline-block;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.ea-btn-solid {
+  background: var(--ea-signal);
+  color: var(--ea-navy);
+}
+
+.ea-btn-solid:hover {
+  transform: translateY(-2px);
+  background: #f28744;
+}
+
+.ea-btn-ghost {
+  border: 2px solid rgba(47, 184, 198, 0.6);
+  color: var(--ea-cyan);
+}
+
+.ea-btn-ghost:hover {
+  border-color: var(--ea-cyan);
+  color: var(--ea-paper);
+}
+
+/* --- Signature: hladina + měrná lať --- */
+
+.ea-waterline {
+  position: relative;
+  margin: 2rem calc(-1.25rem) 0;
+}
+
+.ea-wave {
+  display: block;
+  width: 100%;
+  height: 70px;
+}
+
+.ea-gauge {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  align-items: flex-end;
+  font-family: var(--ea-font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(238, 243, 242, 0.75);
+}
+
+.ea-gauge-mark {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-direction: row-reverse;
+}
+
+.ea-gauge-mark i {
+  display: block;
+  width: 2.2rem;
+  height: 2px;
+  background: rgba(238, 243, 242, 0.5);
+}
+
+.ea-gauge-ok {
+  color: var(--ea-cyan);
+  font-weight: 700;
+}
+
+.ea-gauge-ok i {
+  background: var(--ea-cyan);
+  height: 3px;
+}
+
+/* --- Hero load sekvence --- */
+
+.ea-hero-eyebrow,
+.ea-hero-title .ea-line,
+.ea-hero-lead,
+.ea-hero-actions {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: ea-rise 0.6s ease forwards;
+}
+
+.ea-hero-eyebrow { animation-delay: 0.05s; }
+.ea-line-1 { animation-delay: 0.15s; }
+.ea-line-2 { animation-delay: 0.28s; }
+.ea-line-3 { animation-delay: 0.41s; }
+.ea-hero-lead { animation-delay: 0.55s; }
+.ea-hero-actions { animation-delay: 0.68s; }
+
+@keyframes ea-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================== SLUŽBY ===================== */
+
+.ea-services {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4rem 1.25rem 3rem;
+}
+
+.ea-section-head h2,
+.ea-trust h2 {
+  font-family: var(--ea-font-display);
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: var(--ea-deep);
+  margin: 0 0 0.75rem;
+}
+
+.ea-section-head p {
+  max-width: 38rem;
+  margin: 0 0 2.5rem;
+  color: #3c4f57;
+}
+
+.ea-service-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.ea-card {
+  background: #ffffff;
+  border-top: 4px solid var(--ea-cyan);
+  border-radius: 4px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  box-shadow: 0 1px 3px rgba(11, 58, 74, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ea-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(11, 58, 74, 0.14);
+}
+
+.ea-card-tag {
+  font-family: var(--ea-font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ea-signal);
+}
+
+.ea-card h3 {
+  font-family: var(--ea-font-display);
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  color: var(--ea-deep);
+  margin: 0.6rem 0 0.75rem;
+}
+
+.ea-card p {
+  margin: 0 0 1rem;
+  font-size: 0.98rem;
+  color: #33454d;
+}
+
+.ea-card-out {
+  font-family: var(--ea-font-mono);
+  font-size: 0.78rem;
+  color: var(--ea-deep);
+  border-top: 1px dashed rgba(11, 58, 74, 0.25);
+  padding-top: 0.75rem;
+  margin-bottom: 0 !important;
+}
+
+/* ===================== DŮVĚRA ===================== */
+
+.ea-trust {
+  background: #ffffff;
+  border-top: 1px solid rgba(11, 58, 74, 0.1);
+  padding: 4rem 1.25rem;
+}
+
+.ea-trust-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.ea-trust-text p {
+  max-width: 40rem;
+  color: #33454d;
+}
+
+.ea-trust-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.75rem 0 0;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.ea-trust-list li {
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--ea-cyan);
+  max-width: 40rem;
+  color: #33454d;
+}
+
+.ea-trust-list strong {
+  font-family: var(--ea-font-display);
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: var(--ea-deep);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.ea-trust-card {
+  background: var(--ea-deep);
+  color: var(--ea-paper);
+  border-radius: 4px;
+  padding: 1.75rem 1.5rem;
+  align-self: start;
+}
+
+.ea-trust-card h3 {
+  font-family: var(--ea-font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 1.1rem;
+  margin: 0 0 1.25rem;
+  color: var(--ea-cyan);
+}
+
+.ea-person {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-bottom: 1.1rem;
+  margin-bottom: 1.1rem;
+  border-bottom: 1px dashed rgba(238, 243, 242, 0.25);
+}
+
+.ea-person-name {
+  font-family: var(--ea-font-display);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  font-size: 1.05rem;
+}
+
+.ea-person-role {
+  font-size: 0.85rem;
+  color: rgba(238, 243, 242, 0.7);
+  margin-bottom: 0.35rem;
+}
+
+.ea-person a {
+  font-family: var(--ea-font-mono);
+  font-size: 0.85rem;
+  color: var(--ea-cyan);
+  text-decoration: none;
+  width: fit-content;
+}
+
+.ea-person a:hover {
+  color: var(--ea-paper);
+  text-decoration: underline;
+}
+
+.ea-address {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-family: var(--ea-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: rgba(238, 243, 242, 0.65);
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (min-width: 640px) {
+  .ea-service-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .ea-hero {
+    padding: 2rem 3rem 0;
+  }
+
+  .ea-waterline {
+    margin: 3rem calc(-3rem) 0;
+  }
+
+  .ea-hero-body {
+    padding: 5rem 0 3rem;
+  }
+
+  .ea-services,
+  .ea-trust {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .ea-trust-inner {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 4rem;
+  }
+
+  .ea-gauge {
+    right: 4rem;
+  }
+}
+
+/* ===================== REDUCED MOTION ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ea-hero-eyebrow,
+  .ea-hero-title .ea-line,
+  .ea-hero-lead,
+  .ea-hero-actions {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .ea-card,
+  .ea-btn {
+    transition: none;
+  }
+
+  .ea-card:hover,
+  .ea-btn-solid:hover {
+    transform: none;
+  }
+}
