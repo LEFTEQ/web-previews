@@ -1,0 +1,536 @@
+/* =========================================================
+   VOBECKÝ — klempířství, Ostrava
+   Paleta odvozená z řemesla:
+   - zinek/titanzinek (chladná šedá plechu)
+   - grafitová břidlice (tmavý podklad)
+   - měď (akcent — měděné oplechování)
+   - papír technického výkresu (světlé pozadí)
+   ========================================================= */
+
+:root {
+  --zinc: #8d97a0;        /* povrch zinkového plechu */
+  --graphite: #23282d;    /* grafit / asfaltový pás */
+  --graphite-deep: #191d21;
+  --copper: #b5622e;      /* měděné oplechování */
+  --copper-bright: #d07a41;
+  --paper: #eef0f2;       /* světlá, chladná — žádný krémový default */
+  --paper-dim: #dfe3e7;
+  --ink: #22262a;
+
+  --font-display: "Archivo Black", "Arial Black", "Franklin Gothic Heavy", sans-serif;
+  --font-body: "Georgia", "Times New Roman", serif;
+  --font-util: "Courier New", "Courier", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img.kv-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- Focus ---------- */
+.kv a:focus-visible,
+.kv button:focus-visible {
+  outline: 3px solid var(--copper);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.kv-hero {
+  background: var(--paper);
+  padding: 1.25rem 1.25rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemná "drážkovaná" textura plechu na pozadí hero */
+.kv-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 118px,
+    rgba(141, 151, 160, 0.16) 118px,
+    rgba(141, 151, 160, 0.16) 120px
+  );
+  pointer-events: none;
+}
+
+.kv-hero > * {
+  position: relative;
+}
+
+.kv-hero__topbar {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1.5rem;
+}
+
+/* ---------- Wordmark ---------- */
+.kv-wordmark {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  column-gap: 0.6rem;
+  align-items: baseline;
+}
+
+.kv-wordmark__fold {
+  grid-row: 1 / 3;
+  width: 26px;
+  height: 34px;
+  align-self: center;
+  background: var(--graphite);
+  /* ohnutý plech: falc v rohu */
+  clip-path: polygon(0 0, 100% 0, 100% 62%, 62% 62%, 62% 100%, 0 100%);
+  position: relative;
+}
+
+.kv-wordmark__name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.14em;
+  color: var(--graphite);
+  line-height: 1;
+}
+
+.kv-wordmark__sub {
+  grid-column: 2;
+  font-family: var(--font-util);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+/* ---------- Tlačítko volání v horní liště ---------- */
+.kv-callpill {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-decoration: none;
+  border: 2px solid var(--graphite);
+  padding: 0.45rem 0.9rem;
+  background: var(--paper);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.kv-callpill:hover {
+  background: var(--graphite);
+}
+
+.kv-callpill:hover .kv-callpill__num,
+.kv-callpill:hover .kv-callpill__label {
+  color: var(--paper);
+}
+
+.kv-callpill__label {
+  font-family: var(--font-util);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--copper);
+}
+
+.kv-callpill__num {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  color: var(--graphite);
+}
+
+/* ---------- Hero grid ---------- */
+.kv-hero__grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding-bottom: 2.5rem;
+}
+
+.kv-eyebrow {
+  font-family: var(--font-util);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: var(--copper);
+  margin: 0 0 1rem;
+}
+
+.kv-eyebrow--light {
+  color: var(--copper-bright);
+}
+
+.kv-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 7vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  margin: 0 0 1.4rem;
+}
+
+.kv-hero__title em {
+  font-style: normal;
+  color: var(--copper);
+  position: relative;
+}
+
+.kv-hero__lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  margin: 0 0 1.8rem;
+}
+
+.kv-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.kv-btn {
+  display: inline-block;
+  font-family: var(--font-util);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  padding: 0.9rem 1.4rem;
+  transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.kv-btn--solid {
+  background: var(--copper);
+  color: #fff;
+  border: 2px solid var(--copper);
+}
+
+.kv-btn--solid:hover {
+  background: var(--graphite);
+  border-color: var(--graphite);
+  transform: translateY(-2px);
+}
+
+.kv-btn--line {
+  border: 2px solid var(--graphite);
+  color: var(--graphite);
+  background: transparent;
+}
+
+.kv-btn--line:hover {
+  background: var(--graphite);
+  color: var(--paper);
+  transform: translateY(-2px);
+}
+
+.kv-hero__note {
+  font-size: 0.92rem;
+  color: #566068;
+  font-style: italic;
+  margin: 0;
+}
+
+/* ---------- Hero media ---------- */
+.kv-hero__media {
+  margin: 0;
+  border: 3px solid var(--graphite);
+  box-shadow: 10px 10px 0 var(--zinc);
+}
+
+.kv-hero__caption {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-util);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--graphite);
+  color: var(--paper);
+  padding: 0.65rem 0.9rem;
+}
+
+.kv-seam {
+  flex: none;
+  width: 22px;
+  height: 10px;
+  border-bottom: 2px solid var(--copper-bright);
+  border-left: 2px solid var(--copper-bright);
+  border-right: 2px solid var(--copper-bright);
+}
+
+/* ---------- Signature: falcovaný profil plechu ---------- */
+.kv-falc {
+  color: var(--graphite);
+  margin: 0 -1.25rem;
+  line-height: 0;
+}
+
+.kv-falc svg {
+  width: 100%;
+  height: 28px;
+  display: block;
+}
+
+/* =========================================================
+   SEKCE 1 — PRÁCE
+   ========================================================= */
+.kv-section {
+  padding: 4rem 1.25rem;
+}
+
+.kv-section--work {
+  background: var(--paper-dim);
+}
+
+.kv-section__head {
+  max-width: 1180px;
+  margin: 0 auto 2.5rem;
+}
+
+.kv-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--graphite);
+  margin: 0;
+}
+
+.kv-h2--light {
+  color: var(--paper);
+}
+
+.kv-work__grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.kv-work__media {
+  margin: 0;
+  border: 3px solid var(--graphite);
+  box-shadow: 10px 10px 0 var(--copper);
+  position: sticky;
+  top: 1.5rem;
+}
+
+.kv-work__list {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.kv-card {
+  background: var(--paper);
+  border-left: 5px solid var(--zinc);
+  padding: 1.3rem 1.5rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.kv-card:hover {
+  border-left-color: var(--copper);
+  transform: translateX(4px);
+}
+
+.kv-card__title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--graphite);
+  margin: 0 0 0.5rem;
+}
+
+.kv-card p {
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+/* =========================================================
+   SEKCE 2 — DŮVĚRA (tmavá, jako asfaltový pás)
+   ========================================================= */
+.kv-section--trust {
+  background: var(--graphite-deep);
+  color: var(--paper);
+}
+
+.kv-trust__grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.kv-trust__lead {
+  max-width: 36rem;
+  font-size: 1.08rem;
+  color: #c9ced3;
+  margin: 1.2rem 0 2rem;
+}
+
+.kv-facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.4rem;
+  margin: 0;
+}
+
+.kv-fact {
+  border-top: 2px solid var(--copper);
+  padding-top: 0.8rem;
+}
+
+.kv-fact dt {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--paper);
+  margin-bottom: 0.35rem;
+}
+
+.kv-fact dd {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #aeb5bb;
+}
+
+.kv-trust__media {
+  margin: 0;
+}
+
+.kv-trust__media img {
+  border: 3px solid var(--zinc);
+}
+
+.kv-trust__caption {
+  font-family: var(--font-util);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--zinc);
+  padding-top: 0.7rem;
+}
+
+/* =========================================================
+   ANIMACE — jediný orchestrovaný moment při načtení hero
+   ========================================================= */
+@keyframes kv-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.kv-hero__text > * {
+  animation: kv-rise 0.55s ease-out both;
+}
+
+.kv-hero__text > *:nth-child(1) { animation-delay: 0.05s; }
+.kv-hero__text > *:nth-child(2) { animation-delay: 0.15s; }
+.kv-hero__text > *:nth-child(3) { animation-delay: 0.25s; }
+.kv-hero__text > *:nth-child(4) { animation-delay: 0.35s; }
+.kv-hero__text > *:nth-child(5) { animation-delay: 0.45s; }
+
+.kv-hero__media {
+  animation: kv-rise 0.65s ease-out 0.3s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .kv-hero__text > *,
+  .kv-hero__media {
+    animation: none;
+  }
+  .kv-btn,
+  .kv-card,
+  .kv-callpill {
+    transition: none;
+  }
+  .kv-btn--solid:hover,
+  .kv-btn--line:hover,
+  .kv-card:hover {
+    transform: none;
+  }
+}
+
+/* =========================================================
+   RESPONZIVITA — desktop
+   ========================================================= */
+@media (min-width: 760px) {
+  .kv-hero {
+    padding: 1.75rem 2.5rem 0;
+  }
+
+  .kv-hero__grid {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 3.5rem;
+    align-items: center;
+    padding-bottom: 3.5rem;
+  }
+
+  .kv-section {
+    padding: 5.5rem 2.5rem;
+  }
+
+  .kv-work__grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 3rem;
+  }
+
+  .kv-trust__grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3.5rem;
+  }
+
+  .kv-facts {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.8rem 2rem;
+  }
+
+  .kv-falc {
+    margin: 0 -2.5rem;
+  }
+}
