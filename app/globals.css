@@ -1,0 +1,492 @@
+:root {
+  /* Paleta odvozená z řemesla: čerstvý řez, sušina, benzín křovinořezu */
+  --sz-noc: #17240f;        /* tmavá zeleň lesa nad Střekovem */
+  --sz-cerstva: #4a8f29;    /* čerstvě posekaná tráva */
+  --sz-jarni: #a4d65e;      /* mladé jarní stéblo */
+  --sz-seno: #f2eedc;       /* usušené seno / papír faktury */
+  --sz-benzin: #e4572e;     /* oranžová krytu křovinořezu */
+  --sz-inkoust: #22301a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--sz-seno);
+  color: var(--sz-inkoust);
+  font-family: "Trebuchet MS", "Segoe UI", -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sz a:focus-visible,
+.sz button:focus-visible {
+  outline: 3px solid var(--sz-benzin);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* =============== HERO =============== */
+
+.sz-hero {
+  min-height: 92svh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(178deg, var(--sz-noc) 0%, #223816 62%, #2c4a1a 100%);
+  color: var(--sz-seno);
+  padding: 20px clamp(18px, 5vw, 64px) 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.sz-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sz-wordmark {
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  font-size: 1.05rem;
+  line-height: 1.15;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.sz-wordmark b {
+  color: var(--sz-jarni);
+  font-weight: 900;
+}
+
+.sz-wordmark i {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.65;
+  margin-top: 3px;
+}
+
+.sz-hero-tel {
+  background: var(--sz-benzin);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.sz-hero-tel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.25);
+}
+
+.sz-hero-title {
+  margin: clamp(36px, 7vh, 80px) 0 0;
+  font-size: clamp(3rem, 12vw, 9.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.sz-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: sz-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.sz-line-1 { animation-delay: 0.05s; }
+.sz-line-2 { animation-delay: 0.2s; }
+.sz-line-3 { animation-delay: 0.35s; }
+
+.sz-line em {
+  font-style: normal;
+  color: var(--sz-jarni);
+  position: relative;
+}
+
+/* přeškrtnutí jako řez strunou křovinořezu */
+.sz-line em::after {
+  content: "";
+  position: absolute;
+  left: -2%;
+  right: -4%;
+  top: 54%;
+  height: 0.06em;
+  background: var(--sz-benzin);
+  transform: rotate(-1.5deg) scaleX(0);
+  transform-origin: left center;
+  animation: sz-cut 0.5s ease-out 0.9s forwards;
+}
+
+@keyframes sz-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sz-cut {
+  to {
+    transform: rotate(-1.5deg) scaleX(1);
+  }
+}
+
+/* =============== SIGNATURE: pás trávy =============== */
+
+.sz-meadow {
+  margin-top: clamp(28px, 6vh, 64px);
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(3px, 0.9vw, 10px);
+  height: 100px;
+  position: relative;
+  border-bottom: 3px solid var(--sz-jarni);
+  padding-bottom: 0;
+}
+
+.sz-blade {
+  flex: 1;
+  min-width: 3px;
+  max-width: 14px;
+  background: linear-gradient(to top, var(--sz-cerstva), var(--sz-jarni));
+  border-radius: 99px 99px 0 0;
+  transform-origin: bottom center;
+  animation: sz-sway 3.4s ease-in-out infinite alternate;
+}
+
+.sz-blade-cut {
+  background: var(--sz-cerstva);
+  animation: none;
+  opacity: 0.85;
+}
+
+@keyframes sz-sway {
+  from { transform: rotate(-3.5deg); }
+  to { transform: rotate(3.5deg); }
+}
+
+.sz-meadow-label {
+  position: absolute;
+  right: 0;
+  top: -1.9em;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sz-jarni);
+  opacity: 0.9;
+}
+
+.sz-hero-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 26px 0 34px;
+}
+
+.sz-hero-claim {
+  max-width: 46ch;
+  margin: 0;
+  font-size: 1.05rem;
+  color: #dbe6c9;
+}
+
+.sz-hero-claim strong {
+  color: var(--sz-jarni);
+}
+
+.sz-hero-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  max-width: 380px;
+}
+
+.sz-hero-tags li {
+  border: 1px solid rgba(164, 214, 94, 0.45);
+  color: #cfe3ac;
+  border-radius: 999px;
+  padding: 5px 13px;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+}
+
+/* =============== SLUŽBY =============== */
+
+.sz-sluzby {
+  padding: clamp(56px, 9vw, 110px) clamp(18px, 5vw, 64px);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sz-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--sz-cerstva);
+  margin: 0 0 10px;
+}
+
+.sz-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 26px;
+  height: 3px;
+  background: var(--sz-benzin);
+  margin-right: 10px;
+  vertical-align: middle;
+  transform: rotate(-1.5deg);
+}
+
+.sz-section-head h2 {
+  font-size: clamp(1.7rem, 4.5vw, 2.7rem);
+  line-height: 1.12;
+  margin: 0 0 14px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+.sz-section-lead {
+  max-width: 58ch;
+  margin: 0;
+  color: #47523c;
+}
+
+.sz-sluzby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+  margin-top: 38px;
+}
+
+.sz-karta {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px 22px 24px;
+  border: 1px solid #e0dcc6;
+  border-bottom: 4px solid var(--sz-cerstva);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.sz-karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(23, 36, 15, 0.12);
+}
+
+.sz-karta-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.sz-vyska {
+  font-weight: 900;
+  font-size: 1.35rem;
+  color: var(--sz-cerstva);
+  letter-spacing: -0.01em;
+}
+
+.sz-stroj {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--sz-benzin);
+  font-weight: 700;
+  text-align: right;
+}
+
+.sz-karta h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.sz-karta p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #47523c;
+}
+
+.sz-foto {
+  margin: 46px 0 0;
+}
+
+.sz-foto img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  border-bottom: 6px solid var(--sz-cerstva);
+}
+
+.sz-foto figcaption {
+  font-size: 0.86rem;
+  color: #5b6650;
+  margin-top: 10px;
+  max-width: 60ch;
+}
+
+/* =============== DŮVĚRA =============== */
+
+.sz-duvera {
+  background: var(--sz-noc);
+  color: var(--sz-seno);
+  padding: clamp(56px, 9vw, 110px) clamp(18px, 5vw, 64px);
+}
+
+.sz-duvera .sz-section-head {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sz-eyebrow-light {
+  color: var(--sz-jarni);
+}
+
+.sz-duvera h2 {
+  color: var(--sz-seno);
+}
+
+.sz-duvody {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 26px;
+}
+
+.sz-duvod {
+  border-top: 3px solid var(--sz-jarni);
+  padding-top: 16px;
+}
+
+.sz-duvod h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--sz-jarni);
+}
+
+.sz-duvod p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #cdd8bd;
+}
+
+.sz-reference {
+  max-width: 1200px;
+  margin: 60px auto 0;
+}
+
+.sz-ref-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin: 0 0 22px;
+}
+
+.sz-ref-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.sz-ref-grid blockquote {
+  margin: 0;
+  background: rgba(164, 214, 94, 0.08);
+  border: 1px solid rgba(164, 214, 94, 0.25);
+  border-radius: 14px;
+  padding: 20px 22px;
+}
+
+.sz-ref-grid blockquote p {
+  margin: 0 0 12px;
+  font-size: 0.97rem;
+  color: #e6edd8;
+}
+
+.sz-ref-grid cite {
+  font-style: normal;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sz-jarni);
+}
+
+/* =============== RESPONSIVE =============== */
+
+@media (max-width: 640px) {
+  .sz-hero {
+    min-height: auto;
+    padding-bottom: 8px;
+  }
+
+  .sz-hero-tel {
+    width: 100%;
+    text-align: center;
+  }
+
+  .sz-meadow {
+    height: 72px;
+  }
+
+  .sz-meadow-label {
+    font-size: 0.66rem;
+  }
+
+  .sz-hero-foot {
+    flex-direction: column;
+    gap: 18px;
+  }
+}
+
+/* =============== REDUCED MOTION =============== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .sz-line {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .sz-line em::after {
+    animation: none;
+    transform: rotate(-1.5deg) scaleX(1);
+  }
+
+  .sz-blade {
+    animation: none;
+  }
+
+  .sz-karta,
+  .sz-hero-tel {
+    transition: none;
+  }
+}
