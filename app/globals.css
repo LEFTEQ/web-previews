@@ -1,0 +1,584 @@
+/* ============================================================
+   EUC Klinika — zubní ordinace, Hradec Králové
+   Palette: klinicky čistá bílá + hluboká petrolejová (zdravotní
+   modrozelená, ne generická "tech" modř) + mátová a signální
+   korálová pro akutní péči. Typ: Fraunces (display s lidským,
+   měkkým charakterem — protiklad sterilní ordinace) + system
+   grotesk pro věcný text.
+   Signature: "zubní kříž" — kvadrantový diagram chrupu (11–48),
+   jak ho pacient zná ze své karty, vysázený jako grafika hera.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;700&display=swap");
+
+:root {
+  --petrol: #0e5f63;
+  --petrol-deep: #093f42;
+  --mint: #d9efe9;
+  --paper: #fbfdfc;
+  --ink: #12292b;
+  --coral: #e4572e;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.euc a:focus-visible,
+.euc .btn:focus-visible {
+  outline: 3px solid var(--coral);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(168deg, var(--petrol-deep) 0%, var(--petrol) 62%, #12777c 100%);
+  color: #f2faf8;
+  padding: 1.5rem 1.25rem 3.5rem;
+}
+
+.hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 0.01em;
+}
+
+.wordmark-dot {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin: 0 0.08em;
+  border-radius: 50%;
+  background: var(--coral);
+  transform: translateY(-0.55em);
+}
+
+.hero-loc {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mint);
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  max-width: 40rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mint);
+  margin: 0 0 1rem;
+}
+
+.hero-h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 8.5vw, 5.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.5rem;
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-line-2 em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--mint);
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  max-width: 34rem;
+  color: #dcefe9;
+  margin: 0 0 2rem;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  transition: transform 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+}
+
+.btn-solid {
+  background: var(--coral);
+  color: #fff;
+}
+
+.btn-solid:hover {
+  background: #c94a25;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: #f2faf8;
+  border: 2px solid rgba(242, 250, 248, 0.5);
+}
+
+.btn-ghost:hover {
+  border-color: #f2faf8;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.hero-acute {
+  font-size: 0.95rem;
+  color: var(--mint);
+  border-left: 3px solid var(--coral);
+  padding-left: 0.9rem;
+  max-width: 30rem;
+  margin: 0;
+}
+
+.hero-acute strong {
+  color: #fff;
+}
+
+/* --- Signature: zubní kříž (kvadrantový diagram chrupu) --- */
+
+.dental-chart {
+  position: relative;
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem 2rem;
+  max-width: 34rem;
+  opacity: 0.9;
+}
+
+.dc-axis {
+  position: absolute;
+  background: rgba(217, 239, 233, 0.35);
+}
+
+.dc-axis-h {
+  left: -2rem;
+  right: -2rem;
+  top: 50%;
+  height: 1px;
+}
+
+.dc-axis-v {
+  top: -0.75rem;
+  bottom: -0.75rem;
+  left: 50%;
+  width: 1px;
+}
+
+.dc-quadrant {
+  display: flex;
+  gap: 0.35rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+}
+
+.dc-q1,
+.dc-q3 {
+  justify-content: flex-end;
+}
+
+.dc-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.9em;
+  padding: 0.25em 0;
+  border: 1px solid rgba(217, 239, 233, 0.4);
+  border-radius: 0.6em 0.6em 1.1em 1.1em;
+  color: var(--mint);
+}
+
+.dc-q3 .dc-num,
+.dc-q4 .dc-num {
+  border-radius: 1.1em 1.1em 0.6em 0.6em;
+}
+
+/* jedna "ošetřená" osmička — mrknutí pro pozorné */
+.dc-q1 .dc-num:first-child {
+  background: var(--coral);
+  border-color: var(--coral);
+  color: #fff;
+}
+
+/* --- page-load sekvence --- */
+
+.hero-line,
+.hero-sub,
+.hero-cta,
+.hero-acute,
+.dental-chart {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-line-1 { animation-delay: 0.05s; }
+.hero-line-2 { animation-delay: 0.15s; }
+.hero-sub { animation-delay: 0.28s; }
+.hero-cta { animation-delay: 0.38s; }
+.hero-acute { animation-delay: 0.46s; }
+.dental-chart { animation-delay: 0.55s; }
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============ SLUŽBY ============ */
+
+.sluzby {
+  padding: 4rem 1.25rem;
+  max-width: 70rem;
+  margin: 0 auto;
+}
+
+.section-head {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.sluzby h2,
+.duvera h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 4.5vw, 2.75rem);
+  line-height: 1.1;
+  margin: 0 0 1rem;
+  color: var(--petrol-deep);
+}
+
+.section-lead {
+  font-size: 1.05rem;
+  color: #33504f;
+  margin: 0;
+}
+
+.sluzby-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sluzba {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 1.25rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid #cfe4de;
+  transition: background-color 0.18s ease;
+}
+
+.sluzba:last-child {
+  border-bottom: 1px solid #cfe4de;
+}
+
+.sluzba:hover {
+  background: #f0f8f5;
+}
+
+.sluzba-kod {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--petrol);
+  border: 1.5px solid var(--petrol);
+  border-radius: 0.5em 0.5em 0.9em 0.9em;
+  width: 2.6em;
+  height: 2.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sluzba-text h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin: 0 0 0.35rem;
+  color: var(--petrol-deep);
+}
+
+.sluzba-text p {
+  margin: 0;
+  color: #33504f;
+  max-width: 42rem;
+}
+
+.sluzba-cas {
+  grid-column: 2;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--petrol);
+  margin-top: 0.5rem;
+}
+
+/* ============ DŮVĚRA ============ */
+
+.duvera {
+  background: var(--mint);
+  padding: 4rem 1.25rem;
+}
+
+.duvera-grid {
+  max-width: 70rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 3rem;
+}
+
+.kroky {
+  list-style: none;
+  margin: 2.25rem 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.krok {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+}
+
+.krok-num {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #fff;
+  background: var(--petrol);
+  border-radius: 50%;
+  width: 2.4em;
+  height: 2.4em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.krok h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  color: var(--petrol-deep);
+}
+
+.krok p {
+  margin: 0;
+  color: #2a4644;
+}
+
+.reference {
+  margin: 2.5rem 0 0;
+  padding: 1.75rem 1.75rem 1.5rem;
+  background: var(--paper);
+  border-radius: 1rem 1rem 2rem 2rem;
+  max-width: 36rem;
+}
+
+.reference p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--petrol-deep);
+  margin: 0 0 0.75rem;
+}
+
+.reference footer {
+  font-size: 0.9rem;
+  color: #33504f;
+}
+
+/* --- sidebar --- */
+
+.duvera-side {
+  background: var(--petrol-deep);
+  color: #eaf6f2;
+  border-radius: 1rem;
+  padding: 1.75rem;
+  align-self: start;
+}
+
+.side-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 0 0 1rem;
+  color: #fff;
+}
+
+.hodiny {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.75rem;
+}
+
+.hodiny th,
+.hodiny td {
+  text-align: left;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(217, 239, 233, 0.2);
+  font-size: 0.95rem;
+}
+
+.hodiny th {
+  font-weight: 500;
+  color: var(--mint);
+}
+
+.hodiny td {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.fakta {
+  margin: 0;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.fakta dt {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mint);
+  margin-bottom: 0.2rem;
+}
+
+.fakta dd {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.fakta a {
+  color: #fff;
+  font-weight: 700;
+  text-decoration-color: var(--coral);
+  text-underline-offset: 3px;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (min-width: 720px) {
+  .hero {
+    padding: 2rem 3rem 4.5rem;
+  }
+
+  .sluzby,
+  .duvera {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .sluzba {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .sluzba-cas {
+    grid-column: auto;
+    margin-top: 0.6rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr;
+    column-gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-top {
+    grid-column: 1 / -1;
+    margin-bottom: 4rem;
+  }
+
+  .dental-chart {
+    margin-top: 0;
+    width: 24rem;
+  }
+
+  .duvera-grid {
+    grid-template-columns: 1.6fr 1fr;
+    align-items: start;
+  }
+}
+
+/* ============ MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-line,
+  .hero-sub,
+  .hero-cta,
+  .hero-acute,
+  .dental-chart {
+    animation: none;
+  }
+
+  .btn,
+  .sluzba {
+    transition: none;
+  }
+}
