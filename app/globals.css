@@ -1,0 +1,522 @@
+:root {
+  --fm-papir: #efece4;
+  --fm-inkoust: #1f2328;
+  --fm-modra: #2e4b6e;
+  --fm-okr: #a56a3a;
+  --fm-seda: #b9bcb6;
+  --fm-bila: #f6f3ec;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--fm-papir);
+  color: var(--fm-inkoust);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.fm a:focus-visible,
+.fm button:focus-visible {
+  outline: 3px solid var(--fm-okr);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* =================== HERO =================== */
+
+.fm-hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--fm-papir);
+}
+
+.fm-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.4rem 1.5rem 0;
+  position: relative;
+  z-index: 3;
+}
+
+.fm-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+
+.fm-wordmark-fuchs {
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 1.35rem;
+  letter-spacing: 0.14em;
+  color: var(--fm-inkoust);
+}
+
+.fm-wordmark-malir {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--fm-modra);
+}
+
+.fm-topbar-loc {
+  margin: 0;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(31, 35, 40, 0.6);
+  white-space: nowrap;
+}
+
+.fm-hero-body {
+  position: relative;
+  z-index: 3;
+  padding: 3.5rem 1.5rem 3rem;
+  max-width: 60rem;
+}
+
+.fm-hero-eyebrow {
+  margin: 0 0 1.2rem;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fm-okr);
+  font-weight: 700;
+}
+
+.fm-hero-title {
+  margin: 0;
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.7rem, 10vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+}
+
+.fm-hero-line {
+  display: block;
+  animation: fm-vstup 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.fm-hero-line-1 {
+  color: var(--fm-inkoust);
+  animation-delay: 0.05s;
+}
+
+.fm-hero-line-2 {
+  color: var(--fm-modra);
+  animation-delay: 0.18s;
+  padding-left: 0.6em;
+}
+
+.fm-hero-line-3 {
+  color: var(--fm-okr);
+  animation-delay: 0.31s;
+  padding-left: 1.2em;
+}
+
+.fm-hero-dot {
+  color: var(--fm-inkoust);
+}
+
+.fm-hero-sub {
+  margin: 1.6rem 0 0;
+  max-width: 32rem;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: rgba(31, 35, 40, 0.85);
+  animation: fm-vstup 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+}
+
+.fm-hero-actions {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  animation: fm-vstup 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+}
+
+.fm-btn {
+  display: inline-block;
+  padding: 0.9rem 1.6rem;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.fm-btn-primary {
+  background: var(--fm-modra);
+  color: var(--fm-bila);
+  box-shadow: 0 4px 0 rgba(31, 35, 40, 0.25);
+}
+
+.fm-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 rgba(31, 35, 40, 0.25);
+}
+
+.fm-btn-ghost {
+  color: var(--fm-inkoust);
+  border: 2px solid var(--fm-inkoust);
+  background: transparent;
+}
+
+.fm-btn-ghost:hover {
+  background: var(--fm-inkoust);
+  color: var(--fm-bila);
+}
+
+/* --- Signature: čtyři svislé tahy štětcem, stékající barva --- */
+
+.fm-strokes {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.fm-stroke {
+  position: absolute;
+  top: 0;
+  width: clamp(2.2rem, 6vw, 5rem);
+  transform-origin: top center;
+  animation: fm-tah 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* nepravidelný spodní okraj = kapající barva */
+  border-radius: 0 0 45% 60% / 0 0 2.5rem 4rem;
+  opacity: 0.92;
+}
+
+.fm-stroke::after {
+  content: "";
+  position: absolute;
+  bottom: -1.6rem;
+  left: 32%;
+  width: 0.55rem;
+  height: 1.9rem;
+  background: inherit;
+  border-radius: 999px;
+}
+
+.fm-stroke-1 {
+  right: 30%;
+  height: 46%;
+  background: var(--fm-modra);
+  animation-delay: 0.15s;
+}
+
+.fm-stroke-2 {
+  right: 22%;
+  height: 68%;
+  background: var(--fm-okr);
+  animation-delay: 0.3s;
+}
+
+.fm-stroke-3 {
+  right: 14%;
+  height: 38%;
+  background: var(--fm-seda);
+  animation-delay: 0.45s;
+}
+
+.fm-stroke-4 {
+  right: 6%;
+  height: 58%;
+  background: var(--fm-inkoust);
+  animation-delay: 0.6s;
+}
+
+@keyframes fm-tah {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes fm-vstup {
+  from {
+    opacity: 0;
+    transform: translateY(1.2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =================== SLUŽBY =================== */
+
+.fm-sluzby {
+  padding: 4.5rem 1.5rem 5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.fm-section-head {
+  margin-bottom: 2.5rem;
+}
+
+.fm-section-title {
+  margin: 0;
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.fm-section-note {
+  margin: 0.7rem 0 0;
+  font-style: italic;
+  color: rgba(31, 35, 40, 0.65);
+}
+
+.fm-karty {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+}
+
+.fm-karta {
+  display: flex;
+  background: var(--fm-bila);
+  border: 1px solid rgba(31, 35, 40, 0.12);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fm-karta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(31, 35, 40, 0.12);
+}
+
+.fm-karta-vzorek {
+  flex: 0 0 5.5rem;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.6rem 0.5rem;
+  border-right: 1px solid rgba(31, 35, 40, 0.1);
+}
+
+.fm-karta-kod {
+  font-family: "Courier New", monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(246, 243, 236, 0.95);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.fm-karta-kod-dark {
+  color: rgba(31, 35, 40, 0.7);
+}
+
+.fm-karta-text {
+  padding: 1.3rem 1.4rem 1.4rem;
+}
+
+.fm-karta-nazev {
+  margin: 0 0 0.5rem;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.fm-karta-popis {
+  margin: 0;
+  font-size: 0.98rem;
+  color: rgba(31, 35, 40, 0.8);
+}
+
+/* =================== DŮVĚRA =================== */
+
+.fm-duvera {
+  background: var(--fm-inkoust);
+  color: var(--fm-bila);
+  padding: 4.5rem 1.5rem 5rem;
+}
+
+.fm-duvera-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.fm-section-title-light {
+  color: var(--fm-bila);
+  max-width: 40rem;
+}
+
+.fm-duvera-text {
+  margin: 1.2rem 0 0;
+  max-width: 38rem;
+  color: rgba(246, 243, 236, 0.82);
+  line-height: 1.7;
+}
+
+.fm-cisla {
+  list-style: none;
+  margin: 3rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.8rem;
+}
+
+.fm-cislo {
+  border-top: 3px solid var(--fm-okr);
+  padding-top: 1rem;
+}
+
+.fm-cislo-hodnota {
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--fm-bila);
+}
+
+.fm-cislo-text {
+  margin: 0.6rem 0 0;
+  font-size: 0.98rem;
+  color: rgba(246, 243, 236, 0.78);
+}
+
+.fm-reference {
+  margin: 3.5rem 0 0;
+  padding: 1.8rem 1.6rem;
+  background: rgba(246, 243, 236, 0.06);
+  border-left: 5px solid var(--fm-modra);
+  border-radius: 0 10px 10px 0;
+  max-width: 44rem;
+}
+
+.fm-reference blockquote {
+  margin: 0;
+  font-style: italic;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: rgba(246, 243, 236, 0.92);
+}
+
+.fm-reference figcaption {
+  margin-top: 1rem;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  color: rgba(246, 243, 236, 0.6);
+}
+
+/* =================== RESPONSIVITA =================== */
+
+@media (min-width: 640px) {
+  .fm-hero-body {
+    padding: 5rem 3rem 4rem;
+  }
+
+  .fm-topbar {
+    padding: 1.6rem 3rem 0;
+  }
+
+  .fm-karty {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fm-cisla {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .fm-sluzby,
+  .fm-duvera {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .fm-hero-body {
+    padding: 6.5rem 4rem 5rem;
+  }
+}
+
+@media (max-width: 639px) {
+  /* na mobilu tahy štětcem ustoupí textu */
+  .fm-stroke-1 {
+    display: none;
+  }
+
+  .fm-stroke-2 {
+    right: 16%;
+    height: 30%;
+  }
+
+  .fm-stroke-3 {
+    right: 8%;
+    height: 20%;
+  }
+
+  .fm-stroke-4 {
+    right: 1%;
+    height: 26%;
+  }
+
+  .fm-strokes {
+    opacity: 0.5;
+  }
+}
+
+/* =================== REDUCED MOTION =================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .fm-hero-line,
+  .fm-hero-sub,
+  .fm-hero-actions,
+  .fm-stroke {
+    animation: none;
+  }
+
+  .fm-karta,
+  .fm-btn {
+    transition: none;
+  }
+
+  .fm-karta:hover,
+  .fm-btn-primary:hover {
+    transform: none;
+  }
+}
