@@ -1,0 +1,515 @@
+/* =====================================================
+   Q-lit s.r.o. — polepy aut, České Budějovice
+   Koncept: „bok dodávky" — celý web je karoserie,
+   přes kterou se táhne pás řezané fólie.
+   Paleta: lak (tmavě modrošedá), fólie signální oranž,
+   fólie teal, podkladový papír (světle šedá).
+   ===================================================== */
+
+:root {
+  --lak: #1b2430;          /* tmavý lak karoserie */
+  --lak-hloubka: #121a24;  /* stín pod prahem */
+  --folie-oranz: #ff5c1f;  /* signální řezaná fólie */
+  --folie-teal: #19b8a6;   /* druhá barva fólie */
+  --papir: #eef0f2;        /* přenosový papír / podklad */
+  --papir-tmavsi: #dfe3e7;
+  --inkoust: #232a33;
+  --sedy-text: #5b6572;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--papir);
+  color: var(--inkoust);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ql a:focus-visible,
+.ql button:focus-visible {
+  outline: 3px solid var(--folie-oranz);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ HERO ============ */
+
+.ql-hero {
+  position: relative;
+  background: var(--lak);
+  color: #fff;
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.ql-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+}
+
+.ql-wordmark {
+  font-weight: 900;
+  font-size: 1.5rem;
+  letter-spacing: 0.14em;
+  font-style: italic; /* kurzíva = pohyb, auto v jízdě */
+  color: #fff;
+}
+
+.ql-wordmark-dash {
+  color: var(--folie-oranz);
+  font-style: normal;
+}
+
+.ql-hero-loc {
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: #8b96a5;
+  text-transform: uppercase;
+}
+
+.ql-hero-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-bottom: 3.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.ql-hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--folie-teal);
+  font-weight: 700;
+}
+
+.ql-hero-title {
+  margin: 0 0 1.5rem;
+  font-size: clamp(2.6rem, 8.5vw, 5.5rem);
+  line-height: 1.02;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.ql-line {
+  display: block;
+}
+
+/* animace načtení: řádky „nalepované" jeden po druhém jako pásy fólie */
+.ql-line-1 { animation: ql-peel 0.6s cubic-bezier(0.2, 0.8, 0.3, 1) both 0.05s; }
+.ql-line-2 { animation: ql-peel 0.6s cubic-bezier(0.2, 0.8, 0.3, 1) both 0.2s; }
+.ql-line-3 { animation: ql-peel 0.6s cubic-bezier(0.2, 0.8, 0.3, 1) both 0.35s; }
+
+@keyframes ql-peel {
+  from {
+    opacity: 0;
+    transform: translateX(-2.5rem) skewX(-6deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) skewX(0);
+  }
+}
+
+.ql-stripe-word {
+  font-style: italic;
+  color: var(--folie-oranz);
+}
+
+.ql-hero-sub {
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  font-size: 1.1rem;
+  color: #c3cbd6;
+}
+
+.ql-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.ql-btn {
+  display: inline-block;
+  padding: 0.95rem 1.7rem;
+  font-size: 1.02rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 4px;
+  /* zkosený roh = řez plotru */
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.ql-btn-solid {
+  background: var(--folie-oranz);
+  color: #fff;
+}
+
+.ql-btn-solid:hover {
+  background: #e64d13;
+  transform: translateY(-2px);
+}
+
+.ql-btn-ghost {
+  background: transparent;
+  color: #fff;
+  box-shadow: inset 0 0 0 2px #47535f;
+}
+
+.ql-btn-ghost:hover {
+  box-shadow: inset 0 0 0 2px var(--folie-teal);
+  color: var(--folie-teal);
+  transform: translateY(-2px);
+}
+
+/* Signature prvek: šikmé pásy fólie přes spodek hera,
+   jako grafika na boku dodávky */
+.ql-stripes {
+  position: relative;
+  height: 110px;
+  margin: 0 -1.25rem;
+  overflow: hidden;
+  background: var(--lak-hloubka);
+}
+
+.ql-stripe {
+  position: absolute;
+  top: -30px;
+  bottom: -30px;
+  width: 46%;
+  transform: skewX(-24deg);
+  animation: ql-drive 0.9s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+.ql-stripe-a {
+  left: -8%;
+  background: var(--folie-oranz);
+  animation-delay: 0.45s;
+}
+
+.ql-stripe-b {
+  left: 34%;
+  width: 10%;
+  background: var(--folie-teal);
+  animation-delay: 0.6s;
+}
+
+.ql-stripe-c {
+  left: 47%;
+  width: 7%;
+  background: #fff;
+  opacity: 0.9;
+  animation-delay: 0.72s;
+}
+
+@keyframes ql-drive {
+  from {
+    transform: skewX(-24deg) translateX(-120%);
+  }
+  to {
+    transform: skewX(-24deg) translateX(0);
+  }
+}
+
+.ql-hero-caption {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 0.6rem;
+  z-index: 3;
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: #9aa4b1;
+  max-width: 60%;
+  text-align: right;
+}
+
+/* ============ SLUŽBY ============ */
+
+.ql-services {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 3.5rem;
+}
+
+.ql-section-head {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.ql-section-head h2,
+.ql-trust h2 {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.ql-section-head p {
+  margin: 0;
+  color: var(--sedy-text);
+  font-size: 1.05rem;
+}
+
+.ql-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+
+.ql-card {
+  background: #fff;
+  padding: 1.6rem 1.5rem;
+  border-radius: 6px;
+  /* zkosený roh — podpis plotru na každé kartě */
+  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
+  border-left: 4px solid var(--folie-teal);
+}
+
+.ql-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.ql-card p {
+  margin: 0;
+  color: var(--sedy-text);
+}
+
+.ql-card-main {
+  border-left-color: var(--folie-oranz);
+  background: var(--lak);
+  color: #fff;
+}
+
+.ql-card-main h3 {
+  font-size: 1.5rem;
+}
+
+.ql-card-main p {
+  color: #c3cbd6;
+}
+
+.ql-card-tag {
+  display: inline-block;
+  margin-bottom: 0.8rem;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #fff;
+  background: var(--folie-oranz);
+  border-radius: 3px;
+}
+
+.ql-card-list {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: #dfe5ec;
+}
+
+.ql-card-list li {
+  padding-left: 1.3rem;
+  position: relative;
+  margin-bottom: 0.4rem;
+}
+
+.ql-card-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 12px;
+  height: 4px;
+  background: var(--folie-teal);
+  transform: skewX(-24deg);
+}
+
+/* ============ DŮVĚRA ============ */
+
+.ql-trust {
+  background: var(--papir-tmavsi);
+  padding: 4rem 1.25rem 3.5rem;
+}
+
+.ql-trust-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.ql-trust-text p {
+  color: #444d58;
+  max-width: 34rem;
+}
+
+.ql-trust-text .ql-btn {
+  margin-top: 0.8rem;
+}
+
+.ql-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 1.2rem;
+}
+
+.ql-step {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+  background: #fff;
+  padding: 1.2rem 1.3rem;
+  border-radius: 6px;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+}
+
+.ql-step-num {
+  flex: 0 0 auto;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-items: center;
+  background: var(--lak);
+  color: var(--folie-oranz);
+  font-weight: 900;
+  font-style: italic;
+  font-size: 1.1rem;
+  transform: skewX(-8deg);
+  border-radius: 4px;
+}
+
+.ql-step h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.ql-step p {
+  margin: 0;
+  color: var(--sedy-text);
+  font-size: 0.97rem;
+}
+
+.ql-refs {
+  max-width: 1100px;
+  margin: 3rem auto 0;
+  border-top: 3px solid var(--lak);
+  padding-top: 1.4rem;
+}
+
+.ql-refs-label {
+  margin: 0 0 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--sedy-text);
+}
+
+.ql-refs-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.6rem;
+  font-weight: 700;
+  color: var(--inkoust);
+}
+
+.ql-refs-list li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.ql-refs-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 10px;
+  height: 4px;
+  background: var(--folie-oranz);
+  transform: skewX(-24deg);
+}
+
+/* ============ RESPONZIVITA ============ */
+
+@media (min-width: 700px) {
+  .ql-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .ql-card-main {
+    grid-column: 1 / -1;
+  }
+
+  .ql-hero {
+    padding: 2rem 2rem 0;
+  }
+
+  .ql-stripes {
+    margin: 0 -2rem;
+    height: 140px;
+  }
+}
+
+@media (min-width: 960px) {
+  .ql-trust-inner {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: start;
+  }
+
+  .ql-card-main {
+    grid-column: span 2;
+  }
+
+  .ql-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ql-line-1,
+  .ql-line-2,
+  .ql-line-3,
+  .ql-stripe {
+    animation: none;
+  }
+
+  .ql-btn:hover {
+    transform: none;
+  }
+}
