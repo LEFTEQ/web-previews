@@ -1,0 +1,576 @@
+/* ============================================================
+   POSPÍŠIL střechy — pokrývačství Radek Pospíšil, Liberec
+   Paleta odvozená z materiálů řemesla:
+   --brida   #232A31  (mokrá břidlice / plech)
+   --palena  #B4472A  (pálená taška, engoba)
+   --palena2 #8C3620  (taška ve stínu)
+   --omitka  #EDE7DD  (světlá omítka štítu)
+   --zinek   #9AA4AB  (pozinkovaný okap)
+   --papir   #F7F4EE  (podklad)
+   ============================================================ */
+
+:root {
+  --brida: #232a31;
+  --brida-deep: #171d23;
+  --palena: #b4472a;
+  --palena2: #8c3620;
+  --omitka: #ede7dd;
+  --zinek: #9aa4ab;
+  --papir: #f7f4ee;
+  --ink: #262b30;
+
+  --f-display: "Archivo Black", "Arial Black", "Franklin Gothic Heavy", sans-serif;
+  --f-body: Georgia, "Times New Roman", serif;
+  --f-util: "Trebuchet MS", Verdana, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--papir);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.strecha a:focus-visible,
+.strecha .btn:focus-visible {
+  outline: 3px solid var(--palena);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--omitka);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-media,
+.hero-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    172deg,
+    rgba(23, 29, 35, 0.55) 0%,
+    rgba(23, 29, 35, 0.72) 55%,
+    rgba(23, 29, 35, 0.9) 100%
+  );
+}
+
+/* --- horní lišta --- */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem clamp(1.25rem, 5vw, 3.5rem);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--omitka);
+  text-decoration: none;
+}
+
+.wm-roof {
+  width: 34px;
+  height: 19px;
+  color: var(--palena);
+}
+
+.wm-text {
+  font-family: var(--f-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.14em;
+}
+
+.wm-text em {
+  font-family: var(--f-body);
+  font-style: italic;
+  font-size: 0.95em;
+  letter-spacing: 0.02em;
+  color: var(--zinek);
+  margin-left: 0.3rem;
+}
+
+.topbar-tel {
+  font-family: var(--f-util);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: var(--omitka);
+  text-decoration: none;
+  border: 2px solid rgba(237, 231, 221, 0.4);
+  padding: 0.45rem 0.9rem;
+  border-radius: 3px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+}
+
+.topbar-tel:hover {
+  border-color: var(--palena);
+  background: rgba(180, 71, 42, 0.25);
+}
+
+/* --- obsah hero --- */
+
+.hero-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 46rem;
+  padding: 3rem clamp(1.25rem, 5vw, 3.5rem) 5.5rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--f-util);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--zinek);
+  margin: 0 0 1.1rem;
+  animation: hero-up 0.7s ease-out both;
+}
+
+.hero-title {
+  font-family: var(--f-display);
+  font-size: clamp(2.1rem, 6.5vw, 4.1rem);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.4rem;
+  text-transform: uppercase;
+}
+
+.hero-title .line {
+  display: block;
+  animation: hero-up 0.7s ease-out both;
+}
+
+.hero-title .line-1 {
+  animation-delay: 0.08s;
+}
+
+.hero-title .line-2 {
+  color: var(--palena);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+  animation-delay: 0.18s;
+}
+
+.hero-lede {
+  max-width: 36rem;
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  color: rgba(237, 231, 221, 0.92);
+  margin: 0 0 2rem;
+  animation: hero-up 0.7s ease-out 0.28s both;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  animation: hero-up 0.7s ease-out 0.38s both;
+}
+
+.btn {
+  font-family: var(--f-util);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: 3px;
+  display: inline-block;
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-solid {
+  background: var(--palena);
+  color: #fff;
+  border: 2px solid var(--palena);
+}
+
+.btn-solid:hover {
+  background: var(--palena2);
+  border-color: var(--palena2);
+}
+
+.btn-ghost {
+  color: var(--omitka);
+  border: 2px solid rgba(237, 231, 221, 0.5);
+}
+
+.btn-ghost:hover {
+  border-color: var(--omitka);
+}
+
+.hero-note {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: rgba(237, 231, 221, 0.75);
+  margin: 1.1rem 0 0;
+  animation: hero-up 0.7s ease-out 0.48s both;
+}
+
+/* --- SIGNATURE: keramický okraj z tašek (bobrovky) na hraně hero ---
+   Řada půlkruhových „tašek“ v barvě pálené krytiny — spodní hrana hero
+   vypadá jako okap se skládanou krytinou. Poznávací prvek celého webu. */
+
+.hero-tiles {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  pointer-events: none;
+}
+
+.hero-tiles span {
+  flex: 1 0 auto;
+  min-width: 3rem;
+  height: 2.6rem;
+  background: var(--palena);
+  border-radius: 100% 100% 0 0 / 200% 200% 0 0;
+  box-shadow: inset -6px 4px 0 rgba(0, 0, 0, 0.18);
+  margin-left: -0.6rem;
+  transform-origin: bottom center;
+  animation: tile-rise 0.5s ease-out both;
+}
+
+.hero-tiles span:nth-child(odd) {
+  background: var(--palena2);
+}
+
+.hero-tiles span:nth-child(1) { animation-delay: 0.5s; }
+.hero-tiles span:nth-child(2) { animation-delay: 0.53s; }
+.hero-tiles span:nth-child(3) { animation-delay: 0.56s; }
+.hero-tiles span:nth-child(4) { animation-delay: 0.59s; }
+.hero-tiles span:nth-child(5) { animation-delay: 0.62s; }
+.hero-tiles span:nth-child(6) { animation-delay: 0.65s; }
+.hero-tiles span:nth-child(7) { animation-delay: 0.68s; }
+.hero-tiles span:nth-child(8) { animation-delay: 0.71s; }
+.hero-tiles span:nth-child(9) { animation-delay: 0.74s; }
+.hero-tiles span:nth-child(10) { animation-delay: 0.77s; }
+.hero-tiles span:nth-child(11) { animation-delay: 0.8s; }
+.hero-tiles span:nth-child(12) { animation-delay: 0.83s; }
+.hero-tiles span:nth-child(13) { animation-delay: 0.86s; }
+.hero-tiles span:nth-child(14) { animation-delay: 0.89s; }
+.hero-tiles span:nth-child(15) { animation-delay: 0.92s; }
+.hero-tiles span:nth-child(16) { animation-delay: 0.95s; }
+.hero-tiles span:nth-child(17) { animation-delay: 0.98s; }
+.hero-tiles span:nth-child(18) { animation-delay: 1.01s; }
+.hero-tiles span:nth-child(19) { animation-delay: 1.04s; }
+.hero-tiles span:nth-child(20) { animation-delay: 1.07s; }
+
+@keyframes hero-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tile-rise {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* ================= SLUŽBY ================= */
+
+.sluzby {
+  background: var(--palena);
+  color: #fff;
+  padding: clamp(3rem, 8vw, 5.5rem) clamp(1.25rem, 5vw, 3.5rem);
+}
+
+.section-head {
+  max-width: 72rem;
+  margin: 0 auto 2.5rem;
+}
+
+.eyebrow {
+  font-family: var(--f-util);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 0.6rem;
+}
+
+.sluzby h2,
+.duvera h2 {
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  font-size: clamp(1.5rem, 4vw, 2.3rem);
+  line-height: 1.12;
+  letter-spacing: 0;
+  margin: 0;
+}
+
+.sluzby-grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+  gap: 1.1rem;
+}
+
+.karta {
+  background: rgba(23, 29, 35, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+  padding: 1.5rem 1.4rem 1.3rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.karta:hover {
+  background: rgba(23, 29, 35, 0.3);
+  transform: translateY(-4px);
+}
+
+.karta-znak {
+  width: 44px;
+  height: 44px;
+  color: var(--omitka);
+  margin-bottom: 0.9rem;
+}
+
+.karta-znak svg {
+  width: 100%;
+  height: 100%;
+}
+
+.karta h3 {
+  font-family: var(--f-util);
+  font-size: 1.12rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.karta p {
+  margin: 0 0 0.9rem;
+  font-size: 0.98rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.karta-detail {
+  font-family: var(--f-util);
+  font-size: 0.78rem !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  padding-top: 0.7rem;
+  margin-bottom: 0 !important;
+}
+
+/* ================= DŮVĚRA ================= */
+
+.duvera {
+  background: var(--brida);
+  color: var(--omitka);
+  padding: clamp(3rem, 8vw, 5.5rem) clamp(1.25rem, 5vw, 3.5rem);
+}
+
+.duvera-grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.duvera-media {
+  margin: 0;
+}
+
+.duvera-media img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+}
+
+.duvera-media figcaption {
+  font-family: var(--f-util);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--zinek);
+  margin-top: 0.7rem;
+}
+
+.eyebrow-light {
+  color: var(--zinek);
+}
+
+.duvera-text h2 {
+  margin-bottom: 1.2rem;
+}
+
+.duvera-text > p {
+  color: rgba(237, 231, 221, 0.9);
+  max-width: 38rem;
+  margin: 0 0 1.1rem;
+}
+
+.duvera-fakta {
+  list-style: none;
+  margin: 1.8rem 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1rem;
+}
+
+.duvera-fakta li {
+  border-left: 3px solid var(--palena);
+  padding-left: 0.9rem;
+}
+
+.duvera-fakta strong {
+  display: block;
+  font-family: var(--f-display);
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.2rem;
+}
+
+.duvera-fakta span {
+  font-size: 0.9rem;
+  color: var(--zinek);
+}
+
+.reference {
+  margin: 2rem 0 0;
+  padding: 1.4rem 1.5rem;
+  background: rgba(237, 231, 221, 0.06);
+  border-left: 4px solid var(--palena);
+  border-radius: 0 4px 4px 0;
+}
+
+.reference p {
+  margin: 0 0 0.7rem;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--omitka);
+}
+
+.reference cite {
+  font-family: var(--f-util);
+  font-style: normal;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--zinek);
+}
+
+/* ================= RESPONSIVITA ================= */
+
+@media (min-width: 56rem) {
+  .duvera-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 3.5rem;
+  }
+
+  .duvera-media {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  .hero {
+    min-height: 100svh;
+  }
+
+  .hero-tiles span {
+    min-width: 2.2rem;
+    height: 2rem;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-eyebrow,
+  .hero-title .line,
+  .hero-lede,
+  .hero-actions,
+  .hero-note,
+  .hero-tiles span {
+    animation: none;
+  }
+
+  .btn,
+  .karta,
+  .topbar-tel {
+    transition: none;
+  }
+
+  .btn:hover,
+  .karta:hover {
+    transform: none;
+  }
+}
