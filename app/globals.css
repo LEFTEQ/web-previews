@@ -1,0 +1,488 @@
+/* ============================================================
+   KLIMALAND — klimatizace · tepelná čerpadla · rekuperace, Praha
+   Koncept: teplotní stupnice. Chladná ledová modř ↔ teplá oranž,
+   mezi nimi klid interiéru. Typografie: kondenzovaný technický
+   display (Archivo-like stack přes system fonts s font-stretch)
+   + čitelný grotesk pro tělo.
+   ============================================================ */
+
+:root {
+  /* Paleta odvozená z řemesla: chladivo / kondenzát / topná voda */
+  --led: #0a2f4e;        /* hluboká chladná modř — venkovní mráz */
+  --led-svetla: #dceefb; /* jinovatka / kondenzát */
+  --azur: #1b7fd4;       /* chladicí okruh */
+  --interier: #f7f9fb;   /* klidná pokojová bílá s nádechem chladu */
+  --teplo: #e8620f;      /* topná větev, 55 °C */
+  --teplo-tm: #b34608;
+  --inkoust: #10202e;
+
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", system-ui, sans-serif;
+  --font-body: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--inkoust);
+  background: var(--interier);
+  -webkit-font-smoothing: antialiased;
+}
+
+.kl a:focus-visible,
+.kl summary:focus-visible,
+.kl button:focus-visible {
+  outline: 3px solid var(--teplo);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  background:
+    radial-gradient(120% 90% at 85% -10%, rgba(27, 127, 212, 0.35), transparent 55%),
+    linear-gradient(165deg, #071f36 0%, var(--led) 55%, #0d3a5e 100%);
+  color: var(--led-svetla);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-bottom: 2.5rem;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: condensed;
+  font-size: 1.5rem;
+  letter-spacing: 0.14em;
+  color: #fff;
+}
+
+.wordmark em {
+  font-style: normal;
+  color: var(--teplo);
+}
+
+.hero-loc {
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: rgba(220, 238, 251, 0.75);
+  text-transform: uppercase;
+}
+
+.hero-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 0 3.5rem;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(220, 238, 251, 0.7);
+  animation: kl-rise 0.7s ease-out both;
+}
+
+/* Hero titulek: dvě teploty, dvě barvy — teze celé firmy */
+.hero-title {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-title .t-cold {
+  color: #8fc9f2;
+  animation: kl-rise 0.7s 0.1s ease-out both;
+}
+
+.hero-title .t-warm {
+  color: #fff;
+  animation: kl-rise 0.7s 0.25s ease-out both;
+}
+
+.hero-title .t-warm::after {
+  content: "";
+  display: block;
+  width: 5.5rem;
+  height: 0.4rem;
+  margin-top: 0.9rem;
+  background: linear-gradient(90deg, var(--azur), var(--teplo));
+  border-radius: 999px;
+}
+
+.hero-sub {
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  font-size: 1.1rem;
+  color: rgba(235, 245, 252, 0.9);
+  animation: kl-rise 0.7s 0.4s ease-out both;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  animation: kl-rise 0.7s 0.5s ease-out both;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--teplo);
+  color: #fff;
+}
+
+.btn-primary:hover { background: var(--teplo-tm); transform: translateY(-2px); }
+
+.btn-ghost {
+  border: 2px solid rgba(220, 238, 251, 0.4);
+  color: var(--led-svetla);
+}
+
+.btn-ghost:hover { border-color: rgba(220, 238, 251, 0.9); transform: translateY(-2px); }
+
+/* ---- Signature: teplotní stupnice ---- */
+
+.scale {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 0 6.5rem;
+  animation: kl-rise 0.8s 0.65s ease-out both;
+}
+
+.scale-bar {
+  height: 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #8fc9f2 0%, var(--azur) 30%, #7fb069 52%, #f2a541 75%, var(--teplo) 100%);
+  box-shadow: 0 4px 24px rgba(27, 127, 212, 0.35);
+}
+
+.scale-marks {
+  position: relative;
+  height: 4.5rem;
+  margin-top: 0.9rem;
+}
+
+.mark {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(0);
+}
+
+.mark::before {
+  content: "";
+  position: absolute;
+  top: -1.35rem;
+  left: 0;
+  width: 2px;
+  height: 0.9rem;
+  background: rgba(220, 238, 251, 0.6);
+}
+
+.mark-mid { transform: translateX(-50%); }
+.mark-mid::before { left: 50%; }
+.mark-end { transform: translateX(-100%); text-align: right; }
+.mark-end::before { left: auto; right: 0; }
+
+.mark b {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.mark i {
+  font-style: normal;
+  font-size: 0.8rem;
+  color: rgba(220, 238, 251, 0.7);
+}
+
+/* ============ SLUŽBY ============ */
+
+.sluzby {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem;
+}
+
+.sec-head { max-width: 40rem; margin-bottom: 2.5rem; }
+
+.sec-head h2 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--led);
+}
+
+.sec-head p { margin: 0; color: #45596b; font-size: 1.05rem; }
+
+.sluzby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+
+.karta {
+  background: #fff;
+  border: 1px solid #e2ebf2;
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(10, 47, 78, 0.12);
+}
+
+.karta-rozsah {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--azur);
+  border-bottom: 3px solid;
+  border-image: linear-gradient(90deg, var(--azur), var(--teplo)) 1;
+  padding-bottom: 0.6rem;
+  align-self: flex-start;
+}
+
+.karta h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: var(--led);
+}
+
+.karta-popis {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: #3c5162;
+}
+
+.karta-list {
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+  color: var(--led);
+}
+
+.karta-list li {
+  padding: 0.45rem 0 0.45rem 1.4rem;
+  position: relative;
+  border-top: 1px solid #edf3f8;
+}
+
+.karta-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.95rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--azur), var(--teplo));
+}
+
+/* ============ DŮVĚRA ============ */
+
+.duvera {
+  background: var(--led);
+  color: var(--led-svetla);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.duvera > * { max-width: 1100px; margin-left: auto; margin-right: auto; }
+
+.sec-head-inv { margin-bottom: 2.5rem; }
+.sec-head-inv h2 { color: #fff; }
+.sec-head-inv p { color: rgba(220, 238, 251, 0.75); }
+
+.duvera-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.blok-titul {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-size: 1.15rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teplo);
+}
+
+.real-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: real;
+}
+
+.real-list li {
+  counter-increment: real;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "num misto" "num co" "num pozn";
+  column-gap: 1rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid rgba(220, 238, 251, 0.18);
+}
+
+.real-list li::before {
+  content: counter(real, decimal-leading-zero);
+  grid-area: num;
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(143, 201, 242, 0.65);
+  line-height: 1.2;
+}
+
+.real-misto {
+  grid-area: misto;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(220, 238, 251, 0.65);
+}
+
+.real-co {
+  grid-area: co;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.real-pozn {
+  grid-area: pozn;
+  font-size: 0.9rem;
+  color: rgba(220, 238, 251, 0.75);
+}
+
+/* FAQ */
+
+.faq-item {
+  border-top: 1px solid rgba(220, 238, 251, 0.18);
+}
+
+.faq-item summary {
+  cursor: pointer;
+  padding: 1rem 2rem 1rem 0;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  list-style: none;
+  position: relative;
+}
+
+.faq-item summary::-webkit-details-marker { display: none; }
+
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--teplo);
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] summary::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.faq-item p {
+  margin: 0 0 1.1rem;
+  font-size: 0.95rem;
+  color: rgba(220, 238, 251, 0.85);
+  max-width: 36rem;
+}
+
+/* ============ ANIMACE ============ */
+
+@keyframes kl-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-eyebrow,
+  .hero-title .t-cold,
+  .hero-title .t-warm,
+  .hero-sub,
+  .hero-cta,
+  .scale {
+    animation: none;
+  }
+  .btn,
+  .karta,
+  .faq-item summary::after {
+    transition: none;
+  }
+  .karta:hover { transform: none; }
+  .btn:hover { transform: none; }
+}
+
+/* ============ RESPONZIVITA ============ */
+
+@media (max-width: 760px) {
+  .duvera-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-top { flex-direction: column; gap: 0.25rem; }
+  .hero-body { padding-bottom: 2.75rem; }
+  .scale { padding-bottom: 4.5rem; }
+  .mark i { max-width: 7.5rem; }
+  .btn { width: 100%; text-align: center; }
+}
