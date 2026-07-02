@@ -1,0 +1,518 @@
+/* =====================================================
+   Lucie Kundrová — fotografka, Ostrava
+   Koncept: temná komora. Hluboká fotografická čerň,
+   stříbrná halogenidová šeď a jediný akcent — červené
+   světlo z temné komory (safelight). Signature prvek:
+   typografická clona (aperture) uprostřed titulku hero,
+   která se při načtení „otevře“ jako závěrka.
+   ===================================================== */
+
+:root {
+  --cerna: #101014;        /* tělo fotoaparátu */
+  --uhel: #1a1a20;         /* temná komora */
+  --stribro: #c9c9cf;      /* halogenidové stříbro */
+  --papir: #f2f0eb;        /* fotografický papír, teplý bílý */
+  --safelight: #e0362c;    /* červené světlo temné komory */
+  --safelight-tmava: #a8241c;
+
+  --font-display: "Bodoni Moda", "Bodoni MT", "Didot", "Playfair Display", Georgia, serif;
+  --font-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--papir);
+  color: var(--cerna);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- fokus ---------- */
+.lk a:focus-visible,
+.lk .btn:focus-visible {
+  outline: 3px solid var(--safelight);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =====================================================
+   HERO — temná komora
+   ===================================================== */
+
+.hero {
+  background: var(--cerna);
+  background-image: radial-gradient(
+    ellipse 120% 80% at 70% 10%,
+    #23232b 0%,
+    var(--cerna) 55%
+  );
+  color: var(--papir);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.25rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  max-width: 68rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--papir);
+}
+
+.wordmark em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--safelight);
+  margin-left: 0.15em;
+}
+
+.hero-tel {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--stribro);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201, 201, 207, 0.35);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.hero-tel:hover {
+  color: var(--papir);
+  border-color: var(--safelight);
+}
+
+.hero-body {
+  max-width: 68rem;
+  width: 100%;
+  margin: auto;
+  padding: 3.5rem 0 3rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--safelight);
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.7s ease both;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.9rem, 11vw, 7.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+.hero-title .line {
+  display: block;
+  animation: fadeUp 0.8s ease both;
+}
+
+.line-1 { animation-delay: 0.1s; }
+.line-2 {
+  animation-delay: 0.25s;
+  display: flex;
+  align-items: center;
+  gap: 0.18em;
+  font-style: italic;
+}
+.line-3 { animation-delay: 0.4s; }
+
+/* ---------- signature: typografická clona ---------- */
+
+.aperture {
+  position: relative;
+  display: inline-block;
+  width: 0.82em;
+  height: 0.82em;
+  border-radius: 50%;
+  border: 0.045em solid var(--stribro);
+  flex: none;
+  overflow: hidden;
+  animation: apertureIn 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.35s both;
+}
+
+.blade {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 58%;
+  height: 3.5%;
+  min-height: 2px;
+  background: var(--safelight);
+  transform-origin: 0% 50%;
+  animation: bladeOpen 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) 0.5s both;
+}
+
+.b1 { rotate: 0deg; }
+.b2 { rotate: 60deg; }
+.b3 { rotate: 120deg; }
+.b4 { rotate: 180deg; }
+.b5 { rotate: 240deg; }
+.b6 { rotate: 300deg; }
+
+@keyframes bladeOpen {
+  from { transform: translate(0, -50%) scaleX(1); }
+  to   { transform: translate(0, -50%) scaleX(0.62) translateX(38%); }
+}
+
+@keyframes apertureIn {
+  from { opacity: 0; transform: scale(0.6) rotate(-30deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(1.2rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-sub {
+  max-width: 34rem;
+  margin-top: 2rem;
+  color: var(--stribro);
+  font-size: 1.05rem;
+  animation: fadeUp 0.8s ease 0.55s both;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2.2rem;
+  animation: fadeUp 0.8s ease 0.7s both;
+}
+
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.85rem 1.7rem;
+  border-radius: 999px;
+  transition: transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
+  display: inline-block;
+}
+
+.btn-solid {
+  background: var(--safelight);
+  color: var(--papir);
+}
+
+.btn-solid:hover {
+  background: var(--safelight-tmava);
+  transform: translateY(-2px);
+}
+
+.btn-line {
+  color: var(--papir);
+  border: 1.5px solid rgba(242, 240, 235, 0.4);
+}
+
+.btn-line:hover {
+  border-color: var(--safelight);
+  color: var(--safelight);
+  transform: translateY(-2px);
+}
+
+/* ---------- spodní pásek s expozicí ---------- */
+
+.hero-strip {
+  border-top: 1px solid rgba(201, 201, 207, 0.18);
+  max-width: 68rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem 0 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: rgba(201, 201, 207, 0.55);
+  animation: fadeUp 0.8s ease 0.85s both;
+}
+
+/* =====================================================
+   SLUŽBY
+   ===================================================== */
+
+.sluzby {
+  padding: 5rem 1.25rem;
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+.section-head {
+  max-width: 38rem;
+  margin-bottom: 3rem;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--safelight);
+  margin-bottom: 0.8rem;
+}
+
+.eyebrow-light {
+  color: var(--safelight);
+}
+
+.sluzby h2,
+.duvera h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 4.5vw, 2.7rem);
+  line-height: 1.15;
+}
+
+.section-lead {
+  margin-top: 1rem;
+  color: #4c4c55;
+}
+
+.sluzby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.karta {
+  border: 1px solid rgba(16, 16, 20, 0.14);
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  background: #fff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  border-color: var(--safelight);
+  box-shadow: 0 14px 32px rgba(16, 16, 20, 0.1);
+}
+
+.karta-clona {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--papir);
+  background: var(--cerna);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  display: inline-block;
+}
+
+.karta h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.45rem;
+  margin: 0.9rem 0 0.6rem;
+}
+
+.karta-popis {
+  color: #4c4c55;
+  font-size: 0.98rem;
+}
+
+.karta-detail {
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--safelight-tmava);
+}
+
+/* =====================================================
+   DŮVĚRA — ateliér + reference (temná sekce)
+   ===================================================== */
+
+.duvera {
+  background: var(--uhel);
+  color: var(--papir);
+  padding: 5rem 1.25rem;
+}
+
+.duvera-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.5rem;
+}
+
+.atelier h2 {
+  white-space: pre-line;
+}
+
+.atelier-lead {
+  margin-top: 1rem;
+  color: var(--stribro);
+  max-width: 30rem;
+}
+
+.atelier-list {
+  list-style: none;
+  margin-top: 2rem;
+}
+
+.atelier-list li {
+  padding: 1rem 0;
+  border-top: 1px solid rgba(201, 201, 207, 0.16);
+  display: grid;
+  gap: 0.2rem;
+}
+
+.atelier-list li:last-child {
+  border-bottom: 1px solid rgba(201, 201, 207, 0.16);
+}
+
+.atelier-list strong {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.atelier-list span {
+  color: var(--stribro);
+  font-size: 0.92rem;
+}
+
+.atelier-adresa {
+  margin-top: 1.75rem;
+  font-size: 0.95rem;
+  color: var(--stribro);
+}
+
+.atelier-adresa a {
+  color: var(--papir);
+  text-decoration-color: var(--safelight);
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.atelier-adresa a:hover {
+  color: var(--safelight);
+}
+
+.refs {
+  display: grid;
+  gap: 1.5rem;
+  align-content: start;
+}
+
+.ref {
+  border-left: 3px solid var(--safelight);
+  padding: 0.4rem 0 0.4rem 1.25rem;
+}
+
+.ref p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.12rem;
+  line-height: 1.5;
+}
+
+.ref footer {
+  margin-top: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--stribro);
+}
+
+/* =====================================================
+   RESPONZIVITA
+   ===================================================== */
+
+@media (min-width: 640px) {
+  .hero {
+    padding: 2rem 2.5rem 0;
+  }
+  .sluzby,
+  .duvera {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+  .sluzby-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 960px) {
+  .duvera-inner {
+    grid-template-columns: 1.15fr 1fr;
+    gap: 5rem;
+  }
+  .sluzby {
+    padding-top: 6.5rem;
+    padding-bottom: 6.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-strip span:nth-child(4),
+  .hero-strip span:nth-child(5) {
+    display: none;
+  }
+}
+
+/* =====================================================
+   PREFERS-REDUCED-MOTION
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-eyebrow,
+  .hero-title .line,
+  .hero-sub,
+  .hero-cta,
+  .hero-strip,
+  .aperture,
+  .blade {
+    animation: none;
+  }
+  .blade {
+    transform: translate(0, -50%) scaleX(0.62) translateX(38%);
+  }
+  .karta,
+  .btn {
+    transition: none;
+  }
+  .karta:hover,
+  .btn:hover {
+    transform: none;
+  }
+}
