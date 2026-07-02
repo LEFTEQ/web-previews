@@ -1,0 +1,517 @@
+/* ==========================================================================
+   AGENTURA VARIA — úklidové služby, Pardubice
+   Koncept: "tah stěrkou" — diagonální čistý pruh napříč tmavě modrou plochou.
+   Paleta z reality řemesla: hloubková modř mokré podlahy, chlorové aqua,
+   citronová žluť čisticího prostředku, bílá pěna.
+   ========================================================================== */
+
+:root {
+  --vr-navy: #0e2a47;        /* mokrá podlaha za soumraku */
+  --vr-navy-deep: #081c33;   /* stín pod regálem */
+  --vr-aqua: #2fd4c6;        /* chlorová aqua — dezinfekce */
+  --vr-lemon: #f5d90a;       /* citronová — saponát */
+  --vr-foam: #f7fbfc;        /* pěna / čistý povrch */
+  --vr-ink: #10222f;         /* text na světlé */
+  --vr-mist: #dceef0;        /* světlá plocha sekcí */
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--vr-ink);
+  background: var(--vr-foam);
+  -webkit-font-smoothing: antialiased;
+}
+
+.vr-page a:focus-visible,
+.vr-page button:focus-visible {
+  outline: 3px solid var(--vr-lemon);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ================= HERO ================= */
+
+.vr-hero {
+  position: relative;
+  overflow: hidden;
+  color: var(--vr-foam);
+  background:
+    radial-gradient(120% 90% at 85% -10%, #1a4a72 0%, transparent 55%),
+    linear-gradient(165deg, var(--vr-navy) 0%, var(--vr-navy-deep) 100%);
+  padding: 1.5rem 1.25rem 0;
+}
+
+.vr-hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.vr-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.vr-wordmark-agentura {
+  font-size: 0.7rem;
+  letter-spacing: 0.45em;
+  color: var(--vr-aqua);
+  font-weight: 700;
+}
+
+.vr-wordmark-varia {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: var(--vr-foam);
+}
+
+.vr-wordmark-varia::after {
+  content: "";
+  display: block;
+  width: 2.2em;
+  height: 3px;
+  margin-top: 4px;
+  background: linear-gradient(90deg, var(--vr-lemon), var(--vr-aqua));
+  border-radius: 2px;
+  transform: skewX(-20deg);
+}
+
+.vr-hero-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 0.9rem;
+}
+
+.vr-hero-nav a {
+  color: var(--vr-foam);
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.vr-hero-nav a:hover { color: var(--vr-aqua); }
+
+.vr-nav-tel {
+  padding: 0.4rem 0.9rem;
+  border: 2px solid var(--vr-aqua);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.vr-hero-body {
+  position: relative;
+  z-index: 2;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3.5rem 0 4rem;
+}
+
+.vr-hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--vr-aqua);
+}
+
+.vr-hero-title {
+  margin: 0 0 1.5rem;
+  font-size: clamp(3rem, 11vw, 7.5rem);
+  line-height: 0.95;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  display: flex;
+  flex-direction: column;
+}
+
+.vr-line {
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: vr-wipe-in 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+.vr-line-1 { animation-delay: 0.1s; color: #6d86a0; text-decoration: line-through; text-decoration-color: var(--vr-aqua); text-decoration-thickness: 0.06em; }
+.vr-line-2 { animation-delay: 0.25s; }
+.vr-line-3 { animation-delay: 0.45s; color: var(--vr-lemon); }
+.vr-line-4 { animation-delay: 0.6s; }
+
+.vr-line-clean { color: var(--vr-foam); }
+.vr-line-4 { color: var(--vr-aqua); }
+
+@keyframes vr-wipe-in {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.vr-hero-sub {
+  max-width: 34rem;
+  font-size: 1.15rem;
+  color: #c4d6e4;
+  margin: 0 0 2rem;
+  opacity: 0;
+  animation: vr-fade-up 0.7s ease 0.85s forwards;
+}
+
+@keyframes vr-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.vr-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  opacity: 0;
+  animation: vr-fade-up 0.7s ease 1s forwards;
+}
+
+.vr-btn {
+  display: inline-block;
+  padding: 0.9rem 1.7rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.vr-btn-primary {
+  background: var(--vr-lemon);
+  color: var(--vr-navy-deep);
+  box-shadow: 0 4px 20px rgba(245, 217, 10, 0.35);
+}
+
+.vr-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(245, 217, 10, 0.45); }
+
+.vr-btn-ghost {
+  color: var(--vr-foam);
+  border: 2px solid rgba(247, 251, 252, 0.4);
+}
+
+.vr-btn-ghost:hover { border-color: var(--vr-aqua); color: var(--vr-aqua); }
+
+/* --- Signature: tah stěrkou napříč heroem --- */
+
+.vr-squeegee {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.vr-squeegee-clean {
+  position: absolute;
+  top: -20%;
+  right: -12%;
+  width: 34%;
+  height: 150%;
+  transform: rotate(14deg);
+  background: linear-gradient(90deg,
+    rgba(47, 212, 198, 0) 0%,
+    rgba(47, 212, 198, 0.14) 35%,
+    rgba(47, 212, 198, 0.22) 100%);
+  border-left: 2px solid rgba(47, 212, 198, 0.5);
+  clip-path: inset(0);
+  animation: vr-squeegee-sweep 1.4s cubic-bezier(0.3, 0, 0.2, 1) 0.3s both;
+}
+
+.vr-squeegee-blade {
+  position: absolute;
+  top: -20%;
+  right: 22%;
+  width: 6px;
+  height: 150%;
+  transform: rotate(14deg);
+  background: linear-gradient(180deg, var(--vr-lemon), var(--vr-aqua));
+  border-radius: 3px;
+  box-shadow: 0 0 24px rgba(47, 212, 198, 0.6);
+  animation: vr-blade-sweep 1.4s cubic-bezier(0.3, 0, 0.2, 1) 0.3s both;
+}
+
+@keyframes vr-squeegee-sweep {
+  from { clip-path: inset(0 0 0 100%); }
+  to { clip-path: inset(0); }
+}
+
+@keyframes vr-blade-sweep {
+  from { translate: 40vw 0; opacity: 0; }
+  20% { opacity: 1; }
+  to { translate: 0 0; opacity: 1; }
+}
+
+/* --- pás služeb pod heroem --- */
+
+.vr-hero-strip {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  justify-content: center;
+  padding: 1rem 1.25rem;
+  margin: 0 -1.25rem;
+  background: rgba(8, 28, 51, 0.6);
+  border-top: 1px solid rgba(47, 212, 198, 0.25);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: #8fb3c9;
+}
+
+.vr-hero-strip span:nth-child(even) { color: var(--vr-aqua); }
+
+/* ================= SEKCE ================= */
+
+.vr-section {
+  padding: 4.5rem 1.25rem;
+}
+
+.vr-section-head {
+  max-width: 72rem;
+  margin: 0 auto 3rem;
+}
+
+.vr-section-head h2,
+.vr-trust h2 {
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+  color: var(--vr-navy);
+}
+
+.vr-section-head h2::after {
+  content: "";
+  display: block;
+  width: 4.5rem;
+  height: 5px;
+  margin-top: 0.8rem;
+  border-radius: 3px;
+  transform: skewX(-20deg);
+  background: linear-gradient(90deg, var(--vr-lemon), var(--vr-aqua));
+}
+
+.vr-section-head p {
+  max-width: 38rem;
+  margin: 0;
+  color: #3d5568;
+  font-size: 1.1rem;
+}
+
+/* --- karty služeb --- */
+
+.vr-services { background: var(--vr-foam); }
+
+.vr-service-grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+.vr-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 2rem 1.75rem;
+  border: 1px solid #dbe7ec;
+  border-top: 5px solid var(--vr-aqua);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vr-card:nth-child(2) { border-top-color: var(--vr-lemon); }
+.vr-card:nth-child(3) { border-top-color: var(--vr-navy); }
+
+.vr-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(14, 42, 71, 0.12);
+}
+
+.vr-card-badge {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--vr-mist);
+  color: var(--vr-navy);
+  margin-bottom: 1.25rem;
+}
+
+.vr-card h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--vr-navy);
+  line-height: 1.3;
+}
+
+.vr-card p {
+  margin: 0 0 1rem;
+  color: #3d5568;
+}
+
+.vr-card-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.95rem;
+  color: var(--vr-navy);
+}
+
+.vr-card-list li {
+  padding: 0.35rem 0 0.35rem 1.5rem;
+  position: relative;
+}
+
+.vr-card-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.75em;
+  width: 0.85em;
+  height: 0.45em;
+  border-left: 3px solid var(--vr-aqua);
+  border-bottom: 3px solid var(--vr-aqua);
+  transform: rotate(-45deg);
+}
+
+/* --- důvěra --- */
+
+.vr-trust {
+  background:
+    linear-gradient(180deg, var(--vr-mist) 0%, #c9e4e6 100%);
+}
+
+.vr-trust-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1fr;
+}
+
+.vr-trust-copy p {
+  color: #2c4356;
+  max-width: 38rem;
+}
+
+.vr-address {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--vr-navy);
+  border-left: 4px solid var(--vr-lemon);
+  padding-left: 1rem;
+  margin-top: 1.5rem;
+  line-height: 1.7;
+}
+
+.vr-facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 0;
+  align-content: start;
+}
+
+.vr-fact {
+  background: var(--vr-navy);
+  color: var(--vr-foam);
+  border-radius: 14px;
+  padding: 1.4rem 1.2rem;
+}
+
+.vr-fact dt {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--vr-aqua);
+  margin-bottom: 0.4rem;
+}
+
+.vr-fact dd {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.vr-quote {
+  max-width: 72rem;
+  margin: 3rem auto 0;
+  padding: 0;
+}
+
+.vr-quote blockquote {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--vr-navy);
+  max-width: 46rem;
+}
+
+.vr-quote figcaption {
+  color: #4a6478;
+  font-size: 0.95rem;
+}
+
+/* ================= RESPONSIVITA ================= */
+
+@media (min-width: 640px) {
+  .vr-service-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 960px) {
+  .vr-hero { padding: 2rem 3rem 0; }
+  .vr-hero-strip { margin: 0 -3rem; }
+  .vr-hero-body { padding: 5.5rem 0 6rem; }
+  .vr-section { padding: 6rem 3rem; }
+  .vr-service-grid { grid-template-columns: repeat(3, 1fr); }
+  .vr-trust-inner { grid-template-columns: 1.3fr 1fr; gap: 4rem; }
+}
+
+@media (max-width: 480px) {
+  .vr-hero-nav a:not(.vr-nav-tel) { display: none; }
+  .vr-btn { width: 100%; text-align: center; }
+  .vr-squeegee-clean { width: 55%; }
+  .vr-squeegee-blade { right: 40%; }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .vr-line,
+  .vr-hero-sub,
+  .vr-hero-cta,
+  .vr-squeegee-clean,
+  .vr-squeegee-blade {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .vr-squeegee-clean { transform: rotate(14deg); clip-path: inset(0); }
+  .vr-squeegee-blade { transform: rotate(14deg); translate: 0 0; }
+  .vr-btn,
+  .vr-card { transition: none; }
+}
