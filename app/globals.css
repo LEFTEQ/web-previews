@@ -1,0 +1,495 @@
+/* =====================================================
+   J.D. Agency — výroba reklam, Brno
+   Koncept: tiskový arch. Ořezové značky, CMYK soutisk,
+   "kód technologie" jako výrobní štítek. Bílý podklad
+   jako čistý arch před tiskem, černá K jako hlavní barva.
+   ===================================================== */
+
+:root {
+  --k: #14120f;            /* tisková čerň (K) */
+  --paper: #ffffff;        /* čistý arch */
+  --paper-dim: #f2f0ec;    /* arch pod světlem dílny */
+  --cyan: #00a3d9;         /* procesní C */
+  --magenta: #e5087e;      /* procesní M */
+  --yellow: #ffd400;       /* procesní Y */
+  --ink-soft: #55514b;     /* šedý text */
+  --line: #d9d5cf;
+
+  --font-display: "Arial Black", "Archivo Black", Haettenschweiler,
+    "Franklin Gothic Heavy", sans-serif;
+  --font-body: "Trebuchet MS", "Segoe UI", Verdana, sans-serif;
+  --font-mono: "Lucida Console", Monaco, "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--k);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.jd a:focus-visible,
+.jd .btn:focus-visible {
+  outline: 3px solid var(--magenta);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =============== HERO — tiskový arch =============== */
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.25rem, 4vw, 3rem) clamp(1.25rem, 6vw, 5.5rem) 0;
+  background:
+    linear-gradient(180deg, #ffffff 0%, #faf9f7 70%, #f2f0ec 100%);
+  overflow: hidden;
+}
+
+.hero-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid var(--k);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.wordmark-agency {
+  color: var(--magenta);
+  margin-left: 0.15em;
+}
+
+.hero-meta {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.hero-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 62rem;
+  padding: clamp(2.5rem, 8vh, 6rem) 0 clamp(3rem, 10vh, 6rem);
+}
+
+/* CMYK soutiskové terče — eyebrow */
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: clamp(1.25rem, 3vh, 2rem);
+  animation: jd-rise 0.7s ease-out both;
+}
+
+.reg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.reg-c { background: var(--cyan); }
+.reg-m { background: var(--magenta); }
+.reg-y { background: var(--yellow); color: var(--k); }
+.reg-k { background: var(--k); }
+
+.reg-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-left: 0.4rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 8.5vw, 6.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+.hero-line {
+  display: block;
+  animation: jd-rise 0.7s ease-out both;
+}
+
+.hero-line-1 { animation-delay: 0.1s; }
+.hero-line-2 { animation-delay: 0.22s; }
+
+/* "nepřehlédnete" = řezaná grafika: čárkovaná řezná linka fólie */
+.hero-cut {
+  position: relative;
+  display: inline-block;
+  color: var(--magenta);
+}
+
+.cut-path {
+  position: absolute;
+  left: -1%;
+  bottom: -0.08em;
+  width: 102%;
+  height: 0.14em;
+  color: var(--k);
+}
+
+.hero-sub {
+  max-width: 34rem;
+  margin-top: clamp(1.25rem, 3vh, 2rem);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: var(--ink-soft);
+  animation: jd-rise 0.7s ease-out 0.34s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-top: clamp(1.75rem, 4vh, 2.75rem);
+  animation: jd-rise 0.7s ease-out 0.46s both;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.95rem 1.7rem;
+  font-family: var(--font-body);
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 3px solid var(--k);
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--k);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--magenta);
+  border-color: var(--magenta);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 rgba(20, 18, 15, 0.15);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--k);
+}
+
+.btn-ghost:hover {
+  background: var(--yellow);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 rgba(20, 18, 15, 0.15);
+}
+
+/* Ořezové značky v rozích archu */
+.cropmark {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+}
+
+.cropmark::before,
+.cropmark::after {
+  content: "";
+  position: absolute;
+  background: var(--k);
+}
+
+.cropmark::before { width: 100%; height: 2px; }
+.cropmark::after { width: 2px; height: 100%; }
+
+.cm-tl { top: 12px; left: 12px; }
+.cm-tl::before { top: 0; left: 0; }
+.cm-tl::after { top: 0; left: 0; }
+
+.cm-tr { top: 12px; right: 12px; }
+.cm-tr::before { top: 0; right: 0; }
+.cm-tr::after { top: 0; right: 0; }
+
+.cm-bl { bottom: 12px; left: 12px; }
+.cm-bl::before { bottom: 0; left: 0; }
+.cm-bl::after { bottom: 0; left: 0; }
+
+.cm-br { bottom: 12px; right: 12px; }
+.cm-br::before { bottom: 0; right: 0; }
+.cm-br::after { bottom: 0; right: 0; }
+
+/* CMYK kontrolní pruh na spodní hraně archu */
+.hero-strip {
+  display: flex;
+  height: 14px;
+  margin: 0 calc(-1 * clamp(1.25rem, 6vw, 5.5rem));
+}
+
+.hero-strip span { flex: 1; }
+.strip-c { background: var(--cyan); }
+.strip-m { background: var(--magenta); }
+.strip-y { background: var(--yellow); }
+.strip-k { background: var(--k); }
+
+/* =============== SEKCE: SLUŽBY =============== */
+
+.sluzby {
+  padding: clamp(3.5rem, 9vh, 6.5rem) clamp(1.25rem, 6vw, 5.5rem);
+  background: var(--paper);
+}
+
+.section-head {
+  max-width: 44rem;
+  margin-bottom: clamp(2rem, 5vh, 3.5rem);
+}
+
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--magenta);
+  margin-bottom: 0.7rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.9rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.section-lead {
+  margin-top: 1rem;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+.sluzby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.4rem;
+}
+
+/* Karta jako výrobní štítek na zakázce */
+.karta {
+  border: 2px solid var(--k);
+  padding: 1.5rem 1.5rem 1.25rem;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.karta:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0 var(--yellow);
+}
+
+.karta-kod {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--k);
+  margin-bottom: 1rem;
+  background: var(--paper-dim);
+}
+
+.karta-nazev {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.karta-popis {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  flex: 1;
+}
+
+.karta-detail {
+  margin-top: 1.1rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--k);
+}
+
+/* =============== SEKCE: DŮVĚRA =============== */
+
+.duvera {
+  background: var(--k);
+  color: #fff;
+  padding: clamp(3.5rem, 9vh, 6.5rem) clamp(1.25rem, 6vw, 5.5rem);
+  /* jemná CMYK linka na horní hraně = pokračování archu */
+  border-top: 6px solid var(--magenta);
+}
+
+.duvera-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.section-head-inverse .section-eyebrow {
+  color: var(--yellow);
+}
+
+.section-head-inverse .section-title {
+  color: #fff;
+}
+
+.duvera-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: clamp(2.5rem, 6vh, 4rem);
+}
+
+.duvod {
+  border-left: 3px solid var(--cyan);
+  padding-left: 1.25rem;
+}
+
+.duvod:nth-child(2) { border-left-color: var(--magenta); }
+.duvod:nth-child(3) { border-left-color: var(--yellow); }
+
+.duvod-rok {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+
+.duvod-titulek {
+  font-size: 1.05rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.duvod-text {
+  color: #c9c5be;
+  font-size: 0.95rem;
+}
+
+.duvera-cit {
+  border: 2px dashed rgba(255, 255, 255, 0.35);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  max-width: 52rem;
+}
+
+.duvera-cit p {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  line-height: 1.55;
+}
+
+.cit-autor {
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--yellow);
+}
+
+/* =============== Animace =============== */
+
+@keyframes jd-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-eyebrow,
+  .hero-line,
+  .hero-sub,
+  .hero-actions {
+    animation: none;
+  }
+  .btn,
+  .karta {
+    transition: none;
+  }
+  .btn:hover,
+  .karta:hover {
+    transform: none;
+  }
+}
+
+/* =============== Mobil =============== */
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: auto;
+  }
+
+  .hero-body {
+    padding-top: 3rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .cropmark {
+    display: none;
+  }
+
+  .hero-meta {
+    font-size: 0.7rem;
+  }
+}
