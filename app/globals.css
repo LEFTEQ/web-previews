@@ -1,0 +1,512 @@
+/* =========================================================
+   ICARO Consulting — daňový poradce, České Budějovice
+   Koncept: „hlavní kniha" — účetní ledger jako vizuální řád.
+   Paleta odvozená z účetní praxe: inkoustová modř (razítko,
+   propiska poradce), papírová běloba, červeň účetní tužky
+   (má dáti / kontrola), linkovaný papír hlavní knihy.
+   ========================================================= */
+
+:root {
+  --ink: #1b2a4a;        /* inkoustová modř — razítko a podpis poradce */
+  --ink-deep: #101c36;   /* hlubší modř pro tmavou sekci */
+  --paper: #fbfaf7;      /* papír hlavní knihy */
+  --paper-line: #d8d4c8; /* linky účetního papíru */
+  --red-pencil: #c0392b; /* červená účetní tužka — kontrola, zvýraznění */
+  --gray-note: #5a6478;  /* poznámky tužkou */
+
+  --font-display: "Georgia", "Times New Roman", serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SFMono-Regular", "Consolas", "Liberation Mono", Menlo,
+    monospace; /* čísla, termíny, paragrafy — řeč účetnictví */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Viditelný focus všude */
+.ic a:focus-visible,
+.ic button:focus-visible {
+  outline: 3px solid var(--red-pencil);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =============== HERO =============== */
+
+.ic-hero {
+  position: relative;
+  padding: 1.5rem 1.25rem 0;
+  max-width: 1180px;
+  margin: 0 auto;
+  /* linkovaný papír hlavní knihy — jemný, jen v hero */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 47px,
+    var(--paper-line) 47px,
+    var(--paper-line) 48px
+  );
+}
+
+.ic-hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.ic-wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.ic-wordmark-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--ink);
+  /* podtržení červenou tužkou — dvojitá účetní linka pod součtem */
+  border-bottom: 3px double var(--red-pencil);
+  padding-bottom: 2px;
+}
+
+.ic-wordmark-sub {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--gray-note);
+}
+
+.ic-hero-loc {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--gray-note);
+  letter-spacing: 0.05em;
+}
+
+.ic-hero-main {
+  display: grid;
+  gap: 2rem;
+  padding: 1rem 0 3rem;
+}
+
+.ic-hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 9vw, 5.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+.ic-hero-title .ic-line {
+  display: block;
+}
+
+.ic-hero-title em {
+  font-style: italic;
+  color: var(--red-pencil);
+}
+
+/* orchestrovaný nástup: řádky titulku po sobě, pak ledger */
+.ic-line,
+.ic-hero-lead,
+.ic-hero-cta,
+.ic-ledger {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: ic-rise 0.6s ease-out forwards;
+}
+
+.ic-line-1 { animation-delay: 0.05s; }
+.ic-line-2 { animation-delay: 0.18s; }
+.ic-line-3 { animation-delay: 0.31s; }
+.ic-hero-lead { animation-delay: 0.5s; }
+.ic-hero-cta { animation-delay: 0.62s; }
+.ic-ledger { animation-delay: 0.8s; }
+
+@keyframes ic-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ic-hero-lead {
+  font-size: 1.1rem;
+  max-width: 34rem;
+  color: var(--ink);
+}
+
+.ic-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.ic-btn {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: 3px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.ic-btn:hover {
+  background: var(--red-pencil);
+  transform: translateY(-2px);
+}
+
+.ic-btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+.ic-btn-ghost:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* --- Signature: pás daňového kalendáře jako řádky hlavní knihy --- */
+
+.ic-ledger {
+  background: #fff;
+  border: 1px solid var(--paper-line);
+  border-top: 4px solid var(--red-pencil);
+  margin-bottom: -3rem; /* přesah do další sekce — záložka v knize */
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 12px 30px rgba(27, 42, 74, 0.1);
+}
+
+.ic-ledger-row {
+  display: grid;
+  grid-template-columns: 5rem 1fr auto;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.8rem 1.25rem;
+  border-bottom: 1px solid var(--paper-line);
+  transition: background-color 0.15s ease;
+}
+
+.ic-ledger-row:hover {
+  background: #fdf6f5;
+}
+
+.ic-ledger-day {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--red-pencil);
+  text-align: right;
+}
+
+.ic-ledger-what {
+  font-size: 0.98rem;
+}
+
+.ic-ledger-when {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--gray-note);
+  letter-spacing: 0.05em;
+}
+
+.ic-ledger-note {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--gray-note);
+  padding: 0.7rem 1.25rem;
+  font-style: italic;
+}
+
+/* =============== SLUŽBY =============== */
+
+.ic-sluzby {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 7rem 1.25rem 5rem;
+}
+
+.ic-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--red-pencil);
+  margin-bottom: 0.75rem;
+}
+
+.ic-eyebrow-light {
+  color: #e8a49b;
+}
+
+.ic-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4.5vw, 2.7rem);
+  font-weight: 700;
+  line-height: 1.12;
+}
+
+.ic-h2-light {
+  color: var(--paper);
+}
+
+.ic-section-head {
+  max-width: 42rem;
+  margin-bottom: 3rem;
+}
+
+.ic-section-lead {
+  margin-top: 1rem;
+  color: var(--gray-note);
+  font-size: 1.05rem;
+}
+
+.ic-sluzby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.ic-karta {
+  background: #fff;
+  border: 1px solid var(--paper-line);
+  border-radius: 4px;
+  padding: 1.75rem 1.5rem;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.ic-karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(27, 42, 74, 0.12);
+  border-color: var(--ink);
+}
+
+.ic-karta-par {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--red-pencil);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.9rem;
+}
+
+.ic-karta-h {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  margin-bottom: 0.7rem;
+}
+
+.ic-karta-p {
+  font-size: 0.98rem;
+  color: var(--ink);
+  margin-bottom: 0.9rem;
+}
+
+.ic-karta-detail {
+  font-size: 0.9rem;
+  color: var(--gray-note);
+  border-top: 1px solid var(--paper-line);
+  padding-top: 0.8rem;
+  font-style: italic;
+}
+
+/* =============== DŮVĚRA =============== */
+
+.ic-duvera {
+  background: var(--ink-deep);
+  color: var(--paper);
+  /* jemné linky knihy i v tmavé sekci — rub stránky */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 47px,
+    rgba(251, 250, 247, 0.05) 47px,
+    rgba(251, 250, 247, 0.05) 48px
+  );
+}
+
+.ic-duvera-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.ic-duvera-p {
+  margin-top: 1.1rem;
+  max-width: 36rem;
+  color: #cfd6e4;
+  font-size: 1.02rem;
+}
+
+.ic-citace {
+  margin-top: 2rem;
+  border-left: 3px solid var(--red-pencil);
+  padding-left: 1.25rem;
+  max-width: 34rem;
+}
+
+.ic-citace p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  color: var(--paper);
+}
+
+.ic-citace cite {
+  display: block;
+  margin-top: 0.7rem;
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.8rem;
+  color: #8f9ab2;
+}
+
+.ic-duvera-cisla {
+  display: grid;
+  gap: 1.5rem;
+  align-content: start;
+}
+
+.ic-cislo {
+  border-top: 1px solid rgba(251, 250, 247, 0.2);
+  padding-top: 1rem;
+}
+
+.ic-cislo-num {
+  font-family: var(--font-mono);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--red-pencil);
+  display: block;
+  line-height: 1;
+}
+
+.ic-cislo-p {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #cfd6e4;
+  max-width: 26rem;
+}
+
+/* =============== RESPONSIVITA =============== */
+
+@media (min-width: 720px) {
+  .ic-hero {
+    padding: 2.5rem 2rem 0;
+  }
+
+  .ic-hero-main {
+    grid-template-columns: 1.3fr 1fr;
+    align-items: end;
+    padding: 2rem 0 4rem;
+  }
+
+  .ic-sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ic-sluzby,
+  .ic-duvera-inner {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .ic-ledger-row {
+    grid-template-columns: 6rem 1fr auto;
+    padding: 0.9rem 1.75rem;
+  }
+
+  .ic-ledger-note {
+    padding: 0.8rem 1.75rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .ic-duvera-inner {
+    grid-template-columns: 1.5fr 1fr;
+    gap: 4rem;
+  }
+
+  .ic-sluzby {
+    padding-top: 8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ic-ledger-row {
+    grid-template-columns: 3.5rem 1fr;
+  }
+
+  .ic-ledger-when {
+    grid-column: 2;
+  }
+
+  .ic-hero-cta .ic-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* =============== REDUCED MOTION =============== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ic-line,
+  .ic-hero-lead,
+  .ic-hero-cta,
+  .ic-ledger {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .ic-btn,
+  .ic-karta,
+  .ic-ledger-row {
+    transition: none;
+  }
+
+  .ic-btn:hover,
+  .ic-karta:hover {
+    transform: none;
+  }
+}
