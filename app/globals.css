@@ -1,0 +1,598 @@
+/* =====================================================
+   Cestářské práce s.r.o. — autodoprava, Liberec
+   Vizuální svět: asfalt, vodorovné dopravní značení,
+   výstražná žluť sklápěčů a silničních strojů.
+   Palette:
+     --asphalt   #1B1D21  (mokrý asfalt)
+     --asphalt-2 #26292F  (suchý asfalt)
+     --signal    #F5B301  (výstražná žluť značení)
+     --chalk     #EDEDE8  (bílá čára / křída)
+     --steel     #8B919B  (ocel korby)
+   Type: Archivo (display, široké tučné řezy jako
+   silniční tabule) + system-ui pro běžný text.
+   ===================================================== */
+
+:root {
+  --asphalt: #1b1d21;
+  --asphalt-2: #26292f;
+  --signal: #f5b301;
+  --signal-deep: #d99e00;
+  --chalk: #edede8;
+  --steel: #8b919b;
+  --ink: #17181b;
+  --paper: #f7f6f2;
+  --radius: 10px;
+  --font-display: "Archivo", "Arial Black", "Segoe UI", sans-serif;
+  --font-body: "Archivo", system-ui, "Segoe UI", sans-serif;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src: local("Archivo");
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.cp a:focus-visible,
+.cp button:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  background:
+    radial-gradient(120% 90% at 85% -10%, #33373f 0%, transparent 55%),
+    linear-gradient(175deg, var(--asphalt-2) 0%, var(--asphalt) 70%);
+  color: var(--chalk);
+  padding: 1.25rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.hero__nav {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0 2.5rem;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.wordmark__badge {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--signal);
+  color: var(--asphalt);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  /* tvar dopravní značky — kosočtverec P2 „hlavní silnice“ */
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+.wordmark__text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.wordmark__suffix {
+  font-weight: 400;
+  color: var(--steel);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.hero__call {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--chalk);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid rgba(237, 237, 232, 0.25);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+}
+
+.hero__call:hover {
+  border-color: var(--signal);
+  background: rgba(245, 179, 1, 0.08);
+}
+
+.hero__call-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--signal);
+}
+
+.hero__body {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1rem 0 3.5rem;
+}
+
+.hero__eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 1.75rem;
+  font-size: 0.85rem;
+}
+
+.eyebrow-chip {
+  background: var(--signal);
+  color: var(--asphalt);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.7rem;
+  border-radius: 3px;
+}
+
+.eyebrow-loc {
+  color: var(--steel);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hero__title {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+}
+
+.hero__line {
+  display: block;
+}
+
+.hero__line--2 {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--chalk);
+}
+
+.hero__line--3 {
+  color: var(--signal);
+}
+
+.hero__dot {
+  color: var(--chalk);
+}
+
+.hero__lead {
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  color: #c9cbc6;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.9rem 1.5rem;
+  border-radius: var(--radius);
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn--primary {
+  background: var(--signal);
+  color: var(--asphalt);
+}
+
+.btn--primary:hover {
+  background: var(--signal-deep);
+  transform: translateY(-2px);
+}
+
+.btn--ghost {
+  color: var(--chalk);
+  border: 1.5px solid rgba(237, 237, 232, 0.35);
+}
+
+.btn--ghost:hover {
+  border-color: var(--signal);
+  transform: translateY(-2px);
+}
+
+/* ---- Signature: vozovka s přerušovanou čárou ---- */
+
+.road {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+.road__edge {
+  height: 4px;
+  background: var(--chalk);
+  opacity: 0.85;
+  border-radius: 2px;
+}
+
+.road__dash {
+  height: 8px;
+  margin: 1.1rem 0;
+  background-image: linear-gradient(
+    90deg,
+    var(--signal) 0 56px,
+    transparent 56px 96px
+  );
+  background-size: 96px 8px;
+  background-repeat: repeat-x;
+  animation: road-roll 1.6s linear infinite;
+}
+
+@keyframes road-roll {
+  from { background-position-x: 0; }
+  to { background-position-x: -96px; }
+}
+
+.road__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  margin-top: 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+/* ---- Page-load sekvence hero řádků ---- */
+
+.hero__line--1 { animation: rise 0.6s ease-out both 0.05s; }
+.hero__line--2 { animation: rise 0.6s ease-out both 0.18s; }
+.hero__line--3 { animation: rise 0.6s ease-out both 0.31s; }
+.hero__lead,
+.hero__actions { animation: rise 0.6s ease-out both 0.45s; }
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= SEKCE — společné ================= */
+
+.section-head {
+  max-width: 72rem;
+  margin: 0 auto 2.5rem;
+}
+
+.section-kicker {
+  display: inline-block;
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--signal-deep);
+  border-bottom: 3px solid var(--signal);
+  padding-bottom: 0.25rem;
+}
+
+.section-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* ================= SLUŽBY ================= */
+
+.services {
+  padding: 4.5rem 1.25rem;
+}
+
+.services__grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e4e2da;
+  border-top: 6px solid var(--signal);
+  border-radius: var(--radius);
+  padding: 1.75rem 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(27, 29, 33, 0.1);
+}
+
+.card__sign {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--asphalt);
+  background: var(--paper);
+  border: 1.5px solid var(--asphalt);
+  border-radius: 4px;
+  padding: 0.2rem 0.55rem;
+  margin-bottom: 1rem;
+}
+
+.card__title {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+.card__text {
+  margin: 0 0 1rem;
+  color: #4a4c50;
+}
+
+.card__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card__list li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.card__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 0.85rem;
+  height: 3px;
+  background: var(--signal);
+  border-radius: 2px;
+}
+
+.services__note {
+  max-width: 72rem;
+  margin: 2.5rem auto 0;
+  padding: 1.25rem 1.5rem;
+  background: var(--asphalt);
+  color: var(--chalk);
+  border-radius: var(--radius);
+  border-left: 6px solid var(--signal);
+  font-size: 1.02rem;
+}
+
+/* ================= DŮVĚRA ================= */
+
+.trust {
+  background: var(--asphalt);
+  color: var(--chalk);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.section-head--light .section-title {
+  color: var(--chalk);
+}
+
+.section-head--light .section-kicker {
+  color: var(--signal);
+}
+
+.trust__grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.machines {
+  margin: 0;
+}
+
+.machines__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px dashed rgba(237, 237, 232, 0.25);
+}
+
+.machines__row dt {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+
+.machines__row dd {
+  margin: 0;
+  color: var(--steel);
+  font-size: 0.92rem;
+}
+
+.machines__caption {
+  margin: 1rem 0 0;
+  font-size: 0.9rem;
+  color: var(--signal);
+  font-weight: 600;
+}
+
+.quote {
+  margin: 0 0 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--asphalt-2);
+  border-left: 4px solid var(--signal);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.quote p {
+  margin: 0 0 0.6rem;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.quote__author {
+  font-size: 0.85rem;
+  color: var(--steel);
+}
+
+.trust__facts {
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trust__facts li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.7rem;
+  font-size: 0.98rem;
+  color: #c9cbc6;
+}
+
+.trust__facts li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  width: 0.7rem;
+  height: 0.7rem;
+  background: var(--signal);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+.trust__facts strong {
+  color: var(--chalk);
+}
+
+/* ================= RESPONSIVITA ================= */
+
+@media (max-width: 760px) {
+  .trust__grid {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .hero__nav {
+    padding-bottom: 1.75rem;
+  }
+
+  .hero__call {
+    padding: 0.45rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .road__meta span:last-child {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .wordmark__suffix {
+    display: none;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .road__dash {
+    animation: none;
+  }
+
+  .hero__line--1,
+  .hero__line--2,
+  .hero__line--3,
+  .hero__lead,
+  .hero__actions {
+    animation: none;
+  }
+
+  .card,
+  .btn,
+  .hero__call {
+    transition: none;
+  }
+
+  .card:hover,
+  .btn--primary:hover,
+  .btn--ghost:hover {
+    transform: none;
+  }
+}
