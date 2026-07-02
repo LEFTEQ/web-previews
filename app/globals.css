@@ -1,0 +1,465 @@
+/* =========================================================
+   AUTOVACEK, s.r.o. — autoservis Brno
+   Palette: pit-dark blue steel, chalk white, signal amber
+   Type: big condensed-feel display (system stack, tightened),
+         humanist body
+   Signature: chalk-line car on a two-post lift in the hero
+   ========================================================= */
+
+:root {
+  --pit: #101820;        /* dark of the workshop pit / fresh asphalt */
+  --pit-2: #1b2530;      /* raised panel */
+  --steel: #8fa3b3;      /* blued steel, secondary text on dark */
+  --chalk: #e9edf0;      /* chalk marking on dark, page paper */
+  --paper: #f2f0eb;      /* light section background (workshop wall) */
+  --signal: #ffb300;     /* signal amber — warning lamp, lift posts */
+  --signal-deep: #c47f00;
+  --ink: #14181d;        /* body text on light */
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.av a { text-decoration: none; }
+
+.av :focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.av-hero {
+  position: relative;
+  background:
+    linear-gradient(180deg, var(--pit) 0%, #0c1218 100%);
+  color: var(--chalk);
+  overflow: hidden;
+  padding: 1.25rem 1.25rem 0;
+}
+
+/* faint diagonal hazard stripes along the very top — workshop floor marking */
+.av-hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--signal) 0 14px,
+    var(--pit) 14px 28px
+  );
+}
+
+.av-hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.75rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+/* Wordmark: AUTO in outline, VACEK filled — like a stamped part number */
+.av-wordmark {
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.av-wordmark-auto {
+  color: transparent;
+  -webkit-text-stroke: 1.4px var(--signal);
+}
+
+.av-wordmark-vacek {
+  color: var(--chalk);
+}
+
+.av-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--pit);
+  background: var(--signal);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.av-call:hover { background: #ffc233; transform: translateY(-1px); }
+
+.av-hero-body {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3.5rem 0 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.av-hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+
+.av-hero-title {
+  margin: 0;
+  font-size: clamp(2.4rem, 8vw, 5.4rem);
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.av-hero-title .av-line {
+  display: block;
+}
+
+.av-hero-title em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--signal);
+}
+
+.av-line-2 { color: var(--chalk); }
+.av-line-3 { color: var(--steel); }
+
+.av-hero-sub {
+  max-width: 34rem;
+  margin: 1.5rem 0 0;
+  font-size: 1.1rem;
+  color: var(--steel);
+}
+
+.av-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.av-btn {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.av-btn-primary {
+  background: var(--signal);
+  color: var(--pit);
+}
+
+.av-btn-primary:hover { background: #ffc233; transform: translateY(-1px); }
+
+.av-btn-ghost {
+  color: var(--chalk);
+  border: 2px solid #33414f;
+}
+
+.av-btn-ghost:hover { border-color: var(--signal); }
+
+/* Signature lift illustration */
+.av-lift {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-top: 1.5rem;
+}
+
+.av-lift svg {
+  display: block;
+  width: min(46rem, 100%);
+  margin-left: auto;
+  height: auto;
+}
+
+/* page-load sequence: car rises on the lift, headline lines slide up */
+@keyframes av-rise {
+  from { transform: translateY(46px); }
+  to { transform: translateY(0); }
+}
+
+@keyframes av-up {
+  from { opacity: 0; transform: translateY(0.5em); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.av-lift-car {
+  animation: av-rise 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+
+.av-line-1 { animation: av-up 0.6s ease-out 0.05s both; }
+.av-line-2 { animation: av-up 0.6s ease-out 0.18s both; }
+.av-line-3 { animation: av-up 0.6s ease-out 0.31s both; }
+.av-hero-sub, .av-hero-actions { animation: av-up 0.6s ease-out 0.45s both; }
+
+/* service strip along hero bottom */
+.av-hero-strip {
+  border-top: 1px solid #26313d;
+  margin: 0 -1.25rem;
+  padding: 0.8rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--steel);
+}
+
+.av-hero-strip i {
+  font-style: normal;
+  color: var(--signal);
+  font-size: 0.6rem;
+  align-self: center;
+}
+
+/* ============ SLUŽBY ============ */
+
+.av-services {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 3.5rem;
+}
+
+.av-section-head h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.av-section-head p {
+  margin: 0.75rem 0 0;
+  max-width: 40rem;
+  color: #4a5560;
+  font-size: 1.05rem;
+}
+
+.av-service-grid {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.av-card {
+  background: #ffffff;
+  border: 1px solid #e0ddd4;
+  border-left: 4px solid var(--signal);
+  border-radius: 6px;
+  padding: 1.4rem 1.5rem 1.5rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.av-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(16, 24, 32, 0.1);
+}
+
+.av-card-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--signal-deep);
+}
+
+.av-card h3 {
+  margin: 0.5rem 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.av-card p {
+  margin: 0;
+  color: #4a5560;
+  font-size: 0.98rem;
+}
+
+/* ============ DŮVĚRA ============ */
+
+.av-trust {
+  background: var(--pit);
+  color: var(--chalk);
+}
+
+.av-trust-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.av-trust-copy h2 {
+  margin: 0;
+  font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.av-trust-copy > p {
+  margin: 1.25rem 0 0;
+  color: var(--steel);
+  font-size: 1.05rem;
+  max-width: 36rem;
+}
+
+.av-trust-points {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.av-trust-points li {
+  border-left: 3px solid var(--signal);
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.av-trust-points strong {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.av-trust-points span {
+  color: var(--steel);
+  font-size: 0.95rem;
+}
+
+.av-trust-quotes {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.av-quote {
+  margin: 0;
+  background: var(--pit-2);
+  border: 1px solid #2a3644;
+  border-radius: 6px;
+  padding: 1.4rem 1.5rem;
+}
+
+.av-quote blockquote {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.av-quote figcaption {
+  margin-top: 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--signal);
+  text-transform: uppercase;
+}
+
+.av-hours {
+  border: 2px dashed #33414f;
+  border-radius: 6px;
+  padding: 1.2rem 1.5rem;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.av-hours-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+
+.av-hours-time {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.av-hours-note {
+  color: var(--steel);
+  font-size: 0.92rem;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (min-width: 640px) {
+  .av-service-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 960px) {
+  .av-hero { padding: 1.25rem 2.5rem 0; }
+  .av-hero-strip { margin: 0 -2.5rem; }
+  .av-hero-body { padding-top: 5rem; }
+
+  .av-service-grid { grid-template-columns: repeat(3, 1fr); }
+  .av-services { padding-left: 2.5rem; padding-right: 2.5rem; }
+
+  .av-trust-inner {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  /* on wide screens the lift sits beside the copy visually */
+  .av-lift {
+    margin-top: -8rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .av-lift-car,
+  .av-line-1, .av-line-2, .av-line-3,
+  .av-hero-sub, .av-hero-actions {
+    animation: none;
+  }
+
+  .av-card, .av-btn, .av-call {
+    transition: none;
+  }
+
+  .av-card:hover { transform: none; }
+}
