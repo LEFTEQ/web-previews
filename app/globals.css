@@ -1,0 +1,734 @@
+/* =====================================================
+   AUTOSKLO SPEED s.r.o. — Mělník
+   Palette: hluboká "dílenská" modrozelená noc (sklo za
+   šera), ledově modrá plocha skla, výstražná oranžová
+   servisní páska jako akcent. Žádný krémový serif,
+   žádná acid-green — barvy vychází z reality: sklo,
+   reflexní vesta, značení VIN.
+   Type: Archivo (Expanded pro display — široký,
+   "nákladní" řez jako popisky na dodávce) + system
+   stack pro tělo.
+   Signature: animovaná prasklina od kamínku, která se
+   při načtení "rozjede" ze středu — přesně to, s čím
+   sem lidi jezdí.
+   ===================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Archivo:wght@400;500;600;700&display=swap");
+
+:root {
+  --as-night: #0b2233;      /* hluboké sklo za šera */
+  --as-night-2: #103349;    /* světlejší plocha */
+  --as-glass: #bfe3f2;      /* ledová modrá — odlesk skla */
+  --as-glass-dim: #7fb3cc;
+  --as-signal: #ff7a1a;     /* výstražná servisní oranžová */
+  --as-signal-deep: #e05e00;
+  --as-paper: #f0f6fa;      /* chladný, ne krémový podklad */
+  --as-ink: #12242f;
+
+  --font-display: "Archivo", "Arial Black", system-ui, sans-serif;
+  --font-body: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--as-ink);
+  background: var(--as-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus — viditelný, oranžový, všude */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--as-signal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ layout helpers ============ */
+.as-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ================= HERO ================= */
+.as-hero {
+  position: relative;
+  background:
+    radial-gradient(120% 90% at 85% 10%, #17455f 0%, transparent 55%),
+    linear-gradient(160deg, var(--as-night-2) 0%, var(--as-night) 60%, #071823 100%);
+  color: var(--as-glass);
+  overflow: hidden;
+}
+
+.as-hero-inner {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 20px 0;
+  z-index: 1;
+}
+
+/* topbar */
+.as-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(191, 227, 242, 0.18);
+}
+
+.as-wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-display);
+}
+
+.as-wm-auto {
+  font-weight: 500;
+  font-stretch: 110%;
+  letter-spacing: 0.14em;
+  font-size: 0.95rem;
+  color: var(--as-glass);
+}
+
+.as-wm-speed {
+  font-weight: 900;
+  font-stretch: 125%;
+  font-style: italic;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  color: var(--as-signal);
+}
+
+.as-topbar-contact {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.as-nonstop-badge {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: var(--as-night);
+  background: var(--as-signal);
+  padding: 4px 10px;
+  border-radius: 3px;
+}
+
+.as-phone {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 110%;
+  font-size: 1.05rem;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.as-phone:hover {
+  color: var(--as-signal);
+}
+
+/* hero main */
+.as-hero-main {
+  position: relative;
+  padding: 56px 0 40px;
+  max-width: 640px;
+}
+
+.as-hero-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--as-glass-dim);
+  margin-bottom: 20px;
+}
+
+.as-hero-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 118%;
+  text-transform: uppercase;
+  font-size: clamp(2.2rem, 7.2vw, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.as-hero-title .as-line {
+  display: block;
+}
+
+.as-hours {
+  font-style: italic;
+  color: var(--as-signal);
+}
+
+.as-hero-sub {
+  margin-top: 24px;
+  max-width: 520px;
+  font-size: 1.06rem;
+  color: var(--as-glass);
+}
+
+.as-hero-sub strong {
+  color: #fff;
+}
+
+.as-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+/* buttons */
+.as-btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 108%;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 15px 28px;
+  border-radius: 6px;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.as-btn-primary {
+  background: var(--as-signal);
+  color: var(--as-night);
+}
+
+.as-btn-primary:hover {
+  background: #ff8f3f;
+  transform: translateY(-2px);
+}
+
+.as-btn-ghost {
+  color: var(--as-glass);
+  border: 2px solid rgba(191, 227, 242, 0.4);
+}
+
+.as-btn-ghost:hover {
+  border-color: var(--as-glass);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ---- signature: prasklina ---- */
+.as-crack {
+  position: absolute;
+  top: 40px;
+  right: -120px;
+  width: 560px;
+  height: 560px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.as-crack-path {
+  stroke: var(--as-glass);
+  stroke-width: 2;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: as-crack-grow 0.9s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+  opacity: 0.55;
+}
+
+.as-crack-path.p1 { animation-delay: 0.25s; }
+.as-crack-path.p2 { animation-delay: 0.32s; }
+.as-crack-path.p3 { animation-delay: 0.4s; }
+.as-crack-path.p4 { animation-delay: 0.48s; }
+.as-crack-path.p5 { animation-delay: 0.36s; }
+.as-crack-path.p6 { animation-delay: 0.5s; }
+.as-crack-path.p7 { animation-delay: 0.44s; }
+.as-crack-path.p8,
+.as-crack-path.p9,
+.as-crack-path.p10,
+.as-crack-path.p11 {
+  stroke-width: 1.5;
+  animation-delay: 0.9s;
+  animation-duration: 0.5s;
+  opacity: 0.4;
+}
+
+.as-crack-core {
+  stroke: var(--as-signal);
+  stroke-width: 3;
+  opacity: 0;
+  animation: as-fade-in 0.4s ease 0.1s forwards;
+}
+
+.as-crack-ring {
+  stroke: rgba(191, 227, 242, 0.35);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 8;
+  opacity: 0;
+  animation: as-fade-in 0.5s ease 0.35s forwards;
+}
+
+@keyframes as-crack-grow {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes as-fade-in {
+  to { opacity: 1; }
+}
+
+/* hero page-load sequence */
+.as-hero-eyebrow,
+.as-hero-title .as-line,
+.as-hero-sub,
+.as-hero-cta {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: as-rise 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+.as-hero-eyebrow { animation-delay: 0.05s; }
+.as-line-1 { animation-delay: 0.12s; }
+.as-line-2 { animation-delay: 0.22s; }
+.as-line-3 { animation-delay: 0.32s; }
+.as-hero-sub { animation-delay: 0.45s; }
+.as-hero-cta { animation-delay: 0.55s; }
+
+@keyframes as-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* hero strip — fakta jako popisky na dílenské tabuli */
+.as-hero-strip {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  margin-top: 24px;
+  background: rgba(191, 227, 242, 0.18);
+  border-top: 1px solid rgba(191, 227, 242, 0.18);
+}
+
+.as-hero-strip li {
+  background: rgba(7, 24, 35, 0.55);
+  padding: 18px 16px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.as-hero-strip strong {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 115%;
+  font-size: 1.35rem;
+  color: var(--as-signal);
+}
+
+.as-hero-strip span {
+  font-size: 0.85rem;
+  color: var(--as-glass-dim);
+}
+
+/* ================= SLUŽBY ================= */
+.as-services {
+  padding: 72px 0 64px;
+  background: var(--as-paper);
+}
+
+.as-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--as-signal-deep);
+  margin-bottom: 12px;
+}
+
+.as-eyebrow-light {
+  color: var(--as-signal);
+}
+
+.as-h2 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 115%;
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.1;
+  color: var(--as-night);
+  max-width: 720px;
+}
+
+.as-h2-light {
+  color: #fff;
+}
+
+.as-lead {
+  margin-top: 14px;
+  max-width: 620px;
+  font-size: 1.05rem;
+  color: #3c5261;
+}
+
+.as-service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.as-card {
+  background: #fff;
+  border: 1px solid #d7e5ee;
+  border-radius: 10px;
+  padding: 26px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.as-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(11, 34, 51, 0.12);
+}
+
+.as-card-tag {
+  align-self: flex-start;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--as-night);
+  background: var(--as-glass);
+  padding: 4px 10px;
+  border-radius: 3px;
+}
+
+.as-card h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 110%;
+  font-size: 1.2rem;
+  color: var(--as-night);
+}
+
+.as-card-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: #34495a;
+}
+
+.as-card-list li {
+  padding-left: 18px;
+  position: relative;
+}
+
+.as-card-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 2px;
+  background: var(--as-signal);
+}
+
+.as-card-time {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px dashed #cfe0ea;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--as-signal-deep);
+}
+
+/* mobilní servis banner */
+.as-mobile-banner {
+  margin-top: 36px;
+  background: var(--as-night);
+  border-radius: 12px;
+  padding: 30px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  /* jemný "reflexní" pruh — vesta servisáka */
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 26px,
+    rgba(255, 122, 26, 0.07) 26px 34px
+  );
+}
+
+.as-mobile-banner-text h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 112%;
+  font-size: 1.3rem;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.as-mobile-banner-text p {
+  color: var(--as-glass);
+  max-width: 560px;
+  font-size: 0.98rem;
+}
+
+.as-mobile-banner-text strong {
+  color: var(--as-signal);
+}
+
+/* ================= DŮVĚRA ================= */
+.as-trust {
+  background:
+    linear-gradient(180deg, var(--as-night) 0%, #081c29 100%);
+  color: var(--as-glass);
+  padding: 72px 0 80px;
+}
+
+.as-trust-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.as-trust-lead {
+  margin-top: 16px;
+  font-size: 1.05rem;
+  color: var(--as-glass);
+  max-width: 560px;
+}
+
+.as-steps {
+  list-style: none;
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.as-steps li {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.as-step-n {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.05rem;
+  color: var(--as-night);
+  background: var(--as-signal);
+  border-radius: 50%;
+}
+
+.as-steps strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 108%;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.as-steps p {
+  font-size: 0.95rem;
+  color: var(--as-glass-dim);
+}
+
+/* trust side */
+.as-trust-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.as-side-block {
+  background: rgba(191, 227, 242, 0.06);
+  border: 1px solid rgba(191, 227, 242, 0.16);
+  border-radius: 10px;
+  padding: 24px;
+}
+
+.as-side-block h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 110%;
+  font-size: 1.05rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.as-side-block p {
+  font-size: 0.94rem;
+  color: var(--as-glass);
+}
+
+.as-side-block strong {
+  color: var(--as-signal);
+}
+
+.as-address {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem !important;
+  color: #fff !important;
+  margin-bottom: 14px;
+}
+
+.as-hours-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.as-hours-list div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px dashed rgba(191, 227, 242, 0.18);
+  padding-bottom: 8px;
+}
+
+.as-hours-list dt {
+  color: var(--as-glass-dim);
+  font-size: 0.9rem;
+}
+
+.as-hours-list dd {
+  font-weight: 600;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.as-hours-list a {
+  color: var(--as-signal);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+.as-hours-list a:hover {
+  text-decoration: underline;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .as-crack {
+    right: -220px;
+    top: 120px;
+    opacity: 0.5;
+  }
+
+  .as-service-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .as-trust-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .as-mobile-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .as-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .as-hero-main {
+    padding: 40px 0 32px;
+  }
+
+  .as-hero-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .as-crack {
+    width: 420px;
+    height: 420px;
+    right: -200px;
+    top: 260px;
+    opacity: 0.35;
+  }
+
+  .as-services,
+  .as-trust {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .as-hero-eyebrow,
+  .as-hero-title .as-line,
+  .as-hero-sub,
+  .as-hero-cta {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .as-crack-path,
+  .as-crack-core,
+  .as-crack-ring {
+    animation: none;
+    stroke-dashoffset: 0;
+    opacity: 0.5;
+  }
+
+  .as-btn,
+  .as-card {
+    transition: none;
+  }
+}
