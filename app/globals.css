@@ -1,0 +1,618 @@
+/* ============================================================
+   FLIGHTICS — cestovní kancelář, Pardubice
+   Koncept: odletová tabule letiště Pardubice (split-flap board)
+   Paleta:
+     --ft-night   #101D33  (noční obloha nad ranvejí / tabule)
+     --ft-sky     #1E5BC6  (letecká modř — hlavní značková)
+     --ft-day     #EAF1FB  (denní obloha, světlé pozadí)
+     --ft-amber   #FFB629  (jantar odletové tabule — akcent)
+     --ft-paper   #FFFFFF
+     --ft-ink     #0C1626
+   Typo: Arvo/serif-slab pro display cítění nahrazeno systémově —
+         display: "Georgia"-free → používáme kombinaci:
+         Display: "Archivo Black"-like via system heavy sans (font-stretch)
+         Řešení bez externích fontů: display = ui-sans-serif heavy,
+         monospace = tabule (ui-monospace), tělo = system-ui.
+   ============================================================ */
+
+:root {
+  --ft-night: #101d33;
+  --ft-night-2: #182a4a;
+  --ft-sky: #1e5bc6;
+  --ft-sky-soft: #4d84e0;
+  --ft-day: #eaf1fb;
+  --ft-amber: #ffb629;
+  --ft-paper: #ffffff;
+  --ft-ink: #0c1626;
+  --ft-muted: #52627e;
+
+  --font-display: "Avenir Next Condensed", "Arial Narrow", "Roboto Condensed", ui-sans-serif, system-ui, sans-serif;
+  --font-body: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-board: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ft-ink);
+  background: var(--ft-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ft a:focus-visible,
+.ft button:focus-visible {
+  outline: 3px solid var(--ft-amber);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  background:
+    radial-gradient(120% 90% at 85% -10%, #24457e 0%, transparent 55%),
+    linear-gradient(170deg, var(--ft-night) 0%, var(--ft-night-2) 60%, #0d2247 100%);
+  color: var(--ft-day);
+  padding: 1.5rem 1.25rem 3.5rem;
+  overflow: hidden;
+}
+
+/* jemná "ranvejová" středová čára */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 182, 41, 0.12) 0 42px,
+    transparent 42px 84px
+  );
+  background-size: 3px 100%;
+  background-repeat: no-repeat;
+  background-position: 8% 0;
+  pointer-events: none;
+}
+
+.hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  max-width: 68rem;
+  margin: 0 auto 3rem;
+  position: relative;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.6rem;
+  letter-spacing: 0.14em;
+  color: var(--ft-paper);
+}
+
+.wordmark-ics {
+  color: var(--ft-amber);
+}
+
+.hero-tag {
+  font-family: var(--font-board);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ft-sky-soft);
+}
+
+.hero-main {
+  max-width: 68rem;
+  margin: 0 auto;
+  position: relative;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-board);
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ft-amber);
+  margin: 0 0 1rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(3rem, 11vw, 7.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-line {
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: ft-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.hero-line-1 { animation-delay: 0.05s; }
+.hero-line-2 { animation-delay: 0.18s; color: var(--ft-sky-soft); }
+.hero-line-3 { animation-delay: 0.31s; color: var(--ft-amber); }
+
+@keyframes ft-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-sub {
+  max-width: 34rem;
+  font-size: 1.08rem;
+  color: #b9c9e4;
+  margin: 0 0 2rem;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: 6px;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--ft-amber);
+  color: var(--ft-night);
+}
+
+.btn-solid:hover {
+  background: #ffc95c;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--ft-day);
+  border: 2px solid rgba(234, 241, 251, 0.4);
+}
+
+.btn-ghost:hover {
+  border-color: var(--ft-amber);
+  color: var(--ft-amber);
+  transform: translateY(-2px);
+}
+
+/* ---- Signature: odletová tabule ---- */
+
+.board {
+  max-width: 68rem;
+  margin: 0 auto;
+  background: #0a1424;
+  border: 1px solid #22345c;
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: var(--font-board);
+  position: relative;
+  box-shadow: 0 24px 60px rgba(4, 10, 24, 0.6);
+}
+
+.board-head,
+.board-row {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr 6.5rem 6.5rem;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.85rem 1.25rem;
+}
+
+.board-head {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  color: #5f76a3;
+  border-bottom: 1px solid #22345c;
+  background: #0d1a30;
+}
+
+.board-row {
+  border-bottom: 1px solid #16294a;
+  opacity: 0;
+  animation: ft-flap 0.5s ease forwards;
+}
+
+.board-row:last-child {
+  border-bottom: none;
+}
+
+@keyframes ft-flap {
+  0% {
+    opacity: 0;
+    transform: rotateX(70deg);
+  }
+  60% {
+    opacity: 1;
+    transform: rotateX(-12deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateX(0);
+  }
+}
+
+.board-code {
+  color: var(--ft-amber);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.board-dest {
+  color: var(--ft-day);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.board-dest em {
+  font-style: normal;
+  color: #5f76a3;
+  font-size: 0.78rem;
+  margin-left: 0.4rem;
+}
+
+.board-time {
+  color: #b9c9e4;
+  font-size: 0.88rem;
+}
+
+.board-status {
+  color: #4ade80;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 640px) {
+  .board-head,
+  .board-row {
+    grid-template-columns: 6rem 1fr 5.2rem;
+  }
+  .board-col-status {
+    display: none;
+  }
+}
+
+/* ============ SEKCE obecně ============ */
+
+.sec {
+  padding: 4.5rem 1.25rem;
+}
+
+.sec-head {
+  max-width: 68rem;
+  margin: 0 auto 3rem;
+}
+
+.sec-eyebrow {
+  font-family: var(--font-board);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ft-sky);
+  margin: 0 0 0.75rem;
+}
+
+.sec-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin: 0 0 1rem;
+  color: var(--ft-ink);
+}
+
+.sec-lead {
+  max-width: 38rem;
+  font-size: 1.05rem;
+  color: var(--ft-muted);
+  margin: 0;
+}
+
+/* ============ SEKCE 1 — trasy ============ */
+
+.sec-trasy {
+  background: var(--ft-day);
+}
+
+.trasy-grid {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 720px) {
+  .trasy-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.trasa {
+  background: var(--ft-paper);
+  border: 1px solid #d5e1f2;
+  border-radius: 10px;
+  padding: 1.5rem 1.5rem 1.6rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.trasa:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(30, 91, 198, 0.14);
+}
+
+.trasa-route {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.trasa-code {
+  font-family: var(--font-board);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ft-sky);
+  background: #e2ecfb;
+  padding: 0.2rem 0.55rem;
+  border-radius: 5px;
+}
+
+.trasa-path {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+  color: var(--ft-sky-soft);
+}
+
+.trasa-dash {
+  flex: 1;
+  height: 0;
+  border-top: 2px dashed #b8cdec;
+}
+
+.trasa-plane {
+  transform: rotate(90deg);
+  flex-shrink: 0;
+}
+
+.trasa:hover .trasa-plane {
+  animation: ft-fly 0.9s ease;
+}
+
+@keyframes ft-fly {
+  0% { transform: rotate(90deg) translateY(0); }
+  50% { transform: rotate(90deg) translateY(-6px); }
+  100% { transform: rotate(90deg) translateY(0); }
+}
+
+.trasa-mesto {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin: 0 0 0.25rem;
+  color: var(--ft-ink);
+}
+
+.trasa-zeme {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ft-muted);
+  letter-spacing: 0.08em;
+  margin-left: 0.35rem;
+}
+
+.trasa-doba {
+  font-family: var(--font-board);
+  font-size: 0.85rem;
+  color: var(--ft-sky);
+  margin: 0 0 0.75rem;
+}
+
+.trasa-popis {
+  margin: 0;
+  color: var(--ft-muted);
+  font-size: 0.98rem;
+}
+
+/* ============ SEKCE 2 — důvěra ============ */
+
+.sec-duvera {
+  background:
+    radial-gradient(100% 80% at 15% 110%, #24457e 0%, transparent 55%),
+    linear-gradient(200deg, var(--ft-night-2) 0%, var(--ft-night) 70%);
+  color: var(--ft-day);
+}
+
+.sec-eyebrow-light {
+  color: var(--ft-amber);
+}
+
+.sec-title-light {
+  color: var(--ft-paper);
+}
+
+.sec-lead-light {
+  color: #b9c9e4;
+}
+
+.sluzby-grid {
+  max-width: 68rem;
+  margin: 0 auto 4rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 720px) {
+  .sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .sluzby-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.sluzba {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(184, 205, 236, 0.18);
+  border-radius: 10px;
+  padding: 1.4rem 1.4rem 1.5rem;
+}
+
+.sluzba-stitek {
+  display: inline-block;
+  font-family: var(--font-board);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  color: var(--ft-night);
+  background: var(--ft-amber);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  margin-bottom: 0.9rem;
+}
+
+.sluzba-titulek {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.5rem;
+  color: var(--ft-paper);
+}
+
+.sluzba-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #b9c9e4;
+}
+
+/* --- reference --- */
+
+.ref-blok {
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+.ref-nadpis {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ft-amber);
+  margin: 0 0 1.5rem;
+}
+
+.ref-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 900px) {
+  .ref-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ref {
+  margin: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 3px solid var(--ft-amber);
+  border-radius: 0 10px 10px 0;
+  padding: 1.3rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ref-text {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--ft-day);
+  font-style: italic;
+}
+
+.ref-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.ref-jmeno {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--ft-paper);
+}
+
+.ref-trasa {
+  font-family: var(--font-board);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--ft-sky-soft);
+}
+
+/* ============ Reduced motion ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-line,
+  .board-row {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .trasa,
+  .btn {
+    transition: none;
+  }
+  .trasa:hover .trasa-plane {
+    animation: none;
+  }
+}
