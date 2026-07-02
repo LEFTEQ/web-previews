@@ -1,0 +1,616 @@
+/* =========================================================
+   AUTO DRYML a.s. — Pardubice
+   Koncept „Odometr": asfalt + petrolejová zeleň + žluť SPZ.
+   Display: tabulární, technická čísla (odometr, kartotéka).
+   ========================================================= */
+
+:root {
+  --asfalt: #16211e;        /* tmavý podklad — asfalt placu za soumraku */
+  --asfalt-2: #1e2c28;      /* o stupeň světlejší plocha */
+  --petrolej: #0e6b52;      /* škodovácká zeleň, ztmavená do petroleje */
+  --petrolej-svetly: #3ba888;
+  --spz: #f5c518;           /* žluť registrační značky / výkupního štítku */
+  --papir: #eef0ec;         /* světlý papír servisní kartotéky */
+  --inkoust: #1a2320;
+  --linka: rgba(22, 33, 30, 0.16);
+
+  --pismo-display: "Arial Black", "Archivo Black", Futura, "Helvetica Neue", Arial, sans-serif;
+  --pismo-text: Georgia, "Times New Roman", serif;
+  --pismo-technicke: "Courier New", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--asfalt);
+  color: var(--papir);
+  font-family: var(--pismo-text);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ad a:focus-visible,
+.ad button:focus-visible {
+  outline: 3px solid var(--spz);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Hlavička ---------- */
+
+.ad-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 5vw;
+  border-bottom: 1px solid rgba(238, 240, 236, 0.12);
+}
+
+.ad-wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-family: var(--pismo-display);
+  letter-spacing: 0.04em;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.ad-wordmark-auto {
+  color: var(--papir);
+  font-weight: 900;
+}
+
+.ad-wordmark-dryml {
+  color: var(--asfalt);
+  background: var(--spz);
+  padding: 0.15em 0.35em 0.1em;
+  font-weight: 900;
+  border-radius: 3px;
+}
+
+.ad-wordmark-as {
+  font-family: var(--pismo-technicke);
+  font-size: 0.75rem;
+  color: var(--petrolej-svetly);
+}
+
+.ad-tel {
+  text-decoration: none;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.ad-tel-label {
+  font-family: var(--pismo-technicke);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--petrolej-svetly);
+}
+
+.ad-tel-num {
+  font-family: var(--pismo-display);
+  font-size: 1.05rem;
+  color: var(--papir);
+}
+
+.ad-tel:hover .ad-tel-num {
+  color: var(--spz);
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+  padding: clamp(3rem, 8vw, 6rem) 5vw clamp(3.5rem, 7vw, 5.5rem);
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-eyebrow {
+  font-family: var(--pismo-technicke);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--petrolej-svetly);
+  margin: 0 0 1.4rem;
+  animation: vjezd 0.7s ease-out both;
+}
+
+.hero-title {
+  font-family: var(--pismo-display);
+  font-size: clamp(2.1rem, 6.5vw, 4.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0 0 2.4rem;
+  color: var(--papir);
+  text-wrap: balance;
+  animation: vjezd 0.7s 0.1s ease-out both;
+}
+
+/* --- Signature: odometr --- */
+
+.odo {
+  margin: 0 auto 2.4rem;
+  animation: vjezd 0.7s 0.2s ease-out both;
+}
+
+.odo-frame {
+  display: inline-flex;
+  gap: clamp(4px, 1vw, 8px);
+  padding: clamp(10px, 2vw, 16px);
+  background: #0b120f;
+  border: 1px solid rgba(238, 240, 236, 0.18);
+  border-radius: 10px;
+  box-shadow:
+    inset 0 4px 14px rgba(0, 0, 0, 0.7),
+    0 1px 0 rgba(238, 240, 236, 0.08);
+}
+
+.odo-digit {
+  font-family: var(--pismo-display);
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(2.4rem, 9vw, 5rem);
+  line-height: 1;
+  width: clamp(2.1rem, 8vw, 4.3rem);
+  padding: 0.18em 0;
+  text-align: center;
+  color: var(--papir);
+  background: linear-gradient(180deg, #223732 0%, #16211e 48%, #101917 52%, #1a2824 100%);
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+  animation: cifra 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+}
+
+/* středová dělicí linka válce odometru */
+.odo-digit::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.odo-digit-hot {
+  color: var(--spz);
+}
+
+.odo-caption {
+  margin: 0.9rem 0 0;
+  font-size: 1rem;
+  color: var(--papir);
+}
+
+.odo-caption strong {
+  color: var(--spz);
+  font-weight: 700;
+}
+
+.hero-lead {
+  max-width: 40rem;
+  margin: 0 auto 2.2rem;
+  font-size: 1.1rem;
+  color: rgba(238, 240, 236, 0.82);
+  animation: vjezd 0.7s 0.3s ease-out both;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 0.9rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+  animation: vjezd 0.7s 0.4s ease-out both;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--pismo-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 6px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-hlavni {
+  background: var(--spz);
+  color: var(--asfalt);
+}
+
+.btn-hlavni:hover {
+  background: #ffd83d;
+  transform: translateY(-2px);
+}
+
+.btn-vedlejsi {
+  color: var(--papir);
+  border: 2px solid var(--petrolej-svetly);
+}
+
+.btn-vedlejsi:hover {
+  background: var(--petrolej);
+  border-color: var(--petrolej);
+  transform: translateY(-2px);
+}
+
+.hero-fakta {
+  list-style: none;
+  margin: 0;
+  padding: 1.6rem 0 0;
+  border-top: 1px solid rgba(238, 240, 236, 0.14);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  animation: vjezd 0.7s 0.5s ease-out both;
+}
+
+.hero-fakta li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.fakt-cislo {
+  font-family: var(--pismo-display);
+  font-size: 1.35rem;
+  color: var(--petrolej-svetly);
+  font-variant-numeric: tabular-nums;
+}
+
+.fakt-text {
+  font-size: 0.88rem;
+  color: rgba(238, 240, 236, 0.72);
+}
+
+/* ---------- SEKCE: VOZY (světlá kartotéka) ---------- */
+
+.vozy {
+  background: var(--papir);
+  color: var(--inkoust);
+  padding: clamp(3rem, 7vw, 5.5rem) 5vw;
+}
+
+.sekce-hlava {
+  max-width: 1100px;
+  margin: 0 auto 2.5rem;
+}
+
+.sekce-hlava h2 {
+  font-family: var(--pismo-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.7rem);
+  margin: 0 0 0.7rem;
+  line-height: 1.1;
+}
+
+.sekce-pozn {
+  max-width: 36rem;
+  margin: 0;
+  color: rgba(26, 35, 32, 0.75);
+}
+
+.vozy-grid {
+  max-width: 1100px;
+  margin: 0 auto 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem;
+}
+
+.karta {
+  background: #fff;
+  border: 1px solid var(--linka);
+  border-radius: 8px;
+  padding: 1.3rem 1.3rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(22, 33, 30, 0.14);
+}
+
+/* štítek stylizovaný jako SPZ */
+.karta-spz {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-family: var(--pismo-technicke);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: var(--spz);
+  color: var(--inkoust);
+  border: 1.5px solid var(--inkoust);
+  border-radius: 4px;
+  padding: 0.25em 0.6em 0.25em 0;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.karta-spz-e {
+  background: #1d4ed8;
+  color: #fff;
+  padding: 0.25em 0.45em;
+  font-weight: 700;
+}
+
+.karta-model {
+  font-family: var(--pismo-display);
+  font-size: 1.15rem;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.karta-motor {
+  font-family: var(--pismo-technicke);
+  font-size: 0.82rem;
+  color: rgba(26, 35, 32, 0.7);
+  margin: 0 0 0.7rem;
+}
+
+.karta-udaje {
+  margin: auto 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem;
+  border-top: 1px dashed var(--linka);
+  padding-top: 0.8rem;
+}
+
+.karta-udaje dt {
+  font-family: var(--pismo-technicke);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(26, 35, 32, 0.55);
+}
+
+.karta-udaje dd {
+  margin: 0.1rem 0 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.karta-cena {
+  color: var(--petrolej);
+}
+
+.vozy-pruhy {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.pruh {
+  background: var(--petrolej);
+  color: #f2fbf7;
+  border-radius: 8px;
+  padding: 1.5rem 1.6rem;
+}
+
+.pruh h3 {
+  font-family: var(--pismo-display);
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem;
+}
+
+.pruh p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(242, 251, 247, 0.85);
+}
+
+/* ---------- SEKCE: CESTA (tmavá) ---------- */
+
+.cesta {
+  padding: clamp(3rem, 7vw, 5.5rem) 5vw;
+  background:
+    linear-gradient(180deg, var(--asfalt) 0%, var(--asfalt-2) 100%);
+}
+
+.sekce-hlava-svetla h2 {
+  color: var(--papir);
+}
+
+.sekce-hlava-svetla .sekce-pozn {
+  color: rgba(238, 240, 236, 0.75);
+}
+
+.cesta-kroky {
+  list-style: none;
+  margin: 0 auto 3rem;
+  padding: 0;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+
+.krok {
+  border-top: 3px solid var(--petrolej-svetly);
+  padding-top: 1.1rem;
+}
+
+/* kilometrovník — značení kroků odvozené z reality silnice */
+.krok-znacka {
+  display: inline-block;
+  font-family: var(--pismo-technicke);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--asfalt);
+  background: var(--papir);
+  border-left: 5px solid var(--spz);
+  padding: 0.25em 0.7em;
+  border-radius: 3px;
+  margin-bottom: 0.8rem;
+}
+
+.krok h3 {
+  font-family: var(--pismo-display);
+  font-size: 1.15rem;
+  margin: 0 0 0.5rem;
+  color: var(--papir);
+}
+
+.krok p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(238, 240, 236, 0.78);
+}
+
+.reference {
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+  padding: 1.8rem 2rem;
+  background: rgba(238, 240, 236, 0.06);
+  border-left: 4px solid var(--spz);
+  border-radius: 0 8px 8px 0;
+}
+
+.reference p {
+  margin: 0 0 0.9rem;
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--papir);
+}
+
+.reference-autor {
+  font-family: var(--pismo-technicke);
+  font-style: normal;
+  font-size: 0.82rem;
+  color: var(--petrolej-svetly);
+}
+
+.cesta-lokalita {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cesta-lokalita p {
+  margin: 0;
+  color: rgba(238, 240, 236, 0.82);
+}
+
+.cesta-lokalita strong {
+  color: var(--spz);
+}
+
+/* ---------- Animace ---------- */
+
+@keyframes vjezd {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cifra {
+  from {
+    opacity: 0;
+    transform: translateY(-60%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-eyebrow,
+  .hero-title,
+  .odo,
+  .odo-digit,
+  .hero-lead,
+  .hero-cta,
+  .hero-fakta {
+    animation: none;
+  }
+  .btn,
+  .karta {
+    transition: none;
+  }
+  .btn:hover,
+  .karta:hover {
+    transform: none;
+  }
+}
+
+/* ---------- Responzivita ---------- */
+
+@media (max-width: 820px) {
+  .cesta-kroky {
+    grid-template-columns: 1fr;
+  }
+  .vozy-pruhy {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .ad-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .ad-tel {
+    text-align: left;
+  }
+  .hero {
+    text-align: left;
+  }
+  .odo-frame {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-cta {
+    justify-content: flex-start;
+  }
+  .hero-cta .btn {
+    width: 100%;
+    text-align: center;
+  }
+  .hero-fakta {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+  .reference {
+    padding: 1.3rem 1.2rem;
+  }
+}
