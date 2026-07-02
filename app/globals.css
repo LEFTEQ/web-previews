@@ -1,0 +1,471 @@
+/* ==========================================================================
+   Pekárna Crocus — Brno
+   Paleta: kůrka / mouka / kvásek + šafránově-krokusový akcent (z názvu firmy)
+   Typografie: robustní serif s pekařskou vahou (Georgia stack pro display)
+   + čistý grotesk pro provozní údaje. Žádné externí fonty = rychlé načtení.
+   ========================================================================== */
+
+:root {
+  --kurka: #6b3a1e;        /* tmavá kůrka chleba */
+  --kurka-tmava: #47250f;  /* dopečená kůrka, pozadí tmavé sekce */
+  --mouka: #faf5ec;        /* pšeničná mouka */
+  --strida: #f0e4d0;       /* světlá střída */
+  --krokus: #7b5ea7;       /* květ krokusu — akcent z názvu */
+  --safran: #e8a13d;       /* šafránové blizny / máslové pečivo */
+
+  --font-display: "Georgia", "Times New Roman", "Liberation Serif", serif;
+  --font-utility: "Trebuchet MS", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--mouka);
+  color: var(--kurka-tmava);
+  font-family: var(--font-display);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pk a:focus-visible,
+.pk .btn:focus-visible {
+  outline: 3px solid var(--krokus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* =========================== HERO =========================== */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.25rem 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 85% -10%, rgba(123, 94, 167, 0.14), transparent 60%),
+    linear-gradient(180deg, var(--mouka) 0%, var(--strida) 100%);
+  overflow: hidden;
+}
+
+.hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+}
+
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.95;
+}
+
+.wordmark-pek {
+  font-family: var(--font-utility);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--kurka);
+}
+
+.wordmark-crocus {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--krokus);
+  letter-spacing: -0.01em;
+}
+
+.hero-meta {
+  margin: 0;
+  font-family: var(--font-utility);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--kurka);
+}
+
+.hero-title {
+  margin: auto 0;
+  padding: 3rem 0 2rem;
+  font-size: clamp(2.4rem, 8.5vw, 6.2rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  max-width: 16ch;
+}
+
+.hero-title .line {
+  display: block;
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-title .line-1 { animation-delay: 0.05s; }
+.hero-title .line-2 { animation-delay: 0.18s; }
+.hero-title .line-3 { animation-delay: 0.31s; }
+.hero-title .line-4 { animation-delay: 0.44s; }
+
+.hero-title em {
+  font-style: italic;
+  color: var(--safran);
+}
+
+.hero-title .accent {
+  color: var(--krokus);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Kvásková křivka — signature */
+
+.hero-curve {
+  margin: 0 -1.25rem;
+  position: relative;
+}
+
+.hero-curve svg {
+  display: block;
+  width: 100%;
+  height: clamp(90px, 14vw, 160px);
+}
+
+.curve-dough {
+  fill: rgba(123, 94, 167, 0.1);
+}
+
+.curve-line {
+  stroke: var(--kurka);
+  stroke-width: 2.5;
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+  animation: knead 2.2s ease-out 0.5s forwards;
+}
+
+.curve-dot {
+  fill: var(--safran);
+  opacity: 0;
+  animation: pop 0.4s ease-out forwards;
+}
+
+.curve-dot:first-of-type { animation-delay: 1.4s; }
+.curve-dot:last-of-type { animation-delay: 2.1s; }
+
+@keyframes knead {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.4); transform-origin: center; }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.curve-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.4rem 1.25rem 0.8rem;
+  font-family: var(--font-utility);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kurka);
+}
+
+.curve-labels span:nth-child(2) { text-align: center; }
+.curve-labels span:last-child { text-align: right; }
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0 0 2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.7rem;
+  font-family: var(--font-utility);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-full {
+  background: var(--kurka-tmava);
+  color: var(--mouka);
+}
+
+.btn-full:hover {
+  background: var(--krokus);
+  transform: translateY(-2px);
+}
+
+.btn-line {
+  border: 2px solid var(--kurka-tmava);
+  color: var(--kurka-tmava);
+}
+
+.btn-line:hover {
+  border-color: var(--krokus);
+  color: var(--krokus);
+  transform: translateY(-2px);
+}
+
+/* =========================== SEKCE =========================== */
+
+.section {
+  padding: 4.5rem 1.25rem;
+}
+
+.section-head {
+  max-width: 62rem;
+  margin: 0 auto 2.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-utility);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--krokus);
+}
+
+.section h2 {
+  margin: 0;
+  font-size: clamp(1.9rem, 5vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+/* --- Nabídka: pult v pořadí pečení --- */
+
+.nabidka {
+  background: var(--mouka);
+}
+
+.pult {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 62rem;
+}
+
+.pult-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.35rem;
+  padding: 1.5rem 0;
+  border-top: 2px solid rgba(107, 58, 30, 0.16);
+}
+
+.pult-item:last-child {
+  border-bottom: 2px solid rgba(107, 58, 30, 0.16);
+}
+
+.pult-cas {
+  font-family: var(--font-utility);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--safran);
+}
+
+.pult-body h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+}
+
+.pult-body p {
+  margin: 0;
+  max-width: 46ch;
+  color: rgba(71, 37, 15, 0.85);
+}
+
+.pult-vaha {
+  font-family: var(--font-utility);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kurka);
+}
+
+.nabidka-note {
+  max-width: 62rem;
+  margin: 2rem auto 0;
+  padding: 1.2rem 1.4rem;
+  background: rgba(123, 94, 167, 0.08);
+  border-left: 4px solid var(--krokus);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+}
+
+/* --- Pekárna / důvěra --- */
+
+.pekarna {
+  background: var(--kurka-tmava);
+  color: var(--strida);
+}
+
+.section-head-light h2 {
+  color: var(--mouka);
+}
+
+.duvody {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 62rem;
+  margin: 0 auto 3.5rem;
+}
+
+.duvod {
+  border-top: 2px solid rgba(232, 161, 61, 0.4);
+  padding-top: 1.2rem;
+}
+
+.duvod-cislo {
+  display: block;
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--safran);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.duvod p {
+  margin: 0;
+  max-width: 34ch;
+  color: rgba(240, 228, 208, 0.88);
+}
+
+.reference {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+.ref {
+  margin: 0;
+  padding: 1.8rem;
+  background: rgba(250, 245, 236, 0.06);
+  border: 1px solid rgba(232, 161, 61, 0.25);
+  border-radius: 12px;
+}
+
+.ref blockquote {
+  margin: 0 0 1rem;
+}
+
+.ref blockquote p {
+  margin: 0;
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--mouka);
+}
+
+.ref figcaption {
+  font-family: var(--font-utility);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--safran);
+}
+
+/* =========================== RESPONZIVITA =========================== */
+
+@media (min-width: 700px) {
+  .hero {
+    padding: 2rem 3rem 0;
+  }
+
+  .hero-curve {
+    margin: 0 -3rem;
+  }
+
+  .curve-labels {
+    padding: 0.5rem 3rem 1rem;
+  }
+
+  .section {
+    padding: 6rem 3rem;
+  }
+
+  .pult-item {
+    grid-template-columns: 7rem 1fr 10rem;
+    gap: 1.5rem;
+    align-items: baseline;
+  }
+
+  .pult-vaha {
+    text-align: right;
+  }
+
+  .duvody {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .reference {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1100px) {
+  .hero-title {
+    padding: 4rem 0 2.5rem;
+  }
+}
+
+/* =========================== REDUCED MOTION =========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-title .line,
+  .curve-line,
+  .curve-dot {
+    animation: none;
+    opacity: 1;
+    stroke-dashoffset: 0;
+    transform: none;
+  }
+
+  .btn {
+    transition: none;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+}
