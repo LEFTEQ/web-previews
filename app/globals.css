@@ -1,0 +1,489 @@
+/* =========================================================
+   letterhead s.r.o. — reklamní agentura, Pardubice
+   Koncept: stránka jako firemní hlavičkový papír.
+   Palette:
+     --lh-paper   #f7f8f6  (kancelářský papír, chladnější než krém)
+     --lh-ink     #14181d  (černý inkoust)
+     --lh-blue    #2246d6  (razítková modrá — barva podpisů a razítek)
+     --lh-yellow  #ffd42a  (zvýrazňovač)
+     --lh-grey    #5b636d  (tužka)
+   Type: Georgia (display serif — psací/redakční tón)
+         + systémový grotesk pro "formulářové" popisky.
+   Signature: linkovaný podklad hlavičkového papíru + eyebrow
+   s pilcrow ¶ a perforovaná "odtrhávací" linka pod herem.
+   ========================================================= */
+
+:root {
+  --lh-paper: #f7f8f6;
+  --lh-ink: #14181d;
+  --lh-blue: #2246d6;
+  --lh-blue-deep: #182f8f;
+  --lh-yellow: #ffd42a;
+  --lh-grey: #5b636d;
+  --lh-line: rgba(34, 70, 214, 0.14);
+
+  --lh-serif: Georgia, "Times New Roman", "Noto Serif", serif;
+  --lh-sans: "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--lh-paper);
+  color: var(--lh-ink);
+  font-family: var(--lh-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.lh img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Viditelný focus všude */
+.lh a:focus-visible,
+.lh button:focus-visible {
+  outline: 3px solid var(--lh-blue);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Signature: linkovaný papír v hero ---------- */
+
+.lh-hero {
+  position: relative;
+  padding: 1.25rem 1.25rem 0;
+  background-color: var(--lh-paper);
+  background-image:
+    linear-gradient(to bottom, var(--lh-line) 1px, transparent 1px);
+  background-size: 100% 2.4rem;
+  background-position: 0 5.5rem;
+  border-top: 6px solid var(--lh-blue);
+  overflow: hidden;
+}
+
+/* červená okrajová linka jako na dopisním bloku */
+.lh-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 1.1rem;
+  width: 2px;
+  background: rgba(214, 66, 34, 0.35);
+  pointer-events: none;
+}
+
+.lh-hero-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding: 0.5rem 0 1.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+/* ---------- Wordmark ---------- */
+
+.lh-wordmark {
+  font-family: var(--lh-serif);
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.lh-wordmark-l {
+  font-style: italic;
+  color: var(--lh-ink);
+}
+
+.lh-wordmark-h {
+  font-weight: 700;
+  color: var(--lh-blue);
+}
+
+.lh-wordmark-tld {
+  font-family: var(--lh-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lh-grey);
+  margin-left: 0.5rem;
+  vertical-align: super;
+}
+
+.lh-hero-locality {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--lh-grey);
+}
+
+/* ---------- Hero grid ---------- */
+
+.lh-hero-grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+  padding-bottom: 3rem;
+}
+
+.lh-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--lh-blue);
+  font-weight: 600;
+}
+
+.lh-eyebrow span {
+  font-family: var(--lh-serif);
+  font-size: 1.05rem;
+  margin-right: 0.4rem;
+}
+
+.lh-eyebrow-light {
+  color: var(--lh-yellow);
+}
+
+.lh-hero-title {
+  font-family: var(--lh-serif);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 7vw, 4.4rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.5rem;
+}
+
+.lh-hero-title em {
+  font-style: italic;
+  color: var(--lh-blue);
+  /* zvýrazňovač */
+  background: linear-gradient(transparent 58%, var(--lh-yellow) 58%, var(--lh-yellow) 92%, transparent 92%);
+  padding: 0 0.08em;
+}
+
+.lh-hero-lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: var(--lh-ink);
+  margin: 0 0 2rem;
+}
+
+.lh-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.lh-btn {
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  font-family: var(--lh-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: transform 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+
+.lh-btn-solid {
+  background: var(--lh-blue);
+  color: #fff;
+}
+
+.lh-btn-solid:hover {
+  background: var(--lh-blue-deep);
+  transform: translateY(-2px);
+}
+
+.lh-btn-line {
+  border: 2px solid var(--lh-ink);
+  color: var(--lh-ink);
+}
+
+.lh-btn-line:hover {
+  background: var(--lh-ink);
+  color: var(--lh-paper);
+  transform: translateY(-2px);
+}
+
+/* ---------- Hero figure ---------- */
+
+.lh-hero-figure {
+  margin: 0;
+  position: relative;
+}
+
+.lh-hero-figure .lh-img {
+  width: 100%;
+  border: 1px solid rgba(20, 24, 29, 0.15);
+  box-shadow: 6px 6px 0 var(--lh-blue);
+}
+
+.lh-hero-caption {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--lh-grey);
+  font-style: italic;
+  font-family: var(--lh-serif);
+}
+
+/* ---------- Perforovaná odtrhávací linka ---------- */
+
+.lh-rule {
+  max-width: 72rem;
+  margin: 0 auto;
+  border-top: 2px dashed rgba(20, 24, 29, 0.35);
+  padding: 0.6rem 0 1.4rem;
+  text-align: center;
+}
+
+.lh-rule-mark {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lh-grey);
+}
+
+/* ---------- Sekce ---------- */
+
+.lh-section {
+  padding: 4rem 1.25rem;
+}
+
+.lh-section-head {
+  max-width: 72rem;
+  margin: 0 auto 2.5rem;
+}
+
+.lh-h2 {
+  font-family: var(--lh-serif);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* ---------- Služby: karty jako papírové formáty ---------- */
+
+.lh-services {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.lh-service {
+  background: #fff;
+  border: 1px solid rgba(20, 24, 29, 0.12);
+  border-radius: 3px;
+  padding: 1.5rem 1.5rem 1.75rem;
+  position: relative;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.lh-service:hover {
+  transform: translateY(-4px);
+  box-shadow: 4px 4px 0 var(--lh-yellow);
+}
+
+.lh-service-format {
+  margin: 0 0 1rem;
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--lh-blue);
+  border: 1.5px solid var(--lh-blue);
+  border-radius: 2px;
+  padding: 0.2rem 0.55rem;
+}
+
+.lh-service-title {
+  font-family: var(--lh-serif);
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin: 0 0 0.6rem;
+}
+
+.lh-service-text {
+  margin: 0;
+  color: var(--lh-grey);
+  font-size: 0.98rem;
+}
+
+/* ---------- Tmavá sekce: důvěra ---------- */
+
+.lh-section-dark {
+  background: var(--lh-ink);
+  color: var(--lh-paper);
+}
+
+.lh-section-dark .lh-h2 {
+  color: var(--lh-paper);
+}
+
+.lh-trust-grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+}
+
+.lh-trust-figure {
+  margin: 0;
+}
+
+.lh-trust-figure .lh-img {
+  width: 100%;
+  border: 1px solid rgba(247, 248, 246, 0.2);
+  box-shadow: 6px 6px 0 var(--lh-yellow);
+}
+
+.lh-trust-lead {
+  font-family: var(--lh-serif);
+  font-size: 1.2rem;
+  line-height: 1.55;
+  margin: 0 0 2rem;
+}
+
+.lh-facts {
+  list-style: none;
+  margin: 0 0 2rem;
+  padding: 0;
+}
+
+.lh-fact {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px dashed rgba(247, 248, 246, 0.25);
+}
+
+.lh-fact:first-child {
+  border-top: 1px dashed rgba(247, 248, 246, 0.25);
+}
+
+.lh-fact-key {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lh-yellow);
+  font-weight: 600;
+}
+
+.lh-fact-val {
+  font-size: 1rem;
+}
+
+.lh-quote {
+  margin: 0;
+  border-left: 3px solid var(--lh-yellow);
+  padding-left: 1.25rem;
+}
+
+.lh-quote p {
+  font-family: var(--lh-serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem;
+}
+
+.lh-quote cite {
+  font-style: normal;
+  font-size: 0.85rem;
+  color: rgba(247, 248, 246, 0.65);
+}
+
+/* ---------- Vstupní animace (jen hero, decentní) ---------- */
+
+@keyframes lh-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lh-hero-copy {
+  animation: lh-rise 500ms ease-out both;
+}
+
+.lh-hero-figure {
+  animation: lh-rise 500ms ease-out 140ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .lh-hero-copy,
+  .lh-hero-figure {
+    animation: none;
+  }
+  .lh-btn,
+  .lh-service {
+    transition: none;
+  }
+}
+
+/* ---------- Responzivita ---------- */
+
+@media (min-width: 640px) {
+  .lh-services {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .lh-hero {
+    padding: 1.5rem 3rem 0;
+  }
+
+  .lh-hero::before {
+    left: 2.4rem;
+  }
+
+  .lh-hero-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .lh-section {
+    padding: 5.5rem 3rem;
+  }
+
+  .lh-trust-grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: start;
+    gap: 4rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .lh-services {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
