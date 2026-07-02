@@ -1,0 +1,544 @@
+/* =====================================================
+   ERPEstav s.r.o. — elektroinstalace, Ústí nad Labem
+   Palette: rozvaděčová šeď + fázová modř + izolační žluť
+   ===================================================== */
+
+:root {
+  --es-ink: #10151c;        /* skoro černá, deska rozvaděče */
+  --es-steel: #232b36;      /* ocelový plech */
+  --es-paper: #eef1f4;      /* světle šedý podklad, ne krémový */
+  --es-phase: #1f6df2;      /* fázová modř — hlavní akcent */
+  --es-tape: #ffd23f;       /* izolační páska, žlutá */
+  --es-copper: #c9743a;     /* měď, drobný doplněk */
+  --es-line: rgba(16, 21, 28, 0.12);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--es-paper);
+  color: var(--es-ink);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.es-page a:focus-visible,
+.es-page button:focus-visible,
+:focus-visible {
+  outline: 3px solid var(--es-phase);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.es-hero {
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(31, 109, 242, 0.25), transparent 60%),
+    linear-gradient(165deg, var(--es-ink) 0%, var(--es-steel) 100%);
+  color: #f4f7fb;
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemná technická mřížka jako výkres instalace */
+.es-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+}
+
+.es-hero-inner {
+  position: relative;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 28px 20px 64px;
+}
+
+.es-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-bottom: 40px;
+}
+
+.es-wordmark {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  position: relative;
+}
+
+.es-wordmark-live { color: var(--es-tape); font-weight: 400; letter-spacing: 0.14em; }
+
+.es-wordmark-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 6px;
+  border-radius: 50%;
+  background: var(--es-phase);
+  box-shadow: 0 0 10px rgba(31, 109, 242, 0.9);
+  vertical-align: super;
+}
+
+.es-topbar-note {
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(244, 247, 251, 0.6);
+}
+
+.es-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.85fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.es-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 18px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--es-tape);
+}
+
+.es-eyebrow-pulse {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--es-tape);
+  animation: es-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes es-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 210, 63, 0.55); }
+  50% { box-shadow: 0 0 0 8px rgba(255, 210, 63, 0); }
+}
+
+.es-h1 {
+  margin: 0 0 22px;
+  font-size: clamp(2.5rem, 6.4vw, 4.4rem);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  animation: es-rise 0.7s ease-out both;
+}
+
+.es-h1-accent {
+  position: relative;
+  display: inline-block;
+  color: var(--es-tape);
+}
+
+/* drátové podtržení se zubem — signature linka */
+.es-h1-wire {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.28em;
+  width: 100%;
+  height: 0.34em;
+}
+
+.es-wire-path {
+  stroke: var(--es-phase);
+  stroke-dasharray: 480;
+  stroke-dashoffset: 480;
+  animation: es-wire 1.1s 0.45s ease-out forwards;
+}
+
+.es-wire-node { fill: var(--es-tape); opacity: 0; animation: es-fade 0.4s ease-out forwards; }
+.es-wire-node-a { animation-delay: 0.5s; }
+.es-wire-node-b { animation-delay: 1.45s; }
+
+@keyframes es-wire { to { stroke-dashoffset: 0; } }
+@keyframes es-fade { to { opacity: 1; } }
+@keyframes es-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.es-lead {
+  margin: 0 0 34px;
+  max-width: 34em;
+  font-size: 1.1rem;
+  color: rgba(244, 247, 251, 0.82);
+  animation: es-rise 0.7s 0.15s ease-out both;
+}
+
+.es-hero-facts {
+  display: flex;
+  gap: 34px;
+  flex-wrap: wrap;
+  animation: es-rise 0.7s 0.3s ease-out both;
+}
+
+.es-fact { display: flex; flex-direction: column; gap: 2px; }
+
+.es-fact-num {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.es-fact-label {
+  font-size: 0.82rem;
+  color: rgba(244, 247, 251, 0.6);
+  letter-spacing: 0.04em;
+}
+
+/* ---- signature: rozvaděč ---- */
+
+.es-panel {
+  background: linear-gradient(180deg, #2b3542, #1c232d);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 20px 20px 16px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  animation: es-rise 0.7s 0.4s ease-out both;
+}
+
+.es-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.es-panel-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: rgba(244, 247, 251, 0.65);
+}
+
+.es-panel-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--es-ink);
+  background: var(--es-tape);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.es-panel-rows { display: grid; gap: 10px; }
+
+.es-breaker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 10px 14px;
+}
+
+.es-breaker-switch {
+  flex: none;
+  width: 16px;
+  height: 30px;
+  border-radius: 4px;
+  background: #414d5c;
+  position: relative;
+}
+
+.es-breaker-switch::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  height: 12px;
+  border-radius: 3px;
+  background: #5b6a7c;
+  bottom: 2px;
+  transition: background 0.3s;
+}
+
+.es-breaker.is-on .es-breaker-switch::after {
+  top: 2px;
+  bottom: auto;
+  background: var(--es-phase);
+  box-shadow: 0 0 8px rgba(31, 109, 242, 0.8);
+}
+
+.es-breaker.is-rcd .es-breaker-switch::after {
+  top: 2px;
+  bottom: auto;
+  background: var(--es-tape);
+  box-shadow: 0 0 8px rgba(255, 210, 63, 0.7);
+}
+
+.es-breaker-delay .es-breaker-switch::after { animation: es-flick 0.5s 1.6s steps(2) both; }
+
+@keyframes es-flick {
+  from { background: #5b6a7c; box-shadow: none; }
+  to { background: var(--es-phase); box-shadow: 0 0 8px rgba(31, 109, 242, 0.8); }
+}
+
+.es-breaker-label {
+  font-size: 0.88rem;
+  color: rgba(244, 247, 251, 0.85);
+  letter-spacing: 0.03em;
+}
+
+.es-panel-foot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  color: rgba(244, 247, 251, 0.45);
+}
+
+.es-panel-foot-line { flex: 1; height: 1px; background: rgba(255, 255, 255, 0.14); }
+
+/* pás fázových vodičů pod hero */
+.es-hero-strip {
+  position: relative;
+  display: flex;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.es-hero-strip span {
+  flex: 1;
+  text-align: center;
+  padding: 8px 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: rgba(244, 247, 251, 0.55);
+  border-top: 4px solid transparent;
+}
+
+.es-hero-strip span:nth-child(1) { border-top-color: #8a5a2b; }   /* L1 hnědá */
+.es-hero-strip span:nth-child(2) { border-top-color: #1c1c1c; }   /* L2 černá */
+.es-hero-strip span:nth-child(3) { border-top-color: #7d8894; }   /* L3 šedá */
+.es-hero-strip span:nth-child(4) { border-top-color: #2f6fe0; }   /* N modrá */
+.es-hero-strip span:nth-child(5) {
+  border-top-color: #44b04a;                                       /* PE zelenožlutá */
+  border-image: repeating-linear-gradient(90deg, #44b04a 0 14px, var(--es-tape) 14px 28px) 1;
+}
+
+/* ================= SECTIONS ================= */
+
+.es-section-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 72px 20px;
+}
+
+.es-section-head {
+  max-width: 620px;
+  margin-bottom: 44px;
+}
+
+.es-h2 {
+  margin: 0 0 14px;
+  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.es-section-sub {
+  margin: 0;
+  color: rgba(16, 21, 28, 0.7);
+  font-size: 1.05rem;
+}
+
+/* ---- služby ---- */
+
+.es-services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.es-card {
+  background: #fff;
+  border: 1px solid var(--es-line);
+  border-radius: 10px;
+  padding: 26px 26px 22px;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.es-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(16, 21, 28, 0.12);
+  border-color: rgba(31, 109, 242, 0.4);
+}
+
+.es-card-tag {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--es-phase);
+  background: rgba(31, 109, 242, 0.1);
+  border: 1px solid rgba(31, 109, 242, 0.3);
+  border-radius: 4px;
+  padding: 3px 9px;
+  margin-bottom: 14px;
+}
+
+.es-card:last-child .es-card-tag {
+  color: #9a7400;
+  background: rgba(255, 210, 63, 0.22);
+  border-color: rgba(255, 210, 63, 0.7);
+}
+
+.es-h3 {
+  margin: 0 0 10px;
+  font-size: 1.22rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.es-card p { margin: 0 0 12px; color: rgba(16, 21, 28, 0.75); }
+
+.es-card-detail {
+  margin: 0 !important;
+  padding-top: 12px;
+  border-top: 1px dashed var(--es-line);
+  font-size: 0.84rem;
+  letter-spacing: 0.04em;
+  color: rgba(16, 21, 28, 0.55) !important;
+}
+
+/* ---- důvěra ---- */
+
+.es-trust {
+  background: #fff;
+  border-top: 1px solid var(--es-line);
+}
+
+.es-trust-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 56px;
+  align-items: start;
+}
+
+.es-trust-copy > p {
+  color: rgba(16, 21, 28, 0.75);
+  font-size: 1.05rem;
+}
+
+.es-trust-list {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+}
+
+.es-trust-list li {
+  padding-left: 22px;
+  position: relative;
+  color: rgba(16, 21, 28, 0.75);
+}
+
+.es-trust-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--es-tape);
+  border: 2px solid var(--es-ink);
+}
+
+.es-trust-list strong { color: var(--es-ink); }
+
+.es-quotes { display: grid; gap: 18px; }
+
+.es-quote {
+  margin: 0;
+  background: var(--es-paper);
+  border-left: 4px solid var(--es-phase);
+  border-radius: 0 8px 8px 0;
+  padding: 18px 20px;
+}
+
+.es-quote blockquote {
+  margin: 0 0 10px;
+  font-size: 0.98rem;
+  color: rgba(16, 21, 28, 0.85);
+}
+
+.es-quote figcaption {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: rgba(16, 21, 28, 0.55);
+}
+
+.es-quote:nth-child(2) { border-left-color: var(--es-tape); }
+.es-quote:nth-child(3) { border-left-color: var(--es-copper); }
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 880px) {
+  .es-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .es-panel { max-width: 420px; }
+  .es-trust-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .es-services-grid { grid-template-columns: 1fr; }
+  .es-hero-inner { padding: 22px 16px 48px; }
+  .es-section-inner { padding: 56px 16px; }
+  .es-hero-facts { gap: 22px; }
+  .es-topbar { padding-bottom: 28px; }
+  .es-hero-strip span { letter-spacing: 0.18em; font-size: 0.66rem; }
+}
+
+/* ================= MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .es-h1,
+  .es-lead,
+  .es-hero-facts,
+  .es-panel { animation: none; }
+  .es-wire-path { animation: none; stroke-dashoffset: 0; }
+  .es-wire-node { animation: none; opacity: 1; }
+  .es-eyebrow-pulse { animation: none; }
+  .es-breaker-delay .es-breaker-switch::after {
+    animation: none;
+    background: var(--es-phase);
+    box-shadow: 0 0 8px rgba(31, 109, 242, 0.8);
+  }
+  .es-card { transition: none; }
+  .es-card:hover { transform: none; }
+}
