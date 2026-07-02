@@ -1,0 +1,499 @@
+/* =========================================================
+   Tesařství Pavel Škrabálek — Rokytnice nad Jizerou
+   Paleta: dřevo (modřínové jádro), sníh, jehličí, tuhá tužka
+   ========================================================= */
+
+:root {
+  --ts-snow: #f7f5f0;        /* sníh na střeše, teplá bílá */
+  --ts-timber: #8a5a2b;      /* modřínové jádro */
+  --ts-timber-deep: #5c3a17; /* vyschlý trám */
+  --ts-spruce: #29382e;      /* jehličí, tmavé pozadí hero */
+  --ts-spruce-deep: #1c2822; /* stín pod krovem */
+  --ts-chalk: #ede4d3;       /* tesařská křída */
+  --ts-ink: #241d14;         /* text na světlém */
+
+  --ts-font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Impact, sans-serif;
+  --ts-font-body: Georgia, "Times New Roman", serif;
+  --ts-font-util: "Courier New", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--ts-snow);
+  color: var(--ts-ink);
+  font-family: var(--ts-font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ts-page a:focus-visible,
+.ts-page button:focus-visible {
+  outline: 3px solid var(--ts-timber);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.ts-hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background:
+    linear-gradient(178deg, var(--ts-spruce-deep) 0%, var(--ts-spruce) 55%, #33453a 100%);
+  color: var(--ts-chalk);
+  overflow: hidden;
+  /* letokruhy — jemný dřevěný raster */
+  background-image:
+    repeating-linear-gradient(92deg, rgba(237, 228, 211, 0.035) 0px, rgba(237, 228, 211, 0.035) 1px, transparent 1px, transparent 9px),
+    linear-gradient(178deg, var(--ts-spruce-deep) 0%, var(--ts-spruce) 55%, #33453a 100%);
+}
+
+.ts-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem clamp(1.1rem, 4vw, 3rem);
+  position: relative;
+  z-index: 3;
+}
+
+.ts-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--ts-chalk);
+}
+
+.ts-wordmark-axe { color: var(--ts-timber); display: inline-flex; }
+
+.ts-wordmark-text {
+  font-family: var(--ts-font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.14em;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.ts-wordmark-sub {
+  font-family: var(--ts-font-util);
+  font-weight: 400;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: rgba(237, 228, 211, 0.65);
+  text-transform: lowercase;
+}
+
+.ts-topbar-tel {
+  font-family: var(--ts-font-util);
+  font-size: 0.85rem;
+  color: var(--ts-chalk);
+  text-decoration: none;
+  border: 1px solid rgba(237, 228, 211, 0.4);
+  padding: 0.55rem 0.95rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.ts-topbar-tel:hover {
+  background: rgba(237, 228, 211, 0.12);
+  border-color: var(--ts-chalk);
+}
+
+.ts-hero-body {
+  position: relative;
+  z-index: 3;
+  padding: clamp(2rem, 6vh, 4.5rem) clamp(1.1rem, 4vw, 3rem) 0;
+  max-width: 62rem;
+}
+
+.ts-hero-eyebrow {
+  font-family: var(--ts-font-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ts-timber);
+  color: #c9924f;
+  margin: 0 0 1.2rem;
+}
+
+.ts-hero-title {
+  font-family: var(--ts-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.7rem, 9.5vw, 6.8rem);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  margin: 0 0 1.4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.ts-hero-line { display: block; }
+.ts-hero-line-2 { color: #c9924f; }
+.ts-hero-line-3 {
+  color: var(--ts-snow);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+}
+
+.ts-hero-lead {
+  max-width: 34rem;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  color: rgba(247, 245, 240, 0.88);
+  margin: 0 0 2rem;
+}
+
+.ts-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding-bottom: 2rem;
+}
+
+.ts-btn {
+  font-family: var(--ts-font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: 3px;
+  transition: transform 0.15s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.ts-btn-primary {
+  background: var(--ts-timber);
+  color: var(--ts-snow);
+  box-shadow: 0 4px 0 var(--ts-timber-deep);
+}
+
+.ts-btn-primary:hover { transform: translateY(-2px); }
+.ts-btn-primary:active { transform: translateY(1px); box-shadow: 0 2px 0 var(--ts-timber-deep); }
+
+.ts-btn-ghost {
+  color: var(--ts-chalk);
+  border: 1px solid rgba(237, 228, 211, 0.45);
+}
+
+.ts-btn-ghost:hover { background: rgba(237, 228, 211, 0.12); }
+
+/* --- signature: řez krovem --- */
+
+.ts-truss {
+  position: relative;
+  margin-top: auto;
+  width: 100%;
+  z-index: 1;
+  line-height: 0;
+}
+
+.ts-truss svg {
+  width: min(100%, 62rem);
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.ts-t {
+  stroke: #c9924f;
+  stroke-width: 7;
+  stroke-linecap: square;
+  opacity: 0.85;
+}
+
+.ts-peg {
+  fill: var(--ts-snow);
+  opacity: 0.9;
+}
+
+/* orchestrovaný page-load: krov se "váže" trám po trámu */
+@keyframes ts-draw {
+  from { stroke-dashoffset: 800; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes ts-pop {
+  from { opacity: 0; transform: scale(0); }
+  to { opacity: 0.9; transform: scale(1); }
+}
+
+@keyframes ts-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ts-t {
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: ts-draw 0.7s ease-out forwards;
+}
+
+.ts-t1 { animation-delay: 0.15s; }
+.ts-t2 { animation-delay: 0.5s; }
+.ts-t3 { animation-delay: 0.5s; }
+.ts-t4 { animation-delay: 1s; }
+.ts-t5 { animation-delay: 1.25s; }
+.ts-t6 { animation-delay: 1.5s; }
+
+.ts-peg {
+  opacity: 0;
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: ts-pop 0.3s ease-out forwards;
+  animation-delay: 1.9s;
+}
+
+.ts-hero-eyebrow,
+.ts-hero-line,
+.ts-hero-lead,
+.ts-hero-actions {
+  opacity: 0;
+  animation: ts-rise 0.6s ease-out forwards;
+}
+
+.ts-hero-eyebrow { animation-delay: 0.1s; }
+.ts-hero-line-1 { animation-delay: 0.2s; }
+.ts-hero-line-2 { animation-delay: 0.32s; }
+.ts-hero-line-3 { animation-delay: 0.44s; }
+.ts-hero-lead { animation-delay: 0.6s; }
+.ts-hero-actions { animation-delay: 0.75s; }
+
+/* ================= SEKCE OBECNĚ ================= */
+
+.ts-section {
+  padding: clamp(3rem, 8vw, 5.5rem) clamp(1.1rem, 4vw, 3rem);
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.ts-section-head {
+  max-width: 44rem;
+  margin-bottom: 2.5rem;
+}
+
+.ts-section-title {
+  font-family: var(--ts-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.05;
+  margin: 0 0 0.9rem;
+  color: var(--ts-ink);
+}
+
+.ts-section-note {
+  margin: 0;
+  color: #574a38;
+  font-size: 1.05rem;
+}
+
+/* ================= SLUŽBY ================= */
+
+.ts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+  gap: 1.2rem;
+}
+
+.ts-card {
+  background: #fffdf8;
+  border: 1px solid #e3d9c6;
+  border-top: 4px solid var(--ts-timber);
+  border-radius: 4px;
+  padding: 1.5rem 1.4rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ts-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(36, 29, 20, 0.1);
+}
+
+.ts-card-joint { color: var(--ts-timber); }
+
+.ts-card-title {
+  font-family: var(--ts-font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.ts-card-text {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #453a2a;
+  flex-grow: 1;
+}
+
+.ts-card-meta {
+  margin: 0;
+  font-family: var(--ts-font-util);
+  font-size: 0.74rem;
+  letter-spacing: 0.05em;
+  color: var(--ts-timber-deep);
+  border-top: 1px dashed #d8cbb2;
+  padding-top: 0.7rem;
+}
+
+/* ================= O NÁS / REFERENCE ================= */
+
+.ts-about {
+  max-width: none;
+  background: var(--ts-chalk);
+  border-top: 1px solid #ddd1ba;
+}
+
+.ts-about-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+.ts-about-text {
+  margin: 0 0 1.1rem;
+  max-width: 36rem;
+}
+
+.ts-vows {
+  list-style: none;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.ts-vow {
+  display: flex;
+  gap: 0.7rem;
+  align-items: baseline;
+  font-size: 1rem;
+}
+
+.ts-vow-mark {
+  font-family: var(--ts-font-util);
+  color: var(--ts-timber);
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.ts-refs {
+  background: var(--ts-spruce);
+  color: var(--ts-chalk);
+  border-radius: 4px;
+  padding: 1.8rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.ts-refs-title {
+  font-family: var(--ts-font-display);
+  text-transform: uppercase;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  margin: 0;
+  color: #c9924f;
+}
+
+.ts-quote {
+  margin: 0;
+  border-left: 3px solid var(--ts-timber);
+  padding-left: 1rem;
+}
+
+.ts-quote p {
+  margin: 0 0 0.5rem;
+  font-style: italic;
+  font-size: 0.98rem;
+  color: rgba(247, 245, 240, 0.92);
+}
+
+.ts-quote-by {
+  font-family: var(--ts-font-util);
+  font-size: 0.76rem;
+  color: rgba(237, 228, 211, 0.65);
+}
+
+.ts-refs-fact {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid rgba(237, 228, 211, 0.2);
+  padding-top: 1.2rem;
+}
+
+.ts-refs-fact-num {
+  font-family: var(--ts-font-display);
+  font-weight: 700;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--ts-snow);
+}
+
+.ts-refs-fact-label {
+  font-size: 0.85rem;
+  color: rgba(237, 228, 211, 0.8);
+  max-width: 16rem;
+}
+
+/* ================= RESPONZIVITA ================= */
+
+@media (max-width: 860px) {
+  .ts-about-inner { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+  .ts-topbar-tel { font-size: 0.78rem; padding: 0.5rem 0.7rem; }
+  .ts-wordmark-text { font-size: 1.05rem; }
+  .ts-btn { width: 100%; text-align: center; }
+  .ts-hero-actions { flex-direction: column; }
+  .ts-truss svg { width: 140%; margin-left: -20%; }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .ts-t,
+  .ts-peg,
+  .ts-hero-eyebrow,
+  .ts-hero-line,
+  .ts-hero-lead,
+  .ts-hero-actions {
+    animation: none;
+    opacity: 1;
+    stroke-dashoffset: 0;
+    transform: none;
+  }
+
+  .ts-card,
+  .ts-btn,
+  .ts-topbar-tel {
+    transition: none;
+  }
+
+  .ts-card:hover,
+  .ts-btn-primary:hover {
+    transform: none;
+  }
+}
