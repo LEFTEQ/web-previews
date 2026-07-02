@@ -1,0 +1,583 @@
+/* =====================================================================
+   INSTALPROFI — revize elektro, Brno
+   Koncept: revizní protokol / rozvaděč. Paleta z reality řemesla:
+   šedá RAL 7035 rozvaděče, fázová hnědočervená vodiče, signální žlutá
+   výstražného štítku, inkoustová modročerná revizní zprávy.
+   ===================================================================== */
+
+:root {
+  --ink: #14202e;        /* modročerná — inkoust razítka, navy dědictví značky */
+  --panel: #e9ebe8;      /* RAL 7035 — šedá dvířek rozvaděče */
+  --papir: #f7f8f6;      /* papír revizní zprávy */
+  --faze: #c4351c;       /* fázový vodič / červená značky */
+  --vystraha: #f5b800;   /* signální žlutá výstražného štítku */
+  --zem: #2c7a4b;        /* zelenožlutý ochranný vodič → zelená VYHOVUJE */
+  --linka: #c9cdc7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--papir);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ip a:focus-visible,
+.ip .btn:focus-visible {
+  outline: 3px solid var(--vystraha);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============================ HERO ============================ */
+
+.hero {
+  background:
+    /* jemný rastr rozvaděče — vyvrtaná montážní deska */
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.07) 1px, transparent 1.6px) 0 0 / 28px 28px,
+    linear-gradient(160deg, #14202e 0%, #1b2c3e 55%, #22384e 100%);
+  color: var(--papir);
+  padding: 2rem 1.25rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* svislý pruh fázové červené na hraně — jako značení vodiče L1 */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 8px;
+  background: linear-gradient(
+    to bottom,
+    var(--faze) 0 28%,
+    var(--vystraha) 28% 36%,
+    var(--faze) 36% 100%
+  );
+}
+
+.hero-inner {
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+/* --- wordmark --- */
+.brand {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 3rem;
+}
+
+.brand-mark {
+  color: var(--vystraha);
+  align-self: center;
+  display: inline-flex;
+}
+
+.brand-word {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.brand-word em {
+  font-style: normal;
+  color: var(--vystraha);
+}
+
+.brand-sub {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(247, 248, 246, 0.65);
+}
+
+/* --- eyebrow s „kontrolkou" --- */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(247, 248, 246, 0.75);
+  border: 1px solid rgba(247, 248, 246, 0.25);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  margin: 0 0 1.5rem;
+  animation: objevit 0.6s ease-out both;
+}
+
+.blik {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--zem);
+  box-shadow: 0 0 8px 2px rgba(44, 122, 75, 0.7);
+  animation: kontrolka 2.4s ease-in-out infinite;
+}
+
+/* --- titulek --- */
+.hero-title {
+  font-size: clamp(2.1rem, 6.5vw, 4.2rem);
+  line-height: 1.06;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+  animation: objevit 0.6s ease-out 0.1s both;
+}
+
+.vyhovuje {
+  display: inline-block;
+  background: var(--zem);
+  color: var(--papir);
+  padding: 0.05em 0.28em 0.08em;
+  border-radius: 4px;
+  letter-spacing: 0.06em;
+  transform: rotate(-1.2deg);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.hero-lead {
+  max-width: 38rem;
+  font-size: 1.1rem;
+  color: rgba(247, 248, 246, 0.85);
+  margin: 0 0 2rem;
+  animation: objevit 0.6s ease-out 0.2s both;
+}
+
+/* --- tlačítka --- */
+.hero-akce {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-bottom: 3rem;
+  animation: objevit 0.6s ease-out 0.3s both;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: 4px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.btn-hlavni {
+  background: var(--faze);
+  color: #fff;
+  box-shadow: 0 4px 0 #8f2412;
+}
+
+.btn-hlavni:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #8f2412;
+}
+
+.btn-hlavni:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #8f2412;
+}
+
+.btn-vedlejsi {
+  color: var(--papir);
+  border: 1px solid rgba(247, 248, 246, 0.4);
+}
+
+.btn-vedlejsi:hover {
+  background: rgba(247, 248, 246, 0.1);
+}
+
+/* --- SIGNATURE: měřicí stupnice --- */
+.stupnice {
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(247, 248, 246, 0.18);
+  border-radius: 8px;
+  padding: 1.1rem 1.25rem 1rem;
+  max-width: 44rem;
+  animation: objevit 0.6s ease-out 0.45s both;
+}
+
+.stupnice-hlava {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  font-family: "Consolas", "SFMono-Regular", "Menlo", monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.8rem;
+}
+
+.stupnice-popisek {
+  color: rgba(247, 248, 246, 0.7);
+}
+
+.stupnice-hodnota {
+  color: #6fce97;
+  font-weight: 700;
+}
+
+.stupnice-pas {
+  position: relative;
+  display: flex;
+  gap: 4px;
+  height: 26px;
+}
+
+.dilek {
+  flex: 1;
+  border-radius: 2px;
+  background: rgba(247, 248, 246, 0.14);
+}
+
+/* dílky se „rozsvěcují" zleva — červená → žlutá → zelená */
+.d1, .d2, .d3 { background: var(--faze); }
+.d4, .d5, .d6 { background: var(--vystraha); }
+.d7, .d8, .d9, .d10 { background: var(--zem); }
+.d11 { background: #3d9663; }
+.d12 { background: #52b57c; }
+
+.d1 { animation: dilek 0.25s ease-out 0.55s both; }
+.d2 { animation: dilek 0.25s ease-out 0.63s both; }
+.d3 { animation: dilek 0.25s ease-out 0.71s both; }
+.d4 { animation: dilek 0.25s ease-out 0.79s both; }
+.d5 { animation: dilek 0.25s ease-out 0.87s both; }
+.d6 { animation: dilek 0.25s ease-out 0.95s both; }
+.d7 { animation: dilek 0.25s ease-out 1.03s both; }
+.d8 { animation: dilek 0.25s ease-out 1.11s both; }
+.d9 { animation: dilek 0.25s ease-out 1.19s both; }
+.d10 { animation: dilek 0.25s ease-out 1.27s both; }
+.d11 { animation: dilek 0.25s ease-out 1.35s both; }
+.d12 { animation: dilek 0.25s ease-out 1.43s both; }
+
+.rucicka {
+  position: absolute;
+  top: -6px;
+  bottom: -6px;
+  width: 3px;
+  background: var(--papir);
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  animation: rucicka 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+}
+
+.stupnice-cisla {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.55rem;
+  font-family: "Consolas", "SFMono-Regular", "Menlo", monospace;
+  font-size: 0.75rem;
+  color: rgba(247, 248, 246, 0.55);
+}
+
+/* ============================ SEKCE — společné ============================ */
+
+.sekce-inner {
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+.sekce-eyebrow {
+  font-family: "Consolas", "SFMono-Regular", "Menlo", monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faze);
+  margin: 0 0 0.6rem;
+}
+
+.sekce-eyebrow--svetly {
+  color: var(--vystraha);
+}
+
+.sekce-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  margin: 0 0 0.9rem;
+}
+
+.sekce-title--svetly {
+  color: var(--papir);
+}
+
+.sekce-lead {
+  max-width: 40rem;
+  color: #4a5560;
+  margin: 0 0 2.25rem;
+}
+
+/* ============================ SLUŽBY ============================ */
+
+.sluzby {
+  background: var(--panel);
+  padding: 3.5rem 1.25rem 4rem;
+}
+
+.karty {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.1rem;
+}
+
+.karta {
+  background: var(--papir);
+  border: 1px solid var(--linka);
+  border-top: 4px solid var(--faze);
+  border-radius: 6px;
+  padding: 1.4rem 1.4rem 1.5rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(20, 32, 46, 0.12);
+}
+
+.karta-hlava {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.karta-kod {
+  font-family: "Consolas", "SFMono-Regular", "Menlo", monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--papir);
+  background: var(--ink);
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+}
+
+.karta-lhuta {
+  font-size: 0.78rem;
+  color: #5a6570;
+  text-align: right;
+}
+
+.karta-nazev {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem;
+}
+
+.karta-popis {
+  margin: 0;
+  font-size: 0.97rem;
+  color: #3c4650;
+}
+
+/* ============================ PRŮBĚH / DŮVĚRA ============================ */
+
+.prubeh {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 1.6px) 0 0 / 28px 28px,
+    var(--ink);
+  color: var(--papir);
+  padding: 3.5rem 1.25rem 4rem;
+}
+
+.kroky {
+  list-style: none;
+  margin: 0 0 2.75rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.5rem;
+  counter-reset: krok;
+}
+
+.krok {
+  border-left: 3px solid var(--vystraha);
+  padding-left: 1.1rem;
+}
+
+/* svorka L1/L2/L3 — jako značení fází v rozvaděči */
+.krok-svorka {
+  display: inline-block;
+  font-family: "Consolas", "SFMono-Regular", "Menlo", monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  background: var(--vystraha);
+  padding: 0.15rem 0.55rem;
+  border-radius: 3px;
+  margin-bottom: 0.7rem;
+}
+
+.krok-nazev {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 0 0 0.4rem;
+}
+
+.krok-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(247, 248, 246, 0.78);
+}
+
+/* --- důvody --- */
+.duvody {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.duvod {
+  background: rgba(247, 248, 246, 0.06);
+  border: 1px solid rgba(247, 248, 246, 0.14);
+  border-radius: 6px;
+  padding: 1.1rem 1.2rem;
+}
+
+.duvod-hodnota {
+  display: block;
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--vystraha);
+  letter-spacing: -0.01em;
+}
+
+.duvod-hodnota small {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(247, 248, 246, 0.6);
+  letter-spacing: 0.06em;
+}
+
+.duvod-text {
+  margin: 0.35rem 0 0;
+  font-size: 0.92rem;
+  color: rgba(247, 248, 246, 0.8);
+}
+
+/* --- reference --- */
+.reference {
+  margin: 0;
+  max-width: 42rem;
+  border-left: 3px solid var(--zem);
+  padding-left: 1.25rem;
+}
+
+.reference p {
+  margin: 0 0 0.6rem;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: rgba(247, 248, 246, 0.9);
+}
+
+.reference cite {
+  font-style: normal;
+  font-size: 0.88rem;
+  color: rgba(247, 248, 246, 0.6);
+}
+
+/* ============================ ANIMACE ============================ */
+
+@keyframes objevit {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dilek {
+  from {
+    opacity: 0;
+    transform: scaleY(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes rucicka {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 82%;
+  }
+}
+
+.rucicka {
+  left: 82%;
+}
+
+@keyframes kontrolka {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-eyebrow,
+  .hero-title,
+  .hero-lead,
+  .hero-akce,
+  .stupnice,
+  .dilek,
+  .rucicka,
+  .blik {
+    animation: none !important;
+  }
+  .btn,
+  .karta {
+    transition: none;
+  }
+}
+
+/* ============================ MOBIL ============================ */
+
+@media (max-width: 40rem) {
+  .hero {
+    padding: 1.5rem 1rem 2.75rem;
+  }
+  .brand {
+    margin-bottom: 2.25rem;
+  }
+  .hero-akce .btn {
+    width: 100%;
+    text-align: center;
+  }
+  .sluzby,
+  .prubeh {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
