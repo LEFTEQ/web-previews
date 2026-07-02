@@ -1,0 +1,495 @@
+/* =========================================================
+   ZVČ, s.r.o. — demoliční práce, Hradec Králové
+   Paleta: prach betonu, ocel stroje, výstražná žluť
+   Signature: šrafované „demoliční pásmo" (výstražná páska)
+   ========================================================= */
+
+:root {
+  --dust: #e8e4dc;        /* betonový prach — světlé pozadí */
+  --concrete: #cfc9bd;    /* omítka */
+  --steel: #23272b;       /* ocel podvozku — tmavé pozadí */
+  --steel-deep: #16191c;  /* stín pod strojem */
+  --hazard: #f2b705;      /* výstražná žluť techniky */
+  --ink: #1c1e21;         /* text na světlé */
+  --ink-soft: #4d5157;
+  --paper-line: rgba(28, 30, 33, 0.16);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--dust);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--hazard);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.container {
+  width: min(1120px, 100% - 2.5rem);
+  margin-inline: auto;
+}
+
+/* ================= TYPOGRAFIE =================
+   Display: kondenzovaný, těžký, VERZÁLKY — nápisy na strojích,
+   šablonová písma na kontejnerech. */
+
+.hero-title,
+.section-title,
+.wordmark-mono {
+  font-family: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Impact, sans-serif;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 0.98;
+  margin: 0;
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 0.75rem;
+}
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 1.6rem;
+  height: 0.55rem;
+  margin-right: 0.6rem;
+  vertical-align: baseline;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--hazard) 0 5px,
+    var(--steel) 5px 10px
+  );
+}
+
+.eyebrow-light { color: rgba(232, 228, 220, 0.75); }
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  min-height: 92svh;
+  display: flex;
+  flex-direction: column;
+  color: var(--dust);
+  isolation: isolate;
+}
+
+.hero-media,
+.hero-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-media img { object-fit: cover; }
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(22, 25, 28, 0.55) 0%, rgba(22, 25, 28, 0.25) 40%, rgba(22, 25, 28, 0.78) 100%);
+}
+
+.hero-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.4rem;
+}
+
+.wordmark {
+  text-decoration: none;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.wordmark-mono {
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--dust);
+  background: var(--steel-deep);
+  padding: 0.15em 0.35em 0.1em;
+  border-left: 0.28em solid var(--hazard);
+  width: fit-content;
+}
+
+.wordmark-sub {
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(232, 228, 220, 0.85);
+}
+
+.hero-phone {
+  font-weight: 700;
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+  padding: 0.45rem 0.9rem;
+  border: 2px solid rgba(232, 228, 220, 0.5);
+  white-space: nowrap;
+}
+
+.hero-phone:hover { border-color: var(--hazard); color: var(--hazard); }
+
+.hero-body {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding: 4rem 0 3.5rem;
+  max-width: 780px;
+}
+
+.hero-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--hazard);
+  margin: 0 0 1rem;
+}
+
+.hero-title {
+  font-size: clamp(2.9rem, 9.5vw, 6.2rem);
+}
+
+.hero-title .line {
+  display: block;
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-title .line-2 { animation-delay: 0.12s; }
+.hero-title .line-3 { animation-delay: 0.24s; }
+
+.hero-title .accent {
+  color: var(--steel-deep);
+  background: var(--hazard);
+  width: fit-content;
+  padding: 0.02em 0.14em;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(0.6em); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-lead {
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  max-width: 34em;
+  margin: 1.4rem 0 2rem;
+  color: rgba(232, 228, 220, 0.92);
+}
+
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.95rem;
+  padding: 0.95rem 1.6rem;
+  border: 2px solid transparent;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.btn-solid { background: var(--hazard); color: var(--steel-deep); }
+.btn-solid:hover { background: #ffc81a; }
+
+.btn-ghost { border-color: rgba(232, 228, 220, 0.6); color: var(--dust); }
+.btn-ghost:hover { border-color: var(--hazard); color: var(--hazard); }
+
+/* --------- SIGNATURE: demoliční pásmo --------- */
+
+.hazard-band {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--hazard);
+  border-top: 6px solid var(--steel-deep);
+  border-bottom: 6px solid var(--steel-deep);
+  /* šrafování jako výstražná páska */
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 34px,
+    rgba(22, 25, 28, 0.12) 34px 68px
+  );
+}
+
+.hazard-label {
+  font-family: "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--steel-deep);
+  padding: 0.55rem 2.5rem;
+  animation: tape 26s linear infinite;
+}
+
+@keyframes tape {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+/* ================= SEKCE ================= */
+
+.section { padding: 4.5rem 0; }
+
+.section-title {
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  max-width: 18em;
+  margin-bottom: 0.6rem;
+}
+
+.section-lead {
+  max-width: 40em;
+  color: var(--ink-soft);
+  margin: 0.8rem 0 3rem;
+}
+
+/* ---- Sekce 1: postup zakázky ---- */
+
+.section-work {
+  background:
+    linear-gradient(var(--dust), var(--dust)),
+    var(--dust);
+}
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 3.2rem 1fr;
+  gap: 1.2rem;
+}
+
+.step-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-num {
+  font-family: "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: grid;
+  place-items: center;
+  background: var(--steel);
+  color: var(--hazard);
+  flex-shrink: 0;
+}
+
+.step-line {
+  flex: 1;
+  width: 0;
+  border-left: 3px dashed var(--paper-line);
+  margin: 0.4rem 0;
+}
+
+.step-line-end { border-left-color: transparent; }
+
+.step-body { padding-bottom: 2.4rem; }
+
+.step-body h3 {
+  margin: 0.2rem 0 0.5rem;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.step-body p { margin: 0; color: var(--ink-soft); max-width: 46em; }
+
+.work-more {
+  margin-top: 1.5rem;
+  background: #fff;
+  border-left: 6px solid var(--hazard);
+  padding: 1.6rem 1.8rem;
+  box-shadow: 0 2px 12px rgba(28, 30, 33, 0.07);
+}
+
+.work-more-title {
+  margin: 0 0 0.8rem;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.work-more-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+  color: var(--ink-soft);
+}
+
+.work-more-list strong { color: var(--ink); }
+
+/* ---- Sekce 2: důvěra ---- */
+
+.section-trust {
+  background: var(--steel);
+  color: var(--dust);
+}
+
+.trust-grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.trust-media img {
+  width: 100%;
+  border: 4px solid var(--steel-deep);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.trust-media-caption {
+  font-size: 0.85rem;
+  color: rgba(232, 228, 220, 0.65);
+  margin: 0.6rem 0 0;
+}
+
+.trust-text .section-title { color: var(--dust); }
+
+.trust-text > p { color: rgba(232, 228, 220, 0.88); max-width: 42em; }
+
+.trust-facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.4rem 2rem;
+  margin: 2.2rem 0;
+}
+
+.fact dt {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.95rem;
+  color: var(--hazard);
+  margin-bottom: 0.25rem;
+}
+
+.fact dd { margin: 0; color: rgba(232, 228, 220, 0.82); font-size: 0.98rem; }
+
+.trust-contact {
+  border-top: 3px solid var(--hazard);
+  padding-top: 1.5rem;
+}
+
+.trust-contact-label {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 1rem;
+}
+
+.trust-people {
+  display: grid;
+  gap: 1rem;
+}
+
+.trust-people p { margin: 0; }
+
+.trust-people a {
+  color: var(--hazard);
+  font-weight: 700;
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.trust-people a:hover { text-decoration: underline; }
+
+.trust-address {
+  margin: 1.2rem 0 0;
+  font-size: 0.9rem;
+  color: rgba(232, 228, 220, 0.65);
+}
+
+.trust-address a { color: rgba(232, 228, 220, 0.85); }
+
+/* ================= RESPONZIVITA ================= */
+
+@media (min-width: 640px) {
+  .trust-facts { grid-template-columns: 1fr 1fr; }
+  .trust-people { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 900px) {
+  .section { padding: 6rem 0; }
+
+  .trust-grid {
+    grid-template-columns: 5fr 6fr;
+    align-items: start;
+    gap: 4rem;
+  }
+
+  .trust-media {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-phone { display: none; }
+  .step { grid-template-columns: 2.8rem 1fr; gap: 0.9rem; }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .hero-title .line {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hazard-label { animation: none; }
+
+  .hazard-band { justify-content: center; }
+  .hazard-band .hazard-label:nth-child(n + 2) { display: none; }
+
+  .btn:hover { transform: none; }
+}
