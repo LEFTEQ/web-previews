@@ -1,0 +1,542 @@
+/* ============================================================
+   TČ ČECHY — tepelná čerpadla, Praha 4
+   Paleta odvozená z řemesla: mrazivá modř venku → teplo uvnitř.
+   ------------------------------------------------------------
+   --mraz    #DEEDF5  studené pozadí (venkovní vzduch)
+   --led     #7FB5D6  světlá technická modř
+   --hloubka #1E5E8A  hlavní modř značky (chladicí okruh)
+   --noc     #0E2A3D  tmavá sekce (strojovna / zimní noc)
+   --zhavo   #E8613C  kondenzátor — teplo, akcent
+   --papir   #FAFCFD  text na tmavé, plochy karet
+   ============================================================ */
+
+:root {
+  --mraz: #deedf5;
+  --led: #7fb5d6;
+  --hloubka: #1e5e8a;
+  --noc: #0e2a3d;
+  --zhavo: #e8613c;
+  --papir: #fafcfd;
+  --ink: #10222f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--papir);
+  -webkit-font-smoothing: antialiased;
+}
+
+.tc a:focus-visible,
+.tc button:focus-visible {
+  outline: 3px solid var(--zhavo);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------------- HERO ---------------- */
+
+.tc-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(168deg, var(--mraz) 0%, #f1f8fc 46%, var(--papir) 100%);
+  padding: 1.25rem 1.25rem 0;
+}
+
+.tc-hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+/* wordmark: čtyři lamely výparníku + název */
+.tc-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  color: var(--noc);
+}
+
+.tc-wordmark-mark {
+  display: inline-flex;
+  gap: 3px;
+  align-items: flex-end;
+  height: 26px;
+}
+
+.tc-wordmark-mark i {
+  width: 5px;
+  border-radius: 3px;
+  background: var(--hloubka);
+}
+
+.tc-wordmark-mark i:nth-child(1) { height: 12px; background: var(--led); }
+.tc-wordmark-mark i:nth-child(2) { height: 18px; }
+.tc-wordmark-mark i:nth-child(3) { height: 24px; }
+.tc-wordmark-mark i:nth-child(4) { height: 26px; background: var(--zhavo); }
+
+.tc-wordmark-text {
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  font-size: 1.05rem;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.tc-wordmark-text em {
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  font-size: 0.72rem;
+  color: var(--hloubka);
+}
+
+.tc-hero-contact {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  font-size: 0.92rem;
+  color: var(--hloubka);
+}
+
+.tc-hero-contact a {
+  color: var(--noc);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 2px solid var(--zhavo);
+}
+
+.tc-hero-body {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3.5rem 0 1rem;
+}
+
+.tc-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hloubka);
+}
+
+.tc-h1 {
+  margin: 0;
+  font-size: clamp(2.6rem, 8.5vw, 6rem);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  font-weight: 800;
+  color: var(--noc);
+  text-wrap: balance;
+}
+
+.tc-h1-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.35em);
+  animation: tc-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.tc-h1-line:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.tc-h1-accent {
+  color: var(--zhavo);
+}
+
+.tc-hero-lead {
+  max-width: 36rem;
+  margin: 1.5rem 0 0;
+  font-size: 1.12rem;
+  color: #2c4658;
+  opacity: 0;
+  animation: tc-fade 0.8s ease 0.4s forwards;
+}
+
+.tc-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.8rem;
+  opacity: 0;
+  animation: tc-fade 0.8s ease 0.55s forwards;
+}
+
+.tc-btn {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tc-btn-primary {
+  background: var(--zhavo);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(232, 97, 60, 0.35);
+}
+
+.tc-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(232, 97, 60, 0.4);
+}
+
+.tc-btn-ghost {
+  color: var(--hloubka);
+  border: 2px solid var(--hloubka);
+}
+
+.tc-btn-ghost:hover {
+  background: var(--hloubka);
+  color: #fff;
+}
+
+/* --- signature: teplotní křivka --- */
+
+.tc-curve {
+  max-width: 72rem;
+  margin: 2.5rem auto 0;
+  padding-bottom: 2.5rem;
+}
+
+.tc-curve svg {
+  display: block;
+  width: 100%;
+  height: clamp(90px, 16vw, 200px);
+}
+
+.tc-curve-path {
+  stroke-dasharray: 1600;
+  stroke-dashoffset: 1600;
+  animation: tc-draw 1.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+}
+
+.tc-curve-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.6rem;
+}
+
+.tc-temp {
+  display: flex;
+  flex-direction: column;
+  font-weight: 800;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  letter-spacing: -0.01em;
+  opacity: 0;
+  animation: tc-fade 0.7s ease forwards;
+}
+
+.tc-temp em {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: #4a6478;
+  max-width: 15rem;
+}
+
+.tc-temp-out { color: var(--led); animation-delay: 0.9s; }
+.tc-temp-cop { color: var(--hloubka); text-align: center; align-items: center; animation-delay: 1.4s; }
+.tc-temp-cop em { text-align: center; }
+.tc-temp-in { color: var(--zhavo); text-align: right; align-items: flex-end; animation-delay: 1.9s; }
+.tc-temp-in em { text-align: right; }
+
+/* ---------------- SEKCE: SLUŽBY ---------------- */
+
+.tc-sluzby {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.tc-section-head {
+  max-width: 42rem;
+  margin-bottom: 2.5rem;
+}
+
+.tc-h2 {
+  margin: 0 0 0.8rem;
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+  color: var(--noc);
+}
+
+.tc-section-lead {
+  margin: 0;
+  font-size: 1.08rem;
+  color: #3c5468;
+}
+
+.tc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1.25rem;
+}
+
+.tc-card {
+  background: #fff;
+  border: 1px solid #d7e6ef;
+  border-top: 4px solid var(--hloubka);
+  border-radius: 14px;
+  padding: 1.5rem 1.4rem 1.6rem;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.tc-card:hover {
+  transform: translateY(-4px);
+  border-top-color: var(--zhavo);
+  box-shadow: 0 14px 30px rgba(14, 42, 61, 0.1);
+}
+
+.tc-card-brand {
+  margin: 0 0 0.5rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--hloubka);
+}
+
+.tc-h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+  color: var(--noc);
+}
+
+.tc-card-text {
+  margin: 0 0 1rem;
+  font-size: 0.98rem;
+  color: #35505f;
+}
+
+.tc-card-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+.tc-card-list li {
+  padding-left: 1.2rem;
+  position: relative;
+  margin-top: 0.35rem;
+}
+
+.tc-card-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.55rem;
+  height: 0.2rem;
+  border-radius: 2px;
+  background: var(--zhavo);
+}
+
+/* ---------------- SEKCE: DŮVĚRA ---------------- */
+
+.tc-duvera {
+  background: linear-gradient(180deg, var(--noc) 0%, #123650 100%);
+  color: var(--papir);
+  padding: 4.5rem 1.25rem 4.5rem;
+}
+
+.tc-duvera > * {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tc-h2-invert {
+  color: var(--papir);
+}
+
+.tc-lead-invert {
+  color: #b9d3e4;
+}
+
+.tc-kroky {
+  list-style: none;
+  counter-reset: krok;
+  margin: 2.5rem auto 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1.5rem 1.25rem;
+}
+
+.tc-krok {
+  counter-increment: krok;
+  border-top: 1px solid rgba(127, 181, 214, 0.35);
+  padding-top: 1rem;
+}
+
+.tc-krok-nazev {
+  margin: 0 0 0.4rem;
+  font-size: 1.15rem;
+  color: var(--papir);
+}
+
+.tc-krok-nazev::before {
+  content: counter(krok, decimal-leading-zero) " ";
+  color: var(--zhavo);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  margin-right: 0.4rem;
+}
+
+.tc-krok p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #c6dcea;
+}
+
+.tc-fakta {
+  margin-top: 3.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 1.25rem;
+}
+
+.tc-fakt {
+  background: rgba(250, 252, 253, 0.06);
+  border: 1px solid rgba(127, 181, 214, 0.25);
+  border-radius: 12px;
+  padding: 1.2rem 1.2rem 1.3rem;
+}
+
+.tc-fakt strong {
+  display: block;
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+  color: var(--led);
+  margin-bottom: 0.25rem;
+}
+
+.tc-fakt span {
+  font-size: 0.92rem;
+  color: #c6dcea;
+}
+
+.tc-citace {
+  margin: 3rem auto 0;
+  max-width: 46rem;
+  border-left: 4px solid var(--zhavo);
+  padding-left: 1.4rem;
+}
+
+.tc-citace p {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: var(--papir);
+}
+
+.tc-citace footer {
+  font-size: 0.9rem;
+  color: #9dbdd2;
+}
+
+/* ---------------- ANIMACE ---------------- */
+
+@keyframes tc-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tc-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes tc-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .tc-h1-line,
+  .tc-hero-lead,
+  .tc-hero-cta,
+  .tc-temp {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .tc-curve-path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .tc-btn,
+  .tc-card {
+    transition: none;
+  }
+}
+
+/* ---------------- MOBIL ---------------- */
+
+@media (max-width: 40rem) {
+  .tc-hero-body {
+    padding-top: 2.5rem;
+  }
+
+  .tc-hero-contact {
+    font-size: 0.85rem;
+  }
+
+  .tc-curve-labels {
+    flex-wrap: wrap;
+  }
+
+  .tc-temp em {
+    max-width: 9rem;
+  }
+
+  .tc-temp-cop em {
+    max-width: 100%;
+  }
+
+  .tc-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
