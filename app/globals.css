@@ -1,0 +1,591 @@
+/* =====================================================================
+   HRUŠKA REALITNÍ — Ostrava
+   Koncept: „klíč a půdorys“. Realitní řemeslo = plány bytů, předání
+   klíčů, jistota podpisu. Paleta z hlubokého zeleného inkoustu razítka
+   a hruškově zlatavé — teplé, seriózní, nezaměnitelné s šablonou.
+   ===================================================================== */
+
+:root {
+  --ink: #123c33;        /* hluboká lahvová zeleň — razítko, seriózita */
+  --ink-dark: #0b2a24;   /* tmavší plocha sekce důvěry */
+  --pear: #d9a521;       /* hruškově zlatá — akcent, klíč */
+  --pear-soft: #f3e4b8;  /* světlé zlatavé pozadí detailů */
+  --paper: #f7f5ee;      /* papír kupní smlouvy, ne krémový default */
+  --line: #cfd8d2;
+  --text: #1e2b27;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Gill Sans", "Gill Sans MT", "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.hr-page {
+  overflow-x: clip;
+}
+
+/* Display písmo: úzký, výrazný grotesk — připomíná popisky na plánech */
+.hr-title,
+.hr-h2,
+.hr-wordmark,
+.hr-krok-cislo {
+  font-family: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", "Segoe UI", Arial, sans-serif;
+  font-stretch: condensed;
+}
+
+/* Focus stavy */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--pear);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============================ HERO ============================ */
+
+.hr-hero {
+  position: relative;
+  background: var(--ink);
+  color: var(--paper);
+  overflow: hidden;
+}
+
+.hr-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3.5rem;
+}
+
+.hr-brandline {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(247, 245, 238, 0.25);
+  margin-bottom: 3rem;
+}
+
+.hr-wordmark {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.hr-wordmark em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--pear);
+  margin-left: 0.35em;
+}
+
+.hr-loc {
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(247, 245, 238, 0.7);
+}
+
+.hr-title {
+  margin: 0 0 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  font-size: clamp(3rem, 11vw, 7.5rem);
+}
+
+.hr-title-row {
+  display: block;
+}
+
+.hr-t3 {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+  color: var(--pear);
+}
+
+/* Klíč vjíždí do slova „s klidem“ — jediný orchestrovaný moment */
+.hr-klic {
+  display: inline-flex;
+  width: 1.9em;
+  flex-shrink: 0;
+  color: var(--pear);
+}
+
+.hr-klic svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hr-lead {
+  max-width: 34em;
+  font-size: 1.15rem;
+  color: rgba(247, 245, 238, 0.88);
+  margin: 0 0 2rem;
+}
+
+.hr-hero-cta {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.hr-btn {
+  display: inline-block;
+  padding: 0.9rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.hr-btn-plna {
+  background: var(--pear);
+  color: var(--ink-dark);
+}
+
+.hr-btn-plna:hover {
+  background: #e8b62f;
+  transform: translateY(-2px);
+}
+
+.hr-btn-linka {
+  color: var(--paper);
+  border: 2px solid rgba(247, 245, 238, 0.5);
+}
+
+.hr-btn-linka:hover {
+  border-color: var(--pear);
+  color: var(--pear);
+}
+
+.hr-hero-fakta {
+  display: flex;
+  gap: 0.6rem 2rem;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  color: rgba(247, 245, 238, 0.75);
+}
+
+.hr-hero-fakta li::before {
+  content: "✓";
+  color: var(--pear);
+  margin-right: 0.5em;
+}
+
+/* Signature: půdorys bytu vpravo, kreslí se při načtení */
+.hr-pudorys {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: min(46%, 520px);
+  z-index: 1;
+  color: rgba(217, 165, 33, 0.5);
+  pointer-events: none;
+  mask-image: linear-gradient(to right, transparent, black 30%);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 30%);
+}
+
+.hr-pudorys svg {
+  width: 100%;
+  height: 100%;
+}
+
+.hr-pud-labels text {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.hr-pud-lines line,
+.hr-pud-lines rect,
+.hr-pud-lines path {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: hr-kresli 2.4s ease-out forwards;
+}
+
+.hr-pud-labels,
+.hr-pud-bod {
+  opacity: 0;
+  animation: hr-objev 0.8s ease-out 1.8s forwards;
+}
+
+.hr-pud-bod {
+  animation: hr-objev 0.8s ease-out 1.8s forwards, hr-puls 3s ease-in-out 2.6s infinite;
+}
+
+@keyframes hr-kresli {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes hr-objev {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hr-puls {
+  0%,
+  100% {
+    r: 6;
+  }
+  50% {
+    r: 9;
+  }
+}
+
+/* Vjezd titulku */
+.hr-title-row,
+.hr-lead,
+.hr-hero-cta,
+.hr-hero-fakta {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: hr-nastup 0.7s ease-out forwards;
+}
+
+.hr-t1 { animation-delay: 0.05s; }
+.hr-t2 { animation-delay: 0.15s; }
+.hr-t3 { animation-delay: 0.25s; }
+.hr-lead { animation-delay: 0.4s; }
+.hr-hero-cta { animation-delay: 0.5s; }
+.hr-hero-fakta { animation-delay: 0.6s; }
+
+@keyframes hr-nastup {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================ SEKCE ============================ */
+
+.hr-sekce-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+}
+
+.hr-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8a6a10;
+}
+
+.hr-eyebrow-svetly {
+  color: var(--pear);
+}
+
+.hr-h2 {
+  margin: 0 0 2.5rem;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.05;
+  color: var(--ink);
+  max-width: 18em;
+}
+
+.hr-h2-svetly {
+  color: var(--paper);
+}
+
+/* --- Kroky --- */
+
+.hr-kroky {
+  list-style: none;
+  margin: 0 0 4rem;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.hr-krok {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.25rem;
+  padding: 2rem 0;
+  border-top: 2px solid var(--ink);
+}
+
+.hr-krok:last-child {
+  border-bottom: 2px solid var(--ink);
+}
+
+.hr-krok-cislo {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--pear);
+  -webkit-text-stroke: 1px #8a6a10;
+  min-width: 2ch;
+}
+
+.hr-krok-obsah h3 {
+  margin: 0.2rem 0 0.6rem;
+  font-size: 1.35rem;
+  color: var(--ink);
+}
+
+.hr-krok-obsah p {
+  margin: 0 0 0.75rem;
+  max-width: 42em;
+}
+
+.hr-krok-vysledek {
+  padding: 0.6rem 1rem;
+  background: var(--pear-soft);
+  border-left: 4px solid var(--pear);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.95rem;
+}
+
+.hr-krok-vysledek strong {
+  color: #6f5509;
+}
+
+/* --- Principy --- */
+
+.hr-principy {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.hr-princip {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hr-princip:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(18, 60, 51, 0.12);
+}
+
+.hr-princip h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.hr-princip h3::before {
+  content: "";
+  display: block;
+  width: 2.2rem;
+  height: 4px;
+  background: var(--pear);
+  margin-bottom: 0.8rem;
+  border-radius: 2px;
+}
+
+.hr-princip p {
+  margin: 0;
+  font-size: 0.97rem;
+}
+
+/* --- Důvěra / Kdo jsem --- */
+
+.hr-duvera {
+  background: var(--ink-dark);
+  color: rgba(247, 245, 238, 0.92);
+}
+
+.hr-duvera-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+}
+
+.hr-kdo p {
+  max-width: 36em;
+}
+
+.hr-citat {
+  margin: 1.75rem 0;
+  padding-left: 1.25rem;
+  border-left: 4px solid var(--pear);
+  font-size: 1.35rem;
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--pear);
+}
+
+.hr-kdo-pozn {
+  font-size: 0.9rem;
+  color: rgba(247, 245, 238, 0.65);
+}
+
+.hr-reference {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
+
+.hr-ref {
+  margin: 0;
+  padding: 1.5rem;
+  background: rgba(247, 245, 238, 0.06);
+  border: 1px solid rgba(247, 245, 238, 0.15);
+  border-radius: 10px;
+}
+
+.hr-ref blockquote {
+  margin: 0 0 1rem;
+}
+
+.hr-ref blockquote p {
+  margin: 0;
+  font-size: 0.97rem;
+}
+
+.hr-ref blockquote p::before {
+  content: "„";
+  color: var(--pear);
+  font-weight: 700;
+}
+
+.hr-ref blockquote p::after {
+  content: "“";
+  color: var(--pear);
+  font-weight: 700;
+}
+
+.hr-ref figcaption {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.hr-ref figcaption strong {
+  color: var(--pear);
+}
+
+.hr-ref figcaption span {
+  color: rgba(247, 245, 238, 0.6);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+/* ============================ RESPONZIVITA ============================ */
+
+@media (max-width: 900px) {
+  .hr-duvera-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .hr-principy {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-pudorys {
+    width: 70%;
+    opacity: 0.45;
+  }
+}
+
+@media (max-width: 560px) {
+  .hr-hero-inner {
+    padding-top: 1.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .hr-brandline {
+    margin-bottom: 2rem;
+  }
+
+  .hr-title {
+    font-size: clamp(2.6rem, 14vw, 3.4rem);
+  }
+
+  .hr-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hr-sekce-inner {
+    padding: 3rem 1.25rem;
+  }
+
+  .hr-krok {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .hr-pudorys {
+    width: 90%;
+    opacity: 0.25;
+  }
+}
+
+/* ============================ REDUCED MOTION ============================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hr-title-row,
+  .hr-lead,
+  .hr-hero-cta,
+  .hr-hero-fakta,
+  .hr-pud-labels,
+  .hr-pud-bod {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hr-pud-lines line,
+  .hr-pud-lines rect,
+  .hr-pud-lines path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .hr-btn,
+  .hr-princip {
+    transition: none;
+  }
+}
