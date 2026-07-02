@@ -1,0 +1,575 @@
+/* ==========================================================================
+   SCONTO Zahradnictví — České Budějovice
+   Paleta odvozená ze skleníku a záhonu:
+   --hlina    #2E2419  (tmavá jihočeská ornice)
+   --list     #3E6B34  (list rajčete)
+   --klicek   #A8C256  (mladý klíček — signature akcent)
+   --papir    #F2EEE3  (pytlík na semínka)
+   --kvet     #D96C3F  (měsíček / aksamitník)
+   ========================================================================== */
+
+:root {
+  --hlina: #2e2419;
+  --list: #3e6b34;
+  --list-tmavy: #2c4f25;
+  --klicek: #a8c256;
+  --papir: #f2eee3;
+  --papir-tmavsi: #e7e1d0;
+  --kvet: #d96c3f;
+
+  --font-display: "Georgia", "Times New Roman", serif;
+  --font-body: "Trebuchet MS", "Segoe UI", -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--hlina);
+  background: var(--papir);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus stavy — viditelné, dvoubarevné */
+.zh a:focus-visible,
+.zh button:focus-visible {
+  outline: 3px solid var(--kvet);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   HERO — typografický záhon
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  background: var(--list-tmavy);
+  background: linear-gradient(175deg, var(--list-tmavy) 0%, var(--list) 78%);
+  color: var(--papir);
+  overflow: hidden;
+  padding: 2rem 1.25rem 0;
+}
+
+.hero-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  padding-bottom: 3rem;
+}
+
+/* Wordmark */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 3.5rem;
+}
+
+.brand-mark {
+  color: var(--klicek);
+  display: inline-flex;
+}
+
+.brand-word {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.14em;
+  color: var(--papir);
+}
+
+.brand-word em {
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--klicek);
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  margin-top: -0.15rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--klicek);
+  margin-bottom: 1.25rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.9rem, 9.5vw, 6.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.75rem;
+}
+
+.hero-title .line {
+  display: block;
+}
+
+.hero-title .l2 {
+  font-style: italic;
+  padding-left: clamp(1rem, 5vw, 4rem);
+}
+
+.hero-title .roste {
+  color: var(--klicek);
+  font-style: italic;
+  position: relative;
+  white-space: nowrap;
+}
+
+/* podtržení jako brázda */
+.hero-title .roste::after {
+  content: "";
+  position: absolute;
+  left: 0.05em;
+  right: 0.05em;
+  bottom: 0.02em;
+  height: 0.08em;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--klicek) 0,
+    var(--klicek) 0.35em,
+    transparent 0.35em,
+    transparent 0.55em
+  );
+}
+
+.hero-sub {
+  max-width: 34rem;
+  font-size: 1.05rem;
+  color: rgba(242, 238, 227, 0.88);
+  margin-bottom: 2.25rem;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: transform 0.18s ease, background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.btn-solid {
+  background: var(--klicek);
+  color: var(--hlina);
+}
+
+.btn-solid:hover {
+  background: var(--papir);
+  transform: translateY(-2px);
+}
+
+.btn-line {
+  border: 2px solid rgba(242, 238, 227, 0.5);
+  color: var(--papir);
+}
+
+.btn-line:hover {
+  border-color: var(--klicek);
+  color: var(--klicek);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   SIGNATURE: řádkovaný záhon — svislé brázdy, z každé „vyrůstá" klíček.
+   Rytmus pěstební školky přeložený do grafiky; animace = klíčení při načtení.
+   -------------------------------------------------------------------------- */
+
+.zahon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 110px;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0 0.5rem;
+}
+
+.brazda {
+  width: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--klicek);
+  position: relative;
+  transform-origin: bottom center;
+  animation: klicit 0.9s cubic-bezier(0.34, 1.4, 0.5, 1) both;
+}
+
+/* lísteček na vrcholu každé brázdy */
+.brazda::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 2px;
+  width: 13px;
+  height: 13px;
+  background: var(--klicek);
+  border-radius: 0 100% 0 100%;
+  transform: rotate(-8deg);
+}
+
+.brazda:nth-child(even)::before {
+  left: auto;
+  right: 2px;
+  border-radius: 100% 0 100% 0;
+  transform: rotate(8deg);
+}
+
+/* nestejná výška = živý záhon, ne dekorativní ornament */
+.b1 { height: 52%; animation-delay: 0.15s; }
+.b2 { height: 78%; animation-delay: 0.3s; }
+.b3 { height: 40%; animation-delay: 0.45s; }
+.b4 { height: 90%; animation-delay: 0.2s; }
+.b5 { height: 60%; animation-delay: 0.55s; }
+.b6 { height: 82%; animation-delay: 0.35s; }
+.b7 { height: 46%; animation-delay: 0.6s; }
+.b8 { height: 72%; animation-delay: 0.25s; }
+.b9 { height: 56%; animation-delay: 0.5s; }
+
+/* pár klíčků kvete — měsíčkově oranžové špičky */
+.b3::before,
+.b7::before {
+  background: var(--kvet);
+}
+
+@keyframes klicit {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* Vstupní animace textu hero */
+.hero-eyebrow,
+.hero-title .line,
+.hero-sub,
+.hero-cta {
+  animation: vzejit 0.7s ease both;
+}
+
+.hero-title .l1 { animation-delay: 0.08s; }
+.hero-title .l2 { animation-delay: 0.18s; }
+.hero-title .l3 { animation-delay: 0.28s; }
+.hero-sub { animation-delay: 0.42s; }
+.hero-cta { animation-delay: 0.52s; }
+
+@keyframes vzejit {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   SEKCE — společné
+   ========================================================================== */
+
+.sekce {
+  padding: 4.5rem 1.25rem;
+}
+
+.sekce-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--list);
+  margin-bottom: 0.9rem;
+}
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 1.6rem;
+  height: 3px;
+  background: var(--klicek);
+  border-radius: 3px;
+  margin-right: 0.6rem;
+  vertical-align: middle;
+}
+
+.sekce h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+
+.sekce-perex {
+  max-width: 38rem;
+  color: rgba(46, 36, 25, 0.78);
+  margin-bottom: 2.75rem;
+}
+
+/* ==========================================================================
+   SEKCE 1: SORTIMENT — zahradnický kalendář
+   ========================================================================== */
+
+.sortiment {
+  background: var(--papir);
+}
+
+.karty {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+
+.karta {
+  background: #fff;
+  border: 1px solid var(--papir-tmavsi);
+  border-radius: 14px;
+  padding: 1.5rem 1.4rem 1.6rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  border-color: var(--klicek);
+  box-shadow: 0 12px 28px rgba(46, 36, 25, 0.1);
+}
+
+.karta-mesic {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-bottom: 2px dashed var(--papir-tmavsi);
+  padding-bottom: 0.7rem;
+  margin-bottom: 0.9rem;
+}
+
+.mesic-cislo {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--list);
+}
+
+.mesic-stitek {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--kvet);
+}
+
+.karta h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.karta p {
+  font-size: 0.95rem;
+  color: rgba(46, 36, 25, 0.75);
+}
+
+.sortiment-pozn {
+  margin-top: 2rem;
+  font-size: 0.92rem;
+  color: rgba(46, 36, 25, 0.65);
+  max-width: 36rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--klicek);
+}
+
+/* ==========================================================================
+   SEKCE 2: ZAHRADNÍCI / DŮVĚRA
+   ========================================================================== */
+
+.zahradnici {
+  background: var(--hlina);
+  color: var(--papir);
+}
+
+.zahradnici h2 {
+  color: var(--papir);
+}
+
+.eyebrow-svetla {
+  color: var(--klicek);
+}
+
+.zahradnici-text p {
+  color: rgba(242, 238, 227, 0.82);
+  max-width: 34rem;
+  margin-bottom: 1.1rem;
+}
+
+.zahradnici-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.fakta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.fakta dt {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--klicek);
+  line-height: 1.1;
+}
+
+.fakta dd {
+  font-size: 0.82rem;
+  color: rgba(242, 238, 227, 0.65);
+  margin-top: 0.25rem;
+}
+
+.reference {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.ref {
+  background: rgba(242, 238, 227, 0.06);
+  border: 1px solid rgba(242, 238, 227, 0.14);
+  border-left: 4px solid var(--klicek);
+  border-radius: 0 12px 12px 0;
+  padding: 1.25rem 1.3rem;
+}
+
+.ref blockquote p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--papir);
+}
+
+.ref figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--klicek);
+}
+
+/* ==========================================================================
+   RESPONSIVITA
+   ========================================================================== */
+
+@media (min-width: 640px) {
+  .karty {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .hero {
+    padding-top: 3rem;
+  }
+
+  .karty {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .zahradnici-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .zahon {
+    height: 150px;
+  }
+
+  .brazda {
+    width: 4px;
+  }
+
+  .brazda::before {
+    width: 16px;
+    height: 16px;
+    left: 3px;
+  }
+
+  .brazda:nth-child(even)::before {
+    left: auto;
+    right: 3px;
+  }
+}
+
+/* ==========================================================================
+   REDUKOVANÝ POHYB
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .brazda,
+  .hero-eyebrow,
+  .hero-title .line,
+  .hero-sub,
+  .hero-cta {
+    animation: none;
+  }
+
+  .btn,
+  .karta {
+    transition: none;
+  }
+
+  .btn:hover,
+  .karta:hover {
+    transform: none;
+  }
+}
