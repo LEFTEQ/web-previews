@@ -1,0 +1,497 @@
+/* ==========================================================================
+   Truhlářství Peter — Ostrava
+   Paleta odvozená z dílny: lamino "dub přírodní", tvrzená ABS hrana (tmavá),
+   ocelové kování Blum. Signature: rybinový spoj (dovetail) jako dělicí pás
+   a piktogram.
+   ========================================================================== */
+
+:root {
+  --deska: #f7f2e9;        /* světlé lamino, pracovní deska */
+  --dub: #c98d4b;          /* dub přírodní — dekor lamina */
+  --dub-tmavy: #a56b2e;
+  --hrana: #22303a;        /* tmavá ABS hrana, modročerná ocel */
+  --hrana-hluboka: #16212a;
+  --kovani: #8ea3b0;       /* matná ocel pojezdů */
+  --inkoust: #241d15;      /* text na světlé */
+  --papir: #fffdf8;
+
+  --pismo-titulky: "Archivo Black", "Arial Black", "Franklin Gothic Heavy", sans-serif;
+  --pismo-text: Georgia, "Times New Roman", serif;
+  --pismo-technicke: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--deska);
+  color: var(--inkoust);
+  font-family: var(--pismo-text);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tp a:focus-visible,
+.tp button:focus-visible {
+  outline: 3px solid var(--dub);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ===================== HERO ===================== */
+
+.hero {
+  position: relative;
+  background: var(--hrana);
+  background-image:
+    linear-gradient(160deg, var(--hrana) 0%, var(--hrana-hluboka) 70%),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 118px,
+      rgba(142, 163, 176, 0.07) 118px,
+      rgba(142, 163, 176, 0.07) 120px
+    );
+  background-blend-mode: normal, normal;
+  color: var(--deska);
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 8.5rem;
+}
+
+/* --- wordmark --- */
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 3.5rem;
+}
+
+.wordmark-znak {
+  color: var(--dub);
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.wordmark-text {
+  font-family: var(--pismo-titulky);
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+}
+
+.wordmark-text strong {
+  color: var(--dub);
+  font-weight: inherit;
+}
+
+.wordmark-mesto {
+  font-family: var(--pismo-technicke);
+  font-size: 0.72rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--kovani);
+  margin-top: 0.35rem;
+}
+
+/* --- titulek --- */
+
+.hero-titulek {
+  font-family: var(--pismo-titulky);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.94;
+  letter-spacing: -0.01em;
+  font-size: clamp(2.9rem, 11vw, 7.5rem);
+  margin: 0 0 2rem;
+}
+
+.hero-titulek .radek {
+  display: block;
+}
+
+.radek-2 {
+  color: var(--dub);
+  /* deska zasunutá do spoje — mírný posun jako pero a drážka */
+  margin-left: clamp(1.2rem, 5vw, 4.5rem);
+}
+
+.radek-3 {
+  color: var(--kovani);
+}
+
+/* animace načtení — desky se skládají na sebe */
+@keyframes zasunuti {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.radek-1 { animation: zasunuti 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.radek-2 { animation: zasunuti 0.55s 0.12s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.radek-3 { animation: zasunuti 0.55s 0.24s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-perex,
+.hero-akce,
+.hero-fakta {
+  animation: zasunuti 0.55s 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-perex {
+  max-width: 34rem;
+  font-size: 1.125rem;
+  color: #d9d3c6;
+  margin: 0 0 2.25rem;
+}
+
+/* --- tlačítka --- */
+
+.hero-akce {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-bottom: 3rem;
+}
+
+.tlacitko {
+  font-family: var(--pismo-titulky);
+  text-transform: uppercase;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 0.95rem 1.6rem;
+  background: var(--dub);
+  color: var(--hrana-hluboka);
+  border-radius: 4px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.tlacitko:hover {
+  background: #e0a35f;
+  transform: translateY(-2px);
+}
+
+.tlacitko-tiche {
+  background: transparent;
+  color: var(--deska);
+  box-shadow: inset 0 0 0 2px var(--kovani);
+}
+
+.tlacitko-tiche:hover {
+  background: rgba(142, 163, 176, 0.15);
+}
+
+/* --- fakta --- */
+
+.hero-fakta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.25rem;
+  margin: 0;
+  border-top: 1px solid rgba(142, 163, 176, 0.35);
+  padding-top: 1.4rem;
+  max-width: 46rem;
+}
+
+.hero-fakta dt {
+  font-family: var(--pismo-technicke);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--kovani);
+  margin-bottom: 0.3rem;
+}
+
+.hero-fakta dd {
+  margin: 0;
+  font-family: var(--pismo-titulky);
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: var(--deska);
+}
+
+/* --- rybinový pás --- */
+
+.rybina {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  line-height: 0;
+  pointer-events: none;
+}
+
+.rybina svg {
+  display: block;
+  width: 100%;
+  height: clamp(56px, 9vw, 110px);
+}
+
+.rybina-horni {
+  fill: var(--hrana-hluboka);
+}
+
+.rybina {
+  background: var(--deska);
+}
+
+/* ===================== SEKCE OBECNĚ ===================== */
+
+.sekce-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem;
+}
+
+.stitek {
+  font-family: var(--pismo-technicke);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.42em;
+  color: var(--dub-tmavy);
+  margin: 0 0 0.75rem;
+}
+
+.stitek-svetly {
+  color: var(--dub);
+}
+
+.sekce h2 {
+  font-family: var(--pismo-titulky);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 4.2vw, 2.6rem);
+  line-height: 1.08;
+  margin: 0 0 2.25rem;
+  max-width: 38rem;
+}
+
+.sekce h3 {
+  font-family: var(--pismo-titulky);
+  font-weight: 400;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin: 0 0 0.5rem;
+}
+
+/* ===================== SEKCE 1: VÝROBA ===================== */
+
+.sekce-vyroba {
+  background: var(--deska);
+}
+
+.sortiment {
+  list-style: none;
+  margin: 0 0 5rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+
+.sortiment-karta {
+  background: var(--papir);
+  border: 1px solid #e5dcc9;
+  border-left: 5px solid var(--dub);
+  border-radius: 4px;
+  padding: 1.35rem 1.35rem 1.2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sortiment-karta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(34, 48, 58, 0.1);
+}
+
+.sortiment-karta p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #5a5045;
+}
+
+/* --- průběh --- */
+
+.prubeh-hlava h2 {
+  margin-bottom: 0.75rem;
+}
+
+.prubeh-perex {
+  margin: 0 0 2.5rem;
+  color: #5a5045;
+  max-width: 34rem;
+}
+
+.kroky {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.krok {
+  display: grid;
+  grid-template-columns: 3.6rem 1fr;
+  gap: 1.25rem;
+  padding: 1.6rem 0;
+  border-top: 2px solid var(--hrana);
+}
+
+.krok:last-child {
+  border-bottom: 2px solid var(--hrana);
+}
+
+.krok-cislo {
+  font-family: var(--pismo-titulky);
+  font-size: 2.2rem;
+  line-height: 1;
+  color: var(--dub);
+}
+
+.krok-obsah p {
+  margin: 0;
+  max-width: 42rem;
+  color: #4a4238;
+}
+
+/* ===================== SEKCE 2: DŮVĚRA ===================== */
+
+.sekce-duvera {
+  background: var(--hrana);
+  color: var(--deska);
+}
+
+.sekce-duvera h2 {
+  color: var(--deska);
+  max-width: 44rem;
+}
+
+.duvody {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.75rem 2.5rem;
+  margin-bottom: 4rem;
+}
+
+.duvod-znak {
+  color: var(--dub);
+  display: inline-flex;
+  margin-bottom: 0.7rem;
+}
+
+.duvod h3 {
+  color: var(--deska);
+}
+
+.duvod p {
+  margin: 0;
+  color: #c3bfb4;
+  font-size: 0.98rem;
+}
+
+/* --- citace --- */
+
+.citace {
+  margin: 0;
+  border-left: 5px solid var(--dub);
+  padding: 0.5rem 0 0.5rem 1.75rem;
+  max-width: 44rem;
+}
+
+.citace blockquote {
+  margin: 0 0 1rem;
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--deska);
+}
+
+.citace figcaption {
+  font-family: var(--pismo-technicke);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--kovani);
+}
+
+/* ===================== RESPONZIVITA ===================== */
+
+@media (max-width: 40rem) {
+  .hero-inner {
+    padding-top: 1.5rem;
+    padding-bottom: 6.5rem;
+  }
+
+  .wordmark {
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-fakta {
+    gap: 1.25rem 2rem;
+  }
+
+  .krok {
+    grid-template-columns: 2.6rem 1fr;
+    gap: 0.9rem;
+  }
+
+  .krok-cislo {
+    font-size: 1.7rem;
+  }
+
+  .sekce-inner {
+    padding-top: 3.25rem;
+    padding-bottom: 3.25rem;
+  }
+
+  .sortiment {
+    margin-bottom: 3.5rem;
+  }
+}
+
+/* ===================== REDUCED MOTION ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .radek-1,
+  .radek-2,
+  .radek-3,
+  .hero-perex,
+  .hero-akce,
+  .hero-fakta {
+    animation: none;
+  }
+
+  .tlacitko,
+  .sortiment-karta {
+    transition: none;
+  }
+
+  .tlacitko:hover,
+  .sortiment-karta:hover {
+    transform: none;
+  }
+}
