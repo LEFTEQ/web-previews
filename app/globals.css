@@ -1,0 +1,468 @@
+/* ==========================================================================
+   STUDIO RELAX · masáže · Ostrava
+   Koncept: „dlouhý tah" — palec masérky vedený po zádech = jedna nepřerušená
+   vlnovka, která je signature prvkem celého webu. Paleta z masérny samotné:
+   hluboká lahvově zelená (klid pokoje), teplý olejově-mandlový podklad,
+   šalvěj a měkká meruňka (teplo kůže po masáži). Žádná studená klinika,
+   žádné wellness klišé s orchidejí.
+   Typo: Fraunces (display, měkké optické serify — hmatové, tělesné písmo)
+   + Karla (věcný, přátelský grotesk pro provozní text).
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,540;1,9..144,340;1,9..144,540&family=Karla:wght@400;500;700&display=swap");
+
+:root {
+  --sr-pine: #17332b;      /* hluboká lahvová zelená — stěny klidu */
+  --sr-pine-soft: #22443a;
+  --sr-oil: #f2e9dc;       /* mandlový olej — hlavní světlý podklad */
+  --sr-oil-deep: #e8dcc8;
+  --sr-sage: #9db8a4;      /* šalvěj — sekundární */
+  --sr-apricot: #e8a173;   /* teplo prokrvené kůže — akcent */
+  --sr-ink: #24322c;       /* text na světlé */
+
+  --sr-display: "Fraunces", "Georgia", serif;
+  --sr-body: "Karla", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--sr-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--sr-ink);
+  background: var(--sr-oil);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Viditelný focus všude */
+.sr a:focus-visible,
+.sr button:focus-visible {
+  outline: 3px solid var(--sr-apricot);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* =========================
+   HERO — čistě typografický
+   ========================= */
+
+.sr-hero {
+  background: var(--sr-pine);
+  color: var(--sr-oil);
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 6vw, 5rem)
+    clamp(3rem, 7vw, 5.5rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.sr-hero-inner {
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+/* Wordmark — dvě váhy, „relax" se roztéká širším prostrkáním */
+.sr-wordmark {
+  margin: 0 0 clamp(2.5rem, 7vw, 5rem);
+  font-family: var(--sr-display);
+  font-size: 1.35rem;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+
+.sr-wordmark-studio {
+  font-weight: 340;
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.sr-wordmark-relax {
+  font-weight: 540;
+  letter-spacing: 0.32em;
+  text-transform: lowercase;
+  color: var(--sr-apricot);
+}
+
+.sr-hero-title {
+  margin: 0;
+  font-family: var(--sr-display);
+  font-weight: 340;
+  font-size: clamp(3rem, 11vw, 7.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+}
+
+.sr-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: sr-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.sr-line-1 { animation-delay: 0.1s; }
+.sr-line-2 { animation-delay: 0.35s; padding-left: clamp(1rem, 8vw, 6rem); font-style: italic; }
+.sr-line-3 { animation-delay: 0.6s; padding-left: clamp(2rem, 16vw, 12rem); }
+
+/* „čká" v „počká" — nádech barvy, jediné zvýrazněné místo v titulku */
+.sr-breath {
+  color: var(--sr-apricot);
+  font-style: italic;
+}
+
+@keyframes sr-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Signature: dechová vlna — kreslí se jako jeden dlouhý masážní tah */
+.sr-wave {
+  margin: clamp(1.5rem, 4vw, 2.5rem) 0;
+}
+
+.sr-wave svg {
+  display: block;
+  width: 100%;
+  height: clamp(48px, 10vw, 110px);
+}
+
+.sr-wave-path {
+  stroke: var(--sr-apricot);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: sr-stroke 2.4s cubic-bezier(0.45, 0, 0.2, 1) 0.9s forwards;
+}
+
+@keyframes sr-stroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.sr-hero-sub {
+  max-width: 32rem;
+  margin: 0 0 2rem;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--sr-sage);
+  opacity: 0;
+  animation: sr-rise 0.9s ease 1.1s forwards;
+}
+
+.sr-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  opacity: 0;
+  animation: sr-rise 0.9s ease 1.3s forwards;
+}
+
+.sr-btn {
+  display: inline-block;
+  padding: 0.9rem 1.75rem;
+  border-radius: 999px;
+  font-family: var(--sr-body);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.sr-btn-primary {
+  background: var(--sr-apricot);
+  color: var(--sr-pine);
+}
+
+.sr-btn-primary:hover {
+  transform: translateY(-2px);
+  background: #f0b189;
+}
+
+.sr-btn-ghost {
+  border: 1.5px solid var(--sr-sage);
+  color: var(--sr-oil);
+}
+
+.sr-btn-ghost:hover {
+  background: var(--sr-pine-soft);
+}
+
+.sr-hero-facts {
+  margin: 2.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.75rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sr-sage);
+  opacity: 0;
+  animation: sr-rise 0.9s ease 1.5s forwards;
+}
+
+.sr-hero-facts li {
+  position: relative;
+}
+
+.sr-hero-facts li + li::before {
+  content: "·";
+  position: absolute;
+  left: -1.1rem;
+  color: var(--sr-apricot);
+}
+
+/* =========================
+   SEKCE — společné
+   ========================= */
+
+.sr-section {
+  padding: clamp(3.5rem, 9vw, 6.5rem) clamp(1.25rem, 6vw, 5rem);
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.sr-section-alt {
+  max-width: none;
+  background: var(--sr-oil-deep);
+}
+
+.sr-section-alt > * {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sr-section-head {
+  max-width: 40rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.sr-eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a6a4e;
+}
+
+.sr-h2 {
+  margin: 0 0 1rem;
+  font-family: var(--sr-display);
+  font-weight: 540;
+  font-size: clamp(1.85rem, 4.5vw, 2.9rem);
+  line-height: 1.12;
+  color: var(--sr-pine);
+}
+
+.sr-h2 em {
+  font-style: italic;
+  color: var(--sr-apricot);
+}
+
+.sr-section-lead {
+  margin: 0;
+  max-width: 34rem;
+}
+
+/* =========================
+   CENÍK — jako lístek masáží
+   ========================= */
+
+.sr-menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.sr-menu-item {
+  padding: 1.5rem 0 1.6rem;
+  border-top: 1px solid rgba(23, 51, 43, 0.18);
+  display: grid;
+  gap: 0.4rem;
+  transition: padding-left 0.25s ease;
+}
+
+.sr-menu-item:hover {
+  padding-left: 0.6rem;
+}
+
+.sr-menu-item:last-child {
+  border-bottom: 1px solid rgba(23, 51, 43, 0.18);
+}
+
+.sr-menu-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 1rem;
+  justify-content: space-between;
+}
+
+.sr-menu-name {
+  margin: 0;
+  font-family: var(--sr-display);
+  font-weight: 540;
+  font-size: 1.35rem;
+  color: var(--sr-pine);
+}
+
+.sr-menu-meta {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  white-space: nowrap;
+}
+
+.sr-menu-doba {
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6c7a70;
+}
+
+.sr-menu-cena {
+  font-family: var(--sr-display);
+  font-weight: 540;
+  font-size: 1.25rem;
+  color: var(--sr-apricot);
+}
+
+.sr-menu-popis {
+  margin: 0;
+  max-width: 42rem;
+  color: #45544c;
+}
+
+/* =========================
+   DŮVĚRA
+   ========================= */
+
+.sr-duvody {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.sr-duvod-mark svg {
+  width: 48px;
+  height: 16px;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.sr-duvod-mark path {
+  stroke: var(--sr-apricot);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.sr-duvod-heslo {
+  margin: 0 0 0.4rem;
+  font-family: var(--sr-display);
+  font-weight: 540;
+  font-size: 1.3rem;
+  color: var(--sr-pine);
+}
+
+.sr-duvod-text {
+  margin: 0;
+  color: #45544c;
+}
+
+/* Reference — dvě tmavé „karty klidu" */
+.sr-reference {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.sr-ref {
+  margin: 0;
+  padding: 1.75rem 1.75rem 1.5rem;
+  background: var(--sr-pine);
+  color: var(--sr-oil);
+  border-radius: 1.25rem 1.25rem 1.25rem 0.25rem;
+}
+
+.sr-ref-text {
+  margin: 0 0 1rem;
+  font-family: var(--sr-display);
+  font-style: italic;
+  font-weight: 340;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.sr-ref-jmeno {
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  color: var(--sr-sage);
+}
+
+/* =========================
+   RESPONZIVITA
+   ========================= */
+
+@media (min-width: 720px) {
+  .sr-duvody {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .sr-reference {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sr-menu {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   REDUKOVANÝ POHYB
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .sr-line,
+  .sr-hero-sub,
+  .sr-hero-cta,
+  .sr-hero-facts {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .sr-wave-path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .sr-btn,
+  .sr-menu-item {
+    transition: none;
+  }
+}
