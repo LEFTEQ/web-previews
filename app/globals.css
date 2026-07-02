@@ -1,0 +1,473 @@
+/* ==========================================================================
+   PLOTY KINCL s.r.o. — Ostrava / Hlučín
+   Paleta odvozená z materiálů řemesla:
+   --ocel    #232A30  (surová ocel, tmavé pozadí sekce důvěry)
+   --zinek   #9AA6AC  (žárový zinek — matně stříbrošedá)
+   --beton   #EDEEEC  (betonová patka — světlé pozadí)
+   --okuje   #C8451B  (žhavé okuje od svářečky — akcent, šetřený)
+   --papir   #FFFFFF
+   Typografie: Arial Black / system heavy sans jako „ražený štítek z dílny“,
+   tělo v system-ui. Signature: plotové pole vyrůstající z hero + svislý
+   rytmus latí procházející celou stránkou.
+   ========================================================================== */
+
+:root {
+  --ocel: #232a30;
+  --zinek: #9aa6ac;
+  --beton: #edeeec;
+  --okuje: #c8451b;
+  --papir: #ffffff;
+  --ink: #1c2226;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--beton);
+  -webkit-font-smoothing: antialiased;
+}
+
+.pk a:focus-visible,
+.pk :focus-visible {
+  outline: 3px solid var(--okuje);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============================ HERO ============================ */
+
+.pk-hero {
+  position: relative;
+  background: var(--beton);
+  padding: 2rem 1.25rem 0;
+  overflow: hidden;
+  /* svislý rytmus latí přes celé hero — jemný, jako stín plotu */
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 76px,
+    rgba(35, 42, 48, 0.05) 76px,
+    rgba(35, 42, 48, 0.05) 82px
+  );
+}
+
+.pk-hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 2rem;
+  max-width: 72rem;
+  margin: 0 auto 3rem;
+}
+
+/* Wordmark: PLOTY jako lehká deska, KINCL ražený těžkým řezem s okujovou
+   linkou — připomíná vypálený štítek na rámu brány */
+.pk-wordmark {
+  display: inline-flex;
+  align-items: stretch;
+  line-height: 1;
+  font-family: "Arial Black", "Arial Bold", Arial, system-ui, sans-serif;
+  letter-spacing: 0.06em;
+}
+
+.pk-wordmark-ploty {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--beton);
+  background: var(--ocel);
+  padding: 0.45rem 0.6rem;
+}
+
+.pk-wordmark-kincl {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--ocel);
+  padding: 0.45rem 0.6rem;
+  border: 3px solid var(--ocel);
+  border-left: none;
+  box-shadow: inset 0 -6px 0 var(--okuje);
+}
+
+.pk-hero-loc {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4c565d;
+}
+
+.pk-hero-h1 {
+  max-width: 72rem;
+  margin: 0 auto;
+  font-family: "Arial Black", "Arial Bold", Arial, system-ui, sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.6rem, 9.5vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--ocel);
+}
+
+.pk-h1-line {
+  display: block;
+}
+
+.pk-h1-b {
+  color: var(--okuje);
+}
+
+.pk-h1-c {
+  color: var(--zinek);
+  -webkit-text-stroke: 1px var(--ocel);
+}
+
+.pk-hero-sub {
+  max-width: 72rem;
+  margin: 1.75rem auto 0;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.65;
+  color: #39424a;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 64rem) {
+  .pk-hero-sub {
+    margin-left: calc((100% - 72rem) / 2);
+  }
+}
+
+.pk-hero-cta {
+  max-width: 72rem;
+  margin: 2rem auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.pk-btn {
+  display: inline-block;
+  font-family: "Arial Black", Arial, system-ui, sans-serif;
+  font-weight: 900;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1rem 1.6rem;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.pk-btn-solid {
+  background: var(--okuje);
+  color: var(--papir);
+}
+
+.pk-btn-solid:hover {
+  background: #a83812;
+  transform: translateY(-2px);
+}
+
+.pk-btn-line {
+  color: var(--ocel);
+  border: 3px solid var(--ocel);
+}
+
+.pk-btn-line:hover {
+  background: var(--ocel);
+  color: var(--beton);
+  transform: translateY(-2px);
+}
+
+/* signature plotové pole — vyrůstá ze spodní hrany hero */
+.pk-hero-fence {
+  display: block;
+  width: min(100%, 72rem);
+  margin: 3rem auto 0;
+  height: auto;
+}
+
+/* orchestrovaná sekvence při načtení: řádky titulku → podtitul → CTA → plot */
+@media (prefers-reduced-motion: no-preference) {
+  .pk-h1-line,
+  .pk-hero-sub,
+  .pk-hero-cta {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: pk-rise 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+  }
+
+  .pk-h1-a { animation-delay: 0.05s; }
+  .pk-h1-b { animation-delay: 0.18s; }
+  .pk-h1-c { animation-delay: 0.31s; }
+  .pk-hero-sub { animation-delay: 0.48s; }
+  .pk-hero-cta { animation-delay: 0.6s; }
+
+  .pk-hero-fence {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: pk-rise 0.8s cubic-bezier(0.2, 0.7, 0.3, 1) 0.55s forwards;
+  }
+}
+
+@keyframes pk-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================ SLUŽBY ============================ */
+
+.pk-sluzby {
+  background: var(--papir);
+  padding: 4rem 1.25rem 5rem;
+  border-top: 6px solid var(--ocel);
+}
+
+.pk-section-head {
+  max-width: 72rem;
+  margin: 0 auto 2.5rem;
+}
+
+.pk-eyebrow {
+  margin: 0 0 0.6rem;
+  font-family: "Arial Black", Arial, system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--okuje);
+}
+
+.pk-h2 {
+  margin: 0;
+  font-family: "Arial Black", Arial, system-ui, sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--ocel);
+  max-width: 34ch;
+}
+
+.pk-sluzby-grid {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 72rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 40rem) {
+  .pk-sluzby-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 64rem) {
+  .pk-sluzby-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.pk-karta {
+  background: var(--beton);
+  padding: 1.75rem 1.5rem;
+  border-top: 4px solid var(--ocel);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.pk-karta:hover {
+  border-top-color: var(--okuje);
+  transform: translateY(-3px);
+}
+
+.pk-karta-kod {
+  display: inline-block;
+  font-family: "Arial Black", Arial, system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  color: var(--papir);
+  background: var(--zinek);
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.pk-karta-h3 {
+  margin: 0 0 0.6rem;
+  font-family: "Arial Black", Arial, system-ui, sans-serif;
+  font-weight: 900;
+  font-size: 1.2rem;
+  line-height: 1.25;
+  color: var(--ocel);
+}
+
+.pk-karta-p {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #39424a;
+}
+
+.pk-karta-dilna {
+  background: var(--ocel);
+  border-top-color: var(--okuje);
+}
+
+.pk-karta-dilna .pk-karta-kod {
+  background: var(--okuje);
+}
+
+.pk-karta-dilna .pk-karta-h3 {
+  color: var(--papir);
+}
+
+.pk-karta-dilna .pk-karta-p {
+  color: #c6ced3;
+}
+
+/* ============================ DŮVĚRA ============================ */
+
+.pk-duvera {
+  background: var(--ocel);
+  color: var(--beton);
+  padding: 4rem 1.25rem 5rem;
+  /* stejný rytmus latí i v tmavé sekci — plot jako podpis celé stránky */
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 76px,
+    rgba(255, 255, 255, 0.03) 76px,
+    rgba(255, 255, 255, 0.03) 82px
+  );
+}
+
+.pk-eyebrow-light {
+  color: #e8825f;
+}
+
+.pk-h2-light {
+  color: var(--papir);
+}
+
+.pk-linka {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 72rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 48rem) {
+  .pk-linka {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2.5rem;
+  }
+}
+
+.pk-linka-bod {
+  border-left: 4px solid var(--okuje);
+  padding-left: 1.25rem;
+}
+
+.pk-linka-rok {
+  display: block;
+  font-family: "Arial Black", Arial, system-ui, sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  line-height: 1;
+  color: var(--zinek);
+  margin-bottom: 0.6rem;
+}
+
+.pk-linka-h3 {
+  margin: 0 0 0.5rem;
+  font-family: "Arial Black", Arial, system-ui, sans-serif;
+  font-weight: 900;
+  font-size: 1.15rem;
+  color: var(--papir);
+}
+
+.pk-linka-p {
+  margin: 0;
+  font-size: 0.97rem;
+  line-height: 1.65;
+  color: #b9c2c8;
+}
+
+.pk-citat {
+  max-width: 72rem;
+  margin: 3.5rem auto 0;
+  padding: 2rem 1.5rem;
+  border: 3px solid var(--zinek);
+}
+
+.pk-citat blockquote {
+  margin: 0 0 1rem;
+  font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+  line-height: 1.5;
+  font-weight: 600;
+  color: var(--papir);
+  max-width: 52ch;
+}
+
+.pk-citat figcaption {
+  font-family: "Arial Black", Arial, system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e8825f;
+}
+
+@media (min-width: 48rem) {
+  .pk-citat {
+    padding: 2.75rem 2.5rem;
+  }
+}
+
+/* ============================ REDUCED MOTION ============================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .pk-h1-line,
+  .pk-hero-sub,
+  .pk-hero-cta,
+  .pk-hero-fence {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .pk-btn,
+  .pk-karta {
+    transition: none;
+  }
+
+  .pk-btn:hover,
+  .pk-karta:hover {
+    transform: none;
+  }
+}
