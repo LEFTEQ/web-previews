@@ -1,0 +1,519 @@
+/* ==========================================================================
+   U Toulavé pípy — Pardubice
+   Paleta z hospodského světa: tmavé mořené dřevo výčepu, mosaz pípy,
+   pěna ležáku, jantar piva. Žádný cream+terracotta default.
+   ========================================================================== */
+
+:root {
+  --drevo: #241a12;        /* mořený dub výčepního pultu */
+  --drevo-svetle: #33261a; /* světlejší lať */
+  --mosaz: #c9973f;        /* mosazná pípa */
+  --mosaz-lesk: #e5b968;   /* odlesk na kohoutu */
+  --pena: #f6efdd;         /* pěna / světlý text */
+  --jantar: #9a5b1e;       /* jantar ležáku, tmavší akcent */
+  --inkoust: #17100a;      /* nejtmavší pozadí */
+
+  --font-display: "Alfa Slab One", "Georgia", "Times New Roman", serif;
+  --font-body: "Karla", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--inkoust);
+  color: var(--pena);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Viditelný focus pro klávesnici */
+.pipa a:focus-visible,
+.pipa button:focus-visible {
+  outline: 3px solid var(--mosaz-lesk);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============================ HERO ============================ */
+
+.hero {
+  position: relative;
+  min-height: 92svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(23, 16, 10, 0.96) 0%, rgba(23, 16, 10, 0.55) 45%, rgba(23, 16, 10, 0.25) 100%);
+}
+
+.hero-inner {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+  padding: 7rem 1.25rem 3.5rem;
+}
+
+/* --- wordmark --- */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 2.25rem;
+}
+
+.brand-tap {
+  color: var(--mosaz);
+  width: 44px;
+  height: 44px;
+  flex: none;
+}
+
+.brand-tap svg {
+  width: 100%;
+  height: 100%;
+}
+
+.brand-word {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+  color: var(--pena);
+  text-transform: uppercase;
+}
+
+.brand-word em {
+  font-style: normal;
+  color: var(--mosaz);
+}
+
+.hero-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mosaz-lesk);
+  margin: 0 0 1rem;
+}
+
+/* --- titulek: motto štamgastů jako thesis --- */
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 7.5vw, 4.6rem);
+  line-height: 1.06;
+  margin: 0 0 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+.hero-title .line {
+  display: block;
+}
+
+.hero-title .line-2 {
+  color: var(--mosaz);
+}
+
+.hero-lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  margin: 0 0 2rem;
+  color: rgba(246, 239, 221, 0.9);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero-tap-note {
+  margin: 2.5rem 0 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(246, 239, 221, 0.5);
+  border-top: 1px dashed rgba(201, 151, 63, 0.4);
+  padding-top: 0.9rem;
+  max-width: 34rem;
+}
+
+/* --- orchestrovaný nástup hero (jedna sekvence, nic víc) --- */
+.brand,
+.hero-eyebrow,
+.hero-title .line,
+.hero-lead,
+.hero-actions,
+.hero-tap-note {
+  animation: pipa-pour 0.7s cubic-bezier(0.22, 0.7, 0.3, 1) both;
+}
+
+.hero-eyebrow { animation-delay: 0.1s; }
+.hero-title .line-1 { animation-delay: 0.2s; }
+.hero-title .line-2 { animation-delay: 0.32s; }
+.hero-lead { animation-delay: 0.45s; }
+.hero-actions { animation-delay: 0.55s; }
+.hero-tap-note { animation-delay: 0.7s; }
+
+@keyframes pipa-pour {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================ TLAČÍTKA ============================ */
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--mosaz);
+  color: var(--inkoust);
+}
+
+.btn-solid:hover {
+  background: var(--mosaz-lesk);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  border: 2px solid rgba(246, 239, 221, 0.45);
+  color: var(--pena);
+}
+
+.btn-ghost:hover {
+  border-color: var(--mosaz);
+  transform: translateY(-2px);
+}
+
+/* ============================ SEKCE OBECNĚ ============================ */
+
+.section {
+  padding: 5rem 1.25rem;
+}
+
+.eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mosaz);
+  margin: 0 0 0.75rem;
+}
+
+.section h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+}
+
+.section-lead {
+  max-width: 38rem;
+  color: rgba(246, 239, 221, 0.85);
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* ============================ SEKCE 1: ČEPY ============================ */
+
+.section-cepy {
+  background:
+    linear-gradient(rgba(36, 26, 18, 0.94), rgba(36, 26, 18, 0.94)),
+    repeating-linear-gradient(
+      90deg,
+      var(--drevo) 0,
+      var(--drevo) 120px,
+      var(--drevo-svetle) 120px,
+      var(--drevo-svetle) 122px
+    );
+}
+
+.section-cepy .section-head {
+  width: min(1080px, 100%);
+  margin: 0 auto 3rem;
+}
+
+/* Signature prvek: řada čepů — karty visí z mosazné trubky výčepu */
+.tap-rail {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+  padding: 2.2rem 0 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.25rem;
+  position: relative;
+}
+
+/* mosazná trubka nad kartami */
+.tap-rail::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(to bottom, var(--mosaz-lesk), var(--mosaz) 45%, #7e5a1e);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.tap {
+  position: relative;
+  background: rgba(23, 16, 10, 0.75);
+  border: 1px solid rgba(201, 151, 63, 0.25);
+  border-radius: 10px;
+  padding: 1.5rem 1.25rem 1.35rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* stopka kohoutu spojující kartu s trubkou */
+.tap::before {
+  content: "";
+  position: absolute;
+  top: -2.2rem;
+  left: 2rem;
+  width: 6px;
+  height: 2.2rem;
+  background: linear-gradient(to right, var(--mosaz-lesk), #7e5a1e);
+  border-radius: 0 0 3px 3px;
+}
+
+.tap:hover {
+  transform: translateY(4px); /* natočení pípy: karta se "stáhne" jako páka */
+  border-color: var(--mosaz);
+}
+
+.tap-handle {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--inkoust);
+  background: var(--mosaz);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  margin-bottom: 0.9rem;
+}
+
+.tap h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.15rem;
+  margin: 0 0 0.6rem;
+  line-height: 1.25;
+}
+
+.tap p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: rgba(246, 239, 221, 0.82);
+}
+
+/* ============================ SEKCE 2: PROSTORY ============================ */
+
+.section-prostory {
+  background: var(--inkoust);
+}
+
+.prostory-grid {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.prostory-media img {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(201, 151, 63, 0.3);
+}
+
+.media-caption {
+  font-size: 0.85rem;
+  color: rgba(246, 239, 221, 0.6);
+  margin: 0.7rem 0 0;
+  letter-spacing: 0.04em;
+}
+
+.rooms {
+  list-style: none;
+  margin: 2rem 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.room {
+  padding: 1.15rem 0;
+  border-top: 1px dashed rgba(201, 151, 63, 0.35);
+}
+
+.room:last-child {
+  border-bottom: 1px dashed rgba(201, 151, 63, 0.35);
+}
+
+.room-name {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.room h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.1rem;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.room-cap {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mosaz);
+  white-space: nowrap;
+}
+
+.room p {
+  margin: 0.4rem 0 0;
+  font-size: 0.98rem;
+  color: rgba(246, 239, 221, 0.8);
+}
+
+.rezervace {
+  background: var(--drevo);
+  border: 1px solid rgba(201, 151, 63, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem 1.4rem;
+}
+
+.rezervace p {
+  margin: 0 0 1.1rem;
+}
+
+.rezervace strong {
+  color: var(--mosaz-lesk);
+}
+
+.rezervace-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.rezervace-actions .btn {
+  font-size: 0.95rem;
+}
+
+/* ============================ RESPONZIVITA ============================ */
+
+@media (min-width: 860px) {
+  .prostory-grid {
+    grid-template-columns: 5fr 6fr;
+    gap: 3.5rem;
+  }
+
+  .prostory-media {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-inner {
+    padding-top: 5rem;
+  }
+
+  .hero-actions .btn,
+  .rezervace-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .section {
+    padding: 3.5rem 1.1rem;
+  }
+}
+
+/* ============================ REDUCED MOTION ============================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .brand,
+  .hero-eyebrow,
+  .hero-title .line,
+  .hero-lead,
+  .hero-actions,
+  .hero-tap-note {
+    animation: none;
+  }
+
+  .btn,
+  .tap {
+    transition: none;
+  }
+
+  .tap:hover,
+  .btn:hover {
+    transform: none;
+  }
+}
