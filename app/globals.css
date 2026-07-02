@@ -1,0 +1,535 @@
+/* ============================================================
+   ADAT s.r.o. — stavby od základu (Pardubice)
+   Koncept: stavební řez. Výškové kóty (±0,000; +3,250…) jako
+   nosný grafický jazyk — signature prvek celé stránky.
+   Paleta: beton / okr střešní tašky / stavební modrá výkresu.
+   ============================================================ */
+
+:root {
+  --beton: #2b2e33;        /* tmavý beton — základ */
+  --beton-svetly: #eceae5; /* světlá omítka */
+  --papir: #f7f6f2;        /* výkresový papír */
+  --okr: #d9822b;          /* pálená taška / výstražný okr */
+  --vykres: #2a4d8f;       /* modrá stavebního výkresu */
+  --linka: #c9c5bc;        /* tužková linka */
+  --ink: #1d1f23;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--papir);
+  color: var(--ink);
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* utility / technické písmo pro kóty, tagy, čísla */
+.adat .hero-kota,
+.adat .sluzba-tag,
+.adat .ref-kota,
+.adat .ref-typ,
+.adat .sec-eyebrow,
+.adat .hero-loc,
+.adat .wordmark-sub,
+.adat .rez-line span,
+.adat .rez-zaklad span,
+.adat .duvera-cislo,
+.adat .btn {
+  font-family: "Courier New", ui-monospace, monospace;
+}
+
+.adat a {
+  color: var(--vykres);
+}
+
+.adat :focus-visible {
+  outline: 3px solid var(--okr);
+  outline-offset: 3px;
+}
+
+/* ── HERO ──────────────────────────────────────── */
+
+.hero {
+  position: relative;
+  background: var(--beton);
+  color: var(--beton-svetly);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+  /* jemný rastr výkresové mřížky */
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 3.25rem 3.25rem;
+}
+
+.hero-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid rgba(236, 234, 229, 0.25);
+  padding-bottom: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.65rem;
+}
+
+.wordmark-name {
+  font-family: "Georgia", serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: 0.14em;
+  border-bottom: 4px solid var(--okr); /* základová deska pod jménem */
+  line-height: 1.1;
+}
+
+.wordmark-sub {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(236, 234, 229, 0.75);
+}
+
+.hero-loc {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: rgba(236, 234, 229, 0.6);
+}
+
+.hero-body {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3rem 0 2.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-kota {
+  margin: 0 0 0.75rem;
+  color: var(--okr);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.kota-mark {
+  display: inline-block;
+  margin-right: 0.4rem;
+  font-size: 0.8em;
+}
+
+.hero-title {
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-line-2 {
+  color: var(--okr);
+}
+
+.hero-line-3 {
+  /* obrysové písmo = nezastavěné podlaží na výkresu */
+  color: transparent;
+  -webkit-text-stroke: 2px var(--beton-svetly);
+}
+
+.hero-lead {
+  max-width: 34rem;
+  margin: 1.75rem 0 0;
+  font-size: 1.1rem;
+  color: rgba(236, 234, 229, 0.85);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 1.5rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--okr);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.btn-solid:hover {
+  transform: translateY(-2px);
+  background: #e8933c;
+}
+
+.btn-line {
+  border: 1px solid rgba(236, 234, 229, 0.5);
+  color: var(--beton-svetly);
+}
+
+.btn-line:hover {
+  background: rgba(236, 234, 229, 0.12);
+}
+
+/* signature — výškové kóty stavebního řezu vpravo dole */
+.hero-rez {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-bottom: 0;
+  position: relative;
+}
+
+.rez-line {
+  border-top: 1px dashed rgba(236, 234, 229, 0.45);
+  padding: 0.3rem 0 0.9rem;
+}
+
+.rez-line span,
+.rez-zaklad span {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: rgba(236, 234, 229, 0.65);
+}
+
+.rez-zaklad {
+  background: var(--okr);
+  margin: 0 -1.25rem;
+  padding: 0.55rem 1.25rem 0.65rem;
+}
+
+.rez-zaklad span {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* animace načtení: dům „roste“ odspodu — jen jednou, decentně */
+.hero-line-1,
+.hero-line-2,
+.hero-line-3,
+.hero-lead,
+.hero-actions,
+.hero-kota {
+  animation: adat-rust 0.6s ease-out both;
+}
+
+.hero-kota { animation-delay: 0.05s; }
+.hero-line-3 { animation-delay: 0.1s; }
+.hero-line-2 { animation-delay: 0.22s; }
+.hero-line-1 { animation-delay: 0.34s; }
+.hero-lead { animation-delay: 0.45s; }
+.hero-actions { animation-delay: 0.55s; }
+
+@keyframes adat-rust {
+  from {
+    opacity: 0;
+    transform: translateY(0.9rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── SEKCE — společné hlavičky ─────────────────── */
+
+.sec-head {
+  max-width: 72rem;
+  margin: 0 auto 2.5rem;
+}
+
+.sec-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--vykres);
+}
+
+.sec-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 4.5vw, 2.9rem);
+  line-height: 1.12;
+  font-weight: 700;
+}
+
+.sec-lead {
+  max-width: 36rem;
+  margin: 1rem 0 0;
+  color: #4a4d52;
+}
+
+/* ── SLUŽBY ────────────────────────────────────── */
+
+.sluzby {
+  padding: 4rem 1.25rem;
+}
+
+.sluzby-grid {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 72rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px; /* spáry mezi tvárnicemi */
+  background: var(--linka);
+  border: 1px solid var(--linka);
+}
+
+.sluzba {
+  background: var(--papir);
+  padding: 1.6rem 1.4rem 1.8rem;
+  transition: background-color 0.2s ease;
+}
+
+.sluzba:hover {
+  background: var(--beton-svetly);
+}
+
+.sluzba-tag {
+  margin: 0 0 0.6rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--okr);
+  font-weight: 700;
+}
+
+.sluzba-nazev {
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+.sluzba-text {
+  margin: 0;
+  color: #4a4d52;
+  font-size: 0.98rem;
+}
+
+/* ── REFERENCE ─────────────────────────────────── */
+
+.refs {
+  background: var(--beton);
+  color: var(--beton-svetly);
+  padding: 4rem 1.25rem 4.5rem;
+}
+
+.sec-head-dark .sec-eyebrow {
+  color: var(--okr);
+}
+
+.sec-head-dark .sec-lead {
+  color: rgba(236, 234, 229, 0.75);
+}
+
+.refs-list {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 72rem;
+  /* svislá kótovací čára řezu */
+  border-left: 1px dashed rgba(236, 234, 229, 0.4);
+}
+
+.ref {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.4rem;
+  padding: 1.5rem 0 1.5rem 1.25rem;
+  position: relative;
+}
+
+.ref + .ref {
+  border-top: 1px solid rgba(236, 234, 229, 0.15);
+}
+
+.ref-kota {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  color: var(--okr);
+}
+
+.ref-kota::before {
+  /* značka kóty na svislé čáře */
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 2.1rem;
+  width: 9px;
+  height: 9px;
+  background: var(--okr);
+  transform: rotate(45deg);
+}
+
+.ref-kota-mark {
+  font-size: 0.7rem;
+}
+
+.ref-kota-num {
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.ref-typ {
+  margin: 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(236, 234, 229, 0.6);
+}
+
+.ref-nazev {
+  margin: 0.1rem 0 0;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.ref-misto {
+  margin: 0.15rem 0 0.5rem;
+  font-style: italic;
+  color: rgba(236, 234, 229, 0.7);
+  font-size: 0.95rem;
+}
+
+.ref-text {
+  margin: 0;
+  max-width: 42rem;
+  color: rgba(236, 234, 229, 0.85);
+  font-size: 0.98rem;
+}
+
+/* důvěra / čísla */
+.refs-duvera {
+  max-width: 72rem;
+  margin: 3rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem 1.25rem;
+  border-top: 4px solid var(--okr);
+  padding-top: 1.75rem;
+}
+
+.duvera-cislo {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--okr);
+  letter-spacing: 0.04em;
+}
+
+.duvera-pop {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: rgba(236, 234, 229, 0.75);
+}
+
+/* ── RESPONSIVITA ──────────────────────────────── */
+
+@media (min-width: 640px) {
+  .sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ref {
+    grid-template-columns: 9rem 1fr;
+    gap: 0 1.5rem;
+    padding-left: 1.75rem;
+  }
+
+  .ref-kota {
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .hero {
+    padding: 2rem 3rem 0;
+  }
+
+  .rez-zaklad {
+    margin: 0 -3rem;
+    padding: 0.6rem 3rem 0.7rem;
+  }
+
+  .sluzby,
+  .refs {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .sluzby {
+    padding-top: 5.5rem;
+    padding-bottom: 5.5rem;
+  }
+
+  .sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .refs-duvera {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .hero-body {
+    padding: 4.5rem 0 3.5rem;
+  }
+}
+
+/* ── REDUKOVANÝ POHYB ──────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-line-1,
+  .hero-line-2,
+  .hero-line-3,
+  .hero-lead,
+  .hero-actions,
+  .hero-kota {
+    animation: none;
+  }
+
+  .btn,
+  .sluzba {
+    transition: none;
+  }
+
+  .btn-solid:hover {
+    transform: none;
+  }
+}
