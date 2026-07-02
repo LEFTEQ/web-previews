@@ -1,0 +1,629 @@
+/* ============================================================
+   SENDI design — kožená galanterie, Brno
+   Paleta odvozená z materiálů řemesla:
+   --sedlo   #7A4A21  sedlová kůže (hlavní akcent)
+   --kuze    #3B2416  tmavá tříslená kůže (inverzní plochy)
+   --plst    #EFE9DF  světlá podšívka / plsť (pozadí)
+   --mosaz   #C9973F  mosazné kování (detaily, přezka)
+   --nit     #E8D9B0  režná nit (stehy, linky)
+   --inkoust #221A12  text
+   Typo: Fraunces (display, měkké kožené serify) + Archivo (tělo).
+   Signature: mosazná přezka s prošívaným popruhem v hero
+   + přerušované „stehové“ linky napříč strukturou stránky.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Archivo:wght@400;500;600;700&display=swap");
+
+:root {
+  --sedlo: #7a4a21;
+  --kuze: #3b2416;
+  --kuze-hl: #4d301d;
+  --plst: #efe9df;
+  --plst-2: #e6ddce;
+  --mosaz: #c9973f;
+  --nit: #e8d9b0;
+  --inkoust: #221a12;
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--plst);
+  color: var(--inkoust);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sd a:focus-visible,
+.sd button:focus-visible {
+  outline: 3px solid var(--mosaz);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- stehová linka (opakující se motiv) ---------- */
+
+.sd-stitchline {
+  display: inline-block;
+  width: 3.5rem;
+  height: 0;
+  border-top: 2px dashed var(--sedlo);
+  vertical-align: middle;
+  margin-right: 0.75rem;
+}
+
+/* ---------- hlavička ---------- */
+
+.sd-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.sd-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--inkoust);
+}
+
+.sd-wordmark-sendi {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.45rem;
+  letter-spacing: 0.04em;
+}
+
+.sd-wordmark-stitch {
+  width: 1.4rem;
+  border-top: 2px dashed var(--mosaz);
+  transform: translateY(-0.35rem);
+}
+
+.sd-wordmark-design {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--sedlo);
+}
+
+.sd-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.sd-nav a {
+  color: var(--inkoust);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.sd-nav a:hover {
+  color: var(--sedlo);
+}
+
+.sd-nav-tel {
+  color: var(--sedlo) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 40rem) {
+  .sd-nav a:not(.sd-nav-tel) {
+    display: none;
+  }
+}
+
+/* ---------- HERO ---------- */
+
+.sd-hero {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 4.5rem;
+  position: relative;
+}
+
+.sd-hero-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sedlo);
+  margin: 0 0 1.75rem;
+  animation: sd-rise 0.7s ease-out both;
+}
+
+.sd-hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.7rem, 9vw, 6.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.75rem;
+  max-width: 14ch;
+}
+
+.sd-hero-title em {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--sedlo);
+}
+
+.sd-hero-row {
+  display: block;
+  animation: sd-rise 0.8s ease-out both;
+}
+
+.sd-hero-row-1 { animation-delay: 0.08s; }
+.sd-hero-row-2 { animation-delay: 0.2s; padding-left: 0.9em; }
+.sd-hero-row-3 { animation-delay: 0.32s; }
+
+.sd-hero-lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  margin: 0 0 2rem;
+  animation: sd-rise 0.8s ease-out 0.45s both;
+}
+
+.sd-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-bottom: 3rem;
+  animation: sd-rise 0.8s ease-out 0.55s both;
+}
+
+.sd-btn {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.sd-btn-full {
+  background: var(--sedlo);
+  color: var(--plst);
+  border: 2px solid var(--sedlo);
+}
+
+.sd-btn-full:hover {
+  background: var(--kuze);
+  border-color: var(--kuze);
+  transform: translateY(-2px);
+}
+
+.sd-btn-line {
+  border: 2px dashed var(--sedlo);
+  color: var(--sedlo);
+}
+
+.sd-btn-line:hover {
+  background: var(--plst-2);
+  transform: translateY(-2px);
+}
+
+/* ---------- signature: přezka + popruh ---------- */
+
+.sd-hero-buckle {
+  position: absolute;
+  top: 4.5rem;
+  right: 1.25rem;
+  width: min(19rem, 32vw);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  animation: sd-fade 1s ease-out 0.5s both;
+}
+
+.sd-buckle {
+  width: 7.5rem;
+  height: 5.6rem;
+  border: 0.85rem solid var(--mosaz);
+  border-radius: 1.4rem;
+  position: relative;
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.55),
+    inset 0 -3px 4px rgba(59, 36, 22, 0.35),
+    0 6px 14px rgba(59, 36, 22, 0.2);
+  z-index: 2;
+}
+
+.sd-buckle-pin {
+  position: absolute;
+  top: 50%;
+  left: -0.85rem;
+  width: 62%;
+  height: 0.6rem;
+  transform: translateY(-50%);
+  background: linear-gradient(180deg, #dcae5c, var(--mosaz) 55%, #9a7028);
+  border-radius: 999px;
+}
+
+.sd-strap {
+  width: 4.6rem;
+  margin-right: 1.45rem;
+  margin-top: -0.5rem;
+  height: clamp(9rem, 22vw, 15rem);
+  background: linear-gradient(90deg, var(--kuze-hl), var(--sedlo) 45%, var(--kuze));
+  border-radius: 0 0 2.3rem 2.3rem;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.9rem 0.55rem;
+  box-shadow: 0 10px 22px rgba(59, 36, 22, 0.28);
+}
+
+.sd-strap-stitch {
+  width: 0;
+  border-left: 2px dashed var(--nit);
+  opacity: 0.9;
+}
+
+@media (max-width: 52rem) {
+  .sd-hero-buckle {
+    position: static;
+    width: auto;
+    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 2.5rem;
+  }
+
+  .sd-buckle {
+    width: 5.4rem;
+    height: 4.2rem;
+    border-width: 0.65rem;
+  }
+
+  .sd-buckle-pin {
+    left: -0.65rem;
+    height: 0.5rem;
+  }
+
+  .sd-strap {
+    width: clamp(8rem, 45vw, 16rem);
+    height: 3.4rem;
+    margin: 0 0 0 -0.45rem;
+    border-radius: 0 1.7rem 1.7rem 0;
+    flex-direction: column;
+    padding: 0.5rem 0.85rem;
+  }
+
+  .sd-strap-stitch {
+    width: auto;
+    height: 0;
+    border-left: none;
+    border-top: 2px dashed var(--nit);
+  }
+}
+
+/* ---------- hero fakta ---------- */
+
+.sd-hero-facts {
+  list-style: none;
+  margin: 0;
+  padding: 1.75rem 0 0;
+  border-top: 2px dashed var(--sedlo);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 52rem;
+  animation: sd-rise 0.8s ease-out 0.65s both;
+}
+
+.sd-hero-facts strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.sd-hero-facts span {
+  font-size: 0.92rem;
+  color: var(--kuze-hl);
+}
+
+@media (max-width: 40rem) {
+  .sd-hero-facts {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+}
+
+/* ---------- sekce: hlavičky ---------- */
+
+.sd-section-head {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.sd-section-head h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+  line-height: 1.1;
+  margin: 0 0 0.9rem;
+}
+
+.sd-section-head p {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* ---------- SORTIMENT ---------- */
+
+.sd-sortiment {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+}
+
+.sd-kolekce {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 52rem) {
+  .sd-kolekce {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sd-kolekce-card {
+  background: #fff;
+  border-radius: 1.4rem;
+  padding: 2rem 1.75rem;
+  border: 1px solid var(--plst-2);
+  box-shadow: 0 8px 24px rgba(59, 36, 22, 0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sd-kolekce-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(59, 36, 22, 0.12);
+}
+
+.sd-kolekce-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sd-kolekce-tag {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--plst);
+  background: var(--sedlo);
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+}
+
+.sd-kolekce-muzi .sd-kolekce-tag {
+  background: var(--kuze);
+}
+
+.sd-kolekce-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sd-kolekce-list li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 2px dashed var(--plst-2);
+}
+
+.sd-kolekce-list li:last-child {
+  border-bottom: none;
+}
+
+.sd-kolekce-list strong {
+  font-weight: 600;
+}
+
+.sd-kolekce-list span {
+  font-size: 0.88rem;
+  color: var(--kuze-hl);
+  text-align: right;
+}
+
+@media (max-width: 40rem) {
+  .sd-kolekce-list li {
+    flex-direction: column;
+  }
+
+  .sd-kolekce-list span {
+    text-align: left;
+  }
+}
+
+.sd-kolekce-note {
+  margin: 1.4rem 0 0;
+  padding: 0.85rem 1rem;
+  background: var(--plst);
+  border-radius: 0.8rem;
+  font-size: 0.92rem;
+  border-left: 4px solid var(--mosaz);
+}
+
+/* ---------- ZNAČKY / DŮVĚRA ---------- */
+
+.sd-znacky {
+  background: var(--kuze);
+  color: var(--plst);
+  padding: 4.5rem 1.25rem 5rem;
+  border-top: 3px dashed var(--mosaz);
+}
+
+.sd-znacky > * {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sd-section-head-inverse h2 {
+  color: var(--nit);
+}
+
+.sd-section-head-inverse p {
+  color: var(--plst-2);
+}
+
+.sd-znacky-grid {
+  list-style: none;
+  margin: 0 auto 3rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 52rem) {
+  .sd-znacky-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 34rem) {
+  .sd-znacky-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sd-znacka {
+  border: 2px dashed rgba(232, 217, 176, 0.4);
+  border-radius: 1rem;
+  padding: 1.2rem 1.3rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.sd-znacka:hover {
+  border-color: var(--mosaz);
+  background: var(--kuze-hl);
+}
+
+.sd-znacka-jmeno {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--nit);
+}
+
+.sd-znacka-role {
+  font-size: 0.88rem;
+  color: var(--plst-2);
+}
+
+.sd-provoz {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  border-top: 2px dashed rgba(232, 217, 176, 0.4);
+  padding-top: 1.75rem;
+}
+
+@media (max-width: 40rem) {
+  .sd-provoz {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sd-provoz-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mosaz);
+  margin-bottom: 0.3rem;
+}
+
+.sd-provoz-value {
+  font-size: 1.02rem;
+}
+
+.sd-provoz-value a {
+  color: var(--nit);
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 3px;
+}
+
+.sd-provoz-value a:hover {
+  color: #fff;
+}
+
+/* ---------- animace ---------- */
+
+@keyframes sd-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sd-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .sd *,
+  .sd *::before,
+  .sd *::after {
+    animation-duration: 0.001s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.001s !important;
+  }
+}
