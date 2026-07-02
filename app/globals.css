@@ -1,0 +1,624 @@
+/* =====================================================
+   HUSTÝ KÁRY — autopůjčovna Ostrava
+   Palette:
+   --asphalt   #16181D  (mokrý asfalt / noční Ostrava)
+   --smoke     #23262E  (karoserie ve stínu)
+   --chalk     #EDEEF0  (křídová bílá — značení na silnici)
+   --signal    #FFC400  (výstražná žlutá — SPZ, semafor, výfuk)
+   --rev       #E8452C  (otáčkoměr v červeném poli)
+   Type: Archivo Black-style condensed display přes system stack
+   Signature: SPZ (registrační značka) jako grafický motiv + jízdní
+   pruh (dashed lane line) jako dělicí prvek.
+   ===================================================== */
+
+:root {
+  --asphalt: #16181d;
+  --smoke: #23262e;
+  --chalk: #edeef0;
+  --signal: #ffc400;
+  --rev: #e8452c;
+  --gray: #9aa0ab;
+
+  --font-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial,
+    sans-serif;
+  --font-body: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-plate: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--asphalt);
+  color: var(--chalk);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hk a:focus-visible,
+.hk button:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Buttons ---------- */
+.hk-btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: 8px;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.hk-btn-solid {
+  background: var(--signal);
+  color: var(--asphalt);
+  box-shadow: 0 4px 0 #b58a00;
+}
+
+.hk-btn-solid:hover {
+  transform: translateY(-2px);
+}
+
+.hk-btn-solid:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #b58a00;
+}
+
+.hk-btn-ghost {
+  color: var(--chalk);
+  border: 2px solid var(--gray);
+}
+
+.hk-btn-ghost:hover {
+  border-color: var(--signal);
+  color: var(--signal);
+}
+
+/* ---------- HERO ---------- */
+.hk-hero {
+  padding: 1.25rem 1.25rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hk-hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+}
+
+/* Wordmark — stacked, condensed, s "pruhem" jako podtržením */
+.hk-wordmark {
+  font-family: var(--font-display);
+  line-height: 0.86;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.hk-wordmark-line1 {
+  display: block;
+  font-size: 1.6rem;
+  letter-spacing: 0.12em;
+  color: var(--chalk);
+}
+
+.hk-wordmark-line2 {
+  display: block;
+  font-size: 1.6rem;
+  letter-spacing: 0.3em;
+  color: var(--signal);
+  position: relative;
+}
+
+.hk-wordmark-line2::after {
+  content: "";
+  display: block;
+  margin-top: 4px;
+  height: 3px;
+  background: repeating-linear-gradient(
+    to right,
+    var(--chalk) 0 12px,
+    transparent 12px 20px
+  );
+}
+
+.hk-hero-contact {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hk-hero-city {
+  color: var(--gray);
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Hero media + SPZ plate */
+.hk-hero-media {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  animation: hk-rise 0.7s ease both;
+}
+
+.hk-hero-img {
+  width: 100%;
+  aspect-ratio: 16 / 8;
+  object-fit: cover;
+}
+
+/* Signature: registrační značka */
+.hk-hero-plate {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  display: inline-flex;
+  align-items: stretch;
+  border: 3px solid var(--asphalt);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  font-family: var(--font-plate);
+  font-weight: 700;
+  animation: hk-plate-in 0.6s 0.5s ease both;
+}
+
+.hk-plate-eu {
+  background: #003399;
+  color: #fff;
+  padding: 0.5rem 0.55rem;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+}
+
+.hk-plate-text {
+  background: var(--chalk);
+  color: var(--asphalt);
+  padding: 0.5rem 0.9rem;
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
+}
+
+.hk-hero-claim {
+  padding: 2.25rem 0 2rem;
+  max-width: 46rem;
+  animation: hk-rise 0.7s 0.15s ease both;
+}
+
+.hk-hero-claim h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 5.4vw, 3.4rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin: 0 0 1rem;
+}
+
+.hk-hero-claim h1 em {
+  font-style: normal;
+  color: var(--signal);
+}
+
+.hk-hero-sub {
+  color: var(--gray);
+  font-size: 1.05rem;
+  max-width: 40rem;
+  margin: 0 0 1.5rem;
+}
+
+.hk-hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+/* Marquee = jedoucí pruh s benefity (CSS only, decentní) */
+.hk-marquee {
+  overflow: hidden;
+  border-top: 2px dashed rgba(237, 238, 240, 0.25);
+  border-bottom: 2px dashed rgba(237, 238, 240, 0.25);
+  padding: 0.7rem 0;
+  margin: 0 -1.25rem;
+}
+
+.hk-marquee-track {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+  animation: hk-drive 28s linear infinite;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  color: var(--signal);
+}
+
+/* ---------- SECTION HEADS ---------- */
+.hk-section-head {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 2rem;
+}
+
+.hk-eyebrow {
+  display: inline-block;
+  font-family: var(--font-plate);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--asphalt);
+  background: var(--signal);
+  border-radius: 4px;
+  padding: 0.25rem 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.hk-section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0 0 0.75rem;
+}
+
+.hk-section-head p {
+  color: var(--gray);
+  max-width: 42rem;
+  margin: 0;
+}
+
+/* ---------- FLEET ---------- */
+.hk-fleet {
+  background: var(--smoke);
+  padding-bottom: 3.5rem;
+}
+
+.hk-fleet-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: grid;
+  gap: 2rem;
+}
+
+.hk-fleet-photo {
+  margin: 0;
+}
+
+.hk-fleet-photo img {
+  border-radius: 12px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.hk-fleet-photo figcaption {
+  color: var(--gray);
+  font-size: 0.9rem;
+  margin-top: 0.6rem;
+}
+
+.hk-fleet-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.hk-car {
+  background: var(--asphalt);
+  border-radius: 10px;
+  padding: 1.25rem;
+  display: grid;
+  gap: 0.6rem;
+  border-left: 5px solid var(--signal);
+  transition: transform 0.15s ease;
+}
+
+.hk-car:hover {
+  transform: translateX(6px);
+}
+
+.hk-car-tag {
+  font-family: var(--font-plate);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  color: var(--signal);
+}
+
+.hk-car h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.hk-car p {
+  margin: 0;
+  color: var(--gray);
+  font-size: 0.95rem;
+}
+
+.hk-car-price {
+  font-family: var(--font-plate);
+  font-weight: 700;
+  color: var(--chalk);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}
+
+/* ---------- HOW / TRUST ---------- */
+.hk-how {
+  background: var(--asphalt);
+  padding-bottom: 4rem;
+  /* jízdní pruh nahoře */
+  border-top: 4px dashed rgba(255, 196, 0, 0.5);
+}
+
+.hk-steps {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0 1.25rem 2.5rem;
+  max-width: 1200px;
+  display: grid;
+  gap: 1.25rem;
+  counter-reset: none;
+}
+
+.hk-step {
+  background: var(--smoke);
+  border-radius: 10px;
+  padding: 1.5rem 1.25rem 1.25rem;
+  position: relative;
+}
+
+.hk-step-n {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: var(--rev);
+  color: var(--chalk);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.hk-step h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.05rem;
+  margin: 0 0 0.5rem;
+}
+
+.hk-step p {
+  margin: 0;
+  color: var(--gray);
+  font-size: 0.95rem;
+}
+
+/* Trust blok */
+.hk-trust {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: grid;
+  gap: 2rem;
+}
+
+.hk-trust-photo {
+  margin: 0;
+}
+
+.hk-trust-photo img {
+  border-radius: 12px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.hk-trust-body h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  margin: 0 0 0.75rem;
+}
+
+.hk-trust-body > p {
+  color: var(--gray);
+  margin: 0 0 1.25rem;
+}
+
+.hk-quote {
+  margin: 0 0 1.5rem;
+  padding: 1rem 1.25rem;
+  border-left: 5px solid var(--rev);
+  background: var(--smoke);
+  border-radius: 0 10px 10px 0;
+  font-style: italic;
+  color: var(--chalk);
+}
+
+.hk-quote cite {
+  display: block;
+  margin-top: 0.6rem;
+  font-style: normal;
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+.hk-trust-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 0;
+}
+
+.hk-stat dt {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--signal);
+  line-height: 1;
+}
+
+.hk-stat dd {
+  margin: 0.35rem 0 0;
+  color: var(--gray);
+  font-size: 0.85rem;
+}
+
+/* ---------- Animations ---------- */
+@keyframes hk-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hk-plate-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) rotate(-2deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes hk-drive {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hk-hero-media,
+  .hk-hero-claim,
+  .hk-hero-plate {
+    animation: none;
+  }
+  .hk-marquee-track {
+    animation: none;
+    white-space: normal;
+    width: auto;
+  }
+  .hk-btn,
+  .hk-car {
+    transition: none;
+  }
+}
+
+/* ---------- Desktop layout ---------- */
+@media (min-width: 760px) {
+  .hk-hero {
+    padding: 2rem 2rem 0;
+  }
+
+  .hk-marquee {
+    margin: 0 -2rem;
+  }
+
+  .hk-wordmark-line1,
+  .hk-wordmark-line2 {
+    font-size: 1.9rem;
+  }
+
+  .hk-hero-plate {
+    left: 1.5rem;
+    bottom: 1.5rem;
+  }
+
+  .hk-plate-text {
+    font-size: 1.3rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .hk-fleet-grid {
+    grid-template-columns: 1fr 1.1fr;
+    align-items: start;
+  }
+
+  .hk-fleet-photo {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .hk-car {
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .hk-car-tag {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .hk-steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hk-trust {
+    grid-template-columns: 1fr 1.2fr;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hk-hero-contact {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .hk-trust-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hk-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hk-hero-ctas {
+    flex-direction: column;
+  }
+}
