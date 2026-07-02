@@ -1,0 +1,471 @@
+:root {
+  --steel: #1c2530;        /* tmavá ocel – pozadí hero */
+  --steel-2: #26313f;      /* lamela světlejší */
+  --zinc: #eef1f4;         /* zinkově světlé pozadí sekcí */
+  --anthracite: #2b3441;   /* text */
+  --signal: #ffb400;       /* výstražná žluť pohonů a závor */
+  --signal-deep: #e09a00;
+  --line: #c9d2db;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--anthracite);
+  background: var(--zinc);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  background:
+    linear-gradient(180deg, var(--steel) 0%, #161e27 100%);
+  color: #f2f5f8;
+  padding: 1.25rem 1.25rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-top {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  font-size: 1.05rem;
+}
+
+.wordmark-ideal { color: #f2f5f8; }
+
+.wordmark-vrata {
+  color: var(--steel);
+  background: var(--signal);
+  padding: 0.1rem 0.45rem;
+  letter-spacing: 0.18em;
+}
+
+.hero-tel {
+  color: #f2f5f8;
+  text-decoration: none;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  border: 1px solid rgba(242, 245, 248, 0.35);
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.hero-tel:hover {
+  border-color: var(--signal);
+  background: rgba(255, 180, 0, 0.12);
+}
+
+.hero-body {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.5rem 0 2.5rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--signal);
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 8.5vw, 6rem);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  max-width: 15ch;
+}
+
+.hero-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.6em);
+  animation: liftUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-line-1 { animation-delay: 0.05s; }
+.hero-line-2 { animation-delay: 0.15s; color: var(--signal); }
+.hero-line-3 { animation-delay: 0.25s; font-weight: 300; letter-spacing: 0.01em; }
+.hero-line-4 { animation-delay: 0.35s; font-weight: 300; letter-spacing: 0.01em; }
+
+@keyframes liftUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Signature: lamely sekčních vrat */
+.gate-panels {
+  margin: 2.25rem 0;
+  display: grid;
+  gap: 6px;
+}
+
+.gate-panel {
+  height: 26px;
+  background: linear-gradient(180deg, var(--steel-2) 0%, #1f2935 85%, #131b23 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 3px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: slideOpen 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.gate-panel.p1 { animation-delay: 0.45s; width: 100%; }
+.gate-panel.p2 { animation-delay: 0.55s; width: 88%; }
+.gate-panel.p3 { animation-delay: 0.65s; width: 72%; }
+.gate-panel.p4 {
+  animation-delay: 0.75s;
+  width: 52%;
+  background: linear-gradient(180deg, var(--signal) 0%, var(--signal-deep) 100%);
+  border-top-color: rgba(255, 255, 255, 0.35);
+}
+
+@keyframes slideOpen {
+  to { transform: scaleX(1); }
+}
+
+.hero-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 620px;
+}
+
+.hero-lede {
+  font-size: 1.05rem;
+  color: #c6cfd8;
+}
+
+.hero-cta {
+  align-self: flex-start;
+  background: var(--signal);
+  color: #161e27;
+  font-weight: 800;
+  text-decoration: none;
+  padding: 0.95rem 1.75rem;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.hero-cta:hover {
+  background: #ffc433;
+  transform: translateY(-2px);
+}
+
+.hero-strip {
+  border-top: 1px solid rgba(242, 245, 248, 0.15);
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1rem 0 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: #8d99a6;
+  font-weight: 600;
+}
+
+/* ============ SEKCE 1: NABÍDKA ============ */
+
+.offer {
+  padding: 4rem 1.25rem;
+  background: var(--zinc);
+}
+
+.offer-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.offer-head h2,
+.trust-text h2 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.offer-sub {
+  margin-top: 0.75rem;
+  max-width: 52ch;
+  color: #4d5a68;
+}
+
+/* Kolejnice – proces jako dráha vrat */
+.rail {
+  list-style: none;
+  margin: 2.75rem 0 3.5rem;
+  display: grid;
+  gap: 1.75rem;
+  position: relative;
+  padding-left: 1.75rem;
+}
+
+.rail::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  background: repeating-linear-gradient(
+    180deg,
+    var(--anthracite) 0 14px,
+    transparent 14px 22px
+  );
+  border-radius: 2px;
+}
+
+.rail-step { position: relative; }
+
+.rail-dot {
+  position: absolute;
+  left: -1.75rem;
+  top: 0.35rem;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--signal);
+  border: 3px solid var(--zinc);
+  box-shadow: 0 0 0 2px var(--anthracite);
+}
+
+.rail-step h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.rail-step p {
+  color: #4d5a68;
+  max-width: 56ch;
+}
+
+.offer-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.offer-figure img,
+.trust-figure img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(28, 37, 48, 0.18);
+}
+
+.offer-figure figcaption,
+.trust-figure figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.88rem;
+  color: #64717f;
+}
+
+.offer-list h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.product-list {
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.product-list li {
+  padding: 0.65rem 0.9rem;
+  background: #ffffff;
+  border-left: 4px solid var(--signal);
+  border-radius: 0 6px 6px 0;
+}
+
+.offer-note {
+  margin-top: 1.25rem;
+  color: #4d5a68;
+  font-size: 0.95rem;
+}
+
+/* ============ SEKCE 2: DŮVĚRA ============ */
+
+.trust {
+  background: #ffffff;
+  padding: 4rem 1.25rem;
+  border-top: 4px solid var(--signal);
+}
+
+.trust-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+}
+
+.trust-text p {
+  margin-top: 1rem;
+  color: #4d5a68;
+  max-width: 58ch;
+}
+
+.trust-facts {
+  margin-top: 2rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.fact {
+  border-top: 3px solid var(--anthracite);
+  padding-top: 0.6rem;
+}
+
+.fact dt {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #64717f;
+  font-weight: 700;
+}
+
+.fact dd {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-top: 0.2rem;
+}
+
+.trust-quote {
+  max-width: 1120px;
+  margin: 3rem auto 0;
+  background: var(--steel);
+  color: #e7ecf1;
+  border-radius: 8px;
+  padding: 2rem 1.75rem;
+  border-left: 6px solid var(--signal);
+}
+
+.trust-quote p {
+  font-size: 1.15rem;
+  line-height: 1.55;
+}
+
+.trust-quote cite {
+  display: block;
+  margin-top: 1rem;
+  font-style: normal;
+  font-size: 0.9rem;
+  color: #9fabb8;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (min-width: 720px) {
+  .hero { padding-top: 1.75rem; }
+
+  .hero-foot {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    max-width: none;
+  }
+
+  .hero-lede { max-width: 48ch; }
+
+  .gate-panel { height: 34px; }
+
+  .offer-grid {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: start;
+  }
+
+  .rail {
+    grid-template-columns: repeat(5, 1fr);
+    padding-left: 0;
+    padding-top: 2rem;
+    gap: 1.25rem;
+  }
+
+  .rail::before {
+    left: 8px;
+    right: 8px;
+    top: 7px;
+    bottom: auto;
+    width: auto;
+    height: 3px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--anthracite) 0 14px,
+      transparent 14px 22px
+    );
+  }
+
+  .rail-dot {
+    left: 0;
+    top: -2rem;
+  }
+
+  .trust-inner {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+  }
+
+  .trust-facts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .hero-line,
+  .gate-panel {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-cta:hover { transform: none; }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
