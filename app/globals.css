@@ -1,0 +1,544 @@
+/* ==========================================================================
+   HAL SERVIS GROUP — zemní práce, Ostrava
+   Koncept: řez terénem. Paleta z výkopu: ornice, jíl, skála, výstražná žluť
+   strojů, betonově světlé pozadí. Signature: vrstvený profil výkopu v hero.
+   ========================================================================== */
+
+:root {
+  --soil-dark: #241a12;    /* ornice / skoro černá hnědá */
+  --soil-clay: #7a4a21;    /* jíl */
+  --soil-rock: #4a4741;    /* skalní šeď */
+  --machine-yellow: #f0a500; /* výstražná žluť rypadel */
+  --plain-light: #ece7dd;  /* betonově světlé pozadí */
+  --paper: #f7f4ee;
+  --ink: #1c1712;
+
+  --font-display: "Arial Black", "Archivo Black", Haettenschweiler, "Franklin Gothic Heavy", sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-utility: "Courier New", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.hs a { color: inherit; }
+
+.hs :focus-visible {
+  outline: 3px solid var(--machine-yellow);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.hs-hero {
+  position: relative;
+  background: var(--plain-light);
+  overflow: hidden;
+}
+
+.hs-hero-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 20px 0;
+}
+
+.hs-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid var(--soil-dark);
+}
+
+.hs-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.hs-wordmark-main {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
+  color: var(--soil-dark);
+}
+
+.hs-wordmark-sub {
+  font-family: var(--font-utility);
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--soil-clay);
+  margin-top: 4px;
+}
+
+.hs-topbar-tel {
+  text-decoration: none;
+  text-align: right;
+  line-height: 1.2;
+}
+
+.hs-topbar-tel-label {
+  display: block;
+  font-family: var(--font-utility);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--soil-rock);
+}
+
+.hs-topbar-tel-num {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--soil-dark);
+}
+
+.hs-topbar-tel:hover .hs-topbar-tel-num {
+  color: var(--soil-clay);
+}
+
+.hs-hero-body {
+  padding: 48px 0 56px;
+  max-width: 720px;
+}
+
+.hs-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-utility);
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soil-rock);
+  margin: 0 0 20px;
+}
+
+.hs-eyebrow-tick {
+  width: 34px;
+  height: 12px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--machine-yellow) 0 6px,
+    var(--soil-dark) 6px 12px
+  );
+  flex: none;
+}
+
+.hs-hero-title {
+  margin: 0 0 24px;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 11vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--soil-dark);
+  display: flex;
+  flex-direction: column;
+}
+
+.hs-line { display: block; }
+
+.hs-line-2 {
+  color: var(--soil-clay);
+  padding-left: 0.6em; /* schodovité odsazení = terasy výkopu */
+}
+
+.hs-line-3 {
+  padding-left: 1.2em;
+}
+
+.hs-title-dot { color: var(--machine-yellow); }
+
+.hs-hero-lead {
+  font-size: 1.15rem;
+  max-width: 34em;
+  margin: 0 0 32px;
+  color: #3d3227;
+}
+
+.hs-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.hs-btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 26px;
+  border: 3px solid var(--soil-dark);
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.hs-btn-primary {
+  background: var(--machine-yellow);
+  color: var(--soil-dark);
+}
+
+.hs-btn-primary:hover {
+  background: var(--soil-dark);
+  color: var(--machine-yellow);
+  transform: translateY(-2px);
+}
+
+.hs-btn-ghost {
+  background: transparent;
+  color: var(--soil-dark);
+}
+
+.hs-btn-ghost:hover {
+  background: var(--soil-dark);
+  color: var(--paper);
+  transform: translateY(-2px);
+}
+
+/* --- Signature: řez terénem --- */
+
+.hs-cut {
+  position: relative;
+  margin-top: 8px;
+}
+
+.hs-cut-layer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  transform-origin: bottom;
+}
+
+.hs-cut-topsoil {
+  height: 46px;
+  background: var(--soil-dark);
+  animation: hs-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+.hs-cut-clay {
+  height: 64px;
+  background: var(--soil-clay);
+  animation: hs-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+.hs-cut-rock {
+  height: 84px;
+  background: var(--soil-rock);
+  background-image: repeating-linear-gradient(
+    -60deg,
+    rgba(0, 0, 0, 0.12) 0 2px,
+    transparent 2px 26px
+  );
+  animation: hs-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+}
+
+.hs-cut-label {
+  font-family: var(--font-utility);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 1120px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* zuby lžíce bagru na hraně řezu */
+.hs-cut-tooth {
+  position: absolute;
+  top: -14px;
+  right: 8%;
+  display: flex;
+  gap: 10px;
+}
+
+.hs-cut-tooth span {
+  width: 0;
+  height: 0;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  border-bottom: 14px solid var(--machine-yellow);
+}
+
+@keyframes hs-rise {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+/* ================= SEKCE — společné ================= */
+
+.hs-section-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 72px 20px;
+}
+
+.hs-section-eyebrow {
+  font-family: var(--font-utility);
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--soil-clay);
+  margin: 0 0 12px;
+}
+
+.hs-section-eyebrow-light { color: var(--machine-yellow); }
+
+.hs-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin: 0 0 16px;
+  color: var(--soil-dark);
+}
+
+.hs-section-title-light { color: var(--paper); }
+
+.hs-section-lead {
+  max-width: 40em;
+  margin: 0;
+  color: #3d3227;
+}
+
+/* ================= SLUŽBY ================= */
+
+.hs-services { background: var(--paper); }
+
+.hs-section-head { margin-bottom: 48px; }
+
+.hs-service-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: hs-step;
+}
+
+.hs-service {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 24px;
+  padding: 28px 0;
+  border-top: 2px solid var(--soil-dark);
+  position: relative;
+}
+
+.hs-service:last-child {
+  border-bottom: 2px solid var(--soil-dark);
+}
+
+.hs-service-depth {
+  font-family: var(--font-utility);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--soil-rock);
+  line-height: 1.5;
+  padding-top: 6px;
+  border-left: 6px solid var(--machine-yellow);
+  padding-left: 12px;
+}
+
+/* hloubková stupnice: čím dál v postupu, tím tmavší pruh */
+.hs-service:nth-child(2) .hs-service-depth { border-left-color: var(--soil-clay); }
+.hs-service:nth-child(3) .hs-service-depth { border-left-color: var(--soil-rock); }
+.hs-service:nth-child(4) .hs-service-depth { border-left-color: var(--soil-dark); }
+
+.hs-service-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0 0 10px;
+  color: var(--soil-dark);
+}
+
+.hs-service-body p {
+  margin: 0;
+  max-width: 48em;
+  color: #3d3227;
+}
+
+.hs-service:hover .hs-service-body h3 { color: var(--soil-clay); }
+
+/* ================= DŮVĚRA ================= */
+
+.hs-trust {
+  background: var(--soil-dark);
+  color: var(--paper);
+  background-image: repeating-linear-gradient(
+    -60deg,
+    rgba(255, 255, 255, 0.025) 0 2px,
+    transparent 2px 30px
+  );
+}
+
+.hs-trust-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+.hs-trust-lead {
+  color: #d8d0c2;
+  max-width: 42em;
+  margin: 0 0 28px;
+}
+
+.hs-trust-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hs-trust-points li {
+  padding: 14px 0 14px 20px;
+  border-left: 4px solid var(--machine-yellow);
+  margin-bottom: 14px;
+  color: #d8d0c2;
+}
+
+.hs-trust-points strong {
+  display: block;
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+}
+
+.hs-trust-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  align-self: start;
+}
+
+.hs-stat {
+  background: var(--soil-dark);
+  padding: 22px 18px;
+}
+
+.hs-stat dt {
+  font-family: var(--font-utility);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #a89a86;
+  margin-bottom: 8px;
+}
+
+.hs-stat dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  color: var(--machine-yellow);
+  line-height: 1;
+}
+
+.hs-quote {
+  margin: 56px 0 0;
+  padding: 28px 24px;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  border-left: 6px solid var(--machine-yellow);
+  max-width: 760px;
+}
+
+.hs-quote blockquote {
+  margin: 0 0 14px;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--paper);
+  line-height: 1.55;
+}
+
+.hs-quote figcaption {
+  font-family: var(--font-utility);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a89a86;
+}
+
+/* ================= RESPONSIVITA ================= */
+
+@media (min-width: 760px) {
+  .hs-trust-grid {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 64px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hs-hero-body { padding: 36px 0 44px; }
+
+  .hs-line-2 { padding-left: 0.35em; }
+  .hs-line-3 { padding-left: 0.7em; }
+
+  .hs-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hs-service {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .hs-service-depth {
+    display: flex;
+    gap: 6px;
+    padding-top: 0;
+  }
+
+  .hs-service-depth br { display: none; }
+
+  .hs-cut-tooth { right: 5%; }
+
+  .hs-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .hs-topbar-tel { text-align: left; }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .hs-cut-topsoil,
+  .hs-cut-clay,
+  .hs-cut-rock {
+    animation: none;
+  }
+
+  .hs-btn,
+  .hs-btn:hover {
+    transition: none;
+    transform: none;
+  }
+}
