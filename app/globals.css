@@ -1,0 +1,574 @@
+/* ============================================================
+   JK TRADE HK — plynařství Hradec Králové
+   Koncept: „měří se, nehádá“ — svět manometrů, modrého plamene
+   a ocelové trubky. Tmavě ocelové pozadí hero, plamenná modř
+   jako akcent, teplý zážehový oranž jen pro CTA (jiskra).
+   ============================================================ */
+
+:root {
+  --ocel: #10171e;          /* tmavá ocel trubky */
+  --ocel-svetla: #1b2530;   /* panel */
+  --plamen: #3fa9f5;        /* modrý plamen hořáku */
+  --plamen-hloubka: #1565c0;
+  --jiskra: #ff8a3d;        /* zážehová jiskra — jen CTA */
+  --papir: #eef3f7;         /* revizní protokol */
+  --inkoust: #16232e;
+  --seda: #5d6d7c;
+
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Impact, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-utility: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--inkoust);
+  background: var(--papir);
+  -webkit-font-smoothing: antialiased;
+}
+
+.gas a:focus-visible,
+.gas button:focus-visible {
+  outline: 3px solid var(--jiskra);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  background:
+    radial-gradient(ellipse 120% 80% at 85% 110%, rgba(63, 169, 245, 0.18), transparent 60%),
+    linear-gradient(175deg, #0c1218 0%, var(--ocel) 55%, #101d2a 100%);
+  color: var(--papir);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 2.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+
+.wordmark-jk {
+  color: var(--papir);
+}
+
+.wordmark-flame {
+  color: var(--plamen);
+  display: inline-flex;
+  transform: translateY(-2px);
+}
+
+.wordmark-trade {
+  color: var(--plamen);
+  font-weight: 400;
+  letter-spacing: 0.22em;
+}
+
+.hero-locality {
+  font-family: var(--font-utility);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(238, 243, 247, 0.6);
+}
+
+.hero-main {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  max-width: 14ch;
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--plamen);
+}
+
+.hero-line-3 {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--plamen);
+}
+
+.hero-sub {
+  max-width: 34rem;
+  margin-top: 1.5rem;
+  font-size: 1.05rem;
+  color: rgba(238, 243, 247, 0.82);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.9rem 1.4rem;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-flame {
+  background: var(--jiskra);
+  color: #23130a;
+}
+
+.btn-flame:hover {
+  background: #ffa15f;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--papir);
+  border: 1px solid rgba(238, 243, 247, 0.35);
+}
+
+.btn-ghost:hover {
+  border-color: var(--plamen);
+  color: var(--plamen);
+}
+
+/* --- Signature: manometr --- */
+
+.gauge {
+  position: absolute;
+  right: clamp(-4rem, 2vw, 4rem);
+  top: 6.5rem;
+  width: clamp(14rem, 26vw, 22rem);
+  text-align: center;
+  pointer-events: none;
+}
+
+.gauge-dial svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gauge-ring {
+  fill: rgba(27, 37, 48, 0.55);
+  stroke: rgba(63, 169, 245, 0.4);
+  stroke-width: 2;
+}
+
+.tick {
+  stroke: rgba(238, 243, 247, 0.35);
+  stroke-width: 2;
+}
+
+.tick-long {
+  stroke: var(--plamen);
+  stroke-width: 3;
+}
+
+.gauge-unit {
+  font-family: var(--font-utility);
+  font-size: 14px;
+  fill: rgba(238, 243, 247, 0.55);
+  letter-spacing: 0.2em;
+}
+
+.gauge-needle {
+  stroke: var(--jiskra);
+  stroke-width: 3;
+  stroke-linecap: round;
+  transform-origin: 100px 100px;
+  transform: rotate(-120deg);
+  animation: needle-settle 2.2s cubic-bezier(0.34, 1.4, 0.4, 1) 0.4s forwards;
+}
+
+.gauge-hub {
+  fill: var(--papir);
+}
+
+.gauge-caption {
+  margin-top: 0.4rem;
+  font-family: var(--font-utility);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(238, 243, 247, 0.5);
+}
+
+@keyframes needle-settle {
+  0% { transform: rotate(-120deg); }
+  60% { transform: rotate(48deg); }
+  80% { transform: rotate(38deg); }
+  100% { transform: rotate(42deg); }
+}
+
+/* --- trubka jako dělicí linie hero --- */
+
+.hero-pipe {
+  display: flex;
+  align-items: center;
+  max-width: 72rem;
+  margin: 2rem auto 0;
+  padding-bottom: 2.2rem;
+}
+
+.pipe-run {
+  flex: 1;
+  height: 10px;
+  background: linear-gradient(180deg, #3b4a58, #232f3a 50%, #3b4a58);
+  border-radius: 5px;
+}
+
+.pipe-run-short {
+  flex: 0 0 18%;
+}
+
+.pipe-joint {
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #4c5d6d, #2a3846);
+  flex: none;
+}
+
+.pipe-valve {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 4px solid var(--plamen);
+  background: var(--ocel);
+  flex: none;
+  margin: 0 4px;
+  position: relative;
+}
+
+.pipe-valve::after {
+  content: "";
+  position: absolute;
+  inset: 6px 8px;
+  border-radius: 2px;
+  background: var(--plamen);
+  transform: rotate(45deg);
+}
+
+/* načtení hero — jemná sekvence */
+
+.hero-line,
+.hero-sub,
+.hero-actions {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: rise 0.7s ease forwards;
+}
+
+.hero-line-1 { animation-delay: 0.05s; }
+.hero-line-2 { animation-delay: 0.18s; }
+.hero-line-3 { animation-delay: 0.31s; }
+.hero-sub { animation-delay: 0.45s; }
+.hero-actions { animation-delay: 0.58s; }
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ================= SEKCE — společné ================= */
+
+.section-head {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: var(--font-utility);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--plamen-hloubka);
+  margin-bottom: 0.6rem;
+}
+
+.eyebrow-light {
+  color: var(--plamen);
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 5vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+
+.section-lead {
+  max-width: 38rem;
+  margin-top: 1rem;
+  color: var(--seda);
+}
+
+.section-lead-light {
+  color: rgba(238, 243, 247, 0.75);
+}
+
+/* ================= SLUŽBY ================= */
+
+.sluzby {
+  padding: 4rem 1.25rem 4.5rem;
+  background: var(--papir);
+}
+
+.sluzby-grid {
+  list-style: none;
+  max-width: 72rem;
+  margin: 2.5rem auto 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.sluzba {
+  background: #fff;
+  border: 1px solid #d8e2ea;
+  border-top: 4px solid var(--plamen);
+  border-radius: 6px;
+  padding: 1.6rem 1.5rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sluzba:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(16, 23, 30, 0.1);
+}
+
+.sluzba-kod {
+  font-family: var(--font-utility);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  color: var(--plamen-hloubka);
+  border: 1px solid var(--plamen-hloubka);
+  border-radius: 3px;
+  align-self: flex-start;
+  padding: 0.15rem 0.5rem;
+}
+
+.sluzba h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
+}
+
+.sluzba p {
+  color: #3a4a58;
+  font-size: 0.98rem;
+}
+
+.sluzba-detail {
+  margin-top: auto;
+  font-family: var(--font-utility);
+  font-size: 0.8rem;
+  color: var(--seda);
+  border-top: 1px dashed #c6d3de;
+  padding-top: 0.7rem;
+}
+
+/* ================= DŮVĚRA ================= */
+
+.duvera {
+  background:
+    radial-gradient(ellipse 90% 60% at 10% 0%, rgba(63, 169, 245, 0.12), transparent 55%),
+    var(--ocel);
+  color: var(--papir);
+  padding: 4rem 1.25rem 4.5rem;
+}
+
+.duvera h2 {
+  color: var(--papir);
+}
+
+.duvody {
+  max-width: 72rem;
+  margin: 2.5rem auto 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.duvod {
+  background: var(--ocel-svetla);
+  border-left: 4px solid var(--plamen);
+  border-radius: 4px;
+  padding: 1.4rem 1.4rem 1.3rem;
+}
+
+.duvod dt {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--plamen);
+}
+
+.duvod dd {
+  margin-top: 0.6rem;
+  font-size: 0.98rem;
+  color: rgba(238, 243, 247, 0.8);
+}
+
+.reference {
+  max-width: 72rem;
+  margin: 2.5rem auto 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.ref {
+  border: 1px solid rgba(238, 243, 247, 0.15);
+  border-radius: 6px;
+  padding: 1.5rem;
+}
+
+.ref blockquote p {
+  font-size: 1.05rem;
+  font-style: italic;
+  color: rgba(238, 243, 247, 0.9);
+}
+
+.ref figcaption {
+  margin-top: 0.9rem;
+  font-family: var(--font-utility);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--plamen);
+}
+
+.duvera-region {
+  max-width: 72rem;
+  margin: 2.5rem auto 0;
+  color: rgba(238, 243, 247, 0.7);
+  font-size: 0.98rem;
+}
+
+.duvera-region a {
+  color: var(--jiskra);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* ================= RESPONZIVITA ================= */
+
+@media (min-width: 640px) {
+  .sluzby-grid,
+  .reference {
+    grid-template-columns: 1fr 1fr;
+  }
+  .duvody {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    padding: 2rem 3rem 0;
+  }
+  .hero-main {
+    padding-bottom: 3rem;
+  }
+  .sluzby,
+  .duvera {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (max-width: 899px) {
+  .gauge {
+    position: static;
+    width: min(16rem, 70%);
+    margin: 1.5rem auto 0;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-line,
+  .hero-sub,
+  .hero-actions {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .gauge-needle {
+    animation: none;
+    transform: rotate(42deg);
+  }
+  .sluzba,
+  .btn {
+    transition: none;
+  }
+  .sluzba:hover,
+  .btn-flame:hover {
+    transform: none;
+  }
+}
