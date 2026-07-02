@@ -1,0 +1,625 @@
+/* ============================================================
+   QHOUSE — dřevostavby Olomouc
+   Paleta odvozená ze dřeva a řemesla:
+   --smrk    #2E4034  (tmavá jehličnatá zeleň — les, ne "tech dark")
+   --papir   #FBF7EF  (světlé smrkové řezivo)
+   --hoblina #E8DCC7  (čerstvá hoblina)
+   --med     #C77B3B  (medová lazura / letokruh)
+   --uhel    #22201C  (tesařská tužka)
+   Typo: Marcellus (tesařský, rytý display) + Work Sans (věcné tělo)
+   Signature: letokruhy — soustředné kruhy jako otisk kmene,
+   které se při načtení "dořezávají" (stroke-dashoffset).
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Marcellus&family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap");
+
+:root {
+  --smrk: #2e4034;
+  --smrk-tmavy: #22312a;
+  --papir: #fbf7ef;
+  --hoblina: #e8dcc7;
+  --med: #c77b3b;
+  --med-svetla: #dfa06a;
+  --uhel: #22201c;
+  --display: "Marcellus", "Georgia", serif;
+  --body: "Work Sans", "Segoe UI", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--uhel);
+  background: var(--papir);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.qh a:focus-visible,
+.qh button:focus-visible {
+  outline: 3px solid var(--med);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--papir);
+  overflow: hidden;
+  background: var(--smrk-tmavy);
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: hero-zoom 2.4s ease-out both;
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    12deg,
+    rgba(34, 49, 42, 0.94) 0%,
+    rgba(34, 49, 42, 0.72) 42%,
+    rgba(34, 49, 42, 0.18) 100%
+  );
+}
+
+.hero-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.5rem clamp(1.25rem, 5vw, 4rem);
+}
+
+.wordmark {
+  font-family: var(--display);
+  font-size: 1.75rem;
+  letter-spacing: 0.06em;
+  color: var(--papir);
+  line-height: 1;
+}
+
+.wordmark-thin {
+  color: var(--med-svetla);
+}
+
+.wordmark-sub {
+  display: block;
+  font-family: var(--body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--hoblina);
+  margin-top: 0.4rem;
+}
+
+.hero-tel {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--papir);
+  text-decoration: none;
+  border-bottom: 2px solid var(--med);
+  padding-bottom: 2px;
+  white-space: nowrap;
+}
+
+.hero-tel:hover {
+  color: var(--med-svetla);
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  margin: auto 0;
+  padding: 3rem clamp(1.25rem, 5vw, 4rem) 2rem;
+  max-width: 46rem;
+  animation: rise 0.9s 0.2s ease-out both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-eyebrow {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--med-svetla);
+  margin: 0 0 1rem;
+}
+
+.hero-title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 7vw, 4.6rem);
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  margin: 0 0 1.25rem;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--med-svetla);
+}
+
+.hero-lead {
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  max-width: 34rem;
+  color: var(--hoblina);
+  margin: 0 0 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.9rem 1.8rem;
+  border-radius: 3px;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-solid {
+  background: var(--med);
+  color: var(--uhel);
+}
+
+.btn-solid:hover {
+  background: var(--med-svetla);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--papir);
+  border: 1px solid rgba(251, 247, 239, 0.55);
+}
+
+.btn-ghost:hover {
+  border-color: var(--med-svetla);
+  color: var(--med-svetla);
+}
+
+/* --- signature: letokruhy --- */
+
+.hero-rings {
+  position: absolute;
+  z-index: 1;
+  right: -8rem;
+  bottom: -8rem;
+  width: clamp(20rem, 40vw, 32rem);
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.hero-rings svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-rings circle {
+  fill: none;
+  stroke: var(--med-svetla);
+  stroke-width: 1.5;
+  opacity: 0.55;
+  stroke-dasharray: 1300;
+  stroke-dashoffset: 1300;
+  animation: rez 2.6s ease-out forwards;
+  transform-origin: center;
+}
+
+.hero-rings circle:nth-child(1) { animation-delay: 0.2s; }
+.hero-rings circle:nth-child(2) { animation-delay: 0.45s; }
+.hero-rings circle:nth-child(3) { animation-delay: 0.7s; }
+.hero-rings circle:nth-child(4) { animation-delay: 0.95s; }
+.hero-rings circle:nth-child(5) { animation-delay: 1.2s; }
+
+@keyframes rez {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.hero-facts {
+  position: relative;
+  z-index: 2;
+  list-style: none;
+  margin: 0;
+  padding: 1.5rem clamp(1.25rem, 5vw, 4rem) 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 3.5rem;
+  border-top: 1px solid rgba(251, 247, 239, 0.25);
+}
+
+.hero-facts li {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-facts strong {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--papir);
+  line-height: 1.1;
+}
+
+.hero-facts span {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--hoblina);
+}
+
+/* ---------- SEKCE: STAVBA (vrstvy) ---------- */
+
+.stavba {
+  background: var(--papir);
+  padding: clamp(3.5rem, 8vw, 6.5rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--med);
+  margin: 0 0 0.75rem;
+}
+
+.stavba h2,
+.nabidka h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  color: var(--smrk-tmavy);
+}
+
+.stavba-intro {
+  max-width: 38rem;
+  font-size: 1.05rem;
+  color: #4b463d;
+  margin: 0 0 3rem;
+}
+
+.stavba-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.vrstvy {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: vrstva;
+}
+
+.vrstva {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.4rem 0;
+  border-top: 1px solid var(--hoblina);
+}
+
+.vrstva:last-child {
+  border-bottom: 1px solid var(--hoblina);
+}
+
+.vrstva-cislo {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  color: var(--med);
+  line-height: 1;
+  min-width: 2.2rem;
+  padding-top: 0.2rem;
+}
+
+.vrstva-text h3 {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 0 0 0.35rem;
+  color: var(--smrk-tmavy);
+}
+
+.vrstva-text p {
+  margin: 0;
+  color: #4b463d;
+  font-size: 0.98rem;
+}
+
+.stavba-figure {
+  margin: 0;
+}
+
+.stavba-figure img,
+.nabidka-figure img {
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 20px 40px -24px rgba(34, 49, 42, 0.5);
+}
+
+.stavba-figure figcaption,
+.nabidka-figure figcaption {
+  font-size: 0.88rem;
+  color: #6b6458;
+  margin-top: 0.8rem;
+  max-width: 32rem;
+}
+
+.stavba-note {
+  margin: 3rem auto 0;
+  max-width: 44rem;
+  text-align: center;
+  font-size: 1.05rem;
+  background: var(--hoblina);
+  padding: 1.4rem 1.6rem;
+  border-radius: 4px;
+  color: var(--smrk-tmavy);
+}
+
+.stavba-note a {
+  color: var(--smrk-tmavy);
+  font-weight: 600;
+  text-decoration-color: var(--med);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.stavba-note a:hover {
+  color: var(--med);
+}
+
+/* ---------- SEKCE: NABÍDKA ---------- */
+
+.nabidka {
+  background: var(--smrk);
+  color: var(--papir);
+  padding: clamp(3.5rem, 8vw, 6.5rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.nabidka h2 {
+  color: var(--papir);
+}
+
+.eyebrow-dark {
+  color: var(--med-svetla);
+}
+
+.nabidka-intro {
+  max-width: 38rem;
+  color: var(--hoblina);
+  font-size: 1.05rem;
+  margin: 0 0 2.5rem;
+}
+
+.nabidka-figure {
+  margin: 0 0 2.5rem;
+}
+
+.nabidka-figure figcaption {
+  color: var(--hoblina);
+}
+
+.domy {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.dum {
+  background: rgba(251, 247, 239, 0.06);
+  border: 1px solid rgba(251, 247, 239, 0.18);
+  border-radius: 4px;
+  padding: 1.6rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.dum:hover {
+  border-color: var(--med-svetla);
+  transform: translateY(-4px);
+}
+
+.dum-jmeno {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.6rem;
+  margin: 0 0 0.5rem;
+  color: var(--med-svetla);
+  letter-spacing: 0.03em;
+}
+
+.dum-popis {
+  margin: 0 0 1.25rem;
+  color: var(--hoblina);
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+.dum-data {
+  margin: 0 0 1.25rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.dum-data div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px dashed rgba(251, 247, 239, 0.2);
+  padding-bottom: 0.4rem;
+}
+
+.dum-data dt {
+  font-size: 0.85rem;
+  color: var(--hoblina);
+}
+
+.dum-data dd {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.dum-cena {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dum-cena span {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--hoblina);
+}
+
+.dum-cena strong {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--papir);
+}
+
+.citace {
+  margin: 3.5rem auto 0;
+  max-width: 42rem;
+  text-align: center;
+  border: none;
+  padding: 0;
+}
+
+.citace p {
+  font-family: var(--display);
+  font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+  line-height: 1.5;
+  color: var(--papir);
+  margin: 0 0 1rem;
+}
+
+.citace cite {
+  font-style: normal;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--med-svetla);
+}
+
+/* ---------- RESPONSIVITA ---------- */
+
+@media (min-width: 760px) {
+  .stavba-grid {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 4rem;
+  }
+
+  .domy {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 100svh;
+  }
+
+  .hero-rings {
+    right: -10rem;
+    bottom: -10rem;
+    opacity: 0.5;
+  }
+
+  .hero-facts {
+    gap: 1.25rem 2rem;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-img,
+  .hero-body {
+    animation: none;
+  }
+
+  .hero-rings circle {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .btn,
+  .dum {
+    transition: none;
+  }
+
+  .btn-solid:hover,
+  .dum:hover {
+    transform: none;
+  }
+}
