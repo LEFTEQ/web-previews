@@ -1,0 +1,529 @@
+/* =========================================================
+   LABÍK průmyslové podlahy — Pardubice
+   Koncept: „řez podlahou“ — vrstvy skladby jako signature.
+   Paleta z reality řemesla:
+   --pf-beton   #B9B4AB  (strojně hlazený beton)
+   --pf-tmavy   #23262B  (drátkobeton / asfaltový podklad)
+   --pf-signal  #F2B705  (signální žluť značení uliček)
+   --pf-epoxid  #2E6E5E  (typická zeleň epoxidové stěrky)
+   --pf-svetla  #EDEBE6  (cementová stěrka)
+   ========================================================= */
+
+:root {
+  --pf-beton: #b9b4ab;
+  --pf-tmavy: #23262b;
+  --pf-signal: #f2b705;
+  --pf-epoxid: #2e6e5e;
+  --pf-svetla: #edebe6;
+  --pf-ink: #1b1d21;
+  --pf-max: 72rem;
+  --pf-pad: clamp(1.25rem, 5vw, 3.5rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--pf-svetla);
+  color: var(--pf-ink);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pf a:focus-visible,
+.pf :focus-visible {
+  outline: 3px solid var(--pf-signal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.pf-hero {
+  background: var(--pf-tmavy);
+  color: var(--pf-svetla);
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemná textura hlazeného betonu */
+.pf-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 70% 10%, rgba(185, 180, 171, 0.08), transparent 60%),
+    repeating-linear-gradient(
+      105deg,
+      transparent 0 46px,
+      rgba(237, 235, 230, 0.025) 46px 48px
+    );
+  pointer-events: none;
+}
+
+.pf-hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem var(--pf-pad);
+  position: relative;
+  z-index: 2;
+}
+
+.pf-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.pf-wordmark-main {
+  font-weight: 900;
+  font-size: 1.5rem;
+  letter-spacing: 0.22em;
+  color: var(--pf-svetla);
+  /* podtržení = vylitá vrstva */
+  box-shadow: 0 4px 0 0 var(--pf-signal);
+  width: fit-content;
+  padding-bottom: 2px;
+}
+
+.pf-wordmark-sub {
+  margin-top: 0.55rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pf-beton);
+}
+
+.pf-hero-tel {
+  color: var(--pf-tmavy);
+  background: var(--pf-signal);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.pf-hero-tel:hover {
+  background: #ffc81e;
+  transform: translateY(-1px);
+}
+
+.pf-hero-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5rem var(--pf-pad) 3rem;
+  position: relative;
+  z-index: 2;
+  max-width: var(--pf-max);
+}
+
+.pf-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--pf-signal);
+  font-weight: 700;
+}
+
+.pf-h1 {
+  margin: 0;
+  font-size: clamp(2.1rem, 7.5vw, 5rem);
+  line-height: 1.02;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.pf-h1 em {
+  font-style: normal;
+  color: var(--pf-signal);
+}
+
+.pf-h1-line {
+  display: block;
+  animation: pf-pour 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.pf-h1-line-1 { animation-delay: 0.05s; }
+.pf-h1-line-2 { animation-delay: 0.18s; }
+.pf-h1-line-3 { animation-delay: 0.31s; }
+
+@keyframes pf-pour {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pf-lead {
+  margin: 1.5rem 0 0;
+  max-width: 34rem;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: #cfccc5;
+  animation: pf-pour 0.7s 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.pf-hero-cta {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  animation: pf-pour 0.7s 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.pf-btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 3px;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.pf-btn-solid {
+  background: var(--pf-signal);
+  color: var(--pf-tmavy);
+}
+
+.pf-btn-solid:hover {
+  background: #ffc81e;
+  transform: translateY(-2px);
+}
+
+.pf-btn-ghost {
+  color: var(--pf-svetla);
+  border: 2px solid rgba(237, 235, 230, 0.35);
+}
+
+.pf-btn-ghost:hover {
+  border-color: var(--pf-svetla);
+  transform: translateY(-2px);
+}
+
+/* ---- SIGNATURE: řez podlahou ---- */
+
+.pf-cut {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.pf-cut-layer {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--pf-pad);
+  transform-origin: left center;
+  animation: pf-spread 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes pf-spread {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.pf-cut-nater {
+  height: 16px;
+  background: var(--pf-epoxid);
+  animation-delay: 0.9s;
+}
+
+.pf-cut-penetrace {
+  height: 6px;
+  background: var(--pf-signal);
+  animation-delay: 0.78s;
+}
+
+.pf-cut-beton {
+  height: 44px;
+  background:
+    radial-gradient(circle at 12% 40%, rgba(35, 38, 43, 0.5) 0 2px, transparent 3px),
+    radial-gradient(circle at 34% 65%, rgba(35, 38, 43, 0.45) 0 2px, transparent 3px),
+    radial-gradient(circle at 58% 30%, rgba(35, 38, 43, 0.5) 0 2px, transparent 3px),
+    radial-gradient(circle at 79% 60%, rgba(35, 38, 43, 0.45) 0 2px, transparent 3px),
+    radial-gradient(circle at 92% 35%, rgba(35, 38, 43, 0.5) 0 2px, transparent 3px),
+    var(--pf-beton);
+  animation-delay: 0.66s;
+}
+
+.pf-cut-podklad {
+  height: 26px;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      #3a3e45 0 10px,
+      #2e3238 10px 20px
+    );
+  animation-delay: 0.54s;
+}
+
+.pf-cut-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(237, 235, 230, 0.9);
+  white-space: nowrap;
+}
+
+.pf-cut-beton .pf-cut-label,
+.pf-cut-nater .pf-cut-label {
+  color: rgba(27, 29, 33, 0.75);
+}
+
+.pf-cut-nater .pf-cut-label {
+  color: rgba(237, 235, 230, 0.9);
+}
+
+.pf-cut-penetrace .pf-cut-label {
+  color: rgba(27, 29, 33, 0.8);
+  font-size: 0.55rem;
+}
+
+/* ============ SEKCE obecně ============ */
+
+.pf-section {
+  padding: clamp(3.5rem, 8vw, 6rem) var(--pf-pad);
+}
+
+.pf-section-head {
+  max-width: var(--pf-max);
+  margin: 0 auto clamp(2rem, 5vw, 3.5rem);
+}
+
+.pf-h2 {
+  margin: 0;
+  font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  width: fit-content;
+  box-shadow: 0 5px 0 0 var(--pf-signal);
+  padding-bottom: 4px;
+}
+
+.pf-section-note {
+  margin: 1.25rem 0 0;
+  max-width: 36rem;
+  color: #55524c;
+  font-size: 1.05rem;
+}
+
+.pf-section-note-light {
+  color: #c6c3bc;
+}
+
+/* ============ SLUŽBY ============ */
+
+.pf-services {
+  max-width: var(--pf-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.25rem;
+}
+
+.pf-service {
+  background: #fff;
+  border: 1px solid #dcd9d2;
+  border-radius: 4px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pf-service:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(27, 29, 33, 0.1);
+}
+
+/* chip = vzorek povrchu, jako vzorník od podlaháře */
+.pf-service-chip {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 3px;
+  margin-bottom: 1.1rem;
+  border: 1px solid rgba(27, 29, 33, 0.15);
+}
+
+.pf-chip-beton {
+  background:
+    radial-gradient(circle at 30% 35%, rgba(35, 38, 43, 0.4) 0 2px, transparent 3px),
+    radial-gradient(circle at 70% 65%, rgba(35, 38, 43, 0.35) 0 2px, transparent 3px),
+    var(--pf-beton);
+}
+
+.pf-chip-epoxid {
+  background: linear-gradient(135deg, #37826f, var(--pf-epoxid) 55%);
+}
+
+.pf-chip-pu {
+  background: linear-gradient(135deg, #8e8a81, #6e6a62);
+}
+
+.pf-chip-oprava {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--pf-signal) 0 8px,
+    var(--pf-tmavy) 8px 16px
+  );
+}
+
+.pf-h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.pf-service p {
+  margin: 0 0 0.75rem;
+  color: #45423d;
+  font-size: 0.96rem;
+}
+
+.pf-service-meta {
+  margin-top: auto;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #837f77 !important;
+}
+
+/* ============ DŮVĚRA ============ */
+
+.pf-section-dark {
+  background: var(--pf-tmavy);
+  color: var(--pf-svetla);
+}
+
+.pf-section-dark .pf-h2 {
+  color: var(--pf-svetla);
+}
+
+.pf-trust {
+  max-width: var(--pf-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1.25rem;
+}
+
+.pf-fact {
+  border-top: 4px solid var(--pf-signal);
+  padding-top: 1rem;
+}
+
+.pf-fact-num {
+  display: block;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--pf-signal);
+  line-height: 1;
+}
+
+.pf-fact-text {
+  margin: 0.75rem 0 0;
+  color: #c6c3bc;
+  font-size: 0.95rem;
+}
+
+.pf-quotes {
+  max-width: var(--pf-max);
+  margin: clamp(2.5rem, 6vw, 4rem) auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.25rem;
+}
+
+.pf-quote {
+  margin: 0;
+  background: #2c3036;
+  border-left: 4px solid var(--pf-epoxid);
+  border-radius: 0 4px 4px 0;
+  padding: 1.5rem;
+}
+
+.pf-quote blockquote {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--pf-svetla);
+}
+
+.pf-quote figcaption {
+  margin-top: 1rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  color: #9c988f;
+}
+
+/* ============ RESPONSIVITA ============ */
+
+@media (max-width: 40rem) {
+  .pf-hero {
+    min-height: auto;
+  }
+
+  .pf-hero-body {
+    padding-top: 3rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .pf-cut-label {
+    font-size: 0.56rem;
+  }
+
+  .pf-hero-cta .pf-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .pf-h1-line,
+  .pf-lead,
+  .pf-hero-cta,
+  .pf-cut-layer {
+    animation: none;
+  }
+
+  .pf-service,
+  .pf-btn,
+  .pf-hero-tel {
+    transition: none;
+  }
+}
