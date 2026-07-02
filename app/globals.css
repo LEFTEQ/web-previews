@@ -1,0 +1,530 @@
+/* ============================================================
+   BIGSAM — demoliční práce, Ústí nad Labem
+   Paleta: beton, asfalt, výstražná žluť
+   Signature: přeškrtnuté slovo v hero (demoliční gesto)
+   ============================================================ */
+
+:root {
+  --asfalt: #1c1a17; /* skoro černá s hnědým podtónem strojů */
+  --beton: #d8d4cc; /* světlý beton */
+  --beton-tmavy: #b9b3a8;
+  --zlut: #f5b800; /* výstražná žluť bagru */
+  --rez: #a34a1f; /* rez na oceli — jen drobné akcenty */
+  --papir: #efece6;
+  --ink: #26231f;
+
+  --font-display: "Arial Narrow", "Roboto Condensed", "Helvetica Neue Condensed",
+    Impact, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-util: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--papir);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+а:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--zlut);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   HERO — čistě typografický, asfalt + žlutý výstražný pruh
+   ============================================================ */
+
+.hero {
+  position: relative;
+  background: var(--asfalt);
+  color: var(--beton);
+  overflow: hidden;
+}
+
+/* výstražný šrafovaný pruh — jazyk staveniště */
+.hero-hazard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 14px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--zlut) 0 22px,
+    var(--asfalt) 22px 44px
+  );
+}
+
+.hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 44px;
+  flex-wrap: wrap;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.wordmark-big {
+  font-weight: 700;
+  color: var(--zlut);
+}
+
+.wordmark-sam {
+  font-weight: 700;
+  color: var(--beton);
+  border-bottom: 4px solid var(--zlut);
+  padding-bottom: 2px;
+}
+
+.hero-tel {
+  font-family: var(--font-util);
+  font-size: 15px;
+  color: var(--beton);
+  text-decoration: none;
+  border: 1px solid var(--beton-tmavy);
+  padding: 8px 14px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.hero-tel:hover {
+  border-color: var(--zlut);
+  color: var(--zlut);
+}
+
+.hero-body {
+  padding: 64px 0 40px;
+  max-width: 760px;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-util);
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--zlut);
+  margin: 0 0 20px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(52px, 10.5vw, 118px);
+  line-height: 0.94;
+  letter-spacing: 0.01em;
+  margin: 0 0 28px;
+  color: var(--beton);
+}
+
+.hero-title .line {
+  display: block;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--zlut);
+}
+
+/* ---- SIGNATURE: demoliční škrt — slovo „co překáží“ přeťaté
+   žlutým pruhem, který se při načtení „prožene“ zleva ---- */
+
+.strike-word {
+  position: relative;
+  display: inline-block;
+  color: var(--beton-tmavy);
+}
+
+.strike-word::after {
+  content: "";
+  position: absolute;
+  left: -3%;
+  right: -3%;
+  top: 50%;
+  height: 0.16em;
+  background: var(--zlut);
+  transform: translateY(-50%) rotate(-2deg);
+  transform-origin: left center;
+  animation: strike 0.55s cubic-bezier(0.7, 0, 0.2, 1) 0.75s both;
+}
+
+@keyframes strike {
+  from {
+    scale: 0 1;
+  }
+  to {
+    scale: 1 1;
+  }
+}
+
+/* postupné načtení řádků titulku */
+.line-1 {
+  animation: rise 0.6s ease-out 0.1s both;
+}
+.line-2 {
+  animation: rise 0.6s ease-out 0.25s both;
+}
+.line-3 {
+  animation: rise 0.6s ease-out 0.4s both;
+}
+.hero-sub,
+.hero-cta {
+  animation: rise 0.6s ease-out 0.55s both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-sub {
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--beton-tmavy);
+  max-width: 34em;
+  margin: 0 0 32px;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--zlut);
+  color: var(--asfalt);
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 15px 28px;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.btn-primary:hover {
+  background: #ffd42e;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  font-family: var(--font-util);
+  font-size: 15px;
+  color: var(--beton);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--zlut);
+  padding: 10px 4px;
+}
+
+.btn-ghost:hover {
+  color: var(--zlut);
+}
+
+/* fakta pod hero */
+.hero-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: #3a362f;
+  border-top: 1px solid #3a362f;
+  margin: 24px 0 0;
+  padding: 0;
+}
+
+.fact {
+  background: var(--asfalt);
+  padding: 20px 0 36px;
+}
+
+.fact + .fact {
+  padding-left: 24px;
+}
+
+.fact dt {
+  font-family: var(--font-util);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--zlut);
+  margin-bottom: 4px;
+}
+
+.fact dd {
+  margin: 0;
+  font-size: 16px;
+  color: var(--beton);
+}
+
+/* ============================================================
+   SEKCE: SLUŽBY — betonová plocha, karty se zkratkami strojů
+   ============================================================ */
+
+.sluzby {
+  background: var(--papir);
+  padding: 88px 0 96px;
+}
+
+.sec-head {
+  max-width: 620px;
+  margin-bottom: 52px;
+}
+
+.sec-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(34px, 5vw, 52px);
+  line-height: 1.02;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+
+.sec-lead {
+  font-size: 18px;
+  color: #5b564e;
+  margin: 0;
+}
+
+.sluzby-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.sluzba {
+  background: #ffffff;
+  border: 1px solid var(--beton);
+  border-top: 5px solid var(--zlut);
+  padding: 26px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sluzba:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(28, 26, 23, 0.12);
+}
+
+.sluzba-kod {
+  font-family: var(--font-util);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: var(--rez);
+  margin-bottom: 14px;
+}
+
+.sluzba-nazev {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 24px;
+  line-height: 1.1;
+  margin: 0 0 12px;
+  color: var(--ink);
+}
+
+.sluzba-popis {
+  font-size: 16px;
+  margin: 0 0 18px;
+  color: #44403a;
+  flex: 1;
+}
+
+.sluzba-detail {
+  font-family: var(--font-util);
+  font-size: 13px;
+  color: #7a746a;
+  margin: 0;
+  border-top: 1px dashed var(--beton);
+  padding-top: 12px;
+}
+
+/* ============================================================
+   SEKCE: POSTUP — zpět na asfalt, tři kroky demolice
+   ============================================================ */
+
+.postup {
+  position: relative;
+  background: var(--asfalt);
+  color: var(--beton);
+  padding: 88px 0 80px;
+}
+
+.postup-hazard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 14px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--zlut) 0 22px,
+    var(--asfalt) 22px 44px
+  );
+}
+
+.sec-title-light {
+  color: var(--beton);
+}
+
+.sec-lead-light {
+  color: var(--beton-tmavy);
+}
+
+.kroky {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  counter-reset: none;
+}
+
+.krok {
+  border-left: 4px solid var(--zlut);
+  padding-left: 22px;
+}
+
+.krok-cislo {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 1;
+  color: var(--zlut);
+  margin-bottom: 10px;
+}
+
+.krok-nazev {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 22px;
+  margin: 0 0 10px;
+  color: var(--beton);
+}
+
+.krok-text {
+  font-size: 16px;
+  color: var(--beton-tmavy);
+  margin: 0;
+}
+
+.postup-pozn {
+  margin: 56px 0 0;
+  font-family: var(--font-util);
+  font-size: 14px;
+  color: #8d867a;
+  border-top: 1px solid #3a362f;
+  padding-top: 20px;
+  max-width: 46em;
+}
+
+/* ============================================================
+   RESPONZIVITA
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .kroky {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 620px) {
+  .hero-body {
+    padding: 48px 0 32px;
+  }
+  .hero-facts {
+    grid-template-columns: 1fr;
+  }
+  .fact {
+    padding: 16px 0;
+  }
+  .fact + .fact {
+    padding-left: 0;
+  }
+  .sluzby-grid {
+    grid-template-columns: 1fr;
+  }
+  .sluzby,
+  .postup {
+    padding: 64px 0 72px;
+  }
+  .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .line-1,
+  .line-2,
+  .line-3,
+  .hero-sub,
+  .hero-cta,
+  .strike-word::after {
+    animation: none;
+  }
+  .sluzba,
+  .btn-primary {
+    transition: none;
+  }
+  .sluzba:hover,
+  .btn-primary:hover {
+    transform: none;
+  }
+}
