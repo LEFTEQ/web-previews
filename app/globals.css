@@ -1,0 +1,519 @@
+/* ==========================================================================
+   LARX topenářství — České Budějovice
+   Palette: hluboká kotlová modř + žár mědi. Type: Archivo (display, wide)
+   + Source Serif / systémové serify nahrazeny — používáme pouze systémové
+   stacky, aby web zůstal rychlý (0 externích requestů).
+   ========================================================================== */
+
+:root {
+  --lx-navy: #0e2233;      /* studená voda ve zpátečce */
+  --lx-navy-deep: #081824; /* kotelna po setmění */
+  --lx-copper: #d96e30;    /* měděná trubka, žár */
+  --lx-copper-hot: #f0913f;/* rozžhavený spoj */
+  --lx-steam: #eef3f4;     /* pára, podklad */
+  --lx-ink: #1a2a36;       /* text */
+  --lx-line: #c9d6da;
+
+  --font-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-utility: "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--lx-steam);
+  color: var(--lx-ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus */
+:focus-visible {
+  outline: 3px solid var(--lx-copper);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.hx-main { display: block; }
+
+/* ==========================================================================
+   HERO — tmavá kotelna, měděný sloupec teploty jako signature
+   ========================================================================== */
+
+.hx-hero {
+  background:
+    radial-gradient(120% 90% at 85% 10%, rgba(217, 110, 48, 0.14), transparent 55%),
+    linear-gradient(170deg, var(--lx-navy) 0%, var(--lx-navy-deep) 100%);
+  color: var(--lx-steam);
+  position: relative;
+  overflow: hidden;
+}
+
+.hx-hero-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 1.75rem 1.25rem 3.5rem;
+}
+
+.hx-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 2.5rem;
+}
+
+.hx-wordmark {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.hx-wordmark-x {
+  color: var(--lx-copper-hot);
+}
+
+.hx-wordmark-sub {
+  font-family: var(--font-utility);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(238, 243, 244, 0.6);
+}
+
+.hx-topbar-note {
+  font-family: var(--font-utility);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: rgba(238, 243, 244, 0.65);
+}
+
+.hx-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: end;
+}
+
+.hx-eyebrow {
+  font-family: var(--font-utility);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--lx-copper-hot);
+  margin: 0 0 1.2rem;
+}
+
+.hx-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 9vw, 5.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.5rem;
+  text-transform: uppercase;
+}
+
+.hx-hl-line { display: block; }
+
+.hx-hl-2 { color: var(--lx-copper-hot); }
+
+.hx-hl-3 {
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(238, 243, 244, 0.85);
+}
+
+.hx-lede {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: rgba(238, 243, 244, 0.85);
+  margin: 0 0 2rem;
+}
+
+.hx-hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  font-family: var(--font-utility);
+  font-size: 0.85rem;
+  color: rgba(238, 243, 244, 0.7);
+}
+
+.hx-hero-facts strong {
+  color: var(--lx-steam);
+  display: block;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+/* --- Signature: teplotní stupnice soustavy ------------------------------ */
+
+.hx-gauge {
+  display: flex;
+  gap: 1.1rem;
+  align-items: stretch;
+  min-height: 320px;
+  padding-top: 0.5rem;
+}
+
+.hx-gauge-pipe {
+  width: 22px;
+  border-radius: 999px;
+  background: rgba(238, 243, 244, 0.1);
+  border: 1px solid rgba(238, 243, 244, 0.2);
+  position: relative;
+  overflow: hidden;
+  flex: none;
+}
+
+.hx-gauge-fill {
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  top: 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to bottom,
+    var(--lx-copper-hot) 0%,
+    var(--lx-copper) 45%,
+    #7a4a7e00 0%,
+    #3d6a86 100%
+  );
+  background: linear-gradient(to bottom, #f0913f 0%, #d96e30 40%, #8a5a4a 65%, #3d6a86 100%);
+  transform-origin: bottom;
+  animation: hx-rise 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+@keyframes hx-rise {
+  from { transform: scaleY(0.08); }
+  to { transform: scaleY(1); }
+}
+
+.hx-gauge-scale {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: var(--font-utility);
+  font-size: 0.82rem;
+  color: rgba(238, 243, 244, 0.75);
+}
+
+.hx-tick {
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.hx-tick::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.9rem;
+  height: 1px;
+  background: rgba(238, 243, 244, 0.4);
+}
+
+.hx-tick i {
+  font-style: normal;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  display: block;
+  color: var(--lx-steam);
+  letter-spacing: 0.02em;
+}
+
+.hx-tick-hot i { color: var(--lx-copper-hot); }
+
+/* Baseline — slovník řemesla jako běžící lišta (statická, žádný marquee) */
+
+.hx-hero-baseline {
+  border-top: 1px solid rgba(238, 243, 244, 0.15);
+  font-family: var(--font-utility);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(238, 243, 244, 0.4);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2.5rem;
+  padding: 0.9rem 1.25rem;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+/* Page-load sequence */
+
+.hx-hl-line,
+.hx-lede,
+.hx-hero-facts {
+  animation: hx-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hx-hl-1 { animation-delay: 0.05s; }
+.hx-hl-2 { animation-delay: 0.15s; }
+.hx-hl-3 { animation-delay: 0.25s; }
+.hx-lede { animation-delay: 0.4s; }
+.hx-hero-facts { animation-delay: 0.5s; }
+
+@keyframes hx-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   SEKCE — společné
+   ========================================================================== */
+
+.hx-section-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+}
+
+.hx-section-head { margin-bottom: 2.5rem; }
+
+.hx-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  margin: 0;
+  color: var(--lx-navy);
+}
+
+/* ==========================================================================
+   SLUŽBY
+   ========================================================================== */
+
+.hx-sluzby { background: var(--lx-steam); }
+
+.hx-sluzby .hx-eyebrow { color: var(--lx-copper); }
+
+.hx-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.hx-card {
+  background: #ffffff;
+  border: 1px solid var(--lx-line);
+  border-top: 4px solid var(--lx-copper);
+  border-radius: 6px;
+  padding: 1.6rem 1.5rem 1.4rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hx-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(14, 34, 51, 0.12);
+}
+
+.hx-card-okruh {
+  font-family: var(--font-utility);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--lx-copper);
+  margin: 0 0 0.6rem;
+}
+
+.hx-card-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  line-height: 1.25;
+  margin: 0 0 0.7rem;
+  color: var(--lx-navy);
+}
+
+.hx-card-text {
+  margin: 0 0 1.1rem;
+  color: #3a4a55;
+}
+
+.hx-card-detail {
+  font-family: var(--font-utility);
+  font-size: 0.8rem;
+  color: #6b7d88;
+  margin: 0;
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--lx-line);
+}
+
+/* Kroky */
+
+.hx-kroky { margin-top: 3.5rem; }
+
+.hx-kroky-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--lx-navy);
+  margin: 0 0 1.5rem;
+}
+
+.hx-kroky-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.hx-krok {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+}
+
+.hx-krok-c {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--lx-copper);
+  line-height: 1;
+  flex: none;
+  padding-top: 0.15rem;
+}
+
+.hx-krok-t {
+  font-family: var(--font-utility);
+  font-weight: 700;
+  font-size: 1.02rem;
+  margin: 0 0 0.35rem;
+  color: var(--lx-navy);
+}
+
+.hx-krok-p {
+  margin: 0;
+  color: #3a4a55;
+  font-size: 0.97rem;
+}
+
+/* ==========================================================================
+   DŮVĚRA / REFERENCE
+   ========================================================================== */
+
+.hx-duvera {
+  background:
+    radial-gradient(100% 80% at 15% 100%, rgba(217, 110, 48, 0.12), transparent 60%),
+    var(--lx-navy-deep);
+  color: var(--lx-steam);
+}
+
+.hx-eyebrow-light { color: var(--lx-copper-hot); }
+
+.hx-h2-light { color: var(--lx-steam); }
+
+.hx-duvera-lede {
+  max-width: 32rem;
+  color: rgba(238, 243, 244, 0.7);
+  margin: 1rem 0 0;
+}
+
+.hx-refs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.hx-ref {
+  margin: 0;
+  padding: 1.5rem 1.4rem;
+  border: 1px solid rgba(238, 243, 244, 0.15);
+  border-left: 4px solid var(--lx-copper);
+  border-radius: 6px;
+  background: rgba(238, 243, 244, 0.04);
+}
+
+.hx-ref-misto {
+  font-family: var(--font-utility);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--lx-copper-hot);
+  margin-bottom: 0.8rem;
+}
+
+.hx-ref-text {
+  margin: 0 0 1rem;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: rgba(238, 243, 244, 0.92);
+}
+
+.hx-ref-jmeno {
+  margin: 0;
+  font-family: var(--font-utility);
+  font-size: 0.85rem;
+  color: rgba(238, 243, 244, 0.6);
+}
+
+.hx-duvera-pruh {
+  margin-top: 2.5rem;
+  padding: 1.4rem 1.5rem;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--lx-copper) 0%, var(--lx-copper-hot) 100%);
+  color: var(--lx-navy-deep);
+  font-size: 1.05rem;
+}
+
+.hx-duvera-pruh p { margin: 0; max-width: 52rem; }
+
+.hx-duvera-pruh strong { font-family: var(--font-utility); }
+
+/* ==========================================================================
+   RESPONSIVITA
+   ========================================================================== */
+
+@media (min-width: 720px) {
+  .hx-cards { grid-template-columns: repeat(3, 1fr); }
+  .hx-kroky-list { grid-template-columns: repeat(3, 1fr); }
+  .hx-refs { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 900px) {
+  .hx-hero-grid {
+    grid-template-columns: 1fr 300px;
+    gap: 4rem;
+  }
+  .hx-gauge { min-height: 420px; }
+  .hx-hero-inner { padding: 2rem 1.25rem 4.5rem; }
+}
+
+@media (max-width: 899px) {
+  .hx-gauge { min-height: 260px; }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hx-hl-line,
+  .hx-lede,
+  .hx-hero-facts,
+  .hx-gauge-fill {
+    animation: none !important;
+  }
+  .hx-card,
+  .hx-card:hover {
+    transition: none;
+    transform: none;
+  }
+}
