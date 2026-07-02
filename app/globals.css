@@ -1,0 +1,568 @@
+/* ============================================================
+   POLIKLINIKA OLOMOUC — rehabilitace
+   Paleta odvozená z prostředí rehabilitace: hluboká klinická
+   modrozelená (uniformy fyzioterapeutů), bílá ordinace, teplá
+   „tejpová" korálová jako akcent, papírově šedý podklad karet.
+   ============================================================ */
+
+:root {
+  --ink: #0d3b3e;          /* hluboká petrolejová — uniformy, důvěra */
+  --ink-soft: #35595c;
+  --paper: #f7f9f8;        /* světlo ordinace, ne krémová */
+  --card: #ffffff;
+  --tape: #e8604c;         /* kinesiotape korálová — akcent */
+  --tape-soft: #fbe4df;
+  --mint: #cfe4e0;         /* desinfekční mint pro plochy */
+  --line: #d5e0de;
+
+  --font-display: "Georgia", "Times New Roman", serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.reha a:focus-visible,
+.reha button:focus-visible {
+  outline: 3px solid var(--tape);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 1.25rem 1.25rem 4.5rem;
+  overflow: hidden;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--paper);
+}
+
+.wordmark-plus {
+  display: inline-grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background: var(--tape);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.hero-tel {
+  color: var(--paper);
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  border: 1px solid rgba(247, 249, 248, 0.35);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  white-space: nowrap;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.hero-tel:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.hero-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  color: var(--mint);
+  animation: rise 0.6s ease both;
+}
+
+.hero-title {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.9rem, 9vw, 6rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  animation: rise 0.6s 0.1s ease both;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--tape);
+}
+
+.hero-lead {
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  font-size: 1.1rem;
+  color: rgba(247, 249, 248, 0.85);
+  animation: rise 0.6s 0.2s ease both;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  animation: rise 0.6s 0.3s ease both;
+}
+
+.btn-primary,
+.btn-ghost {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  transition: transform 0.15s, background-color 0.2s, color 0.2s;
+}
+
+.btn-primary {
+  background: var(--tape);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: #d14e3b;
+}
+
+.btn-ghost {
+  color: var(--paper);
+  border: 1px solid rgba(247, 249, 248, 0.4);
+}
+
+.btn-ghost:hover {
+  background: rgba(247, 249, 248, 0.12);
+}
+
+/* ---- Signature: goniometrická stupnice (měření rozsahu pohybu) ---- */
+
+.rom {
+  position: relative;
+  max-width: 1100px;
+  margin: 3.5rem auto 0;
+  height: 190px;
+}
+
+.rom-arc {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  width: 340px;
+  height: 170px;
+  border: 2px solid rgba(207, 228, 224, 0.45);
+  border-bottom: none;
+  border-radius: 340px 340px 0 0;
+}
+
+.rom-ticks {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  width: 0;
+  height: 0;
+}
+
+.rom-tick {
+  position: absolute;
+  left: -1px;
+  bottom: 0;
+  width: 2px;
+  height: 158px;
+  transform-origin: 50% 100%;
+  background: linear-gradient(
+    to top,
+    transparent 0 88%,
+    rgba(207, 228, 224, 0.55) 88% 100%
+  );
+}
+
+.rom-tick-major {
+  background: linear-gradient(
+    to top,
+    transparent 0 82%,
+    var(--mint) 82% 100%
+  );
+}
+
+.rom-needle {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  width: 3px;
+  height: 145px;
+  margin-left: -1.5px;
+  transform-origin: 50% 100%;
+  background: var(--tape);
+  border-radius: 3px;
+  transform: rotate(52deg);
+  animation: sweep 1.6s 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rom-needle::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--tape);
+}
+
+.rom-labels {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+  color: var(--mint);
+}
+
+.rom-labels span:nth-child(2) {
+  transform: translateY(-176px);
+}
+
+.rom-caption {
+  position: absolute;
+  left: 50%;
+  bottom: -2.4rem;
+  transform: translateX(-50%);
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  color: rgba(207, 228, 224, 0.75);
+}
+
+/* ================= SEKCE OBECNĚ ================= */
+
+.section-head {
+  max-width: 1100px;
+  margin: 0 auto 2.5rem;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 5vw, 2.8rem);
+  margin: 0 0 0.6rem;
+  line-height: 1.15;
+}
+
+.section-head p {
+  margin: 0;
+  max-width: 36rem;
+  color: var(--ink-soft);
+}
+
+/* ================= SLUŽBY ================= */
+
+.sluzby {
+  padding: 4.5rem 1.25rem;
+}
+
+.sluzby-list {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1100px;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.sluzba {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 1.1rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.35rem 1.5rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.sluzba:hover {
+  border-color: var(--tape);
+  box-shadow: 0 6px 24px rgba(13, 59, 62, 0.08);
+}
+
+.sluzba-kod {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--tape);
+  background: var(--tape-soft);
+  border-radius: 6px;
+  padding: 0.3rem 0.55rem;
+  margin-top: 0.2rem;
+  min-width: 3.2rem;
+  text-align: center;
+}
+
+.sluzba-text h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.sluzba-text p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+
+.sluzba-delka {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  margin-top: 0.35rem;
+}
+
+.sluzby-note {
+  max-width: 1100px;
+  margin: 1.75rem auto 0;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  border-left: 3px solid var(--tape);
+  padding-left: 1rem;
+}
+
+/* ================= PRŮBĚH + DŮVĚRA ================= */
+
+.prubeh {
+  background: var(--mint);
+  padding: 4.5rem 1.25rem;
+}
+
+.section-head-inverse h2,
+.section-head-inverse p {
+  color: var(--ink);
+}
+
+.kroky {
+  list-style: none;
+  counter-reset: none;
+  margin: 0 auto 3rem;
+  padding: 0;
+  max-width: 1100px;
+  display: grid;
+  gap: 1rem;
+}
+
+.krok {
+  position: relative;
+  background: var(--card);
+  border-radius: 14px;
+  padding: 1.5rem 1.5rem 1.5rem 4.4rem;
+}
+
+.krok-cislo {
+  position: absolute;
+  left: 1.35rem;
+  top: 1.45rem;
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.krok h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.12rem;
+}
+
+.krok p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+
+.duvera {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
+  border-top: 2px solid rgba(13, 59, 62, 0.2);
+  padding-top: 2rem;
+}
+
+.duvera-item {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.duvera-item strong {
+  font-size: 1.02rem;
+}
+
+.duvera-item span {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* ================= ANIMACE ================= */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sweep {
+  from {
+    transform: rotate(-88deg);
+  }
+  to {
+    transform: rotate(52deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-eyebrow,
+  .hero-title,
+  .hero-lead,
+  .hero-actions,
+  .rom-needle {
+    animation: none;
+  }
+  .btn-primary:hover {
+    transform: none;
+  }
+}
+
+/* ================= RESPONZIVITA ================= */
+
+@media (min-width: 700px) {
+  .kroky {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .krok {
+    padding: 4.2rem 1.5rem 1.6rem;
+  }
+  .krok-cislo {
+    left: 1.5rem;
+    top: 1.5rem;
+  }
+  .duvera {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    padding: 1.75rem 2rem 5rem;
+  }
+  .hero-body {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .rom {
+    position: absolute;
+    right: 2rem;
+    bottom: 6rem;
+    width: 420px;
+    margin: 0;
+  }
+  .hero-lead,
+  .hero-title,
+  .hero-eyebrow,
+  .hero-actions {
+    max-width: 55%;
+  }
+  .hero-lead {
+    max-width: 30rem;
+  }
+  .sluzby,
+  .prubeh {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rom {
+    transform: scale(0.82);
+    transform-origin: top center;
+    height: 175px;
+  }
+  .sluzba {
+    grid-template-columns: auto 1fr;
+  }
+  .sluzba-delka {
+    grid-column: 2;
+    margin-top: 0;
+  }
+  .hero-tel {
+    font-size: 0.9rem;
+  }
+}
