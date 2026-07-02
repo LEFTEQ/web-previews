@@ -1,0 +1,512 @@
+/* ============================================================
+   Sluňákov — centrum ekologických aktivit, Olomouc
+   Paleta: lužní les + slunce (jméno firmy = slunce + sluňák)
+   ============================================================ */
+
+:root {
+  --night: #1e3326;      /* hluboká lesní zelená (text, tmavá sekce) */
+  --meadow: #3f7d4e;     /* louka */
+  --moss: #2c5738;       /* mech / stín lesa */
+  --sunflower: #f5b301;  /* slunce — signature akcent */
+  --sky: #eaf3ec;        /* světlé pozadí — bledě zelené nebe nad loukou */
+  --paper: #ffffff;
+  --ink-soft: #46604f;
+
+  --font-display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--night);
+  background: var(--sky);
+}
+
+.sun a:focus-visible,
+.sun .btn:focus-visible {
+  outline: 3px solid var(--sunflower);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  background: var(--sky);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  max-width: 1160px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.45rem;
+  letter-spacing: -0.02em;
+  color: var(--night);
+  text-decoration: none;
+}
+
+.wordmark-sun {
+  display: inline-flex;
+}
+
+.hero-nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-nav-links a {
+  color: var(--night);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+}
+
+.hero-nav-links a:hover {
+  border-bottom-color: var(--sunflower);
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  max-width: 1160px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 1rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--moss);
+  margin: 0 0 1rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.3rem, 7.5vw, 5.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.5rem;
+  max-width: 15ch;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--meadow);
+  position: relative;
+}
+
+.hero-title em::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.04em;
+  height: 0.14em;
+  background: var(--sunflower);
+  z-index: -1;
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  margin: 0 0 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--night);
+  color: var(--sunflower);
+}
+
+.btn-solid:hover {
+  background: var(--moss);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--night);
+  border: 2px solid var(--night);
+}
+
+.btn-ghost:hover {
+  background: var(--sunflower);
+  border-color: var(--sunflower);
+  transform: translateY(-2px);
+}
+
+/* --- Signature: horizont s vycházejícím sluncem --- */
+
+.hero-horizon {
+  position: relative;
+  margin-top: 1.5rem;
+  height: clamp(120px, 20vw, 200px);
+}
+
+.horizon-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.horizon-sun {
+  position: absolute;
+  right: 12%;
+  bottom: 28%;
+  width: clamp(70px, 11vw, 130px);
+  height: clamp(70px, 11vw, 130px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffd54d, var(--sunflower));
+  box-shadow: 0 0 0 14px rgba(245, 179, 1, 0.18), 0 0 0 32px rgba(245, 179, 1, 0.07);
+  animation: sunrise 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes sunrise {
+  from {
+    transform: translateY(60%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Stagger nadpisu při načtení */
+.hero-line,
+.hero-eyebrow,
+.hero-lead,
+.hero-actions {
+  animation: rise 0.7s ease both;
+}
+
+.hero-eyebrow { animation-delay: 0.05s; }
+.ht-1 { animation-delay: 0.12s; }
+.ht-2 { animation-delay: 0.22s; }
+.ht-3 { animation-delay: 0.32s; }
+.hero-lead { animation-delay: 0.45s; }
+.hero-actions { animation-delay: 0.55s; }
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= PROGRAMY ================= */
+
+.programy {
+  background: var(--paper);
+  padding: 4rem 1.25rem 4.5rem;
+}
+
+.section-head {
+  max-width: 1160px;
+  margin: 0 auto 2.5rem;
+}
+
+.eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--meadow);
+  margin: 0 0 0.6rem;
+}
+
+.eyebrow-light {
+  color: var(--sunflower);
+}
+
+.programy h2,
+.dum h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 0.9rem;
+}
+
+.section-lead {
+  max-width: 38rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.prog-grid {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+
+.prog-card {
+  background: var(--sky);
+  border-radius: 18px;
+  padding: 1.5rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.prog-card:hover {
+  border-color: var(--sunflower);
+  transform: translateY(-4px);
+}
+
+.prog-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.prog-tag {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--meadow);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+}
+
+.prog-date {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--moss);
+}
+
+.prog-card h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.prog-card p {
+  margin: 0;
+  font-size: 0.97rem;
+  color: var(--ink-soft);
+}
+
+.prog-note {
+  max-width: 1160px;
+  margin: 2rem auto 0;
+  color: var(--ink-soft);
+}
+
+.prog-note strong {
+  color: var(--night);
+}
+
+/* ================= DŮM + ČÍSLA ================= */
+
+.dum {
+  background: var(--night);
+  color: #e9f2ec;
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.dum-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.dum h2 {
+  color: #ffffff;
+}
+
+.dum-text p {
+  color: #c5d6ca;
+  max-width: 36rem;
+}
+
+.dum-fakta {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dum-fakta li {
+  padding-left: 1.4rem;
+  position: relative;
+  color: #c5d6ca;
+}
+
+.dum-fakta li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--sunflower);
+}
+
+.dum-fakta strong {
+  color: #ffffff;
+}
+
+.dum-cisla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.cislo {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  padding: 1.4rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cislo-n {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  letter-spacing: -0.02em;
+  color: var(--sunflower);
+  line-height: 1;
+}
+
+.cislo-label {
+  font-size: 0.92rem;
+  color: #c5d6ca;
+  line-height: 1.45;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 860px) {
+  .dum-inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero-nav-links {
+    gap: 1rem;
+  }
+
+  .hero-body {
+    padding-top: 1.5rem;
+  }
+
+  .dum-cisla {
+    grid-template-columns: 1fr;
+  }
+
+  .prog-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .horizon-sun,
+  .hero-line,
+  .hero-eyebrow,
+  .hero-lead,
+  .hero-actions {
+    animation: none;
+  }
+
+  .btn,
+  .prog-card {
+    transition: none;
+  }
+}
