@@ -1,0 +1,513 @@
+/* ============================================================
+   WISTERIA s.r.o. — zahradní architektura, České Budějovice
+   Palette:
+     --ws-ink      #2B2140  (tmavý fialový inkoust — dřevo liány za šera)
+     --ws-wisteria #8C7BC8  (květ vistárie)
+     --ws-lilacpale#E9E4F4  (světlý nádech květu)
+     --ws-leaf     #4C6B45  (list)
+     --ws-paper    #FBFAF6  (papír plánů)
+     --ws-honey    #C9A227  (včelí med / mosaz měřidla — akcent)
+   Type: Cormorant Garamond (display, botanické kurzívy)
+         + Sofia Sans / system grotesk fallback (text)
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Sofia+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap");
+
+:root {
+  --ws-ink: #2b2140;
+  --ws-wisteria: #8c7bc8;
+  --ws-wisteria-deep: #6a57ab;
+  --ws-lilac: #e9e4f4;
+  --ws-leaf: #4c6b45;
+  --ws-paper: #fbfaf6;
+  --ws-honey: #c9a227;
+  --ws-display: "Cormorant Garamond", "Georgia", serif;
+  --ws-body: "Sofia Sans", "Segoe UI", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--ws-paper);
+  color: var(--ws-ink);
+  font-family: var(--ws-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ws-page a:focus-visible,
+.ws-page button:focus-visible {
+  outline: 3px solid var(--ws-honey);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ HERO ============ */
+
+.ws-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(90rem 44rem at 85% -18%, rgba(140, 123, 200, 0.28), transparent 60%),
+    radial-gradient(50rem 34rem at -12% 108%, rgba(76, 107, 69, 0.14), transparent 62%),
+    var(--ws-paper);
+  padding: clamp(1.5rem, 4vw, 3.5rem) clamp(1.25rem, 6vw, 6rem) 0;
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.ws-hero-inner {
+  max-width: 46rem;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 3rem 0 4rem;
+}
+
+/* wordmark */
+.ws-brand {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: clamp(2rem, 6vh, 4rem);
+  animation: ws-fade 0.7s ease-out both;
+}
+
+.ws-brand-mark {
+  color: var(--ws-wisteria-deep);
+  align-self: center;
+  display: inline-flex;
+}
+
+.ws-brand-word {
+  font-family: var(--ws-display);
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ws-brand-sub {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ws-leaf);
+}
+
+/* title — typografický statement */
+.ws-hero-title {
+  font-family: var(--ws-display);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 8vw, 5.5rem);
+  line-height: 1.04;
+  margin: 0 0 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.ws-hero-title .ws-line {
+  display: block;
+  animation: ws-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.ws-line-1 { animation-delay: 0.05s; }
+.ws-line-2 { animation-delay: 0.18s; }
+.ws-line-3 {
+  animation-delay: 0.32s;
+  font-size: 0.62em;
+  font-weight: 500;
+  color: var(--ws-leaf);
+  margin-top: 0.35em;
+}
+
+.ws-italic {
+  font-style: italic;
+  color: var(--ws-wisteria-deep);
+}
+
+.ws-hero-lead {
+  max-width: 34rem;
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  animation: ws-fade 0.9s ease-out 0.45s both;
+}
+
+.ws-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  animation: ws-fade 0.9s ease-out 0.6s both;
+}
+
+.ws-btn {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.ws-btn-solid {
+  background: var(--ws-ink);
+  color: var(--ws-paper);
+}
+
+.ws-btn-solid:hover {
+  background: var(--ws-wisteria-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(43, 33, 64, 0.22);
+}
+
+.ws-btn-ghost {
+  color: var(--ws-ink);
+  border: 1.5px solid rgba(43, 33, 64, 0.35);
+  background: transparent;
+}
+
+.ws-btn-ghost:hover {
+  border-color: var(--ws-wisteria-deep);
+  color: var(--ws-wisteria-deep);
+  transform: translateY(-2px);
+}
+
+/* ---- SIGNATURE: převislý hrozen vistárie u pravé hrany ---- */
+
+.ws-raceme {
+  position: absolute;
+  top: 0;
+  right: clamp(1rem, 9vw, 9rem);
+  height: 78%;
+  width: 8rem;
+  pointer-events: none;
+}
+
+.ws-vine {
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--ws-leaf), rgba(76, 107, 69, 0));
+  transform-origin: top;
+  animation: ws-grow 1.4s cubic-bezier(0.3, 0.6, 0.2, 1) both;
+}
+
+.ws-bloom {
+  position: absolute;
+  left: 50%;
+  border-radius: 50% 50% 50% 4px;
+  background: radial-gradient(circle at 32% 30%, #cfc3ee, var(--ws-wisteria) 62%, var(--ws-wisteria-deep));
+  box-shadow: 0 6px 16px rgba(106, 87, 171, 0.28);
+  animation: ws-bloom-in 0.7s cubic-bezier(0.2, 0.8, 0.3, 1.2) both, ws-sway 7s ease-in-out infinite;
+}
+
+/* hrozen se zužuje dolů — velikosti a rozmístění kódují tvar květenství */
+.b1 { width: 2.6rem; height: 2.6rem; top: 6%;  transform: translateX(-140%); animation-delay: 0.5s, 0s; }
+.b2 { width: 2.6rem; height: 2.6rem; top: 9%;  transform: translateX(30%);   animation-delay: 0.58s, 0.4s; }
+.b3 { width: 2.3rem; height: 2.3rem; top: 20%; transform: translateX(-150%); animation-delay: 0.66s, 0.8s; }
+.b4 { width: 2.3rem; height: 2.3rem; top: 24%; transform: translateX(40%);   animation-delay: 0.74s, 1.2s; }
+.b5 { width: 2rem;   height: 2rem;   top: 37%; transform: translateX(-135%); animation-delay: 0.82s, 1.6s; }
+.b6 { width: 2rem;   height: 2rem;   top: 42%; transform: translateX(25%);   animation-delay: 0.9s, 2s; }
+.b7 { width: 1.6rem; height: 1.6rem; top: 55%; transform: translateX(-120%); animation-delay: 0.98s, 2.4s; }
+.b8 { width: 1.4rem; height: 1.4rem; top: 66%; transform: translateX(10%);   animation-delay: 1.06s, 2.8s; }
+.b9 { width: 1.1rem; height: 1.1rem; top: 78%; transform: translateX(-70%);  animation-delay: 1.14s, 3.2s; }
+
+/* jemný pás pojmů řemesla u paty hero */
+.ws-hero-strip {
+  margin: 0 calc(-1 * clamp(1.25rem, 6vw, 6rem));
+  padding: 0.9rem clamp(1.25rem, 6vw, 6rem);
+  border-top: 1px solid rgba(43, 33, 64, 0.12);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(43, 33, 64, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* ============ SLUŽBY / KROKY ============ */
+
+.ws-section {
+  padding: clamp(3.5rem, 9vw, 6.5rem) clamp(1.25rem, 6vw, 6rem);
+}
+
+.ws-section-head {
+  max-width: 42rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.ws-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ws-leaf);
+  margin: 0 0 0.75rem;
+}
+
+.ws-eyebrow-light {
+  color: var(--ws-honey);
+}
+
+.ws-h2 {
+  font-family: var(--ws-display);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  line-height: 1.12;
+  margin: 0 0 1rem;
+}
+
+.ws-section-lead {
+  margin: 0;
+  max-width: 36rem;
+  color: rgba(43, 33, 64, 0.78);
+}
+
+.ws-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+  gap: 1.25rem;
+  counter-reset: krok;
+}
+
+.ws-step {
+  counter-increment: krok;
+  background: #fff;
+  border: 1px solid rgba(43, 33, 64, 0.1);
+  border-radius: 18px 18px 18px 4px; /* echo tvaru květu */
+  padding: 1.5rem 1.4rem 1.25rem;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.ws-step:hover {
+  transform: translateY(-4px);
+  border-color: var(--ws-wisteria);
+  box-shadow: 0 16px 32px rgba(106, 87, 171, 0.14);
+}
+
+.ws-step::before {
+  content: counter(krok);
+  font-family: var(--ws-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--ws-wisteria);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.ws-step-season {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.3rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ws-leaf);
+  background: rgba(76, 107, 69, 0.09);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+}
+
+.ws-step-title {
+  font-family: var(--ws-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+}
+
+.ws-step-text {
+  margin: 0 0 1rem;
+  font-size: 0.98rem;
+  color: rgba(43, 33, 64, 0.82);
+}
+
+.ws-step-out {
+  margin: 0;
+  padding-top: 0.75rem;
+  border-top: 1px dashed rgba(43, 33, 64, 0.2);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ws-wisteria-deep);
+}
+
+/* ============ O NÁS / REFERENCE ============ */
+
+.ws-story {
+  background:
+    radial-gradient(60rem 40rem at 110% 0%, rgba(140, 123, 200, 0.22), transparent 60%),
+    var(--ws-ink);
+  color: var(--ws-lilac);
+}
+
+.ws-story-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+  max-width: 72rem;
+}
+
+.ws-h2-light {
+  color: #fff;
+}
+
+.ws-story-text {
+  color: rgba(233, 228, 244, 0.85);
+  max-width: 34rem;
+}
+
+.ws-claims {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.ws-claim {
+  border-left: 3px solid var(--ws-honey);
+  padding-left: 1rem;
+}
+
+.ws-claim strong {
+  display: block;
+  color: #fff;
+  font-size: 1.02rem;
+}
+
+.ws-claim span {
+  font-size: 0.92rem;
+  color: rgba(233, 228, 244, 0.72);
+}
+
+.ws-quotes {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.ws-quote {
+  margin: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(140, 123, 200, 0.3);
+  border-radius: 18px 18px 18px 4px;
+  padding: 1.4rem 1.5rem;
+}
+
+.ws-quote blockquote {
+  margin: 0 0 0.8rem;
+  font-family: var(--ws-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.45;
+  color: #fff;
+}
+
+.ws-quote figcaption {
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--ws-wisteria);
+  text-transform: uppercase;
+}
+
+/* ============ ANIMATIONS ============ */
+
+@keyframes ws-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ws-rise {
+  from { opacity: 0; transform: translateY(0.6em); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ws-grow {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes ws-bloom-in {
+  from { opacity: 0; scale: 0.3; }
+  to { opacity: 1; scale: 1; }
+}
+
+@keyframes ws-sway {
+  0%, 100% { margin-left: 0; }
+  50% { margin-left: 0.35rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .ws-brand,
+  .ws-hero-title .ws-line,
+  .ws-hero-lead,
+  .ws-hero-actions,
+  .ws-vine,
+  .ws-bloom {
+    animation: none;
+  }
+  .ws-btn,
+  .ws-step {
+    transition: none;
+  }
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 900px) {
+  .ws-story-grid {
+    grid-template-columns: 1fr;
+  }
+  .ws-raceme {
+    right: 0.5rem;
+    width: 6rem;
+    height: 46%;
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 560px) {
+  .ws-hero {
+    min-height: auto;
+  }
+  .ws-hero-inner {
+    padding: 2rem 0 3rem;
+  }
+  .ws-hero-title {
+    font-size: clamp(2.3rem, 11.5vw, 3rem);
+  }
+  .ws-raceme {
+    height: 32%;
+    opacity: 0.35;
+  }
+  .ws-step-season {
+    position: static;
+    display: inline-block;
+    margin-bottom: 0.6rem;
+  }
+  .ws-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
