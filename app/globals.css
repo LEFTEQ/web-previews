@@ -1,0 +1,502 @@
+:root {
+  --pk-ink: #14212e;        /* noční asfalt */
+  --pk-paper: #f7f8f6;      /* denní světlo */
+  --pk-signal: #ffb400;     /* výstražná žlutá dodávky */
+  --pk-signal-deep: #e09a00;
+  --pk-route: #1e6ff0;      /* modrá trasy na mapě */
+  --pk-mist: #d8dde2;
+
+  --pk-font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Arial, sans-serif;
+  --pk-font-body: Georgia, "Times New Roman", serif;
+  --pk-font-mono: "Courier New", Courier, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--pk-paper);
+  color: var(--pk-ink);
+  font-family: var(--pk-font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+.pk a:focus-visible,
+.pk button:focus-visible {
+  outline: 3px solid var(--pk-route);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+.pk-hero {
+  background: var(--pk-ink);
+  color: var(--pk-paper);
+  position: relative;
+  overflow: hidden;
+}
+
+.pk-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid rgba(247, 248, 246, 0.14);
+}
+
+.pk-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pk-wm-arrow {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  background: var(--pk-signal);
+  color: var(--pk-ink);
+  font-size: 1.1rem;
+  border-radius: 4px;
+  transform: rotate(-8deg);
+}
+
+.pk-wm-text {
+  font-family: var(--pk-font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.pk-wm-text em {
+  font-style: normal;
+  color: var(--pk-signal);
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  font-family: var(--pk-font-body);
+  font-style: italic;
+  margin-left: 0.15em;
+}
+
+.pk-topcall {
+  text-decoration: none;
+  color: var(--pk-paper);
+  text-align: right;
+  line-height: 1.2;
+}
+
+.pk-topcall-label {
+  display: block;
+  font-family: var(--pk-font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pk-signal);
+}
+
+.pk-topcall-num {
+  font-family: var(--pk-font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+}
+
+.pk-topcall:hover .pk-topcall-num { color: var(--pk-signal); }
+
+.pk-hero-grid {
+  display: grid;
+  gap: 2rem;
+  padding: 2.5rem 1.25rem 3rem;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.pk-routeline {
+  font-family: var(--pk-font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  color: rgba(247, 248, 246, 0.75);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.4rem;
+  flex-wrap: wrap;
+}
+
+.pk-dot {
+  width: 9px; height: 9px;
+  border: 2px solid var(--pk-signal);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.pk-dot-fill { background: var(--pk-signal); }
+
+.pk-dash {
+  flex: 0 0 2rem;
+  height: 0;
+  border-top: 2px dashed rgba(255, 180, 0, 0.65);
+  display: inline-block;
+}
+
+.pk-h1 {
+  font-family: var(--pk-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.7rem, 9vw, 5.2rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  margin: 0 0 1.4rem;
+}
+
+.pk-h1-accent {
+  color: var(--pk-signal);
+  position: relative;
+  display: inline-block;
+}
+
+.pk-lede {
+  max-width: 34rem;
+  font-size: 1.08rem;
+  color: rgba(247, 248, 246, 0.88);
+  margin: 0 0 1.8rem;
+}
+
+.pk-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 2.2rem;
+}
+
+.pk-btn {
+  font-family: var(--pk-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: 0.95rem 1.6rem;
+  border-radius: 4px;
+  display: inline-block;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.pk-btn-primary {
+  background: var(--pk-signal);
+  color: var(--pk-ink);
+}
+
+.pk-btn-primary:hover {
+  background: var(--pk-signal-deep);
+  transform: translateY(-2px);
+}
+
+.pk-btn-ghost {
+  color: var(--pk-paper);
+  border: 2px solid rgba(247, 248, 246, 0.4);
+}
+
+.pk-btn-ghost:hover {
+  border-color: var(--pk-signal);
+  color: var(--pk-signal);
+}
+
+.pk-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 0;
+  border-top: 1px solid rgba(247, 248, 246, 0.14);
+  padding-top: 1.4rem;
+  max-width: 34rem;
+}
+
+.pk-hero-stats dt {
+  font-family: var(--pk-font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(247, 248, 246, 0.6);
+  margin-bottom: 0.3rem;
+}
+
+.pk-hero-stats dd {
+  margin: 0;
+  font-family: var(--pk-font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.03em;
+  color: var(--pk-signal);
+}
+
+.pk-hero-media {
+  margin: 0;
+  position: relative;
+}
+
+.pk-hero-media img {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(247, 248, 246, 0.18);
+}
+
+.pk-hero-tag {
+  position: absolute;
+  left: 0.9rem;
+  bottom: 0.9rem;
+  background: var(--pk-signal);
+  color: var(--pk-ink);
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  transform: rotate(-2deg);
+  max-width: 85%;
+}
+
+.pk-tag-city {
+  display: block;
+  font-family: var(--pk-font-display);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  font-size: 0.85rem;
+}
+
+.pk-tag-note {
+  display: block;
+  font-family: var(--pk-font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.04em;
+}
+
+/* ---- signature: jízdní řád / ticker ---- */
+.pk-ticker {
+  border-top: 2px solid var(--pk-signal);
+  background: #0d1620;
+  overflow: hidden;
+  padding: 0.65rem 0;
+}
+
+.pk-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: pk-scroll 32s linear infinite;
+}
+
+.pk-ticker-track span {
+  font-family: var(--pk-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--pk-signal);
+  white-space: nowrap;
+}
+
+@keyframes pk-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ============ SLUŽBY ============ */
+.pk-services {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 4rem;
+}
+
+.pk-section-head { max-width: 42rem; margin-bottom: 2.2rem; }
+
+.pk-eyebrow {
+  font-family: var(--pk-font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--pk-route);
+  margin: 0 0 0.6rem;
+}
+
+.pk-h2 {
+  font-family: var(--pk-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.05;
+  margin: 0;
+}
+
+.pk-services-grid {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.pk-card {
+  background: #fff;
+  border: 1px solid var(--pk-mist);
+  border-top: 4px solid var(--pk-signal);
+  border-radius: 6px;
+  padding: 1.5rem 1.4rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.pk-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(20, 33, 46, 0.12);
+}
+
+.pk-card h3 {
+  font-family: var(--pk-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 1.15rem;
+  margin: 0 0 0.35rem;
+}
+
+.pk-card-price {
+  font-family: var(--pk-font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--pk-route);
+  margin: 0 0 0.8rem;
+}
+
+.pk-card p { margin: 0 0 0.8rem; }
+
+.pk-card-meta {
+  font-size: 0.82rem;
+  color: #5b6874;
+  font-style: italic;
+  margin: 0;
+}
+
+.pk-card-wide {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.pk-card-wide img {
+  border-radius: 4px;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* ============ DŮVĚRA ============ */
+.pk-trust {
+  background: var(--pk-ink);
+  color: var(--pk-paper);
+}
+
+.pk-trust-grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 4rem;
+  display: grid;
+  gap: 2rem;
+}
+
+.pk-trust-media { margin: 0; }
+
+.pk-trust-media img {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(247, 248, 246, 0.18);
+}
+
+.pk-eyebrow-light { color: var(--pk-signal); }
+
+.pk-h2-light { color: var(--pk-paper); margin-bottom: 1.4rem; }
+
+.pk-trust-list {
+  list-style: none;
+  margin: 0 0 2rem;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.pk-trust-list li {
+  padding-left: 1.4rem;
+  position: relative;
+  color: rgba(247, 248, 246, 0.88);
+}
+
+.pk-trust-list li::before {
+  content: "➔";
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  color: var(--pk-signal);
+  font-size: 0.85em;
+}
+
+.pk-trust-list strong { color: var(--pk-paper); }
+
+.pk-quote {
+  margin: 0;
+  border-left: 4px solid var(--pk-signal);
+  padding: 0.4rem 0 0.4rem 1.2rem;
+}
+
+.pk-quote p {
+  font-style: italic;
+  font-size: 1.05rem;
+  margin: 0 0 0.6rem;
+  color: rgba(247, 248, 246, 0.92);
+}
+
+.pk-quote cite {
+  font-style: normal;
+  font-family: var(--pk-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: rgba(247, 248, 246, 0.65);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (min-width: 760px) {
+  .pk-topbar { padding: 1.2rem 2rem; }
+
+  .pk-hero-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    padding: 3.5rem 2rem 4rem;
+  }
+
+  .pk-services { padding: 4.5rem 2rem 5rem; }
+
+  .pk-services-grid { grid-template-columns: repeat(3, 1fr); }
+
+  .pk-card-wide {
+    grid-column: 1 / -1;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+  }
+
+  .pk-card-wide img { height: 100%; }
+
+  .pk-trust-grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: center;
+    padding: 4.5rem 2rem 5rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .pk-topcall-num { font-size: 1rem; }
+  .pk-hero-stats { grid-template-columns: 1fr 1fr; }
+}
+
+/* ============ MOTION ============ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .pk-ticker-track { animation: none; }
+  .pk-btn, .pk-card { transition: none; }
+  .pk-btn-primary:hover, .pk-card:hover { transform: none; }
+}
