@@ -1,0 +1,660 @@
+/* ============================================================
+   SPORTCENTRUM DELFÍN — České Budějovice
+   Paleta „bazén za soumraku":
+   --hlubina  #0B2545  (hluboká bazénová modř — pozadí hero)
+   --voda     #13315C  (střední modř — plochy)
+   --hladina  #8DA9C4  (světlá modrošedá — sekundární text)
+   --pena     #EEF4ED  (téměř bílá se zelenkavým nádechem)
+   --koral    #FF5D5D  (korálová — tep, akce, rezervace)
+   --slunce   #FFC145  (žlutá — akcent detailů)
+   Typografie: display = široký grotesk (system stack s rozšířeným
+   prostrkáním a těžkou vahou), tělo = humanistický sans.
+   Signature: sinusová „vlna delfína" kreslená při načtení.
+   ============================================================ */
+
+:root {
+  --hlubina: #0b2545;
+  --voda: #13315c;
+  --hladina: #8da9c4;
+  --pena: #eef4ed;
+  --koral: #ff5d5d;
+  --slunce: #ffc145;
+  --pismo-telo: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --pismo-display: "Arial Black", "Segoe UI", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--pismo-telo);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--hlubina);
+  background: var(--pena);
+}
+
+.delfin a {
+  color: inherit;
+}
+
+.delfin :focus-visible {
+  outline: 3px solid var(--slunce);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+  background:
+    radial-gradient(120% 90% at 85% -10%, #1d4e89 0%, transparent 55%),
+    linear-gradient(170deg, var(--hlubina) 0%, var(--voda) 100%);
+  color: var(--pena);
+  padding: 1.25rem 1.25rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemný vzor dráhy bazénu — svislé pruhy jako plavecké dráhy */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 120px,
+    rgba(141, 169, 196, 0.07) 120px,
+    rgba(141, 169, 196, 0.07) 122px
+  );
+  pointer-events: none;
+}
+
+.hero-nav {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.wordmark {
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: 1.5rem;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* otočené F = delfíní ploutev ve wordmarku */
+.wordmark-flip {
+  display: inline-block;
+  transform: rotate(180deg) translateY(-2px);
+  color: var(--koral);
+}
+
+.wordmark-sub {
+  font-family: var(--pismo-telo);
+  font-weight: 400;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--hladina);
+}
+
+.nav-cta {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid rgba(238, 244, 237, 0.35);
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  white-space: nowrap;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.nav-cta:hover {
+  border-color: var(--pena);
+  background: rgba(238, 244, 237, 0.08);
+}
+
+.hero-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 4rem;
+  position: relative;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1.25rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hladina);
+}
+
+.hero-title {
+  margin: 0;
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: clamp(2.9rem, 10vw, 7rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.hero-line {
+  display: block;
+}
+
+/* každý řádek titulku „vyplave" o kousek dál — pohyb delfína */
+.hero-line-2 {
+  margin-left: clamp(1rem, 6vw, 5rem);
+  color: var(--hladina);
+}
+
+.hero-line-3 {
+  margin-left: clamp(2rem, 12vw, 10rem);
+}
+
+.tecka {
+  color: var(--koral);
+}
+
+.hero-vlna {
+  display: block;
+  width: min(720px, 100%);
+  height: 90px;
+  margin: 1.5rem 0 0;
+  color: var(--koral);
+}
+
+.hero-perex {
+  max-width: 34rem;
+  margin: 1.5rem 0 2rem;
+  font-size: 1.15rem;
+  color: #d7e3ee;
+}
+
+.hero-akce {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.9rem 1.7rem;
+  border-radius: 999px;
+  transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.btn-hlavni {
+  background: var(--koral);
+  color: #fff;
+}
+
+.btn-hlavni:hover {
+  background: #ff7676;
+  transform: translateY(-2px);
+}
+
+.btn-tichy {
+  border: 1px solid rgba(238, 244, 237, 0.4);
+  color: var(--pena);
+}
+
+.btn-tichy:hover {
+  border-color: var(--pena);
+}
+
+.hero-fakta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 3rem;
+  margin: 3rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(141, 169, 196, 0.3);
+}
+
+.hero-fakta dt {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hladina);
+}
+
+.hero-fakta dd {
+  margin: 0.15rem 0 0;
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: 1.25rem;
+}
+
+.hero-fakta dd a {
+  text-decoration: none;
+}
+
+.hero-fakta dd a:hover {
+  color: var(--slunce);
+}
+
+/* ---------- animace při načtení ---------- */
+
+.hero-line,
+.hero-perex,
+.hero-akce,
+.hero-fakta,
+.hero-eyebrow {
+  animation: vyplout 0.7s ease-out both;
+}
+
+.hero-line-1 { animation-delay: 0.05s; }
+.hero-line-2 { animation-delay: 0.15s; }
+.hero-line-3 { animation-delay: 0.25s; }
+.hero-perex { animation-delay: 0.45s; }
+.hero-akce { animation-delay: 0.55s; }
+.hero-fakta { animation-delay: 0.65s; }
+
+@keyframes vyplout {
+  from {
+    opacity: 0;
+    transform: translateY(1.2rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* signature: vlna se „doplave" — kreslení tahu */
+.vlna-path {
+  stroke-dasharray: 1600;
+  stroke-dashoffset: 1600;
+  animation: plavat 1.6s ease-out 0.35s forwards;
+}
+
+@keyframes plavat {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---------- SEKCE: SLUŽBY ---------- */
+
+.sluzby {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.sekce-hlava {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.sekce-hlava h2 {
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0 0 0.75rem;
+}
+
+.sekce-hlava p {
+  margin: 0;
+  color: #47617f;
+  font-size: 1.1rem;
+}
+
+.sluzby-mrizka {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+
+.sluzba {
+  background: #fff;
+  border-radius: 18px;
+  padding: 1.5rem 1.5rem 1.75rem;
+  border-bottom: 4px solid var(--voda);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.sluzba:hover {
+  transform: translateY(-4px);
+  border-bottom-color: var(--koral);
+}
+
+.sluzba-detail {
+  margin: 0 0 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--koral);
+}
+
+.sluzba h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+.sluzba-popis {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #3c536e;
+}
+
+/* ---------- rozvrh ---------- */
+
+.rozvrh {
+  margin-top: 3.5rem;
+  background: #fff;
+  border-radius: 22px;
+  padding: 2rem 1.5rem;
+  scroll-margin-top: 2rem;
+}
+
+.rozvrh-hlava h3 {
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+
+.rozvrh-hlava p {
+  margin: 0 0 1.5rem;
+  color: #47617f;
+  max-width: 36rem;
+}
+
+.rozvrh-seznam {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lekce {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr auto;
+  grid-template-areas:
+    "cas nazev typ"
+    "cas trener typ";
+  align-items: center;
+  column-gap: 1rem;
+  padding: 0.9rem 0.25rem;
+  border-top: 1px solid #e3ebe2;
+}
+
+.lekce:first-child {
+  border-top: none;
+}
+
+.lekce-cas {
+  grid-area: cas;
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: 1.15rem;
+  color: var(--voda);
+}
+
+.lekce-nazev {
+  grid-area: nazev;
+  font-weight: 700;
+}
+
+.lekce-trener {
+  grid-area: trener;
+  font-size: 0.88rem;
+  color: #6a7f96;
+}
+
+.lekce-typ {
+  grid-area: typ;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+}
+
+.typ-klid {
+  background: #e2efe6;
+  color: #2c6e49;
+}
+
+.typ-stred {
+  background: #fff0d6;
+  color: #9a6700;
+}
+
+.typ-naloz {
+  background: #ffe3e3;
+  color: #c0392b;
+}
+
+.rozvrh-pozn {
+  margin: 1.25rem 0 0;
+  font-size: 0.85rem;
+  color: #6a7f96;
+}
+
+/* ---------- SEKCE: TÝM ---------- */
+
+.tym {
+  background: var(--hlubina);
+  color: var(--pena);
+  padding: 4.5rem 1.25rem 4.5rem;
+}
+
+.tym > * {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sekce-hlava-svetla p {
+  color: var(--hladina);
+}
+
+.tym-seznam {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.trener {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "ini jmeno"
+    "ini role";
+  column-gap: 0.9rem;
+  align-items: center;
+  background: rgba(238, 244, 237, 0.06);
+  border: 1px solid rgba(141, 169, 196, 0.2);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.trener:hover {
+  border-color: var(--koral);
+  background: rgba(238, 244, 237, 0.09);
+}
+
+.trener-inicialy {
+  grid-area: ini;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--voda);
+  color: var(--slunce);
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+}
+
+.trener-jmeno {
+  grid-area: jmeno;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.trener-role {
+  grid-area: role;
+  font-size: 0.85rem;
+  color: var(--hladina);
+}
+
+/* ---------- důvěra / citace ---------- */
+
+.duvera {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.citace {
+  margin: 0;
+  max-width: 40rem;
+}
+
+.citace-vlna {
+  display: block;
+  width: 180px;
+  height: 28px;
+  color: var(--koral);
+  margin-bottom: 1rem;
+}
+
+.citace p {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  line-height: 1.45;
+  font-weight: 300;
+}
+
+.citace cite {
+  font-style: normal;
+  font-size: 0.9rem;
+  color: var(--hladina);
+}
+
+.duvera-fakta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 3rem;
+  margin: 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(141, 169, 196, 0.25);
+}
+
+.duvera-fakta dt {
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: 1.05rem;
+}
+
+.duvera-fakta dd {
+  margin: 0.15rem 0 0;
+  font-size: 0.9rem;
+  color: var(--hladina);
+}
+
+/* ---------- responzivita ---------- */
+
+@media (min-width: 760px) {
+  .hero {
+    padding: 2rem 2.5rem 5.5rem;
+  }
+
+  .sluzby,
+  .tym {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .rozvrh {
+    padding: 2.5rem 2.75rem;
+  }
+
+  .lekce {
+    grid-template-columns: 5.5rem 1.4fr 1fr auto;
+    grid-template-areas: "cas nazev trener typ";
+  }
+
+  .duvera {
+    grid-template-columns: 1.4fr 1fr;
+    align-items: start;
+  }
+
+  .duvera-fakta {
+    flex-direction: column;
+    gap: 1.25rem;
+    border-top: none;
+    border-left: 1px solid rgba(141, 169, 196, 0.25);
+    padding: 0.25rem 0 0.25rem 2rem;
+  }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-line,
+  .hero-perex,
+  .hero-akce,
+  .hero-fakta,
+  .hero-eyebrow {
+    animation: none;
+  }
+
+  .vlna-path {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+
+  .btn,
+  .sluzba,
+  .trener {
+    transition: none;
+  }
+
+  .btn-hlavni:hover,
+  .sluzba:hover {
+    transform: none;
+  }
+}
