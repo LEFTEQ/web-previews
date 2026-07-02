@@ -1,0 +1,621 @@
+:root {
+  --ct-navy: #0d1f3c;
+  --ct-navy-deep: #091528;
+  --ct-yellow: #ffc21a;
+  --ct-paper: #f7f5ef;
+  --ct-ink: #17233a;
+  --ct-slate: #55617a;
+  --ct-line: #d8d4c8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ct-ink);
+  background: var(--ct-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ct-main a:focus-visible,
+.ct-main button:focus-visible {
+  outline: 3px solid var(--ct-yellow);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.ct-hero {
+  position: relative;
+  background:
+    linear-gradient(160deg, var(--ct-navy) 0%, var(--ct-navy-deep) 70%);
+  color: #fff;
+  overflow: hidden;
+}
+
+.ct-hero::before {
+  /* jemná mapová mřížka – dispečerský podklad */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+}
+
+.ct-hero-inner {
+  position: relative;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 28px 24px 88px;
+}
+
+.ct-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 64px;
+}
+
+.ct-wordmark {
+  font-weight: 800;
+  font-size: 1.45rem;
+  letter-spacing: 0.14em;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.ct-wordmark-dot {
+  color: var(--ct-yellow);
+  margin-left: -10px;
+}
+
+.ct-wordmark-sub {
+  font-weight: 400;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.ct-topbar-phone {
+  color: var(--ct-yellow);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.ct-topbar-phone:hover {
+  border-bottom-color: var(--ct-yellow);
+}
+
+.ct-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);
+  gap: 56px;
+  align-items: center;
+}
+
+.ct-eyebrow {
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ct-eyebrow-code {
+  background: var(--ct-yellow);
+  color: var(--ct-navy-deep);
+  font-weight: 800;
+  padding: 3px 10px;
+  letter-spacing: 0.1em;
+}
+
+.ct-hero-title {
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 26px;
+}
+
+.ct-line {
+  display: block;
+  opacity: 0;
+  transform: translateX(-28px);
+  animation: ct-drive-in 0.55s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+.ct-line-1 { animation-delay: 0.08s; }
+.ct-line-2 { animation-delay: 0.22s; }
+.ct-line-3 { animation-delay: 0.38s; }
+
+.ct-line-accent {
+  color: var(--ct-yellow);
+}
+
+@keyframes ct-drive-in {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.ct-hero-lead {
+  max-width: 46ch;
+  font-size: 1.08rem;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 34px;
+}
+
+.ct-hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.ct-btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  padding: 15px 30px;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.ct-btn-primary {
+  background: var(--ct-yellow);
+  color: var(--ct-navy-deep);
+}
+
+.ct-btn-primary:hover {
+  transform: translateY(-2px);
+  background: #ffd04d;
+}
+
+.ct-btn-ghost {
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+.ct-btn-ghost:hover {
+  border-color: var(--ct-yellow);
+  color: var(--ct-yellow);
+}
+
+/* --- Signature: přepravní štítek --- */
+
+.ct-label-card {
+  background: #fff;
+  color: var(--ct-ink);
+  border-radius: 6px;
+  padding: 22px 24px 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  transform: rotate(1.5deg);
+  font-size: 0.95rem;
+  opacity: 0;
+  animation: ct-label-drop 0.6s ease 0.55s forwards;
+}
+
+@keyframes ct-label-drop {
+  from {
+    opacity: 0;
+    transform: rotate(1.5deg) translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(1.5deg) translateY(0);
+  }
+}
+
+.ct-label-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  border-bottom: 2px solid var(--ct-navy);
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+}
+
+.ct-label-no {
+  color: var(--ct-slate);
+  font-weight: 600;
+}
+
+.ct-label-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--ct-line);
+}
+
+.ct-label-key {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ct-slate);
+  flex-shrink: 0;
+}
+
+.ct-label-val {
+  font-weight: 600;
+  text-align: right;
+}
+
+.ct-label-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #0a7a3d;
+}
+
+.ct-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #12b35c;
+  animation: ct-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes ct-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(18, 179, 92, 0.45); }
+  55% { box-shadow: 0 0 0 7px rgba(18, 179, 92, 0); }
+}
+
+.ct-barcode {
+  display: flex;
+  gap: 3px;
+  height: 40px;
+  margin: 16px 0 10px;
+}
+
+.ct-barcode i {
+  flex: 1;
+  background: var(--ct-ink);
+}
+
+.ct-barcode i:nth-child(3n) { flex: 2.2; }
+.ct-barcode i:nth-child(4n) { flex: 0.5; }
+.ct-barcode i:nth-child(7n) { flex: 1.6; }
+
+.ct-label-foot {
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  color: var(--ct-slate);
+  text-align: center;
+}
+
+/* --- dálniční pruh --- */
+
+.ct-roadline {
+  position: relative;
+  height: 14px;
+  background: var(--ct-navy-deep);
+  border-top: 3px solid var(--ct-yellow);
+  overflow: hidden;
+}
+
+.ct-road-dash {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 3px;
+  transform: translateY(-50%);
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.7) 0 34px, transparent 34px 68px);
+  background-size: 68px 3px;
+  animation: ct-road 1.4s linear infinite;
+}
+
+@keyframes ct-road {
+  to { background-position: -68px 0; }
+}
+
+/* ============ SEKCE ============ */
+
+.ct-section {
+  padding: 84px 24px;
+}
+
+.ct-section-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.ct-section-head {
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+
+.ct-section-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.ct-section-lead {
+  color: var(--ct-slate);
+  font-size: 1.08rem;
+}
+
+/* --- Služby --- */
+
+.ct-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.ct-service {
+  background: #fff;
+  border: 1px solid var(--ct-line);
+  border-radius: 6px;
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.ct-service:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(13, 31, 60, 0.12);
+}
+
+.ct-service-featured {
+  background: var(--ct-navy);
+  color: #fff;
+  border-color: var(--ct-navy);
+}
+
+.ct-service-featured .ct-service-text {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.ct-service-tag {
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  background: var(--ct-yellow);
+  color: var(--ct-navy-deep);
+  padding: 4px 10px;
+}
+
+.ct-service-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.ct-service-text {
+  color: var(--ct-slate);
+  font-size: 0.98rem;
+  flex-grow: 1;
+}
+
+.ct-service-price {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: inherit;
+}
+
+.ct-service-notes {
+  margin-top: 36px;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.ct-service-notes li {
+  padding-left: 20px;
+  position: relative;
+  color: var(--ct-slate);
+  font-size: 0.95rem;
+}
+
+.ct-service-notes li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 10px;
+  height: 10px;
+  background: var(--ct-yellow);
+  border-radius: 2px;
+}
+
+/* --- Důvěra --- */
+
+.ct-trust {
+  background: #fff;
+  border-top: 1px solid var(--ct-line);
+}
+
+.ct-trust-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.ct-trust-text {
+  color: var(--ct-slate);
+  margin-bottom: 18px;
+  max-width: 56ch;
+}
+
+.ct-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.ct-stat dd {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--ct-navy);
+  line-height: 1.1;
+}
+
+.ct-stat dt {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ct-slate);
+  order: 2;
+}
+
+.ct-stat {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+}
+
+.ct-quotes {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ct-quote {
+  background: var(--ct-paper);
+  border-left: 4px solid var(--ct-yellow);
+  border-radius: 0 6px 6px 0;
+  padding: 24px 26px;
+}
+
+.ct-quote blockquote {
+  font-size: 1.02rem;
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+
+.ct-quote figcaption {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ct-slate);
+}
+
+/* ============ RESPONZIVITA ============ */
+
+@media (max-width: 920px) {
+  .ct-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .ct-label-card {
+    max-width: 420px;
+  }
+
+  .ct-services-grid,
+  .ct-service-notes {
+    grid-template-columns: 1fr;
+  }
+
+  .ct-trust-grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+}
+
+@media (max-width: 560px) {
+  .ct-hero-inner {
+    padding: 20px 18px 64px;
+  }
+
+  .ct-topbar {
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 44px;
+  }
+
+  .ct-section {
+    padding: 60px 18px;
+  }
+
+  .ct-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .ct-label-card {
+    transform: rotate(0deg);
+    padding: 18px 18px 14px;
+  }
+
+  @keyframes ct-label-drop {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .ct-stats {
+    gap: 24px;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ct-line,
+  .ct-label-card {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .ct-label-card {
+    transform: rotate(1.5deg);
+  }
+
+  .ct-road-dash,
+  .ct-dot {
+    animation: none;
+  }
+
+  .ct-btn,
+  .ct-service {
+    transition: none;
+  }
+}
