@@ -1,0 +1,487 @@
+/* ==========================================================
+   PROLAK, spol. s r. o. — lakýrnictví Brno
+   Koncept: řez lakovanou vrstvou. Základ / plnič / vrchní lak
+   jako tři barevné nánosy, které nesou celou identitu.
+   Paleta: ocel (podklad), zinkově šedý základ, oxidově červený
+   plnič (klasický antikorozní základ), safírový vrchní lak
+   (RAL 5003 – barva, kterou lakovny opravdu stříkají).
+   ========================================================== */
+
+:root {
+  --steel: #1b1f24;        /* surová ocel / text */
+  --shopfloor: #eef0ee;    /* světlo haly, podklad */
+  --zinc: #b9bfb7;         /* zinkový základ */
+  --oxide: #b3401f;        /* oxidově červený plnič */
+  --saphir: #1d3b6e;       /* vrchní lak, RAL 5003 */
+  --saphir-deep: #14294d;
+  --gloss: #f7f8f6;        /* lesklý bílý detail */
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--shopfloor);
+  color: var(--steel);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pk a:focus-visible,
+.pk button:focus-visible {
+  outline: 3px solid var(--oxide);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.pk-hero {
+  position: relative;
+  background: var(--shopfloor);
+  overflow: hidden;
+}
+
+.pk-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.4rem clamp(1.25rem, 5vw, 4rem) 0;
+}
+
+.pk-wordmark { display: flex; flex-direction: column; }
+
+.pk-wordmark-main {
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--steel);
+}
+
+.pk-wordmark-main em {
+  font-style: normal;
+  color: var(--saphir);
+  position: relative;
+}
+
+.pk-wordmark-main em::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -0.18em;
+  height: 0.14em;
+  background: linear-gradient(90deg, var(--oxide) 0 33%, var(--zinc) 33% 66%, var(--saphir) 66% 100%);
+}
+
+.pk-wordmark-sub {
+  margin-top: 0.55rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #5a6068;
+}
+
+.pk-hero-tel {
+  text-align: right;
+  text-decoration: none;
+  color: var(--steel);
+  line-height: 1.25;
+}
+
+.pk-hero-tel-label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #5a6068;
+}
+
+.pk-hero-tel-num {
+  display: block;
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--saphir);
+}
+
+.pk-hero-body {
+  padding: clamp(2.5rem, 7vw, 5.5rem) clamp(1.25rem, 5vw, 4rem) clamp(2rem, 5vw, 3.5rem);
+  max-width: 62rem;
+}
+
+.pk-hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--oxide);
+}
+
+.pk-hero-title {
+  margin: 0;
+  font-size: clamp(3rem, 11vw, 7.5rem);
+  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.pk-hero-title .pk-line { display: block; }
+
+.pk-line-1 { color: var(--zinc); -webkit-text-stroke: 1.5px var(--steel); }
+.pk-line-2 { color: var(--oxide); }
+.pk-line-3 { color: var(--saphir); }
+
+.pk-hero-lead {
+  margin: 1.75rem 0 0;
+  max-width: 34rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  color: #3a4048;
+}
+
+.pk-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2rem;
+}
+
+.pk-btn {
+  display: inline-block;
+  padding: 0.9rem 1.8rem;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.pk-btn-solid {
+  background: var(--saphir);
+  color: var(--gloss);
+}
+
+.pk-btn-solid:hover { background: var(--saphir-deep); transform: translateY(-2px); }
+
+.pk-btn-line {
+  border: 2px solid var(--steel);
+  color: var(--steel);
+}
+
+.pk-btn-line:hover { background: var(--steel); color: var(--gloss); transform: translateY(-2px); }
+
+/* --- Signature: tři nánosy laku --- */
+
+.pk-coats { display: flex; flex-direction: column; }
+
+.pk-coat {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(1.25rem, 5vw, 4rem);
+  transform-origin: left center;
+  animation: pk-spray 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.pk-coat-primer {
+  height: 3.4rem;
+  background: var(--zinc);
+  animation-delay: 0.15s;
+}
+
+.pk-coat-filler {
+  height: 4.6rem;
+  background: var(--oxide);
+  animation-delay: 0.4s;
+}
+
+.pk-coat-top {
+  height: 2.6rem;
+  background: linear-gradient(180deg, #2a4d8a 0%, var(--saphir) 40%, var(--saphir-deep) 100%);
+  animation-delay: 0.65s;
+}
+
+/* lesk vrchního laku */
+.pk-coat-top::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 4px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.pk-coat-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pk-coat-primer .pk-coat-tag { color: #3d4340; }
+.pk-coat-filler .pk-coat-tag { color: #ffe4d8; }
+.pk-coat-top .pk-coat-tag { color: #cfdcf5; }
+
+@keyframes pk-spray {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* ============ SEKCE OBECNĚ ============ */
+
+.pk-section { padding: clamp(3rem, 8vw, 5.5rem) clamp(1.25rem, 5vw, 4rem); }
+
+.pk-eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--oxide);
+}
+
+.pk-eyebrow-light { color: #e8a58c; }
+
+.pk-h2 {
+  margin: 0;
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  max-width: 38rem;
+}
+
+.pk-h2-light { color: var(--gloss); }
+
+.pk-section-head { margin-bottom: 2.5rem; }
+
+/* ============ SLUŽBY ============ */
+
+.pk-services { background: var(--shopfloor); }
+
+.pk-service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+  gap: 1.25rem;
+}
+
+.pk-card {
+  background: var(--gloss);
+  border: 1px solid #d9dcd6;
+  border-radius: 4px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pk-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(27, 31, 36, 0.1);
+}
+
+.pk-card-chip {
+  width: 3rem;
+  height: 0.9rem;
+  border-radius: 2px;
+  margin-bottom: 1.1rem;
+}
+
+.pk-chip-wet { background: linear-gradient(180deg, #2a4d8a, var(--saphir-deep)); }
+.pk-chip-powder { background: linear-gradient(180deg, #c9502b, #8f3218); }
+.pk-chip-prep { background: linear-gradient(180deg, #c6ccc4, #9aa098); }
+.pk-chip-series { background: linear-gradient(90deg, var(--zinc) 0 33%, var(--oxide) 33% 66%, var(--saphir) 66% 100%); }
+
+.pk-card-title {
+  margin: 0 0 0.6rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.pk-card-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #3a4048;
+  flex-grow: 1;
+}
+
+.pk-card-meta {
+  margin: 1rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6a7078;
+  border-top: 1px dashed #d0d4cd;
+  padding-top: 0.75rem;
+}
+
+/* vzorník RAL */
+
+.pk-ral-strip {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem 1.4rem;
+}
+
+.pk-ral-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #5a6068;
+}
+
+.pk-ral {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--steel);
+}
+
+.pk-ral i {
+  display: inline-block;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 2px;
+  box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ============ DŮVĚRA ============ */
+
+.pk-trust {
+  background: linear-gradient(180deg, var(--saphir) 0%, var(--saphir-deep) 100%);
+  color: var(--gloss);
+}
+
+.pk-trust-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.pk-trust-text {
+  margin: 1.25rem 0 0;
+  max-width: 32rem;
+  color: #d5def0;
+  font-size: 1.05rem;
+}
+
+.pk-facts {
+  list-style: none;
+  margin: 2.25rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.pk-fact {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  border-left: 3px solid var(--oxide);
+  padding-left: 1rem;
+}
+
+.pk-fact-num {
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: var(--gloss);
+  white-space: nowrap;
+}
+
+.pk-fact-desc { color: #c3cee6; font-size: 0.95rem; }
+
+.pk-quotes {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pk-quote {
+  margin: 0;
+  background: rgba(247, 248, 246, 0.06);
+  border: 1px solid rgba(247, 248, 246, 0.14);
+  border-radius: 4px;
+  padding: 1.4rem 1.5rem;
+}
+
+.pk-quote blockquote {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--gloss);
+}
+
+.pk-quote figcaption {
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9fb0d4;
+}
+
+.pk-badge {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  background: var(--oxide);
+  border-radius: 4px;
+  padding: 1.1rem 1.4rem;
+}
+
+.pk-badge-num {
+  font-size: 1.8rem;
+  font-weight: 900;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.pk-badge-txt {
+  font-size: 0.88rem;
+  color: #ffe4d8;
+  line-height: 1.4;
+}
+
+/* ============ RESPONZIVITA ============ */
+
+@media (max-width: 860px) {
+  .pk-trust-inner { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+  .pk-hero-top { flex-direction: column; gap: 0.9rem; }
+  .pk-hero-tel { text-align: left; }
+  .pk-hero-actions .pk-btn { width: 100%; text-align: center; }
+  .pk-coat-primer { height: 2.6rem; }
+  .pk-coat-filler { height: 3.4rem; }
+  .pk-coat-top { height: 2.2rem; }
+  .pk-coat-tag { font-size: 0.62rem; letter-spacing: 0.12em; }
+  .pk-fact { grid-template-columns: 1fr; gap: 0.2rem; }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .pk-coat { animation: none; }
+  .pk-btn,
+  .pk-card { transition: none; }
+  .pk-btn-solid:hover,
+  .pk-btn-line:hover,
+  .pk-card:hover { transform: none; }
+}
