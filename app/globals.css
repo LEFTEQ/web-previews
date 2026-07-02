@@ -1,0 +1,555 @@
+/* =========================================================
+   ALLdom — správa nemovitostí, Plzeň
+   Paleta: hluboká petrolejová (noční fasáda), teplá okrová
+   (rozsvícená okna), omítková šedobílá, betonová šeď.
+   Typo: Archivo (výrazný, hranatý grotesk — "panelová" typografie)
+   + systémový sans pro tělo.
+   Signature: fasáda domu z okének, která se po načtení rozsvěcí.
+   ========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Archivo+Narrow:wght@500;600&display=swap");
+
+:root {
+  --petrolej: #12333b;      /* noční město */
+  --petrolej-tma: #0b2228;
+  --okr: #e8a13c;           /* světlo v okně */
+  --okr-svetly: #f4c477;
+  --omitka: #eef0ec;        /* šedobílá omítka */
+  --beton: #5b6b6e;
+  --inkoust: #17272b;
+
+  --f-display: "Archivo", "Arial Black", sans-serif;
+  --f-narrow: "Archivo Narrow", "Arial Narrow", sans-serif;
+  --f-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--inkoust);
+  background: var(--omitka);
+}
+
+.ad-main a:focus-visible,
+.ad-main :focus-visible {
+  outline: 3px solid var(--okr);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.ad-hero {
+  background: linear-gradient(168deg, var(--petrolej) 0%, var(--petrolej-tma) 100%);
+  color: var(--omitka);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.ad-hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+.ad-wordmark {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.ad-wordmark-dom {
+  color: var(--okr);
+  font-weight: 700;
+}
+
+.ad-wordmark-sub {
+  font-family: var(--f-narrow);
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--beton);
+  color: #9db2b5;
+  margin-top: 0.35rem;
+}
+
+.ad-hero-tel {
+  font-family: var(--f-narrow);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--okr-svetly);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.ad-hero-tel:hover {
+  border-bottom-color: var(--okr);
+}
+
+.ad-hero-grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: end;
+  padding-bottom: 0;
+}
+
+.ad-hero-eyebrow {
+  font-family: var(--f-narrow);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.82rem;
+  color: var(--okr);
+  margin-bottom: 1.25rem;
+}
+
+.ad-hero-title {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: clamp(2.9rem, 9vw, 5.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.ad-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.6em);
+  animation: ad-vzestup 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.ad-line-1 {
+  animation-delay: 0.1s;
+}
+
+.ad-line-2 {
+  color: var(--okr);
+  animation-delay: 0.3s;
+}
+
+@keyframes ad-vzestup {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ad-hero-lead {
+  max-width: 32rem;
+  font-size: 1.1rem;
+  color: #c8d4d6;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: ad-vzestup 0.7s ease 0.55s forwards;
+}
+
+.ad-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-bottom: 2.5rem;
+  opacity: 0;
+  animation: ad-vzestup 0.7s ease 0.7s forwards;
+}
+
+.ad-btn {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  background: var(--okr);
+  color: var(--petrolej-tma);
+  border-radius: 4px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.ad-btn:hover {
+  background: var(--okr-svetly);
+  transform: translateY(-2px);
+}
+
+.ad-btn-ghost {
+  background: transparent;
+  color: var(--omitka);
+  border: 2px solid #3d565c;
+}
+
+.ad-btn-ghost:hover {
+  background: rgba(232, 161, 60, 0.12);
+  border-color: var(--okr);
+}
+
+/* --- Signature: fasáda --- */
+
+.ad-facade {
+  justify-self: center;
+  width: min(300px, 70vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ad-facade-roof {
+  width: 100%;
+  height: 14px;
+  background: var(--okr);
+  border-radius: 3px 3px 0 0;
+}
+
+.ad-facade-windows {
+  width: 100%;
+  background: #1c4049;
+  border: 1px solid #2c5058;
+  border-bottom: none;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  padding: 16px;
+}
+
+.ad-okno {
+  display: block;
+  aspect-ratio: 3 / 4;
+  background: #0e2b32;
+  border-radius: 2px;
+  opacity: 0;
+  animation: ad-okno-zjev 0.4s ease forwards;
+}
+
+.ad-okno-lit {
+  animation: ad-okno-zjev 0.4s ease forwards, ad-rozsviceni 1.2s ease forwards;
+}
+
+@keyframes ad-okno-zjev {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ad-rozsviceni {
+  0%,
+  55% {
+    background: #0e2b32;
+    box-shadow: none;
+  }
+  100% {
+    background: var(--okr-svetly);
+    box-shadow: 0 0 14px rgba(232, 161, 60, 0.55);
+  }
+}
+
+.ad-facade-door {
+  width: 22%;
+  height: 34px;
+  background: var(--okr);
+  border-radius: 3px 3px 0 0;
+}
+
+/* --- pruh s adresou --- */
+
+.ad-hero-strip {
+  border-top: 1px solid #2c5058;
+  margin-top: 0;
+  padding: 0.9rem 0 1rem;
+  max-width: 72rem;
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.9rem;
+  font-family: var(--f-narrow);
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+  color: #9db2b5;
+}
+
+.ad-strip-dot {
+  color: var(--okr);
+  font-size: 0.55rem;
+  align-self: center;
+}
+
+/* ================= SLUŽBY ================= */
+
+.ad-sluzby {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 3rem;
+}
+
+.ad-section-head {
+  max-width: 36rem;
+  margin-bottom: 2.5rem;
+}
+
+.ad-section-head h2,
+.ad-duvera-head h2 {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.ad-section-head p {
+  color: var(--beton);
+  font-size: 1.05rem;
+}
+
+.ad-sluzby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.ad-karta {
+  background: #fff;
+  border: 1px solid #dde1db;
+  border-top: 4px solid var(--petrolej);
+  border-radius: 4px;
+  padding: 1.6rem 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-top-color 0.2s ease;
+}
+
+.ad-karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(18, 51, 59, 0.12);
+  border-top-color: var(--okr);
+}
+
+.ad-karta-klic {
+  font-family: var(--f-narrow);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--okr);
+  background: rgba(232, 161, 60, 0.12);
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 0.9rem;
+}
+
+.ad-karta h3 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.6rem;
+}
+
+.ad-karta p {
+  color: var(--beton);
+  font-size: 0.98rem;
+  margin-bottom: 1rem;
+}
+
+.ad-karta ul {
+  list-style: none;
+}
+
+.ad-karta li {
+  font-family: var(--f-narrow);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding-left: 1.2rem;
+  position: relative;
+  margin-bottom: 0.35rem;
+}
+
+.ad-karta li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.42em;
+  width: 9px;
+  height: 12px;
+  background: var(--okr);
+  border-radius: 1px;
+}
+
+/* ================= DŮVĚRA ================= */
+
+.ad-duvera {
+  background: var(--petrolej);
+  color: var(--omitka);
+  padding: 4.5rem 1.25rem;
+}
+
+.ad-duvera-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.ad-duvera-head {
+  max-width: 36rem;
+  margin-bottom: 2.5rem;
+}
+
+.ad-duvera-head p {
+  color: #9db2b5;
+  font-size: 1.05rem;
+}
+
+.ad-zasady {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  margin-bottom: 3rem;
+}
+
+.ad-zasada {
+  border-left: 1px solid #2c5058;
+  padding-left: 1.25rem;
+}
+
+.ad-zasada-okno {
+  display: block;
+  width: 15px;
+  height: 20px;
+  background: var(--okr);
+  border-radius: 2px;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 0 12px rgba(232, 161, 60, 0.4);
+}
+
+.ad-zasada h3 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.45rem;
+}
+
+.ad-zasada p {
+  color: #b9c7c9;
+  font-size: 0.97rem;
+}
+
+.ad-citace {
+  background: var(--petrolej-tma);
+  border-left: 4px solid var(--okr);
+  border-radius: 4px;
+  padding: 1.75rem 1.75rem 1.5rem;
+  max-width: 46rem;
+}
+
+.ad-citace p {
+  font-size: 1.12rem;
+  line-height: 1.55;
+  color: var(--omitka);
+  margin-bottom: 0.9rem;
+}
+
+.ad-citace footer {
+  font-family: var(--f-narrow);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  color: var(--okr);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (min-width: 760px) {
+  .ad-hero {
+    padding: 2rem 2rem 0;
+  }
+
+  .ad-hero-grid {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 4rem;
+  }
+
+  .ad-facade {
+    justify-self: end;
+  }
+
+  .ad-sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .ad-zasady {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 3rem;
+  }
+
+  .ad-sluzby,
+  .ad-duvera {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1080px) {
+  .ad-sluzby-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .ad-zasady {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ad-line,
+  .ad-hero-lead,
+  .ad-hero-cta,
+  .ad-okno {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .ad-okno-lit {
+    animation: none;
+    opacity: 1;
+    background: var(--okr-svetly);
+    box-shadow: 0 0 14px rgba(232, 161, 60, 0.55);
+  }
+
+  .ad-btn,
+  .ad-karta {
+    transition: none;
+  }
+
+  .ad-karta:hover,
+  .ad-btn:hover {
+    transform: none;
+  }
+}
