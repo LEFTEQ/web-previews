@@ -1,0 +1,492 @@
+/* ===================================================================
+   PAVEL PALAŠ — sádrokartonář, Praha
+   Koncept „Rovina“: barvy a rastr vychází z materiálu řemesla —
+   šedý karton desky, bílá sádrová stěrka, modrý potisk Knauf desek,
+   žlutozelená bublina vodováhy jako jediný teplý akcent.
+   =================================================================== */
+
+:root {
+  --karton: #b9b4ac;        /* šedý papír SDK desky */
+  --sadra: #f7f6f2;         /* čerstvá stěrka */
+  --potisk: #1d3f8f;        /* modrý rastr potisku desky */
+  --potisk-tmavy: #14295c;  /* stín spáry */
+  --bublina: #cdd935;       /* kapalina ve vodováze — jediný akcent */
+  --tuzka: #2b2926;         /* tesařská tužka — text */
+
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Arial, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-tech: "Courier New", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--sadra);
+  color: var(--tuzka);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pp a:focus-visible,
+.pp button:focus-visible {
+  outline: 3px solid var(--bublina);
+  outline-offset: 3px;
+}
+
+/* =========================== HERO =========================== */
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  background: var(--potisk);
+  color: var(--sadra);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 4rem 1.25rem 7rem;
+}
+
+/* rastr desek — svislé spáry po „1250 mm“, jedna vodorovná */
+.hero-board { position: absolute; inset: 0; pointer-events: none; }
+
+.seam {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--potisk-tmavy), rgba(20,41,92,.35));
+}
+.seam::after {
+  /* páska přes spáru — světlý pruh tmelení */
+  content: "";
+  position: absolute;
+  inset: 0 -8px;
+  background: rgba(247,246,242,.05);
+}
+.seam-1 { left: 26%; }
+.seam-2 { left: 55%; }
+.seam-3 { left: 84%; }
+
+.seam-h {
+  position: absolute;
+  left: 0; right: 0;
+  top: 62%;
+  height: 3px;
+  background: var(--potisk-tmavy);
+  opacity: .55;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* wordmark — jako razítko na hraně desky */
+.wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  gap: .15rem;
+  border: 2px solid var(--sadra);
+  padding: .5rem .9rem;
+  margin-bottom: 2.5rem;
+}
+.wordmark-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: .35em;
+  margin-right: -.35em;
+}
+.wordmark-sub {
+  font-family: var(--font-tech);
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--karton);
+}
+
+.hero-title {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(3rem, 11vw, 8.5rem);
+  line-height: .92;
+  letter-spacing: -0.01em;
+}
+.hero-title .line { display: block; }
+.hero-title em {
+  font-style: normal;
+  color: var(--bublina);
+}
+
+.hero-lead {
+  max-width: 34rem;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: #dfe3ee;
+  margin: 0 0 2.25rem;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem;
+  margin-bottom: 3rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: .95rem 1.6rem;
+  transition: transform .15s ease, background-color .15s ease, color .15s ease;
+}
+.btn-solid {
+  background: var(--bublina);
+  color: var(--potisk-tmavy);
+}
+.btn-solid:hover { transform: translateY(-2px); background: #dbe75a; }
+.btn-ghost {
+  border: 2px solid var(--sadra);
+  color: var(--sadra);
+}
+.btn-ghost:hover { background: rgba(247,246,242,.12); }
+
+.hero-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.25rem;
+  margin: 0;
+  font-family: var(--font-tech);
+}
+.hero-specs dt {
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--karton);
+  margin-bottom: .2rem;
+}
+.hero-specs dd {
+  margin: 0;
+  font-size: .95rem;
+  color: var(--sadra);
+}
+
+/* ---- vodováha (signature) ---- */
+.level {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 2.4rem;
+  height: 2.6rem;
+  z-index: 1;
+}
+.level-line {
+  position: absolute;
+  left: 5%; right: 5%;
+  top: 50%;
+  height: 2px;
+  background: var(--sadra);
+  opacity: .85;
+}
+.level-mark {
+  position: absolute;
+  top: 50%;
+  width: 2px;
+  height: 18px;
+  transform: translateY(-50%);
+  background: var(--sadra);
+  opacity: .85;
+}
+.level-mark-l { left: calc(50% - 60px); }
+.level-mark-r { left: calc(50% + 58px); }
+
+.level-bubble {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 76px;
+  height: 16px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: radial-gradient(ellipse at 35% 35%, #eef685 0%, var(--bublina) 55%, #9aa823 100%);
+  box-shadow: 0 0 18px rgba(205,217,53,.5);
+  animation: bubble-settle 2.4s cubic-bezier(.22,1,.36,1) both;
+  animation-delay: .5s;
+}
+.level-label {
+  position: absolute;
+  left: 50%;
+  top: -0.6rem;
+  transform: translateX(-50%);
+  font-family: var(--font-tech);
+  font-size: .7rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--karton);
+  white-space: nowrap;
+}
+
+@keyframes bubble-settle {
+  0%   { transform: translate(-260%, -50%); }
+  55%  { transform: translate(30%, -50%); }
+  80%  { transform: translate(-65%, -50%); }
+  100% { transform: translate(-50%, -50%); }
+}
+
+/* načtení hero textu */
+.hero-inner > * {
+  animation: rise .7s ease both;
+}
+.wordmark { animation-delay: 0s; }
+.hero-title { animation-delay: .12s; }
+.hero-lead { animation-delay: .24s; }
+.hero-cta { animation-delay: .34s; }
+.hero-specs { animation-delay: .44s; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* =========================== SEKCE OBECNĚ =========================== */
+
+.sluzby, .duvera {
+  padding: 5rem 1.25rem;
+}
+
+.section-head {
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-tech);
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: var(--potisk);
+  border-bottom: 2px solid var(--bublina);
+  padding-bottom: .3rem;
+  margin-bottom: 1rem;
+}
+
+.section-head h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  line-height: 1.05;
+  color: var(--tuzka);
+}
+
+/* =========================== SLUŽBY =========================== */
+
+.sluzby { background: var(--sadra); }
+
+.sluzby-grid {
+  max-width: 1100px;
+  margin: 0 auto 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3px; /* spáry mezi „deskami“ */
+  background: var(--karton);
+  border: 3px solid var(--karton);
+}
+
+.karta {
+  background: #fff;
+  padding: 1.75rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .9rem;
+  transition: background-color .2s ease;
+}
+.karta:hover { background: #fbfbe9; }
+
+.karta-head h3 {
+  margin: .4rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  color: var(--potisk);
+}
+.karta-kod {
+  font-family: var(--font-tech);
+  font-size: .72rem;
+  letter-spacing: .14em;
+  color: var(--karton);
+}
+.karta-popis {
+  margin: 0;
+  font-size: .98rem;
+  flex: 1;
+}
+.karta-detail {
+  margin: 0;
+  font-family: var(--font-tech);
+  font-size: .74rem;
+  letter-spacing: .04em;
+  color: var(--potisk);
+  border-top: 1px dashed var(--karton);
+  padding-top: .8rem;
+}
+
+/* postup zakázky */
+.postup {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+}
+.postup-krok {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.postup-cislo {
+  flex: none;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: grid;
+  place-items: center;
+  background: var(--potisk);
+  color: var(--bublina);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.postup-krok h3 {
+  margin: .1rem 0 .4rem;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.05rem;
+  letter-spacing: .05em;
+}
+.postup-krok p {
+  margin: 0;
+  font-size: .95rem;
+}
+
+/* =========================== DŮVĚRA =========================== */
+
+.duvera {
+  background: var(--potisk-tmavy);
+  color: var(--sadra);
+}
+.duvera .section-head h2 { color: var(--sadra); }
+.eyebrow-light { color: var(--karton); }
+
+.duvera-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 3.5rem;
+}
+
+.onas-velky {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  line-height: 1.25;
+  margin: 0 0 1.4rem;
+  color: #fff;
+}
+.onas p { color: #cfd4e4; }
+
+.onas-body {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+}
+.onas-body li {
+  padding: .7rem 0 .7rem 1.6rem;
+  position: relative;
+  border-bottom: 1px solid rgba(247,246,242,.15);
+  font-size: .98rem;
+}
+.onas-body li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.15rem;
+  width: .7rem;
+  height: .7rem;
+  background: var(--bublina);
+}
+
+.reference {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.ref {
+  margin: 0;
+  background: rgba(247,246,242,.06);
+  border-left: 3px solid var(--bublina);
+  padding: 1.25rem 1.4rem;
+}
+.ref-misto {
+  font-family: var(--font-tech);
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--karton);
+  margin-bottom: .5rem;
+}
+.ref blockquote { margin: 0 0 .6rem; }
+.ref blockquote p {
+  margin: 0;
+  font-size: 1rem;
+  color: #eceef5;
+}
+.ref-jmeno {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: .82rem;
+  color: var(--bublina);
+}
+
+/* =========================== RESPONZIVITA =========================== */
+
+@media (max-width: 860px) {
+  .duvera-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero { min-height: auto; padding-bottom: 8rem; }
+  .seam-2 { display: none; }
+}
+
+@media (max-width: 480px) {
+  .hero-specs { gap: 1.25rem 1.75rem; }
+  .btn { width: 100%; text-align: center; }
+  .sluzby, .duvera { padding: 3.5rem 1rem; }
+}
+
+/* =========================== REDUCED MOTION =========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-inner > *,
+  .level-bubble {
+    animation: none;
+  }
+  .btn-solid:hover { transform: none; }
+  * { transition-duration: 0.01ms !important; }
+}
