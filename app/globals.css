@@ -1,0 +1,598 @@
+/* ==========================================================================
+   PETAKS s.r.o. — plynařství Liberec
+   Paleta odvozená z řemesla: modrý plamen na tmavé oceli kotelny,
+   mosazný fitink jako teplý akcent, protokolově bílý papír.
+   ========================================================================== */
+
+:root {
+  --pk-steel: #101820;        /* tmavá ocel — pozadí hero a důvěry */
+  --pk-steel-2: #1b2733;      /* světlejší ocelový panel */
+  --pk-flame: #2f7bff;        /* modrý plamen — primární akcent */
+  --pk-flame-core: #9fd0ff;   /* jádro plamene — světlá modrá */
+  --pk-brass: #c8a24a;        /* mosazný fitink — sekundární akcent */
+  --pk-paper: #eef2f6;        /* protokolový papír — světlé sekce */
+  --pk-ink: #17222c;          /* text na světlé */
+  --pk-mist: #b8c6d4;         /* tlumený text na tmavé */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--pk-paper);
+  color: var(--pk-ink);
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pk a {
+  color: inherit;
+}
+
+.pk a:focus-visible,
+.pk button:focus-visible {
+  outline: 3px solid var(--pk-brass);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- layout helpers ---------- */
+
+.pk-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.pk-section {
+  padding: 72px 0;
+}
+
+/* ---------- typografie ---------- */
+
+.pk-eyebrow {
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pk-brass);
+  margin: 0 0 14px;
+  font-weight: 700;
+}
+
+.pk-eyebrow-dark {
+  color: #8a6f2a;
+}
+
+.pk-h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.6rem, 7.5vw, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin: 0 0 22px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.pk-h1 em {
+  font-style: italic;
+  color: var(--pk-flame-core);
+  text-shadow: 0 0 34px rgba(47, 123, 255, 0.65);
+}
+
+.pk-h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.8rem, 4.5vw, 2.7rem);
+  line-height: 1.12;
+  margin: 0 0 34px;
+  letter-spacing: -0.01em;
+}
+
+.pk-h2-light {
+  color: #fff;
+}
+
+.pk-lede {
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  color: var(--pk-mist);
+  max-width: 34em;
+  margin: 0 0 30px;
+}
+
+/* ---------- hero ---------- */
+
+.pk-hero {
+  background:
+    radial-gradient(60% 50% at 78% 38%, rgba(47, 123, 255, 0.22), transparent 70%),
+    linear-gradient(165deg, var(--pk-steel) 55%, #0b1a2e 100%);
+  color: #fff;
+  overflow: hidden;
+}
+
+.pk-hero-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 26px 20px 0;
+}
+
+.pk-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 40px;
+}
+
+.pk-wordmark {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.14em;
+}
+
+.pk-wordmark-flame {
+  color: var(--pk-flame);
+}
+
+.pk-wordmark-sro {
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--pk-mist);
+  margin-left: 10px;
+  vertical-align: super;
+}
+
+.pk-topbar-tel {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--pk-flame-core);
+  border-bottom: 2px solid rgba(47, 123, 255, 0.5);
+  padding-bottom: 2px;
+  white-space: nowrap;
+}
+
+.pk-topbar-tel:hover {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+.pk-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+  padding-bottom: 56px;
+}
+
+.pk-hero-copy {
+  animation: pk-rise 0.7s ease both;
+}
+
+.pk-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.pk-btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 6px;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.pk-btn:hover {
+  transform: translateY(-2px);
+}
+
+.pk-btn-flame {
+  background: var(--pk-flame);
+  color: #fff;
+  box-shadow: 0 8px 28px rgba(47, 123, 255, 0.4);
+}
+
+.pk-btn-flame:hover {
+  background: #4a8dff;
+}
+
+.pk-btn-ghost {
+  color: var(--pk-flame-core);
+  border: 1px solid rgba(159, 208, 255, 0.45);
+}
+
+.pk-btn-ghost:hover {
+  border-color: var(--pk-flame-core);
+  color: #fff;
+}
+
+/* ---------- signature: manometr s modrým plamenem ---------- */
+
+.pk-gauge {
+  justify-self: center;
+  text-align: center;
+  animation: pk-rise 0.7s ease 0.15s both;
+  max-width: 340px;
+  width: 100%;
+}
+
+.pk-gauge-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.pk-gauge-rim {
+  fill: none;
+  stroke: var(--pk-brass);
+  stroke-width: 6;
+}
+
+.pk-gauge-face {
+  fill: var(--pk-steel-2);
+  stroke: rgba(200, 162, 74, 0.35);
+  stroke-width: 1;
+}
+
+.pk-gauge-ticks line {
+  stroke: var(--pk-mist);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.pk-flame-outer {
+  fill: var(--pk-flame);
+  opacity: 0.85;
+}
+
+.pk-flame-inner {
+  fill: var(--pk-flame-core);
+}
+
+.pk-gauge-flame {
+  transform-origin: 170px 190px;
+  animation: pk-flicker 2.8s ease-in-out infinite;
+}
+
+.pk-gauge-needle line {
+  stroke: var(--pk-brass);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.pk-gauge-needle circle {
+  fill: var(--pk-brass);
+}
+
+.pk-gauge-needle {
+  transform-origin: 170px 170px;
+  animation: pk-needle 1.4s cubic-bezier(0.34, 1.4, 0.5, 1) 0.4s both;
+}
+
+.pk-gauge-label {
+  fill: var(--pk-mist);
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.28em;
+  text-anchor: middle;
+}
+
+.pk-gauge-caption {
+  color: var(--pk-mist);
+  font-size: 0.9rem;
+  margin: 14px auto 0;
+  max-width: 26em;
+}
+
+@keyframes pk-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pk-flicker {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.045) scaleX(0.985); }
+}
+
+@keyframes pk-needle {
+  from { transform: rotate(-140deg); }
+  to { transform: rotate(-35deg); }
+}
+
+/* ---------- hero strip ---------- */
+
+.pk-hero-strip {
+  list-style: none;
+  margin: 0 -20px;
+  padding: 18px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  border-top: 1px solid rgba(184, 198, 212, 0.18);
+  color: var(--pk-mist);
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+}
+
+.pk-hero-strip li::before {
+  content: "▲";
+  font-size: 0.6em;
+  color: var(--pk-flame);
+  margin-right: 10px;
+  vertical-align: 2px;
+}
+
+/* ---------- služby ---------- */
+
+.pk-services {
+  background: var(--pk-paper);
+}
+
+.pk-service-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  margin-bottom: 64px;
+}
+
+.pk-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 26px 26px 28px;
+  border-top: 4px solid var(--pk-flame);
+  box-shadow: 0 2px 14px rgba(16, 24, 32, 0.06);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.pk-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 26px rgba(16, 24, 32, 0.12);
+}
+
+.pk-card-tag {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: #8a6f2a;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.pk-card-title {
+  font-family: Georgia, serif;
+  font-size: 1.25rem;
+  margin: 0 0 10px;
+  line-height: 1.25;
+}
+
+.pk-card-text {
+  margin: 0;
+  color: #3d4c5a;
+  font-size: 0.98rem;
+}
+
+/* ---------- značky ---------- */
+
+.pk-brands-title {
+  font-family: Georgia, serif;
+  font-size: 1.35rem;
+  margin: 0 0 20px;
+}
+
+.pk-brand-rows {
+  border-top: 2px solid var(--pk-ink);
+}
+
+.pk-brand-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+  padding: 18px 0;
+  border-bottom: 1px solid #cdd8e2;
+}
+
+.pk-brand-name {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.pk-brand-detail {
+  color: #67788a;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+.pk-brand-scope {
+  font-size: 0.95rem;
+  color: #3d4c5a;
+}
+
+.pk-brands-note {
+  margin: 24px 0 0;
+  max-width: 44em;
+  color: #3d4c5a;
+}
+
+/* ---------- důvěra ---------- */
+
+.pk-trust {
+  background:
+    radial-gradient(50% 60% at 15% 20%, rgba(47, 123, 255, 0.14), transparent 70%),
+    var(--pk-steel);
+  color: var(--pk-mist);
+}
+
+.pk-trust-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 44px;
+}
+
+.pk-trust-text {
+  max-width: 36em;
+  margin: 0 0 24px;
+}
+
+.pk-trust-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.pk-trust-list li {
+  padding-left: 22px;
+  position: relative;
+}
+
+.pk-trust-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--pk-flame);
+}
+
+.pk-trust-list strong {
+  color: #fff;
+}
+
+/* citace */
+
+.pk-quote {
+  margin: 0;
+  background: var(--pk-steel-2);
+  border-left: 4px solid var(--pk-brass);
+  border-radius: 0 10px 10px 0;
+  padding: 30px 28px;
+}
+
+.pk-quote blockquote {
+  margin: 0 0 18px;
+}
+
+.pk-quote blockquote p {
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: #e8eef4;
+  margin: 0;
+}
+
+.pk-quote figcaption {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin-bottom: 26px;
+}
+
+.pk-quote-name {
+  font-weight: 700;
+  color: #fff;
+}
+
+.pk-quote-place {
+  font-size: 0.88rem;
+  color: var(--pk-mist);
+}
+
+.pk-quote-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  border-top: 1px solid rgba(184, 198, 212, 0.2);
+  padding-top: 20px;
+}
+
+.pk-fact-num {
+  display: block;
+  font-family: Georgia, serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--pk-flame-core);
+  line-height: 1.1;
+}
+
+.pk-fact-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+/* ---------- responsivita ---------- */
+
+@media (min-width: 720px) {
+  .pk-service-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pk-brand-row {
+    grid-template-columns: 180px 1fr 1.2fr;
+    gap: 18px;
+    align-items: baseline;
+  }
+}
+
+@media (min-width: 960px) {
+  .pk-hero-grid {
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 56px;
+    padding-top: 20px;
+    padding-bottom: 72px;
+  }
+
+  .pk-trust-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .pk-section {
+    padding: 96px 0;
+  }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .pk-hero-copy,
+  .pk-gauge,
+  .pk-gauge-needle,
+  .pk-gauge-flame {
+    animation: none;
+  }
+
+  .pk-gauge-needle {
+    transform: rotate(-35deg);
+  }
+
+  .pk-btn,
+  .pk-card {
+    transition: none;
+  }
+}
