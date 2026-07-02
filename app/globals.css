@@ -1,0 +1,571 @@
+/* ============================================================
+   STAVCAMI — stavební bazar, Brno-Bosonohy
+   Paleta: beton, palety, výstražná žluť skladu
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;1,400&family=Archivo+Expanded:wght@600;800;900&display=swap");
+
+:root {
+  --beton: #2b2e31;        /* tmavý beton — hero pozadí */
+  --beton-svetly: #eef0ee; /* světlý beton — plochy */
+  --papir: #fbfaf6;        /* papír štítku */
+  --zlut: #f5b301;         /* výstražná žluť skladu */
+  --cihla: #b4472e;        /* razítko / akcent výkupu */
+  --inkoust: #1c1e20;      /* text */
+  --sedka: #6a6f73;
+
+  --font-display: "Archivo Expanded", "Archivo", system-ui, sans-serif;
+  --font-body: "Archivo", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--inkoust);
+  background: var(--papir);
+  -webkit-font-smoothing: antialiased;
+}
+
+.sc a:focus-visible,
+.sc button:focus-visible {
+  outline: 3px solid var(--zlut);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.sc-hero {
+  background: var(--beton);
+  color: var(--papir);
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemná paletová mřížka v pozadí — připomíná řady palet na dvoře */
+.sc-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(251, 250, 246, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(251, 250, 246, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
+}
+
+.sc-topbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding: 1.25rem clamp(1.25rem, 5vw, 4rem);
+  border-bottom: 1px solid rgba(251, 250, 246, 0.14);
+}
+
+.sc-wordmark {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.sc-wordmark-stav {
+  font-weight: 900;
+  color: var(--papir);
+}
+
+.sc-wordmark-cami {
+  font-weight: 600;
+  color: var(--zlut);
+}
+
+.sc-topbar-note {
+  margin: 0;
+  font-size: 0.85rem;
+  color: rgba(251, 250, 246, 0.65);
+}
+
+.sc-hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(260px, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  padding: clamp(3rem, 8vw, 6.5rem) clamp(1.25rem, 5vw, 4rem) clamp(3rem, 7vw, 5.5rem);
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+.sc-hero-eyebrow {
+  margin: 0 0 1.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--zlut);
+}
+
+.sc-hero-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.4rem, 6.5vw, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.sc-hero-line {
+  display: block;
+}
+
+.sc-hero-line em {
+  font-style: normal;
+  color: var(--zlut);
+}
+
+.sc-hero-lead {
+  margin: 1.5rem 0 2rem;
+  max-width: 34rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  color: rgba(251, 250, 246, 0.82);
+}
+
+.sc-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.sc-btn {
+  display: inline-block;
+  padding: 0.9rem 1.5rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.sc-btn-primary {
+  background: var(--zlut);
+  color: var(--inkoust);
+}
+
+.sc-btn-primary:hover {
+  background: #ffc51f;
+  transform: translateY(-2px);
+}
+
+.sc-btn-ghost {
+  color: var(--papir);
+  border: 1.5px solid rgba(251, 250, 246, 0.45);
+}
+
+.sc-btn-ghost:hover {
+  border-color: var(--zlut);
+  color: var(--zlut);
+}
+
+/* ---- Signature: skladový štítek ---- */
+
+.sc-tag {
+  position: relative;
+  background: var(--papir);
+  color: var(--inkoust);
+  padding: 2.4rem 1.5rem 1.4rem;
+  border-radius: 6px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+  transform: rotate(2deg);
+  max-width: 340px;
+  justify-self: end;
+}
+
+.sc-tag-hole {
+  position: absolute;
+  top: 0.9rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--beton);
+  box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.25);
+}
+
+.sc-tag-head {
+  margin: 0 0 0.9rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.28em;
+  border-bottom: 2px dashed rgba(28, 30, 32, 0.25);
+  padding-bottom: 0.7rem;
+}
+
+.sc-tag-rows {
+  margin: 0;
+}
+
+.sc-tag-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(28, 30, 32, 0.1);
+}
+
+.sc-tag-row dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--sedka);
+}
+
+.sc-tag-row dd {
+  margin: 0;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-align: right;
+}
+
+.sc-tag-stamp {
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: var(--cihla);
+  border: 2.5px solid var(--cihla);
+  border-radius: 3px;
+  padding: 0.05rem 0.5rem;
+  transform: rotate(-3deg);
+  display: inline-block;
+}
+
+.sc-tag-foot {
+  margin: 0.9rem 0 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--sedka);
+  letter-spacing: 0.06em;
+}
+
+/* ---- žlutý běžící pruh — výstražná páska skladu ---- */
+
+.sc-hero-strip {
+  position: relative;
+  display: flex;
+  gap: 1.75rem;
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--zlut);
+  color: var(--inkoust);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.3em;
+  padding: 0.65rem clamp(1.25rem, 5vw, 4rem);
+}
+
+/* ---- animace při načtení ---- */
+
+@keyframes sc-rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sc-tag-in {
+  from {
+    opacity: 0;
+    transform: rotate(6deg) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(2deg) translateY(0);
+  }
+}
+
+.sc-hero-eyebrow,
+.sc-hero-line,
+.sc-hero-lead,
+.sc-hero-actions {
+  animation: sc-rise 0.6s ease-out both;
+}
+
+.sc-hero-line-1 { animation-delay: 0.08s; }
+.sc-hero-line-2 { animation-delay: 0.16s; }
+.sc-hero-line-3 { animation-delay: 0.24s; }
+.sc-hero-line-4 { animation-delay: 0.32s; }
+.sc-hero-lead { animation-delay: 0.42s; }
+.sc-hero-actions { animation-delay: 0.5s; }
+
+.sc-tag {
+  animation: sc-tag-in 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) 0.55s both;
+}
+
+/* ================= SKLAD ================= */
+
+.sc-sklad {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.sc-section-head {
+  max-width: 44rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.sc-section-head h2,
+.sc-duvera h2 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.sc-section-head p {
+  margin: 0;
+  color: var(--sedka);
+  font-size: 1.05rem;
+}
+
+.sc-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.1rem;
+}
+
+.sc-card {
+  background: var(--beton-svetly);
+  border-radius: 6px;
+  padding: 1.4rem 1.5rem 1.5rem;
+  border-top: 4px solid var(--zlut);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sc-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(43, 46, 49, 0.14);
+}
+
+.sc-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.9rem;
+}
+
+.sc-card-kod {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--sedka);
+}
+
+.sc-card-stav {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(43, 46, 49, 0.08);
+}
+
+.sc-stav-skladem {
+  background: var(--zlut);
+  color: var(--inkoust);
+}
+
+.sc-stav-vykupujeme {
+  background: var(--cihla);
+  color: var(--papir);
+}
+
+.sc-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.sc-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #45494d;
+}
+
+.sc-sklad-note {
+  margin: 2rem 0 0;
+  max-width: 44rem;
+  font-size: 0.95rem;
+  color: var(--sedka);
+}
+
+.sc-sklad-note a {
+  color: var(--inkoust);
+  font-weight: 700;
+  text-decoration-color: var(--zlut);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.sc-sklad-note a:hover {
+  color: var(--cihla);
+}
+
+/* ================= DŮVĚRA ================= */
+
+.sc-duvera {
+  background: var(--beton-svetly);
+  border-top: 4px solid var(--zlut);
+}
+
+.sc-duvera-grid {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.sc-duvera-copy p {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+  color: #3a3e41;
+}
+
+.sc-duvera-fakta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.1rem;
+}
+
+.sc-fakt {
+  background: var(--papir);
+  border-radius: 6px;
+  padding: 1.3rem 1.4rem;
+  border-left: 4px solid var(--zlut);
+}
+
+.sc-fakt h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--sedka);
+}
+
+.sc-fakt p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.sc-hodiny {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.sc-hodiny th {
+  text-align: left;
+  font-weight: 500;
+  color: #45494d;
+  padding: 0.3rem 0;
+}
+
+.sc-hodiny td {
+  text-align: right;
+  font-weight: 700;
+  padding: 0.3rem 0;
+}
+
+.sc-hodiny tr + tr {
+  border-top: 1px solid rgba(43, 46, 49, 0.1);
+}
+
+/* ================= RESPONZIVITA ================= */
+
+@media (max-width: 860px) {
+  .sc-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sc-tag {
+    justify-self: start;
+    transform: rotate(-1.5deg);
+    max-width: 320px;
+  }
+
+  .sc-duvera-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .sc-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sc-btn {
+    text-align: center;
+  }
+
+  .sc-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ================= REDUKOVANÝ POHYB ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .sc-hero-eyebrow,
+  .sc-hero-line,
+  .sc-hero-lead,
+  .sc-hero-actions,
+  .sc-tag {
+    animation: none;
+  }
+
+  .sc-btn,
+  .sc-card {
+    transition: none;
+  }
+}
