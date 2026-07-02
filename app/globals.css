@@ -1,0 +1,497 @@
+/* =========================================================
+   Fábera Systems — návrh
+   Palema odvozená z dílny: mosaz obráběného klíče, modř
+   kalené oceli, papírově šedé pozadí technického výkresu.
+   Typo: Archivo (úzký, technický grotesk pro titulky)
+         + system stack pro text. Bez těžkých knihoven —
+         fonty přes @font-face fallback / system.
+   Signature: „profil klíče" — zubatá linie napříč hero.
+   ========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=Sora:wght@400;600&display=swap");
+
+:root {
+  --ocel: #16233a;        /* kalená ocel — hlavní tmavá */
+  --ocel-hlub: #0d1626;   /* hlubší tón pro sekci důvěry */
+  --mosaz: #c9973b;       /* mosaz čerstvě frézovaného klíče */
+  --mosaz-svetla: #e4b95e;
+  --papir: #eef0f2;       /* papír technického výkresu */
+  --papir-tmavsi: #dfe3e7;
+  --inkoust: #232c3b;
+  --sedy-text: #5b6675;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Sora", -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--inkoust);
+  background: var(--papir);
+  -webkit-font-smoothing: antialiased;
+}
+
+.fs a:focus-visible,
+.fs button:focus-visible {
+  outline: 3px solid var(--mosaz);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =============== HERO =============== */
+
+.hero {
+  position: relative;
+  background: var(--ocel);
+  color: var(--papir);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.hero-top {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wordmark {
+  font-family: "Archivo", sans-serif;
+  font-weight: 900;
+  font-stretch: 75%;
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  color: var(--papir);
+}
+
+.wordmark-cut {
+  color: var(--mosaz);
+  font-weight: 400;
+  font-stretch: 100%;
+  letter-spacing: 0.28em;
+  margin-left: 0.5rem;
+  font-size: 0.8em;
+  vertical-align: 0.08em;
+}
+
+.hero-phone {
+  text-decoration: none;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.hero-phone-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(238, 240, 242, 0.6);
+}
+
+.hero-phone-num {
+  font-family: "Archivo", sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--mosaz-svetla);
+}
+
+.hero-body {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3.5rem 0 2rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--mosaz-svetla);
+  margin: 0 0 1.25rem;
+}
+
+.hero-title {
+  font-family: "Archivo", sans-serif;
+  font-weight: 900;
+  font-stretch: 72%;
+  text-transform: uppercase;
+  font-size: clamp(2.9rem, 10vw, 7.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.01em;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--mosaz);
+}
+
+.hero-line {
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: heroVstup 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.hero-line-1 { animation-delay: 0.05s; }
+.hero-line-2 { animation-delay: 0.18s; color: var(--papir-tmavsi); }
+.hero-line-3 { animation-delay: 0.31s; }
+
+@keyframes heroVstup {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-sub {
+  max-width: 34rem;
+  margin: 1.75rem 0 0;
+  font-size: 1.05rem;
+  color: rgba(238, 240, 242, 0.82);
+  opacity: 0;
+  animation: heroVstup 0.7s 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+/* --- Signature: profil klíče --- */
+
+.keyline {
+  position: relative;
+  max-width: 72rem;
+  margin: 1rem auto 0;
+  height: 96px;
+}
+
+.keyline svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.keyline-path {
+  fill: none;
+  stroke: var(--mosaz);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-dasharray: 2600;
+  stroke-dashoffset: 2600;
+  animation: rezKlice 1.6s 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes rezKlice {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* hlava klíče na konci profilu */
+.keyline-bow {
+  position: absolute;
+  right: -14px;
+  top: 32px;
+  width: 56px;
+  height: 56px;
+  border: 3px solid var(--mosaz);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  animation: heroVstup 0.5s 1.9s ease forwards;
+}
+
+.keyline-bow-hole {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ocel);
+  border: 3px solid var(--mosaz);
+}
+
+.hero-facts {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 1.5rem 0 2.5rem;
+  border-top: 1px solid rgba(238, 240, 242, 0.12);
+}
+
+.hero-facts p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(238, 240, 242, 0.7);
+}
+
+.hero-facts strong {
+  display: block;
+  font-family: "Archivo", sans-serif;
+  font-weight: 800;
+  font-stretch: 80%;
+  font-size: 1.3rem;
+  color: var(--papir);
+  margin-bottom: 0.15rem;
+}
+
+/* =============== SLUŽBY =============== */
+
+.sluzby {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.sekce-hlava {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.sekce-hlava h2 {
+  font-family: "Archivo", sans-serif;
+  font-weight: 900;
+  font-stretch: 75%;
+  text-transform: uppercase;
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  line-height: 1.05;
+  margin: 0 0 0.75rem;
+}
+
+.sekce-hlava p {
+  margin: 0;
+  color: var(--sedy-text);
+}
+
+.sluzby-mrizka {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--papir-tmavsi);
+  border: 1px solid var(--papir-tmavsi);
+}
+
+.sluzba {
+  background: #fff;
+  padding: 1.75rem 1.5rem 1.9rem;
+  transition: background-color 0.25s ease;
+}
+
+.sluzba:hover {
+  background: #fdf8ee;
+}
+
+.sluzba-stitek {
+  display: inline-block;
+  font-family: "Archivo", sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  color: var(--mosaz);
+  border: 1px solid var(--mosaz);
+  padding: 0.2rem 0.55rem;
+  margin-bottom: 1rem;
+}
+
+.sluzba h3 {
+  font-family: "Archivo", sans-serif;
+  font-weight: 800;
+  font-stretch: 82%;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+}
+
+.sluzba p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--sedy-text);
+}
+
+.sluzby-druzstva {
+  margin: 2rem 0 0;
+  padding: 1.4rem 1.6rem;
+  background: #fff;
+  border-left: 4px solid var(--mosaz);
+  max-width: 44rem;
+  font-size: 0.98rem;
+}
+
+/* =============== DŮVĚRA / HISTORIE =============== */
+
+.duvera {
+  background: var(--ocel-hlub);
+  color: var(--papir);
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.sekce-hlava-svetla {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sekce-hlava-svetla h2 {
+  color: var(--papir);
+}
+
+.sekce-hlava-svetla p {
+  color: rgba(238, 240, 242, 0.72);
+  max-width: 38rem;
+}
+
+.casova-osa {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 72rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem 2.5rem;
+}
+
+.casova-osa li {
+  border-top: 3px solid var(--mosaz);
+  padding-top: 0.9rem;
+}
+
+.osa-rok {
+  font-family: "Archivo", sans-serif;
+  font-weight: 900;
+  font-stretch: 75%;
+  font-size: 1.6rem;
+  color: var(--mosaz-svetla);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.casova-osa p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: rgba(238, 240, 242, 0.75);
+}
+
+.pobocky {
+  max-width: 72rem;
+  margin: 3rem auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.pobocka {
+  background: rgba(238, 240, 242, 0.05);
+  border: 1px solid rgba(238, 240, 242, 0.14);
+  padding: 1.6rem 1.75rem;
+}
+
+.pobocka h3 {
+  font-family: "Archivo", sans-serif;
+  font-weight: 800;
+  font-stretch: 80%;
+  font-size: 1.25rem;
+  margin: 0 0 0.4rem;
+  color: var(--mosaz-svetla);
+}
+
+.pobocka p {
+  margin: 0 0 0.25rem;
+  font-size: 0.95rem;
+  color: rgba(238, 240, 242, 0.8);
+}
+
+.pobocka-cas {
+  font-size: 0.85rem;
+  color: rgba(238, 240, 242, 0.6);
+}
+
+.pobocka a {
+  color: var(--papir);
+  text-decoration-color: var(--mosaz);
+  text-underline-offset: 3px;
+  font-size: 0.95rem;
+}
+
+.pobocka a:hover {
+  color: var(--mosaz-svetla);
+}
+
+/* =============== RESPONSIVITA =============== */
+
+@media (max-width: 900px) {
+  .sluzby-mrizka {
+    grid-template-columns: 1fr 1fr;
+  }
+  .casova-osa {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-body {
+    padding-top: 2.5rem;
+  }
+  .hero-facts {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .keyline {
+    height: 64px;
+  }
+  .keyline-bow {
+    width: 40px;
+    height: 40px;
+    top: 12px;
+    right: -8px;
+  }
+  .sluzby-mrizka {
+    grid-template-columns: 1fr;
+  }
+  .casova-osa {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .pobocky {
+    grid-template-columns: 1fr;
+  }
+  .hero-phone {
+    text-align: left;
+  }
+}
+
+/* =============== REDUCED MOTION =============== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-line,
+  .hero-sub,
+  .keyline-bow {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .keyline-path {
+    animation: none;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+  .sluzba {
+    transition: none;
+  }
+}
