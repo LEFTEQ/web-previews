@@ -1,0 +1,423 @@
+/* ============================================================
+   FOK Žaluzie — Brno, stínicí technika od 1992
+   Koncept: lamela. Celý web je postavený na vodorovné lince
+   naklopené lamely — světlo prochází mezi pruhy.
+   Paleta: hluboká petrolejová modř (stín interiéru),
+   slunečná okrová (světlo za oknem), kov lamel.
+   ============================================================ */
+
+:root {
+  --fz-ink: #10222b;        /* petrolejový stín */
+  --fz-ink-soft: #24404d;
+  --fz-paper: #f7f5ef;      /* denní světlo na zdi */
+  --fz-sun: #e8a13c;        /* slunce za lamelami */
+  --fz-sun-deep: #c97f1b;
+  --fz-metal: #b9c4c9;      /* hliníková lamela */
+  --fz-line: #d8d4c8;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--fz-ink);
+  background: var(--fz-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.fz-page a:focus-visible,
+.fz-page :focus-visible {
+  outline: 3px solid var(--fz-sun);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.fz-hero {
+  position: relative;
+  background: var(--fz-ink);
+  color: var(--fz-paper);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.fz-hero-inner {
+  position: relative;
+  z-index: 2;
+  padding: 2rem 1.25rem 3rem;
+  max-width: 44rem;
+}
+
+/* Wordmark: tři lamely + název */
+.fz-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 3rem;
+}
+
+.fz-brand-mark {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 34px;
+}
+
+.fz-brand-mark span {
+  height: 5px;
+  background: var(--fz-sun);
+  border-radius: 1px;
+  transform: skewY(-6deg);
+}
+
+.fz-brand-mark span:nth-child(2) { width: 78%; background: var(--fz-metal); }
+.fz-brand-mark span:nth-child(3) { width: 56%; }
+
+.fz-brand-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.fz-brand-name em {
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--fz-metal);
+  text-transform: lowercase;
+}
+
+/* Titulek jako tři naklopené lamely, které se při načtení „otevřou“ */
+.fz-hero-title {
+  margin: 0 0 1.5rem;
+  font-size: clamp(3rem, 11vw, 6.5rem);
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.fz-slat {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.fz-slat > span {
+  display: inline-block;
+  transform: translateY(110%) rotate(2deg);
+  animation: fz-open 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.fz-slat-1 > span { animation-delay: 0.1s; }
+.fz-slat-2 > span { animation-delay: 0.28s; color: var(--fz-sun); }
+.fz-slat-3 > span { animation-delay: 0.46s; color: var(--fz-metal); }
+
+@keyframes fz-open {
+  to { transform: translateY(0) rotate(0deg); }
+}
+
+.fz-hero-lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: #cfd8db;
+  margin: 0 0 2.5rem;
+}
+
+.fz-hero-facts {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.fz-fact {
+  border-left: 4px solid var(--fz-sun);
+  padding-left: 1rem;
+}
+
+.fz-fact strong {
+  display: block;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+}
+
+.fz-fact span {
+  color: var(--fz-metal);
+  font-size: 0.95rem;
+}
+
+/* Signature: sloupec lamel — gradient světla procházejícího žaluzií */
+.fz-lamellas {
+  position: relative;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  gap: 6px;
+  padding: 0 0 0 1.25rem;
+}
+
+.fz-lamellas i {
+  flex: 1;
+  min-height: 14px;
+  background: linear-gradient(90deg, var(--fz-sun) 0%, var(--fz-sun-deep) 70%, transparent 100%);
+  transform-origin: left center;
+  transform: scaleY(0.15);
+  animation: fz-tilt 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  opacity: 0.9;
+}
+
+.fz-lamellas i:nth-child(1)  { animation-delay: 0.05s; opacity: 0.25; }
+.fz-lamellas i:nth-child(2)  { animation-delay: 0.1s;  opacity: 0.32; }
+.fz-lamellas i:nth-child(3)  { animation-delay: 0.15s; opacity: 0.4; }
+.fz-lamellas i:nth-child(4)  { animation-delay: 0.2s;  opacity: 0.48; }
+.fz-lamellas i:nth-child(5)  { animation-delay: 0.25s; opacity: 0.56; }
+.fz-lamellas i:nth-child(6)  { animation-delay: 0.3s;  opacity: 0.64; }
+.fz-lamellas i:nth-child(7)  { animation-delay: 0.35s; opacity: 0.72; }
+.fz-lamellas i:nth-child(8)  { animation-delay: 0.4s;  opacity: 0.8; }
+.fz-lamellas i:nth-child(9)  { animation-delay: 0.45s; opacity: 0.86; }
+.fz-lamellas i:nth-child(10) { animation-delay: 0.5s;  opacity: 0.92; }
+.fz-lamellas i:nth-child(11) { animation-delay: 0.55s; opacity: 0.96; }
+.fz-lamellas i:nth-child(12) { animation-delay: 0.6s;  opacity: 1; }
+
+@keyframes fz-tilt {
+  to { transform: scaleY(0.55) skewY(-2deg); }
+}
+
+/* ================= SEKCE OBECNĚ ================= */
+
+.fz-section {
+  padding: 3.5rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.fz-eyebrow {
+  display: inline-block;
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fz-sun-deep);
+  border-bottom: 3px solid var(--fz-sun);
+  padding-bottom: 0.3rem;
+}
+
+.fz-eyebrow-light {
+  color: var(--fz-sun);
+  border-bottom-color: var(--fz-sun);
+}
+
+.fz-section h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.fz-section-head { max-width: 40rem; margin-bottom: 2.5rem; }
+
+.fz-section-lead { color: var(--fz-ink-soft); margin: 0; }
+
+/* ================= NABÍDKA ================= */
+
+.fz-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.fz-card {
+  background: #fff;
+  border: 1px solid var(--fz-line);
+  border-top: 5px solid var(--fz-ink);
+  padding: 1.5rem 1.4rem 1.3rem;
+  transition: border-top-color 0.25s ease, transform 0.25s ease;
+}
+
+.fz-card:hover {
+  border-top-color: var(--fz-sun);
+  transform: translateY(-3px);
+}
+
+.fz-card h3 {
+  margin: 0.9rem 0 0.5rem;
+  font-size: 1.2rem;
+}
+
+.fz-card p { margin: 0 0 0.6rem; color: var(--fz-ink-soft); font-size: 0.98rem; }
+
+.fz-card-note {
+  font-size: 0.85rem !important;
+  font-weight: 700;
+  color: var(--fz-sun-deep) !important;
+  letter-spacing: 0.03em;
+  margin-bottom: 0 !important;
+}
+
+/* Ikony poskládané z lamel — žádné obrázky, jen řemeslo */
+.fz-card-icon {
+  display: flex;
+  width: 44px;
+  height: 34px;
+}
+
+.fz-icon-horizontal { flex-direction: column; justify-content: space-between; }
+.fz-icon-horizontal i { height: 5px; background: var(--fz-ink); }
+.fz-icon-horizontal i:nth-child(even) { background: var(--fz-sun); width: 82%; }
+
+.fz-icon-vertical { flex-direction: row; justify-content: space-between; }
+.fz-icon-vertical i { width: 6px; background: var(--fz-ink); }
+.fz-icon-vertical i:nth-child(even) { background: var(--fz-sun); height: 82%; align-self: flex-end; }
+
+.fz-icon-roleta i {
+  width: 100%;
+  background: linear-gradient(180deg, var(--fz-ink) 0 30%, var(--fz-sun) 30% 36%, transparent 36%);
+  border: 2px solid var(--fz-ink);
+}
+
+.fz-icon-sit i {
+  width: 100%;
+  border: 2px solid var(--fz-ink);
+  background:
+    repeating-linear-gradient(0deg, transparent 0 6px, var(--fz-sun) 6px 8px),
+    repeating-linear-gradient(90deg, transparent 0 6px, var(--fz-ink) 6px 8px);
+  background-size: 100% 100%;
+  opacity: 0.85;
+}
+
+.fz-icon-markyza i {
+  width: 100%;
+  background: repeating-linear-gradient(90deg, var(--fz-sun) 0 8px, var(--fz-ink) 8px 16px);
+  clip-path: polygon(0 0, 100% 0, 82% 100%, 18% 100%);
+}
+
+.fz-icon-servis i {
+  width: 100%;
+  background:
+    linear-gradient(0deg, transparent 45%, var(--fz-sun) 45% 55%, transparent 55%),
+    linear-gradient(90deg, transparent 45%, var(--fz-ink) 45% 55%, transparent 55%);
+  border: 2px dashed var(--fz-ink);
+}
+
+/* ================= DŮVĚRA ================= */
+
+.fz-trust {
+  max-width: none;
+  background: var(--fz-ink);
+  color: var(--fz-paper);
+  padding: 3.5rem 1.25rem 2.5rem;
+}
+
+.fz-trust-grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.fz-trust-text p { color: #cfd8db; max-width: 36rem; }
+
+.fz-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.fz-step {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+  border-top: 1px solid rgba(185, 196, 201, 0.25);
+  padding-top: 1.25rem;
+}
+
+.fz-step-num {
+  flex: none;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-items: center;
+  background: var(--fz-sun);
+  color: var(--fz-ink);
+  font-weight: 800;
+  font-size: 1.15rem;
+  transform: skewY(-6deg);
+}
+
+.fz-step h3 { margin: 0 0 0.35rem; font-size: 1.1rem; }
+.fz-step p { margin: 0; color: #b9c4c9; font-size: 0.97rem; }
+
+/* Kontaktní pás */
+.fz-contact-strip {
+  max-width: 72rem;
+  margin: 2.5rem auto 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  border-top: 3px solid var(--fz-sun);
+  padding-top: 1.5rem;
+}
+
+.fz-contact-label {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fz-metal);
+  margin-bottom: 0.2rem;
+}
+
+.fz-contact-item a,
+.fz-contact-item span:not(.fz-contact-label) {
+  color: var(--fz-paper);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.fz-contact-item a:hover { color: var(--fz-sun); }
+
+/* ================= RESPONZIVITA ================= */
+
+@media (min-width: 700px) {
+  .fz-grid { grid-template-columns: repeat(2, 1fr); }
+  .fz-hero-facts { grid-template-columns: repeat(3, 1fr); }
+  .fz-contact-strip { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 980px) {
+  .fz-hero { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+  .fz-hero-inner { padding: 3.5rem 2rem 4.5rem 4rem; }
+  .fz-lamellas { min-height: 100%; padding: 3rem 0; }
+  .fz-grid { grid-template-columns: repeat(3, 1fr); }
+  .fz-trust-grid { grid-template-columns: 1.1fr 1fr; }
+  .fz-section { padding: 5rem 2rem; }
+  .fz-trust { padding: 5rem 2rem 3rem; }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fz-slat > span {
+    animation: none;
+    transform: none;
+  }
+  .fz-lamellas i {
+    animation: none;
+    transform: scaleY(0.55) skewY(-2deg);
+  }
+  .fz-card,
+  .fz-card:hover { transition: none; transform: none; }
+}
