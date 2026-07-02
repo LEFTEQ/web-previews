@@ -1,0 +1,453 @@
+/* =========================================================
+   Sklenářství Beer — návrh
+   Paleta: sklo. Hrana tabule je zelená (železité sklo),
+   plocha je čirá/modravá, kov kování je grafit.
+   ========================================================= */
+
+:root {
+  --glass-deep: #0d2b2b;   /* tmavá hrana silného skla */
+  --glass-edge: #2e7d6e;   /* zelená hrana tabule */
+  --glass-pale: #d9efe9;   /* světlý odlesk */
+  --glass-air: #f2f8f7;    /* vzduch mezi tabulemi / pozadí */
+  --graphite: #1c2321;     /* kování, text */
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--graphite);
+  background: var(--glass-air);
+  -webkit-font-smoothing: antialiased;
+}
+
+.beer h1,
+.beer h2,
+.beer h3,
+.beer .wordmark,
+.beer .fakta dt {
+  font-family: "Arial Black", "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.beer a:focus-visible,
+.beer .btn:focus-visible {
+  outline: 3px solid var(--glass-edge);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =============== HERO =============== */
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    linear-gradient(115deg, var(--white) 0%, var(--glass-air) 45%, var(--glass-pale) 100%);
+  overflow: hidden;
+  padding: 1.5rem 1.25rem 0;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.wordmark {
+  font-size: 1.5rem;
+  color: var(--glass-deep);
+}
+
+.wordmark-thin {
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--glass-edge);
+  font-size: 1.05rem;
+}
+
+.hero-loc {
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--glass-edge);
+  white-space: nowrap;
+}
+
+.hero-body {
+  max-width: 1100px;
+  width: 100%;
+  margin: auto;
+  padding: 3.5rem 0 8rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--glass-edge);
+  margin-bottom: 1.25rem;
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  color: var(--glass-deep);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title .line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.hero-title .line-2 { animation-delay: 0.15s; }
+.hero-title .line-3 { animation-delay: 0.3s; }
+
+/* „vybroušený" řádek — text jako hrana skla */
+.etched {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--glass-edge);
+  text-stroke: 2px var(--glass-edge);
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-sub {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: #3a4a46;
+  margin-bottom: 2rem;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.95rem 1.8rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--glass-deep);
+  color: var(--white);
+  box-shadow: 0 4px 14px rgba(13, 43, 43, 0.25);
+}
+
+.btn-solid:hover {
+  background: var(--glass-edge);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--glass-deep);
+  border: 2px solid var(--glass-edge);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.btn-ghost:hover {
+  background: var(--glass-pale);
+  transform: translateY(-2px);
+}
+
+/* --- signature: průřez izolačním trojsklem podél spodní hrany hero --- */
+
+.glass-edge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4.5rem;
+  display: flex;
+  align-items: flex-end;
+}
+
+.glass-edge .pane {
+  display: block;
+  height: 100%;
+  animation: growPane 1s 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  transform-origin: bottom;
+}
+
+/* 4 / 16 / 4 / 16 / 4 — poměry tabulí a distančních mezer */
+.pane-1 {
+  flex: 0 0 100%;
+  background:
+    linear-gradient(
+      90deg,
+      var(--glass-edge) 0%,
+      var(--glass-edge) 4%,
+      transparent 4%,
+      transparent 20%,
+      var(--glass-edge) 20%,
+      var(--glass-edge) 24%,
+      transparent 24%,
+      transparent 40%,
+      var(--glass-edge) 40%,
+      var(--glass-edge) 44%,
+      transparent 44%
+    );
+  opacity: 0.85;
+}
+
+.pane-2,
+.pane-3 {
+  display: none;
+}
+
+@keyframes growPane {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.pane-label {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 0.6rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--glass-edge);
+  background: rgba(255, 255, 255, 0.75);
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+}
+
+/* =============== SLUŽBY =============== */
+
+.sluzby {
+  background: var(--glass-deep);
+  color: var(--glass-air);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.section-head {
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+}
+
+.sluzby h2 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 0.8rem;
+}
+
+.section-lead {
+  max-width: 36rem;
+  color: var(--glass-pale);
+}
+
+.sluzby-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.sluzba {
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid var(--glass-edge);
+  padding: 1.6rem 1.5rem;
+  border-radius: 0 4px 4px 0;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.sluzba:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-left-color: var(--glass-pale);
+  transform: translateX(4px);
+}
+
+.sluzba h3 {
+  font-size: 1.25rem;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.sluzba p {
+  color: #c9ded9;
+  font-size: 0.98rem;
+}
+
+.sluzba-detail {
+  margin-top: 0.9rem;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--glass-edge) !important;
+}
+
+/* =============== DŮVĚRA / REALIZACE =============== */
+
+.duvera {
+  background: var(--white);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.duvera-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.duvera h2 {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  text-transform: uppercase;
+  color: var(--glass-deep);
+  margin-bottom: 1.2rem;
+}
+
+.duvera-text p {
+  margin-bottom: 1rem;
+  max-width: 36rem;
+  color: #33403c;
+}
+
+.fakta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.fakta dt {
+  font-size: 1.6rem;
+  color: var(--glass-edge);
+}
+
+.fakta dd {
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5a6b66;
+}
+
+.realizace {
+  border-top: 4px solid var(--glass-edge);
+  padding-top: 1.5rem;
+}
+
+.realizace-h {
+  font-size: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--glass-edge);
+  margin-bottom: 1.2rem;
+}
+
+.realizace-list {
+  list-style: none;
+}
+
+.realizace-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--glass-pale);
+}
+
+.real-co {
+  font-weight: 700;
+  color: var(--glass-deep);
+}
+
+.real-kde {
+  font-size: 0.9rem;
+  color: #5a6b66;
+}
+
+/* =============== RESPONSIVE =============== */
+
+@media (min-width: 700px) {
+  .sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .realizace-list li {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 980px) {
+  .duvera-inner {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+  }
+
+  .hero {
+    padding: 2rem 2.5rem 0;
+  }
+
+  .glass-edge {
+    height: 6rem;
+  }
+}
+
+/* =============== MOTION =============== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-title .line,
+  .glass-edge .pane {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .btn,
+  .sluzba {
+    transition: none;
+  }
+}
