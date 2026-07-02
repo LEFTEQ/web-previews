@@ -1,0 +1,557 @@
+/* =====================================================
+   REVIZE DOBEŠ — České Budějovice
+   Vizuální svět: rozvaděč, výstražný štítek, protokol.
+   Paleta: šeď eloxovaného rozvaděče + signální žluť
+   výstražného štítku „POZOR ELEKTRICKÉ ZAŘÍZENÍ“.
+   Signature: šrafovaný výstražný pruh (žluto-černý)
+   jako strukturní prvek, ne dekorace.
+   ===================================================== */
+
+:root {
+  --ocel: #1b2228;        /* tmavá ocel rozvaděče */
+  --ocel-svetla: #2a343d; /* panel */
+  --signal: #f5c400;      /* výstražná žluť */
+  --papir: #eef0ee;       /* papír protokolu */
+  --grafit: #3d464e;      /* text na papíru */
+  --med: #b97a3c;         /* měděný vodič — drobný akcent */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Archivo", "Roboto Condensed", "Segoe UI", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--grafit);
+  background: var(--papir);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 3px;
+}
+
+/* ---------- typografie ---------- */
+
+h1,
+h2,
+h3,
+.wordmark-text,
+.eyebrow,
+.btn,
+.hero-strip,
+.karta-znacka,
+dt {
+  font-family: "Barlow Condensed", "Arial Narrow", "Archivo Narrow", sans-serif;
+}
+
+h2 {
+  font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--ocel);
+}
+
+/* ---------- výstražný pruh (signature) ---------- */
+
+.hero-strip,
+.sluzby::before,
+.duvera::before {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--signal) 0 22px,
+    var(--ocel) 22px 44px
+  );
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+  position: relative;
+  min-height: 92svh;
+  display: flex;
+  flex-direction: column;
+  color: var(--papir);
+  overflow: hidden;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    200deg,
+    rgba(27, 34, 40, 0.35) 0%,
+    rgba(27, 34, 40, 0.78) 55%,
+    rgba(27, 34, 40, 0.94) 100%
+  );
+}
+
+.hero-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem clamp(1rem, 5vw, 3.5rem);
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.wordmark-sign {
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  background: var(--signal);
+  color: var(--ocel);
+  font-size: 1.15rem;
+  /* trojúhelník výstražného štítku */
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  padding-top: 0.5rem;
+}
+
+.wordmark-text {
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.wordmark-text strong {
+  font-weight: 700;
+  color: var(--signal);
+}
+
+.hero-tel {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  border-bottom: 2px solid var(--signal);
+  padding-bottom: 0.1rem;
+  white-space: nowrap;
+}
+
+.hero-body {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding: 2rem clamp(1rem, 5vw, 3.5rem) 3rem;
+  max-width: 56rem;
+}
+
+.hero-stamp {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: 1.2rem;
+}
+
+.stamp-line {
+  width: 2.6rem;
+  height: 2px;
+  background: var(--signal);
+  flex: none;
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 8vw, 5.4rem);
+  font-weight: 700;
+  line-height: 0.98;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--signal);
+}
+
+.hero-sub {
+  margin-top: 1.2rem;
+  max-width: 34rem;
+  font-size: 1.05rem;
+  color: rgba(238, 240, 238, 0.88);
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.8rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.8rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid var(--signal);
+  transition: background-color 0.18s ease, color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.btn-primary {
+  background: var(--signal);
+  color: var(--ocel);
+}
+
+.btn-primary:hover {
+  background: #ffd824;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--papir);
+}
+
+.btn-ghost:hover {
+  background: rgba(245, 196, 0, 0.14);
+}
+
+.hero-strip {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 2.2rem;
+  padding: 0.55rem 1rem;
+}
+
+.hero-strip span {
+  background: var(--ocel);
+  color: var(--signal);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.9rem;
+}
+
+/* ---------- sekce obecně ---------- */
+
+.eyebrow {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--med);
+  margin-bottom: 0.6rem;
+}
+
+.eyebrow-light {
+  color: var(--signal);
+}
+
+/* ---------- SLUŽBY / REVIZE ---------- */
+
+.sluzby {
+  position: relative;
+  padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 5vw, 3.5rem);
+  max-width: 78rem;
+  margin: 0 auto;
+}
+
+.sekce-hlava {
+  max-width: 44rem;
+  margin-bottom: 2.5rem;
+}
+
+.sekce-perex {
+  margin-top: 1rem;
+}
+
+.sluzby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.karta {
+  background: #fff;
+  border: 1px solid #d8dcd8;
+  border-top: 4px solid var(--ocel);
+  padding: 1.4rem 1.4rem 1.2rem;
+  position: relative;
+  transition: border-top-color 0.18s ease, transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.karta:hover {
+  border-top-color: var(--signal);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(27, 34, 40, 0.1);
+}
+
+.karta-znacka {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.3rem;
+  height: 2.3rem;
+  padding: 0 0.4rem;
+  background: var(--ocel);
+  color: var(--signal);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.9rem;
+}
+
+.karta h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--ocel);
+  margin-bottom: 0.5rem;
+}
+
+.karta p {
+  font-size: 0.98rem;
+}
+
+.karta-lhuta {
+  margin-top: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--med);
+  border-top: 1px dashed #d8dcd8;
+  padding-top: 0.6rem;
+}
+
+.sluzby-foto {
+  margin-top: 2.5rem;
+}
+
+.sluzby-foto img {
+  width: 100%;
+  height: clamp(14rem, 40vw, 26rem);
+  object-fit: cover;
+}
+
+figcaption {
+  font-size: 0.9rem;
+  padding: 0.7rem 0 0;
+  color: var(--grafit);
+  border-left: 4px solid var(--signal);
+  padding-left: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+/* ---------- DŮVĚRA ---------- */
+
+.duvera {
+  position: relative;
+  background: var(--ocel);
+  color: rgba(238, 240, 238, 0.9);
+  padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 5vw, 3.5rem);
+}
+
+.duvera::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+
+.duvera-text h2 {
+  color: var(--papir);
+  margin-bottom: 1.2rem;
+}
+
+.duvera-text p {
+  max-width: 40rem;
+  margin-bottom: 1rem;
+}
+
+.duvera-text strong {
+  color: var(--signal);
+  font-weight: 600;
+}
+
+.duvera-fakta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.4rem;
+  margin-top: 2.2rem;
+}
+
+.duvera-fakta dt {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: 0.35rem;
+}
+
+.duvera-fakta dd {
+  font-size: 0.98rem;
+}
+
+.duvera-fakta a {
+  color: var(--papir);
+  text-decoration-color: var(--signal);
+  text-underline-offset: 3px;
+}
+
+.kraje {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.kraje li {
+  border: 1px solid rgba(245, 196, 0, 0.5);
+  padding: 0.15rem 0.7rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.duvera-foto {
+  margin-top: 2.5rem;
+}
+
+.duvera-foto img {
+  width: 100%;
+  height: clamp(14rem, 38vw, 24rem);
+  object-fit: cover;
+}
+
+.duvera-foto figcaption {
+  color: rgba(238, 240, 238, 0.75);
+}
+
+/* ---------- animace při načtení ---------- */
+
+@keyframes zvednout {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-stamp,
+.hero-title,
+.hero-sub,
+.hero-cta {
+  animation: zvednout 0.65s ease-out both;
+}
+
+.hero-title {
+  animation-delay: 0.1s;
+}
+
+.hero-sub {
+  animation-delay: 0.22s;
+}
+
+.hero-cta {
+  animation-delay: 0.34s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-stamp,
+  .hero-title,
+  .hero-sub,
+  .hero-cta {
+    animation: none;
+  }
+  .karta,
+  .btn {
+    transition: none;
+  }
+  .karta:hover,
+  .btn-primary:hover {
+    transform: none;
+  }
+}
+
+/* ---------- responzivita ---------- */
+
+@media (min-width: 640px) {
+  .sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .duvera {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .duvera-foto {
+    margin-top: 0;
+    position: sticky;
+    top: 2rem;
+  }
+
+  .duvera-fakta {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .duvera-fakta div:first-child {
+    grid-column: 1 / -1;
+  }
+}
