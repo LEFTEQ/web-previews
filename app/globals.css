@@ -1,0 +1,607 @@
+/* ============================================================
+   G-SYSTEM Olomouc — velkoobchod TZB (topení · instalace · sanita)
+   Tokeny:
+   --steel   #16232E  (ocel potrubí, tmavé pozadí)
+   --flame   #E85A1E  (plamen hořáku / červený kohout teplé vody)
+   --copper  #C97B4A  (měděná trubka — sekundární akcent)
+   --frost   #EDF2F4  (světlé pozadí, studená voda)
+   --ink     #1B2833  (text)
+   Typo: Archivo (display, technické, široké) + system body
+   Signature: „DN" stupnice — sortiment řazený jako dimenze potrubí,
+   svislá trubka propojuje položky seznamu.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Archivo:ital,wght@0,400;0,500;0,600;1,400&display=swap");
+
+:root {
+  --steel: #16232e;
+  --steel-2: #1f3242;
+  --flame: #e85a1e;
+  --flame-dark: #c74812;
+  --copper: #c97b4a;
+  --frost: #edf2f4;
+  --ink: #1b2833;
+  --muted: #56707f;
+  --line: #cfdae0;
+  --font-display: "Archivo", "Arial Black", sans-serif;
+  --font-body: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--frost);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gs a:focus-visible,
+.gs :focus-visible {
+  outline: 3px solid var(--flame);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  padding: 1.25rem 1.25rem 0;
+  overflow: hidden;
+  background: var(--steel);
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      170deg,
+      rgba(22, 35, 46, 0.55) 0%,
+      rgba(22, 35, 46, 0.82) 55%,
+      rgba(22, 35, 46, 0.95) 100%
+    );
+}
+
+.hero-top,
+.hero-body,
+.hero-strip {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Wordmark — vlastní typografické logo */
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 110%;
+  letter-spacing: 0.14em;
+  font-size: 1.35rem;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.wordmark-g {
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  background: var(--flame);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 1.15rem;
+  letter-spacing: 0;
+}
+
+.wordmark-sep {
+  width: 3px;
+  height: 1.5rem;
+  background: var(--copper);
+  border-radius: 2px;
+}
+
+.hero-region {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.hero-body {
+  max-width: 46rem;
+  padding: 3.5rem 0 3rem;
+}
+
+/* Signature moment č. 1: teploměrový řádek nad H1 */
+.gauge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 1.25rem;
+  font-size: 0.85rem;
+}
+
+.gauge-line {
+  width: 3.25rem;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #3a7ca5, var(--flame));
+  animation: gauge-fill 900ms ease-out both;
+  transform-origin: left;
+}
+
+.gauge-val {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--flame);
+  letter-spacing: 0.04em;
+}
+
+.gauge-label {
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+@keyframes gauge-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.hero h1 {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 118%;
+  font-size: clamp(2rem, 5.5vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  animation: rise 700ms ease-out both;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--flame);
+}
+
+.hero-lead {
+  margin: 0 0 2rem;
+  max-width: 36rem;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  animation: rise 700ms ease-out 120ms both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  animation: rise 700ms ease-out 220ms both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 1.75rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.btn-solid {
+  background: var(--flame);
+  color: #fff;
+}
+
+.btn-solid:hover {
+  background: var(--flame-dark);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+}
+
+.btn-ghost:hover {
+  border-color: #fff;
+  transform: translateY(-2px);
+}
+
+.hero-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2.5rem;
+  margin: 0;
+  padding: 1.1rem 0 1.25rem;
+  list-style: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.hero-strip li {
+  padding: 0.25rem 0;
+}
+
+.hero-strip strong {
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  margin-right: 0.35rem;
+}
+
+/* ============ SECTION SHARED ============ */
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--flame);
+}
+
+.kicker-pipe {
+  display: inline-block;
+  width: 2rem;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--copper);
+}
+
+.kicker-light {
+  color: #ff8a52;
+}
+
+h2 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-weight: 850;
+  font-stretch: 112%;
+  font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+}
+
+.section-lead {
+  margin: 0;
+  max-width: 40rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+/* ============ SORTIMENT ============ */
+
+.sortiment {
+  padding: 4.5rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.section-head {
+  margin-bottom: 3rem;
+}
+
+.sortiment-grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.sortiment-figure {
+  margin: 0;
+}
+
+.sortiment-figure img {
+  width: 100%;
+  border-radius: 6px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.sortiment-figure figcaption,
+.studio-figure figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
+
+/* Signature: DN stupnice — svislá „trubka" propojuje položky,
+   dimenze klesá od kotelny (DN 25) po koupelnu (DN 10) */
+.pipe-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.pipe-list::before {
+  content: "";
+  position: absolute;
+  left: 1.9rem;
+  top: 1rem;
+  bottom: 1rem;
+  width: 4px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--flame) 0%, var(--copper) 60%, #3a7ca5 100%);
+}
+
+.pipe-item {
+  display: grid;
+  grid-template-columns: 3.9rem 1fr;
+  gap: 1.1rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.pipe-item:last-child {
+  border-bottom: none;
+}
+
+.pipe-dn {
+  position: relative;
+  z-index: 1;
+  align-self: start;
+  justify-self: start;
+  display: inline-block;
+  padding: 0.35rem 0.5rem;
+  background: var(--steel);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.pipe-item h3 {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.pipe-item p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.pipe-item {
+  transition: transform 200ms ease;
+}
+
+.pipe-item:hover {
+  transform: translateX(6px);
+}
+
+/* ============ STUDIO / DŮVĚRA ============ */
+
+.studio {
+  background: var(--steel);
+  color: #eef4f7;
+  padding: 4.5rem 1.25rem;
+}
+
+.studio-grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 3rem;
+}
+
+.studio-copy h2 {
+  color: #fff;
+}
+
+.studio-copy > p {
+  color: rgba(238, 244, 247, 0.85);
+  max-width: 38rem;
+}
+
+.trust-facts {
+  margin: 2.25rem 0 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.trust-facts > div {
+  padding-left: 1.1rem;
+  border-left: 4px solid var(--copper);
+}
+
+.trust-facts dt {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.3rem;
+}
+
+.trust-facts dd {
+  margin: 0;
+  color: rgba(238, 244, 247, 0.72);
+  font-size: 0.97rem;
+}
+
+.studio-figure {
+  margin: 0;
+}
+
+.studio-figure img {
+  width: 100%;
+  border-radius: 6px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.studio-figure figcaption {
+  color: rgba(238, 244, 247, 0.6);
+}
+
+.studio-quote {
+  margin: 1.75rem 0 0;
+  padding: 1.25rem 1.4rem;
+  background: var(--steel-2);
+  border-left: 4px solid var(--flame);
+  border-radius: 0 6px 6px 0;
+}
+
+.studio-quote p {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #fff;
+}
+
+.studio-quote cite {
+  font-style: normal;
+  font-size: 0.85rem;
+  color: rgba(238, 244, 247, 0.6);
+  letter-spacing: 0.04em;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (min-width: 760px) {
+  .hero {
+    padding: 2rem 3rem 0;
+  }
+
+  .hero-body {
+    padding: 5rem 0 4rem;
+  }
+
+  .sortiment,
+  .studio {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .sortiment-grid {
+    grid-template-columns: 5fr 7fr;
+    align-items: start;
+  }
+
+  .sortiment-figure {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .studio-grid {
+    grid-template-columns: 7fr 5fr;
+    align-items: start;
+  }
+
+  .trust-facts {
+    gap: 1.75rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .hero h1 {
+    font-size: 4.25rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero h1,
+  .hero-lead,
+  .hero-actions,
+  .gauge-line {
+    animation: none;
+  }
+
+  .btn,
+  .pipe-item {
+    transition: none;
+  }
+
+  .btn-solid:hover,
+  .btn-ghost:hover,
+  .pipe-item:hover {
+    transform: none;
+  }
+}
