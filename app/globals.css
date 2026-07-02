@@ -1,0 +1,566 @@
+/* ============================================================
+   VELOCENTRUM — Specialized Concept Store, Praha
+   Paleta: dílna + závodní karbon
+   - uhlová černá karbonu, bílá dílenské zdi,
+   - "Levo Red" červená (rámová barva Specialized),
+   - chladná ocelová šedá nástrojů.
+   Typ: Archivo/„sportovní grotesk" pro titulky (system stack
+   s širokým řezem), monospace pro míry a čísla (pravítko,
+   ceny) — svět velikostních tabulek a momentových klíčů.
+   Signature: velikostní pravítko S–XL v heru.
+   ============================================================ */
+
+:root {
+  --carbon: #16181d;
+  --carbon-2: #1f232b;
+  --paper: #f7f8f9;
+  --white: #ffffff;
+  --levo-red: #d81e2c;
+  --steel: #8b93a1;
+  --steel-dark: #4a515d;
+
+  --font-display: "Archivo Black", "Arial Black", "Franklin Gothic Heavy",
+    "Helvetica Neue", sans-serif;
+  --font-body: "Archivo", "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono",
+    monospace;
+
+  --maxw: 72rem;
+  --pad: clamp(1.25rem, 4vw, 3rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--carbon);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Focus — viditelný, červený jako rám Levo */
+.vc a:focus-visible,
+.vc button:focus-visible {
+  outline: 3px solid var(--levo-red);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.vc-hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  color: var(--white);
+  background: var(--carbon);
+  overflow: hidden;
+}
+
+.vc-hero__media {
+  position: absolute;
+  inset: 0;
+}
+
+.vc-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.vc-hero__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    108deg,
+    rgba(22, 24, 29, 0.94) 0%,
+    rgba(22, 24, 29, 0.78) 45%,
+    rgba(22, 24, 29, 0.25) 100%
+  );
+}
+
+.vc-hero__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--pad);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 6vh, 4rem);
+}
+
+.vc-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.vc-wordmark {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  letter-spacing: 0.06em;
+  font-style: italic; /* náklon = rychlost, cyklistická konvence */
+}
+
+.vc-wordmark__spoke {
+  color: var(--levo-red);
+  font-style: normal;
+}
+
+.vc-topbar__tel {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--white);
+  text-decoration: none;
+  border-bottom: 2px solid var(--levo-red);
+  padding-bottom: 2px;
+}
+
+.vc-topbar__tel:hover {
+  color: var(--levo-red);
+}
+
+.vc-hero__copy {
+  max-width: 38rem;
+  margin-top: auto;
+}
+
+.vc-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--levo-red);
+  margin: 0 0 1rem;
+}
+
+.vc-eyebrow--light {
+  color: #ff5a66;
+}
+
+.vc-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6.5vw, 4.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem;
+}
+
+.vc-hero__title em {
+  font-style: italic;
+  color: var(--levo-red);
+}
+
+.vc-hero__lead {
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  line-height: 1.65;
+  color: #d4d8de;
+  margin: 0 0 2rem;
+  max-width: 34rem;
+}
+
+.vc-hero__actions {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.vc-btn {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.85rem 1.75rem;
+  border-radius: 3px;
+  display: inline-block;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.vc-btn--solid {
+  background: var(--levo-red);
+  color: var(--white);
+}
+
+.vc-btn--solid:hover {
+  background: #b8121f;
+  transform: translateY(-2px);
+}
+
+.vc-btn--ghost {
+  color: var(--white);
+  border: 2px solid rgba(255, 255, 255, 0.55);
+}
+
+.vc-btn--ghost:hover {
+  border-color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* ---- Signature: velikostní pravítko ---- */
+
+.vc-ruler {
+  border-top: 2px solid var(--levo-red);
+  padding-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  animation: vc-rise 0.8s ease 0.3s both;
+}
+
+.vc-ruler__label,
+.vc-ruler__note {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--steel);
+  white-space: nowrap;
+}
+
+.vc-ruler__scale {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 16rem;
+}
+
+.vc-ruler__tick {
+  flex: 1;
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 0.15rem 0 0.15rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.vc-ruler__tick:last-child {
+  border-right: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.vc-ruler__tick b {
+  font-size: 1.05rem;
+  color: var(--white);
+}
+
+.vc-ruler__tick i {
+  font-style: normal;
+  font-size: 0.7rem;
+  color: var(--steel);
+}
+
+@keyframes vc-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============ SEKCE ============ */
+
+.vc-section {
+  padding: clamp(3.5rem, 9vw, 6.5rem) var(--pad);
+}
+
+.vc-section > * {
+  max-width: var(--maxw);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vc-section__head {
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.vc-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  line-height: 1.08;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin: 0 0 1rem;
+}
+
+.vc-h2--light {
+  color: var(--white);
+}
+
+.vc-section__lead {
+  max-width: 36rem;
+  color: var(--steel-dark);
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* grid: obrázek + obsah */
+
+.vc-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+.vc-grid__media {
+  margin: 0;
+}
+
+.vc-img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 12px 40px rgba(22, 24, 29, 0.18);
+}
+
+.vc-grid__caption {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--steel-dark);
+  margin-top: 0.75rem;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--levo-red);
+}
+
+.vc-grid__caption--light {
+  color: var(--steel);
+}
+
+/* kategorie kol */
+
+.vc-cats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: #dfe2e7;
+  border: 1px solid #dfe2e7;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.vc-cat {
+  background: var(--white);
+  padding: 1.5rem 1.5rem 1.35rem;
+  position: relative;
+  transition: background-color 0.15s ease;
+}
+
+.vc-cat:hover {
+  background: #fcf5f5;
+}
+
+.vc-cat__tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  color: var(--levo-red);
+  border: 1px solid currentColor;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.vc-cat__name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+
+.vc-cat__desc {
+  margin: 0 0 0.85rem;
+  color: var(--steel-dark);
+  font-size: 0.95rem;
+}
+
+.vc-cat__price {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* ============ SEKCE 2 — tmavá dílna ============ */
+
+.vc-section--dark {
+  background: var(--carbon);
+  color: #d4d8de;
+}
+
+.vc-service__lead {
+  margin: 0 0 1.75rem;
+  font-size: 1.05rem;
+  max-width: 34rem;
+}
+
+.vc-service__list {
+  list-style: none;
+  margin: 0 0 2.25rem;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.vc-service__list li {
+  padding-left: 1.4rem;
+  position: relative;
+  font-size: 0.98rem;
+}
+
+.vc-service__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.65rem;
+  height: 0.65rem;
+  border: 2px solid var(--levo-red);
+  border-radius: 50%; /* náboj kola */
+}
+
+.vc-service__list b {
+  color: var(--white);
+}
+
+/* důkazy / čísla */
+
+.vc-proof {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  border-top: 1px solid var(--carbon-2);
+  border-bottom: 1px solid var(--carbon-2);
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+}
+
+.vc-proof__num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--white);
+  font-style: italic;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.vc-proof__label {
+  font-size: 0.82rem;
+  color: var(--steel);
+  line-height: 1.4;
+  display: block;
+}
+
+/* citace */
+
+.vc-quote {
+  margin: 0;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--levo-red);
+}
+
+.vc-quote p {
+  margin: 0 0 0.5rem;
+  font-size: 1.02rem;
+  color: var(--white);
+  font-style: italic;
+}
+
+.vc-quote cite {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--steel);
+}
+
+/* ============ RESPONZIVITA ============ */
+
+@media (min-width: 760px) {
+  .vc-cats {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 960px) {
+  .vc-grid {
+    grid-template-columns: 1fr 1.1fr;
+    align-items: center;
+  }
+
+  .vc-grid--flip .vc-grid__media {
+    order: 2;
+  }
+
+  .vc-grid--flip .vc-service {
+    order: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .vc-ruler__scale {
+    flex-wrap: wrap;
+  }
+
+  .vc-ruler__tick {
+    flex: 1 1 45%;
+    padding-bottom: 0.5rem;
+  }
+
+  .vc-proof {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+/* ============ REDUKOVANÝ POHYB ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .vc-ruler {
+    animation: none;
+  }
+
+  .vc-btn,
+  .vc-cat {
+    transition: none;
+  }
+
+  .vc-btn--solid:hover,
+  .vc-btn--ghost:hover {
+    transform: none;
+  }
+}
