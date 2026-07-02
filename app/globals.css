@@ -1,0 +1,639 @@
+/* =========================================================
+   BURRITO LOCO — Tex-Mex nonstop, Praha
+   Palette: noc nad Prahou + neon kuchyně
+   --masa   #1E1712  (tmavé pozadí — noc, gril, pražená kukuřice)
+   --tortilla #F6E7C8 (světlý text / plochy — pšeničná tortilla)
+   --salsa  #E8452C  (pálivá červená — salsa roja)
+   --guac   #8CB53A  (avokádová zelená)
+   --maiz   #F2A93B  (kukuřičná žlutá)
+   --frijol #5A2E1E  (fazolová hnědá)
+   Typo: Arial Black / system heavy pro display (kondenzovaně,
+   uppercase — vývěsní štít bufetu), system sans pro text.
+   Signature: „řez burritem" — soustředné vrstvy náplně v heru.
+   ========================================================= */
+
+:root {
+  --masa: #1e1712;
+  --masa-2: #2a2018;
+  --tortilla: #f6e7c8;
+  --tortilla-dim: #d9c8a5;
+  --salsa: #e8452c;
+  --salsa-dark: #c1341f;
+  --guac: #8cb53a;
+  --maiz: #f2a93b;
+  --frijol: #5a2e1e;
+  --font-display: "Arial Black", "Arial Bold", Arial, "Helvetica Neue",
+    sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--masa);
+  color: var(--tortilla);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.bl a:focus-visible,
+.bl button:focus-visible {
+  outline: 3px solid var(--maiz);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: radial-gradient(
+      ellipse 120% 90% at 85% 20%,
+      var(--masa-2) 0%,
+      var(--masa) 60%
+    );
+  padding: 1.25rem 1.25rem 0;
+}
+
+.hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+  z-index: 3;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+  color: var(--tortilla);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.wordmark em {
+  font-style: normal;
+  color: var(--salsa);
+  display: inline-block;
+  transform: rotate(-4deg) translateY(-1px);
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--maiz);
+  border: 1px solid rgba(242, 169, 59, 0.4);
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  white-space: nowrap;
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--guac);
+  animation: pulz 2.2s ease-in-out infinite;
+}
+
+@keyframes pulz {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.75);
+  }
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  max-width: 46rem;
+  margin: auto 0;
+  padding: 3.5rem 0 3rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--maiz);
+  margin: 0 0 1rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.9rem, 11vw, 7.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.5rem;
+  text-transform: uppercase;
+  color: var(--tortilla);
+}
+
+.hero-title .line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.5em);
+  animation: nastup 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.hero-title .line-1 {
+  animation-delay: 0.1s;
+}
+.hero-title .line-2 {
+  animation-delay: 0.25s;
+  color: var(--salsa);
+}
+.hero-title .line-3 {
+  animation-delay: 0.4s;
+}
+
+.hero-title .rana {
+  color: var(--maiz);
+}
+
+@keyframes nastup {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-sub {
+  max-width: 32rem;
+  font-size: 1.1rem;
+  color: var(--tortilla-dim);
+  margin: 0 0 2rem;
+  opacity: 0;
+  animation: nastup 0.7s ease 0.6s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  opacity: 0;
+  animation: nastup 0.7s ease 0.75s forwards;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 0.95rem 1.6rem;
+  border-radius: 999px;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn-hot {
+  background: var(--salsa);
+  color: var(--tortilla);
+}
+
+.btn-hot:hover {
+  background: var(--salsa-dark);
+  transform: translateY(-2px) rotate(-1deg);
+}
+
+.btn-ghost {
+  color: var(--tortilla);
+  border: 2px solid rgba(246, 231, 200, 0.35);
+}
+
+.btn-ghost:hover {
+  border-color: var(--tortilla);
+  transform: translateY(-2px);
+}
+
+/* --- signature: řez burritem --- */
+
+.burrito-cut {
+  position: absolute;
+  z-index: 1;
+  right: -22vmin;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 74vmin;
+  height: 74vmin;
+  pointer-events: none;
+}
+
+.burrito-cut .ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  opacity: 0;
+  animation: vrstva 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.ring-tortilla {
+  background: var(--tortilla);
+  animation-delay: 0.15s;
+}
+.ring-rice {
+  inset: 9%;
+  background: #efe0be;
+  animation-delay: 0.3s;
+}
+.ring-beans {
+  inset: 20%;
+  background: var(--frijol);
+  animation-delay: 0.45s;
+}
+.ring-salsa {
+  inset: 33%;
+  background: var(--salsa);
+  animation-delay: 0.6s;
+}
+.ring-guac {
+  inset: 46%;
+  background: var(--guac);
+  animation-delay: 0.75s;
+}
+.ring-core {
+  inset: 60%;
+  background: var(--maiz);
+  animation-delay: 0.9s;
+}
+
+@keyframes vrstva {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- pás salsy pod herem --- */
+
+.hero-marquee {
+  position: relative;
+  z-index: 2;
+  margin: 0 -1.25rem;
+  background: var(--salsa);
+  color: var(--tortilla);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.7rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.hero-marquee span {
+  display: inline-block;
+  animation: jizda 28s linear infinite;
+}
+
+@keyframes jizda {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ================= SEKCE ================= */
+
+.sekce {
+  padding: 5rem 1.25rem;
+}
+
+.sekce-hlava {
+  max-width: 44rem;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.sekce-titul {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+  color: var(--masa);
+}
+
+.sekce-perex {
+  font-size: 1.1rem;
+  color: #56483a;
+  margin: 0;
+}
+
+/* --- sekce MENU (světlá — tortilla) --- */
+
+.sekce-menu {
+  background: var(--tortilla);
+  color: var(--masa);
+}
+
+.kroky {
+  list-style: none;
+  margin: 0 auto 3.5rem;
+  padding: 0;
+  max-width: 68rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.krok {
+  background: rgba(30, 23, 18, 0.05);
+  border-radius: 16px;
+  padding: 1.4rem 1.4rem 1.5rem;
+  position: relative;
+}
+
+.krok-cislo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: var(--salsa);
+  color: var(--tortilla);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.krok-nazev {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.35rem;
+}
+
+.krok-popis {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #56483a;
+}
+
+.menu-grid {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 68rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.jidlo {
+  background: #fffaf0;
+  border: 2px solid rgba(30, 23, 18, 0.08);
+  border-radius: 18px;
+  padding: 1.5rem 1.5rem 1.6rem;
+  position: relative;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.jidlo:hover {
+  transform: translateY(-4px) rotate(-0.5deg);
+  border-color: var(--salsa);
+}
+
+.jidlo-hlava {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.jidlo-nazev {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin: 0;
+  color: var(--masa);
+}
+
+.jidlo-cena {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--salsa);
+  white-space: nowrap;
+}
+
+.jidlo-popis {
+  margin: 0;
+  color: #56483a;
+  font-size: 0.98rem;
+}
+
+.jidlo-stitek {
+  display: inline-block;
+  margin-top: 0.9rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--masa);
+  background: var(--maiz);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+}
+
+.menu-pozn {
+  max-width: 44rem;
+  margin: 2.5rem auto 0;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #77664f;
+}
+
+/* --- sekce PROČ (tmavá) --- */
+
+.sekce-proc {
+  background: var(--masa);
+  border-top: 6px solid var(--salsa);
+}
+
+.sekce-titul-svetly {
+  color: var(--tortilla);
+}
+
+.sekce-perex-svetly {
+  color: var(--tortilla-dim);
+}
+
+.duvody {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.duvod {
+  position: relative;
+  padding-top: 1.1rem;
+}
+
+.duvod-linka {
+  display: block;
+  width: 3.5rem;
+  height: 5px;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+  background: linear-gradient(
+    90deg,
+    var(--guac) 0%,
+    var(--maiz) 50%,
+    var(--salsa) 100%
+  );
+}
+
+.duvod-titulek {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+  color: var(--tortilla);
+}
+
+.duvod-text {
+  margin: 0;
+  color: var(--tortilla-dim);
+  font-size: 1rem;
+}
+
+.hodiny {
+  max-width: 68rem;
+  margin: 3.5rem auto 0;
+  padding: 2rem 1.5rem;
+  border: 2px dashed rgba(246, 231, 200, 0.25);
+  border-radius: 20px;
+  text-align: center;
+}
+
+.hodiny-cas {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 8vw, 3.6rem);
+  letter-spacing: 0.02em;
+  color: var(--maiz);
+  line-height: 1.1;
+}
+
+.hodiny-pozn {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--tortilla-dim);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (min-width: 640px) {
+  .hero {
+    padding: 1.75rem 2.5rem 0;
+  }
+  .hero-marquee {
+    margin: 0 -2.5rem;
+  }
+  .kroky {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .duvody {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .kroky {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .menu-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .burrito-cut {
+    right: -14vmin;
+    width: 82vmin;
+    height: 82vmin;
+  }
+  .sekce {
+    padding: 6.5rem 2.5rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .burrito-cut {
+    right: -46vmin;
+    top: 62%;
+    opacity: 0.55;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-title .line,
+  .hero-sub,
+  .hero-actions,
+  .burrito-cut .ring {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .badge-dot {
+    animation: none;
+  }
+  .hero-marquee span {
+    animation: none;
+  }
+  .btn,
+  .jidlo {
+    transition: none;
+  }
+}
