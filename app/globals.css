@@ -1,0 +1,537 @@
+:root {
+  /* Paleta odvozená z původního fialového blesku (blesk_3.EPS) — už ne clipart,
+     ale hluboká indigová izolace + signální žluť měřicího přístroje. */
+  --izolace: #201a3a;      /* tmavý indigo-fialový podklad, PVC izolace */
+  --izolace-2: #2c2450;    /* světlejší vrstva */
+  --papir: #f7f6f2;        /* papír revizní zprávy */
+  --blesk: #ffd21f;        /* signální žlutá — výstražný štítek */
+  --med: #c8742e;          /* měděný vodič, drobný akcent */
+  --inkoust: #23203a;      /* text na papíru */
+  --seda: #6b6880;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Georgia", "Times New Roman", serif;
+  color: var(--inkoust);
+  background: var(--papir);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Utility/technické písmo — mono jako z měřicího protokolu */
+.brand-sub,
+.tag,
+.sec-eyebrow,
+.rev-kod,
+.rev-lhuta,
+.krok-num,
+.stitek-head,
+.stitek-row dt,
+.scale-band,
+.btn {
+  font-family: "Courier New", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ============ FOCUS ============ */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--blesk);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+.hero {
+  position: relative;
+  background:
+    radial-gradient(1200px 600px at 85% -10%, var(--izolace-2), transparent 60%),
+    var(--izolace);
+  color: var(--papir);
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4.5rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 3.5rem;
+}
+
+.brand-bolt {
+  color: var(--blesk);
+  display: inline-flex;
+}
+
+.brand-name {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.14em;
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.brand-sub {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  color: var(--blesk);
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.hero-title {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(2.9rem, 10vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-line-2 {
+  color: var(--blesk);
+  font-style: italic;
+}
+
+.hero-dot {
+  color: var(--papir);
+}
+
+.hero-lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #d8d5e8;
+  margin-bottom: 1.75rem;
+}
+
+.hero-tag {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2.25rem;
+}
+
+.tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid rgba(247, 246, 242, 0.35);
+  border-radius: 999px;
+  color: #cfcbe4;
+  white-space: nowrap;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.btn {
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: 4px;
+  transition: transform 160ms ease, background 160ms ease, color 160ms ease;
+}
+
+.btn-solid {
+  background: var(--blesk);
+  color: var(--izolace);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.35);
+}
+
+.btn-solid:hover {
+  transform: translateY(-2px);
+}
+
+.btn-line {
+  color: var(--papir);
+  border: 1px solid rgba(247, 246, 242, 0.5);
+}
+
+.btn-line:hover {
+  background: rgba(247, 246, 242, 0.1);
+}
+
+/* ---- SIGNATURE: stupnice voltmetru na spodní hraně hero ---- */
+.hero-scale {
+  position: relative;
+  height: 74px;
+  background: var(--blesk);
+  color: var(--izolace);
+  overflow: hidden;
+  border-top: 3px solid var(--izolace);
+}
+
+.scale-ticks {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+      to right,
+      var(--izolace) 0,
+      var(--izolace) 2px,
+      transparent 2px,
+      transparent 24px
+    ),
+    repeating-linear-gradient(
+      to right,
+      rgba(32, 26, 58, 0.55) 0,
+      rgba(32, 26, 58, 0.55) 1px,
+      transparent 1px,
+      transparent 6px
+    );
+  background-size: 100% 26px, 100% 14px;
+  background-repeat: no-repeat;
+  background-position: bottom left, bottom left;
+}
+
+.scale-band {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5%;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.scale-unit {
+  font-style: italic;
+}
+
+.scale-needle {
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 3px;
+  height: 58px;
+  background: var(--izolace);
+  transform-origin: bottom center;
+  animation: needle 1.4s cubic-bezier(0.25, 1.4, 0.4, 1) 0.3s both;
+}
+
+@keyframes needle {
+  from {
+    left: 10%;
+    transform: rotate(-8deg);
+  }
+  60% {
+    left: 68%;
+  }
+  to {
+    left: 62%;
+    transform: rotate(4deg);
+  }
+}
+
+/* hero load sequence */
+.hero-title,
+.hero-lead,
+.hero-tag,
+.hero-cta {
+  animation: rise 600ms ease both;
+}
+
+.hero-lead { animation-delay: 120ms; }
+.hero-tag { animation-delay: 220ms; }
+.hero-cta { animation-delay: 320ms; }
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============ SEKCE OBECNĚ ============ */
+.sec-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+}
+
+.sec-eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--med);
+  margin-bottom: 0.6rem;
+}
+
+.sec-title {
+  font-family: Georgia, serif;
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 2.5rem;
+}
+
+/* ============ SEKCE 1: REVIZE ============ */
+.sec-revize {
+  background: var(--papir);
+}
+
+.rev-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.rev-card {
+  background: #fff;
+  border: 1px solid #e4e1d8;
+  border-top: 4px solid var(--izolace);
+  border-radius: 6px;
+  padding: 1.5rem 1.4rem 1.25rem;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.rev-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(32, 26, 58, 0.12);
+  border-top-color: var(--blesk);
+}
+
+.rev-kod {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  color: var(--seda);
+  margin-bottom: 0.5rem;
+}
+
+.rev-nazev {
+  font-family: Georgia, serif;
+  font-size: 1.25rem;
+  margin-bottom: 0.6rem;
+}
+
+.rev-popis {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #46435c;
+  margin-bottom: 1rem;
+}
+
+.rev-lhuta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--med);
+}
+
+.rev-lhuta-tick {
+  width: 10px;
+  height: 10px;
+  background: var(--blesk);
+  border: 2px solid var(--izolace);
+  border-radius: 50%;
+  flex: none;
+}
+
+.rev-note {
+  margin-top: 2rem;
+  font-style: italic;
+  color: var(--seda);
+  max-width: 40rem;
+}
+
+/* ============ SEKCE 2: POSTUP ============ */
+.sec-postup {
+  background: var(--izolace);
+  color: var(--papir);
+}
+
+.sec-eyebrow-light {
+  color: var(--blesk);
+}
+
+.sec-title-light {
+  color: var(--papir);
+}
+
+.kroky {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  margin-bottom: 3rem;
+}
+
+.krok {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+}
+
+.krok-num {
+  flex: none;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: grid;
+  place-items: center;
+  background: var(--blesk);
+  color: var(--izolace);
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35);
+}
+
+.krok-title {
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  margin-bottom: 0.35rem;
+}
+
+.krok-text {
+  font-size: 0.97rem;
+  line-height: 1.65;
+  color: #cfcbe4;
+  max-width: 34rem;
+}
+
+/* ---- výstražný štítek jako blok důvěry ---- */
+.stitek {
+  background: var(--blesk);
+  color: var(--izolace);
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 46rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.stitek-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.28em;
+  padding: 0.8rem 1.4rem;
+  border-bottom: 3px dashed rgba(32, 26, 58, 0.4);
+}
+
+.stitek-bolt {
+  display: inline-flex;
+  color: var(--izolace);
+}
+
+.stitek-body {
+  padding: 1.1rem 1.4rem 1.3rem;
+}
+
+.stitek-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(32, 26, 58, 0.18);
+}
+
+.stitek-row:last-child {
+  border-bottom: none;
+}
+
+.stitek-row dt {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.stitek-row dd {
+  font-weight: 700;
+  font-size: 0.98rem;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (min-width: 640px) {
+  .rev-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stitek-row {
+    grid-template-columns: 11rem 1fr;
+    align-items: baseline;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero-inner {
+    padding-top: 2.5rem;
+    padding-bottom: 6rem;
+  }
+
+  .kroky {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .krok {
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-title,
+  .hero-lead,
+  .hero-tag,
+  .hero-cta,
+  .scale-needle {
+    animation: none;
+  }
+
+  .scale-needle {
+    left: 62%;
+    transform: rotate(4deg);
+  }
+
+  .btn,
+  .rev-card {
+    transition: none;
+  }
+}
