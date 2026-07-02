@@ -1,0 +1,474 @@
+/* =========================================================
+   GLEICH group — žaluzie a rolety, Ostrava
+   Koncept: lamela. Celý web je postaven na horizontálním
+   rytmu žaluziových lamel — hero titulek jsou tři „lamely“,
+   které se při načtení naklopí do čitelné polohy.
+   Paleta: ocelová modrošedá (hliníková lamela) + teplá
+   sluneční žluť (světlo, které lamely dávkují).
+   ========================================================= */
+
+:root {
+  --gl-ocel: #1f2a37;        /* tmavá ocelová — pozadí hero */
+  --gl-ocel-2: #2e3d4f;      /* světlejší ocelová */
+  --gl-lamela: #9fb0c0;      /* hliníková šedomodrá */
+  --gl-slunce: #f5b32b;      /* sluneční žluť — akcent */
+  --gl-den: #f7f8fa;         /* denní světlo — pozadí sekcí */
+  --gl-inkoust: #16202b;     /* text */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--gl-inkoust);
+  background: var(--gl-den);
+  -webkit-font-smoothing: antialiased;
+}
+
+.gl a:focus-visible,
+.gl button:focus-visible {
+  outline: 3px solid var(--gl-slunce);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =================== HERO =================== */
+
+.gl-hero {
+  background: linear-gradient(175deg, var(--gl-ocel) 0%, var(--gl-ocel-2) 100%);
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+/* jemný lamelový rastr přes celé hero */
+.gl-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 44px,
+    rgba(159, 176, 192, 0.07) 44px,
+    rgba(159, 176, 192, 0.07) 46px
+  );
+  pointer-events: none;
+}
+
+.gl-hero-inner {
+  position: relative;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3.5rem;
+}
+
+.gl-wordmark {
+  margin: 0 0 3rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: #fff;
+}
+
+.gl-wordmark-thin {
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--gl-lamela);
+  text-transform: lowercase;
+  margin-left: 0.35em;
+}
+
+/* --- SIGNATURE: titulek jako tři lamely žaluzie --- */
+
+.gl-hero-title {
+  margin: 0 0 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: clamp(2rem, 8.5vw, 5.25rem);
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  perspective: 900px;
+}
+
+.gl-slat {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.12em 0.35em;
+  background: linear-gradient(
+    to bottom,
+    #ffffff 0%,
+    #dfe7ee 45%,
+    var(--gl-lamela) 100%
+  );
+  color: var(--gl-ocel);
+  border-radius: 0.12em;
+  box-shadow: 0 0.35em 0.9em rgba(0, 0, 0, 0.35);
+  transform-origin: center top;
+  animation: gl-naklopeni 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.18s);
+}
+
+/* prostřední lamela zůstane lehce naklopená — dávkuje světlo */
+.gl-slat-tilt {
+  background: linear-gradient(to bottom, var(--gl-slunce) 0%, #d9971a 100%);
+  color: var(--gl-ocel);
+  transform: rotateX(14deg);
+  animation-name: gl-naklopeni-tilt;
+}
+
+@keyframes gl-naklopeni {
+  from {
+    transform: rotateX(78deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes gl-naklopeni-tilt {
+  from {
+    transform: rotateX(85deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateX(14deg);
+    opacity: 1;
+  }
+}
+
+/* dekorativní stažené lamely pod titulkem */
+.gl-hero-lamely {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 22rem;
+  margin: 0 0 2rem;
+}
+
+.gl-hero-lamely span {
+  height: 7px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(159, 176, 192, 0.25));
+}
+
+.gl-hero-lamely span:nth-child(2) {
+  width: 88%;
+}
+.gl-hero-lamely span:nth-child(3) {
+  width: 72%;
+  background: linear-gradient(to bottom, var(--gl-slunce), #c78e17);
+}
+.gl-hero-lamely span:nth-child(4) {
+  width: 55%;
+}
+.gl-hero-lamely span:nth-child(5) {
+  width: 34%;
+}
+
+.gl-hero-sub {
+  margin: 0 0 2rem;
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: #d8e0e8;
+  max-width: 34rem;
+}
+
+.gl-hero-sub strong {
+  color: var(--gl-slunce);
+}
+
+.gl-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.gl-btn {
+  display: inline-block;
+  padding: 0.9rem 1.6rem;
+  background: var(--gl-slunce);
+  color: var(--gl-ocel);
+  font-weight: 800;
+  font-size: 1.05rem;
+  text-decoration: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(245, 179, 43, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gl-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(245, 179, 43, 0.45);
+}
+
+.gl-btn-ghost {
+  background: transparent;
+  color: #fff;
+  border: 2px solid var(--gl-lamela);
+  box-shadow: none;
+}
+
+.gl-btn-ghost:hover {
+  border-color: #fff;
+  box-shadow: none;
+}
+
+.gl-hero-note {
+  margin: 1.25rem 0 0;
+  font-size: 0.95rem;
+  color: var(--gl-lamela);
+}
+
+/* =================== SLUŽBY =================== */
+
+.gl-sluzby {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+}
+
+.gl-section-head {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.gl-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #a9821f;
+}
+
+.gl-section-head h2 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  line-height: 1.15;
+  font-weight: 900;
+  color: var(--gl-inkoust);
+}
+
+.gl-section-lead {
+  margin: 0;
+  color: #4a5763;
+  font-size: 1.08rem;
+}
+
+.gl-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 600px) {
+  .gl-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 960px) {
+  .gl-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.gl-card {
+  background: #fff;
+  border-radius: 6px;
+  padding: 1.5rem 1.35rem 1.35rem;
+  box-shadow: 0 2px 10px rgba(31, 42, 55, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gl-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(31, 42, 55, 0.14);
+}
+
+/* každá karta má nahoře svou „lamelu“ */
+.gl-card-lamela {
+  height: 8px;
+  width: 3.5rem;
+  border-radius: 2px;
+  margin-bottom: 1.1rem;
+  background: linear-gradient(to bottom, var(--gl-lamela), #7d8fa0);
+}
+
+.gl-card:nth-child(2) .gl-card-lamela,
+.gl-card:nth-child(4) .gl-card-lamela {
+  background: linear-gradient(to bottom, var(--gl-slunce), #d9971a);
+}
+
+.gl-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.gl-card p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #4a5763;
+}
+
+.gl-card-detail {
+  margin-top: 0.9rem !important;
+  font-size: 0.82rem !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a97a4 !important;
+}
+
+/* =================== DŮVĚRA =================== */
+
+.gl-duvera {
+  background: var(--gl-ocel);
+  color: #e6ecf1;
+}
+
+.gl-duvera-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+}
+
+.gl-section-head-light h2 {
+  color: #fff;
+}
+
+.gl-kroky {
+  list-style: none;
+  margin: 0 0 3rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 720px) {
+  .gl-kroky {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.gl-krok {
+  border-top: 3px solid var(--gl-slunce);
+  padding-top: 1.1rem;
+}
+
+.gl-krok-cislo {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--gl-slunce);
+  letter-spacing: 0.15em;
+}
+
+.gl-krok h3 {
+  margin: 0.35rem 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.gl-krok p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #b9c5d0;
+}
+
+.gl-reference {
+  margin: 0 0 3rem;
+  padding: 1.75rem 1.5rem;
+  background: var(--gl-ocel-2);
+  border-left: 6px solid var(--gl-slunce);
+  border-radius: 4px;
+  max-width: 44rem;
+}
+
+.gl-reference blockquote {
+  margin: 0 0 0.75rem;
+  font-size: 1.12rem;
+  line-height: 1.6;
+  color: #f0f4f8;
+  font-style: italic;
+}
+
+.gl-reference figcaption {
+  font-size: 0.95rem;
+  color: var(--gl-lamela);
+  font-weight: 700;
+}
+
+.gl-fakta {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 720px) {
+  .gl-fakta {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.gl-fakta li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--gl-lamela);
+}
+
+.gl-fakta strong {
+  color: #fff;
+  font-size: 1.02rem;
+}
+
+.gl-fakta span {
+  font-size: 0.92rem;
+  color: #b9c5d0;
+}
+
+/* =================== REDUKOVANÝ POHYB =================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .gl-slat,
+  .gl-slat-tilt {
+    animation: none;
+    opacity: 1;
+  }
+
+  .gl-slat-tilt {
+    transform: rotateX(0deg);
+  }
+
+  .gl-btn,
+  .gl-card {
+    transition: none;
+  }
+}
