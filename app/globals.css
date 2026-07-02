@@ -1,0 +1,471 @@
+/* =====================================================
+   DECADENTI s.r.o. — výroba reklam, Hradec Králové
+   Koncept: řezací plotr & signmaking. Barvy = žlutá
+   výstražná fólie na asfaltově tmavém podkladu, řezané
+   linky nože jako signature prvek.
+   ===================================================== */
+
+:root {
+  --dc-ink: #16181d;        /* asfalt / podkladová deska */
+  --dc-ink-2: #22252d;      /* karta na tmavé */
+  --dc-foil: #ffcc1e;       /* žlutá řezaná fólie */
+  --dc-foil-deep: #e0a800;  /* stín fólie */
+  --dc-paper: #f7f6f2;      /* bílý podklad tisku */
+  --dc-steel: #8b909c;      /* ocel nože / popisky */
+  --dc-cut: #ff4d2e;        /* linka řezu (akcent, šetřit) */
+
+  --dc-font-display: "Arial Black", "Archivo Black", Impact, "Segoe UI", sans-serif;
+  --dc-font-body: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --dc-font-mono: "Consolas", "SFMono-Regular", "Roboto Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--dc-font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--dc-ink);
+  background: var(--dc-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.dc a:focus-visible,
+.dc button:focus-visible {
+  outline: 3px solid var(--dc-cut);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.dc-hero {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(255, 204, 30, 0) 55%, rgba(255, 204, 30, 0.06) 100%),
+    var(--dc-ink);
+  color: var(--dc-paper);
+  overflow: hidden;
+  padding: 0 clamp(1.25rem, 5vw, 4rem) clamp(6rem, 12vw, 9rem);
+}
+
+/* jemná mřížka řezací podložky */
+.dc-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+}
+
+.dc-nav {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 0;
+}
+
+.dc-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--dc-paper);
+}
+
+.dc-logo__mark {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: var(--dc-foil);
+  color: var(--dc-ink);
+  font-family: var(--dc-font-display);
+  font-size: 1.25rem;
+  /* useknutý roh = řez nožem */
+  clip-path: polygon(0 0, 100% 0, 100% 68%, 68% 100%, 0 100%);
+}
+
+.dc-logo__word {
+  font-family: var(--dc-font-display);
+  letter-spacing: 0.22em;
+  font-size: 0.95rem;
+}
+
+.dc-nav__tel {
+  font-family: var(--dc-font-mono);
+  font-size: 0.95rem;
+  color: var(--dc-foil);
+  text-decoration: none;
+  border: 1px solid rgba(255, 204, 30, 0.45);
+  padding: 0.45rem 0.9rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dc-nav__tel:hover {
+  background: var(--dc-foil);
+  color: var(--dc-ink);
+}
+
+.dc-hero__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 62rem;
+  margin: 0 auto;
+  padding-top: clamp(2.5rem, 7vw, 5.5rem);
+}
+
+.dc-hero__eyebrow {
+  font-family: var(--dc-font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dc-steel);
+  margin: 0 0 1.2rem;
+}
+
+.dc-hero__title {
+  margin: 0;
+  font-family: var(--dc-font-display);
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.dc-hero__line {
+  display: block;
+}
+
+.dc-hero__line--2 {
+  color: var(--dc-foil);
+  /* text jako vyřezaná fólie – lehký posun stínu */
+  text-shadow: 4px 4px 0 rgba(224, 168, 0, 0.35);
+}
+
+.dc-hero__line--3 {
+  font-size: 0.52em;
+  letter-spacing: 0.02em;
+  color: var(--dc-steel);
+  margin-top: 0.35em;
+}
+
+.dc-hero__line--3 em {
+  font-style: normal;
+  color: var(--dc-paper);
+}
+
+.dc-hero__dot { color: var(--dc-cut); }
+
+.dc-hero__lead {
+  max-width: 34rem;
+  margin: 1.8rem 0 2.2rem;
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  color: #c9ccd4;
+}
+
+.dc-hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.dc-btn {
+  display: inline-block;
+  font-family: var(--dc-font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.95rem 1.6rem;
+  transition: transform 0.15s, background 0.2s, color 0.2s;
+}
+
+.dc-btn--solid {
+  background: var(--dc-foil);
+  color: var(--dc-ink);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+}
+
+.dc-btn--solid:hover { background: #ffd84d; transform: translateY(-2px); }
+
+.dc-btn--ghost {
+  color: var(--dc-paper);
+  border: 1px solid rgba(247, 246, 242, 0.4);
+}
+
+.dc-btn--ghost:hover { border-color: var(--dc-foil); color: var(--dc-foil); }
+
+/* --- signature: dráha řezacího nože --- */
+
+.dc-plotter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2.2rem;
+  width: 100%;
+  height: clamp(90px, 14vw, 160px);
+  z-index: 1;
+}
+
+.dc-plotter__cut {
+  fill: none;
+  stroke: var(--dc-cut);
+  stroke-width: 2.5;
+  stroke-dasharray: 2600;
+  stroke-dashoffset: 2600;
+  animation: dc-cut 2.4s cubic-bezier(0.6, 0, 0.3, 1) 0.4s forwards;
+}
+
+.dc-plotter__peel {
+  fill: none;
+  stroke: rgba(255, 204, 30, 0.35);
+  stroke-width: 1;
+  stroke-dasharray: 6 8;
+}
+
+@keyframes dc-cut {
+  to { stroke-dashoffset: 0; }
+}
+
+.dc-hero__ticks {
+  position: absolute;
+  left: clamp(1.25rem, 5vw, 4rem);
+  right: clamp(1.25rem, 5vw, 4rem);
+  bottom: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--dc-font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: rgba(139, 144, 156, 0.7);
+  border-top: 1px solid rgba(139, 144, 156, 0.3);
+  padding-top: 0.4rem;
+  z-index: 1;
+}
+
+/* načtení hera — postupné odhalení řádků */
+.dc-hero__eyebrow,
+.dc-hero__line,
+.dc-hero__lead,
+.dc-hero__cta {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: dc-rise 0.6s ease forwards;
+}
+
+.dc-hero__eyebrow { animation-delay: 0.05s; }
+.dc-hero__line--1 { animation-delay: 0.15s; }
+.dc-hero__line--2 { animation-delay: 0.3s; }
+.dc-hero__line--3 { animation-delay: 0.45s; }
+.dc-hero__lead    { animation-delay: 0.6s; }
+.dc-hero__cta     { animation-delay: 0.75s; }
+
+@keyframes dc-rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= SEKCE: SLUŽBY ================= */
+
+.dc-section {
+  padding: clamp(3.5rem, 8vw, 6.5rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.dc-section__head {
+  max-width: 62rem;
+  margin: 0 auto 2.5rem;
+}
+
+.dc-section__title {
+  font-family: var(--dc-font-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.7rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.6rem;
+}
+
+.dc-section__title--light { color: var(--dc-paper); }
+
+.dc-section__sub {
+  margin: 0;
+  max-width: 32rem;
+  color: #565b66;
+}
+
+.dc-services__grid {
+  max-width: 62rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1.2rem;
+}
+
+.dc-card {
+  background: #ffffff;
+  border: 1px solid #e4e2da;
+  border-top: 4px solid var(--dc-foil);
+  padding: 1.6rem 1.5rem 1.4rem;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dc-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(22, 24, 29, 0.1);
+}
+
+.dc-card__tag {
+  font-family: var(--dc-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dc-steel);
+  margin: 0 0 0.7rem;
+}
+
+.dc-card__title {
+  font-family: var(--dc-font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  margin: 0 0 0.6rem;
+}
+
+.dc-card__text {
+  margin: 0 0 1rem;
+  font-size: 0.97rem;
+  color: #3c414c;
+}
+
+.dc-card__note {
+  margin: 0;
+  font-family: var(--dc-font-mono);
+  font-size: 0.8rem;
+  color: var(--dc-foil-deep);
+  border-top: 1px dashed #e4e2da;
+  padding-top: 0.7rem;
+}
+
+/* ================= SEKCE: DŮVĚRA ================= */
+
+.dc-trust {
+  background: var(--dc-ink);
+  color: #c9ccd4;
+}
+
+.dc-trust__inner {
+  max-width: 62rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(2rem, 6vw, 4.5rem);
+  align-items: start;
+}
+
+.dc-trust__text {
+  margin: 1rem 0 1.8rem;
+  max-width: 30rem;
+}
+
+.dc-trust__contacts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.dc-trust__contacts li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  align-items: baseline;
+  border-left: 3px solid var(--dc-foil);
+  padding-left: 0.9rem;
+}
+
+.dc-trust__who {
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dc-steel);
+  min-width: 14rem;
+}
+
+.dc-trust__contacts a {
+  font-family: var(--dc-font-mono);
+  font-size: 1.05rem;
+  color: var(--dc-foil);
+  text-decoration: none;
+}
+
+.dc-trust__contacts a:hover { text-decoration: underline; }
+
+.dc-trust__facts {
+  display: grid;
+  gap: 1rem;
+}
+
+.dc-fact {
+  background: var(--dc-ink-2);
+  border: 1px solid rgba(139, 144, 156, 0.2);
+  padding: 1.4rem 1.4rem 1.2rem;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+}
+
+.dc-fact__big {
+  font-family: var(--dc-font-display);
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  color: var(--dc-paper);
+  margin: 0 0 0.4rem;
+}
+
+.dc-fact__small {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--dc-steel);
+}
+
+/* ================= RESPONSIVITA ================= */
+
+@media (max-width: 860px) {
+  .dc-trust__inner { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 540px) {
+  .dc-hero__cta .dc-btn {
+    width: 100%;
+    text-align: center;
+  }
+  .dc-hero__ticks span:nth-child(even) { display: none; }
+  .dc-trust__who { min-width: 100%; }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .dc-hero__eyebrow,
+  .dc-hero__line,
+  .dc-hero__lead,
+  .dc-hero__cta {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .dc-plotter__cut {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .dc-card, .dc-btn { transition: none; }
+  .dc-card:hover, .dc-btn--solid:hover { transform: none; }
+}
