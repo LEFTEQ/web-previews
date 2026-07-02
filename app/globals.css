@@ -1,0 +1,504 @@
+/* =============================================================
+   BŘEVNOVSKÁ LÉKÁRNA — návrh webu
+   Paleta vychází z lékárenského světa: lahvové sklo starých
+   stojatek (tmavá lahvová zeleň), papír receptů (teplá bílá),
+   měď laboratorních vah a razítkově červený lékárenský kříž.
+   Signature prvek: služby jako "receptové karty" s Rx zkratkami
+   a signaturou (D.S.) — vizuální jazyk, kterému lékárna rozumí.
+   ============================================================= */
+
+:root {
+  --lahvova: #1e4238;      /* tmavá lahvová zeleň — sklo stojatek */
+  --lahvova-svetla: #2c5c4d;
+  --recept: #fbf9f3;       /* papír receptu */
+  --recept-linka: #e3ddcd; /* linky na receptu */
+  --med: #b4753a;          /* mosaz/měď lékárenských vah */
+  --kriz: #c8402f;         /* razítkově červený kříž */
+  --inkoust: #22302b;      /* text — zelenočerný inkoust */
+
+  --pismo-display: "Bree Serif", "Rockwell", "Roboto Slab", "Courier New", serif;
+  --pismo-telo: "Karla", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--recept);
+  color: var(--inkoust);
+  font-family: var(--pismo-telo);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Focus stavy */
+.bl a:focus-visible,
+.bl button:focus-visible {
+  outline: 3px solid var(--med);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ================= HERO ================= */
+
+.bl-hero {
+  background:
+    linear-gradient(175deg, var(--lahvova) 0%, #16332b 100%);
+  color: var(--recept);
+  overflow: hidden;
+}
+
+.bl-hero-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+  display: grid;
+  gap: 2.5rem;
+}
+
+/* Wordmark */
+.bl-wordmark {
+  font-family: var(--pismo-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+  margin: 0 0 2.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+}
+
+.bl-wordmark em {
+  font-style: normal;
+  color: var(--med);
+}
+
+.bl-wordmark-cross {
+  color: var(--kriz);
+  background: var(--recept);
+  border-radius: 6px;
+  width: 1.7rem;
+  height: 1.7rem;
+  display: inline-grid;
+  place-items: center;
+  font-size: 1.05rem;
+  align-self: center;
+  transform: rotate(0.001deg); /* crisp render */
+}
+
+.bl-h1 {
+  font-family: var(--pismo-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  line-height: 1.12;
+  margin: 0 0 1.1rem;
+  letter-spacing: -0.01em;
+  max-width: 15ch;
+}
+
+/* podtržení jako tah lihovým fixem na štítku stojatky */
+.bl-h1-mark {
+  position: relative;
+  white-space: nowrap;
+}
+
+.bl-h1-mark::after {
+  content: "";
+  position: absolute;
+  left: -0.1em;
+  right: -0.15em;
+  bottom: 0.02em;
+  height: 0.32em;
+  background: var(--med);
+  opacity: 0.55;
+  border-radius: 0.2em 0.4em 0.15em 0.35em;
+  z-index: -1;
+}
+
+.bl-lead {
+  font-size: 1.1rem;
+  max-width: 44ch;
+  margin: 0 0 1.75rem;
+  color: #e8ecdf;
+}
+
+.bl-hero-akce {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.bl-btn {
+  display: inline-block;
+  background: var(--med);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.bl-btn:hover {
+  background: #c98849;
+  transform: translateY(-2px);
+}
+
+.bl-btn-ghost {
+  background: transparent;
+  border: 2px solid rgba(251, 249, 243, 0.45);
+  color: var(--recept);
+}
+
+.bl-btn-ghost:hover {
+  background: rgba(251, 249, 243, 0.1);
+}
+
+/* otevírací doba jako "signatura" */
+.bl-oteviraci {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  margin: 0;
+  border-top: 1px dashed rgba(251, 249, 243, 0.3);
+  padding-top: 1.25rem;
+}
+
+.bl-oteviraci dt {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--med);
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+}
+
+.bl-oteviraci dd {
+  margin: 0;
+  font-family: var(--pismo-display);
+  font-size: 1.05rem;
+}
+
+/* Hero obraz */
+.bl-hero-obraz {
+  position: relative;
+}
+
+.bl-hero-obraz img {
+  width: 100%;
+  border-radius: 18px;
+  border: 5px solid rgba(251, 249, 243, 0.12);
+}
+
+.bl-hero-stitek {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  margin: 0;
+  background: var(--recept);
+  color: var(--inkoust);
+  padding: 0.55rem 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.bl-hero-stitek strong {
+  color: var(--lahvova-svetla);
+}
+
+/* Page-load sekvence — jediný orchestrovaný moment */
+@keyframes bl-vzhuru {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bl-wordmark,
+.bl-h1,
+.bl-lead,
+.bl-hero-akce,
+.bl-oteviraci,
+.bl-hero-obraz {
+  animation: bl-vzhuru 600ms cubic-bezier(0.22, 0.8, 0.35, 1) both;
+}
+
+.bl-h1 { animation-delay: 90ms; }
+.bl-lead { animation-delay: 170ms; }
+.bl-hero-akce { animation-delay: 250ms; }
+.bl-oteviraci { animation-delay: 330ms; }
+.bl-hero-obraz { animation-delay: 200ms; }
+
+/* ================= SLUŽBY — receptové karty ================= */
+
+.bl-sluzby {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem 4.5rem;
+}
+
+.bl-sekce-hlava {
+  max-width: 620px;
+  margin-bottom: 2.5rem;
+}
+
+.bl-eyebrow {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  color: var(--kriz);
+  margin: 0 0 0.6rem;
+}
+
+.bl-eyebrow::before {
+  content: "✚ ";
+}
+
+.bl-h2 {
+  font-family: var(--pismo-display);
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Receptové karty — signature prvek */
+.bl-recepty {
+  list-style: none;
+  margin: 0 0 3rem;
+  padding: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.bl-recept {
+  background: #fff;
+  border: 1px solid var(--recept-linka);
+  border-radius: 14px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  position: relative;
+  /* linkovaný podklad jako receptový blanket */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 27px,
+    rgba(30, 66, 56, 0.05) 27px,
+    rgba(30, 66, 56, 0.05) 28px
+  );
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.bl-recept:hover {
+  transform: translateY(-4px) rotate(-0.4deg);
+  box-shadow: 0 14px 30px rgba(30, 66, 56, 0.14);
+}
+
+.bl-recept-rx {
+  font-family: var(--pismo-display);
+  font-size: 1.9rem;
+  color: var(--kriz);
+  margin: 0 0 0.4rem;
+  font-style: italic;
+  line-height: 1;
+}
+
+.bl-recept h3 {
+  font-family: var(--pismo-display);
+  font-size: 1.25rem;
+  margin: 0 0 0.6rem;
+  line-height: 1.25;
+}
+
+.bl-recept-text {
+  margin: 0 0 1rem;
+  font-size: 0.98rem;
+}
+
+/* signatura = D.S. řádek dole, jako pokyn na receptu */
+.bl-recept-sig {
+  margin: 0;
+  border-top: 1px dashed var(--recept-linka);
+  padding-top: 0.7rem;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--lahvova-svetla);
+  text-transform: uppercase;
+}
+
+.bl-sluzby-obraz {
+  margin: 0;
+}
+
+.bl-sluzby-obraz img {
+  width: 100%;
+  border-radius: 16px;
+}
+
+.bl-sluzby-obraz figcaption {
+  font-size: 0.9rem;
+  color: var(--lahvova-svetla);
+  padding-top: 0.7rem;
+  border-top: 1px dashed var(--recept-linka);
+  margin-top: 0.9rem;
+  max-width: 60ch;
+}
+
+/* ================= O NÁS / DŮVĚRA ================= */
+
+.bl-onas {
+  background: var(--lahvova);
+  color: var(--recept);
+}
+
+.bl-onas-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+  display: grid;
+  gap: 2.5rem;
+}
+
+.bl-onas-obraz img {
+  width: 100%;
+  border-radius: 16px;
+  border: 5px solid rgba(251, 249, 243, 0.12);
+}
+
+.bl-eyebrow-svetly {
+  color: var(--med);
+}
+
+.bl-onas-text > p {
+  max-width: 55ch;
+  color: #e8ecdf;
+}
+
+.bl-onas-text .bl-h2 {
+  color: var(--recept);
+  margin-bottom: 1rem;
+}
+
+.bl-duvody {
+  list-style: none;
+  margin: 2rem 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.bl-duvody li {
+  border-left: 3px solid var(--med);
+  padding-left: 1.1rem;
+}
+
+.bl-duvod-cislo {
+  font-family: var(--pismo-display);
+  font-size: 2.2rem;
+  line-height: 1;
+  margin: 0 0 0.3rem;
+  color: var(--recept);
+}
+
+.bl-duvod-cislo span {
+  font-size: 1rem;
+  color: var(--med);
+  letter-spacing: 0.05em;
+}
+
+.bl-duvod-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #d7dfd2;
+  max-width: 40ch;
+}
+
+.bl-citace {
+  margin: 2.25rem 0 0;
+  background: rgba(251, 249, 243, 0.06);
+  border: 1px dashed rgba(251, 249, 243, 0.25);
+  border-radius: 14px;
+  padding: 1.4rem 1.5rem;
+  max-width: 56ch;
+}
+
+.bl-citace p {
+  font-family: var(--pismo-display);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin: 0 0 0.75rem;
+}
+
+.bl-citace footer {
+  font-size: 0.88rem;
+  color: var(--med);
+  font-weight: 700;
+}
+
+/* ================= RESPONSIVITA ================= */
+
+@media (min-width: 720px) {
+  .bl-recepty {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .bl-duvody {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .bl-hero-inner {
+    grid-template-columns: 1.15fr 1fr;
+    align-items: center;
+    padding: 2.5rem 1.5rem 4.5rem;
+    gap: 3.5rem;
+  }
+
+  .bl-onas-inner {
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: center;
+    gap: 3.5rem;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .bl-wordmark,
+  .bl-h1,
+  .bl-lead,
+  .bl-hero-akce,
+  .bl-oteviraci,
+  .bl-hero-obraz {
+    animation: none;
+  }
+
+  .bl-recept:hover,
+  .bl-btn:hover {
+    transform: none;
+  }
+}
