@@ -1,0 +1,530 @@
+/* =====================================================
+   INTO CZ — bezpečnostní agentura Pardubice
+   Paleta: noční směna. Signature: strážní deník (log).
+   ===================================================== */
+
+:root {
+  --noc: #10141c;        /* noční obloha nad areálem */
+  --noc-2: #171d28;      /* panel */
+  --papir: #eef1f4;      /* denní papír protokolu */
+  --inkoust: #1c2430;    /* text na světlé */
+  --sedy: #8b95a5;       /* metadata, popisky */
+  --amber: #f5a623;      /* sodíková výbojka / maják hlídky */
+  --amber-tmavy: #b97407;
+  --linka: rgba(139, 149, 165, 0.25);
+
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Arial, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-mono: "Courier New", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--papir);
+  color: var(--inkoust);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.into a:focus-visible,
+.into button:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO — noční směna ============ */
+
+.hero {
+  position: relative;
+  background:
+    radial-gradient(ellipse 90% 60% at 75% -10%, rgba(245, 166, 35, 0.14), transparent 60%),
+    var(--noc);
+  color: var(--papir);
+  overflow: hidden;
+}
+
+/* jemná mřížka kontrolních bodů areálu */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--linka) 1px, transparent 1px),
+    linear-gradient(90deg, var(--linka) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: 0.16;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 20%, black, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 20%, black, transparent 75%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 28px 20px 64px;
+  display: grid;
+  gap: 40px;
+}
+
+.hero-brand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 16px;
+  animation: fadeDown 0.6s ease-out both;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: condensed;
+  font-size: 30px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.wordmark-cz {
+  color: var(--noc);
+  background: var(--amber);
+  padding: 1px 7px;
+  margin-left: 7px;
+  letter-spacing: 0.1em;
+}
+
+.brand-tag {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  color: var(--sedy);
+  text-transform: uppercase;
+}
+
+.hero-main {
+  max-width: 640px;
+  animation: fadeUp 0.7s ease-out 0.1s both;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--amber);
+  border: 1px solid rgba(245, 166, 35, 0.35);
+  padding: 7px 14px;
+  margin: 0 0 26px;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.6);
+  animation: pulse 2.2s ease-out infinite;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(42px, 8.5vw, 88px);
+  line-height: 0.98;
+  letter-spacing: 0.015em;
+  margin: 0 0 24px;
+}
+
+.hero-title-strong {
+  color: var(--amber);
+}
+
+.hero-lead {
+  font-size: clamp(17px, 2.2vw, 20px);
+  line-height: 1.65;
+  color: #c6cdd8;
+  margin: 0 0 32px;
+  max-width: 54ch;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.btn {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 15px 28px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--amber);
+  color: var(--noc);
+}
+
+.btn-solid:hover {
+  background: #ffc04d;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--papir);
+  border: 1px solid rgba(238, 241, 244, 0.4);
+}
+
+.btn-ghost:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
+/* --- signature: strážní deník --- */
+
+.hero-log {
+  background: var(--noc-2);
+  border: 1px solid var(--linka);
+  border-left: 4px solid var(--amber);
+  padding: 20px 22px 14px;
+  max-width: 620px;
+  animation: fadeUp 0.7s ease-out 0.3s both;
+}
+
+.log-head {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--sedy);
+  margin: 0 0 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--linka);
+}
+
+.log-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+}
+
+.log-row {
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  gap: 12px;
+  align-items: baseline;
+  padding: 9px 0;
+  border-bottom: 1px dashed var(--linka);
+  color: #b9c2cf;
+}
+
+.log-row:last-child {
+  border-bottom: none;
+}
+
+.log-time {
+  color: var(--sedy);
+}
+
+.log-ok {
+  color: #7dd08c;
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+}
+
+.log-row-alert .log-ok {
+  color: var(--amber);
+}
+
+.log-row-live {
+  color: var(--papir);
+}
+
+.log-row-live .log-time,
+.log-row-live .log-ok {
+  color: var(--amber);
+  font-weight: 700;
+}
+
+/* ============ SEKCE: SLUŽBY (denní protokol) ============ */
+
+.sluzby {
+  background: var(--papir);
+  padding: 72px 0 80px;
+}
+
+.section-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: 44px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(30px, 5vw, 46px);
+  line-height: 1.05;
+  margin: 0 0 16px;
+  color: var(--inkoust);
+}
+
+.section-sub {
+  color: #4b5563;
+  margin: 0;
+  font-size: 17.5px;
+}
+
+.sluzby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.sluzba {
+  background: #ffffff;
+  border: 1px solid #d7dce3;
+  border-top: 4px solid var(--noc);
+  padding: 26px 24px 22px;
+  position: relative;
+  transition: border-top-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sluzba:hover {
+  border-top-color: var(--amber);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(16, 20, 28, 0.1);
+}
+
+.sluzba-kod {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  color: var(--amber-tmavy);
+  border: 1px solid currentColor;
+  padding: 3px 8px;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.sluzba-nazev {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 22px;
+  letter-spacing: 0.02em;
+  margin: 0 0 12px;
+}
+
+.sluzba-popis {
+  margin: 0 0 14px;
+  color: #3a4453;
+  font-size: 16px;
+}
+
+.sluzba-detail {
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px dashed #cfd5dd;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #6b7686;
+}
+
+/* ============ SEKCE: DŮVĚRA (zpět do noci) ============ */
+
+.duvera {
+  background: var(--noc);
+  color: var(--papir);
+  padding: 72px 0 88px;
+}
+
+.section-title-light {
+  color: var(--papir);
+}
+
+.section-sub-light {
+  color: #aab3c0;
+}
+
+.zasady-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  margin-bottom: 56px;
+}
+
+.zasada {
+  border-top: 1px solid var(--linka);
+  padding-top: 20px;
+}
+
+.zasada-cislo {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: clamp(40px, 6vw, 58px);
+  line-height: 1;
+  color: var(--amber);
+  margin: 0 0 6px;
+}
+
+.zasada-label {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sedy);
+  margin: 0 0 14px;
+}
+
+.zasada-text {
+  margin: 0;
+  color: #c6cdd8;
+  font-size: 16px;
+  max-width: 46ch;
+}
+
+.reference {
+  margin: 0;
+  border-left: 4px solid var(--amber);
+  background: var(--noc-2);
+  padding: 28px 28px 24px;
+  max-width: 760px;
+}
+
+.reference-text {
+  margin: 0 0 16px;
+  font-size: clamp(17px, 2.4vw, 20px);
+  line-height: 1.65;
+  font-style: italic;
+  color: #e3e8ee;
+}
+
+.reference-autor {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--sedy);
+}
+
+/* ============ Animace ============ */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(245, 166, 35, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 166, 35, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-brand,
+  .hero-main,
+  .hero-log {
+    animation: none;
+  }
+  .status-dot {
+    animation: none;
+  }
+  .sluzba,
+  .btn {
+    transition: none;
+  }
+  .sluzba:hover,
+  .btn-solid:hover {
+    transform: none;
+  }
+}
+
+/* ============ Responzivita ============ */
+
+@media (min-width: 680px) {
+  .sluzby-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .zasady-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .hero-inner {
+    padding: 36px 24px 84px;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+    grid-template-areas:
+      "brand brand"
+      "main log";
+    align-items: end;
+    gap: 48px 56px;
+  }
+  .hero-brand {
+    grid-area: brand;
+    margin-bottom: 24px;
+  }
+  .hero-main {
+    grid-area: main;
+  }
+  .hero-log {
+    grid-area: log;
+    justify-self: end;
+    width: 100%;
+  }
+}
