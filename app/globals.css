@@ -1,0 +1,521 @@
+:root {
+  /* Paleta: noční jízda po D8 — hluboká navy z původního webu, povýšená;
+     reflexní žluť dopravního značení jako akcent; beton a mlha pro světlé plochy. */
+  --ct-navy: #0d1b3d;        /* noční asfaltová modř */
+  --ct-navy-deep: #081026;   /* stín pod mostem */
+  --ct-signal: #ffc400;      /* reflexní žluť značení */
+  --ct-concrete: #eef0f4;    /* betonová svodidla / světlé pozadí */
+  --ct-fog: #aab4cc;         /* mlha nad Labem — tlumený text na tmavé */
+  --ct-ink: #16213e;         /* text na světlé */
+
+  --ct-font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Impact, sans-serif;
+  --ct-font-body: Georgia, "Times New Roman", serif;
+  --ct-font-utility: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ct-concrete);
+  color: var(--ct-ink);
+  font-family: var(--ct-font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus stavy — reflexní žluť, viditelná na obou pozadích */
+.ct a:focus-visible,
+.ct button:focus-visible {
+  outline: 3px solid var(--ct-signal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+.ct-hero {
+  background: linear-gradient(168deg, var(--ct-navy) 0%, var(--ct-navy-deep) 100%);
+  color: #fff;
+  padding: 1.5rem 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 92vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.ct-hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(170, 180, 204, 0.25);
+}
+
+/* Wordmark: CARGO úzké a stlačené jako bok návěsu, TOMA v reflexní žluti */
+.ct-wordmark {
+  font-family: var(--ct-font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.ct-wordmark-cargo {
+  color: #fff;
+}
+
+.ct-wordmark-toma {
+  color: var(--ct-signal);
+}
+
+.ct-hero-locality {
+  font-family: var(--ct-font-utility);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ct-fog);
+}
+
+.ct-hero-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 0 2.5rem;
+  max-width: 62rem;
+}
+
+/* Titulek: tři řádky jako tři fáze zakázky — kondenzované verzálky,
+   stoupající odsazení evokuje rozjezd */
+.ct-hero-title {
+  font-family: var(--ct-font-display);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: clamp(2.9rem, 11vw, 7.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+}
+
+.ct-hero-line {
+  display: block;
+  opacity: 0;
+  transform: translateX(-2.5rem);
+  animation: ct-drive-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.ct-hero-line-1 { animation-delay: 0.1s; color: var(--ct-fog); }
+.ct-hero-line-2 { animation-delay: 0.32s; color: #fff; padding-left: 0.6em; }
+.ct-hero-line-3 { animation-delay: 0.54s; color: #fff; padding-left: 1.2em; }
+
+.ct-dot {
+  color: var(--ct-signal);
+}
+
+@keyframes ct-drive-in {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.ct-hero-sub {
+  margin-top: 1.75rem;
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: var(--ct-fog);
+  opacity: 0;
+  animation: ct-fade 0.8s ease 0.85s forwards;
+}
+
+@keyframes ct-fade {
+  to { opacity: 1; }
+}
+
+.ct-hero-actions {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  opacity: 0;
+  animation: ct-fade 0.8s ease 1s forwards;
+}
+
+.ct-btn {
+  font-family: var(--ct-font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  padding: 1rem 1.75rem;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.ct-btn-primary {
+  background: var(--ct-signal);
+  color: var(--ct-navy-deep);
+}
+
+.ct-btn-primary:hover {
+  transform: translateY(-2px);
+  background: #ffd23d;
+}
+
+.ct-btn-ghost {
+  border: 2px solid rgba(170, 180, 204, 0.5);
+  color: #fff;
+}
+
+.ct-btn-ghost:hover {
+  border-color: var(--ct-signal);
+  color: var(--ct-signal);
+}
+
+/* ============ SIGNATURE: dálniční pruh ============ */
+.ct-road {
+  position: relative;
+  padding: 1.5rem 0 2rem;
+}
+
+.ct-road-line {
+  height: 4px;
+  background: var(--ct-signal);
+  border-radius: 2px;
+}
+
+.ct-road-dashes {
+  display: flex;
+  gap: 2.5rem;
+  padding: 1.1rem 0;
+  overflow: hidden;
+}
+
+.ct-road-dashes span {
+  flex: none;
+  width: 4.5rem;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 3px;
+  animation: ct-road-move 1.6s linear infinite;
+}
+
+@keyframes ct-road-move {
+  from { transform: translateX(0); }
+  to { transform: translateX(-7rem); }
+}
+
+.ct-road-sign {
+  position: absolute;
+  right: 1rem;
+  top: -2.2rem;
+  background: var(--ct-navy-deep);
+  border: 2px solid #fff;
+  border-radius: 6px;
+  padding: 0.4rem 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--ct-font-display);
+  text-transform: uppercase;
+}
+
+.ct-road-sign-num {
+  background: #c8102e;
+  color: #fff;
+  font-weight: 700;
+  padding: 0.1rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.95rem;
+}
+
+.ct-road-sign-dir {
+  color: #fff;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+/* ============ SEKCE OBECNĚ ============ */
+.ct-section {
+  padding: 4.5rem 1.25rem;
+}
+
+.ct-section-head {
+  max-width: 68rem;
+  margin: 0 auto 2.75rem;
+}
+
+.ct-eyebrow {
+  font-family: var(--ct-font-utility);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ct-navy);
+  margin-bottom: 0.6rem;
+}
+
+.ct-eyebrow::before {
+  content: "— ";
+  color: var(--ct-signal);
+}
+
+.ct-eyebrow-light {
+  color: var(--ct-fog);
+}
+
+.ct-section-title {
+  font-family: var(--ct-font-display);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+  line-height: 1.1;
+  color: var(--ct-ink);
+  max-width: 30ch;
+}
+
+.ct-section-title-light {
+  color: #fff;
+}
+
+/* ============ SLUŽBY ============ */
+.ct-sluzby {
+  background: var(--ct-concrete);
+}
+
+.ct-sluzby-grid {
+  list-style: none;
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.ct-card {
+  background: #fff;
+  border-radius: 6px;
+  padding: 1.75rem 1.5rem;
+  border-top: 4px solid var(--ct-navy);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ct-card:hover {
+  transform: translateY(-4px);
+  border-top-color: var(--ct-signal);
+  box-shadow: 0 14px 30px rgba(13, 27, 61, 0.12);
+}
+
+.ct-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+}
+
+.ct-card-kod {
+  font-family: var(--ct-font-utility);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: var(--ct-navy);
+  background: var(--ct-concrete);
+  padding: 0.2rem 0.55rem;
+  border-radius: 3px;
+}
+
+.ct-card-parametr {
+  font-family: var(--ct-font-utility);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: #5a6residue;
+  color: #5a6580;
+  text-transform: uppercase;
+}
+
+.ct-card-title {
+  font-family: var(--ct-font-display);
+  text-transform: uppercase;
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+  color: var(--ct-ink);
+  margin-bottom: 0.6rem;
+}
+
+.ct-card-text {
+  font-size: 1rem;
+  color: #3c4560;
+}
+
+.ct-sluzby-note {
+  max-width: 68rem;
+  margin: 2.25rem auto 0;
+  font-style: italic;
+  color: #5a6580;
+}
+
+/* ============ DŮVĚRA ============ */
+.ct-duvera {
+  background: linear-gradient(180deg, var(--ct-navy) 0%, var(--ct-navy-deep) 100%);
+  color: #fff;
+}
+
+.ct-duvody {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.ct-duvod {
+  border-left: 4px solid var(--ct-signal);
+  padding-left: 1.25rem;
+}
+
+.ct-duvod-cislo {
+  font-family: var(--ct-font-display);
+  font-weight: 700;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--ct-signal);
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.ct-duvod-jednotka {
+  font-family: var(--ct-font-utility);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ct-fog);
+}
+
+.ct-duvod-text {
+  margin-top: 0.7rem;
+  color: var(--ct-fog);
+  font-size: 1rem;
+  max-width: 38ch;
+}
+
+.ct-reference {
+  max-width: 68rem;
+  margin: 3.5rem auto 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.ct-ref {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(170, 180, 204, 0.2);
+  border-radius: 6px;
+  padding: 1.75rem 1.5rem;
+}
+
+.ct-ref-citat {
+  font-size: 1.08rem;
+  font-style: italic;
+  color: #e6e9f2;
+  line-height: 1.7;
+}
+
+.ct-ref-kdo {
+  margin-top: 1rem;
+  font-family: var(--ct-font-utility);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ct-fog);
+}
+
+/* ============ RESPONZIVITA ============ */
+@media (min-width: 640px) {
+  .ct-hero {
+    padding: 2rem 3rem 0;
+  }
+
+  .ct-section {
+    padding: 5.5rem 3rem;
+  }
+
+  .ct-sluzby-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .ct-reference {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 960px) {
+  .ct-wordmark {
+    font-size: 1.8rem;
+  }
+
+  .ct-duvody {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .ct-hero-line-2 { padding-left: 0.35em; }
+  .ct-hero-line-3 { padding-left: 0.7em; }
+
+  .ct-road-sign {
+    position: static;
+    margin-bottom: 1rem;
+    width: fit-content;
+  }
+
+  .ct-btn {
+    width: 100%;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ct-hero-line,
+  .ct-hero-sub,
+  .ct-hero-actions {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .ct-road-dashes span {
+    animation: none;
+  }
+
+  .ct-card,
+  .ct-btn {
+    transition: none;
+  }
+
+  .ct-card:hover,
+  .ct-btn-primary:hover {
+    transform: none;
+  }
+}
