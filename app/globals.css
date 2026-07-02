@@ -1,0 +1,574 @@
+:root {
+  --grass: #1e5f3a;
+  --grass-deep: #123f26;
+  --grass-stripe: #24704546;
+  --chalk: #f7f6f1;
+  --night: #14211a;
+  --gold: #e8b93c;
+  --ink: #1c2620;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--chalk);
+  color: var(--ink);
+  font-family: "Gill Sans", "Gill Sans MT", "Trebuchet MS", "Segoe UI",
+    sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(168deg, var(--grass-deep) 0%, var(--grass) 68%, #2a7a4c 100%);
+  color: var(--chalk);
+  padding: 1.5rem 1.25rem 3rem;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* sekané pruhy trávníku */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 11vw,
+    var(--grass-stripe) 11vw,
+    var(--grass-stripe) 22vw
+  );
+  pointer-events: none;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.wordmark {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.32em;
+  font-weight: 400;
+}
+
+.wordmark em {
+  font-style: normal;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.hero-loc {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+/* --- lajnování hřiště (signature) --- */
+.hero-pitch {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.pitch-half {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 26%;
+  width: 3px;
+  background: rgba(247, 246, 241, 0.35);
+}
+
+.pitch-circle {
+  position: absolute;
+  top: 50%;
+  right: 26%;
+  width: clamp(220px, 34vw, 520px);
+  height: clamp(220px, 34vw, 520px);
+  border: 3px solid rgba(247, 246, 241, 0.35);
+  border-radius: 50%;
+  transform: translate(50%, -50%);
+}
+
+.pitch-spot {
+  position: absolute;
+  top: 50%;
+  right: 26%;
+  width: 12px;
+  height: 12px;
+  background: var(--gold);
+  border-radius: 50%;
+  transform: translate(50%, -50%);
+}
+
+.pitch-box {
+  position: absolute;
+  top: 18%;
+  bottom: 18%;
+  right: -3px;
+  width: 14%;
+  border: 3px solid rgba(247, 246, 241, 0.22);
+  border-right: none;
+}
+
+/* --- titulek --- */
+.hero-title {
+  margin: auto 0 1.25rem;
+  padding-top: 3rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: clamp(3rem, 11vw, 8.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.ht-row {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.5em);
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.ht-1 { animation-delay: 0.05s; }
+.ht-2 { animation-delay: 0.2s; padding-left: 0.6em; }
+.ht-3 { animation-delay: 0.35s; color: var(--gold); }
+
+.ht-dot {
+  color: var(--chalk);
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-sub {
+  max-width: 34rem;
+  font-size: clamp(1rem, 2.4vw, 1.2rem);
+  margin: 0 0 2rem;
+  opacity: 0;
+  animation: rise 0.7s 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+/* --- "výsledková tabule" --- */
+.hero-score {
+  display: grid;
+  grid-template-columns: repeat(3, auto) 1fr;
+  gap: 0;
+  border-top: 1px solid rgba(247, 246, 241, 0.3);
+  padding-top: 1.25rem;
+  align-items: center;
+  opacity: 0;
+  animation: rise 0.7s 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.score-cell {
+  padding-right: 2rem;
+}
+
+.score-cell strong {
+  display: block;
+  font-family: Georgia, serif;
+  font-size: clamp(1.4rem, 3.5vw, 2.1rem);
+  color: var(--gold);
+  line-height: 1.1;
+}
+
+.score-cell span {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  opacity: 0.75;
+}
+
+.score-cta {
+  justify-self: end;
+  padding-right: 0;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--night);
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  letter-spacing: 0.03em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* ================= SPOLEČNÉ ================= */
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--grass);
+  border-left: 4px solid var(--gold);
+  padding-left: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow-light {
+  color: var(--gold);
+}
+
+h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  line-height: 1.12;
+  margin: 0 0 1rem;
+  letter-spacing: -0.01em;
+}
+
+/* ================= POKOJE ================= */
+
+.rooms {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.section-head {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.section-head p {
+  margin: 0;
+  color: #47554d;
+}
+
+.rooms-photo {
+  margin: 0 0 2.5rem;
+}
+
+.rooms-photo img,
+.place-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+}
+
+.rooms-photo figcaption,
+.place-photo figcaption {
+  font-size: 0.85rem;
+  color: #5c6b62;
+  margin-top: 0.6rem;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--gold);
+}
+
+.rooms-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.room {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid #e2e5df;
+  border-radius: 12px;
+  padding: 1.25rem 1.4rem;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.room:hover {
+  border-color: var(--grass);
+  transform: translateX(4px);
+}
+
+.room-highlight {
+  background: var(--grass);
+  color: var(--chalk);
+  border-color: var(--grass);
+}
+
+.room-highlight p {
+  color: rgba(247, 246, 241, 0.8);
+}
+
+.room-highlight .room-meta dd {
+  color: var(--gold);
+}
+
+.room-main h3 {
+  margin: 0 0 0.25rem;
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+}
+
+.room-main p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #5c6b62;
+}
+
+.room-meta {
+  margin: 0;
+  display: flex;
+  gap: 1.75rem;
+  flex-shrink: 0;
+}
+
+.room-meta dt {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  opacity: 0.65;
+}
+
+.room-meta dd {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.room-price dd {
+  color: var(--grass);
+  white-space: nowrap;
+}
+
+.rooms-note {
+  margin: 2rem 0 0;
+  max-width: 40rem;
+  color: #47554d;
+}
+
+/* ================= POLOHA ================= */
+
+.place {
+  background: var(--night);
+  color: var(--chalk);
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.place-grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+}
+
+.place-text p {
+  color: rgba(247, 246, 241, 0.82);
+}
+
+.place-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0 2rem;
+}
+
+.place-table th,
+.place-table td {
+  text-align: left;
+  padding: 0.65rem 0;
+  border-bottom: 1px dashed rgba(247, 246, 241, 0.25);
+  font-weight: 400;
+}
+
+.place-table td {
+  text-align: right;
+  color: var(--gold);
+  font-family: Georgia, serif;
+  white-space: nowrap;
+}
+
+.place-contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.btn-outline {
+  display: inline-block;
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 0.8rem 1.5rem;
+  border-radius: 999px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.btn-outline:hover {
+  background: var(--gold);
+  color: var(--night);
+}
+
+.place-mail {
+  color: var(--chalk);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.place-photo {
+  margin: 0;
+  align-self: center;
+}
+
+.place-photo figcaption {
+  color: rgba(247, 246, 241, 0.65);
+}
+
+.place-quote {
+  max-width: 72rem;
+  margin: 3.5rem auto 0;
+  border-top: 1px solid rgba(247, 246, 241, 0.2);
+  padding-top: 2rem;
+}
+
+.place-quote p {
+  font-family: Georgia, serif;
+  font-size: clamp(1.15rem, 2.8vw, 1.5rem);
+  line-height: 1.45;
+  margin: 0 0 0.75rem;
+  max-width: 44rem;
+}
+
+.place-quote cite {
+  font-style: normal;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+}
+
+/* ================= RESPONSIVITA ================= */
+
+@media (min-width: 720px) {
+  .hero {
+    padding: 2rem 4vw 3.5rem;
+  }
+
+  .room {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .place-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+  }
+}
+
+@media (max-width: 719px) {
+  .hero-score {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .score-cell {
+    padding-right: 0.5rem;
+  }
+
+  .score-cta {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    margin-top: 1.25rem;
+  }
+
+  .score-cta .btn-primary {
+    display: block;
+    text-align: center;
+  }
+
+  .pitch-circle,
+  .pitch-half,
+  .pitch-spot {
+    right: 14%;
+  }
+
+  .pitch-box {
+    display: none;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ht-row,
+  .hero-sub,
+  .hero-score {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .room,
+  .btn-primary,
+  .btn-outline {
+    transition: none;
+  }
+
+  .room:hover,
+  .btn-primary:hover {
+    transform: none;
+  }
+}
