@@ -1,0 +1,574 @@
+/* ============================================================
+   Centrum Hastrmánci — bazény a wellness, Brno
+   Paleta „hloubka bazénu":
+   --tun      #0B2E4F  hluboká voda (základ, ne černá)
+   --melcina  #10486E  mělčina / karty
+   --chlor    #35C4CF  chlorová tyrkys (akcent, hladina)
+   --pena     #EAF6F8  pěna / světlé pozadí sekcí
+   --pisek    #E8C98A  teplý písek u bazénu (druhý akcent)
+   --inkoust  #12303F  text na světlé
+   Typografie: display = ultra-tučný široký grotesk (systémový stack
+   laděný na váhu 900 + širší tracking-tight), tělo = humanistický sans.
+   Signature: typografická „hladina" v hero — nadpis půl nad / půl pod
+   vodou, spodní odraz se vlní.
+   ============================================================ */
+
+:root {
+  --tun: #0b2e4f;
+  --melcina: #10486e;
+  --chlor: #35c4cf;
+  --pena: #eaf6f8;
+  --pisek: #e8c98a;
+  --inkoust: #12303f;
+
+  --pismo-telo: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --pismo-display: "Arial Black", "Segoe UI", "Helvetica Neue", system-ui,
+    sans-serif;
+
+  --max-sirka: 72rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--pismo-telo);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--inkoust);
+  background: var(--pena);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Viditelný focus všude */
+.hs a:focus-visible,
+.hs button:focus-visible {
+  outline: 3px solid var(--chlor);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  background: linear-gradient(178deg, #07223c 0%, var(--tun) 45%, #0d3a63 100%);
+  color: #f2fafb;
+  padding: 1.25rem 1.25rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemná kaustika — světelné pruhy jako na dně bazénu */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      ellipse 60% 40% at 80% 0%,
+      rgba(53, 196, 207, 0.14),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 40% 30% at 10% 90%,
+      rgba(53, 196, 207, 0.08),
+      transparent 70%
+    );
+  pointer-events: none;
+}
+
+.hero-top {
+  max-width: var(--max-sirka);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  color: #fff;
+}
+
+.wm-vlnka {
+  width: 2.1rem;
+  height: 0.7rem;
+  color: var(--chlor);
+  align-self: center;
+}
+
+.wm-text {
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+}
+
+.wm-dot {
+  color: var(--chlor);
+}
+
+.hero-tel {
+  color: var(--pena);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: 1.5px solid rgba(234, 246, 248, 0.35);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  white-space: nowrap;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.hero-tel:hover {
+  border-color: var(--chlor);
+  background: rgba(53, 196, 207, 0.12);
+}
+
+.hero-body {
+  max-width: var(--max-sirka);
+  margin: 0 auto;
+  padding-top: 3.5rem;
+  position: relative;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--chlor);
+  animation: vynoreni 0.7s ease-out both;
+}
+
+/* --- Signature: typografická hladina --- */
+
+.hero-title {
+  margin: 0;
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 9.5vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.ponor {
+  display: block;
+  position: relative;
+}
+
+/* horní polovina písma — nad hladinou, plná bílá */
+.nad {
+  display: block;
+  color: #ffffff;
+  clip-path: inset(0 0 46% 0);
+  animation: vynoreni 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* spodní polovina — „pod vodou": tyrkysová, průsvitná, mírně zvlněná */
+.pod {
+  display: block;
+  position: absolute;
+  inset: 0;
+  color: var(--chlor);
+  opacity: 0.55;
+  clip-path: inset(54% 0 0 0);
+  transform: scaleY(1.04) skewX(-2deg);
+  transform-origin: top;
+  filter: blur(0.5px);
+  animation: odraz 5.5s ease-in-out 1s infinite alternate,
+    vynoreni 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.ponor-2 .nad {
+  animation-delay: 0.15s;
+}
+
+.ponor-2 .pod {
+  animation-delay: 1.4s, 0.15s;
+}
+
+@keyframes odraz {
+  from {
+    transform: scaleY(1.04) skewX(-2deg) translateX(0);
+  }
+  to {
+    transform: scaleY(1.07) skewX(2deg) translateX(0.35rem);
+  }
+}
+
+@keyframes vynoreni {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* dělící hladina pod nadpisem */
+.hladina {
+  color: var(--chlor);
+  margin: 1.75rem 0 1.5rem;
+  animation: vynoreni 0.9s ease-out 0.3s both;
+}
+
+.hladina svg {
+  display: block;
+  width: 100%;
+  height: 1.1rem;
+}
+
+.hladina-vlna {
+  stroke-dasharray: 6 10;
+  animation: tok 14s linear infinite;
+}
+
+@keyframes tok {
+  to {
+    stroke-dashoffset: -320;
+  }
+}
+
+.hero-perex {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(242, 250, 251, 0.88);
+  margin: 0 0 2rem;
+  animation: vynoreni 0.9s ease-out 0.4s both;
+}
+
+.hero-akce {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  animation: vynoreni 0.9s ease-out 0.5s both;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  transition: transform 0.2s, background-color 0.2s, color 0.2s,
+    border-color 0.2s;
+}
+
+.btn-plna {
+  background: var(--chlor);
+  color: var(--tun);
+}
+
+.btn-plna:hover {
+  background: #5ad4dd;
+  transform: translateY(-2px);
+}
+
+.btn-linka {
+  color: var(--pena);
+  border: 2px solid rgba(234, 246, 248, 0.4);
+}
+
+.btn-linka:hover {
+  border-color: var(--chlor);
+  color: var(--chlor);
+}
+
+/* hloubkové značky — jako cejchování na stěně bazénu */
+.hero-hloubka {
+  margin: 3rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(234, 246, 248, 0.18);
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: start;
+  gap: 2.5rem;
+  animation: vynoreni 0.9s ease-out 0.6s both;
+}
+
+.hero-hloubka dt {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(234, 246, 248, 0.6);
+  margin-bottom: 0.2rem;
+}
+
+.hero-hloubka dd {
+  margin: 0;
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: 1.15rem;
+  color: var(--pisek);
+}
+
+/* ============ SLUŽBY ============ */
+
+.sluzby {
+  background: var(--pena);
+  padding: 4.5rem 1.25rem;
+}
+
+.sekce-hlava {
+  max-width: var(--max-sirka);
+  margin: 0 auto 2.5rem;
+}
+
+.sekce-eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #1a7f8a;
+}
+
+.sekce-hlava h2 {
+  margin: 0;
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--tun);
+  max-width: 28ch;
+}
+
+.sluzby-mrizka {
+  max-width: var(--max-sirka);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.25rem;
+}
+
+.karta {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.75rem 1.5rem;
+  border: 1px solid rgba(11, 46, 79, 0.08);
+  box-shadow: 0 2px 8px rgba(11, 46, 79, 0.06);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(11, 46, 79, 0.12);
+}
+
+.karta-hlava {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.karta-stitek {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tun);
+  background: rgba(53, 196, 207, 0.18);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+}
+
+.karta-vlnka {
+  width: 1.8rem;
+  height: 0.6rem;
+  color: var(--chlor);
+}
+
+.karta h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--tun);
+  line-height: 1.3;
+}
+
+.karta p {
+  margin: 0;
+  font-size: 0.97rem;
+  color: #3c5666;
+}
+
+.karta-detail {
+  margin-top: 1rem !important;
+  padding-top: 0.85rem;
+  border-top: 1px dashed rgba(53, 196, 207, 0.5);
+  font-size: 0.85rem !important;
+  font-weight: 700;
+  color: #1a7f8a !important;
+}
+
+/* ============ DŮVĚRA ============ */
+
+.duvera {
+  background: linear-gradient(180deg, var(--tun) 0%, #082742 100%);
+  color: #f2fafb;
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.sekce-hlava-svetla .sekce-eyebrow {
+  color: var(--chlor);
+}
+
+.sekce-hlava-svetla h2 {
+  color: #ffffff;
+}
+
+.duvera-perex {
+  margin: 1rem 0 0;
+  max-width: 36rem;
+  color: rgba(242, 250, 251, 0.8);
+  font-size: 1.05rem;
+}
+
+.duvera-cisla {
+  max-width: var(--max-sirka);
+  margin: 0 auto 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1.25rem;
+}
+
+.cislo-blok {
+  border-left: 3px solid var(--chlor);
+  padding-left: 1.25rem;
+}
+
+.cislo {
+  display: block;
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: 2.4rem;
+  letter-spacing: -0.02em;
+  color: var(--pisek);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.cislo-blok p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(242, 250, 251, 0.82);
+}
+
+.reference {
+  max-width: var(--max-sirka);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.25rem;
+}
+
+.ref {
+  margin: 0;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(53, 196, 207, 0.25);
+  border-radius: 1rem;
+  padding: 1.75rem 1.5rem;
+}
+
+.ref blockquote {
+  margin: 0 0 1.25rem;
+}
+
+.ref blockquote p {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: #f2fafb;
+}
+
+.ref figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.ref figcaption strong {
+  color: var(--pisek);
+  font-size: 0.95rem;
+}
+
+.ref figcaption span {
+  font-size: 0.85rem;
+  color: rgba(242, 250, 251, 0.6);
+}
+
+/* ============ RESPONZIVITA ============ */
+
+@media (max-width: 40rem) {
+  .hero-body {
+    padding-top: 2.5rem;
+  }
+
+  .hero-hloubka {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .hero-akce .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-tel {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .nad,
+  .pod,
+  .hero-eyebrow,
+  .hladina,
+  .hero-perex,
+  .hero-akce,
+  .hero-hloubka {
+    animation: none !important;
+  }
+
+  .hladina-vlna {
+    animation: none;
+  }
+
+  .karta,
+  .btn,
+  .hero-tel {
+    transition: none;
+  }
+
+  .karta:hover,
+  .btn-plna:hover {
+    transform: none;
+  }
+}
