@@ -1,0 +1,383 @@
+/* =====================================================
+   KASKO-BLINDS — Brno · žaluzie a rolety
+   Palette: hliník, hluboká modř soumraku za lamelou,
+   sluneční žluť jako proužek světla mezi lamelami.
+   ===================================================== */
+
+:root {
+  --kb-ink: #14203a;        /* soumrak za staženou žaluzií */
+  --kb-ink-deep: #0c1428;   /* nejtmavší modř */
+  --kb-alu: #e9edf2;        /* hliníková lamela */
+  --kb-alu-dim: #c9d2dd;    /* stín na lamele */
+  --kb-sun: #f5b32b;        /* pruh slunce mezi lamelami */
+  --kb-sun-deep: #d99413;
+  --kb-paper: #f7f8fa;
+
+  --f-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Arial, sans-serif;
+  --f-body: Georgia, "Times New Roman", serif;
+  --f-util: "Courier New", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--kb-paper);
+  color: var(--kb-ink);
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.kb :focus-visible {
+  outline: 3px solid var(--kb-sun);
+  outline-offset: 3px;
+}
+
+/* =====================  HERO  ===================== */
+
+.hero {
+  background: var(--kb-ink-deep);
+  color: var(--kb-alu);
+  padding: 1.5rem 1.25rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
+
+.wordmark {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.14em;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  text-transform: uppercase;
+}
+
+/* logo: lamela místo pomlčky */
+.wordmark-slat {
+  display: inline-block;
+  width: 1.15em;
+  height: 0.28em;
+  background: var(--kb-sun);
+  transform: skewY(-12deg);
+}
+
+.hero-loc {
+  font-family: var(--f-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--kb-alu-dim);
+  text-transform: uppercase;
+}
+
+/* --- signature: titulek sázený jako lamely žaluzie --- */
+
+.hero-stage { position: relative; }
+
+.hero-title {
+  margin: 0;
+  font-family: var(--f-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 11vw, 7.5rem);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  display: flex;
+  flex-direction: column;
+  max-width: 12ch;
+}
+
+.slat {
+  display: block;
+  overflow: hidden;
+  border-bottom: 3px solid var(--kb-ink);
+  padding: 0.03em 0 0.06em;
+}
+
+.slat > span {
+  display: block;
+  transform: translateY(0);
+}
+
+.slat-2 > span, .slat-4 > span { color: var(--kb-sun); }
+
+/* animace: lamely se "vytahují" jako žaluzie při načtení */
+@keyframes slat-rise {
+  from { transform: translateY(110%); }
+  to   { transform: translateY(0); }
+}
+
+.slat > span { animation: slat-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.slat-1 > span { animation-delay: 0.05s; }
+.slat-2 > span { animation-delay: 0.18s; }
+.slat-3 > span { animation-delay: 0.31s; }
+.slat-4 > span { animation-delay: 0.44s; }
+
+/* dekorativní žaluzie vpravo — šikmé hliníkové lamely s pruhy slunce */
+.hero-louvre {
+  position: absolute;
+  top: -1rem;
+  right: -3rem;
+  bottom: -1rem;
+  width: 34%;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: skewY(-8deg);
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.hero-louvre i {
+  display: block;
+  height: 9%;
+  background: linear-gradient(180deg, var(--kb-alu) 0%, var(--kb-alu-dim) 100%);
+  border-bottom: 4px solid var(--kb-sun);
+  animation: slat-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-louvre i:nth-child(odd) { animation-delay: 0.2s; }
+.hero-louvre i:nth-child(even) { animation-delay: 0.35s; }
+
+.hero-sub {
+  max-width: 34rem;
+  margin: 2.5rem 0 1.75rem;
+  font-size: 1.05rem;
+  color: var(--kb-alu);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.75rem;
+  font-family: var(--f-util);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--kb-alu-dim);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-facts strong {
+  color: var(--kb-sun);
+  font-weight: 700;
+  margin-right: 0.35em;
+}
+
+/* =====================  SPOLEČNÉ HLAVIČKY SEKCÍ  ===================== */
+
+.sec-head { max-width: 40rem; }
+
+.sec-eyebrow {
+  font-family: var(--f-util);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--kb-sun-deep);
+  margin: 0 0 0.5rem;
+}
+
+.sec-head h2 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  line-height: 1.05;
+  margin: 0 0 0.75rem;
+}
+
+.sec-lead { margin: 0; color: #44506b; }
+
+/* =====================  SEKCE 1: SORTIMENT  ===================== */
+
+.sortiment { padding: 3.5rem 1.25rem 4rem; }
+
+.prod-grid {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.prod-card {
+  background: #fff;
+  border: 1px solid var(--kb-alu-dim);
+  border-top: 6px solid var(--kb-ink);
+  padding: 1.25rem 1.25rem 1rem;
+  transition: border-top-color 0.25s ease, transform 0.25s ease;
+}
+
+.prod-card:hover { border-top-color: var(--kb-sun); transform: translateY(-3px); }
+
+.prod-kod {
+  font-family: var(--f-util);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  color: var(--kb-sun-deep);
+}
+
+.prod-card h3 {
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  letter-spacing: 0.03em;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.prod-card p { margin: 0 0 0.9rem; font-size: 0.98rem; color: #333e57; }
+
+.prod-detail {
+  font-family: var(--f-util);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7690;
+  border-top: 1px dashed var(--kb-alu-dim);
+  display: block;
+  padding-top: 0.6rem;
+}
+
+/* =====================  SEKCE 2: DŮVĚRA  ===================== */
+
+.duvera {
+  background: var(--kb-ink);
+  color: var(--kb-alu);
+  padding: 3.5rem 1.25rem 4rem;
+}
+
+.sec-head-invert h2 { color: #fff; }
+.sec-head-invert .sec-lead { color: var(--kb-alu-dim); }
+.sec-head-invert .sec-eyebrow { color: var(--kb-sun); }
+
+.duvody {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+
+.duvod { display: flex; gap: 1rem; align-items: flex-start; }
+
+/* "lamela" jako odrážka */
+.duvod-tick {
+  flex: none;
+  width: 2rem;
+  height: 0.5rem;
+  margin-top: 0.55rem;
+  background: var(--kb-sun);
+  transform: skewY(-12deg);
+}
+
+.duvod h3 {
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.35rem;
+  color: #fff;
+}
+
+.duvod p { margin: 0; font-size: 0.98rem; color: var(--kb-alu-dim); }
+
+.realizace {
+  margin-top: 3rem;
+  border-top: 1px solid rgba(233, 237, 242, 0.2);
+  padding-top: 2rem;
+}
+
+.realizace-h {
+  font-family: var(--f-util);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--kb-sun);
+  margin: 0 0 1rem;
+  font-weight: 400;
+}
+
+.realizace-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.realizace-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  border-left: 3px solid var(--kb-sun);
+  padding-left: 0.9rem;
+}
+
+.real-misto {
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+.real-co { font-size: 0.9rem; color: var(--kb-alu-dim); }
+
+/* =====================  RESPONSIVE  ===================== */
+
+@media (min-width: 640px) {
+  .prod-grid { grid-template-columns: repeat(2, 1fr); }
+  .realizace-list { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 960px) {
+  .hero { padding: 2rem 4rem 5rem; }
+  .sortiment, .duvera { padding-left: 4rem; padding-right: 4rem; }
+  .prod-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .duvody { grid-template-columns: repeat(2, 1fr); gap: 2rem 3rem; }
+  .realizace-list { grid-template-columns: repeat(4, 1fr); }
+  .hero-sub { font-size: 1.15rem; }
+}
+
+@media (max-width: 639px) {
+  .hero-louvre { display: none; }
+}
+
+/* =====================  REDUCED MOTION  ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .slat > span,
+  .hero-louvre i {
+    animation: none;
+  }
+  .prod-card,
+  .prod-card:hover {
+    transition: none;
+    transform: none;
+  }
+}
