@@ -1,0 +1,479 @@
+/* =====================================================================
+   Kopta reality — Plzeň
+   Palette:  "pilsner & břidlice" — hluboká lahvově zelená (les kolem
+   Radbuzy), pivně-jantarová (Plzeň), teplá slonovina, břidlicově tmavá.
+   Type:     Fraunces (display, opsz osy) + system humanist sans body.
+   Signature: velké iniciálové "K" ve wordmarku + jantarová podtrhová
+   linka, která se chová jako "klíč" — vodorovná čára s zubem.
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap");
+
+:root {
+  --kr-forest: #1e3d2f;   /* lahvově zelená — hlavní */
+  --kr-forest-deep: #142a20;
+  --kr-amber: #d9971e;    /* pivní jantar — akcent */
+  --kr-ivory: #faf6ec;    /* teplá slonovina — podklad */
+  --kr-slate: #26302b;    /* text */
+  --kr-mist: #e7e0cf;     /* jemné dělení */
+
+  --kr-display: "Fraunces", Georgia, serif;
+  --kr-body: "Inter", -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--kr-ivory);
+  color: var(--kr-slate);
+  font-family: var(--kr-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.kr img { max-width: 100%; height: auto; display: block; }
+
+.kr a:focus-visible,
+.kr button:focus-visible {
+  outline: 3px solid var(--kr-amber);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- shared ---------- */
+
+.kr-eyebrow {
+  font-family: var(--kr-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kr-amber);
+  margin: 0 0 0.75rem;
+}
+
+.kr h1, .kr h2, .kr h3 {
+  font-family: var(--kr-display);
+  margin: 0;
+  color: inherit;
+}
+
+.kr-section {
+  padding: 4.5rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.kr-section__head h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--kr-forest);
+}
+
+.kr-section__sub {
+  max-width: 38rem;
+  margin: 1rem 0 0;
+  color: #4a544e;
+}
+
+/* ---------- HERO ---------- */
+
+.kr-hero {
+  background: linear-gradient(165deg, var(--kr-forest) 0%, var(--kr-forest-deep) 100%);
+  color: var(--kr-ivory);
+  padding: 1.25rem 1.25rem 4rem;
+}
+
+.kr-hero__topbar {
+  max-width: 72rem;
+  margin: 0 auto 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* --- wordmark: signature "K jako klíč" --- */
+.kr-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  font-family: var(--kr-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.01em;
+  color: var(--kr-ivory);
+}
+
+.kr-wordmark__k {
+  font-size: 2.1rem;
+  color: var(--kr-amber);
+  margin-right: 0.05em;
+  position: relative;
+  line-height: 1;
+}
+
+.kr-wordmark__k::after {
+  /* zub klíče pod iniciálou */
+  content: "";
+  position: absolute;
+  left: 0.05em;
+  bottom: -0.18em;
+  width: 1.15em;
+  height: 3px;
+  background: var(--kr-amber);
+  clip-path: polygon(0 0, 60% 0, 60% 100%, 75% 100%, 75% 0, 100% 0, 100% 40%, 0 40%);
+}
+
+.kr-wordmark__text em {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.kr-hero__phone {
+  color: var(--kr-ivory);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  border: 1px solid rgba(250, 246, 236, 0.35);
+  border-radius: 999px;
+  padding: 0.45rem 1.1rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.kr-hero__phone:hover {
+  background: var(--kr-ivory);
+  color: var(--kr-forest);
+}
+
+.kr-hero__grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+}
+
+.kr-hero__title {
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  animation: kr-rise 0.7s ease both;
+}
+
+.kr-hero__title-accent {
+  color: var(--kr-amber);
+  font-style: italic;
+  font-weight: 600;
+}
+
+.kr-hero__lead {
+  max-width: 34rem;
+  margin: 1.25rem 0 0;
+  font-size: 1.05rem;
+  color: rgba(250, 246, 236, 0.85);
+  animation: kr-rise 0.7s 0.12s ease both;
+}
+
+.kr-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+  animation: kr-rise 0.7s 0.22s ease both;
+}
+
+.kr-btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.kr-btn--solid {
+  background: var(--kr-amber);
+  color: var(--kr-forest-deep);
+}
+
+.kr-btn--solid:hover { transform: translateY(-2px); }
+
+.kr-btn--ghost {
+  color: var(--kr-ivory);
+  border: 1px solid rgba(250, 246, 236, 0.4);
+}
+
+.kr-btn--ghost:hover {
+  background: rgba(250, 246, 236, 0.1);
+}
+
+.kr-hero__facts {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 1.5rem 2.5rem;
+  margin: 2.5rem 0 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(250, 246, 236, 0.2);
+  animation: kr-rise 0.7s 0.32s ease both;
+}
+
+.kr-fact dt {
+  font-family: var(--kr-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--kr-amber);
+}
+
+.kr-fact dd {
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
+  color: rgba(250, 246, 236, 0.75);
+}
+
+.kr-hero__figure {
+  margin: 0;
+  animation: kr-rise 0.7s 0.15s ease both;
+}
+
+.kr-hero__img {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(250, 246, 236, 0.18);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.kr-hero__caption {
+  margin-top: 1rem;
+  font-family: var(--kr-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: rgba(250, 246, 236, 0.9);
+}
+
+.kr-hero__caption span {
+  display: block;
+  font-family: var(--kr-body);
+  font-style: normal;
+  font-size: 0.82rem;
+  color: rgba(250, 246, 236, 0.6);
+  margin-top: 0.35rem;
+}
+
+/* ---------- LISTINGS ---------- */
+
+.kr-listings {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.kr-card {
+  background: #fff;
+  border: 1px solid var(--kr-mist);
+  border-radius: 12px;
+  padding: 1.5rem 1.5rem 1.4rem;
+  position: relative;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.kr-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(30, 61, 47, 0.12);
+  border-color: var(--kr-amber);
+}
+
+.kr-card__tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--kr-forest);
+  background: rgba(217, 151, 30, 0.18);
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  margin-bottom: 0.85rem;
+}
+
+.kr-card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--kr-forest);
+  line-height: 1.3;
+}
+
+.kr-card__place {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: #5a635d;
+}
+
+.kr-card__price {
+  margin: 0.9rem 0 0;
+  font-family: var(--kr-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--kr-slate);
+}
+
+.kr-listings__note {
+  margin: 2rem auto 0;
+  max-width: 40rem;
+  text-align: center;
+  color: #4a544e;
+}
+
+/* ---------- ABOUT / JAK PRACUJI ---------- */
+
+.kr-section--about {
+  border-top: 1px solid var(--kr-mist);
+}
+
+.kr-about__grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.kr-about__figure { margin: 0; }
+
+.kr-about__img {
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 18px 44px rgba(30, 61, 47, 0.18);
+}
+
+.kr-about__copy h2 {
+  font-size: clamp(1.7rem, 3.8vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--kr-forest);
+  margin-bottom: 1rem;
+}
+
+.kr-steps {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.kr-step {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+}
+
+.kr-step__num {
+  flex: 0 0 auto;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: var(--kr-forest);
+  color: var(--kr-amber);
+  font-family: var(--kr-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: grid;
+  place-items: center;
+}
+
+.kr-step h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--kr-forest);
+}
+
+.kr-step p {
+  margin: 0.35rem 0 0;
+  font-size: 0.95rem;
+  color: #4a544e;
+}
+
+.kr-quote {
+  margin: 2.25rem 0 0;
+  padding: 1.4rem 1.6rem;
+  border-left: 4px solid var(--kr-amber);
+  background: #fff;
+  border-radius: 0 12px 12px 0;
+}
+
+.kr-quote p {
+  margin: 0;
+  font-family: var(--kr-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--kr-forest);
+  line-height: 1.45;
+}
+
+.kr-quote footer {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: #5a635d;
+}
+
+.kr-about__trust {
+  margin: 1.75rem 0 0;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--kr-forest);
+}
+
+/* ---------- animation ---------- */
+
+@keyframes kr-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .kr *,
+  .kr *::before,
+  .kr *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- responsive ---------- */
+
+@media (min-width: 640px) {
+  .kr-listings { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 900px) {
+  .kr-hero { padding: 1.5rem 2rem 5.5rem; }
+
+  .kr-hero__grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .kr-section { padding: 5.5rem 2rem; }
+
+  .kr-listings { grid-template-columns: repeat(4, 1fr); }
+
+  .kr-about__grid {
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .kr-about__figure {
+    position: sticky;
+    top: 2rem;
+  }
+}
