@@ -1,0 +1,494 @@
+/* =====================================================================
+   ANTICO spol. s r.o. — stavební firma, České Budějovice
+   Koncept: „spárořez" — vazba zdiva historické fasády jako signature.
+   Paleta: hluboká břidlicová modrošedá (jihočeská střecha), lomená bílá
+   vápenné omítky, teplý okr pískovce jako akcent.
+   ===================================================================== */
+
+:root {
+  --an-ink: #22303a;        /* břidlice — text, plochy */
+  --an-ink-deep: #17222a;   /* tmavší břidlice — hero */
+  --an-plaster: #f0ede6;    /* vápenná omítka — pozadí */
+  --an-plaster-dk: #e2ddd1; /* stín omítky — karty, spáry */
+  --an-ochre: #c98a2d;      /* pískovcový okr — akcent */
+  --an-ochre-lt: #e3b567;   /* světlý okr */
+  --an-line: rgba(34, 48, 58, 0.16);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--an-ink);
+  background: var(--an-plaster);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Titulky: úzký groteskní řez — technické písmo stavebních výkresů */
+.an-page h1,
+.an-page h2,
+.an-page h3,
+.an-wordmark-main,
+.an-hero-eyebrow,
+.an-ref-type,
+.an-hero-facts dt,
+.an-btn,
+.an-nav {
+  font-family: 'Arial Narrow', 'Helvetica Neue Condensed', Arial, sans-serif;
+}
+
+.an-page a:focus-visible,
+.an-page button:focus-visible {
+  outline: 3px solid var(--an-ochre);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HLAVIČKA ================= */
+.an-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.1rem clamp(1.25rem, 4vw, 3rem);
+  background: var(--an-ink-deep);
+}
+
+.an-wordmark {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.an-wordmark-main {
+  color: var(--an-plaster);
+  font-weight: 700;
+  font-size: 1.55rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.an-wordmark-main::after {
+  content: '';
+  display: block;
+  width: 2.6em;
+  height: 3px;
+  margin-top: 4px;
+  background: linear-gradient(90deg, var(--an-ochre), var(--an-ochre-lt));
+}
+
+.an-wordmark-sub {
+  color: rgba(240, 237, 230, 0.62);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  margin-top: 6px;
+  font-family: Georgia, serif;
+  font-style: italic;
+}
+
+.an-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  flex-wrap: wrap;
+}
+
+.an-nav a {
+  color: var(--an-plaster);
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 160ms ease;
+}
+
+.an-nav a:hover { border-bottom-color: var(--an-ochre); }
+
+.an-nav-tel {
+  border: 1.5px solid var(--an-ochre);
+  padding: 0.45rem 0.9rem !important;
+  border-radius: 3px;
+  color: var(--an-ochre-lt) !important;
+}
+
+.an-nav-tel:hover {
+  background: var(--an-ochre);
+  color: var(--an-ink-deep) !important;
+  border-bottom-color: var(--an-ochre) !important;
+}
+
+/* ================= HERO ================= */
+.an-hero {
+  position: relative;
+  background: var(--an-ink-deep);
+  color: var(--an-plaster);
+  overflow: hidden;
+}
+
+/* --- SIGNATURE: spárořez / vazba zdiva ---
+   Řady „cihel" s posunutou vazbou (běhounová vazba), které se při
+   načtení postupně „vyzdí" zprava. Spáry mají barvu okru. */
+.an-bond {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.an-bond-row {
+  display: flex;
+  gap: 5px;
+  height: clamp(40px, 8vw, 72px);
+  margin-top: 5px;
+  transform: translateX(0);
+}
+
+.an-bond-row.r2, .an-bond-row.r4 { margin-left: calc(-1 * clamp(60px, 12vw, 130px)); }
+
+.an-bond-row i {
+  flex: 0 0 clamp(120px, 24vw, 260px);
+  background: rgba(240, 237, 230, 0.045);
+  border: 1px solid rgba(201, 138, 45, 0.28);
+  animation: an-lay 700ms ease-out backwards;
+}
+
+.an-bond-row.r5 i { animation-delay: 80ms; }
+.an-bond-row.r4 i { animation-delay: 200ms; }
+.an-bond-row.r3 i { animation-delay: 320ms; }
+.an-bond-row.r2 i { animation-delay: 440ms; }
+.an-bond-row.r1 i { animation-delay: 560ms; }
+
+@keyframes an-lay {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.an-hero-inner {
+  position: relative;
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 9vw, 7rem) clamp(1.25rem, 4vw, 3rem) clamp(3rem, 7vw, 5.5rem);
+}
+
+.an-hero-eyebrow {
+  margin: 0 0 1.4rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--an-ochre-lt);
+  animation: an-rise 600ms ease-out backwards 150ms;
+}
+
+.an-hero-title {
+  margin: 0 0 1.6rem;
+  font-size: clamp(2.6rem, 8.5vw, 5.6rem);
+  line-height: 0.98;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.an-hero-line {
+  display: block;
+  animation: an-rise 700ms ease-out backwards;
+}
+
+.an-hero-line:nth-child(1) { animation-delay: 250ms; }
+.an-hero-line:nth-child(2) { animation-delay: 400ms; }
+.an-hero-line:nth-child(3) { animation-delay: 550ms; }
+
+.an-hero-accent {
+  color: var(--an-ochre-lt);
+  /* posun jako cihla v běhounové vazbě */
+  padding-left: clamp(1.2rem, 5vw, 3.5rem);
+}
+
+@keyframes an-rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.an-hero-lead {
+  max-width: 38rem;
+  margin: 0 0 2.2rem;
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  color: rgba(240, 237, 230, 0.85);
+  animation: an-rise 700ms ease-out backwards 700ms;
+}
+
+.an-hero-actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  animation: an-rise 700ms ease-out backwards 820ms;
+}
+
+.an-btn {
+  display: inline-block;
+  padding: 0.95rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: transform 160ms ease, background 160ms ease, color 160ms ease;
+}
+
+.an-btn:hover { transform: translateY(-2px); }
+
+.an-btn-solid {
+  background: var(--an-ochre);
+  color: var(--an-ink-deep);
+}
+
+.an-btn-solid:hover { background: var(--an-ochre-lt); }
+
+.an-btn-ghost {
+  border: 1.5px solid rgba(240, 237, 230, 0.5);
+  color: var(--an-plaster);
+}
+
+.an-btn-ghost:hover { border-color: var(--an-ochre-lt); color: var(--an-ochre-lt); }
+
+.an-hero-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 3.2rem 0 0;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(201, 138, 45, 0.4);
+  animation: an-rise 700ms ease-out backwards 950ms;
+}
+
+.an-hero-facts div { margin: 0; }
+
+.an-hero-facts dt {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--an-ochre-lt);
+  margin-bottom: 0.25rem;
+}
+
+.an-hero-facts dd {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(240, 237, 230, 0.75);
+}
+
+/* ================= SLUŽBY ================= */
+.an-services {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.25rem, 4vw, 3rem);
+}
+
+.an-section-head { max-width: 40rem; margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+
+.an-section-head h2,
+.an-trust-copy h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.8rem, 4.5vw, 2.7rem);
+  line-height: 1.08;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+}
+
+.an-section-head h2::after,
+.an-trust-copy h2::after {
+  content: '';
+  display: block;
+  width: 3.2rem;
+  height: 4px;
+  margin-top: 0.8rem;
+  background: var(--an-ochre);
+}
+
+.an-section-head p { margin: 0; color: rgba(34, 48, 58, 0.8); }
+
+.an-service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px; /* spára mezi kartami — stejná jako ve zdivu hero */
+  background: var(--an-ochre);
+  border: 5px solid var(--an-ochre);
+}
+
+.an-service {
+  background: var(--an-plaster);
+  padding: clamp(1.5rem, 3vw, 2.2rem);
+  transition: background 180ms ease;
+}
+
+.an-service:hover { background: #f7f5ef; }
+
+.an-service-mark {
+  color: var(--an-ochre);
+  margin-bottom: 1.1rem;
+}
+
+.an-service h3 {
+  margin: 0 0 0.7rem;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.an-service p {
+  margin: 0 0 1.1rem;
+  font-size: 0.98rem;
+  color: rgba(34, 48, 58, 0.85);
+}
+
+.an-service-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.92rem;
+}
+
+.an-service-list li {
+  padding: 0.5rem 0 0.5rem 1.2rem;
+  position: relative;
+  border-top: 1px solid var(--an-line);
+}
+
+.an-service-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.95rem;
+  width: 0.55rem;
+  height: 0.35rem;
+  background: var(--an-ochre);
+}
+
+/* ================= REFERENCE / DŮVĚRA ================= */
+.an-trust {
+  background: var(--an-ink);
+  color: var(--an-plaster);
+}
+
+.an-trust-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.25rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+.an-trust-copy h2 { color: var(--an-plaster); }
+
+.an-trust-copy > p { color: rgba(240, 237, 230, 0.82); margin: 0 0 1.6rem; }
+
+.an-trust-points {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.an-trust-points li {
+  padding: 1rem 0;
+  border-top: 1px solid rgba(240, 237, 230, 0.16);
+  font-size: 0.98rem;
+  color: rgba(240, 237, 230, 0.78);
+}
+
+.an-trust-points strong {
+  color: var(--an-ochre-lt);
+  display: block;
+  margin-bottom: 0.15rem;
+  font-family: 'Arial Narrow', 'Helvetica Neue Condensed', Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.92rem;
+}
+
+.an-refs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+/* karty referencí drží vazbu zdiva — sudé posunuté dolů */
+.an-ref:nth-child(even) { transform: translateY(14px); }
+
+.an-ref {
+  background: rgba(240, 237, 230, 0.06);
+  border: 1px solid rgba(201, 138, 45, 0.35);
+  padding: 1.4rem;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.an-ref:hover {
+  border-color: var(--an-ochre);
+  background: rgba(240, 237, 230, 0.09);
+}
+
+.an-ref-type {
+  margin: 0 0 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--an-ochre-lt);
+}
+
+.an-ref h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
+}
+
+.an-ref p:last-child {
+  margin: 0;
+  font-size: 0.92rem;
+  color: rgba(240, 237, 230, 0.72);
+}
+
+/* ================= RESPONZIVITA ================= */
+@media (max-width: 900px) {
+  .an-service-grid { grid-template-columns: 1fr; }
+  .an-trust-inner { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .an-hero-facts { grid-template-columns: 1fr; gap: 1rem; }
+  .an-refs { grid-template-columns: 1fr; }
+  .an-ref:nth-child(even) { transform: none; }
+  .an-header { justify-content: center; text-align: center; }
+  .an-wordmark { align-items: center; }
+  .an-btn { width: 100%; text-align: center; }
+}
+
+/* ================= REDUCED MOTION ================= */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .an-bond-row i,
+  .an-hero-eyebrow,
+  .an-hero-line,
+  .an-hero-lead,
+  .an-hero-actions,
+  .an-hero-facts {
+    animation: none !important;
+  }
+  .an-btn:hover { transform: none; }
+  * { transition-duration: 0.01ms !important; }
+}
