@@ -1,0 +1,675 @@
+/* ============================================================
+   Yves Rocher — České Budějovice · rostlinná kosmetika
+   Palette: herbarium greens on botanical paper
+   ------------------------------------------------------------
+   --yr-forest   #1E4632  hluboká lahvová zeleň (značková)
+   --yr-leaf     #3E7A4E  listová zeleň (akcent)
+   --yr-paper    #F6F8F2  botanický papír (pozadí)
+   --yr-petal    #E9F0E4  bledý list (plochy)
+   --yr-blush    #D9A0A6  sedmikrásková růžová (drobný akcent)
+   --yr-ink      #17281E  inkoust herbáře (text)
+   ============================================================ */
+
+:root {
+  --yr-forest: #1e4632;
+  --yr-leaf: #3e7a4e;
+  --yr-paper: #f6f8f2;
+  --yr-petal: #e9f0e4;
+  --yr-blush: #d9a0a6;
+  --yr-ink: #17281e;
+  --yr-radius: 14px;
+  --font-display: "Cormorant Garamond", "Georgia", "Times New Roman", serif;
+  --font-body: "Avenir Next", "Segoe UI", "Trebuchet MS", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--yr-ink);
+  background: var(--yr-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.yr a {
+  color: var(--yr-forest);
+}
+
+.yr a:focus-visible,
+.yr .btn:focus-visible {
+  outline: 3px solid var(--yr-leaf);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- shared ---------- */
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--yr-leaf);
+}
+
+.eyebrow-light {
+  color: #a8cdb2;
+}
+
+.section-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--yr-forest);
+}
+
+.section-title-light {
+  color: var(--yr-paper);
+}
+
+.section-lead {
+  margin: 0;
+  max-width: 34rem;
+  font-size: 1.05rem;
+  color: #40544a;
+}
+
+.section-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(60rem 40rem at 110% -10%, var(--yr-petal) 0%, transparent 60%),
+    linear-gradient(175deg, #fbfdf8 0%, var(--yr-paper) 55%, var(--yr-petal) 100%);
+}
+
+.hero-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(30, 70, 50, 0.14);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--yr-forest);
+}
+
+.wordmark-leaf {
+  align-self: center;
+  display: inline-flex;
+  color: var(--yr-leaf);
+}
+
+.wordmark-city {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--yr-leaf);
+}
+
+.topbar-phone {
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: var(--yr-forest);
+  border-bottom: 2px solid var(--yr-blush);
+  padding-bottom: 1px;
+  white-space: nowrap;
+}
+
+.topbar-phone:hover {
+  border-bottom-color: var(--yr-leaf);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 3rem;
+  align-items: center;
+  padding-top: 3.5rem;
+}
+
+.hero-title {
+  margin: 0 0 1.4rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.8rem, 7.5vw, 5.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: var(--yr-forest);
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--yr-leaf);
+}
+
+.hero-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.6em);
+  animation: yr-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.hero-line-2 { animation-delay: 0.12s; }
+.hero-line-3 { animation-delay: 0.24s; }
+
+.hero-lead {
+  margin: 0 0 2rem;
+  max-width: 32rem;
+  font-size: 1.1rem;
+  color: #40544a;
+  opacity: 0;
+  animation: yr-fade 0.8s ease 0.4s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  opacity: 0;
+  animation: yr-fade 0.8s ease 0.55s forwards;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.7rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+.btn-solid {
+  background: var(--yr-forest);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(30, 70, 50, 0.25);
+}
+
+.btn-solid:hover {
+  background: #275a40;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  border: 2px solid var(--yr-forest);
+  color: var(--yr-forest);
+}
+
+.btn-ghost:hover {
+  background: var(--yr-petal);
+  transform: translateY(-2px);
+}
+
+.hero-promo {
+  margin: 1.75rem 0 0;
+  display: inline-block;
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  background: rgba(217, 160, 166, 0.22);
+  border-left: 3px solid var(--yr-blush);
+  font-size: 0.95rem;
+  color: #5a3a3f;
+  opacity: 0;
+  animation: yr-fade 0.8s ease 0.7s forwards;
+}
+
+.hero-promo strong {
+  color: #7c454c;
+}
+
+/* ---------- signature: herbarium plate ---------- */
+
+.hero-botany {
+  display: flex;
+  justify-content: center;
+}
+
+.herbarium {
+  position: relative;
+  width: min(21rem, 80vw);
+  padding: 1.5rem 1.5rem 1.25rem;
+  background: #fff;
+  border: 1px solid rgba(30, 70, 50, 0.15);
+  border-radius: 6px;
+  box-shadow:
+    0 20px 45px rgba(30, 70, 50, 0.14),
+    0 2px 6px rgba(30, 70, 50, 0.08);
+  transform: rotate(2deg);
+}
+
+.herbarium::before {
+  /* washi tape holding the specimen */
+  content: "";
+  position: absolute;
+  top: -0.7rem;
+  left: 50%;
+  width: 5.5rem;
+  height: 1.4rem;
+  transform: translateX(-50%) rotate(-3deg);
+  background: rgba(233, 240, 228, 0.9);
+  border: 1px solid rgba(30, 70, 50, 0.12);
+}
+
+.herb-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.herb-stroke {
+  fill: none;
+  stroke: var(--yr-forest);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: yr-draw 2.4s ease forwards;
+}
+
+.herb-vein {
+  stroke: var(--yr-leaf);
+  stroke-width: 1.1;
+  animation-delay: 0.9s;
+  animation-duration: 1.6s;
+}
+
+.herb-leaf { animation-delay: 0.4s; }
+
+.herb-bloom {
+  stroke: var(--yr-blush);
+  stroke-width: 1.6;
+  animation-delay: 1.5s;
+  animation-duration: 1.4s;
+}
+
+.herb-plate {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed rgba(30, 70, 50, 0.25);
+}
+
+.herb-plate-no {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--yr-leaf);
+}
+
+.herb-plate-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--yr-forest);
+}
+
+.herb-plate-meta {
+  font-size: 0.8rem;
+  color: #5b6f62;
+}
+
+/* ---------- section: care ---------- */
+
+.section-care {
+  padding: 4.5rem 0 5rem;
+  background: var(--yr-paper);
+}
+
+.section-head {
+  margin-bottom: 2.5rem;
+}
+
+.care-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.care-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid rgba(30, 70, 50, 0.12);
+  border-radius: var(--yr-radius);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.care-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--yr-leaf);
+  box-shadow: 0 14px 30px rgba(30, 70, 50, 0.12);
+}
+
+.care-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.care-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--yr-forest);
+  background: var(--yr-petal);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+}
+
+.care-note {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #9a6b71;
+}
+
+.care-title {
+  margin: 0 0 0.15rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--yr-forest);
+}
+
+.care-plant {
+  margin: 0 0 0.7rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--yr-leaf);
+}
+
+.care-desc {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #40544a;
+}
+
+.care-foot {
+  margin: 2.25rem 0 0;
+  font-size: 1rem;
+  color: #40544a;
+}
+
+.care-foot a {
+  font-weight: 700;
+  text-decoration-color: var(--yr-blush);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* ---------- section: trust ---------- */
+
+.section-trust {
+  padding: 4.5rem 0 5rem;
+  background:
+    radial-gradient(50rem 30rem at -10% 110%, rgba(62, 122, 78, 0.35) 0%, transparent 60%),
+    var(--yr-forest);
+  color: var(--yr-paper);
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 3rem;
+  margin-bottom: 3.5rem;
+}
+
+.trust-lead {
+  margin: 0 0 2rem;
+  font-size: 1.05rem;
+  color: #cfe2d3;
+  max-width: 30rem;
+}
+
+.trust-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin: 0;
+}
+
+.trust-stats > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.2rem;
+  padding-top: 0.85rem;
+  border-top: 2px solid rgba(217, 160, 166, 0.5);
+}
+
+.trust-stats dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+}
+
+.trust-stats dt {
+  font-size: 0.8rem;
+  color: #a8cdb2;
+}
+
+.promise-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.promise {
+  padding: 1.25rem 1.4rem;
+  background: rgba(246, 248, 242, 0.06);
+  border: 1px solid rgba(246, 248, 242, 0.14);
+  border-radius: var(--yr-radius);
+}
+
+.promise-title {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.promise-desc {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #cfe2d3;
+}
+
+/* reviews */
+
+.reviews-title {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.reviews-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.4rem;
+  background: var(--yr-paper);
+  border-radius: var(--yr-radius);
+  color: var(--yr-ink);
+}
+
+.review-text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.45;
+  color: var(--yr-forest);
+}
+
+.review-meta {
+  margin: auto 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed rgba(30, 70, 50, 0.25);
+}
+
+.review-product {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--yr-ink);
+}
+
+.review-rating {
+  font-size: 0.8rem;
+  color: #9a6b71;
+}
+
+/* ---------- animations ---------- */
+
+@keyframes yr-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes yr-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes yr-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-line,
+  .hero-lead,
+  .hero-actions,
+  .hero-promo {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .herb-stroke {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .btn,
+  .care-card {
+    transition: none;
+  }
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-top: 2.5rem;
+  }
+  .care-grid,
+  .reviews-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .trust-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .care-grid,
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+  .trust-stats {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+  .hero-inner {
+    padding-bottom: 3rem;
+  }
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+  .herbarium {
+    transform: rotate(0deg);
+  }
+  .hero-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
