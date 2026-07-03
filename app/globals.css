@@ -1,0 +1,553 @@
+/* =====================================================================
+   FALK spol. s r.o. — zateplování · ploché střechy · okna · fasády · Plzeň
+   Koncept: „Vrstvy pláště" — skladba zateplené fasády jako vizuální systém.
+   Paleta:
+     --beton    #2B2E33  ocelově tmavá (nosná konstrukce)
+     --vata     #E9E7E1  minerální vata / světlé pozadí (ne krémová, studená)
+     --stribro  #C3C9CE  TR plech / hliníkový profil
+     --folie    #FF5A1F  signální oranž pojistné hydroizolační fólie
+     --omitka   #F7F6F3  finální omítka (nejsvětlejší plocha)
+   Typo: Archivo (široký groteskní displej, stavební plakátovost)
+         + systémový grotesk pro tělo — rychlé, bez balastu.
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Archivo:ital,wght@1,500&display=swap");
+
+:root {
+  --beton: #2b2e33;
+  --beton-tmavy: #1f2226;
+  --vata: #e9e7e1;
+  --stribro: #c3c9ce;
+  --folie: #ff5a1f;
+  --folie-tmava: #d9440f;
+  --omitka: #f7f6f3;
+  --ink: #22252a;
+  --max: 1120px;
+  --pad: clamp(1.25rem, 4vw, 3rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--omitka);
+  color: var(--ink);
+  font-family: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.falk :focus-visible {
+  outline: 3px solid var(--folie);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.falk h1,
+.falk h2,
+.falk h3 {
+  margin: 0;
+}
+
+.falk p {
+  margin: 0 0 1rem;
+}
+
+/* ============================ HERO ============================ */
+
+.hero {
+  background: var(--beton);
+  color: var(--omitka);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.hero-inner {
+  padding: var(--pad);
+  padding-top: clamp(1.5rem, 4vw, 3rem);
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+  max-width: var(--max);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.brand-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(2.5rem, 7vw, 5rem);
+}
+
+.wordmark {
+  font-weight: 900;
+  font-stretch: 118%;
+  font-size: 1.75rem;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--omitka);
+}
+
+.wordmark-dot {
+  display: inline-block;
+  width: 0.44em;
+  height: 0.44em;
+  margin-left: 0.14em;
+  background: var(--folie);
+  /* čtverec = izolační deska, ne tečka */
+}
+
+.brand-note {
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--stribro);
+}
+
+.hero-title {
+  font-weight: 900;
+  font-stretch: 110%;
+  font-size: clamp(2.6rem, 8.5vw, 5.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title .line {
+  display: block;
+}
+
+.hero-title .l2 {
+  color: var(--folie);
+}
+
+.hero-title em {
+  font-style: italic;
+  font-weight: 500;
+  font-stretch: 90%;
+  text-transform: lowercase;
+}
+
+.hero-lead {
+  max-width: 34rem;
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  line-height: 1.65;
+  color: #d8dade;
+  margin-bottom: 2rem;
+}
+
+.hero-facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  font-size: 0.95rem;
+  color: var(--stribro);
+}
+
+.hero-facts strong {
+  color: var(--omitka);
+  font-weight: 700;
+}
+
+.hero-facts li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.hero-facts li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 0.5em;
+  height: 0.5em;
+  background: var(--folie);
+}
+
+/* --- Signature: řez skladbou pláště --- */
+
+.skladba {
+  display: grid;
+  grid-auto-rows: auto;
+}
+
+.vrstva {
+  padding: 0.85rem var(--pad);
+  animation: vrstva-nasun 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* pořadí odshora: 04 → 01; nasouvají se postupně jako montáž */
+.vrstva.v4 {
+  background: var(--omitka);
+  color: var(--ink);
+  animation-delay: 0.55s;
+}
+
+.vrstva.v3 {
+  background: var(--folie);
+  color: #fff;
+  animation-delay: 0.4s;
+}
+
+.vrstva.v2 {
+  background: var(--stribro);
+  color: var(--ink);
+  padding-top: 1.4rem;
+  padding-bottom: 1.4rem;
+  /* izolace je nejtlustší vrstva — a taky ta, kterou FALK prodává */
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0,
+    transparent 14px,
+    rgba(43, 46, 51, 0.08) 14px,
+    rgba(43, 46, 51, 0.08) 16px
+  );
+  animation-delay: 0.25s;
+}
+
+.vrstva.v1 {
+  background: var(--beton-tmavy);
+  color: var(--stribro);
+  animation-delay: 0.1s;
+}
+
+.vrstva-label {
+  display: block;
+  max-width: var(--max);
+  margin: 0 auto;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.vrstva-label i {
+  font-style: normal;
+  font-weight: 900;
+  margin-right: 0.75em;
+  opacity: 0.55;
+}
+
+@keyframes vrstva-nasun {
+  from {
+    transform: translateX(-2.5rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ============================ SLUŽBY ============================ */
+
+.sluzby {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 6rem) var(--pad);
+}
+
+.sekce-hlava {
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--folie-tmava);
+  border-bottom: 3px solid var(--folie);
+  padding-bottom: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.eyebrow-invert {
+  color: var(--folie);
+}
+
+.falk h2 {
+  font-weight: 900;
+  font-stretch: 108%;
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.sluzby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.sluzba h3 {
+  font-weight: 800;
+  font-stretch: 110%;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.6rem;
+}
+
+.sluzba p {
+  color: #4a4e55;
+}
+
+/* markery = miniaturní řezy: každé řemeslo má svou skladbu vrstev */
+.sluzba-marker {
+  height: 2.25rem;
+  margin-bottom: 1.1rem;
+  display: grid;
+}
+
+.sm-strecha {
+  /* střecha: krytina / fólie / spád */
+  grid-template-rows: 2fr 1fr 3fr;
+}
+.sm-strecha::before {
+  content: "";
+  background: var(--beton);
+}
+.sm-strecha::after {
+  content: "";
+  background: var(--folie);
+  grid-row: 2;
+}
+
+.sm-okno {
+  /* okno: rám / sklo / rám — vertikálně */
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 1fr;
+}
+.sm-okno::before {
+  content: "";
+  background: var(--stribro);
+  grid-column: 1;
+  border-right: 4px solid var(--omitka);
+}
+.sm-okno::after {
+  content: "";
+  grid-column: 2 / 4;
+  background: linear-gradient(90deg, #dfe4e8 0 80%, var(--stribro) 80%);
+  border-left: 4px solid var(--beton);
+}
+
+.sm-fasada {
+  /* fasáda: sendvičový panel — plech / jádro / plech */
+  grid-template-rows: 1fr 4fr 1fr;
+}
+.sm-fasada::before {
+  content: "";
+  grid-row: 1 / 4;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--stribro) 0,
+    var(--stribro) 10px,
+    #d6dbdf 10px,
+    #d6dbdf 20px
+  );
+  border-top: 5px solid var(--beton);
+  border-bottom: 5px solid var(--folie);
+}
+
+.sluzba-body {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+.sluzba-body li {
+  padding: 0.45rem 0 0.45rem 1.1rem;
+  border-top: 1px solid #dedbd4;
+  position: relative;
+}
+
+.sluzba-body li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1em;
+  width: 0.45em;
+  height: 0.45em;
+  background: var(--folie);
+}
+
+.sluzby-pozn {
+  margin-top: clamp(2rem, 5vw, 3rem);
+  padding: 1.1rem 1.25rem;
+  background: var(--vata);
+  border-left: 5px solid var(--folie);
+  font-size: 1rem;
+  max-width: 42rem;
+}
+
+/* ============================ DŮVĚRA ============================ */
+
+.duvera {
+  background: var(--beton);
+  color: var(--omitka);
+  padding: clamp(3rem, 8vw, 6rem) var(--pad);
+}
+
+.duvera-grid {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.duvera-text h2 {
+  color: var(--omitka);
+  margin-bottom: 1.25rem;
+}
+
+.duvera-text p {
+  color: #cfd2d7;
+  max-width: 38rem;
+}
+
+.duvera-cisla {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: #43464c;
+  border: 1px solid #43464c;
+  align-self: start;
+}
+
+.cislo {
+  background: var(--beton-tmavy);
+  padding: 1.25rem 1.1rem;
+}
+
+.cislo dt {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--stribro);
+  margin-bottom: 0.35rem;
+}
+
+.cislo dd {
+  margin: 0;
+  font-weight: 900;
+  font-stretch: 112%;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  line-height: 1;
+  color: var(--folie);
+}
+
+/* --- reference --- */
+
+.reference {
+  max-width: var(--max);
+  margin: clamp(2.5rem, 6vw, 4rem) auto 0;
+}
+
+.reference-h {
+  font-weight: 800;
+  font-stretch: 110%;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--stribro);
+  margin-bottom: 1.25rem;
+}
+
+.reference-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: #43464c;
+  border: 1px solid #43464c;
+}
+
+.ref {
+  background: var(--beton);
+  padding: 1.25rem 1.25rem 1.35rem;
+  display: grid;
+  gap: 0.3rem;
+  border-left: 5px solid var(--folie);
+  transition: background-color 0.2s ease;
+}
+
+.ref:hover {
+  background: var(--beton-tmavy);
+}
+
+.ref-typ {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--folie);
+}
+
+.ref-nazev {
+  font-weight: 800;
+  font-stretch: 108%;
+  font-size: 1.15rem;
+  line-height: 1.25;
+}
+
+.ref-detail {
+  font-size: 0.9rem;
+  color: #b9bdc3;
+}
+
+/* ============================ RESPONSIVE ============================ */
+
+@media (min-width: 720px) {
+  .sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .reference-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .duvera-grid {
+    grid-template-columns: 3fr 2fr;
+    gap: 4rem;
+  }
+}
+
+/* ============================ MOTION ============================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .vrstva {
+    animation: none;
+  }
+
+  .ref {
+    transition: none;
+  }
+}
