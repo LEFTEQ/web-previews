@@ -1,0 +1,667 @@
+/* =========================================================
+   AZ Real Invest Brno — výkup nemovitostí
+   Paleta: katastrální tmavě zelená + papír + razítková červeň
+   Typografie: system stack laděný na kondenzovaný úřední tón
+   ========================================================= */
+
+:root {
+  --az-ink: #10251e;        /* katastrální zeleň, skoro černá */
+  --az-pine: #1d4436;       /* hlavní zelená */
+  --az-paper: #f7f5ef;      /* papír výpisu (teplý, ne krémově default) */
+  --az-paper-2: #edeae0;
+  --az-stamp: #b23a2f;      /* razítková červeň — jen akcent */
+  --az-gold: #c8a24a;       /* mosaz kliky/cedule — decentně */
+  --az-line: rgba(16, 37, 30, 0.16);
+
+  --az-font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", system-ui, sans-serif;
+  --az-font-body: Georgia, "Times New Roman", serif;
+  --az-font-mono: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--az-paper);
+  color: var(--az-ink);
+  font-family: var(--az-font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.az a:focus-visible,
+.az button:focus-visible {
+  outline: 3px solid var(--az-stamp);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.az-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---------------- HERO ---------------- */
+
+.az-hero {
+  background:
+    linear-gradient(160deg, #10251e 0%, #1d4436 62%, #26543f 100%);
+  color: var(--az-paper);
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemný rastr parcelní mřížky */
+.az-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(247, 245, 239, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247, 245, 239, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
+}
+
+.az-hero-inner {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 20px 72px;
+}
+
+.az-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(247, 245, 239, 0.18);
+  margin-bottom: 48px;
+}
+
+.az-wordmark {
+  font-family: var(--az-font-display);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.az-wordmark em {
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+}
+
+.az-wordmark-city {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 2px 8px;
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  border: 1px solid var(--az-gold);
+  color: var(--az-gold);
+  transform: translateY(-4px);
+}
+
+.az-phone {
+  font-family: var(--az-font-display);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--az-paper);
+  text-decoration: none;
+  text-align: right;
+  line-height: 1.15;
+}
+
+.az-phone-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--az-gold);
+}
+
+.az-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.az-eyebrow {
+  font-family: var(--az-font-display);
+  font-size: 13px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--az-gold);
+  margin: 0 0 18px;
+}
+
+.az-h1 {
+  font-family: var(--az-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(52px, 9vw, 104px);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  margin: 0 0 26px;
+}
+
+.az-h1-line {
+  display: block;
+}
+
+/* „v exekuci" — přeškrtnuto razítkovou červení: problém, který mizí */
+.az-h1-strike {
+  position: relative;
+  color: rgba(247, 245, 239, 0.55);
+  width: fit-content;
+}
+
+.az-h1-strike::after {
+  content: "";
+  position: absolute;
+  left: -2%;
+  right: -4%;
+  top: 50%;
+  height: 0.09em;
+  background: var(--az-stamp);
+  transform: rotate(-1.5deg) scaleX(1);
+  transform-origin: left center;
+}
+
+.az-lead {
+  max-width: 34em;
+  font-size: 18px;
+  line-height: 1.7;
+  color: rgba(247, 245, 239, 0.88);
+  margin: 0 0 30px;
+}
+
+.az-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.az-btn {
+  font-family: var(--az-font-display);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 26px;
+  display: inline-block;
+  border-radius: 3px;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.az-btn-solid {
+  background: var(--az-stamp);
+  color: #fff;
+}
+
+.az-btn-solid:hover {
+  background: #9a2f26;
+  transform: translateY(-1px);
+}
+
+.az-btn-ghost {
+  border: 1px solid rgba(247, 245, 239, 0.45);
+  color: var(--az-paper);
+}
+
+.az-btn-ghost:hover {
+  border-color: var(--az-paper);
+  background: rgba(247, 245, 239, 0.08);
+}
+
+.az-hero-note {
+  margin: 18px 0 0;
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(247, 245, 239, 0.65);
+}
+
+/* ---- Signature: list C výpisu z katastru ---- */
+
+.az-list-c {
+  background: var(--az-paper);
+  color: var(--az-ink);
+  border-radius: 4px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  transform: rotate(1.2deg);
+  max-width: 460px;
+  width: 100%;
+  justify-self: center;
+  font-family: var(--az-font-mono);
+}
+
+.az-list-c-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 2px solid var(--az-ink);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.az-list-c-rows {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+}
+
+.az-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-bottom: 1px dashed var(--az-line);
+  font-size: 14px;
+  animation: az-row-in 0.6s ease both;
+}
+
+.az-row:last-child {
+  border-bottom: none;
+}
+
+.az-row-d2 { animation-delay: 0.25s; }
+.az-row-d3 { animation-delay: 0.5s; }
+.az-row-d4 { animation-delay: 0.85s; }
+
+.az-row-cleared .az-row-type {
+  text-decoration: line-through;
+  text-decoration-color: var(--az-stamp);
+  text-decoration-thickness: 2px;
+  color: rgba(16, 37, 30, 0.55);
+}
+
+.az-row-status {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--az-stamp);
+  border: 1.5px solid var(--az-stamp);
+  border-radius: 2px;
+  padding: 2px 7px;
+  transform: rotate(-3deg);
+  white-space: nowrap;
+}
+
+.az-row-status-ok {
+  color: var(--az-pine);
+  border-color: var(--az-pine);
+}
+
+.az-row-clean .az-row-type {
+  font-weight: 700;
+}
+
+.az-list-c-foot {
+  padding: 12px 18px 16px;
+  border-top: 2px solid var(--az-ink);
+  font-family: var(--az-font-body);
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(16, 37, 30, 0.7);
+}
+
+@keyframes az-row-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------------- SEKCE: SLUŽBY ---------------- */
+
+.az-section {
+  padding: 80px 0;
+}
+
+.az-section-head {
+  max-width: 620px;
+  margin-bottom: 48px;
+}
+
+.az-h2 {
+  font-family: var(--az-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.02;
+  margin: 0 0 14px;
+}
+
+.az-section-sub {
+  font-size: 18px;
+  color: rgba(16, 37, 30, 0.72);
+  margin: 0;
+}
+
+.az-sluzby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.az-karta {
+  background: #fff;
+  border: 1px solid var(--az-line);
+  border-top: 4px solid var(--az-pine);
+  border-radius: 4px;
+  padding: 26px 24px 22px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.az-karta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(16, 37, 30, 0.12);
+}
+
+.az-karta-stitek {
+  display: inline-block;
+  font-family: var(--az-font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--az-stamp);
+  border: 1px solid var(--az-stamp);
+  border-radius: 2px;
+  padding: 3px 9px;
+  margin-bottom: 16px;
+}
+
+.az-h3 {
+  font-family: var(--az-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 22px;
+  line-height: 1.1;
+  margin: 0 0 12px;
+}
+
+.az-karta-text {
+  margin: 0 0 16px;
+  font-size: 16px;
+  color: rgba(16, 37, 30, 0.82);
+}
+
+.az-karta-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+}
+
+.az-karta-list li {
+  padding: 8px 0 8px 22px;
+  border-top: 1px dashed var(--az-line);
+  position: relative;
+}
+
+.az-karta-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--az-gold);
+  font-weight: 700;
+}
+
+/* kroky — reálná sekvence, proto číslování */
+
+.az-kroky {
+  list-style: none;
+  margin: 56px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+.az-krok {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.az-krok-cislo {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--az-pine);
+  border-radius: 50%;
+  font-family: var(--az-font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--az-pine);
+}
+
+.az-krok-titul {
+  font-family: var(--az-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 17px;
+  margin: 4px 0 6px;
+}
+
+.az-krok-text {
+  margin: 0;
+  font-size: 15px;
+  color: rgba(16, 37, 30, 0.78);
+}
+
+/* ---------------- SEKCE: DŮVĚRA ---------------- */
+
+.az-section-duvera {
+  background: var(--az-ink);
+  color: var(--az-paper);
+}
+
+.az-h2-light {
+  color: var(--az-paper);
+}
+
+.az-duvera-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+.az-duvera-lead {
+  font-size: 18px;
+  line-height: 1.7;
+  color: rgba(247, 245, 239, 0.85);
+  margin: 0 0 32px;
+  max-width: 32em;
+}
+
+.az-citace {
+  margin: 0;
+  padding: 22px 24px;
+  border-left: 4px solid var(--az-gold);
+  background: rgba(247, 245, 239, 0.05);
+  border-radius: 0 4px 4px 0;
+}
+
+.az-citace p {
+  margin: 0 0 10px;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.az-citace footer {
+  font-family: var(--az-font-display);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--az-gold);
+}
+
+.az-duvody {
+  display: grid;
+  gap: 24px;
+  align-content: start;
+}
+
+.az-duvod {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(247, 245, 239, 0.14);
+}
+
+.az-duvod-marker {
+  flex: none;
+  font-family: var(--az-font-display);
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--az-gold);
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.az-duvod-titul {
+  font-family: var(--az-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 18px;
+  margin: 0 0 6px;
+}
+
+.az-duvod-text {
+  margin: 0;
+  font-size: 15px;
+  color: rgba(247, 245, 239, 0.78);
+}
+
+.az-kontakt-pas {
+  background: var(--az-pine);
+  border-radius: 4px;
+  padding: 22px 24px;
+}
+
+.az-kontakt-pas-label {
+  font-family: var(--az-font-display);
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--az-gold);
+  margin: 0 0 8px;
+}
+
+.az-kontakt-pas-tel {
+  display: block;
+  font-family: var(--az-font-display);
+  font-weight: 700;
+  font-size: 30px;
+  color: var(--az-paper);
+  text-decoration: none;
+  margin-bottom: 4px;
+}
+
+.az-kontakt-pas-tel:hover {
+  color: var(--az-gold);
+}
+
+.az-kontakt-pas-mail {
+  color: rgba(247, 245, 239, 0.85);
+  font-size: 15px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.az-kontakt-pas-mail:hover {
+  color: var(--az-paper);
+}
+
+/* ---------------- Responzivita ---------------- */
+
+@media (min-width: 720px) {
+  .az-sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .az-kroky {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .az-hero-inner {
+    padding: 32px 20px 96px;
+  }
+
+  .az-hero-grid {
+    grid-template-columns: 1.25fr 1fr;
+    gap: 64px;
+  }
+
+  .az-list-c {
+    justify-self: end;
+  }
+
+  .az-kroky {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .az-krok {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .az-duvera-grid {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 72px;
+  }
+}
+
+/* ---------------- Reduced motion ---------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .az-row {
+    animation: none;
+  }
+
+  .az-btn,
+  .az-karta {
+    transition: none;
+  }
+
+  .az-karta:hover,
+  .az-btn-solid:hover {
+    transform: none;
+  }
+}
