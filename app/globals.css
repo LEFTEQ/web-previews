@@ -1,0 +1,534 @@
+/* ============================================================
+   NTS — Nonstop Truck Servis, Plzeň
+   Paleta: noc na dálnici + výstražná servisní žluť
+   ============================================================ */
+
+:root {
+  --nts-asfalt: #12151a;      /* noční asfalt — pozadí hero */
+  --nts-kabina: #1c2129;      /* tmavší plocha, panely */
+  --nts-zlut: #ffc61a;        /* výstražná servisní žluť */
+  --nts-zlut-tmava: #d9a400;
+  --nts-papir: #f7f6f2;       /* papír protokolu */
+  --nts-inkoust: #21262e;     /* text na papíru */
+  --nts-sedy: #8b93a1;        /* pomocný text na tmavé */
+  --nts-linka: #2c333e;
+
+  --f-display: "Arial Black", "Archivo Black", Haettenschweiler, "Franklin Gothic Heavy", sans-serif;
+  --f-mono: "Consolas", "Menlo", "Roboto Mono", "Courier New", monospace;
+  --f-body: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--nts-inkoust);
+  background: var(--nts-papir);
+}
+
+.nts img { max-width: 100%; height: auto; }
+
+.nts a:focus-visible,
+.nts .btn:focus-visible {
+  outline: 3px solid var(--nts-zlut);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- tlačítka ---------- */
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 1.6rem;
+  font-family: var(--f-display);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--nts-zlut);
+  color: var(--nts-asfalt);
+  box-shadow: 0 4px 0 var(--nts-zlut-tmava);
+}
+.btn-primary:hover { transform: translateY(-2px); }
+.btn-primary:active { transform: translateY(1px); box-shadow: 0 2px 0 var(--nts-zlut-tmava); }
+
+.btn-ghost {
+  color: var(--nts-papir);
+  border: 2px solid var(--nts-linka);
+}
+.btn-ghost:hover { border-color: var(--nts-zlut); color: var(--nts-zlut); }
+
+/* ============================================================
+   HERO — noční dispečink, typografický statement
+   ============================================================ */
+
+.hero {
+  background:
+    linear-gradient(180deg, rgba(255, 198, 26, 0.05), transparent 30%),
+    var(--nts-asfalt);
+  color: var(--nts-papir);
+  padding: 1.25rem 1.25rem 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* vodicí čára jako středová čára silnice */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 1.85rem;
+  width: 3px;
+  background-image: linear-gradient(
+    to bottom,
+    var(--nts-zlut) 0 26px,
+    transparent 26px 52px
+  );
+  background-size: 3px 52px;
+  opacity: 0.35;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.wordmark-nts {
+  font-family: var(--f-display);
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  background: var(--nts-zlut);
+  color: var(--nts-asfalt);
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  transform: skewX(-6deg);
+}
+
+.wordmark-sub {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  line-height: 1.5;
+  color: var(--nts-sedy);
+}
+
+.hero-tel {
+  text-align: right;
+  text-decoration: none;
+  color: var(--nts-papir);
+}
+.hero-tel-label {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nts-zlut);
+}
+.hero-tel-num {
+  font-family: var(--f-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+}
+.hero-tel:hover .hero-tel-num { color: var(--nts-zlut); }
+
+.hero-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3.5rem 0 2.5rem 1.5rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--nts-zlut);
+  margin: 0 0 1.25rem;
+}
+
+.hero-title {
+  font-family: var(--f-display);
+  font-size: clamp(3.2rem, 12vw, 8.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin: 0 0 1.75rem;
+}
+
+.hero-line {
+  display: block;
+  opacity: 0;
+  transform: translateX(-24px);
+  animation: nts-slide 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+.hero-line-1 { animation-delay: 0.05s; }
+.hero-line-2 {
+  animation-delay: 0.18s;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--nts-papir);
+}
+.hero-line-3 { animation-delay: 0.31s; }
+.hero-line-3 em {
+  font-style: normal;
+  color: var(--nts-zlut);
+}
+
+@keyframes nts-slide {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.hero-lead {
+  max-width: 34rem;
+  color: var(--nts-sedy);
+  margin: 0 0 2rem;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+/* ---------- signature: diagnostický záznam ---------- */
+
+.diag-strip {
+  border-top: 1px solid var(--nts-linka);
+  margin: 1.5rem -1.25rem 0;
+  background: var(--nts-kabina);
+}
+
+.diag-svg {
+  display: block;
+  width: 100%;
+  height: 90px;
+}
+
+.diag-path {
+  stroke: var(--nts-zlut);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-dasharray: 3600;
+  stroke-dashoffset: 3600;
+  animation: nts-trace 3.2s ease-out 0.5s forwards;
+  filter: drop-shadow(0 0 6px rgba(255, 198, 26, 0.5));
+}
+
+@keyframes nts-trace {
+  to { stroke-dashoffset: 0; }
+}
+
+.diag-readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  padding: 0 1.5rem 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--nts-sedy);
+}
+.diag-readout span::before {
+  content: "▮ ";
+  color: var(--nts-zlut);
+}
+
+/* ============================================================
+   SLUŽBY
+   ============================================================ */
+
+.sluzby {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.section-head h2,
+.onas h2 {
+  font-family: var(--f-display);
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+
+.section-sub {
+  color: #5c6470;
+  margin: 0 0 2.5rem;
+  max-width: 34rem;
+}
+
+.sluzby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.sluzba {
+  background: #fff;
+  border: 1px solid #e4e2da;
+  border-radius: 10px;
+  padding: 1.5rem 1.4rem 1.4rem;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.sluzba:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -12px rgba(18, 21, 26, 0.25);
+}
+
+.sluzba-kod {
+  display: inline-block;
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  background: var(--nts-asfalt);
+  color: var(--nts-zlut);
+  padding: 0.25rem 0.55rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.sluzba h3 {
+  font-family: var(--f-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.01em;
+  margin: 0 0 0.6rem;
+}
+
+.sluzba p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #454c56;
+}
+
+/* ---------- protokol prohlídky ---------- */
+
+.prohlidka {
+  margin-top: 3.5rem;
+  background: var(--nts-asfalt);
+  color: var(--nts-papir);
+  border-radius: 14px;
+  padding: 2.5rem 2rem;
+  scroll-margin-top: 2rem;
+}
+
+.prohlidka-head h3 {
+  font-family: var(--f-display);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.6rem;
+}
+.prohlidka-head h3::before {
+  content: "PROTOKOL Č. 2024/Z";
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  color: var(--nts-zlut);
+  margin-bottom: 0.6rem;
+}
+
+.prohlidka-head p {
+  color: var(--nts-sedy);
+  max-width: 38rem;
+  margin: 0 0 2rem;
+}
+
+.prohlidka-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1.5rem;
+}
+
+.protokol h4 {
+  font-family: var(--f-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+  color: var(--nts-zlut);
+  border-bottom: 1px dashed var(--nts-linka);
+  padding-bottom: 0.5rem;
+  margin: 0 0 0.75rem;
+}
+
+.protokol ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.92rem;
+  color: #c6ccd6;
+}
+
+.protokol li {
+  padding: 0.35rem 0 0.35rem 1.4rem;
+  position: relative;
+}
+.protokol li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--nts-zlut);
+  font-weight: 700;
+}
+
+/* ============================================================
+   O NÁS / DŮVĚRA
+   ============================================================ */
+
+.onas {
+  background: #fff;
+  border-top: 4px solid var(--nts-zlut);
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.onas-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.onas-text p {
+  color: #454c56;
+  max-width: 36rem;
+}
+.onas-text .btn { margin-top: 1rem; }
+
+.onas-fakta {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: #e4e2da;
+  border: 1px solid #e4e2da;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.fakt {
+  background: var(--nts-papir);
+  padding: 1.4rem 1.2rem;
+}
+
+.fakt dt {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6b7380;
+  margin-bottom: 0.4rem;
+}
+
+.fakt dd {
+  margin: 0;
+  font-family: var(--f-display);
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  letter-spacing: -0.01em;
+  color: var(--nts-asfalt);
+}
+
+/* ---------- skupina firem ---------- */
+
+.skupina {
+  max-width: 1100px;
+  margin: 3.5rem auto 0;
+  border-top: 1px solid #e4e2da;
+  padding-top: 2rem;
+}
+
+.skupina-label {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #6b7380;
+  margin: 0 0 1.25rem;
+}
+
+.skupina-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.skupina-list li {
+  border-left: 3px solid var(--nts-zlut);
+  padding-left: 1rem;
+}
+
+.skupina-list strong {
+  display: block;
+  font-family: var(--f-display);
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.skupina-list span {
+  font-size: 0.9rem;
+  color: #5c6470;
+}
+
+/* ============================================================
+   Responzivita + přístupnost
+   ============================================================ */
+
+@media (max-width: 780px) {
+  .onas-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .hero::before { left: 0.9rem; }
+  .hero-top, .hero-body { padding-left: 1.1rem; }
+  .hero-tel-num { font-size: 1.05rem; }
+  .prohlidka { padding: 2rem 1.4rem; }
+}
+
+@media (max-width: 480px) {
+  .hero-tel-label { display: none; }
+  .onas-fakta { grid-template-columns: 1fr; }
+  .btn { width: 100%; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-line {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .diag-path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .btn, .sluzba { transition: none; }
+  .sluzba:hover { transform: none; }
+}
