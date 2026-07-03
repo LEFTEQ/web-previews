@@ -1,0 +1,639 @@
+/* ============================================================
+   SF-ZEMTRADE — bourací práce, Ostrava
+   Paleta: beton, ocel, výstražná žluť demoliční techniky
+   Typo: Archivo Black (display, těžké jako kladivo) + Barlow (tělo)
+   Signature: rozpadající se rastr — fasáda paneláku, která mizí
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap");
+
+:root {
+  --beton: #2b2d2e;        /* tmavý beton */
+  --beton-svetly: #43474a; /* ocelová šeď */
+  --prach: #e8e6e1;        /* betonový prach — světlé pozadí */
+  --papir: #f5f4f0;
+  --zlut: #f5b301;         /* výstražná žluť rypadel */
+  --zlut-tmava: #c98f00;
+  --cerna: #17181a;
+
+  --font-display: "Archivo Black", "Arial Black", sans-serif;
+  --font-body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  --font-cond: "Barlow Condensed", "Arial Narrow", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--cerna);
+  background: var(--prach);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* viditelný focus všude */
+.zt a:focus-visible,
+.zt button:focus-visible {
+  outline: 3px solid var(--zlut);
+  outline-offset: 3px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  background: var(--cerna);
+  color: var(--prach);
+  overflow: hidden;
+  /* šrafovaná výstražná linka nahoře — páska ze staveniště */
+  border-top: 10px solid transparent;
+  border-image: repeating-linear-gradient(
+      -45deg,
+      var(--zlut) 0 14px,
+      var(--cerna) 14px 28px
+    )
+    10;
+}
+
+.hero-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.25rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+}
+
+.wordmark-sf {
+  background: var(--zlut);
+  color: var(--cerna);
+  padding: 0.1rem 0.45rem;
+  display: inline-block;
+  /* useknutý roh — jako odlomený kus panelu */
+  clip-path: polygon(0 0, 100% 0, 100% 72%, 84% 100%, 0 100%);
+}
+
+.wordmark-sep {
+  width: 2px;
+  height: 1.4em;
+  background: var(--beton-svetly);
+  display: inline-block;
+}
+
+.wordmark-zt {
+  color: var(--prach);
+}
+
+.hero-tel {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  color: var(--zlut);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.hero-tel:hover {
+  border-bottom-color: var(--zlut);
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 3rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--zlut);
+  margin-bottom: 1.25rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 8.5vw, 5.6rem);
+  line-height: 1.02;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  max-width: 14ch;
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-line-2 {
+  color: var(--zlut);
+}
+
+/* přeškrtnutí slova „zbouráme" — čára demolice se přes něj přetáhne */
+.strike-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.strike {
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  top: 52%;
+  height: 0.14em;
+  background: var(--prach);
+  transform: rotate(-2.5deg) scaleX(0);
+  transform-origin: left center;
+  animation: strike-in 0.5s cubic-bezier(0.7, 0, 0.3, 1) 0.9s forwards;
+}
+
+@keyframes strike-in {
+  to {
+    transform: rotate(-2.5deg) scaleX(1);
+  }
+}
+
+.hero-sub {
+  margin-top: 1.75rem;
+  max-width: 44ch;
+  font-size: 1.1rem;
+  color: #c9c7c1;
+}
+
+.hero-cta {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--zlut);
+  color: var(--cerna);
+  clip-path: polygon(0 0, 100% 0, 100% 78%, 94% 100%, 0 100%);
+}
+
+.btn-primary:hover {
+  background: #ffc71f;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--prach);
+  border: 2px solid var(--beton-svetly);
+}
+
+.btn-ghost:hover {
+  border-color: var(--zlut);
+  color: var(--zlut);
+}
+
+/* ---- SIGNATURE: rozpadající se rastr fasády ----
+   Mřížka „oken paneláku", která se směrem doprava dolů drolí —
+   budova v půlce demolice. Bloky u kraje odpadávají animací. */
+
+.rubble {
+  position: absolute;
+  right: -4%;
+  top: 8%;
+  width: min(46vw, 520px);
+  height: 84%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.rubble-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 6px;
+  height: 100%;
+}
+
+.rb {
+  background: var(--beton-svetly);
+  opacity: 0.55;
+}
+
+/* okna, která ještě „svítí" žlutě */
+.rb-1,
+.rb-7 {
+  background: var(--zlut);
+  opacity: 0.85;
+}
+
+/* bloky v různém stupni rozpadu — posunuté, pootočené, mizející */
+.rb-3 {
+  transform: translate(6px, 10px) rotate(6deg);
+  opacity: 0.35;
+}
+
+.rb-5 {
+  transform: translate(-4px, 16px) rotate(-8deg);
+  opacity: 0.25;
+}
+
+.rb-8 {
+  opacity: 0.12;
+  transform: translate(10px, 24px) rotate(12deg);
+}
+
+.rb-10 {
+  opacity: 0;
+}
+
+.rb-11 {
+  transform: translate(2px, 30px) rotate(-14deg);
+  opacity: 0.15;
+}
+
+/* jemný pád při načtení */
+.rb-3,
+.rb-5,
+.rb-8,
+.rb-11 {
+  animation: rb-fall 1.4s cubic-bezier(0.4, 0, 0.6, 1) 0.4s backwards;
+}
+
+@keyframes rb-fall {
+  from {
+    transform: none;
+    opacity: 0.55;
+  }
+}
+
+/* běžící pás služeb pod hero — statický, jen typografický rytmus */
+.hero-strip {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem 1.25rem;
+  padding: 0.9rem 1.25rem;
+  background: var(--beton);
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.24em;
+  color: #9a9floor4;
+  color: #9a9d94;
+}
+
+.strip-dot {
+  color: var(--zlut);
+  font-size: 0.6rem;
+  letter-spacing: 0;
+}
+
+/* ================= SLUŽBY ================= */
+
+.sluzby {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.section-head {
+  max-width: 62ch;
+  margin-bottom: 2.75rem;
+}
+
+.section-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--zlut-tmava);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.section-lead {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #4c4e4f;
+  max-width: 52ch;
+}
+
+.sluzby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.karta {
+  background: var(--papir);
+  border: 1px solid #d5d2ca;
+  border-left: 5px solid var(--zlut);
+  padding: 1.5rem 1.5rem 1.35rem;
+  /* useknutý roh — kus panelu */
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
+  transition: transform 0.18s ease, border-left-color 0.18s ease;
+}
+
+.karta:hover {
+  transform: translateY(-3px);
+  border-left-color: var(--cerna);
+}
+
+.karta-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.karta-id {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: var(--papir);
+  background: var(--cerna);
+  padding: 0.05rem 0.45rem;
+}
+
+.karta-nazev {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.karta-popis {
+  color: #3c3e3f;
+  font-size: 0.98rem;
+}
+
+.karta-detail {
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed #c6c3ba;
+  font-family: var(--font-cond);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--zlut-tmava);
+}
+
+/* ================= DŮVĚRA ================= */
+
+.duvera {
+  background: var(--cerna);
+  color: var(--prach);
+}
+
+.duvera-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.section-head-dark .section-eyebrow {
+  color: var(--zlut);
+}
+
+.postup {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  margin-bottom: 3.5rem;
+}
+
+.postup-item {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+}
+
+.postup-cislo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--zlut);
+  line-height: 1;
+  min-width: 2.6ch;
+}
+
+.postup-krok {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+}
+
+.postup-text {
+  color: #b8b6b0;
+  font-size: 0.98rem;
+  max-width: 48ch;
+}
+
+.fakta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--beton-svetly);
+  border: 1px solid var(--beton-svetly);
+  margin-bottom: 3rem;
+}
+
+.fakt {
+  background: var(--cerna);
+  padding: 1.4rem 1.25rem;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.fakt-cislo {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  color: var(--zlut);
+  line-height: 1.1;
+}
+
+.fakt-popisek {
+  font-family: var(--font-cond);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9a9d94;
+  margin-top: 0.4rem;
+}
+
+.reference {
+  border-left: 5px solid var(--zlut);
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  max-width: 62ch;
+  margin-bottom: 2.5rem;
+}
+
+.reference p {
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--prach);
+}
+
+.reference cite {
+  display: block;
+  margin-top: 0.9rem;
+  font-style: normal;
+  font-family: var(--font-cond);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--zlut);
+}
+
+.duvera-pata {
+  font-size: 0.9rem;
+  color: #85878a;
+  border-top: 1px solid var(--beton-svetly);
+  padding-top: 1.25rem;
+}
+
+/* ============ mobilní lišta „Zavolat" ============ */
+
+.mobil-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: block;
+  text-align: center;
+  background: var(--zlut);
+  color: var(--cerna);
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  padding: 0.9rem 1rem calc(0.9rem + env(safe-area-inset-bottom));
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* na širších obrazovkách lišta pryč — telefon je v hlavičce */
+@media (min-width: 760px) {
+  .mobil-cta {
+    display: none;
+  }
+}
+
+/* pod lištou nechat prostor na mobilu */
+@media (max-width: 759px) {
+  .duvera-inner {
+    padding-bottom: 6.5rem;
+  }
+
+  .rubble {
+    right: -18%;
+    top: 40%;
+    height: 55%;
+    opacity: 0.45;
+  }
+}
+
+/* ============ responzivita nahoru ============ */
+
+@media (min-width: 640px) {
+  .sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fakta {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .postup {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.25rem 3rem;
+  }
+
+  .hero-body {
+    padding-top: 5rem;
+    padding-bottom: 4.5rem;
+  }
+}
+
+/* ============ reduced motion ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .strike {
+    animation: none;
+    transform: rotate(-2.5deg) scaleX(1);
+  }
+
+  .rb-3,
+  .rb-5,
+  .rb-8,
+  .rb-11 {
+    animation: none;
+  }
+
+  .btn,
+  .karta {
+    transition: none;
+  }
+}
