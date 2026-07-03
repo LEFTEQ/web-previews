@@ -1,0 +1,566 @@
+/* =====================================================================
+   Řezníček & Co. — advokátní kancelář, České Budějovice
+   Token systém:
+   - Inkoust    #101820  (téměř černý modrošedý inkoust úředního zápisu)
+   - Papír      #FAFBF7  (chladný listinný bílý — ne krémový)
+   - Justiční   #1E3A5F  (hluboká modř taláru / razítka soudu)
+   - Pečeť      #8C1D2F  (karmín pečetního vosku — jediný teplý akcent)
+   - Tužka      #8B94A3  (marginálie, poznámky na okraji spisu)
+   Typografie: STIX Two Text (display, právnický „litery zákona" serif
+   s výraznými kurzívami) + system sans pro utilitární text.
+   Signature: obří § jako vodoznak listiny v hero + svislá „okrajová"
+   lišta spisu; kurzívní zdůraznění klíčových slov v nadpisech.
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap");
+
+:root {
+  --ink: #101820;
+  --paper: #fafbf7;
+  --justice: #1e3a5f;
+  --seal: #8c1d2f;
+  --pencil: #8b94a3;
+  --rule: #d7dce2;
+
+  --serif: "STIX Two Text", "Georgia", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* viditelný focus všude */
+.rz a:focus-visible,
+.rz button:focus-visible {
+  outline: 3px solid var(--seal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =============================== HERO =============================== */
+
+.rz-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+  padding: 1.5rem 1.25rem 4.5rem;
+  border-bottom: 4px double var(--justice);
+}
+
+.rz-hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.rz-wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.rz-wordmark-name {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.rz-wordmark-amp {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--seal);
+}
+
+.rz-wordmark-sub {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pencil);
+  flex-basis: 100%;
+}
+
+.rz-hero-tel {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--justice);
+  text-decoration: none;
+  border-bottom: 2px solid var(--seal);
+  padding-bottom: 0.1rem;
+}
+
+.rz-hero-tel:hover {
+  color: var(--seal);
+}
+
+.rz-hero-body {
+  position: relative;
+  z-index: 2;
+  max-width: 46rem;
+  padding-top: 3rem;
+}
+
+.rz-hero-eyebrow {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--seal);
+  margin: 0 0 1.25rem;
+}
+
+.rz-hero-title {
+  margin: 0;
+  font-weight: 600;
+  font-size: clamp(2.4rem, 8.5vw, 5.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.rz-hero-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--justice);
+}
+
+.rz-line {
+  display: block;
+}
+
+.rz-line-2,
+.rz-line-4 {
+  padding-left: 0.06em;
+}
+
+.rz-hero-lead {
+  max-width: 34rem;
+  margin: 1.75rem 0 2.25rem;
+  font-size: 1.125rem;
+  color: #3a434e;
+}
+
+.rz-hero-actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.rz-btn {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: 3px;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.rz-btn-solid {
+  background: var(--seal);
+  color: #fff;
+  border: 1px solid var(--seal);
+}
+
+.rz-btn-solid:hover {
+  background: #6f1524;
+  border-color: #6f1524;
+}
+
+.rz-btn-ghost {
+  color: var(--justice);
+  border: 1px solid var(--justice);
+  background: transparent;
+}
+
+.rz-btn-ghost:hover {
+  background: var(--justice);
+  color: var(--paper);
+}
+
+/* Signature — obří § jako vodoznak listiny */
+.rz-hero-par {
+  position: absolute;
+  z-index: 1;
+  right: -0.08em;
+  bottom: -0.28em;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(18rem, 42vw, 38rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(30, 58, 95, 0.22);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* okrajová lišta spisu */
+.rz-hero-margin {
+  position: absolute;
+  z-index: 2;
+  right: 1.1rem;
+  top: 7rem;
+  display: none;
+  flex-direction: column;
+  gap: 1.5rem;
+  writing-mode: vertical-rl;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pencil);
+  border-left: 1px solid var(--rule);
+  padding-left: 0.7rem;
+}
+
+/* ========================== SEKCE — společné ========================= */
+
+.rz-eyebrow {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--seal);
+  margin: 0 0 0.9rem;
+}
+
+.rz-eyebrow-light {
+  color: #d9a0aa;
+}
+
+.rz-h2 {
+  margin: 0;
+  font-weight: 600;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+.rz-h2 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--justice);
+}
+
+.rz-h2-light {
+  color: var(--paper);
+}
+
+.rz-h2-light em {
+  color: #a8c3e0;
+}
+
+/* ============================== SLUŽBY ============================== */
+
+.rz-sluzby {
+  padding: 4.5rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.rz-section-head {
+  max-width: 42rem;
+  margin-bottom: 3rem;
+}
+
+.rz-section-lead {
+  margin: 1rem 0 0;
+  color: #3a434e;
+}
+
+.rz-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+
+.rz-card {
+  background: var(--paper);
+  padding: 1.75rem 1.5rem 2rem;
+  position: relative;
+  transition: background-color 0.25s ease;
+}
+
+.rz-card:hover {
+  background: #f1f4f0;
+}
+
+.rz-card-par {
+  display: block;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--seal);
+  margin-bottom: 0.7rem;
+}
+
+.rz-card-title {
+  margin: 0 0 0.6rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.rz-card-text {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #3a434e;
+}
+
+/* ============================ POSTUP / DŮVĚRA ======================== */
+
+.rz-postup {
+  background: var(--justice);
+  color: var(--paper);
+  padding: 4.5rem 1.25rem;
+}
+
+.rz-postup-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.rz-postup-head {
+  max-width: 42rem;
+  margin-bottom: 3rem;
+}
+
+.rz-kroky {
+  list-style: none;
+  margin: 0 0 3.5rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  counter-reset: krok;
+}
+
+.rz-krok {
+  border-top: 1px solid rgba(250, 251, 247, 0.25);
+  padding-top: 1.25rem;
+}
+
+.rz-krok-num {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #a8c3e0;
+  margin-bottom: 0.6rem;
+}
+
+.rz-krok-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--paper);
+}
+
+.rz-krok-text {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #ccd7e4;
+}
+
+/* citace klienta */
+.rz-cit {
+  margin: 0 0 3.5rem;
+  padding: 1.75rem 1.5rem;
+  border-left: 4px solid var(--seal);
+  background: rgba(16, 24, 32, 0.25);
+}
+
+.rz-cit blockquote {
+  margin: 0;
+}
+
+.rz-cit p {
+  margin: 0;
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--paper);
+}
+
+.rz-cit figcaption {
+  margin-top: 0.9rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: #a8c3e0;
+}
+
+/* fakta */
+.rz-fakta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.rz-fakt {
+  border-top: 1px solid rgba(250, 251, 247, 0.25);
+  padding-top: 1rem;
+}
+
+.rz-fakt-cislo {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.7rem;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+}
+
+.rz-fakt-label {
+  display: block;
+  margin-top: 0.25rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: #ccd7e4;
+}
+
+/* ============================ ANIMACE ================================ */
+
+@keyframes rz-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rz-ink {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.rz-line {
+  animation: rz-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rz-line-1 { animation-delay: 0.05s; }
+.rz-line-2 { animation-delay: 0.15s; }
+.rz-line-3 { animation-delay: 0.25s; }
+.rz-line-4 { animation-delay: 0.35s; }
+
+.rz-hero-eyebrow,
+.rz-hero-lead,
+.rz-hero-actions {
+  animation: rz-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rz-hero-eyebrow { animation-delay: 0s; }
+.rz-hero-lead { animation-delay: 0.45s; }
+.rz-hero-actions { animation-delay: 0.55s; }
+
+.rz-hero-par {
+  animation: rz-ink 1.4s ease 0.5s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .rz-line,
+  .rz-hero-eyebrow,
+  .rz-hero-lead,
+  .rz-hero-actions,
+  .rz-hero-par {
+    animation: none;
+  }
+  .rz-btn,
+  .rz-card {
+    transition: none;
+  }
+}
+
+/* ========================== RESPONSIVITA ============================ */
+
+@media (min-width: 640px) {
+  .rz-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .rz-wordmark-sub {
+    flex-basis: auto;
+    margin-left: 0.6rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .rz-hero {
+    padding: 2rem 3.5rem 6.5rem;
+  }
+  .rz-hero-body {
+    padding-top: 5rem;
+  }
+  .rz-hero-margin {
+    display: flex;
+  }
+  .rz-sluzby {
+    padding: 6rem 3.5rem;
+  }
+  .rz-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .rz-card {
+    padding: 2rem 1.75rem 2.5rem;
+  }
+  .rz-postup {
+    padding: 6rem 3.5rem;
+  }
+  .rz-kroky {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+  .rz-fakta {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+  .rz-cit {
+    padding: 2.25rem 2.5rem;
+    max-width: 56rem;
+  }
+}
