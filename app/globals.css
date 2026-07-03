@@ -1,0 +1,513 @@
+/* =====================================================================
+   Dr.KUBBA — zdravá obuv, Olomouc
+   Tokeny:
+     --ink      #21313A  hluboká šedomodrá (klid ordinace, ne černá)
+     --paper    #FBF9F4  teplá bílá (kůže/přírodní materiál, ne krémová šablona)
+     --clay     #C4552D  cihlová — olomoucká dlažba / kůže podešve (akcent)
+     --moss     #5E7D5A  tlumená zelená — „zdravá“ bez lékárenského klišé
+     --sand     #EDE5D6  písková plocha karet
+   Typo: display = systémová rounded/humanist kombinace přes @font stack
+         (Georgia italic pro em zvýraznění = lidský, „lékařský podpis“)
+   Signature: stopa bosých chodidel procházející hero sekcí
+   ===================================================================== */
+
+:root {
+  --ink: #21313a;
+  --ink-soft: #4a5b64;
+  --paper: #fbf9f4;
+  --clay: #c4552d;
+  --clay-dark: #a33f1c;
+  --moss: #5e7d5a;
+  --sand: #ede5d6;
+  --radius: 18px;
+  --font-body: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-display: "Avenir Next", "Segoe UI", "Trebuchet MS", system-ui, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dk a {
+  color: var(--clay-dark);
+}
+
+.dk :focus-visible {
+  outline: 3px solid var(--clay);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(168deg, var(--paper) 0%, var(--sand) 78%, #e5d9c3 100%);
+  padding: 0 clamp(20px, 5vw, 72px) 0;
+}
+
+.hero-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.wordmark {
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 26px;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.wordmark-dr {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--clay);
+  margin-right: 2px;
+}
+
+.wordmark-kubba {
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.hero-nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 3vw, 30px);
+}
+
+.hero-nav-links a {
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.hero-nav-links a:hover {
+  color: var(--clay-dark);
+}
+
+.nav-tel {
+  color: var(--clay-dark) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  padding: clamp(40px, 8vw, 96px) 0 clamp(36px, 6vw, 72px);
+}
+
+.hero-eyebrow {
+  margin: 0 0 18px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+.hero-title {
+  margin: 0 0 24px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(44px, 9vw, 96px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+
+.ht-line {
+  display: block;
+}
+
+.ht-2 {
+  color: var(--clay);
+}
+
+.ht-3 {
+  font-size: 0.62em;
+  margin-top: 0.28em;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.hero-title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.hero-lead {
+  margin: 0 0 32px;
+  max-width: 54ch;
+  font-size: clamp(17px, 2vw, 19px);
+  color: var(--ink-soft);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--clay);
+  color: var(--paper);
+}
+
+.btn-primary:hover {
+  background: var(--clay-dark);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--ink);
+  border: 2px solid var(--ink);
+}
+
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ---------- Signature: stopa chodidel ---------- */
+
+.footprints {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.fp {
+  position: absolute;
+  width: clamp(34px, 5vw, 56px);
+  color: var(--clay);
+  opacity: 0;
+  animation: fp-step 0.7s ease forwards;
+}
+
+.fp-right {
+  transform: scaleX(-1) rotate(-12deg);
+}
+
+.fp-1 { right: 26%; bottom: 4%;  transform: rotate(14deg); animation-delay: 0.2s; opacity: 0; }
+.fp-2 { right: 18%; bottom: 22%; animation-delay: 0.55s; }
+.fp-3 { right: 13%; bottom: 42%; transform: rotate(20deg); animation-delay: 0.9s; }
+.fp-4 { right: 6%;  bottom: 60%; animation-delay: 1.25s; }
+.fp-5 { right: 2%;  bottom: 80%; transform: rotate(24deg); animation-delay: 1.6s; }
+
+@keyframes fp-step {
+  from { opacity: 0; }
+  to { opacity: 0.5; }
+}
+
+.hero-strip {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  padding: 18px 0 26px;
+  border-top: 2px solid rgba(33, 49, 58, 0.15);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+
+/* ---------- Sekce obecně ---------- */
+
+section {
+  padding: clamp(56px, 9vw, 110px) clamp(20px, 5vw, 72px);
+}
+
+.section-head {
+  max-width: 720px;
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+section h2 {
+  margin: 0 0 16px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(32px, 5.5vw, 54px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+section h2 em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--clay);
+}
+
+.section-lead {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 18px;
+  max-width: 58ch;
+}
+
+/* ---------- Sekce 1: znaky zdravé obuvi ---------- */
+
+.znaky {
+  background: var(--paper);
+}
+
+.znaky-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.znak {
+  background: var(--sand);
+  border-radius: var(--radius);
+  padding: 26px 24px 28px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.znak:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(33, 49, 58, 0.12);
+}
+
+.znak-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--moss);
+  border-radius: 999px;
+  padding: 5px 12px;
+  margin-bottom: 16px;
+}
+
+.znak h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.znak p {
+  margin: 0;
+  font-size: 15.5px;
+  color: var(--ink-soft);
+}
+
+.ortoped {
+  margin-top: clamp(28px, 4vw, 44px);
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--radius);
+  padding: clamp(24px, 4vw, 40px);
+}
+
+.ortoped-foot {
+  flex: 0 0 auto;
+  width: 52px;
+  color: var(--clay);
+}
+
+.ortoped h3 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 22px;
+}
+
+.ortoped p {
+  margin: 0;
+  color: rgba(251, 249, 244, 0.82);
+  max-width: 62ch;
+}
+
+/* ---------- Sekce 2: prodejny ---------- */
+
+.prodejny {
+  background: var(--sand);
+}
+
+.prodejny-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 18px;
+}
+
+.prodejna {
+  background: var(--paper);
+  border-radius: var(--radius);
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+}
+
+.prodejna h3 {
+  margin: 0 0 4px;
+  font-family: var(--font-display);
+  font-size: 23px;
+  letter-spacing: -0.01em;
+}
+
+.prodejna-misto {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+.prodejna-pozn {
+  margin: 0 0 20px;
+  color: var(--ink-soft);
+  font-size: 15.5px;
+}
+
+.prodejna-info {
+  margin: 0 0 24px;
+  display: grid;
+  gap: 14px;
+  border-top: 2px solid var(--sand);
+  padding-top: 18px;
+}
+
+.prodejna-info dt {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+
+.prodejna-info dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.prodejna-info dd span {
+  display: block;
+}
+
+.btn-tel {
+  margin-top: auto;
+  text-align: center;
+  background: var(--ink);
+  color: var(--paper);
+  font-variant-numeric: tabular-nums;
+}
+
+.btn-tel:hover {
+  background: var(--clay);
+  transform: translateY(-2px);
+}
+
+.prodejny-note {
+  margin: clamp(28px, 4vw, 40px) 0 0;
+  max-width: 62ch;
+  color: var(--ink-soft);
+  font-size: 15.5px;
+}
+
+.prodejny-note a {
+  font-weight: 700;
+}
+
+/* ---------- Mobil ---------- */
+
+@media (max-width: 640px) {
+  .hero-nav-links a:not(.nav-tel) {
+    display: none;
+  }
+
+  .ortoped {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fp-4,
+  .fp-5 {
+    display: none;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .fp {
+    animation: none;
+    opacity: 0.5;
+  }
+
+  .btn,
+  .znak {
+    transition: none;
+  }
+}
