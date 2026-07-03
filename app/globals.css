@@ -1,0 +1,529 @@
+/* ============================================================
+   PEPE LOPEZ — rozvoz mexického jídla, Ústí nad Labem
+   Paleta odvozená z mexické taquerie: sytá červeno-oranžová
+   (salsa roja), tmavá kakaovo-hnědá (mole), limetková zeleň,
+   kukuřičná žluť. Signature prvek: papel picado — vystřihovaný
+   papírový lem, který odděluje hero od obsahu.
+   ============================================================ */
+
+:root {
+  --salsa: #d43a1f;        /* salsa roja — hlavní plocha hero */
+  --salsa-deep: #a82812;   /* stín salsy */
+  --mole: #2b1710;         /* tmavá kakaová hnědá */
+  --maiz: #f6c445;         /* kukuřičná žluť — akcent */
+  --lima: #7fae3d;         /* limetka — sekundární akcent */
+  --masa: #fdf6ea;         /* světlé pozadí, barva tortilly */
+  --ink: #2b1710;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--masa);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Utility / display font stack — kondenzovaný grotesk pro plakátový hero */
+.pl h1,
+.pl h2,
+.pl h3,
+.pl .btn,
+.pl .eyebrow,
+.pl .dish-tag,
+.pl .promise-k,
+.pl .nav-links,
+.pl .wordmark,
+.pl .zones th {
+  font-family: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Impact, sans-serif;
+}
+
+.pl a:focus-visible,
+.pl button:focus-visible {
+  outline: 3px solid var(--maiz);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  background:
+    radial-gradient(ellipse 120% 80% at 70% -10%, var(--salsa-deep) 0%, transparent 55%),
+    var(--salsa);
+  color: var(--masa);
+  padding: 0 0 96px;
+  overflow: hidden;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 20px 0;
+}
+
+.wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 0.9;
+  text-decoration: none;
+  color: var(--masa);
+  letter-spacing: 0.14em;
+  font-weight: 700;
+}
+
+.wordmark-pepe {
+  font-size: 1.05rem;
+  color: var(--maiz);
+}
+
+.wordmark-lopez {
+  font-size: 1.35rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nav-links a {
+  color: var(--masa);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+}
+
+.nav-links a:hover {
+  border-bottom-color: var(--maiz);
+}
+
+.nav-call {
+  font-weight: 700;
+  color: var(--maiz) !important;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 64px 20px 0;
+}
+
+.hero-eyebrow {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--maiz);
+  font-family: "Arial Narrow", "Roboto Condensed", sans-serif;
+}
+
+.chile {
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Plakátový titulek — tři řádky, střídavé barvy jako papel picado praporky */
+.hero-title {
+  margin: 0 0 24px;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  font-size: clamp(3.2rem, 12vw, 8.5rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-title .line {
+  display: block;
+}
+
+.line-1 { color: var(--maiz); }
+.line-2 { color: var(--masa); }
+.line-3 {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--masa);
+}
+
+.hero-sub {
+  max-width: 34em;
+  margin: 0 0 32px;
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: #ffe9d6;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 16px 28px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--maiz);
+  color: var(--mole);
+}
+
+.btn-solid:hover {
+  background: #ffd45e;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  border: 2px solid var(--masa);
+  color: var(--masa);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.hero-hours {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #ffd9bd;
+}
+
+/* ===== SIGNATURE: papel picado lem ===== */
+
+.picado {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  color: var(--masa);
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.picado svg {
+  display: block;
+  width: 100%;
+  height: 44px;
+}
+
+/* Page-load sekvence hero titulku */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-title .line,
+  .hero-sub,
+  .hero-actions,
+  .hero-hours,
+  .hero-eyebrow {
+    animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  }
+  .hero-eyebrow { animation-delay: 0.05s; }
+  .line-1 { animation-delay: 0.12s; }
+  .line-2 { animation-delay: 0.22s; }
+  .line-3 { animation-delay: 0.32s; }
+  .hero-sub { animation-delay: 0.45s; }
+  .hero-actions { animation-delay: 0.55s; }
+  .hero-hours { animation-delay: 0.65s; }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .pl *,
+  .pl *::before,
+  .pl *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ================= SEKCE (společné) ================= */
+
+.section {
+  padding: 72px 20px;
+}
+
+.section-head {
+  max-width: 1100px;
+  margin: 0 auto 40px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--salsa);
+}
+
+.eyebrow-light {
+  color: var(--maiz);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+  font-weight: 800;
+}
+
+.section-lead {
+  margin: 0;
+  max-width: 38em;
+  font-size: 1.05rem;
+  color: #5b463c;
+}
+
+.section-lead-light {
+  color: #e8d4c4;
+}
+
+/* ================= MENU ================= */
+
+.menu {
+  background: var(--masa);
+}
+
+.menu-grid {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+}
+
+.dish {
+  background: #fff;
+  border: 1px solid #eadfce;
+  border-top: 5px solid var(--salsa);
+  border-radius: 8px;
+  padding: 24px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dish:nth-child(3n + 2) { border-top-color: var(--maiz); }
+.dish:nth-child(3n) { border-top-color: var(--lima); }
+
+.dish:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(43, 23, 16, 0.1);
+}
+
+.dish-tag {
+  margin: 0 0 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #a08363;
+}
+
+.dish-name {
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.dish-desc {
+  margin: 0 0 18px;
+  font-size: 0.98rem;
+  color: #5b463c;
+  flex-grow: 1;
+}
+
+.dish-price {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--salsa);
+}
+
+.menu-note {
+  max-width: 1100px;
+  margin: 32px auto 0;
+  padding: 16px 20px;
+  background: #fbf0d8;
+  border-left: 5px solid var(--maiz);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* ================= ROZVOZ ================= */
+
+.delivery {
+  background: var(--mole);
+  color: var(--masa);
+}
+
+.zones {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 48px;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.zones th {
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+  color: var(--maiz);
+  padding: 10px 14px;
+  border-bottom: 2px solid rgba(246, 196, 69, 0.5);
+}
+
+.zones td {
+  padding: 14px;
+  border-bottom: 1px solid rgba(253, 246, 234, 0.15);
+}
+
+.zones tbody tr:hover {
+  background: rgba(253, 246, 234, 0.06);
+}
+
+.promises {
+  max-width: 1100px;
+  margin: 0 auto 48px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+.promise-k {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--lima);
+}
+
+.promise h3 {
+  margin: 0 0 10px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.promise p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #e8d4c4;
+}
+
+.quote {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 24px;
+  border-left: 5px solid var(--salsa);
+  background: rgba(212, 58, 31, 0.12);
+  border-radius: 4px;
+}
+
+.quote p {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.quote cite {
+  font-style: normal;
+  font-size: 0.95rem;
+  color: var(--maiz);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 640px) {
+  .nav {
+    flex-wrap: wrap;
+  }
+
+  .nav-links {
+    gap: 14px;
+    font-size: 0.85rem;
+  }
+
+  .hero-inner {
+    padding-top: 48px;
+  }
+
+  .hero {
+    padding-bottom: 72px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .section {
+    padding: 56px 16px;
+  }
+
+  .zones {
+    font-size: 0.92rem;
+  }
+
+  .zones th,
+  .zones td {
+    padding: 10px 8px;
+  }
+}
