@@ -1,0 +1,573 @@
+/* ============================================================
+   AUTOSERVIS DROBIL — Olomouc
+   Palette: hala + dílna. Ocelová modř z původního webu povýšená
+   na plnohodnotnou značkovou barvu, signální žluť zvedáku,
+   grafitová dílna, světlý beton podlahy.
+   ============================================================ */
+
+:root {
+  --ad-graphite: #14181d;   /* dílna po zavíračce */
+  --ad-steel: #1e5a8a;      /* modř původního webu, prohloubená */
+  --ad-steel-deep: #123a5c;
+  --ad-lift: #f2b705;       /* žluť hydraulického zvedáku */
+  --ad-concrete: #eef0f2;   /* betonová podlaha haly */
+  --ad-white: #ffffff;
+  --ad-ink: #22272e;
+  --ad-muted: #5b6672;
+
+  --ad-font-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+  --ad-font-body: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --ad-font-mono: "Consolas", "SFMono-Regular", Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--ad-font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ad-ink);
+  background: var(--ad-concrete);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ad-page a:focus-visible,
+.ad-page button:focus-visible {
+  outline: 3px solid var(--ad-lift);
+  outline-offset: 3px;
+}
+
+/* ========================= HERO ========================= */
+
+.ad-hero {
+  position: relative;
+  background:
+    linear-gradient(160deg, var(--ad-graphite) 0%, #182430 55%, var(--ad-steel-deep) 100%);
+  color: var(--ad-white);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+/* jemný rastr děrovaného plechu ponku */
+.ad-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1.5px);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+
+.ad-hero-top {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.ad-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.ad-wordmark-badge {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  background: var(--ad-lift);
+  color: var(--ad-graphite);
+  font-family: var(--ad-font-display);
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  /* zkosený roh jako klín zvedáku */
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
+}
+
+.ad-wordmark-text {
+  font-family: var(--ad-font-display);
+  font-size: 0.95rem;
+  line-height: 1.15;
+  letter-spacing: 0.14em;
+}
+
+.ad-hero-meta {
+  display: none;
+  text-align: right;
+  font-family: var(--ad-font-mono);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+}
+
+.ad-meta-line {
+  display: block;
+}
+
+.ad-hero-main {
+  position: relative;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3rem 0 3.5rem;
+}
+
+.ad-hero-eyebrow {
+  font-family: var(--ad-font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ad-lift);
+  margin: 0 0 1.25rem;
+  max-width: 34rem;
+}
+
+.ad-hero-title {
+  font-family: var(--ad-font-display);
+  font-size: clamp(2.4rem, 9vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+}
+
+.ad-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: ad-rise 0.55s ease-out forwards;
+}
+
+.ad-line-1 { animation-delay: 0.05s; }
+.ad-line-2 { animation-delay: 0.18s; }
+.ad-line-3 { animation-delay: 0.34s; }
+
+.ad-line-accent {
+  color: var(--ad-lift);
+}
+
+@keyframes ad-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ad-hero-sub {
+  max-width: 32rem;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0 0 2rem;
+}
+
+.ad-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.ad-btn {
+  display: inline-block;
+  font-family: var(--ad-font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.9rem 1.5rem;
+  border: 2px solid transparent;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.ad-btn-primary {
+  background: var(--ad-lift);
+  color: var(--ad-graphite);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+}
+
+.ad-btn-primary:hover {
+  background: #ffc81e;
+  transform: translateY(-2px);
+}
+
+.ad-btn-ghost {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: var(--ad-white);
+}
+
+.ad-btn-ghost:hover {
+  border-color: var(--ad-lift);
+  color: var(--ad-lift);
+}
+
+/* --- signature: výškové měřítko haly (rampa do 3,6 m) --- */
+
+.ad-gauge {
+  display: none;
+  position: absolute;
+  right: 3rem;
+  top: 6.5rem;
+  bottom: 4.5rem;
+  width: 15rem;
+}
+
+.ad-gauge-track {
+  position: absolute;
+  inset: 0;
+  border-right: 3px solid var(--ad-lift);
+}
+
+.ad-tick {
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-direction: row-reverse;
+  transform: translateY(50%);
+}
+
+.ad-tick i {
+  display: block;
+  width: 1.1rem;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.ad-tick-label i {
+  width: 1.8rem;
+  background: var(--ad-lift);
+}
+
+.ad-tick b {
+  font-family: var(--ad-font-mono);
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
+}
+
+.ad-tick-max b {
+  color: var(--ad-lift);
+  font-weight: 700;
+}
+
+/* --- šrafovaný pruh vjezdu do haly --- */
+
+.ad-hero-stripe {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 6px solid var(--ad-lift);
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--ad-graphite) 0,
+    var(--ad-graphite) 14px,
+    var(--ad-lift) 14px,
+    var(--ad-lift) 28px
+  );
+  padding: 0.45rem 0;
+  font-family: var(--ad-font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  color: var(--ad-graphite);
+  margin: 0 -1.25rem;
+}
+
+.ad-hero-stripe span {
+  background: var(--ad-lift);
+  padding: 0.15rem 0.4rem;
+}
+
+/* ========================= SEKCE ========================= */
+
+.ad-section {
+  padding: 4rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.ad-section-title {
+  font-family: var(--ad-font-display);
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--ad-graphite);
+  margin: 0 0 1rem;
+}
+
+.ad-section-lead {
+  max-width: 38rem;
+  color: var(--ad-muted);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.ad-section-head {
+  margin-bottom: 2.5rem;
+}
+
+/* --- služby --- */
+
+.ad-service-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.ad-card {
+  background: var(--ad-white);
+  padding: 1.5rem 1.5rem 1.6rem;
+  border-top: 4px solid var(--ad-steel);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ad-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(20, 24, 29, 0.12);
+}
+
+.ad-card-hl {
+  border-top-color: var(--ad-lift);
+  background: var(--ad-graphite);
+  color: var(--ad-white);
+}
+
+.ad-card-hl p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.ad-card-tag {
+  display: inline-block;
+  font-family: var(--ad-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ad-steel);
+  background: rgba(30, 90, 138, 0.1);
+  padding: 0.2rem 0.55rem;
+  margin-bottom: 0.8rem;
+}
+
+.ad-card-hl .ad-card-tag {
+  color: var(--ad-graphite);
+  background: var(--ad-lift);
+}
+
+.ad-card h3 {
+  font-family: var(--ad-font-display);
+  font-size: 1.1rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin: 0 0 0.6rem;
+}
+
+.ad-card p {
+  margin: 0;
+  color: var(--ad-muted);
+  font-size: 0.95rem;
+}
+
+/* --- důvěra / o nás --- */
+
+.ad-trust {
+  padding-top: 1rem;
+}
+
+.ad-trust-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.ad-trust-copy p {
+  max-width: 36rem;
+  color: var(--ad-ink);
+}
+
+.ad-facts {
+  margin: 2rem 0 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+
+.ad-fact {
+  border-left: 4px solid var(--ad-lift);
+  padding-left: 1rem;
+}
+
+.ad-fact dt {
+  font-family: var(--ad-font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ad-steel);
+  margin-bottom: 0.15rem;
+}
+
+.ad-fact dd {
+  margin: 0;
+  font-weight: 600;
+  color: var(--ad-graphite);
+}
+
+/* panel s kontaktem */
+
+.ad-trust-panel {
+  background: var(--ad-graphite);
+  color: var(--ad-white);
+  padding: 2rem 1.5rem;
+  align-self: start;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+}
+
+.ad-panel-title {
+  font-family: var(--ad-font-display);
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+
+.ad-panel-note {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  margin: 0 0 1.25rem;
+}
+
+.ad-btn-block {
+  display: block;
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.ad-hours {
+  width: 100%;
+  margin: 1.5rem 0 0;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.ad-hours-caption {
+  text-align: left;
+  font-family: var(--ad-font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ad-lift);
+  padding-bottom: 0.5rem;
+}
+
+.ad-hours th,
+.ad-hours td {
+  padding: 0.45rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: left;
+  font-weight: 400;
+}
+
+.ad-hours td {
+  text-align: right;
+  font-family: var(--ad-font-mono);
+}
+
+.ad-panel-hiring {
+  margin: 1.5rem 0 0;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.75);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 1.25rem;
+}
+
+.ad-panel-hiring strong {
+  color: var(--ad-lift);
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (min-width: 700px) {
+  .ad-hero {
+    padding: 2rem 3rem 0;
+  }
+
+  .ad-hero-meta {
+    display: block;
+  }
+
+  .ad-hero-stripe {
+    margin: 0 -3rem;
+  }
+
+  .ad-service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ad-facts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ad-section {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ad-gauge {
+    display: block;
+  }
+
+  .ad-hero-main {
+    padding-right: 19rem;
+    padding-top: 4.5rem;
+    padding-bottom: 5rem;
+  }
+
+  .ad-service-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .ad-trust-grid {
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3rem;
+  }
+}
+
+/* ==================== MOTION ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ad-line {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .ad-btn,
+  .ad-card {
+    transition: none;
+  }
+
+  .ad-btn-primary:hover,
+  .ad-card:hover {
+    transform: none;
+  }
+}
