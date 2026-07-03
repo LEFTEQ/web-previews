@@ -1,0 +1,569 @@
+/* ==========================================================================
+   InVoTop — topenářství, České Budějovice
+   Paleta odvozená z řemesla: značení potrubí dle ČSN
+   červená = topná voda, modrá = studená voda, žlutá = plyn,
+   podklad = tmavý grafit kotelny, papír = technický výkres.
+   ========================================================================== */
+
+:root {
+  --it-ink: #16232e;        /* grafit kotelny */
+  --it-ink-2: #1f3242;      /* hlubší modrošedá pro plochy */
+  --it-paper: #eef2f4;      /* technický papír, studený, ne krémový */
+  --it-heat: #d94f30;       /* topná větev */
+  --it-water: #2f7fb8;      /* vodovodní větev */
+  --it-gas: #e8b325;        /* plynová větev (žluté značení) */
+  --it-line: #c8d3d9;
+  --it-radius: 10px;
+  --it-font-display: "Arial Black", "Avenir Next Heavy", Haettenschweiler, "Franklin Gothic Heavy", sans-serif;
+  --it-font-body: Georgia, "Times New Roman", serif;
+  --it-font-util: "Courier New", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--it-paper);
+  color: var(--it-ink);
+  font-family: var(--it-font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.it-shell {
+  width: min(1120px, 100% - 2.5rem);
+  margin-inline: auto;
+}
+
+/* Focus — vysoký kontrast na tmavém i světlém */
+.it-page a:focus-visible,
+.it-page button:focus-visible {
+  outline: 3px solid var(--it-gas);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   HERO — tmavá kotelna, typografický statement + schéma tří okruhů
+   ========================================================================== */
+
+.it-hero {
+  background:
+    linear-gradient(160deg, var(--it-ink) 0%, var(--it-ink-2) 70%, #24384a 100%);
+  color: #f4f7f8;
+  position: relative;
+  overflow: hidden;
+}
+
+.it-hero-grid {
+  position: relative;
+  padding: 1.75rem 0 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 92svh;
+}
+
+/* --- horní lišta: wordmark + telefon --- */
+
+.it-hero-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.it-wordmark {
+  font-family: var(--it-font-display);
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.it-wm-vo { color: var(--it-heat); }
+
+.it-wm-sub {
+  font-family: var(--it-font-util);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #9db2c0;
+  font-weight: 400;
+}
+
+.it-hero-tel {
+  text-decoration: none;
+  color: #f4f7f8;
+  text-align: right;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  border: 2px solid var(--it-heat);
+  border-radius: var(--it-radius);
+  padding: 0.5rem 0.9rem;
+  transition: background-color 160ms ease;
+}
+
+.it-hero-tel:hover { background: rgba(217, 79, 48, 0.18); }
+
+.it-tel-label {
+  font-family: var(--it-font-util);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #f0a08b;
+}
+
+.it-tel-num {
+  font-family: var(--it-font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
+}
+
+/* --- hlavní sdělení --- */
+
+.it-hero-main {
+  margin-top: clamp(2.5rem, 8vh, 5rem);
+  max-width: 34rem;
+  position: relative;
+  z-index: 2;
+}
+
+.it-eyebrow {
+  font-family: var(--it-font-util);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--it-gas);
+  margin: 0 0 1.25rem;
+}
+
+.it-h1 {
+  font-family: var(--it-font-display);
+  font-size: clamp(2.9rem, 9vw, 5.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  margin: 0 0 1.5rem;
+  text-transform: uppercase;
+}
+
+.it-h1-line { display: block; }
+.it-h1-line-2 { color: var(--it-heat); }
+.it-amp { color: var(--it-water); }
+
+.it-lede {
+  font-size: 1.1rem;
+  color: #cfdae2;
+  max-width: 30rem;
+  margin: 0 0 2rem;
+}
+
+.it-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.it-btn {
+  font-family: var(--it-font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 0.9rem 1.5rem;
+  border-radius: var(--it-radius);
+  display: inline-block;
+  transition: transform 160ms ease, background-color 160ms ease;
+}
+
+.it-btn-primary {
+  background: var(--it-heat);
+  color: #fff;
+}
+
+.it-btn-primary:hover { background: #c04226; transform: translateY(-2px); }
+
+.it-btn-ghost {
+  color: #f4f7f8;
+  border: 2px solid #4b6275;
+}
+
+.it-btn-ghost:hover { border-color: #9db2c0; transform: translateY(-2px); }
+
+/* --- SIGNATURE: schéma potrubních okruhů --- */
+
+.it-pipes {
+  position: absolute;
+  right: -1rem;
+  top: 0;
+  bottom: 3.2rem;
+  width: min(380px, 42%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.it-pipes svg {
+  width: 100%;
+  height: 100%;
+}
+
+.it-pipe {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: it-flow 1.6s ease-out forwards;
+}
+
+.it-pipe-heat  { stroke: var(--it-heat);  animation-delay: 0.2s; }
+.it-pipe-water { stroke: var(--it-water); animation-delay: 0.55s; }
+.it-pipe-gas   { stroke: var(--it-gas);   animation-delay: 0.9s; }
+
+.it-valve {
+  fill: var(--it-ink);
+  stroke-width: 5;
+  opacity: 0;
+  animation: it-pop 400ms ease-out forwards;
+}
+
+.it-valve-heat  { stroke: var(--it-heat);  animation-delay: 1.3s; }
+.it-valve-water { stroke: var(--it-water); animation-delay: 1.5s; }
+.it-valve-gas   { stroke: var(--it-gas);   animation-delay: 1.7s; }
+
+.it-radiator rect {
+  fill: none;
+  stroke: var(--it-heat);
+  stroke-width: 4;
+  opacity: 0;
+  animation: it-pop 400ms ease-out forwards;
+  animation-delay: 1.6s;
+}
+
+@keyframes it-flow {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes it-pop {
+  from { opacity: 0; transform: scale(0.6); transform-origin: center; transform-box: fill-box; }
+  to   { opacity: 1; transform: scale(1);   transform-origin: center; transform-box: fill-box; }
+}
+
+/* --- spodní lišta hero --- */
+
+.it-hero-strip {
+  list-style: none;
+  margin: auto 0 0;
+  padding: 1.1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  border-top: 1px solid #3a4f61;
+  font-family: var(--it-font-util);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #cfdae2;
+  position: relative;
+  z-index: 2;
+}
+
+.it-hero-strip li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.it-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.it-dot-heat  { background: var(--it-heat); }
+.it-dot-water { background: var(--it-water); }
+.it-dot-gas   { background: var(--it-gas); }
+
+/* jemný fade-in obsahu hero */
+
+.it-hero-main,
+.it-hero-strip {
+  animation: it-rise 700ms ease-out both;
+}
+
+.it-hero-strip { animation-delay: 300ms; }
+
+@keyframes it-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   SLUŽBY
+   ========================================================================== */
+
+.it-services {
+  padding: clamp(3.5rem, 9vw, 6rem) 0;
+}
+
+.it-h2 {
+  font-family: var(--it-font-display);
+  font-size: clamp(1.9rem, 5vw, 2.8rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+}
+
+.it-section-lede {
+  max-width: 38rem;
+  font-size: 1.08rem;
+  color: #43535f;
+  margin: 0 0 2.5rem;
+}
+
+.it-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.it-card {
+  background: #fff;
+  border-radius: var(--it-radius);
+  padding: 1.6rem 1.5rem 1.4rem;
+  border: 1px solid var(--it-line);
+  border-top: 6px solid;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.it-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(22, 35, 46, 0.12);
+}
+
+.it-card-heat  { border-top-color: var(--it-heat); }
+.it-card-water { border-top-color: var(--it-water); }
+.it-card-gas   { border-top-color: var(--it-gas); }
+
+.it-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.it-card-pipe {
+  width: 2rem;
+  height: 10px;
+  border-radius: 999px;
+  flex: none;
+}
+
+.it-card-heat  .it-card-pipe { background: var(--it-heat); }
+.it-card-water .it-card-pipe { background: var(--it-water); }
+.it-card-gas   .it-card-pipe { background: var(--it-gas); }
+
+.it-card h3 {
+  font-family: var(--it-font-display);
+  font-size: 1.25rem;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.it-card p {
+  margin: 0 0 1rem;
+  color: #37454f;
+}
+
+.it-card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--it-font-util);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  color: #43535f;
+}
+
+.it-card-list li {
+  padding: 0.5rem 0;
+  border-top: 1px dashed var(--it-line);
+}
+
+.it-services-note {
+  margin: 2.25rem 0 0;
+  padding: 1.25rem 1.5rem;
+  background: #fff;
+  border-left: 6px solid var(--it-gas);
+  border-radius: 0 var(--it-radius) var(--it-radius) 0;
+  max-width: 44rem;
+  color: #37454f;
+}
+
+.it-services-note strong {
+  font-family: var(--it-font-display);
+  font-weight: 900;
+  color: var(--it-ink);
+}
+
+/* ==========================================================================
+   DŮVĚRA / O NÁS
+   ========================================================================== */
+
+.it-trust {
+  background: var(--it-ink);
+  color: #eef2f4;
+  padding: clamp(3.5rem, 9vw, 6rem) 0;
+}
+
+.it-trust .it-h2 { color: #fff; }
+
+.it-trust-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.it-trust-copy p {
+  color: #c3d0da;
+  max-width: 40rem;
+  margin: 0 0 1rem;
+}
+
+.it-facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.25rem;
+}
+
+.it-fact {
+  border-top: 3px solid var(--it-water);
+  padding-top: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.it-fact:nth-child(1) { border-top-color: var(--it-heat); }
+.it-fact:nth-child(2) { border-top-color: var(--it-gas); }
+.it-fact:nth-child(3) { border-top-color: var(--it-water); }
+.it-fact:nth-child(4) { border-top-color: var(--it-heat); }
+
+.it-fact-key {
+  font-family: var(--it-font-display);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.it-fact-val {
+  color: #a9bac6;
+  font-size: 0.95rem;
+}
+
+.it-quote {
+  margin: 0;
+  border-left: 6px solid var(--it-heat);
+  padding: 0.25rem 0 0.25rem 1.5rem;
+  max-width: 44rem;
+}
+
+.it-quote blockquote {
+  margin: 0 0 0.75rem;
+  font-size: 1.2rem;
+  line-height: 1.55;
+  font-style: italic;
+  color: #eef2f4;
+}
+
+.it-quote figcaption {
+  font-family: var(--it-font-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8fa4b3;
+}
+
+/* ==========================================================================
+   RESPONZIVITA
+   ========================================================================== */
+
+@media (max-width: 860px) {
+  .it-pipes {
+    opacity: 0.35;
+    width: 55%;
+    right: -3rem;
+  }
+
+  .it-hero-main { max-width: 100%; }
+}
+
+@media (max-width: 560px) {
+  .it-hero-grid { min-height: auto; padding-bottom: 0; }
+
+  .it-hero-main { margin-top: 2.5rem; margin-bottom: 3rem; }
+
+  .it-hero-tel { padding: 0.45rem 0.7rem; }
+  .it-tel-label { font-size: 0.58rem; }
+  .it-tel-num { font-size: 0.95rem; }
+
+  .it-btn { width: 100%; text-align: center; }
+
+  .it-pipes { opacity: 0.22; }
+
+  .it-hero-strip { gap: 0.75rem 1.5rem; }
+}
+
+@media (min-width: 900px) {
+  .it-trust-grid {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: start;
+  }
+
+  .it-quote { grid-column: 1 / -1; }
+}
+
+/* ==========================================================================
+   PREFERS-REDUCED-MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .it-pipe {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .it-valve,
+  .it-radiator rect {
+    animation: none;
+    opacity: 1;
+  }
+
+  .it-hero-main,
+  .it-hero-strip {
+    animation: none;
+  }
+
+  .it-card,
+  .it-btn,
+  .it-hero-tel {
+    transition: none;
+  }
+
+  .it-card:hover,
+  .it-btn:hover {
+    transform: none;
+  }
+}
