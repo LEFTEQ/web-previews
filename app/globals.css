@@ -1,0 +1,553 @@
+/* ============================================================
+   ReSit s.r.o. — bezpečnostní tabulky a samolepky, Č. Budějovice
+   Paleta odvozená z normovaných barev bezpečnostního značení:
+   zelená (úniková), červená (požární), žlutá (výstraha),
+   fotoluminiscenční jasně zelená jako akcent.
+   ============================================================ */
+
+:root {
+  --ink: #10221b;          /* tmavá zelenočerná — podklad tabulek */
+  --paper: #f7faf7;        /* chladná bílá jako smaltovaná tabulka */
+  --safety-green: #0e7a4a; /* úniková zelená ISO */
+  --safety-red: #c8271f;   /* požární červená */
+  --safety-yellow: #f2b705;/* výstražná žlutá */
+  --lumi: #b8f24e;         /* fotoluminiscenční akcent */
+  --line: rgba(16, 34, 27, 0.14);
+
+  --font-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Trebuchet MS", "Segoe UI", Verdana, sans-serif;
+  --font-mono: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.rs a:focus-visible,
+.rs button:focus-visible {
+  outline: 3px solid var(--safety-yellow);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ====================== HERO ====================== */
+
+.rs-hero {
+  background: linear-gradient(160deg, #0e2b1e 0%, #10382a 55%, #0e7a4a 130%);
+  color: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+
+.rs-hero-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 24px 20px 72px;
+}
+
+.rs-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-bottom: 56px;
+}
+
+.rs-wordmark {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.rs-wm-re {
+  color: var(--paper);
+}
+
+.rs-wm-sit {
+  color: var(--lumi);
+}
+
+.rs-wm-dot {
+  width: 9px;
+  height: 9px;
+  margin-left: 5px;
+  background: var(--safety-red);
+  display: inline-block;
+  align-self: center;
+}
+
+.rs-topbar-note {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(247, 250, 247, 0.65);
+}
+
+.rs-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+.rs-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lumi);
+  margin: 0 0 18px;
+  border-left: 4px solid var(--lumi);
+  padding-left: 12px;
+}
+
+.rs-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 8.5vw, 5.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rs-h1-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: rs-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.rs-h1-line:nth-child(2) { animation-delay: 0.12s; }
+.rs-h1-line:nth-child(3) { animation-delay: 0.24s; }
+
+.rs-h1-accent {
+  color: var(--ink);
+  background: var(--lumi);
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.04em 0.18em;
+  box-shadow: 0 0 32px rgba(184, 242, 78, 0.45);
+}
+
+@keyframes rs-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rs-lead {
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  max-width: 34em;
+  color: rgba(247, 250, 247, 0.88);
+  margin: 0 0 32px;
+}
+
+.rs-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.rs-btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 15px 26px;
+  border-radius: 6px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.rs-btn-primary {
+  background: var(--lumi);
+  color: var(--ink);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.35);
+}
+
+.rs-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.35);
+}
+
+.rs-btn-ghost {
+  border: 2px solid rgba(247, 250, 247, 0.5);
+  color: var(--paper);
+}
+
+.rs-btn-ghost:hover {
+  border-color: var(--lumi);
+  color: var(--lumi);
+}
+
+/* --- Signature: stěna piktogramů --- */
+
+.rs-signwall {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-content: start;
+}
+
+.rs-sign {
+  border-radius: 10px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transform: scale(0.92);
+  animation: rs-pop 0.5s cubic-bezier(0.2, 0.7, 0.3, 1.2) forwards;
+}
+
+.rs-sign:nth-child(1) { animation-delay: 0.30s; }
+.rs-sign:nth-child(2) { animation-delay: 0.40s; }
+.rs-sign:nth-child(3) { animation-delay: 0.50s; }
+.rs-sign:nth-child(4) { animation-delay: 0.60s; }
+.rs-sign:nth-child(5) { animation-delay: 0.70s; }
+.rs-sign:nth-child(6) { animation-delay: 0.80s; }
+
+@keyframes rs-pop {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.rs-sign-ico {
+  width: 40px;
+  height: 40px;
+}
+
+.rs-sign-exit {
+  background: var(--safety-green);
+  color: #ffffff;
+  border: 3px solid #ffffff;
+}
+
+.rs-sign-warn {
+  background: var(--safety-yellow);
+  color: var(--ink);
+  border: 3px solid var(--ink);
+}
+
+.rs-sign-fire {
+  background: var(--safety-red);
+  color: #ffffff;
+  border: 3px solid #ffffff;
+}
+
+.rs-sign-forbid {
+  background: #ffffff;
+  color: var(--safety-red);
+  border: 3px solid var(--safety-red);
+}
+
+.rs-sign-glow {
+  background: #14251c;
+  color: var(--lumi);
+  border: 3px solid var(--lumi);
+  box-shadow: 0 0 24px rgba(184, 242, 78, 0.35), inset 0 0 18px rgba(184, 242, 78, 0.12);
+}
+
+.rs-sign-count {
+  background: transparent;
+  border: 3px dashed rgba(247, 250, 247, 0.4);
+  color: var(--paper);
+  gap: 4px;
+}
+
+.rs-sign-count strong {
+  font-size: 26px;
+  letter-spacing: 0;
+}
+
+.rs-sign-count span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(247, 250, 247, 0.7);
+}
+
+/* výstražný šrafovaný pruh — podpis řemesla, opakuje se jen zde */
+.rs-hazard-stripe {
+  height: 18px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--safety-yellow) 0 22px,
+    var(--ink) 22px 44px
+  );
+}
+
+/* ====================== SEKCE ====================== */
+
+.rs-section {
+  padding: 72px 20px;
+}
+
+.rs-section-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.rs-section-head {
+  max-width: 640px;
+  margin-bottom: 44px;
+}
+
+.rs-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.5rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.08;
+  margin: 0 0 16px;
+}
+
+.rs-section-sub {
+  margin: 0;
+  color: rgba(16, 34, 27, 0.75);
+  font-size: 1.05rem;
+}
+
+.rs-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.rs-card {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 26px 24px;
+  position: relative;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.rs-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 6px;
+  border-radius: 12px 0 0 12px;
+  background: var(--safety-green);
+}
+
+.rs-card:nth-child(2)::before { background: var(--lumi); }
+.rs-card:nth-child(3)::before { background: var(--safety-yellow); }
+.rs-card:nth-child(4)::before { background: var(--safety-red); }
+
+.rs-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(16, 34, 27, 0.12);
+  border-color: rgba(16, 34, 27, 0.25);
+}
+
+.rs-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+
+.rs-card-kod {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.rs-card-pocet {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--safety-green);
+  letter-spacing: 0.04em;
+}
+
+.rs-h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin: 0 0 10px;
+  line-height: 1.25;
+}
+
+.rs-card-popis {
+  margin: 0;
+  color: rgba(16, 34, 27, 0.78);
+}
+
+/* ====================== DŮVĚRA ====================== */
+
+.rs-section-dark {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.rs-duvera-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+.rs-mark {
+  color: var(--lumi);
+}
+
+.rs-duvera-text {
+  color: rgba(247, 250, 247, 0.82);
+  max-width: 36em;
+}
+
+.rs-duvody {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  counter-reset: rs-d;
+}
+
+.rs-duvod {
+  counter-increment: rs-d;
+  border-top: 1px solid rgba(247, 250, 247, 0.16);
+  padding: 22px 0 22px 58px;
+  position: relative;
+}
+
+.rs-duvod::before {
+  content: counter(rs-d, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 24px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--lumi);
+  border: 1px solid rgba(184, 242, 78, 0.5);
+  border-radius: 4px;
+  padding: 3px 7px;
+}
+
+.rs-duvod-h {
+  color: var(--paper);
+  margin-bottom: 6px;
+}
+
+.rs-duvod p {
+  margin: 0;
+  color: rgba(247, 250, 247, 0.75);
+}
+
+.rs-citace {
+  margin: 56px 0 0;
+  border-left: 5px solid var(--safety-yellow);
+  background: rgba(247, 250, 247, 0.05);
+  border-radius: 0 12px 12px 0;
+  padding: 26px 28px;
+  max-width: 760px;
+}
+
+.rs-citace p {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: rgba(247, 250, 247, 0.92);
+}
+
+.rs-citace-autor {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(247, 250, 247, 0.6);
+}
+
+/* ====================== RESPONSIVE ====================== */
+
+@media (min-width: 760px) {
+  .rs-hero-grid {
+    grid-template-columns: 1.25fr 1fr;
+    align-items: center;
+    gap: 56px;
+  }
+
+  .rs-hero-inner {
+    padding: 32px 32px 88px;
+  }
+
+  .rs-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rs-signwall {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rs-section {
+    padding: 96px 32px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .rs-duvera-grid {
+    grid-template-columns: 1fr 1.1fr;
+    gap: 72px;
+  }
+}
+
+/* ====================== MOTION ====================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rs-h1-line,
+  .rs-sign {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .rs-btn,
+  .rs-card {
+    transition: none;
+  }
+
+  .rs-btn-primary:hover,
+  .rs-card:hover {
+    transform: none;
+  }
+}
