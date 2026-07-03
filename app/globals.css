@@ -1,0 +1,552 @@
+/* =====================================================================
+   AM Fitness Pardubice — „Železo & pára"
+   Palette: litinová čerň, ocelová šeď, saunová měď/oranž, chladná modř bazénku
+   Type: kondenzovaný těžký display (system stack, žádné externí fonty) + čistý grotesk
+   Signature: typografická činka v heru + osa/tyč jako strukturní linka
+   ===================================================================== */
+
+:root {
+  --litina: #16181d;        /* téměř černá litina kotoučů */
+  --ocel: #2b2f38;          /* ocelová šeď tyče */
+  --med: #e8622c;           /* rozpálená saunová měď — akcent */
+  --med-tmava: #b6431a;
+  --para: #eef1f4;          /* světlá pára / bílý prostor */
+  --bazen: #2e7fa3;         /* chladná modř ochlazovacího bazénku */
+  --text: #22252c;
+  --text-invert: #f4f5f7;
+
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Impact, system-ui, sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--para);
+  -webkit-font-smoothing: antialiased;
+}
+
+.am a:focus-visible,
+.am .btn:focus-visible {
+  outline: 3px solid var(--med);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  background:
+    radial-gradient(120% 90% at 85% -10%, rgba(232, 98, 44, 0.22), transparent 55%),
+    radial-gradient(90% 70% at 0% 100%, rgba(46, 127, 163, 0.18), transparent 60%),
+    var(--litina);
+  color: var(--text-invert);
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemný rastr — mřížka podlahy posilovny */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Wordmark */
+.wordmark {
+  align-self: flex-start;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 3rem;
+}
+
+.wordmark-am {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.75rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--para);
+  padding: 0.15rem 0.45rem;
+  border: 3px solid var(--med);
+}
+
+.wordmark-rest {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(244, 245, 247, 0.75);
+}
+
+/* Signature: typografická činka */
+.hero-barbell {
+  display: flex;
+  align-items: center;
+  width: min(34rem, 88%);
+  margin-bottom: 1.75rem;
+  animation: am-drop 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+}
+
+.hero-barbell .bar {
+  flex: 1;
+  height: 6px;
+  background: linear-gradient(90deg, var(--ocel), #4a505c, var(--ocel));
+  border-radius: 3px;
+}
+
+.hero-barbell .plate {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #3a3f4a, var(--litina) 70%);
+  border: 4px solid var(--med);
+  flex: none;
+}
+
+.hero-barbell .plate-r {
+  border-color: var(--bazen);
+}
+
+/* Titulek Železo & pára */
+.hero-title {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  font-size: clamp(4rem, 16vw, 11rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-title .line {
+  display: block;
+  animation: am-rise 0.6s ease-out both;
+}
+
+.hero-title .line-1 {
+  color: var(--para);
+  animation-delay: 0.15s;
+}
+
+.hero-title .line-amp {
+  font-size: 0.32em;
+  color: var(--med);
+  margin: 0.25em 0;
+  animation-delay: 0.3s;
+}
+
+.hero-title .line-2 {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--bazen);
+  animation-delay: 0.45s;
+}
+
+.hero-sub {
+  max-width: 34rem;
+  margin: 0 0 2.25rem;
+  font-size: 1.05rem;
+  color: rgba(244, 245, 247, 0.85);
+  animation: am-rise 0.6s ease-out 0.6s both;
+}
+
+/* Fakta */
+.hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 2.5rem;
+  margin-bottom: 2.25rem;
+  animation: am-rise 0.6s ease-out 0.7s both;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fact-num {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.9rem;
+  line-height: 1.1;
+  color: var(--med);
+}
+
+.fact:nth-child(3) .fact-num { color: var(--bazen); }
+
+.fact-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(244, 245, 247, 0.65);
+}
+
+/* CTA */
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  animation: am-rise 0.6s ease-out 0.8s both;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 6px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.btn-solid {
+  background: var(--med);
+  color: #fff;
+}
+
+.btn-solid:hover { background: var(--med-tmava); }
+
+.btn-ghost {
+  color: var(--para);
+  border: 2px solid rgba(244, 245, 247, 0.4);
+}
+
+.btn-ghost:hover {
+  border-color: var(--para);
+}
+
+.hero-note {
+  margin: 1.5rem 0 0;
+  font-size: 0.85rem;
+  color: rgba(244, 245, 247, 0.6);
+  animation: am-rise 0.6s ease-out 0.9s both;
+}
+
+/* ================= SEKCE OBECNĚ ================= */
+
+.sec-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--med);
+}
+
+.eyebrow-light { color: #f3a179; }
+
+.sec-title {
+  margin: 0 0 2.5rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  line-height: 1;
+  color: var(--litina);
+}
+
+.sec-title-light { color: var(--para); }
+
+/* ================= SEKCE 1: NABÍDKA ================= */
+
+.sec-nabidka { background: var(--para); }
+
+.grid-nabidka {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.karta {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.75rem 1.5rem;
+  border-top: 5px solid var(--ocel);
+  box-shadow: 0 1px 3px rgba(22, 24, 29, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(22, 24, 29, 0.12);
+}
+
+.karta-zelezo { border-top-color: var(--med); }
+.karta-para { border-top-color: var(--bazen); }
+
+.karta h3 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+  color: var(--litina);
+}
+
+.karta p {
+  margin: 0;
+  color: #444a55;
+}
+
+/* Akce */
+.akce {
+  margin-top: 2.5rem;
+  background: var(--litina);
+  color: var(--text-invert);
+  border-radius: 10px;
+  padding: 1.75rem 1.5rem;
+}
+
+.akce-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1.35rem;
+  color: var(--med);
+}
+
+.akce-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.akce-list li {
+  padding-left: 1.4rem;
+  position: relative;
+  color: rgba(244, 245, 247, 0.85);
+}
+
+.akce-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  border: 2px solid var(--med);
+}
+
+.akce-list strong { color: #fff; }
+
+/* ================= SEKCE 2: CENÍK ================= */
+
+.sec-cenik {
+  background:
+    radial-gradient(100% 80% at 100% 0%, rgba(46, 127, 163, 0.2), transparent 55%),
+    var(--litina);
+  color: var(--text-invert);
+}
+
+.cenik-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.blok-title {
+  margin: 0 0 1.2rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  letter-spacing: 0.03em;
+  color: var(--med);
+}
+
+.cenik-list {
+  margin: 0;
+  display: grid;
+  gap: 0;
+}
+
+.cenik-radek {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(244, 245, 247, 0.15);
+}
+
+.cenik-radek dt {
+  margin: 0;
+  color: rgba(244, 245, 247, 0.85);
+}
+
+.cenik-radek dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.25rem;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.cenik-pozn {
+  margin: 1rem 0 0;
+  font-size: 0.9rem;
+  color: rgba(244, 245, 247, 0.6);
+}
+
+/* Otevírací doba */
+.doba-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.doba-radek {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(244, 245, 247, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.doba-den {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+.doba-cas {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.95rem;
+}
+
+.doba-fit { color: rgba(244, 245, 247, 0.85); }
+
+.doba-sauna { color: #7db8d1; }
+
+/* Kde nás najdete */
+.kde {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(244, 245, 247, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.kde-text p {
+  margin: 0;
+  max-width: 32rem;
+  color: rgba(244, 245, 247, 0.85);
+}
+
+.btn-light {
+  background: var(--para);
+  color: var(--litina);
+  align-self: flex-start;
+}
+
+.btn-light:hover { background: #fff; }
+
+/* ================= ANIMACE ================= */
+
+@keyframes am-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes am-drop {
+  from { opacity: 0; transform: translateY(-24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-barbell,
+  .hero-title .line,
+  .hero-sub,
+  .hero-facts,
+  .hero-cta,
+  .hero-note {
+    animation: none;
+  }
+  .btn,
+  .karta {
+    transition: none;
+  }
+}
+
+/* ================= RESPONSIVITA (desktop up) ================= */
+
+@media (min-width: 640px) {
+  .hero-inner { padding: 2.5rem 2rem 4.5rem; }
+
+  .grid-nabidka { grid-template-columns: 1fr 1fr; }
+
+  .doba-radek {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .doba-cas {
+    text-align: right;
+  }
+}
+
+@media (min-width: 900px) {
+  .sec-inner { padding: 5.5rem 2rem; }
+
+  .cenik-grid { grid-template-columns: 1fr 1fr; gap: 4rem; }
+
+  .kde {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .btn-light { align-self: center; }
+}
