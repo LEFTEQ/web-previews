@@ -1,0 +1,504 @@
+:root {
+  /* paleta: tmavý oolongový list, matcha, papír čajového lístku, měď konvičky */
+  --ink: #1d2420;        /* tmavá zeleno-černá, barva vlhkého čajového listu */
+  --moss: #2c3b31;       /* hlubší zelená ploch */
+  --matcha: #a8bf8f;     /* světlá matcha na akcenty */
+  --paper: #ece4d3;      /* papír čajového lístku (ne krémová šablona, chladnější) */
+  --copper: #c07a4a;     /* měď konvičky — CTA */
+  --steam: #dfe8dd;      /* pára / světlý text */
+
+  --font-display: "Georgia", "Times New Roman", serif;
+  --font-body: "Trebuchet MS", "Segoe UI", -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ink);
+  color: var(--steam);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tea a:focus-visible,
+.tea button:focus-visible {
+  outline: 3px solid var(--copper);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 85% 10%, rgba(168, 191, 143, 0.14), transparent 55%),
+    linear-gradient(165deg, #232d26 0%, var(--ink) 55%, #161b17 100%);
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 6vw, 6rem) clamp(3.5rem, 7vw, 6rem);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 46rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1.5px solid var(--matcha);
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--matcha);
+}
+
+.brand-word {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand-sub {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--matcha);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.1rem, 6.5vw, 4.4rem);
+  line-height: 1.12;
+  color: var(--paper);
+  max-width: 15ch;
+}
+
+.hero-title .line {
+  display: block;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--matcha);
+}
+
+.hero-lead {
+  margin-top: 1.5rem;
+  max-width: 34rem;
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  color: rgba(223, 232, 221, 0.82);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2.2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.95rem 1.7rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-solid {
+  background: var(--copper);
+  color: #1a120b;
+}
+
+.btn-solid:hover {
+  background: #d18a58;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  border: 1.5px solid rgba(168, 191, 143, 0.6);
+  color: var(--matcha);
+}
+
+.btn-ghost:hover {
+  background: rgba(168, 191, 143, 0.12);
+  transform: translateY(-2px);
+}
+
+.hero-facts {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: 1fr;
+  border-top: 1px solid rgba(168, 191, 143, 0.25);
+  padding-top: 1.6rem;
+  max-width: 40rem;
+}
+
+.hero-facts dt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--matcha);
+  margin-bottom: 0.2rem;
+}
+
+.hero-facts dd {
+  color: var(--paper);
+  font-size: 0.98rem;
+}
+
+/* --- signature: pára --- */
+
+.steam {
+  position: absolute;
+  right: clamp(-4rem, 2vw, 6rem);
+  bottom: 0;
+  top: 0;
+  width: clamp(14rem, 34vw, 26rem);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.steam svg {
+  width: 100%;
+  height: 100%;
+}
+
+.steam-bowl {
+  fill: none;
+  stroke: var(--copper);
+  stroke-width: 2.5;
+  opacity: 0.85;
+}
+
+.steam-line {
+  fill: none;
+  stroke: var(--matcha);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: steam-rise 3.2s ease-out forwards, steam-sway 7s ease-in-out 3.2s infinite alternate;
+}
+
+.steam-line.s2 {
+  animation-delay: 0.5s, 3.7s;
+  opacity: 0.65;
+}
+
+.steam-line.s3 {
+  animation-delay: 1s, 4.2s;
+  opacity: 0.45;
+}
+
+@keyframes steam-rise {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes steam-sway {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(8px);
+  }
+}
+
+/* hero text vjezd */
+
+.hero-title .line,
+.hero-lead,
+.hero-actions,
+.hero-facts {
+  animation: fade-up 0.8s ease-out both;
+}
+
+.hero-title .l1 { animation-delay: 0.1s; }
+.hero-title .l2 { animation-delay: 0.25s; }
+.hero-title .l3 { animation-delay: 0.4s; }
+.hero-lead { animation-delay: 0.55s; }
+.hero-actions { animation-delay: 0.7s; }
+.hero-facts { animation-delay: 0.85s; }
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============ SEKCE OBECNĚ ============ */
+
+.section-head {
+  max-width: 42rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.section-lead {
+  font-size: 1.02rem;
+}
+
+/* ============ ČAJOVÝ LÍSTEK ============ */
+
+.menu {
+  background: var(--paper);
+  color: var(--ink);
+  padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 6vw, 6rem);
+}
+
+.menu .eyebrow {
+  color: var(--copper);
+}
+
+.menu .section-lead {
+  color: #4a5248;
+}
+
+.menu-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+}
+
+.tea-card {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(44, 59, 49, 0.15);
+  border-radius: 14px;
+  padding: 1.5rem 1.4rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tea-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(29, 36, 32, 0.14);
+}
+
+.tea-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.9rem;
+}
+
+.tea-temp {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--copper);
+}
+
+.tea-kod {
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #6a755f;
+}
+
+.tea-card h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.4rem;
+  margin-bottom: 0.35rem;
+  color: var(--moss);
+}
+
+.tea-priklad {
+  font-size: 0.86rem;
+  font-style: italic;
+  color: #5d6657;
+  margin-bottom: 0.7rem;
+}
+
+.tea-popis {
+  font-size: 0.96rem;
+  color: #38412f;
+}
+
+.menu-note {
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  color: #4a5248;
+  border-left: 3px solid var(--copper);
+  padding-left: 1rem;
+  max-width: 34rem;
+}
+
+/* ============ RITUÁL ============ */
+
+.ritual {
+  background: var(--moss);
+  color: var(--steam);
+  padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 6vw, 6rem);
+}
+
+.ritual .eyebrow {
+  color: var(--matcha);
+}
+
+.ritual .section-lead {
+  color: rgba(223, 232, 221, 0.8);
+}
+
+.ritual h2 {
+  color: var(--paper);
+}
+
+.ritual-steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+  counter-reset: none;
+}
+
+.ritual-steps li {
+  border-top: 1px solid rgba(168, 191, 143, 0.35);
+  padding-top: 1.2rem;
+}
+
+.ritual-num {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--matcha);
+  margin-bottom: 0.5rem;
+}
+
+.ritual-steps h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.35rem;
+  color: var(--paper);
+  margin-bottom: 0.4rem;
+}
+
+.ritual-steps p {
+  font-size: 0.97rem;
+  color: rgba(223, 232, 221, 0.85);
+  max-width: 30rem;
+}
+
+.ritual-quote {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  max-width: 40rem;
+}
+
+.ritual-quote blockquote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  line-height: 1.5;
+  color: var(--paper);
+}
+
+.ritual-quote figcaption {
+  margin-top: 0.8rem;
+  font-size: 0.85rem;
+  color: var(--matcha);
+}
+
+/* ============ RESPONSIVITA ============ */
+
+@media (min-width: 640px) {
+  .hero-facts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ritual-steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .menu-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .steam {
+    opacity: 0.28;
+    right: -6rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-title .line,
+  .hero-lead,
+  .hero-actions,
+  .hero-facts {
+    animation: none;
+  }
+  .steam-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .btn,
+  .tea-card {
+    transition: none;
+  }
+  .btn:hover,
+  .tea-card:hover {
+    transform: none;
+  }
+}
