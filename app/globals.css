@@ -1,0 +1,508 @@
+/* ==========================================================================
+   LABELSERVIS — design system
+   Palette (odvozeno z modré identity firmy + materiálů tiskárny):
+   --ink        #0E1B33  (tisková čerň s modrým podtónem)
+   --press-blue #1D4ED8  (pracovní modrá — hlavní barva stroje/značky)
+   --sky        #2F6FED  (světlejší modrá pro gradient válce)
+   --liner      #EEF2F9  (silikonový podklad etiket — pozadí)
+   --paper      #FFFFFF  (etiketový papír)
+   --uv         #F5B301  (UV lak — jediný teplý akcent, používán střídmě)
+   Typo: Arial Black/system heavy pro displej (řemeslná, tisková razance),
+   systémový grotesk pro text — bez externích fontů, rychlé načtení.
+   Signature: pás vysekaných etiket (label strip) v hero.
+   ========================================================================== */
+
+:root {
+  --ink: #0e1b33;
+  --press-blue: #1d4ed8;
+  --sky: #2f6fed;
+  --liner: #eef2f9;
+  --paper: #ffffff;
+  --uv: #f5b301;
+
+  --font-display: "Arial Black", "Avenir Next Heavy", "Helvetica Neue",
+    Arial, sans-serif;
+  --font-body: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+
+  --radius-label: 14px; /* zaoblení výseku etikety */
+  --maxw: 1120px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--liner);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus — viditelný, konzistentní */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--uv);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============================ HERO ============================ */
+
+.hero {
+  position: relative;
+  background: linear-gradient(160deg, var(--ink) 0%, #142a5c 55%, var(--press-blue) 130%);
+  color: var(--paper);
+  overflow: hidden;
+  padding: 2rem 1.25rem 0;
+}
+
+/* jemný rastr — flexotisková síť bodů */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 1.5rem 0 3.5rem;
+}
+
+/* Wordmark — vlastní typografické logo: „label" jako vyseknutá etiketa */
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 3rem;
+}
+
+.wordmark-label {
+  background: var(--uv);
+  color: var(--ink);
+  padding: 0.1em 0.45em 0.14em;
+  border-radius: 999px 6px 999px 6px; /* asymetrický výsek */
+}
+
+.wordmark-servis {
+  color: var(--paper);
+  padding-left: 0.1em;
+}
+
+.hero-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 1.25rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 8vw, 5.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 0 0 1.5rem;
+  text-wrap: balance;
+}
+
+.hero-line {
+  display: block;
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-line-1 { animation-delay: 0.05s; }
+.hero-line-2 { animation-delay: 0.18s; }
+.hero-line-3 { animation-delay: 0.31s; }
+
+.hero-line em {
+  font-style: normal;
+  color: var(--uv);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-lead {
+  max-width: 34em;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 2rem;
+  animation: rise 0.7s 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  animation: rise 0.7s 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-label);
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--uv);
+  color: var(--ink);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: #ffc528;
+}
+
+.btn-ghost {
+  color: var(--paper);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.btn-ghost:hover {
+  border-color: var(--paper);
+  transform: translateY(-2px);
+}
+
+/* --------- SIGNATURE: pás etiket odvíjející se přes spodek hero --------- */
+
+.labelstrip {
+  position: relative;
+  margin: 3.5rem calc(50% - 50vw) 0;
+  width: 100vw;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 10px,
+      rgba(14, 27, 51, 0.15) 10px 11px
+    ),
+    #dfe6f2; /* silikonový podkladový pás */
+  padding: 0.9rem 0;
+  overflow: hidden;
+  transform: rotate(-1.6deg) translateY(0.6rem);
+  transform-origin: center;
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.labelstrip-track {
+  display: flex;
+  gap: 0.9rem;
+  width: max-content;
+  animation: unwind 32s linear infinite;
+}
+
+@keyframes unwind {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.label-chip {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  padding: 0.5em 1.1em;
+  border-radius: var(--radius-label);
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(14, 27, 51, 0.25); /* etiketa lehce nad podkladem */
+}
+
+.chip-blue {
+  background: var(--press-blue);
+  color: var(--paper);
+}
+
+.chip-white {
+  background: var(--paper);
+  color: var(--press-blue);
+  border: 1.5px dashed rgba(29, 78, 216, 0.45); /* perforace výseku */
+}
+
+/* ============================ SEKCE OBECNĚ ============================ */
+
+.section {
+  padding: 4.5rem 1.25rem;
+}
+
+.section-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--press-blue);
+  margin: 0 0 0.75rem;
+}
+
+.eyebrow-light {
+  color: var(--uv);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem;
+  text-wrap: balance;
+}
+
+.title-light {
+  color: var(--paper);
+}
+
+.section-lead {
+  max-width: 38em;
+  color: #3c4a66;
+  margin: 0 0 2.5rem;
+}
+
+/* ============================ SLUŽBY ============================ */
+
+.section-services {
+  background: var(--liner);
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-bottom: 3.5rem;
+}
+
+.service-card {
+  background: var(--paper);
+  border-radius: var(--radius-label);
+  padding: 1.75rem 1.5rem 1.5rem;
+  border: 1px solid rgba(29, 78, 216, 0.12);
+  box-shadow: 0 2px 6px rgba(14, 27, 51, 0.05);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px) rotate(-0.4deg); /* etiketa se odlepuje */
+  box-shadow: 0 12px 28px rgba(14, 27, 51, 0.12);
+}
+
+.service-tag {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  background: var(--press-blue);
+  color: var(--paper);
+  padding: 0.35em 0.9em;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
+.service-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.6rem;
+}
+
+.service-text {
+  margin: 0;
+  color: #3c4a66;
+  font-size: 0.98rem;
+}
+
+/* Materiály — soupis jako technický lístek z tiskárny */
+
+.materials {
+  background: var(--paper);
+  border-radius: var(--radius-label);
+  border: 1.5px dashed rgba(29, 78, 216, 0.35);
+  padding: 1.75rem 1.5rem;
+}
+
+.materials-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin: 0 0 1.25rem;
+  color: var(--press-blue);
+}
+
+.materials-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.material {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(29, 78, 216, 0.14);
+}
+
+.material:last-child {
+  border-bottom: none;
+}
+
+.material-name {
+  font-weight: 700;
+}
+
+.material-note {
+  color: #5b6a85;
+  font-size: 0.92rem;
+}
+
+/* ============================ DŮVĚRA ============================ */
+
+.section-trust {
+  background: linear-gradient(150deg, var(--press-blue) 0%, #16389c 70%, var(--ink) 140%);
+  color: var(--paper);
+}
+
+.trust-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.trust-text {
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 36em;
+  margin: 0 0 1.25rem;
+}
+
+.trust-text strong {
+  color: var(--uv);
+}
+
+.trust-facts {
+  margin: 0;
+  align-self: start;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-label);
+  padding: 0.5rem 1.5rem;
+}
+
+.fact {
+  padding: 1rem 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.25);
+}
+
+.fact:last-child {
+  border-bottom: none;
+}
+
+.fact-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.15rem;
+}
+
+.fact-value {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+/* ============================ RESPONSIVE ============================ */
+
+@media (min-width: 700px) {
+  .service-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .materials-list {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2.5rem;
+  }
+
+  .material:nth-last-child(2) {
+    border-bottom: none;
+  }
+}
+
+@media (min-width: 960px) {
+  .hero-inner {
+    padding-top: 2.5rem;
+    padding-bottom: 5rem;
+  }
+
+  .trust-layout {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 4rem;
+  }
+}
+
+/* ============================ MOTION ============================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-line,
+  .hero-lead,
+  .hero-actions {
+    animation: none;
+  }
+
+  .labelstrip-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: auto;
+    justify-content: center;
+    padding: 0 1rem;
+  }
+
+  .btn,
+  .service-card {
+    transition: none;
+  }
+
+  .service-card:hover,
+  .btn:hover {
+    transform: none;
+  }
+}
