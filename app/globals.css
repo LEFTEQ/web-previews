@@ -1,0 +1,471 @@
+/* ==========================================================================
+   PP AUTOSERVIS — autoklempířství, Praha 4
+   Koncept: dílna a plech. Palety odvozená z karosárny — ocelový plech,
+   svářečská oranž, křídová značka klempíře. Signature: linka „rovnaného
+   plechu“ v hero — pomačkaná vlna, která se směrem doprava narovná.
+   ========================================================================== */
+
+:root {
+  --ocel: #16191d;        /* tmavý plech, pozadí hero */
+  --ocel-svetla: #232830; /* panel na tmavé */
+  --zinek: #eef0f2;       /* světlé pozadí sekcí, zinkovaný plech */
+  --papir: #ffffff;
+  --oranz: #ff5c1f;       /* svářečská jiskra / výstražná oranž dílny */
+  --krida: #ffd23f;       /* křídová značka na plechu */
+  --text: #1d2126;
+  --text-tlum: #5a636e;
+  --text-inv: #f4f5f6;
+  --text-inv-tlum: #a6adb6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--zinek);
+  color: var(--text);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pp h1,
+.pp h2,
+.pp h3 {
+  font-family: "Arial Black", "Arial Narrow", Impact, "Segoe UI", sans-serif;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.pp a:focus-visible,
+.pp button:focus-visible {
+  outline: 3px solid var(--oranz);
+  outline-offset: 3px;
+}
+
+/* viditelný focus pro cokoli fokusovatelného */
+.pp :focus-visible {
+  outline: 3px solid var(--oranz);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   HERO — tmavý plech, typografický statement + linka rovnání
+   ========================================================================== */
+
+.hero {
+  background:
+    linear-gradient(160deg, var(--ocel) 0%, #1b2027 55%, #20272f 100%);
+  color: var(--text-inv);
+  padding: 1.5rem 1.25rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemný rastr nýtů — tečkovaná mřížka plechu, velmi decentní */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1.5px);
+  background-size: 26px 26px;
+  pointer-events: none;
+}
+
+.hero > * {
+  position: relative;
+}
+
+.hero-topbar {
+  max-width: 72rem;
+  margin: 0 auto 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* wordmark: PP jako razidlo na plechu */
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: "Arial Black", Impact, sans-serif;
+}
+
+.wordmark-pp {
+  background: var(--oranz);
+  color: var(--ocel);
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.25);
+}
+
+.wordmark-rest {
+  font-size: 1rem;
+  letter-spacing: 0.28em;
+  color: var(--text-inv);
+}
+
+.hero-loc {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-inv-tlum);
+}
+
+.hero-body {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1.25rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--krida);
+  font-weight: 700;
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 8.5vw, 6.2rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  max-width: 20ch;
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-line-2 em {
+  font-style: normal;
+  color: var(--oranz);
+}
+
+/* --- signature: pás plechu, který se narovnává --- */
+.hero-wave {
+  display: block;
+  width: 100%;
+  height: clamp(60px, 9vw, 120px);
+  margin: 2rem 0 2.5rem;
+}
+
+.wave-path {
+  stroke: var(--oranz);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.wave-path-ghost {
+  stroke: rgba(255, 255, 255, 0.14);
+  stroke-width: 2;
+  stroke-dasharray: 4 10;
+}
+
+.hero-foot {
+  display: grid;
+  gap: 2rem;
+}
+
+.hero-lede {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--text-inv-tlum);
+  max-width: 34rem;
+}
+
+.hero-facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.hero-facts li {
+  border-left: 4px solid var(--oranz);
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.1rem;
+}
+
+.hero-facts strong {
+  color: var(--text-inv);
+  font-size: 1rem;
+}
+
+.hero-facts span {
+  color: var(--text-inv-tlum);
+  font-size: 0.9rem;
+}
+
+/* --- animace načtení hero: titulek naskočí, plech se „narovná“ --- */
+@keyframes pp-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pp-draw {
+  from {
+    stroke-dashoffset: 1600;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.hero-eyebrow,
+.hero-line-1,
+.hero-line-2,
+.hero-foot {
+  animation: pp-rise 0.7s ease-out both;
+}
+
+.hero-line-1 { animation-delay: 0.1s; }
+.hero-line-2 { animation-delay: 0.22s; }
+.hero-foot   { animation-delay: 0.55s; }
+
+.wave-path:not(.wave-path-ghost) {
+  stroke-dasharray: 1600;
+  animation: pp-draw 1.4s ease-out 0.35s both;
+}
+
+/* ==========================================================================
+   SLUŽBY — světlá dílna, karty jako cedule na stěně
+   ========================================================================== */
+
+.sluzby {
+  padding: 4rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.section-head h2 {
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.section-head p {
+  margin: 0.75rem 0 0;
+  color: var(--text-tlum);
+  max-width: 38rem;
+  font-size: 1.05rem;
+}
+
+.sluzby-grid {
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+.karta {
+  background: var(--papir);
+  border: 1px solid #dadee2;
+  border-radius: 6px;
+  padding: 1.5rem 1.4rem 1.6rem;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.karta:hover {
+  transform: translateY(-3px);
+  border-color: var(--oranz);
+  box-shadow: 0 12px 24px -14px rgba(22, 25, 29, 0.35);
+}
+
+.karta-tag {
+  margin: 0 0 0.75rem;
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--ocel);
+  background: var(--krida);
+  padding: 0.2rem 0.55rem;
+  border-radius: 3px;
+}
+
+.karta h3 {
+  font-size: 1.25rem;
+  text-transform: uppercase;
+}
+
+.karta-desc {
+  margin: 0.7rem 0 0;
+  color: var(--text-tlum);
+  font-size: 0.96rem;
+  line-height: 1.6;
+}
+
+.sluzby-pas {
+  margin: 2rem 0 0;
+  padding: 1rem 1.25rem;
+  background: var(--ocel);
+  color: var(--text-inv-tlum);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================================================
+   DŮVĚRA — jak oprava probíhá (skutečná sekvence ⇒ číslování má smysl)
+   ========================================================================== */
+
+.duvera {
+  background: var(--papir);
+  border-top: 4px solid var(--oranz);
+  padding: 4rem 1.25rem;
+}
+
+.duvera-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 3rem;
+}
+
+.duvera-text h2 {
+  font-size: clamp(1.7rem, 4.2vw, 2.6rem);
+  text-transform: uppercase;
+}
+
+.duvera-text p {
+  margin: 1.25rem 0 0;
+  color: var(--text-tlum);
+  max-width: 34rem;
+  font-size: 1.05rem;
+}
+
+.duvera-adresa {
+  font-weight: 700;
+  color: var(--text) !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.03em;
+}
+
+.kroky {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.75rem;
+}
+
+.krok {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+}
+
+.krok-num {
+  flex: none;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: grid;
+  place-items: center;
+  background: var(--ocel);
+  color: var(--krida);
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: 1.15rem;
+  border-radius: 4px;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.krok h3 {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.krok p {
+  margin: 0.45rem 0 0;
+  color: var(--text-tlum);
+  font-size: 0.96rem;
+}
+
+/* ==========================================================================
+   RESPONSIVITA — mobile-first nahoře, tady rozšíření
+   ========================================================================== */
+
+@media (min-width: 640px) {
+  .sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    padding: 2rem 3rem 5rem;
+  }
+
+  .hero-foot {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+  }
+
+  .hero-facts {
+    gap: 1.25rem;
+  }
+
+  .sluzby,
+  .duvera {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .duvera-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-eyebrow,
+  .hero-line-1,
+  .hero-line-2,
+  .hero-foot,
+  .wave-path {
+    animation: none !important;
+  }
+
+  .karta,
+  .karta:hover {
+    transition: none;
+    transform: none;
+  }
+}
