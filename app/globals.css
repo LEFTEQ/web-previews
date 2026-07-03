@@ -1,0 +1,451 @@
+/* Martia 2000 — účetní kancelář Plzeň
+   Koncept: účetní kniha „Má dáti / Dal". Levý a pravý sloupec,
+   tenká středová účetní linka, číslice v tabulkovém groteskním řezu.
+   Paleta: inkoustová modrošedá + zelené sukno (accounting green) +
+   papír s teplým nádechem. Vědomě NE cream+terracotta, NE black+acid. */
+
+:root {
+  --ink: #16202b;
+  --ink-soft: #3d4a57;
+  --paper: #f3f0e7;
+  --paper-line: #ded9c8;
+  --ledger: #1d5a45;        /* účetní zelená */
+  --ledger-deep: #123f30;
+  --red: #a3352b;           /* červený zápis v knize */
+  --rule: #c9c3b0;
+
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Menlo, Consolas, monospace;
+
+  --maxw: 1180px;
+  --gutter: clamp(1.1rem, 4vw, 3rem);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--ledger);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ledger);
+  margin: 0 0 0.9rem;
+}
+
+/* ---------- Topbar ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0 1.2rem;
+  border-bottom: 2px solid var(--ink);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  text-decoration: none;
+  font-family: var(--serif);
+}
+.wordmark__name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.wordmark__year {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--paper);
+  background: var(--ledger);
+  padding: 0.12em 0.4em;
+  letter-spacing: 0.02em;
+}
+
+.topnav {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  font-size: 0.95rem;
+}
+.topnav a { text-decoration: none; }
+.topnav a:not(.topnav__call):hover { text-decoration: underline; text-underline-offset: 4px; }
+.topnav__call {
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--ledger-deep);
+}
+.topnav a:first-child, .topnav a:nth-child(2) { display: none; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  padding: clamp(2.5rem, 7vw, 5rem) 0 clamp(2rem, 5vw, 3.5rem);
+}
+
+.hero__ledger {
+  display: none;
+}
+
+.hero__grid {
+  display: grid;
+  gap: clamp(1.8rem, 4vw, 3rem);
+}
+
+.hero__text { max-width: 44ch; }
+
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 6.4vw, 3.9rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.2rem;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--ledger);
+}
+.hero__mark {
+  color: var(--red);
+  font-style: normal;
+  padding: 0 0.15em;
+}
+
+.hero__lead {
+  font-size: 1.12rem;
+  color: var(--ink-soft);
+  margin: 0 0 1.8rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 0.85rem 1.4rem;
+  border: 2px solid var(--ink);
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.btn--primary {
+  background: var(--ledger);
+  color: var(--paper);
+  border-color: var(--ledger);
+}
+.btn--primary:hover { background: var(--ledger-deep); transform: translateY(-2px); }
+.btn--ghost { background: transparent; color: var(--ink); }
+.btn--ghost:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); }
+
+.hero__figure {
+  margin: 0;
+  position: relative;
+}
+.hero__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 2px solid var(--ink);
+  filter: saturate(0.92);
+}
+
+/* balance strip = řádek účetní bilance */
+.hero__balance {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: clamp(2rem, 5vw, 3rem) 0 0;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.balance__item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px dashed var(--rule);
+}
+.balance__item:last-child { border-bottom: none; }
+.balance__item dt {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.balance__item dd {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-align: right;
+}
+
+/* ---------- Section head ---------- */
+.section-head { margin: clamp(3rem, 8vw, 5.5rem) 0 clamp(1.5rem, 4vw, 2.5rem); }
+.section-head h2,
+.about h2 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 4.6vw, 2.7rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0;
+  max-width: 22ch;
+}
+
+/* ---------- Cards ---------- */
+.cards {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1px;
+  background: var(--rule);
+  border: 2px solid var(--ink);
+}
+.card {
+  background: var(--paper);
+  padding: clamp(1.4rem, 3vw, 2rem);
+}
+.card__code {
+  display: inline-block;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  color: var(--paper);
+  background: var(--ink);
+  padding: 0.25em 0.55em;
+  margin-bottom: 1rem;
+}
+.card__title {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  margin: 0 0 0.6rem;
+}
+.card__desc {
+  color: var(--ink-soft);
+  margin: 0 0 1.1rem;
+  font-size: 1rem;
+}
+.card__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--rule);
+}
+.card__list li {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  padding: 0.55rem 0 0.55rem 1.3rem;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+.card__list li:last-child { border-bottom: none; }
+.card__list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--ledger);
+  font-weight: 700;
+}
+
+/* ---------- Calendar / ledger table ---------- */
+.calendar {
+  margin-top: clamp(2rem, 5vw, 3rem);
+  border: 2px solid var(--ink);
+  background: var(--paper);
+}
+.calendar__title {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  margin: 0;
+  padding: 1.2rem clamp(1rem, 3vw, 1.6rem);
+  background: var(--ledger);
+  color: var(--paper);
+}
+.cal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.98rem;
+}
+.cal-table th,
+.cal-table td {
+  text-align: left;
+  padding: 0.85rem clamp(1rem, 3vw, 1.6rem);
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.cal-table thead th {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: #eae5d7;
+}
+.cal-table tbody th {
+  font-family: var(--serif);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.cal-table__term {
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--red);
+  white-space: nowrap;
+}
+.cal-table tbody tr:last-child th,
+.cal-table tbody tr:last-child td { border-bottom: none; }
+.calendar__note {
+  margin: 0;
+  padding: 1rem clamp(1rem, 3vw, 1.6rem) 1.3rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  border-top: 2px solid var(--ink);
+}
+
+/* ---------- About ---------- */
+.about {
+  display: grid;
+  gap: clamp(1.8rem, 4vw, 3rem);
+  margin: clamp(3.5rem, 8vw, 6rem) 0 clamp(2.5rem, 6vw, 4rem);
+  padding-top: clamp(2rem, 5vw, 3rem);
+  border-top: 2px solid var(--ink);
+}
+.about__figure { margin: 0; }
+.about__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 2px solid var(--ink);
+  filter: saturate(0.92);
+}
+.about__text p {
+  color: var(--ink-soft);
+  margin: 0 0 1.1rem;
+}
+.about__text h2 { margin-bottom: 1.2rem; }
+
+.contacts {
+  list-style: none;
+  padding: 0;
+  margin: 1.6rem 0 0;
+  border-top: 2px solid var(--ink);
+}
+.contacts li {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.15rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px dashed var(--rule);
+}
+.contacts li:last-child { border-bottom: none; }
+.contacts__label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ledger);
+}
+.contacts__val {
+  font-family: var(--serif);
+  font-weight: 700;
+}
+.contacts a {
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  color: var(--ledger-deep);
+  text-decoration: none;
+  width: fit-content;
+}
+.contacts a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Motion ---------- */
+.hero__text > *,
+.hero__figure {
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.hero__figure { animation-delay: 0.12s; }
+.hero .eyebrow { animation-delay: 0.02s; }
+.hero h1 { animation-delay: 0.08s; }
+.hero__lead { animation-delay: 0.16s; }
+.hero__actions { animation-delay: 0.24s; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Responsive ---------- */
+@media (min-width: 720px) {
+  .topnav a:first-child, .topnav a:nth-child(2) { display: inline; }
+  .hero__balance { grid-template-columns: repeat(3, 1fr); }
+  .balance__item {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.35rem;
+    padding: 1.2rem clamp(1rem, 2vw, 1.5rem);
+    border-bottom: none;
+    border-left: 1px dashed var(--rule);
+  }
+  .balance__item:first-child { border-left: none; }
+  .balance__item dd { text-align: left; }
+  .cards { grid-template-columns: repeat(3, 1fr); }
+  .contacts li { grid-template-columns: 8rem 1fr auto; align-items: baseline; gap: 0.5rem 1.2rem; }
+}
+
+@media (min-width: 960px) {
+  .hero__grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+  }
+  .about { grid-template-columns: 0.95fr 1.05fr; align-items: start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
