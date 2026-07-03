@@ -1,0 +1,637 @@
+/* =====================================================================
+   MICHAL HOLKŮ — okna Pardubice
+   Koncept: okenní rám jako layoutový systém. Kříž (poutec) okna se
+   propisuje do hero mřížky, tlusté bílé „rámy" ohraničují obsah,
+   paleta = obloha za čistým sklem + oranžová z původní identity firmy,
+   povýšená na signální akcent.
+   Palette:
+     --nebe      #1B4FA0  (hloubková modrá — obloha za sklem)
+     --nebe-svit #3D7BD9  (světlejší modrá — gradient skla)
+     --ram       #F7F9FC  (bílý PVC profil)
+     --inkoust   #101B2D  (text)
+     --signal    #F26A1B  (oranžová z původního webu — CTA a akcenty)
+     --sklo      #DCE9F8  (studený odlesk)
+   Type: Archivo (display, široké tučné řezy — hranatost PVC profilu)
+         + Public Sans (tělo). Ne Inter, ne Playfair.
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Public+Sans:wght@400;600;700&display=swap");
+
+:root {
+  --nebe: #1b4fa0;
+  --nebe-svit: #3d7bd9;
+  --ram: #f7f9fc;
+  --inkoust: #101b2d;
+  --signal: #f26a1b;
+  --sklo: #dce9f8;
+  --font-display: "Archivo", "Arial Black", sans-serif;
+  --font-body: "Public Sans", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--inkoust);
+  background: var(--ram);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ho a:focus-visible,
+.ho button:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------------------------------------------------------------- HERO */
+
+.ho-hero {
+  background: linear-gradient(160deg, var(--nebe) 0%, #163e7f 55%, #0f2c5e 100%);
+  color: var(--ram);
+  padding: 1.25rem 1.25rem 3.5rem;
+}
+
+.ho-hero__inner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+/* wordmark */
+.ho-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.75rem 0 2.25rem;
+}
+
+.ho-brand__mark {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  width: 34px;
+  height: 34px;
+  padding: 3px;
+  background: var(--ram);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.ho-brand__mark span {
+  background: linear-gradient(150deg, var(--nebe-svit), var(--nebe));
+  border-radius: 1px;
+}
+
+.ho-brand__mark span:last-child {
+  background: var(--signal);
+}
+
+.ho-brand__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 110%;
+  font-size: 1.25rem;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ho-brand__name em {
+  font-style: normal;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sklo);
+}
+
+.ho-hero__grid {
+  display: grid;
+  gap: 3rem;
+}
+
+.ho-hero__eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--signal);
+  margin: 0 0 1.25rem;
+  animation: ho-rise 0.7s ease-out both;
+}
+
+.ho-hero__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 108%;
+  font-size: clamp(2.4rem, 7.5vw, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+  animation: ho-rise 0.7s 0.1s ease-out both;
+}
+
+.ho-hero__title span {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--sklo);
+}
+
+.ho-hero__lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: var(--sklo);
+  margin: 0 0 2rem;
+  animation: ho-rise 0.7s 0.2s ease-out both;
+}
+
+.ho-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  animation: ho-rise 0.7s 0.3s ease-out both;
+}
+
+.ho-btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  padding: 0.95rem 1.6rem;
+  border-radius: 6px;
+  display: inline-block;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.ho-btn--solid {
+  background: var(--signal);
+  color: #fff;
+}
+
+.ho-btn--solid:hover {
+  background: #ff7f33;
+  transform: translateY(-2px);
+}
+
+.ho-btn--line {
+  color: var(--ram);
+  border: 2px solid rgba(247, 249, 252, 0.45);
+}
+
+.ho-btn--line:hover {
+  border-color: var(--ram);
+  background: rgba(247, 249, 252, 0.08);
+  transform: translateY(-2px);
+}
+
+.ho-hero__note {
+  margin: 1.5rem 0 0;
+  font-size: 0.85rem;
+  color: rgba(220, 233, 248, 0.75);
+  animation: ho-rise 0.7s 0.4s ease-out both;
+}
+
+/* --------- SIGNATURE: typografické okno --------- */
+
+.ho-window {
+  animation: ho-rise 0.8s 0.35s ease-out both;
+  max-width: 26rem;
+  width: 100%;
+  justify-self: center;
+}
+
+.ho-window__frame {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+  background: var(--ram);
+  border: 12px solid var(--ram);
+  border-radius: 8px;
+  aspect-ratio: 4 / 4.6;
+  box-shadow: 0 24px 60px rgba(6, 18, 42, 0.45);
+}
+
+.ho-window__pane {
+  background: linear-gradient(155deg, #2a63be 0%, #1b4fa0 60%, #143c7d 100%);
+  border-radius: 3px;
+  padding: 1rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+/* odlesk skla */
+.ho-window__pane::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(247, 249, 252, 0.14) 42%,
+    rgba(247, 249, 252, 0.05) 50%,
+    transparent 58%
+  );
+  pointer-events: none;
+}
+
+.ho-window__pane--sky {
+  background: linear-gradient(155deg, var(--nebe-svit) 0%, #2a63be 100%);
+}
+
+.ho-window__pane--sky2 {
+  background: linear-gradient(155deg, #17427f 0%, #0f2c5e 100%);
+}
+
+.ho-window__pane strong {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 112%;
+  font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+  line-height: 1;
+  color: var(--ram);
+}
+
+.ho-window__pane span {
+  font-size: 0.74rem;
+  line-height: 1.35;
+  color: var(--sklo);
+}
+
+/* poutec okna — kříž */
+.ho-window__mullion-v,
+.ho-window__mullion-h {
+  position: absolute;
+  background: var(--ram);
+  pointer-events: none;
+}
+
+.ho-window__mullion-v {
+  top: -2px;
+  bottom: -2px;
+  left: 50%;
+  width: 12px;
+  transform: translateX(-50%);
+}
+
+.ho-window__mullion-h {
+  left: -2px;
+  right: -2px;
+  top: 50%;
+  height: 12px;
+  transform: translateY(-50%);
+}
+
+/* klika */
+.ho-window__handle {
+  position: absolute;
+  left: calc(50% - 4px);
+  top: calc(50% - 34px);
+  width: 8px;
+  height: 30px;
+  background: var(--signal);
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.ho-window__sill {
+  height: 14px;
+  background: var(--sklo);
+  border-radius: 0 0 6px 6px;
+  margin: 0 -14px;
+  box-shadow: 0 10px 24px rgba(6, 18, 42, 0.35);
+}
+
+/* -------------------------------------------------------------- SEKCE */
+
+.ho-section {
+  padding: 4.5rem 1.25rem;
+}
+
+.ho-section__inner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.ho-section__head {
+  max-width: 42rem;
+  margin-bottom: 3rem;
+}
+
+.ho-section__head h2 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 108%;
+  text-transform: uppercase;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0 0 1rem;
+}
+
+.ho-section__head h2::before {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 8px;
+  background: var(--signal);
+  border-radius: 2px;
+  margin-bottom: 1.1rem;
+}
+
+.ho-section__head p {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #3c4a63;
+}
+
+/* karty oken */
+.ho-cards {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.ho-card {
+  background: #fff;
+  border: 1px solid #e2e9f4;
+  border-top: 6px solid var(--nebe);
+  border-radius: 8px;
+  padding: 1.6rem 1.5rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.ho-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(16, 27, 45, 0.1);
+}
+
+.ho-card__profil {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--signal);
+}
+
+.ho-card__typ {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 106%;
+  font-size: 1.35rem;
+  margin: 0 0 0.7rem;
+}
+
+.ho-card__popis {
+  margin: 0 0 1.1rem;
+  color: #3c4a63;
+  font-size: 0.95rem;
+}
+
+.ho-card__params {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.ho-card__params li {
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: var(--sklo);
+  color: var(--nebe);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+}
+
+/* kroky — skutečná sekvence, proto číslování */
+.ho-steps {
+  margin-top: 3.5rem;
+  background: var(--nebe);
+  color: var(--ram);
+  border-radius: 10px;
+  padding: 2.25rem 1.5rem;
+}
+
+.ho-steps__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 106%;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  margin: 0 0 1.75rem;
+}
+
+.ho-steps__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.75rem;
+}
+
+.ho-step {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.ho-step__num {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.1rem;
+  background: var(--signal);
+  color: #fff;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.ho-step h4 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.35rem;
+}
+
+.ho-step p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--sklo);
+}
+
+/* ------------------------------------------------------- REFERENCE */
+
+.ho-section--dark {
+  background: var(--inkoust);
+  color: var(--ram);
+}
+
+.ho-section--dark .ho-section__head p {
+  color: #9fb0c9;
+}
+
+.ho-refs {
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.ho-ref {
+  border: 1px solid rgba(220, 233, 248, 0.18);
+  border-left: 6px solid var(--nebe-svit);
+  border-radius: 8px;
+  padding: 1.6rem 1.5rem;
+  background: rgba(27, 79, 160, 0.12);
+}
+
+.ho-ref__rozsah {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--signal);
+}
+
+.ho-ref__misto {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 106%;
+  font-size: 1.2rem;
+  margin: 0 0 0.7rem;
+}
+
+.ho-ref__text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #b9c7dd;
+}
+
+.ho-trust {
+  display: grid;
+  gap: 1.75rem;
+  border-top: 1px solid rgba(220, 233, 248, 0.18);
+  padding-top: 2.5rem;
+}
+
+.ho-trust__item strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.02rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.45rem;
+  color: var(--ram);
+}
+
+.ho-trust__item strong::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: var(--signal);
+  border-radius: 2px;
+  margin-right: 0.55rem;
+}
+
+.ho-trust__item p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #9fb0c9;
+}
+
+/* ----------------------------------------------------------- ANIMACE */
+
+@keyframes ho-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .ho *,
+  .ho *::before,
+  .ho *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* -------------------------------------------------------- RESPONZIVITA */
+
+@media (min-width: 640px) {
+  .ho-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+  .ho-steps {
+    padding: 2.5rem 2.25rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .ho-hero {
+    padding: 1.5rem 2rem 5rem;
+  }
+  .ho-hero__grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: 4rem;
+  }
+  .ho-window {
+    justify-self: end;
+  }
+  .ho-section {
+    padding: 6rem 2rem;
+  }
+  .ho-steps__list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .ho-refs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .ho-trust {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .ho-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
