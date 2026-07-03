@@ -1,0 +1,541 @@
+/* =====================================================================
+   PH SERVIS — „Servisní protokol"
+   Paleta:
+   --ph-ink      #10233F  hluboká servisní modř (skříně přístrojů)
+   --ph-blue     #1D4ED8  pracovní modrá (značka PH)
+   --ph-signal   #FF7A1A  signální oranž měřicích přístrojů
+   --ph-paper    #F2F5F9  technický papír protokolu (chladný, ne krémový)
+   --ph-line     #C9D4E2  rastr milimetrového papíru
+   Typo: Archivo (display, technický grotesk s šířkovými řezy)
+         + system-ui pro tělo (rychlost, žádné těžké knihovny)
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,800;1,800&family=Archivo+Narrow:wght@500;700&display=swap");
+
+:root {
+  --ph-ink: #10233f;
+  --ph-ink-soft: #2b415f;
+  --ph-blue: #1d4ed8;
+  --ph-signal: #ff7a1a;
+  --ph-paper: #f2f5f9;
+  --ph-line: #c9d4e2;
+  --ph-white: #ffffff;
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-narrow: "Archivo Narrow", "Arial Narrow", Arial, sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ph-ink);
+  background: var(--ph-paper);
+}
+
+/* Viditelný focus všude (napravujeme hřích starého webu) */
+.ph a:focus-visible,
+.ph button:focus-visible {
+  outline: 3px solid var(--ph-signal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* =========================== HERO =========================== */
+
+.hero {
+  position: relative;
+  background:
+    linear-gradient(rgba(16, 35, 63, 0) 0%, rgba(16, 35, 63, 0.03) 100%),
+    repeating-linear-gradient(
+      to right,
+      transparent 0,
+      transparent 47px,
+      rgba(201, 212, 226, 0.45) 47px,
+      rgba(201, 212, 226, 0.45) 48px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 47px,
+      rgba(201, 212, 226, 0.45) 47px,
+      rgba(201, 212, 226, 0.45) 48px
+    ),
+    var(--ph-paper);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--ph-ink);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+.wordmark-ph {
+  font-weight: 800;
+  font-style: italic;
+  font-size: 1.75rem;
+  color: var(--ph-blue);
+  line-height: 1;
+}
+
+.wordmark-servis {
+  font-family: var(--font-narrow);
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.22em;
+  color: var(--ph-ink);
+}
+
+.wordmark-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--ph-signal);
+  align-self: center;
+}
+
+.hero-locality {
+  margin: 0;
+  font-family: var(--font-narrow);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ph-ink-soft);
+}
+
+.hero-body {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3rem 0 2.5rem;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1.5rem;
+  font-family: var(--font-narrow);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ph-ink);
+  background: var(--ph-white);
+  border: 1px solid var(--ph-line);
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  animation: ph-rise 0.6s ease-out both;
+}
+
+/* zelená kontrolka „v provozu" */
+.led {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.18);
+  animation: ph-blink 2.4s ease-in-out infinite;
+}
+
+.hero-title {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 8.5vw, 6rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--ph-ink);
+  animation: ph-rise 0.6s 0.08s ease-out both;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--ph-blue);
+}
+
+.hero-sub {
+  margin: 0 0 2rem;
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: var(--ph-ink-soft);
+  animation: ph-rise 0.6s 0.16s ease-out both;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  animation: ph-rise 0.6s 0.24s ease-out both;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.9rem 1.5rem;
+  border-radius: 6px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--ph-signal);
+  color: #241000;
+  box-shadow: 0 2px 0 #c95a08;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 #c95a08;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ph-ink);
+  border: 2px solid var(--ph-ink);
+}
+
+.btn-ghost:hover {
+  background: var(--ph-ink);
+  color: var(--ph-white);
+}
+
+/* --- Signature: osciloskopická vlna --- */
+
+.scope {
+  position: relative;
+  max-width: 72rem;
+  margin: 0 auto;
+  border-top: 2px solid var(--ph-ink);
+  padding: 0.75rem 0 1.5rem;
+}
+
+.scope-svg {
+  display: block;
+  width: 100%;
+  height: 110px;
+  color: var(--ph-line);
+}
+
+.scope-grid-line {
+  stroke-width: 1;
+  stroke-dasharray: 4 6;
+}
+
+.scope-wave {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 1300;
+  stroke-dashoffset: 1300;
+  animation: ph-trace 1.6s 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.scope-wave-front {
+  stroke: var(--ph-signal);
+}
+
+.scope-wave-back {
+  stroke: var(--ph-blue);
+  opacity: 0.55;
+  animation-delay: 0.5s;
+}
+
+.scope-readout {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-narrow);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  color: var(--ph-ink-soft);
+  text-transform: uppercase;
+}
+
+/* =========================== SEKCE OBECNĚ =========================== */
+
+.section {
+  padding: 4rem 1.25rem;
+}
+
+.section-head {
+  max-width: 72rem;
+  margin: 0 auto 2.5rem;
+}
+
+.section-eyebrow {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-narrow);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ph-signal);
+}
+
+.section-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ph-ink);
+}
+
+.section-note {
+  margin: 0.85rem 0 0;
+  max-width: 38rem;
+  color: var(--ph-ink-soft);
+}
+
+/* =========================== SEKCE 1: OPRAVY =========================== */
+
+.section-repairs {
+  background: var(--ph-white);
+}
+
+.repair-grid {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 72rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 1rem;
+}
+
+.repair-card {
+  position: relative;
+  background: var(--ph-paper);
+  border: 1px solid var(--ph-line);
+  border-radius: 8px;
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.repair-card:hover {
+  border-color: var(--ph-blue);
+  transform: translateY(-3px);
+}
+
+.repair-kod {
+  display: inline-block;
+  font-family: var(--font-narrow);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: var(--ph-blue);
+  background: var(--ph-white);
+  border: 1.5px dashed var(--ph-blue);
+  border-radius: 4px;
+  padding: 0.15rem 0.55rem;
+  margin-bottom: 0.85rem;
+}
+
+.repair-nazev {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--ph-ink);
+}
+
+.repair-detail {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ph-ink-soft);
+}
+
+.repair-notice {
+  max-width: 72rem;
+  margin: 2rem auto 0;
+  padding: 1.25rem 1.5rem;
+  background: #fff4ea;
+  border-left: 4px solid var(--ph-signal);
+  border-radius: 0 8px 8px 0;
+  color: var(--ph-ink);
+  font-size: 0.98rem;
+}
+
+/* =========================== SEKCE 2: POSTUP + DŮVĚRA =========================== */
+
+.section-trust {
+  background: var(--ph-ink);
+  color: var(--ph-white);
+}
+
+.section-eyebrow-light {
+  color: var(--ph-signal);
+}
+
+.section-title-light {
+  color: var(--ph-white);
+}
+
+.steps {
+  list-style: none;
+  counter-reset: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 72rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.5rem;
+}
+
+.step {
+  border-top: 2px solid rgba(255, 255, 255, 0.25);
+  padding-top: 1rem;
+}
+
+.step-num {
+  display: block;
+  font-family: var(--font-narrow);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--ph-signal);
+  margin-bottom: 0.5rem;
+}
+
+.step-krok {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.step-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(242, 245, 249, 0.75);
+}
+
+.trust-strip {
+  max-width: 72rem;
+  margin: 3rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+}
+
+.trust-item {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.trust-big {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--ph-white);
+}
+
+.trust-small {
+  font-size: 0.9rem;
+  color: rgba(242, 245, 249, 0.7);
+}
+
+/* =========================== ANIMACE =========================== */
+
+@keyframes ph-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ph-trace {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ph-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-eyebrow,
+  .hero-title,
+  .hero-sub,
+  .hero-actions {
+    animation: none;
+  }
+  .scope-wave {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .led {
+    animation: none;
+  }
+  .btn,
+  .repair-card {
+    transition: none;
+  }
+}
+
+/* =========================== MOBIL =========================== */
+
+@media (max-width: 640px) {
+  .hero-body {
+    padding: 2.25rem 0 2rem;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .scope-svg {
+    height: 70px;
+  }
+
+  .section {
+    padding: 3rem 1.25rem;
+  }
+}
