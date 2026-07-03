@@ -1,0 +1,562 @@
+/* ============================================================
+   STUDIO ZAHRADY — zahradní architektura, Hradec Králové
+   Paleta odvozená z řemesla: papír plánu, tuš, mech, jíl polabské půdy
+   ------------------------------------------------------------
+   --papir   #F7F8F3  světle zelenkavý papír skicáku
+   --tus     #22301F  tmavá zeleno-černá tuš
+   --mech    #4A6741  mechová zelená (hlavní akcent)
+   --list    #8FAE7E  světlý list — sekundární
+   --jil     #B0703C  jílová okrová — teplý kontrapunkt
+   ============================================================ */
+
+:root {
+  --papir: #f7f8f3;
+  --tus: #22301f;
+  --mech: #4a6741;
+  --list: #8fae7e;
+  --jil: #b0703c;
+  --linka: rgba(34, 48, 31, 0.14);
+
+  --font-display: "Georgia", "Times New Roman", serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--papir);
+  color: var(--tus);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Viditelný focus všude */
+.sz a:focus-visible,
+.sz button:focus-visible {
+  outline: 3px solid var(--jil);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ===================== HERO ===================== */
+
+.sz-hero {
+  position: relative;
+  padding: 1.25rem 1.25rem 3rem;
+  background: var(--papir);
+  /* jemná mřížka milimetrového papíru */
+  background-image: linear-gradient(var(--linka) 1px, transparent 1px),
+    linear-gradient(90deg, var(--linka) 1px, transparent 1px);
+  background-size: 72px 72px;
+  overflow: hidden;
+}
+
+.sz-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1160px;
+  margin: 0 auto 2.5rem;
+}
+
+/* Wordmark — dvouřádková typografická značka */
+.sz-wordmark {
+  text-decoration: none;
+  color: var(--tus);
+  font-family: var(--font-display);
+  line-height: 1;
+  display: inline-block;
+}
+
+.sz-wordmark-line {
+  display: block;
+  font-size: 0.85rem;
+  letter-spacing: 0.38em;
+  font-weight: 400;
+}
+
+.sz-wordmark-em {
+  font-size: 1.15rem;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  color: var(--mech);
+}
+
+.sz-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.sz-nav-links a {
+  color: var(--tus);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease;
+}
+
+.sz-nav-links a:hover {
+  border-color: var(--mech);
+}
+
+.sz-nav-cta {
+  background: var(--mech);
+  color: var(--papir) !important;
+  padding: 0.55rem 1.1rem !important;
+  border-radius: 999px;
+  border-bottom: none !important;
+}
+
+.sz-nav-cta:hover {
+  background: var(--tus);
+}
+
+/* skryjeme textové odkazy na malých displejích, CTA zůstává */
+@media (max-width: 640px) {
+  .sz-nav-links a:not(.sz-nav-cta) {
+    display: none;
+  }
+}
+
+.sz-hero-grid {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 860px) {
+  .sz-hero-grid {
+    grid-template-columns: 7fr 5fr;
+    gap: 3rem;
+  }
+  .sz-hero {
+    padding: 1.5rem 2rem 5rem;
+  }
+}
+
+.sz-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--jil);
+  margin-bottom: 1.25rem;
+}
+
+.sz-eyebrow-light {
+  color: var(--list);
+}
+
+.sz-h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 8vw, 4.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.5rem;
+}
+
+.sz-h1 em {
+  font-style: italic;
+  color: var(--mech);
+}
+
+.sz-h1-row {
+  display: block;
+}
+
+.sz-lead {
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  max-width: 34em;
+  color: rgba(34, 48, 31, 0.82);
+  margin-bottom: 2rem;
+}
+
+.sz-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.sz-btn {
+  display: inline-block;
+  background: var(--mech);
+  color: var(--papir);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.sz-btn:hover {
+  background: var(--tus);
+  transform: translateY(-2px);
+}
+
+.sz-btn-ghost {
+  background: transparent;
+  color: var(--tus);
+  border: 2px solid var(--tus);
+  padding: calc(0.9rem - 2px) calc(1.6rem - 2px);
+}
+
+.sz-btn-ghost:hover {
+  background: var(--tus);
+  color: var(--papir);
+}
+
+/* --- Signature: osazovací plán (SVG) --- */
+
+.sz-plan {
+  position: relative;
+  max-width: 420px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.sz-plan-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--linka);
+  border-radius: 6px;
+  box-shadow: 8px 8px 0 rgba(74, 103, 65, 0.15);
+}
+
+.sz-plan-grid {
+  color: rgba(34, 48, 31, 0.1);
+}
+
+.sz-plan-path {
+  stroke: var(--jil);
+  opacity: 0.35;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: sz-draw 2.4s ease-out 0.3s forwards;
+}
+
+.sz-plant {
+  stroke: var(--mech);
+  fill: var(--mech);
+  opacity: 0;
+  transform-origin: center;
+  animation: sz-grow 0.7s ease-out forwards;
+}
+
+.sz-plant circle[fill="none"] {
+  fill: none;
+}
+
+.sz-plant-1 { animation-delay: 0.6s; }
+.sz-plant-2 { animation-delay: 0.9s; stroke: var(--tus); fill: none; }
+.sz-plant-3 { animation-delay: 1.2s; fill: none; }
+.sz-plant-4 { animation-delay: 1.5s; fill: none; stroke: var(--list); }
+
+.sz-plan-kota {
+  stroke: var(--tus);
+  opacity: 0.5;
+}
+
+.sz-plan-text {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  fill: var(--tus);
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+@keyframes sz-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes sz-grow {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* hero text — jemný vstup */
+.sz-hero-text > * {
+  animation: sz-rise 0.7s ease-out both;
+}
+
+.sz-hero-text > *:nth-child(2) { animation-delay: 0.08s; }
+.sz-hero-text > *:nth-child(3) { animation-delay: 0.16s; }
+.sz-hero-text > *:nth-child(4) { animation-delay: 0.24s; }
+
+@keyframes sz-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================== SEKCE OBECNĚ ===================== */
+
+.sz-section {
+  padding: 4rem 1.25rem;
+  max-width: none;
+}
+
+@media (min-width: 860px) {
+  .sz-section {
+    padding: 6rem 2rem;
+  }
+}
+
+.sz-section-head {
+  max-width: 1160px;
+  margin: 0 auto 3rem;
+}
+
+.sz-h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  max-width: 18em;
+}
+
+.sz-section-lead {
+  margin-top: 1rem;
+  max-width: 38em;
+  font-size: 1.1rem;
+  color: rgba(34, 48, 31, 0.78);
+}
+
+.sz-h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 0.6rem;
+}
+
+.sz-body {
+  font-size: 1rem;
+  color: rgba(34, 48, 31, 0.82);
+}
+
+/* ===================== SEKCE: FÁZE ===================== */
+
+.sz-faze {
+  list-style: none;
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .sz-faze {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1020px) {
+  .sz-faze {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.sz-faze-item {
+  background: #fff;
+  border: 1px solid var(--linka);
+  border-radius: 8px;
+  padding: 1.75rem 1.5rem;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sz-faze-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0 rgba(74, 103, 65, 0.14);
+}
+
+.sz-faze-marker {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 2px solid var(--list);
+}
+
+.sz-faze-cislo {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--mech);
+  line-height: 1;
+}
+
+.sz-faze-krok {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--jil);
+}
+
+.sz-faze-detail {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--mech);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ===================== SEKCE: DŮVĚRA ===================== */
+
+.sz-section-dark {
+  background: var(--tus);
+  color: var(--papir);
+}
+
+.sz-section-dark .sz-h2,
+.sz-section-dark .sz-h3 {
+  color: var(--papir);
+}
+
+.sz-section-dark .sz-body {
+  color: rgba(247, 248, 243, 0.78);
+}
+
+.sz-duvody {
+  max-width: 1160px;
+  margin: 0 auto 4rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 860px) {
+  .sz-duvody {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+.sz-duvod {
+  border-top: 3px solid var(--list);
+  padding-top: 1.25rem;
+}
+
+.sz-reference {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.sz-ref-nadpis {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--list);
+  margin-bottom: 1.75rem;
+}
+
+.sz-ref-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 860px) {
+  .sz-ref-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.sz-ref {
+  background: rgba(247, 248, 243, 0.06);
+  border: 1px solid rgba(247, 248, 243, 0.15);
+  border-radius: 8px;
+  padding: 1.6rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.sz-ref-misto {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--jil);
+}
+
+.sz-ref-citat {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--papir);
+}
+
+.sz-ref-jmeno {
+  font-size: 0.9rem;
+  color: rgba(247, 248, 243, 0.65);
+  margin-top: auto;
+}
+
+/* ===================== REDUCED MOTION ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .sz-plan-path,
+  .sz-plant,
+  .sz-hero-text > * {
+    animation: none !important;
+    opacity: 1 !important;
+    stroke-dashoffset: 0 !important;
+    transform: none !important;
+  }
+  .sz-btn,
+  .sz-faze-item {
+    transition: none;
+  }
+  .sz-btn:hover,
+  .sz-faze-item:hover {
+    transform: none;
+  }
+}
