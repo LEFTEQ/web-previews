@@ -1,0 +1,583 @@
+/* ==========================================================
+   MAPETO podlahy s.r.o. — Olomouc
+   Paleta odvozená z řemesla: dubová lamela, ořech, křída,
+   podkladová stěrka. Typografie: kondenzovaný grotesk pro
+   titulky (šířka lamely), humanistický grotesk pro text.
+   Signature: „pokládka" — pruhy-lamely v hero a rytmus
+   šikmého řezu napříč sekcemi.
+   ========================================================== */
+
+:root {
+  --mp-dub: #c8965a;        /* světlý dub, hlavní akcent */
+  --mp-dub-svetly: #e3bd8a; /* přírodní olej */
+  --mp-orech: #3d2b1f;      /* tmavý ořech, text a plochy */
+  --mp-sterka: #efe9df;     /* podkladová stěrka, pozadí */
+  --mp-krida: #fbf8f3;      /* křídová bílá, karty */
+  --mp-beton: #8a8177;      /* penetrace/beton, vedlejší text */
+
+  --mp-font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", system-ui, sans-serif;
+  --mp-font-body: "Segoe UI", "Helvetica Neue", system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--mp-font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--mp-orech);
+  background: var(--mp-sterka);
+  -webkit-font-smoothing: antialiased;
+}
+
+.mp img {
+  max-width: 100%;
+}
+
+.mp a {
+  color: inherit;
+}
+
+.mp :focus-visible {
+  outline: 3px solid var(--mp-dub);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- HERO ---------- */
+
+.mp-hero {
+  position: relative;
+  background: var(--mp-orech);
+  color: var(--mp-krida);
+  overflow: hidden;
+  padding: 1.5rem 1.25rem 0;
+}
+
+.mp-hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-bottom: 2.5rem;
+}
+
+.mp-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.mp-wordmark-name {
+  font-family: var(--mp-font-display);
+  font-weight: 700;
+  font-stretch: condensed;
+  font-size: 1.7rem;
+  letter-spacing: 0.22em;
+}
+
+.mp-wordmark-name::after {
+  content: "";
+  display: block;
+  margin-top: 0.35rem;
+  height: 4px;
+  background: linear-gradient(90deg, var(--mp-dub) 0 62%, transparent 62% 66%, var(--mp-dub-svetly) 66% 100%);
+}
+
+.mp-wordmark-sub {
+  margin-top: 0.45rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mp-dub-svetly);
+}
+
+.mp-hero-tel {
+  font-family: var(--mp-font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  color: var(--mp-krida);
+  text-decoration: none;
+  border-bottom: 2px solid var(--mp-dub);
+  padding-bottom: 0.15rem;
+  white-space: nowrap;
+}
+
+.mp-hero-tel:hover {
+  color: var(--mp-dub-svetly);
+}
+
+.mp-hero-body {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-bottom: 3rem;
+}
+
+.mp-hero-eyebrow {
+  margin: 0 0 1.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mp-dub-svetly);
+}
+
+.mp-hero-title {
+  margin: 0;
+  font-family: var(--mp-font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.4rem, 8.5vw, 6.2rem);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+}
+
+/* lamely titulku: každý řádek = jedna „položená" deska,
+   posunutá jako pokládka na vazbu */
+.mp-plank {
+  display: block;
+  width: fit-content;
+  padding: 0.08em 0.3em;
+}
+
+.mp-plank-1 {
+  background: var(--mp-dub);
+  color: var(--mp-orech);
+}
+
+.mp-plank-2 {
+  margin-left: clamp(0.75rem, 4vw, 3.5rem);
+}
+
+.mp-plank-3 {
+  margin-left: clamp(1.5rem, 8vw, 7rem);
+}
+
+.mp-plank-3 em {
+  font-style: normal;
+  color: var(--mp-dub-svetly);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mp-plank {
+    animation: mp-lay 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .mp-plank-2 { animation-delay: 0.15s; }
+  .mp-plank-3 { animation-delay: 0.3s; }
+  .mp-hero-lead,
+  .mp-hero-facts {
+    animation: mp-rise 0.7s 0.5s ease-out both;
+  }
+  .mp-parquet span {
+    animation: mp-grow 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .mp-parquet span:nth-child(2n) { animation-delay: 0.1s; }
+  .mp-parquet span:nth-child(3n) { animation-delay: 0.2s; }
+}
+
+@keyframes mp-lay {
+  from { opacity: 0; transform: translateX(-1.5rem); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes mp-rise {
+  from { opacity: 0; transform: translateY(0.75rem); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes mp-grow {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+.mp-hero-lead {
+  max-width: 34rem;
+  margin: 1.75rem 0 0;
+  font-size: 1.1rem;
+  color: #e9e0d3;
+}
+
+.mp-hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem 2.75rem;
+  margin-top: 2.25rem;
+}
+
+.mp-fact {
+  display: flex;
+  flex-direction: column;
+  border-left: 3px solid var(--mp-dub);
+  padding-left: 0.85rem;
+}
+
+.mp-fact strong {
+  font-family: var(--mp-font-display);
+  font-stretch: condensed;
+  font-size: 1.6rem;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+}
+
+.mp-fact span {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mp-beton);
+  color: #b8ac9c;
+}
+
+/* signature: pruh lamel na spodní hraně hero — dřevěná paleta,
+   nepravidelné šířky jako skutečná pokládka na divokou vazbu */
+.mp-parquet {
+  display: flex;
+  height: clamp(2.5rem, 7vw, 4.5rem);
+  margin: 2rem -1.25rem 0;
+}
+
+.mp-parquet span {
+  transform-origin: bottom;
+  border-right: 2px solid var(--mp-orech);
+}
+
+.mp-parquet span:nth-child(1) { flex: 3; background: var(--mp-dub); }
+.mp-parquet span:nth-child(2) { flex: 5; background: var(--mp-dub-svetly); }
+.mp-parquet span:nth-child(3) { flex: 2; background: #a5713d; }
+.mp-parquet span:nth-child(4) { flex: 4; background: var(--mp-dub); }
+.mp-parquet span:nth-child(5) { flex: 3; background: #b98850; }
+.mp-parquet span:nth-child(6) { flex: 5; background: var(--mp-dub-svetly); }
+.mp-parquet span:nth-child(7) { flex: 2; background: var(--mp-dub); }
+.mp-parquet span:nth-child(8) { flex: 4; background: #a5713d; }
+.mp-parquet span:nth-child(9) { flex: 3; background: var(--mp-dub-svetly); }
+.mp-parquet span:nth-child(10) { flex: 4; background: var(--mp-dub); border-right: 0; }
+
+/* ---------- SEKCE obecně ---------- */
+
+.mp-section {
+  padding: 4rem 1.25rem;
+}
+
+.mp-eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9c6a33;
+  font-weight: 600;
+}
+
+.mp-eyebrow-light {
+  color: var(--mp-dub-svetly);
+}
+
+.mp h2 {
+  margin: 0;
+  font-family: var(--mp-font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.8rem, 4.5vw, 2.9rem);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+
+.mp-section-lead {
+  max-width: 36rem;
+  margin: 1rem 0 0;
+  color: #5d4c3d;
+}
+
+/* ---------- SEKCE 1: nabídka ---------- */
+
+.mp-nabidka {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.mp-nabidka-grid {
+  display: grid;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.mp-list-title {
+  margin: 0 0 1.25rem;
+  font-family: var(--mp-font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.15rem;
+  letter-spacing: 0.12em;
+  color: var(--mp-orech);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mp-list-title::after {
+  content: "";
+  flex: 1;
+  height: 3px;
+  background: repeating-linear-gradient(90deg, var(--mp-dub) 0 2.5rem, transparent 2.5rem calc(2.5rem + 4px));
+}
+
+.mp-krytiny-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mp-krytiny-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  padding: 0.8rem 0.9rem;
+  border-left: 4px solid var(--mp-dub);
+  background: var(--mp-krida);
+  margin-bottom: 0.5rem;
+}
+
+.mp-krytiny-list li:nth-child(2n) {
+  border-left-color: var(--mp-dub-svetly);
+  margin-left: 0.9rem; /* pokládka na vazbu */
+}
+
+.mp-krytina-nazev {
+  font-weight: 700;
+}
+
+.mp-krytina-pozn {
+  color: var(--mp-beton);
+  font-size: 0.92rem;
+}
+
+.mp-dvere-card {
+  background: var(--mp-krida);
+  border-top: 4px solid var(--mp-orech);
+  padding: 1.25rem 1.25rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.mp-dvere-card h4 {
+  margin: 0 0 0.4rem;
+  font-family: var(--mp-font-display);
+  font-stretch: condensed;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 1.1rem;
+}
+
+.mp-dvere-card p {
+  margin: 0;
+  color: #5d4c3d;
+  font-size: 0.97rem;
+}
+
+/* kroky */
+
+.mp-kroky {
+  margin-top: 3.5rem;
+}
+
+.mp-kroky-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+  counter-reset: krok;
+}
+
+.mp-kroky-list li {
+  position: relative;
+  padding: 1.25rem 1.25rem 1.25rem 1.25rem;
+  background: var(--mp-krida);
+  border-bottom: 4px solid var(--mp-dub);
+}
+
+.mp-krok-cislo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  font-family: var(--mp-font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--mp-krida);
+  background: var(--mp-orech);
+  margin-bottom: 0.75rem;
+}
+
+.mp-kroky-list h4 {
+  margin: 0 0 0.4rem;
+  font-family: var(--mp-font-display);
+  font-stretch: condensed;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1.1rem;
+}
+
+.mp-kroky-list p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #5d4c3d;
+}
+
+/* ---------- SEKCE 2: důvěra ---------- */
+
+.mp-duvera {
+  background: var(--mp-orech);
+  color: var(--mp-krida);
+  /* šikmý řez horní hrany — jako seříznutá lamela u zdi */
+  clip-path: polygon(0 2.5rem, 100% 0, 100% 100%, 0 100%);
+  padding-top: 6rem;
+}
+
+.mp-duvera-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 3rem;
+}
+
+.mp-onas p {
+  max-width: 38rem;
+  color: #e4dbcd;
+  margin: 1.1rem 0 0;
+}
+
+.mp-onas-body {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+}
+
+.mp-onas-body li {
+  padding: 0.55rem 0 0.55rem 1.4rem;
+  position: relative;
+  color: var(--mp-krida);
+  font-weight: 600;
+}
+
+.mp-onas-body li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.05rem;
+  width: 0.8rem;
+  height: 4px;
+  background: var(--mp-dub);
+}
+
+.mp-reference {
+  display: grid;
+  gap: 1.5rem;
+  align-content: start;
+}
+
+.mp-ref {
+  margin: 0;
+  background: rgba(251, 248, 243, 0.06);
+  border-left: 4px solid var(--mp-dub);
+  padding: 1.5rem 1.5rem 1.25rem;
+}
+
+.mp-ref blockquote {
+  margin: 0;
+}
+
+.mp-ref blockquote p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #ede5d8;
+}
+
+.mp-ref blockquote p::before {
+  content: "„";
+  color: var(--mp-dub-svetly);
+  font-family: var(--mp-font-display);
+  font-size: 1.4em;
+  line-height: 0;
+  margin-right: 0.1em;
+}
+
+.mp-ref figcaption {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.mp-ref figcaption strong {
+  font-family: var(--mp-font-display);
+  font-stretch: condensed;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.95rem;
+}
+
+.mp-ref figcaption span {
+  font-size: 0.82rem;
+  color: #b8ac9c;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- responzivita ---------- */
+
+@media (min-width: 700px) {
+  .mp-kroky-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .mp-hero {
+    padding: 2rem 3rem 0;
+  }
+  .mp-parquet {
+    margin-left: -3rem;
+    margin-right: -3rem;
+  }
+  .mp-section {
+    padding: 5.5rem 3rem;
+  }
+  .mp-nabidka-grid {
+    grid-template-columns: 1.05fr 1fr;
+    gap: 4rem;
+  }
+  .mp-kroky-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .mp-duvera-inner {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 4.5rem;
+  }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.001s !important;
+  }
+}
