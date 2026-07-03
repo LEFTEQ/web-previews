@@ -1,0 +1,607 @@
+/* =====================================================
+   VR medical s.r.o — Plzeň
+   Rehabilitace ve virtuální realitě
+   Palette:
+     --ink       #0B1B33  (klinická půlnoční modř — headset off)
+     --deep      #10264A  (panel)
+     --cyan      #38E1D4  (zpětná vazba / biofeedback)
+     --sky       #7FB4FF  (chladné VR světlo)
+     --paper     #F2F6FB  (sterilní světlo ordinace)
+     --slate     #43536E  (text na světlé)
+   Type: Lexend (display — geometrická, „softwarová“, výborně čitelná
+         i pro pacienty) + system-ui fallback; data v tabulkových číslicích.
+   Signature: goniometrický vějíř rozsahu pohybu (ROM) v heru —
+   paže se při načtení „natáhne“ z 0° na dosažený úhel.
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --ink: #0B1B33;
+  --deep: #10264A;
+  --cyan: #38E1D4;
+  --sky: #7FB4FF;
+  --paper: #F2F6FB;
+  --slate: #43536E;
+  --radius: 14px;
+  --font: 'Lexend', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--slate);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.vrm a:focus-visible,
+.vrm button:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  background:
+    radial-gradient(1200px 700px at 85% -10%, rgba(56, 225, 212, 0.14), transparent 60%),
+    radial-gradient(900px 600px at -10% 110%, rgba(127, 180, 255, 0.12), transparent 55%),
+    var(--ink);
+  color: #E8F0FA;
+  padding: 1.25rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.nav {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0 1.5rem;
+}
+
+.wordmark {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+}
+
+.wm-vr {
+  font-weight: 800;
+  color: var(--cyan);
+  border: 2px solid var(--cyan);
+  border-radius: 8px 8px 8px 2px; /* tvar zorného pole headsetu */
+  padding: 0 0.35rem;
+  line-height: 1.35;
+}
+
+.wm-med {
+  font-weight: 300;
+  color: #E8F0FA;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: #B9C9E0;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.nav-links a:hover { color: var(--cyan); }
+
+.nav-cta {
+  color: var(--ink) !important;
+  background: var(--cyan);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.nav-cta:hover { background: #5FEADF; }
+
+.hero-grid {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 3rem;
+  align-items: center;
+  padding: 2.5rem 0 3rem;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin: 0 0 1.25rem;
+}
+
+.pulse-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 0 0 rgba(56, 225, 212, 0.6);
+  animation: pulse 2.4s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(56, 225, 212, 0.6); }
+  70% { box-shadow: 0 0 0 12px rgba(56, 225, 212, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(56, 225, 212, 0); }
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  line-height: 1.04;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  margin: 0 0 1.5rem;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--cyan);
+  font-weight: 300;
+}
+
+.hero-lead {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #B9C9E0;
+  max-width: 34rem;
+  margin: 0 0 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--cyan);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: #5FEADF;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  display: inline-block;
+  color: #E8F0FA;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(232, 240, 250, 0.35);
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+/* --- Signature: goniometrický vějíř --- */
+
+.hero-visual { text-align: center; }
+
+.rom-arc {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.arc {
+  fill: rgba(127, 180, 255, 0.06);
+  stroke: rgba(127, 180, 255, 0.22);
+  stroke-width: 1;
+  opacity: 0;
+  animation: arc-in 0.7s ease-out forwards;
+}
+
+.arc-1 { animation-delay: 0.35s; fill: rgba(56, 225, 212, 0.05); }
+.arc-2 { animation-delay: 0.65s; fill: rgba(56, 225, 212, 0.10); }
+.arc-3 { animation-delay: 0.95s; fill: rgba(56, 225, 212, 0.16); }
+.arc-4 { animation-delay: 1.25s; fill: rgba(56, 225, 212, 0.24); }
+
+@keyframes arc-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ticks line {
+  stroke: rgba(232, 240, 250, 0.35);
+  stroke-width: 2;
+}
+
+.limb {
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.limb-start {
+  stroke: rgba(127, 180, 255, 0.45);
+  stroke-dasharray: 8 10;
+}
+
+.limb-end {
+  stroke: var(--cyan);
+  transform-origin: 60px 460px;
+  animation: limb-reach 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+
+@keyframes limb-reach {
+  from { transform: rotate(-49deg); }
+  to { transform: rotate(0deg); }
+}
+
+.joint {
+  fill: var(--ink);
+  stroke: var(--cyan);
+  stroke-width: 3;
+}
+
+.hand-start { fill: rgba(127, 180, 255, 0.5); }
+
+.hand-end {
+  fill: var(--cyan);
+  transform-origin: 60px 460px;
+  animation: limb-reach 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+
+.rom-label {
+  max-width: 340px;
+  margin: 1rem auto 0;
+  font-size: 0.9rem;
+  color: #B9C9E0;
+  border-left: 3px solid var(--cyan);
+  padding-left: 0.85rem;
+  text-align: left;
+}
+
+.rom-label strong {
+  color: var(--cyan);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-size: 1.15rem;
+}
+
+/* --- Hero strip (fakta) --- */
+
+.hero-strip {
+  max-width: 1160px;
+  margin: 0 auto;
+  list-style: none;
+  padding: 1.5rem 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  border-top: 1px solid rgba(232, 240, 250, 0.14);
+}
+
+.hero-strip li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.hero-strip strong {
+  color: #FFFFFF;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-strip span {
+  font-size: 0.85rem;
+  color: #8CA0BF;
+}
+
+/* ============ SEKCE OBECNĚ ============ */
+
+.therapy, .trust {
+  padding: 4.5rem 1.25rem;
+}
+
+.section-head {
+  max-width: 720px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #1B9E93;
+  margin: 0 0 0.75rem;
+}
+
+.section-head h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 1rem;
+}
+
+.section-lead {
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+/* ============ TERAPIE ============ */
+
+.therapy { background: var(--paper); }
+
+.therapy-grid {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.therapy-card {
+  background: #FFFFFF;
+  border: 1px solid #DCE6F2;
+  border-radius: var(--radius);
+  padding: 2rem 1.75rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.therapy-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--cyan);
+  box-shadow: 0 16px 40px rgba(11, 27, 51, 0.10);
+}
+
+.card-glyph {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: rgba(56, 225, 212, 0.14);
+  color: #128A80;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.card-glyph svg { width: 30px; height: 30px; }
+
+.therapy-card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 0.6rem;
+}
+
+.therapy-card p {
+  font-size: 0.97rem;
+  margin: 0 0 1rem;
+}
+
+.card-fact {
+  font-size: 0.9rem !important;
+  font-weight: 500;
+  color: var(--ink);
+  border-left: 3px solid var(--cyan);
+  padding-left: 0.8rem;
+  margin-bottom: 0 !important;
+}
+
+.therapy-note {
+  max-width: 1160px;
+  margin: 2.5rem auto 0;
+  background: var(--deep);
+  color: #E8F0FA;
+  border-radius: var(--radius);
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.therapy-note p {
+  margin: 0;
+  max-width: 44rem;
+  font-size: 1.02rem;
+  color: #C7D6EC;
+}
+
+.therapy-note strong { color: var(--cyan); }
+
+/* ============ DŮVĚRA ============ */
+
+.trust {
+  background:
+    radial-gradient(900px 500px at 100% 0%, rgba(56, 225, 212, 0.10), transparent 55%),
+    var(--ink);
+  color: #C7D6EC;
+}
+
+.trust .eyebrow { color: var(--cyan); }
+.trust .section-head h2 { color: #FFFFFF; }
+.trust .section-lead { color: #9DB1CE; }
+
+.quotes {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.quote {
+  margin: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(127, 180, 255, 0.16);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.quote-lead {
+  grid-column: 1 / -1;
+  background: rgba(56, 225, 212, 0.07);
+  border-color: rgba(56, 225, 212, 0.35);
+}
+
+.quote blockquote {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #E8F0FA;
+  font-weight: 300;
+}
+
+.quote-lead blockquote {
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+.quote figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  border-left: 3px solid var(--cyan);
+  padding-left: 0.85rem;
+}
+
+.quote figcaption strong {
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.quote figcaption span {
+  font-size: 0.85rem;
+  color: #8CA0BF;
+}
+
+.press {
+  max-width: 1160px;
+  margin: 2.5rem auto 0;
+  list-style: none;
+  padding: 1.75rem 0 0;
+  border-top: 1px solid rgba(232, 240, 250, 0.12);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  font-size: 0.92rem;
+  color: #9DB1CE;
+  font-style: italic;
+}
+
+.press li { padding: 0; }
+
+/* ============ RESPONZIVITA ============ */
+
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 1.5rem 0 2.5rem;
+  }
+
+  .rom-arc { max-width: 320px; }
+
+  .hero-strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .therapy-grid { grid-template-columns: 1fr; }
+
+  .quotes { grid-template-columns: 1fr; }
+
+  .press { grid-template-columns: 1fr; gap: 1rem; }
+}
+
+@media (max-width: 600px) {
+  .nav { flex-wrap: wrap; }
+
+  .nav-links { gap: 1rem; }
+
+  .nav-links a:not(.nav-cta) { display: none; }
+
+  .therapy, .trust { padding: 3.25rem 1.15rem; }
+
+  .therapy-note { padding: 1.5rem; }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-ghost {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .pulse-dot,
+  .arc,
+  .limb-end,
+  .hand-end {
+    animation: none !important;
+    opacity: 1;
+  }
+
+  .btn-primary:hover,
+  .therapy-card:hover {
+    transform: none;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
