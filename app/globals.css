@@ -1,0 +1,584 @@
+/* ==========================================================================
+   LAKOVNA JAKUB s.r.o. — prášková lakovna, Ostrava
+   Palette:
+     --pk-steel   #23272b  (surová ocel / grafit)
+     --pk-smoke   #eef0f2  (světlá dílna)
+     --pk-blue    #0e4c8c  (RAL 5017 dopravní modrá — hlavní „lak“)
+     --pk-yellow  #f0a800  (RAL 1023 dopravní žlutá — akcent, výstražná páska dílny)
+     --pk-red     #c8362b  (RAL 3000 — jen ve vzorníku)
+   Type: Archivo Black-like industrial display přes system stack? Ne —
+         používáme systémové fonty s výraznými řezy: display = "Arial Black",
+         širokou průmyslovou hlavu doplňuje čitelný grotesk pro text.
+   Signature: pás RAL vzorníkových karet v hero + „nalakované“ slovo.
+   ========================================================================== */
+
+:root {
+  --pk-steel: #23272b;
+  --pk-steel-deep: #17191c;
+  --pk-smoke: #eef0f2;
+  --pk-white: #ffffff;
+  --pk-blue: #0e4c8c;
+  --pk-blue-bright: #1465b8;
+  --pk-yellow: #f0a800;
+  --pk-red: #c8362b;
+  --pk-ink: #1c1e21;
+  --pk-muted: #5b6168;
+
+  --pk-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+  --pk-body: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --pk-mono: "Consolas", "Menlo", "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--pk-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--pk-ink);
+  background: var(--pk-smoke);
+}
+
+.pk a:focus-visible,
+.pk button:focus-visible {
+  outline: 3px solid var(--pk-yellow);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =========================== HERO =========================== */
+
+.pk-hero {
+  position: relative;
+  background:
+    linear-gradient(160deg, var(--pk-steel-deep) 0%, var(--pk-steel) 55%, #2b3138 100%);
+  color: var(--pk-white);
+  overflow: hidden;
+}
+
+/* jemný „práškový“ šum – tečkovaný raster jako rozprášený pigment */
+.pk-hero-grain {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 14px 14px;
+  pointer-events: none;
+}
+
+.pk-nav {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 20px 24px;
+}
+
+.pk-wordmark {
+  font-family: var(--pk-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  color: var(--pk-white);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pk-wordmark em {
+  font-style: normal;
+  color: var(--pk-yellow);
+}
+
+.pk-wordmark-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--pk-blue-bright), var(--pk-blue) 70%);
+  box-shadow: 0 0 0 3px rgba(20, 101, 184, 0.25);
+  flex: none;
+}
+
+.pk-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+.pk-nav-links a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.pk-nav-links a:hover { color: var(--pk-yellow); }
+
+.pk-nav-cta {
+  border: 2px solid var(--pk-yellow);
+  color: var(--pk-yellow) !important;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.pk-nav-cta:hover {
+  background: var(--pk-yellow);
+  color: var(--pk-ink) !important;
+}
+
+.pk-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 48px 24px 72px;
+}
+
+.pk-hero-eyebrow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0 0 28px;
+}
+
+.pk-chip {
+  font-family: var(--pk-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--pk-blue);
+  color: var(--pk-white);
+  padding: 6px 12px;
+  border-radius: 3px;
+}
+
+.pk-chip-ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.pk-hero-title {
+  font-family: var(--pk-display);
+  font-size: clamp(2.4rem, 7.2vw, 5.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0 0 28px;
+}
+
+.pk-line { display: block; }
+
+.pk-line-2 { color: rgba(255, 255, 255, 0.92); }
+
+/* slovo „vypálený“ — nalakované: modrá výplň se přes něj přeleje při načtení */
+.pk-coated {
+  position: relative;
+  display: inline-block;
+  padding: 0 0.12em;
+  color: var(--pk-white);
+  isolation: isolate;
+}
+
+.pk-coat-layer {
+  position: absolute;
+  inset: -0.06em -0.05em;
+  background: linear-gradient(100deg, var(--pk-blue) 0%, var(--pk-blue-bright) 100%);
+  z-index: -1;
+  transform-origin: left center;
+  border-radius: 3px;
+}
+
+.pk-line-3 { color: var(--pk-yellow); }
+
+.pk-hero-sub {
+  max-width: 560px;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0 0 32px;
+}
+
+.pk-hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+
+.pk-btn {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 14px 26px;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.pk-btn-solid {
+  background: var(--pk-yellow);
+  color: var(--pk-ink);
+}
+
+.pk-btn-solid:hover { transform: translateY(-2px); background: #ffbe1a; }
+
+.pk-btn-line {
+  border: 2px solid currentColor;
+  color: var(--pk-white);
+}
+
+.pk-hero .pk-btn-line:hover { color: var(--pk-yellow); }
+
+/* ---- SIGNATURE: pás RAL karet ---- */
+
+.pk-ral {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  align-items: end;
+}
+
+.pk-ral-card {
+  border-radius: 4px;
+  padding: 14px 12px 12px;
+  min-height: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  transition: transform 0.18s ease;
+}
+
+.pk-ral-card:hover { transform: translateY(-6px); }
+
+.pk-ral-card span {
+  font-family: var(--pk-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.pk-ral-card em {
+  font-style: normal;
+  font-size: 0.74rem;
+  opacity: 0.8;
+}
+
+.pk-ral-note {
+  grid-column: 1 / -1;
+  margin: 10px 0 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* page-load orchestrace */
+@keyframes pk-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pk-coat {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.pk-hero-eyebrow,
+.pk-hero-title,
+.pk-hero-sub,
+.pk-hero-actions,
+.pk-ral {
+  animation: pk-rise 0.6s ease both;
+}
+
+.pk-hero-title   { animation-delay: 0.08s; }
+.pk-hero-sub     { animation-delay: 0.18s; }
+.pk-hero-actions { animation-delay: 0.26s; }
+.pk-ral          { animation-delay: 0.36s; }
+
+.pk-coat-layer { animation: pk-coat 0.7s cubic-bezier(0.6, 0, 0.2, 1) 0.55s both; }
+
+/* =========================== SEKCE: TECHNOLOGIE =========================== */
+
+.pk-tech {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 72px 24px;
+}
+
+.pk-section-head { max-width: 640px; margin-bottom: 44px; }
+
+.pk-eyebrow {
+  font-family: var(--pk-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--pk-blue);
+  margin: 0 0 10px;
+}
+
+.pk-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 26px;
+  height: 3px;
+  background: var(--pk-yellow);
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.pk-tech h2,
+.pk-trust h2 {
+  font-family: var(--pk-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.12;
+  text-transform: uppercase;
+  margin: 0 0 14px;
+}
+
+.pk-section-lead {
+  color: var(--pk-muted);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+/* kroky = skutečná sekvence linky lakovny, proto číslování */
+.pk-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  counter-reset: step;
+}
+
+.pk-step {
+  background: var(--pk-white);
+  border-radius: 6px;
+  border-top: 5px solid var(--pk-blue);
+  padding: 22px 20px 18px;
+  box-shadow: 0 2px 10px rgba(23, 25, 28, 0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.pk-step:last-child { border-top-color: var(--pk-yellow); }
+
+.pk-step-num {
+  font-family: var(--pk-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--pk-blue);
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.pk-step:last-child .pk-step-num { color: #b17c00; }
+
+.pk-step h3 {
+  font-size: 1.08rem;
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+
+.pk-step p {
+  margin: 0 0 14px;
+  font-size: 0.95rem;
+  color: var(--pk-muted);
+  flex: 1;
+}
+
+.pk-step-meta {
+  font-family: var(--pk-mono);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pk-ink);
+  border-top: 1px dashed #d4d8dc;
+  padding-top: 10px;
+}
+
+.pk-tech-strip {
+  margin-top: 36px;
+  background: var(--pk-white);
+  border-left: 6px solid var(--pk-yellow);
+  border-radius: 6px;
+  padding: 24px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 10px rgba(23, 25, 28, 0.06);
+}
+
+.pk-tech-strip strong { display: block; margin-bottom: 6px; font-size: 1.05rem; }
+
+.pk-tech-strip p { margin: 0; color: var(--pk-muted); max-width: 640px; }
+
+.pk-tech-strip .pk-btn-line {
+  color: var(--pk-blue);
+  flex: none;
+}
+
+.pk-tech-strip .pk-btn-line:hover {
+  background: var(--pk-blue);
+  color: var(--pk-white);
+}
+
+/* =========================== SEKCE: DŮVĚRA =========================== */
+
+.pk-trust {
+  background: var(--pk-steel);
+  color: var(--pk-white);
+  padding: 72px 24px 80px;
+}
+
+.pk-trust-grid {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.pk-eyebrow-light { color: var(--pk-yellow); }
+
+.pk-trust-copy > p {
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 560px;
+}
+
+.pk-trust-list {
+  list-style: none;
+  margin: 26px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.pk-trust-list li {
+  padding-left: 18px;
+  border-left: 3px solid var(--pk-blue-bright);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.98rem;
+}
+
+.pk-trust-list strong { color: var(--pk-white); }
+
+.pk-trust-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.pk-fact {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 20px 18px;
+}
+
+.pk-fact-value {
+  display: block;
+  font-family: var(--pk-display);
+  font-size: 1.7rem;
+  color: var(--pk-yellow);
+  margin-bottom: 6px;
+}
+
+.pk-fact-label {
+  display: block;
+  font-size: 0.86rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.45;
+}
+
+.pk-quote {
+  max-width: 1160px;
+  margin: 56px auto 0;
+  padding: 28px 30px;
+  background: rgba(14, 76, 140, 0.25);
+  border-left: 6px solid var(--pk-blue-bright);
+  border-radius: 6px;
+}
+
+.pk-quote blockquote {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--pk-white);
+}
+
+.pk-quote figcaption {
+  font-family: var(--pk-mono);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* =========================== RESPONSIVITA =========================== */
+
+@media (max-width: 960px) {
+  .pk-steps { grid-template-columns: 1fr 1fr; }
+  .pk-trust-grid { grid-template-columns: 1fr; gap: 36px; }
+  .pk-ral { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+
+  .pk-nav { padding: 16px 18px; }
+  .pk-nav-links { gap: 14px; }
+  .pk-nav-links a { font-size: 0.88rem; }
+
+  .pk-hero-inner { padding: 36px 18px 56px; }
+  .pk-hero-actions .pk-btn { width: 100%; text-align: center; }
+
+  .pk-ral { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .pk-ral-card { min-height: 78px; padding: 10px; }
+
+  .pk-tech { padding: 56px 18px; }
+  .pk-steps { grid-template-columns: 1fr; }
+  .pk-tech-strip { padding: 20px; }
+  .pk-tech-strip .pk-btn-line { width: 100%; text-align: center; }
+
+  .pk-trust { padding: 56px 18px 64px; }
+  .pk-trust-facts { grid-template-columns: 1fr 1fr; }
+}
+
+/* =========================== REDUKOVANÝ POHYB =========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .pk-hero-eyebrow,
+  .pk-hero-title,
+  .pk-hero-sub,
+  .pk-hero-actions,
+  .pk-ral,
+  .pk-coat-layer {
+    animation: none !important;
+  }
+
+  .pk-btn,
+  .pk-ral-card,
+  .pk-nav-cta {
+    transition: none !important;
+  }
+
+  .pk-ral-card:hover,
+  .pk-btn-solid:hover { transform: none; }
+}
