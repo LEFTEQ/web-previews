@@ -1,0 +1,358 @@
+/* ===== CLONÍK — žaluzie a rolety Brno =====================================
+   Koncept: stránka je okno se stíněním. Světlo prochází „mezi lamelami“ —
+   proto slat pattern, teplé denní světlo a ostrá, průmyslově čistá typografie.
+   Paleta záměrně NENÍ krémový serif ani black+acid: sytá půlnoční modř okna,
+   teplé sluneční jantarové světlo a chladná hliníková šeď lamel.
+=========================================================================== */
+
+:root {
+  --ink: #10203a;        /* půlnoční okenní modř — text i tmavé plochy */
+  --paper: #f2f4f7;      /* chladná hliníková běl */
+  --alu: #c4cdd6;        /* šeď lamely */
+  --sun: #f4a83b;        /* teplé sluneční světlo mezi lamelami (signature) */
+  --sun-deep: #d9832a;   /* hlubší jantar pro hover */
+  --line: #d3d9e0;
+
+  --font-display: "Archivo", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --font-body: ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+
+  --wrap: 1160px;
+  --pad: clamp(1.15rem, 4vw, 3rem);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--sun);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.cl-page { overflow-x: clip; }
+
+/* ---- shared type ---- */
+.cl-eyebrow {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  color: var(--sun);
+}
+.cl-eyebrow-dark { color: var(--sun-deep); }
+
+.cl-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.7rem, 9vw, 5.6rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.4rem;
+  text-transform: uppercase;
+}
+.cl-h1-accent {
+  color: var(--sun);
+  position: relative;
+}
+.cl-h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.7rem, 4.5vw, 2.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* ===== HERO =============================================================== */
+.cl-hero {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0 var(--pad) clamp(2.5rem, 6vw, 4.5rem);
+  position: relative;
+  overflow: hidden;
+}
+/* signature: sluneční světlo prosvítá mezi lamelami přes celé hero */
+.cl-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0,
+    transparent 30px,
+    rgba(244, 168, 59, 0.06) 30px,
+    rgba(244, 168, 59, 0.06) 33px
+  );
+  pointer-events: none;
+}
+.cl-hero::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 60%;
+  height: 90%;
+  background: radial-gradient(circle, rgba(244,168,59,0.28), transparent 62%);
+  pointer-events: none;
+}
+
+.cl-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 1.6rem 0 clamp(1.5rem, 5vw, 3rem);
+  position: relative;
+  z-index: 2;
+}
+.cl-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.cl-mark-slats {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 22px;
+  padding: 3px 0;
+}
+.cl-mark-slats i {
+  display: block;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--sun);
+}
+.cl-mark-slats i:nth-child(2) { background: var(--alu); }
+.cl-nav-place {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  color: var(--alu);
+}
+
+.cl-hero-grid {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+@media (min-width: 860px) {
+  .cl-hero-grid { grid-template-columns: 1.05fr 0.95fr; }
+}
+
+.cl-hero-copy { max-width: 34rem; }
+.cl-lede {
+  font-size: clamp(1rem, 2.4vw, 1.18rem);
+  color: #cdd6e0;
+  margin: 0 0 2rem;
+  max-width: 30rem;
+}
+
+.cl-cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.cl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.92rem;
+  padding: 0.95rem 1.5rem;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease;
+}
+.cl-btn-primary { background: var(--sun); color: var(--ink); }
+.cl-btn-primary:hover { background: var(--sun-deep); transform: translateY(-2px); }
+.cl-btn-ghost { border-color: var(--alu); color: var(--paper); }
+.cl-btn-ghost:hover { border-color: var(--sun); color: var(--sun); }
+
+.cl-hero-media {
+  margin: 0;
+  position: relative;
+}
+.cl-hero-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 6px solid var(--paper);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+}
+.cl-hero-tag {
+  position: absolute;
+  left: 0;
+  bottom: 1.2rem;
+  background: var(--sun);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  padding: 0.5rem 0.9rem;
+}
+
+/* ===== SEKCE ============================================================== */
+.cl-section {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 6rem) var(--pad);
+}
+.cl-section-head { margin-bottom: clamp(2rem, 5vw, 3rem); max-width: 40rem; }
+
+/* nabídka */
+.cl-offer { display: grid; gap: clamp(2rem, 5vw, 3.5rem); }
+@media (min-width: 860px) {
+  .cl-offer { grid-template-columns: 1.15fr 0.85fr; align-items: start; }
+}
+
+.cl-offer-list { list-style: none; margin: 0; padding: 0; }
+.cl-offer-item {
+  display: grid;
+  grid-template-columns: 8px auto 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 1.4rem 0;
+  border-top: 1px solid var(--line);
+}
+.cl-offer-item:last-child { border-bottom: 1px solid var(--line); }
+.cl-offer-slat {
+  align-self: stretch;
+  width: 8px;
+  background: repeating-linear-gradient(
+    180deg, var(--alu) 0 4px, transparent 4px 7px
+  );
+}
+.cl-offer-no {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--sun-deep);
+  letter-spacing: 0.04em;
+}
+.cl-offer-title {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  font-size: 1.12rem;
+  margin: 0 0 0.25rem;
+}
+.cl-offer-text { margin: 0; color: #40506a; font-size: 1rem; }
+
+.cl-offer-media { margin: 0; position: sticky; top: 1.5rem; }
+.cl-offer-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 5px solid var(--ink);
+}
+
+/* důvěra */
+.cl-section-trust { background: var(--ink); color: var(--paper); max-width: none; }
+.cl-trust-grid {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 6rem) var(--pad);
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: center;
+}
+@media (min-width: 860px) {
+  .cl-trust-grid { grid-template-columns: 0.85fr 1.15fr; }
+}
+.cl-trust-media { margin: 0; }
+.cl-trust-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 5px solid var(--sun);
+}
+.cl-trust-lede { color: #cdd6e0; font-size: 1.1rem; margin: 1rem 0 2rem; max-width: 34rem; }
+
+.cl-facts {
+  display: grid;
+  gap: 0;
+  margin: 0 0 2rem;
+  border-top: 1px solid rgba(196,205,214,0.25);
+}
+.cl-fact {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(196,205,214,0.25);
+}
+.cl-fact-label { color: var(--alu); font-size: 0.95rem; }
+.cl-fact-value {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--sun);
+  font-size: 1.25rem;
+}
+
+.cl-quote {
+  margin: 0;
+  padding: 1.3rem 1.5rem;
+  border-left: 4px solid var(--sun);
+  background: rgba(255,255,255,0.04);
+}
+.cl-quote p { margin: 0 0 0.6rem; font-size: 1.08rem; }
+.cl-quote cite { font-style: normal; color: var(--alu); font-size: 0.9rem; }
+
+/* ===== motion ============================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  .cl-hero-copy > *, .cl-hero-media {
+    animation: cl-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .cl-eyebrow { animation-delay: 0.05s; }
+  .cl-h1 { animation-delay: 0.12s; }
+  .cl-lede { animation-delay: 0.2s; }
+  .cl-cta-row { animation-delay: 0.28s; }
+  .cl-hero-media { animation-delay: 0.34s; }
+
+  @keyframes cl-rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  .cl-offer-media { position: static; }
+}
