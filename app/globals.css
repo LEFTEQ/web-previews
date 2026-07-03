@@ -1,0 +1,505 @@
+/* ============================================================
+   SCHODY STADLER — návrh nového webu
+   Paleta: dílna — ocel, dubové dřevo, křídový papír výkresu
+   ------------------------------------------------------------
+   --st-ocel      #22303C  tmavá ocel (text, plochy)
+   --st-grafit    #14202B  nejtmavší (sekce proces)
+   --st-papir     #EDEFEA  křídový papír technického výkresu
+   --st-dub       #C4863B  dubové dřevo / mosaz (akcent)
+   --st-dub-svetly#E3B878  světlejší dub (akcent na tmavé)
+   --st-linka     #97A6B0  ocelově šedá linka
+   ============================================================ */
+
+:root {
+  --st-ocel: #22303c;
+  --st-grafit: #14202b;
+  --st-papir: #edefea;
+  --st-bila: #f8f9f6;
+  --st-dub: #c4863b;
+  --st-dub-svetly: #e3b878;
+  --st-linka: #97a6b0;
+  --st-linka-jemna: #ccd4d9;
+
+  --st-display: "Archivo Black", "Arial Black", "Franklin Gothic Medium",
+    sans-serif;
+  --st-body: "Georgia", "Times New Roman", serif;
+  --st-util: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--st-papir);
+  color: var(--st-ocel);
+  font-family: var(--st-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.st a {
+  color: inherit;
+}
+
+.st a:focus-visible,
+.st :focus-visible {
+  outline: 3px solid var(--st-dub);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.st-hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.25rem 2.5rem;
+  background: var(--st-papir);
+  /* jemná mřížka technického výkresu */
+  background-image: linear-gradient(
+      to right,
+      rgba(151, 166, 176, 0.14) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(151, 166, 176, 0.14) 1px, transparent 1px);
+  background-size: 68px 68px;
+  position: relative;
+  overflow: hidden;
+}
+
+.st-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.st-wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1;
+  font-family: var(--st-display);
+  letter-spacing: 0.02em;
+}
+
+.st-wordmark-schody {
+  font-size: 0.8rem;
+  letter-spacing: 0.42em;
+  color: var(--st-dub);
+}
+
+.st-wordmark-stadler {
+  font-size: 1.5rem;
+  color: var(--st-ocel);
+  /* posunutí jako stupeň schodu */
+  transform: translateX(0.35em);
+}
+
+.st-hero-since {
+  font-family: var(--st-util);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  text-align: right;
+  color: var(--st-ocel);
+  line-height: 1.5;
+}
+
+.st-hero-main {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 3.5rem 0 2rem;
+  position: relative;
+}
+
+/* --- SIGNATURE: nadpis stoupá jako schody --- */
+.st-hero-title {
+  font-family: var(--st-display);
+  font-size: clamp(3rem, 11vw, 8.5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: var(--st-ocel);
+  display: flex;
+  flex-direction: column-reverse; /* čteme zdola nahoru = stoupáme */
+  z-index: 1;
+}
+
+.st-step {
+  display: block;
+  animation: st-vystup 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.st-step-1 {
+  margin-left: 0;
+  animation-delay: 0.05s;
+}
+
+.st-step-2 {
+  margin-left: 0.55em;
+  animation-delay: 0.2s;
+}
+
+.st-step-3 {
+  margin-left: 1.65em;
+  color: var(--st-dub);
+  animation-delay: 0.35s;
+}
+
+@keyframes st-vystup {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.st-stairline {
+  position: absolute;
+  right: -1.25rem;
+  bottom: 0;
+  width: min(52vw, 560px);
+  height: auto;
+  color: var(--st-linka);
+  z-index: 0;
+}
+
+.st-stairline-path {
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: st-kresli 1.6s ease-out 0.3s forwards;
+}
+
+.st-stairline-balusters {
+  opacity: 0;
+  animation: st-objev 0.6s ease-out 1.5s forwards;
+}
+
+@keyframes st-kresli {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes st-objev {
+  to {
+    opacity: 1;
+  }
+}
+
+.st-hero-bottom {
+  display: grid;
+  gap: 2rem;
+  border-top: 3px solid var(--st-ocel);
+  padding-top: 1.5rem;
+}
+
+.st-hero-lead {
+  font-size: 1.125rem;
+  max-width: 34rem;
+}
+
+.st-hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 3rem;
+}
+
+.st-hero-facts dt {
+  font-family: var(--st-util);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--st-ocel);
+  opacity: 0.75;
+}
+
+.st-hero-facts dd {
+  font-family: var(--st-display);
+  font-size: 1.35rem;
+  color: var(--st-ocel);
+}
+
+.st-hero-facts dd a {
+  text-decoration-color: var(--st-dub);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+/* ============ SEKCE: TYPY ============ */
+
+.st-typy {
+  padding: 4.5rem 1.25rem 5rem;
+  background: var(--st-bila);
+}
+
+.st-section-head {
+  max-width: 68rem;
+  margin: 0 auto 3rem;
+}
+
+.st-eyebrow {
+  font-family: var(--st-util);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--st-dub);
+  margin-bottom: 0.75rem;
+}
+
+.st-section-head h2 {
+  font-family: var(--st-display);
+  font-size: clamp(1.75rem, 4.5vw, 3rem);
+  line-height: 1.08;
+  text-transform: uppercase;
+  color: var(--st-ocel);
+}
+
+.st-typy-list {
+  list-style: none;
+  max-width: 68rem;
+  margin: 0 auto;
+  border-top: 2px solid var(--st-ocel);
+}
+
+.st-typ {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.25rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--st-linka-jemna);
+  transition: background-color 0.25s ease, padding-left 0.25s ease;
+}
+
+.st-typ:hover {
+  background: rgba(196, 134, 59, 0.06);
+  padding-left: 0.75rem;
+}
+
+.st-typ-kod {
+  font-family: var(--st-display);
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--st-dub);
+  min-width: 2.6rem;
+}
+
+.st-typ-body h3 {
+  font-family: var(--st-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--st-ocel);
+}
+
+.st-typ-material {
+  font-family: var(--st-util);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--st-linka);
+  margin: 0.25rem 0 0.75rem;
+}
+
+.st-typ-popis {
+  max-width: 42rem;
+}
+
+.st-typ-detail {
+  margin-top: 0.6rem;
+  font-style: italic;
+  color: var(--st-dub);
+}
+
+/* ============ SEKCE: PROCES ============ */
+
+.st-proces {
+  background: var(--st-grafit);
+  color: var(--st-bila);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.st-section-head-dark h2 {
+  color: var(--st-bila);
+}
+
+.st-section-head-dark .st-eyebrow {
+  color: var(--st-dub-svetly);
+}
+
+.st-proces-uvod {
+  margin-top: 1.5rem;
+  max-width: 40rem;
+  color: #d6dde1;
+}
+
+.st-kroky {
+  list-style: none;
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 2px;
+  counter-reset: krok;
+}
+
+.st-krok {
+  background: rgba(248, 249, 246, 0.05);
+  border-left: 4px solid var(--st-dub);
+  padding: 1.5rem 1.5rem 1.75rem;
+}
+
+.st-krok-stupen {
+  font-family: var(--st-util);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--st-dub-svetly);
+  margin-bottom: 0.5rem;
+}
+
+.st-krok h3 {
+  font-family: var(--st-display);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.st-krok p:last-child {
+  color: #c3ccd2;
+  font-size: 0.98rem;
+}
+
+.st-zaruky {
+  max-width: 68rem;
+  margin: 3rem auto 0;
+  display: grid;
+  gap: 1.5rem;
+  border-top: 1px solid rgba(151, 166, 176, 0.35);
+  padding-top: 2rem;
+}
+
+.st-zaruka {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.st-zaruka strong {
+  font-family: var(--st-display);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--st-dub-svetly);
+}
+
+.st-zaruka span {
+  color: #c3ccd2;
+  font-size: 0.98rem;
+}
+
+/* ============ TABLET / DESKTOP ============ */
+
+@media (min-width: 700px) {
+  .st-hero {
+    padding: 2rem 3rem 3rem;
+  }
+
+  .st-hero-bottom {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+  }
+
+  .st-hero-facts {
+    justify-content: flex-end;
+  }
+
+  .st-typy,
+  .st-proces {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .st-typ {
+    grid-template-columns: 5rem 1fr;
+    gap: 2rem;
+  }
+
+  .st-typ-kod {
+    font-size: 3.2rem;
+  }
+
+  .st-kroky {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* stupňovité odsazení kroků — i mřížka stoupá */
+  .st-krok:nth-child(2) {
+    transform: translateY(1.25rem);
+  }
+  .st-krok:nth-child(4) {
+    transform: translateY(1.25rem);
+  }
+
+  .st-zaruky {
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 4.5rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .st-kroky {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* každý krok o stupeň výš — čteme zleva doprava, stoupáme */
+  .st-krok:nth-child(1) {
+    transform: translateY(3rem);
+  }
+  .st-krok:nth-child(2) {
+    transform: translateY(2rem);
+  }
+  .st-krok:nth-child(3) {
+    transform: translateY(1rem);
+  }
+  .st-krok:nth-child(4) {
+    transform: translateY(0);
+  }
+
+  .st-zaruky {
+    margin-top: 6rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .st-step,
+  .st-stairline-path,
+  .st-stairline-balusters {
+    animation: none;
+    opacity: 1;
+    stroke-dashoffset: 0;
+    transform: none;
+  }
+
+  .st-typ {
+    transition: none;
+  }
+}
