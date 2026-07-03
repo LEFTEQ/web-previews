@@ -1,0 +1,508 @@
+/* ============================================================
+   VETERINA KOMÍN — MVDr. Igor Beneš, Brno
+   Tokeny:
+   --jedle    #123B2E  hluboká klinická zeleň (odkaz na původní zelenou identitu, posunutá do důvěryhodného tónu)
+   --mech     #1E5240  sekundární zeleň
+   --puls     #FF7A59  korálový puls (EKG linka, tep) — akcent
+   --srst     #E9DFCE  teplý písek (srst) — světlé plochy
+   --papir    #FBF9F4  pozadí
+   --inkoust  #16211C  text
+   Typo: display = systémový kondenzovaný grotesk stack (Arial Narrow /
+   condensed fallback) pro razanci; body = Georgia-less humanist stack.
+   ============================================================ */
+
+:root {
+  --jedle: #123b2e;
+  --mech: #1e5240;
+  --puls: #ff7a59;
+  --srst: #e9dfce;
+  --papir: #fbf9f4;
+  --inkoust: #16211c;
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed",
+    system-ui, sans-serif;
+  --font-body: "Seravek", "Gill Sans", "Trebuchet MS", "Segoe UI", system-ui,
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--papir);
+  color: var(--inkoust);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.vk a {
+  color: inherit;
+}
+
+.vk a:focus-visible,
+.vk .btn:focus-visible {
+  outline: 3px solid var(--puls);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  background: var(--jedle);
+  color: var(--srst);
+  padding: 1.5rem 1.25rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.95;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+}
+
+.wordmark-vet {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  color: var(--srst);
+}
+
+.wordmark-komin {
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--puls);
+}
+
+.hero-loc {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.hero-body {
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+.hero-eyebrow {
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--puls);
+  margin: 0 0 1rem;
+  font-weight: 600;
+}
+
+.hero-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  color: #fff;
+}
+
+.hero-title .line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.hero-title .line-2 {
+  animation-delay: 0.12s;
+}
+
+.hero-title .line-3 {
+  animation-delay: 0.24s;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--puls);
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Signature: EKG linka --- */
+
+.ekg {
+  margin: 2.25rem 0;
+}
+
+.ekg-svg {
+  width: 100%;
+  height: 70px;
+  display: block;
+}
+
+.ekg-path {
+  stroke: var(--puls);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+  animation: tep 2.4s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+}
+
+@keyframes tep {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* --- Fakta --- */
+
+.hero-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.25rem;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  border-left: 3px solid var(--mech);
+  padding-left: 0.85rem;
+}
+
+.fact-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  color: #fff;
+  line-height: 1.1;
+}
+
+.fact-label {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* --- Akce --- */
+
+.hero-actions {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--puls);
+  color: var(--jedle);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: #ff8f72;
+}
+
+.btn-ghost {
+  border: 2px solid var(--mech);
+  color: var(--srst);
+}
+
+.btn-ghost:hover {
+  border-color: var(--puls);
+  color: #fff;
+}
+
+/* --- Ordinační hodiny --- */
+
+.hero-hours {
+  max-width: 62rem;
+  margin: 2.75rem auto 0;
+  background: var(--mech);
+  border-radius: 14px;
+  padding: 1.5rem 1.5rem 1.25rem;
+}
+
+.hours-title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--puls);
+}
+
+.hours-list {
+  margin: 0 0 1rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(233, 223, 206, 0.18);
+  padding-bottom: 0.35rem;
+}
+
+.hours-row dt {
+  margin: 0;
+}
+
+.hours-row dd {
+  margin: 0;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.hours-note {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.hours-note a {
+  color: var(--puls);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+/* ================= SEKCE: VÝKONY ================= */
+
+.vykony {
+  padding: 4rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.section-head {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.vykony h2,
+.duvera h2 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  line-height: 1.05;
+  margin: 0 0 0.75rem;
+  color: var(--jedle);
+}
+
+.section-lead {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #3c4a43;
+}
+
+.vykony-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.25rem;
+}
+
+.vykon {
+  background: #fff;
+  border: 1px solid #e4ded1;
+  border-radius: 14px;
+  padding: 1.5rem 1.4rem;
+  position: relative;
+  transition: transform 0.18s ease, border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.vykon:hover {
+  transform: translateY(-4px);
+  border-color: var(--puls);
+  box-shadow: 0 10px 30px rgba(18, 59, 46, 0.1);
+}
+
+.vykon-tag {
+  display: inline-block;
+  background: var(--srst);
+  color: var(--jedle);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  margin-bottom: 0.9rem;
+}
+
+.vykon h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
+  color: var(--jedle);
+}
+
+.vykon p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #3c4a43;
+}
+
+/* ================= SEKCE: DŮVĚRA ================= */
+
+.duvera {
+  background: var(--srst);
+  padding: 4rem 1.25rem;
+}
+
+.duvera-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+}
+
+.duvera-text p {
+  max-width: 38rem;
+  color: #2e3a34;
+}
+
+.duvera-body {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.duvera-body li {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: var(--papir);
+  border-radius: 14px;
+  padding: 1.25rem 1.4rem;
+}
+
+.duvera-znak {
+  color: var(--puls);
+  font-size: 1.3rem;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.duvera-body h3 {
+  margin: 0 0 0.3rem;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
+  color: var(--jedle);
+}
+
+.duvera-body p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #3c4a43;
+}
+
+.duvera-body a {
+  color: var(--mech);
+  font-weight: 700;
+}
+
+/* ================= RESPONZIVITA ================= */
+
+@media (min-width: 760px) {
+  .hero {
+    padding: 2rem 3rem 3.5rem;
+  }
+
+  .duvera-inner {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: start;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-facts {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .ekg-svg {
+    height: 52px;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-title .line {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .ekg-path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .btn,
+  .vykon {
+    transition: none;
+  }
+}
