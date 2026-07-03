@@ -1,0 +1,540 @@
+/* =====================================================
+   KOUPELNY VÍDENSKÝ — návrh
+   Koncept: „spárořez" — celý web drží mřížka obkladu.
+   Paleta: hluboká petrolejová glazura + bílá kachlička,
+   měděný akcent (trubky, baterie). Žádný krém, žádná
+   terakota — koupelnová keramika a kov.
+   ===================================================== */
+
+:root {
+  --glazura: #0e3a43;        /* petrolejová glazura */
+  --glazura-tmava: #092830;  /* stín ve spáře */
+  --kachlicka: #f5f8f8;      /* bílá kachlička, lehce chladná */
+  --kachlicka-2: #e7eef0;    /* druhá glazura */
+  --sparovka: #c9d6d9;       /* spárovací hmota */
+  --med: #c96f3b;            /* měděná trubka / baterie */
+  --med-svetla: #e08b55;
+  --inkoust: #10262b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--kachlicka);
+  color: var(--inkoust);
+  font-family: "Trebuchet MS", "Segoe UI", -apple-system, system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.kv h1,
+.kv h2,
+.kv h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  margin: 0;
+}
+
+.kv a:focus-visible,
+.kv .btn:focus-visible {
+  outline: 3px solid var(--med);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  background: linear-gradient(168deg, var(--glazura) 0%, var(--glazura-tmava) 100%);
+  color: var(--kachlicka);
+  overflow: hidden;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3.5rem;
+}
+
+.hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(245, 248, 248, 0.18);
+}
+
+.wordmark {
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.14em;
+  color: var(--kachlicka);
+}
+
+.wordmark em {
+  font-style: normal;
+  color: var(--med-svetla);
+  border-bottom: 3px solid var(--med);
+  padding-bottom: 2px;
+  margin-left: 0.3ch;
+}
+
+.hero-loc {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sparovka);
+}
+
+.hero-main {
+  max-width: 620px;
+  padding-top: 3rem;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--med-svetla);
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 8vw, 4.6rem);
+  line-height: 1.04;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.t-line {
+  display: block;
+}
+
+.t-accent {
+  color: var(--med-svetla);
+  position: relative;
+  white-space: nowrap;
+}
+
+/* spára pod akcentem — linka jako mezi kachličkami */
+.t-accent::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.04em;
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--med) 0 22px,
+    transparent 22px 28px
+  );
+}
+
+.hero-sub {
+  margin: 1.5rem 0 2rem;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: #d7e2e4;
+  max-width: 52ch;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--med);
+  color: #fff;
+}
+
+.btn-solid:hover {
+  background: var(--med-svetla);
+  transform: translateY(-2px);
+}
+
+.btn-line {
+  border: 2px solid rgba(245, 248, 248, 0.5);
+  color: var(--kachlicka);
+}
+
+.btn-line:hover {
+  border-color: var(--kachlicka);
+  background: rgba(245, 248, 248, 0.08);
+  transform: translateY(-2px);
+}
+
+.hero-note {
+  margin: 1.25rem 0 0;
+  font-size: 0.9rem;
+  color: var(--sparovka);
+}
+
+/* ---- SIGNATURE: kachličková stěna ---- */
+
+.tiles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.tiles-grid {
+  position: absolute;
+  right: -3rem;
+  top: 0;
+  bottom: 0;
+  width: min(46vw, 540px);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 6px; /* spára */
+  transform: skewX(-6deg);
+  transform-origin: top right;
+  opacity: 0.95;
+}
+
+.tile {
+  background: rgba(245, 248, 248, 0.05);
+  border-radius: 3px;
+  animation: tile-in 0.7s ease both;
+}
+
+/* pár kachliček s glazurou a jedna měděná — jako mozaika */
+.tile-1,
+.tile-6,
+.tile-11,
+.tile-16,
+.tile-21 {
+  background: rgba(245, 248, 248, 0.11);
+}
+
+.tile-4,
+.tile-13,
+.tile-22 {
+  background: rgba(201, 111, 59, 0.28);
+}
+
+.tile-9 {
+  background: var(--med);
+}
+
+.tile-18 {
+  background: rgba(245, 248, 248, 0.2);
+}
+
+/* orchestrace: kachličky „nalepované" po řadách */
+.tile-0, .tile-1, .tile-2, .tile-3 { animation-delay: 0.05s; }
+.tile-4, .tile-5, .tile-6, .tile-7 { animation-delay: 0.15s; }
+.tile-8, .tile-9, .tile-10, .tile-11 { animation-delay: 0.25s; }
+.tile-12, .tile-13, .tile-14, .tile-15 { animation-delay: 0.35s; }
+.tile-16, .tile-17, .tile-18, .tile-19 { animation-delay: 0.45s; }
+.tile-20, .tile-21, .tile-22, .tile-23 { animation-delay: 0.55s; }
+
+@keyframes tile-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* nadpis nastupuje po řádcích */
+.t-line {
+  animation: line-in 0.6s ease both;
+}
+.t-1 { animation-delay: 0.1s; }
+.t-2 { animation-delay: 0.22s; }
+.t-3 { animation-delay: 0.34s; }
+
+@keyframes line-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= SEKCE — společné ================= */
+
+.sekce-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+}
+
+.sekce-head {
+  max-width: 620px;
+  margin-bottom: 2.5rem;
+}
+
+.sekce-head h2 {
+  font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+.sekce-head p {
+  margin: 0;
+  color: #3d565c;
+  font-size: 1.05rem;
+}
+
+/* ================= SLUŽBY ================= */
+
+.sluzby {
+  background: var(--kachlicka);
+}
+
+.karty {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px; /* spára i tady — mřížka obkladu drží celý web */
+  background: var(--sparovka);
+  border: 6px solid var(--sparovka);
+  border-radius: 8px;
+}
+
+.karta {
+  background: #fff;
+  padding: 1.5rem 1.4rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: background-color 0.15s ease;
+}
+
+.karta:hover {
+  background: var(--kachlicka-2);
+}
+
+.karta-stitek {
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--med);
+  border: 1px solid var(--med);
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+}
+
+.karta h3 {
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: var(--glazura);
+}
+
+.karta p {
+  margin: 0;
+  font-size: 0.97rem;
+  color: #33494e;
+}
+
+/* ================= POSTUP ================= */
+
+.postup {
+  background: linear-gradient(180deg, var(--glazura) 0%, var(--glazura-tmava) 100%);
+  color: var(--kachlicka);
+}
+
+.sekce-head-light p {
+  color: #c4d4d7;
+}
+
+.kroky {
+  list-style: none;
+  margin: 0 0 3rem;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.krok {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.4rem 0;
+  border-top: 1px solid rgba(245, 248, 248, 0.16);
+}
+
+.krok:last-child {
+  border-bottom: 1px solid rgba(245, 248, 248, 0.16);
+}
+
+.krok-cislo {
+  font-family: Georgia, serif;
+  font-size: 1.6rem;
+  color: var(--med-svetla);
+  line-height: 1.1;
+  min-width: 2.6rem;
+}
+
+.krok-text h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.3rem;
+}
+
+.krok-text p {
+  margin: 0;
+  color: #c4d4d7;
+  font-size: 0.97rem;
+  max-width: 58ch;
+}
+
+/* ---- důvěra ---- */
+
+.duvera {
+  display: grid;
+  gap: 2rem;
+}
+
+.citace {
+  margin: 0;
+  padding: 1.6rem 1.6rem 1.4rem;
+  background: rgba(245, 248, 248, 0.06);
+  border-left: 4px solid var(--med);
+  border-radius: 6px;
+}
+
+.citace p {
+  margin: 0 0 0.8rem;
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  line-height: 1.55;
+}
+
+.citace footer {
+  font-size: 0.9rem;
+  color: var(--sparovka);
+}
+
+.fakta {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+.fakt {
+  background: rgba(245, 248, 248, 0.06);
+  border-radius: 6px;
+  padding: 1rem 1.1rem;
+}
+
+.fakt dt {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sparovka);
+  margin-bottom: 0.25rem;
+}
+
+.fakt dd {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+  color: var(--kachlicka);
+}
+
+.fakta-pozn {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--sparovka);
+}
+
+/* ================= RESPONSIVITA ================= */
+
+@media (min-width: 640px) {
+  .karty {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .fakta {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .karty {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .hero-main {
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+  }
+  .duvera {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+  }
+  .fakta {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .fakta-pozn {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 720px) {
+  .tiles-grid {
+    width: 100%;
+    right: 0;
+    top: auto;
+    bottom: -55%;
+    height: 100%;
+    transform: skewX(0) ;
+    opacity: 0.5;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .tile,
+  .t-line {
+    animation: none;
+  }
+  .btn,
+  .karta {
+    transition: none;
+  }
+  .btn-solid:hover,
+  .btn-line:hover {
+    transform: none;
+  }
+}
