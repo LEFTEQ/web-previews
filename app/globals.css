@@ -1,0 +1,647 @@
+/* ============================================================
+   TEFCO CZ, a.s. — úklidové služby, Ostrava
+   Koncept: „čistý tah stěrky“ — firma vzešla z červené (původní
+   web), my ji držíme jako industriální ostravskou rumělku,
+   ale postavíme ji proti chladné, doslova ČISTÉ bílo-ledové
+   ploše. Signature: diagonální pruh dokonale umytého povrchu
+   (stěrka), který při načtení „setře" hero.
+   ============================================================ */
+
+:root {
+  --tf-rumelka: #d5261e;      /* firemní červená, ztmavená do rumělky */
+  --tf-rumelka-tma: #a31510;
+  --tf-led: #eef4f6;          /* ledová, čistě umytá plocha */
+  --tf-led-stín: #d8e4e8;
+  --tf-inkoust: #17272c;      /* tmavý modrošedý inkoust, ne černá */
+  --tf-ocel: #5c7078;         /* sekundární text */
+  --tf-bila: #ffffff;
+
+  --font-display: "Archivo Black", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@font-face {
+  font-family: "Archivo Black";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Archivo Black");
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--tf-inkoust);
+  background: var(--tf-led);
+  -webkit-font-smoothing: antialiased;
+}
+
+.tf a:focus-visible,
+.tf button:focus-visible {
+  outline: 3px solid var(--tf-rumelka);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.hero a:focus-visible {
+  outline-color: var(--tf-bila);
+}
+
+/* ==================== HERO ==================== */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(168deg, var(--tf-rumelka) 0%, var(--tf-rumelka-tma) 100%);
+  color: var(--tf-bila);
+  overflow: hidden;
+}
+
+.topbar {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  max-width: 72rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.wordmark {
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  color: var(--tf-bila);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  line-height: 1;
+}
+
+.wordmark-tefco {
+  position: relative;
+}
+
+/* podtržení jako tah stěrky pod logem */
+.wordmark-tefco::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: -0.15em;
+  bottom: -0.28em;
+  height: 3px;
+  background: var(--tf-bila);
+  transform: skewX(-24deg);
+}
+
+.wordmark-cz {
+  font-size: 0.62em;
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  opacity: 0.85;
+}
+
+.topbar-tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--tf-bila);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.topbar-tel:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: var(--tf-bila);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 3;
+  max-width: 72rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 7rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.5rem;
+}
+
+.stitek {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.stitek-mesto {
+  background: var(--tf-bila);
+  color: var(--tf-rumelka-tma);
+  border-color: var(--tf-bila);
+}
+
+.hero-titulek {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 9.5vw, 6.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.hero-titulek .radek {
+  display: block;
+}
+
+.radek-1 {
+  animation: tf-vjezd 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.radek-2 {
+  animation: tf-vjezd 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.12s both;
+}
+
+/* „čisto“ — slovo vysazené jako umytá plocha */
+.cisto {
+  position: relative;
+  font-style: normal;
+  color: var(--tf-rumelka-tma);
+  background: var(--tf-led);
+  padding: 0 0.18em;
+  display: inline-block;
+  transform: skewX(-4deg);
+  box-shadow: 0.15em 0.15em 0 rgba(0, 0, 0, 0.22);
+}
+
+.stopa {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  bottom: -0.16em;
+  height: 0.09em;
+  background: rgba(255, 255, 255, 0.75);
+  transform: skewX(-24deg);
+}
+
+.hero-perex {
+  max-width: 34rem;
+  margin: 1.75rem 0 0;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.92);
+  animation: tf-vjezd 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.24s both;
+}
+
+.hero-akce {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2.1rem;
+  animation: tf-vjezd 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.34s both;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  padding: 0.9rem 1.7rem;
+  border-radius: 4px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.btn-hlavni {
+  background: var(--tf-bila);
+  color: var(--tf-rumelka-tma);
+  box-shadow: 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
+}
+
+.btn-hlavni:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 0.45rem 0.45rem 0 rgba(0, 0, 0, 0.25);
+}
+
+.btn-vedlejsi {
+  color: var(--tf-bila);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.btn-vedlejsi:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--tf-bila);
+}
+
+.hero-pozn {
+  margin: 1.3rem 0 0;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.75);
+  animation: tf-vjezd 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.42s both;
+}
+
+/* ---------- SIGNATURE: tah stěrky přes spodek hero ---------- */
+
+.sterka {
+  position: absolute;
+  z-index: 1;
+  left: -10%;
+  right: -10%;
+  bottom: -3rem;
+  height: 11rem;
+  transform: rotate(-3.5deg);
+  pointer-events: none;
+}
+
+.sterka-pruh {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(238, 244, 246, 0) 0%,
+    var(--tf-led) 28%,
+    var(--tf-led) 100%
+  );
+  animation: tf-tah 1.1s cubic-bezier(0.3, 0.8, 0.2, 1) 0.35s both;
+}
+
+/* guma stěrky — tenká tmavá lišta na hraně tahu */
+.sterka-lista {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 26%;
+  height: 6px;
+  background: var(--tf-inkoust);
+  border-radius: 999px;
+  animation: tf-tah 1.1s cubic-bezier(0.3, 0.8, 0.2, 1) 0.35s both;
+}
+
+/* kapky vody těsně nad hranou */
+.sterka-lista::before,
+.sterka-lista::after {
+  content: "";
+  position: absolute;
+  top: -14px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.sterka-lista::before {
+  left: 22%;
+}
+
+.sterka-lista::after {
+  left: 61%;
+  top: -20px;
+  width: 6px;
+  height: 6px;
+}
+
+@keyframes tf-tah {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes tf-vjezd {
+  from {
+    opacity: 0;
+    transform: translateY(1.2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== SEKCE: SLUŽBY ==================== */
+
+.sluzby {
+  background: var(--tf-led);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.sekce-hlava {
+  max-width: 72rem;
+  margin: 0 auto 2.75rem;
+}
+
+.sekce-hlava h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin: 0 0 0.9rem;
+  color: var(--tf-inkoust);
+}
+
+.sekce-hlava h2::after {
+  content: "";
+  display: block;
+  width: 4.5rem;
+  height: 5px;
+  margin-top: 0.7rem;
+  background: var(--tf-rumelka);
+  transform: skewX(-24deg);
+}
+
+.sekce-perex {
+  max-width: 38rem;
+  margin: 0;
+  color: var(--tf-ocel);
+  font-size: 1.05rem;
+}
+
+.sluzby-seznam {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 72rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.sluzba {
+  display: flex;
+  gap: 1.1rem;
+  background: var(--tf-bila);
+  border: 1px solid var(--tf-led-stín);
+  border-radius: 6px;
+  padding: 1.4rem 1.4rem 1.3rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.sluzba:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.6rem 1.4rem rgba(23, 39, 44, 0.1);
+}
+
+/* písmenný kód služby — jako značení pater/úseků na rozpisu úklidu */
+.sluzba-kod {
+  flex: 0 0 auto;
+  width: 2.9rem;
+  height: 2.9rem;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--tf-bila);
+  background: var(--tf-rumelka);
+  transform: skewX(-8deg);
+  border-radius: 4px;
+}
+
+.sluzba-telo h3 {
+  margin: 0.1rem 0 0.45rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.sluzba-telo p {
+  margin: 0;
+  color: var(--tf-ocel);
+  font-size: 0.98rem;
+}
+
+.sluzba-rezim {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.75rem !important;
+  font-size: 0.82rem !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tf-inkoust) !important;
+}
+
+.rezim-tecka {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--tf-rumelka);
+  flex: 0 0 auto;
+}
+
+/* ==================== SEKCE: DŮVĚRA ==================== */
+
+.duvera {
+  background: var(--tf-inkoust);
+  color: var(--tf-led);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.sekce-hlava-svetla h2 {
+  color: var(--tf-bila);
+}
+
+.sekce-hlava-svetla .sekce-perex {
+  color: rgba(238, 244, 246, 0.72);
+}
+
+.duvody {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+
+.duvod {
+  border-top: 3px solid var(--tf-rumelka);
+  padding-top: 1.1rem;
+}
+
+.duvod-cislo {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
+  line-height: 1;
+  color: var(--tf-bila);
+}
+
+.duvod-text {
+  margin: 0;
+  color: rgba(238, 244, 246, 0.78);
+  font-size: 0.98rem;
+}
+
+.citace {
+  max-width: 72rem;
+  margin: 3.25rem auto 0;
+  padding: 1.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 5px solid var(--tf-rumelka);
+  border-radius: 0 6px 6px 0;
+}
+
+.citace blockquote {
+  margin: 0;
+}
+
+.citace blockquote p {
+  margin: 0;
+  font-size: 1.12rem;
+  line-height: 1.65;
+  color: var(--tf-bila);
+}
+
+.citace figcaption {
+  margin-top: 0.85rem;
+  font-size: 0.88rem;
+  color: rgba(238, 244, 246, 0.6);
+}
+
+.zaruky {
+  max-width: 72rem;
+  margin: 2.5rem auto 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.7rem;
+}
+
+.zaruky li {
+  position: relative;
+  padding-left: 1.6rem;
+  font-size: 0.95rem;
+  color: rgba(238, 244, 246, 0.85);
+}
+
+.zaruky li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.42em;
+  width: 0.85rem;
+  height: 0.45rem;
+  border-left: 3px solid var(--tf-rumelka);
+  border-bottom: 3px solid var(--tf-rumelka);
+  transform: rotate(-45deg);
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (min-width: 640px) {
+  .sluzby-seznam {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .zaruky {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 960px) {
+  .topbar {
+    padding: 1.5rem 2rem;
+  }
+
+  .hero-inner {
+    padding: 4rem 2rem 9rem;
+  }
+
+  .sluzby,
+  .duvera {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .sluzby-seznam {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sluzba:nth-child(4),
+  .sluzba:nth-child(5) {
+    grid-column: span 1;
+  }
+
+  .duvody {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .zaruky {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ==================== REDUCED MOTION ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .radek-1,
+  .radek-2,
+  .hero-perex,
+  .hero-akce,
+  .hero-pozn,
+  .sterka-pruh,
+  .sterka-lista {
+    animation: none !important;
+  }
+
+  .btn,
+  .sluzba,
+  .topbar-tel {
+    transition: none !important;
+  }
+
+  .btn-hlavni:hover,
+  .sluzba:hover {
+    transform: none;
+  }
+}
