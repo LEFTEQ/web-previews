@@ -1,0 +1,465 @@
+/* ==========================================================================
+   HAS car — diagnostika vozidel, Ostrava
+   Palette: „noc v dílně" — hluboká petrolejová modř diagnostického displeje,
+   signální diagnostická azurová (barva OBD trasy na osciloskopu),
+   teplá bílá papírového protokolu, ocelová šedá.
+   Type: Archivo Black-like přes system stack? Ne — bez externích fontů
+   používáme systemový stack, ale s výraznými vahami a šířkovým trackingem,
+   který nese identitu. Signature: diagnostická křivka (tep vozu).
+   ========================================================================== */
+
+:root {
+  --ink: #0b1f2a;        /* petrolejová noc — základ */
+  --ink-2: #10303f;      /* světlejší panel */
+  --pulse: #37e0c8;      /* diagnostická azurová — signál */
+  --pulse-dim: #1e8a7c;
+  --paper: #f2f5f4;      /* protokolová bílá */
+  --steel: #93a8b0;      /* ocelová šedá — popisky */
+  --amber: #ffb454;      /* výstražná kontrolka — akcent šetřený */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hc {
+  display: block;
+}
+
+.hc a {
+  color: inherit;
+}
+
+.hc :focus-visible {
+  outline: 3px solid var(--pulse);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(55, 224, 200, 0.12), transparent 60%),
+    linear-gradient(165deg, var(--ink) 0%, var(--ink-2) 100%);
+  color: var(--paper);
+  padding: 1.5rem 1.25rem 3rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto 3.5rem;
+}
+
+.wordmark {
+  font-weight: 900;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.wordmark-dot {
+  color: var(--pulse);
+  margin: 0 0.08em;
+}
+
+.hero-loc {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--steel);
+  text-align: right;
+}
+
+.hero-body {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pulse);
+  margin: 0 0 1.25rem;
+  animation: hero-in 0.6s ease-out both;
+}
+
+.hero-title {
+  margin: 0;
+  font-weight: 900;
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.hero-line {
+  display: block;
+  animation: hero-in 0.7s ease-out both;
+}
+
+.hero-line-1 {
+  animation-delay: 0.1s;
+}
+
+.hero-line-2 {
+  animation-delay: 0.22s;
+  color: var(--pulse);
+}
+
+.hero-line-3 {
+  animation-delay: 0.34s;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.title-dot {
+  color: var(--paper);
+}
+
+.hero-sub {
+  max-width: 34rem;
+  margin: 1.75rem 0 0;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: #cfdadd;
+  animation: hero-in 0.7s ease-out 0.46s both;
+}
+
+/* --- Signature: diagnostická křivka --- */
+
+.scope {
+  max-width: 1100px;
+  margin: 3rem auto 0;
+  color: var(--pulse);
+  animation: hero-in 0.8s ease-out 0.55s both;
+}
+
+.scope-svg {
+  display: block;
+  width: 100%;
+  height: 110px;
+}
+
+.scope-grid-line {
+  opacity: 0.25;
+}
+
+.scope-path {
+  stroke-dasharray: 2600;
+  stroke-dashoffset: 2600;
+  animation: scope-draw 2.4s cubic-bezier(0.25, 0.1, 0.25, 1) 0.6s forwards;
+  filter: drop-shadow(0 0 6px rgba(55, 224, 200, 0.55));
+}
+
+.scope-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--steel);
+  border-top: 1px solid rgba(147, 168, 176, 0.25);
+  padding-top: 0.5rem;
+}
+
+@keyframes scope-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Fakta pod křivkou --- */
+
+.hero-facts {
+  max-width: 1100px;
+  margin: 2.5rem auto 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  animation: hero-in 0.8s ease-out 0.7s both;
+}
+
+.fact {
+  border-left: 3px solid var(--pulse-dim);
+  padding-left: 1rem;
+}
+
+.fact-num {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+}
+
+.fact-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--steel);
+  margin-top: 0.15rem;
+}
+
+/* ============ SLUŽBY ============ */
+
+.sluzby {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem 3rem;
+}
+
+.section-head h2,
+.duvera h2 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.section-lead {
+  margin: 0 0 2.5rem;
+  max-width: 36rem;
+  color: #40565f;
+  font-size: 1.05rem;
+}
+
+.sluzby-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.karta {
+  background: #ffffff;
+  border: 1px solid #dde5e6;
+  border-radius: 10px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.karta:hover {
+  border-color: var(--pulse-dim);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px -18px rgba(11, 31, 42, 0.4);
+}
+
+.karta-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.karta-kod {
+  font-family: "Consolas", "SFMono-Regular", Menlo, monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--pulse-dim);
+  background: rgba(55, 224, 200, 0.1);
+  border: 1px solid rgba(30, 138, 124, 0.3);
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+}
+
+.karta-cena {
+  font-weight: 900;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.karta-nazev {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.karta-popis {
+  margin: 0;
+  color: #40565f;
+  font-size: 0.98rem;
+}
+
+/* ============ DŮVĚRA ============ */
+
+.duvera {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 4rem 1.25rem;
+}
+
+.duvera-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.duvera-text p {
+  color: #cfdadd;
+  max-width: 38rem;
+  margin: 0 0 1rem;
+}
+
+.duvera-text strong {
+  color: var(--paper);
+}
+
+.fleet-title {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pulse);
+}
+
+.fleet-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.fleet-item {
+  border: 1px solid rgba(147, 168, 176, 0.35);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  font-size: 0.88rem;
+  color: #cfdadd;
+  white-space: nowrap;
+}
+
+.duvera-kontakt {
+  max-width: 1100px;
+  margin: 3rem auto 0;
+  border-top: 1px solid rgba(147, 168, 176, 0.25);
+  padding-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.kontakt-label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin-bottom: 0.2rem;
+}
+
+.kontakt-hodnota {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.kontakt-link {
+  color: var(--pulse);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(55, 224, 200, 0.4);
+  transition: border-color 0.15s ease;
+}
+
+.kontakt-link:hover {
+  border-bottom-color: var(--pulse);
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (min-width: 640px) {
+  .hero {
+    padding: 2rem 2rem 4rem;
+  }
+
+  .hero-facts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .duvera-kontakt {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .duvera-inner {
+    grid-template-columns: 1.3fr 1fr;
+    align-items: start;
+  }
+
+  .duvera-kontakt {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-eyebrow,
+  .hero-line,
+  .hero-sub,
+  .scope,
+  .hero-facts {
+    animation: none;
+  }
+
+  .scope-path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .karta,
+  .karta:hover {
+    transition: none;
+    transform: none;
+  }
+}
