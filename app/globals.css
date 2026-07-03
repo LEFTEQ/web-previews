@@ -1,0 +1,557 @@
+/* =====================================================
+   MVDr. Lubomír Košťál — veterinární ordinace, Ostrava
+   Palette:
+   --ink        #1E2A24  (tmavá lesní zeleň-černá — text)
+   --paper      #F7FAF7  (chladná bílá s nádechem zeleně — klinická čistota)
+   --moss       #2E6B4F  (veterinární zeleň — primární)
+   --pulse      #FF7A45  (teplý korál — EKG puls, akutní akce)
+   --mist       #DCE8E0  (světlá šalvěj — plochy, karty)
+   Type: display = system serif stack s výraznou kurzívou? Ne —
+   display: "Georgia"-free… používáme systémové: display přes
+   font-stretch/weight kombinaci Arial Black fallbacků nahrazujeme
+   -- bez externích knihoven: display = 'Iowan Old Style', 'Palatino',
+   serif (lidský, důvěryhodný lékařský tón); body = system-ui.
+   Signature: EKG linka pacienta protínající hero.
+   ===================================================== */
+
+:root {
+  --ink: #1e2a24;
+  --paper: #f7faf7;
+  --moss: #2e6b4f;
+  --moss-deep: #204b38;
+  --pulse: #ff7a45;
+  --mist: #dce8e0;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.vet a:focus-visible,
+.vet button:focus-visible {
+  outline: 3px solid var(--pulse);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(46, 107, 79, 0.14), transparent 60%),
+    var(--paper);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding-bottom: 3.5rem;
+}
+
+/* --- brand / wordmark --- */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 3rem;
+}
+
+.brand-cross {
+  color: var(--moss);
+  display: inline-flex;
+  transform: rotate(45deg);
+}
+
+.brand-word {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.brand-word strong {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+.brand-word em {
+  font-style: normal;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+/* --- title --- */
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 8.5vw, 5.2rem);
+  line-height: 1.03;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.5rem;
+  max-width: 14ch;
+}
+
+.hero-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.5em);
+  animation: hero-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.hero-line-1 { animation-delay: 0.05s; }
+.hero-line-2 { animation-delay: 0.18s; }
+.hero-line-3 { animation-delay: 0.31s; color: var(--moss); }
+
+.hero-dot {
+  color: var(--pulse);
+}
+
+@keyframes hero-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-sub {
+  max-width: 34rem;
+  font-size: 1.08rem;
+  color: #3c4a43;
+  margin: 0 0 2rem;
+  opacity: 0;
+  animation: hero-rise 0.7s 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+/* --- actions --- */
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  opacity: 0;
+  animation: hero-rise 0.7s 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--moss);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(46, 107, 79, 0.35);
+}
+
+.btn-primary:hover {
+  background: var(--moss-deep);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--moss-deep);
+  border: 2px solid rgba(46, 107, 79, 0.4);
+}
+
+.btn-ghost:hover {
+  border-color: var(--moss);
+  transform: translateY(-2px);
+}
+
+/* --- signature: EKG puls --- */
+
+.pulse-wrap {
+  margin-top: 3.5rem;
+}
+
+.pulse {
+  display: block;
+  width: 100%;
+  height: 90px;
+}
+
+.pulse-path {
+  stroke: var(--pulse);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 2600;
+  stroke-dashoffset: 2600;
+  animation: pulse-draw 2.4s 0.6s cubic-bezier(0.4, 0, 0.3, 1) forwards;
+  filter: drop-shadow(0 0 6px rgba(255, 122, 69, 0.4));
+}
+
+@keyframes pulse-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.pulse-label {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6b7d74;
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+  animation: hero-rise 0.6s 2.4s ease forwards;
+}
+
+/* --- fakta pod hero --- */
+
+.hero-facts {
+  list-style: none;
+  margin: 0 -1.25rem;
+  padding: 1.25rem 1.25rem;
+  background: var(--ink);
+  color: var(--paper);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;
+}
+
+.hero-facts li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.fact-key {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9db8ab;
+}
+
+.fact-val {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+/* ================= SLUŽBY ================= */
+
+.sluzby {
+  padding: 4.5rem 1.25rem;
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+.section-head {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--moss);
+  font-weight: 700;
+  margin: 0 0 0.6rem;
+}
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 1.6rem;
+  height: 2px;
+  background: var(--pulse);
+  vertical-align: middle;
+  margin-right: 0.6rem;
+}
+
+.sluzby h2,
+.duvera h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  line-height: 1.15;
+  margin: 0 0 0.8rem;
+}
+
+.section-lead {
+  color: #3c4a43;
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.karta-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.karta {
+  background: #fff;
+  border: 1px solid var(--mist);
+  border-radius: 14px;
+  padding: 1.5rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  border-color: var(--moss);
+  box-shadow: 0 10px 24px rgba(30, 42, 36, 0.09);
+}
+
+.karta h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem;
+}
+
+.karta p {
+  margin: 0 0 1rem;
+  color: #3c4a43;
+  font-size: 0.97rem;
+  flex-grow: 1;
+}
+
+.karta-tag {
+  flex-grow: 0 !important;
+  margin: 0 !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--moss) !important;
+  font-weight: 700;
+}
+
+.karta-akutni {
+  background: var(--moss);
+  border-color: var(--moss);
+  color: #fff;
+}
+
+.karta-akutni h3 {
+  color: #fff;
+}
+
+.karta-akutni p {
+  color: #dcefe5;
+}
+
+.karta-akutni:hover {
+  border-color: var(--pulse);
+}
+
+.karta-cta {
+  align-self: flex-start;
+  background: var(--pulse);
+  color: #2a1408;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  transition: transform 0.15s ease;
+}
+
+.karta-cta:hover {
+  transform: translateY(-2px);
+}
+
+/* ================= DŮVĚRA ================= */
+
+.duvera {
+  background: var(--mist);
+  padding: 4.5rem 1.25rem;
+}
+
+.duvera-grid {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.duvera-text p {
+  color: #33413a;
+  max-width: 36rem;
+}
+
+.eyebrow-light {
+  color: var(--moss-deep);
+}
+
+.duvera-body {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.duvera-body li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-weight: 500;
+}
+
+.check {
+  color: var(--moss);
+  font-weight: 700;
+}
+
+.duvera-refs {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.ref {
+  margin: 0;
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.4rem 1.5rem;
+  border-left: 4px solid var(--pulse);
+}
+
+.ref p {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin: 0 0 0.7rem;
+}
+
+.ref footer {
+  font-size: 0.85rem;
+  color: #5a6b62;
+}
+
+.ordinace-info {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 14px;
+  padding: 1.4rem 1.5rem;
+}
+
+.ordinace-info h3 {
+  font-family: var(--font-display);
+  margin: 0 0 0.8rem;
+  font-size: 1.15rem;
+}
+
+.hodiny {
+  margin: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.hodiny div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(247, 250, 247, 0.15);
+  padding-bottom: 0.4rem;
+}
+
+.hodiny dt {
+  color: #9db8ab;
+  font-size: 0.9rem;
+}
+
+.hodiny dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+  text-align: right;
+}
+
+.hodiny-note {
+  margin: 0.9rem 0 0;
+  font-size: 0.85rem;
+  color: #9db8ab;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (min-width: 640px) {
+  .hero {
+    padding: 2rem 2rem 0;
+  }
+
+  .hero-facts {
+    margin: 0 -2rem;
+    padding: 1.5rem 2rem;
+    grid-template-columns: repeat(4, auto);
+    justify-content: space-between;
+  }
+
+  .karta-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 960px) {
+  .karta-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .duvera-grid {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-line,
+  .hero-sub,
+  .hero-actions,
+  .pulse-label {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .pulse-path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .btn,
+  .karta,
+  .karta-cta {
+    transition: none;
+  }
+}
