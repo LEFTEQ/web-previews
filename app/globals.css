@@ -1,0 +1,501 @@
+/* =====================================================
+   JUDr. Ilona Tajchnerová — advokátní kancelář, Ústí n. L.
+   Palette: hluboká "talárová" modř + papírová běloba +
+   pečetní zlato. Signature: monumentální paragraf (§)
+   jako architektonický prvek hera i marginálie.
+   ===================================================== */
+
+:root {
+  --ink: #12233b;        /* talárová modř — text, plochy */
+  --ink-deep: #0b1729;   /* hlubší modř — inverzní sekce */
+  --paper: #f7f6f2;      /* spisový papír */
+  --paper-dim: #edeae2;  /* podklad karet */
+  --seal: #b98a2f;       /* pečetní zlato */
+  --seal-soft: #d9b978;  /* světlé zlato pro inverzi */
+  --line: #cdc8ba;
+  --font-display: "Georgia", "Times New Roman", serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ak a:focus-visible,
+.ak :focus-visible {
+  outline: 3px solid var(--seal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 1.5rem 1.25rem 4rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* monumentální § — signature prvek */
+.hero::before {
+  content: "§";
+  position: absolute;
+  z-index: 0;
+  right: -0.08em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(22rem, 55vw, 44rem);
+  line-height: 1;
+  font-weight: 400;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(217, 185, 120, 0.28);
+  pointer-events: none;
+  animation: heroPar 1.4s ease-out both;
+}
+
+.hero-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(247, 246, 242, 0.18);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+}
+
+.wordmark-par {
+  color: var(--seal-soft);
+  margin-right: 0.15em;
+}
+
+.hero-badge {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(247, 246, 242, 0.65);
+}
+
+.hero-body {
+  position: relative;
+  z-index: 1;
+  max-width: 40rem;
+  padding-top: 3.5rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--seal-soft);
+  margin-bottom: 1.25rem;
+  animation: rise 0.7s ease-out both;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 8.5vw, 5.2rem);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.5rem;
+}
+
+.hero-line {
+  display: block;
+  animation: rise 0.7s ease-out 0.12s both;
+}
+
+.hero-line-accent {
+  color: var(--seal-soft);
+  font-style: italic;
+  animation-delay: 0.24s;
+}
+
+.hero-lede {
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  line-height: 1.7;
+  color: rgba(247, 246, 242, 0.85);
+  max-width: 34rem;
+  margin-bottom: 2.25rem;
+  animation: rise 0.7s ease-out 0.36s both;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  animation: rise 0.7s ease-out 0.48s both;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.7rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: transform 0.2s ease, background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn-solid {
+  background: var(--seal);
+  color: var(--ink-deep);
+}
+
+.btn-solid:hover {
+  background: var(--seal-soft);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--paper);
+  border: 1px solid rgba(247, 246, 242, 0.4);
+}
+
+.btn-ghost:hover {
+  border-color: var(--seal-soft);
+  transform: translateY(-2px);
+}
+
+.hero-margin {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 3.5rem;
+  color: rgba(247, 246, 242, 0.6);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  animation: rise 0.7s ease-out 0.6s both;
+}
+
+.hero-margin-par {
+  font-family: var(--font-display);
+  color: var(--seal-soft);
+  font-size: 1.1rem;
+}
+
+.hero-margin-rule {
+  width: 3.5rem;
+  height: 1px;
+  background: rgba(217, 185, 120, 0.5);
+}
+
+/* ============ SEKCE — společné ============ */
+
+.section-head {
+  max-width: 44rem;
+  margin-bottom: 3rem;
+}
+
+.section-eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--seal);
+  margin-bottom: 0.85rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 5vw, 2.7rem);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.section-lede {
+  font-size: 1.05rem;
+  color: rgba(18, 35, 59, 0.78);
+  max-width: 38rem;
+}
+
+/* ============ SLUŽBY ============ */
+
+.sluzby {
+  padding: 4.5rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.sluzby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.sluzba {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--seal);
+  border-radius: 3px;
+  padding: 1.75rem 1.5rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sluzba:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(18, 35, 59, 0.12);
+}
+
+.sluzba-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.sluzba-par {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--seal);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.sluzba-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.45rem;
+  line-height: 1.2;
+}
+
+.sluzba-popis {
+  color: rgba(18, 35, 59, 0.8);
+  margin-bottom: 1.1rem;
+}
+
+.sluzba-body {
+  list-style: none;
+}
+
+.sluzba-body li {
+  position: relative;
+  padding-left: 1.35rem;
+  font-size: 0.95rem;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+
+.sluzba-body li::before {
+  content: "§";
+  position: absolute;
+  left: 0;
+  font-family: var(--font-display);
+  color: var(--seal);
+  font-size: 0.85rem;
+}
+
+.sluzby-cenik {
+  margin-top: 2.5rem;
+  padding: 1.5rem 1.5rem;
+  background: var(--paper-dim);
+  border-left: 3px solid var(--seal);
+  border-radius: 0 3px 3px 0;
+  max-width: 46rem;
+  font-size: 1rem;
+}
+
+.sluzby-cenik strong {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+/* ============ KANCELÁŘ / DŮVĚRA ============ */
+
+.kancelar {
+  background: var(--ink-deep);
+  color: var(--paper);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.kancelar .section-head,
+.kancelar-grid,
+.kancelar-citat {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.kancelar .section-head {
+  margin-bottom: 3rem;
+}
+
+.kancelar .section-eyebrow {
+  color: var(--seal-soft);
+}
+
+.kancelar .section-lede {
+  color: rgba(247, 246, 242, 0.75);
+}
+
+.kancelar-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.fakt {
+  border: 1px solid rgba(247, 246, 242, 0.16);
+  border-radius: 3px;
+  padding: 1.75rem 1.5rem;
+  background: rgba(247, 246, 242, 0.03);
+}
+
+.fakt-cislo {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--seal-soft);
+  margin-bottom: 0.9rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.fakt-jednotka {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(247, 246, 242, 0.6);
+}
+
+.fakt-text {
+  color: rgba(247, 246, 242, 0.82);
+  font-size: 0.97rem;
+}
+
+.kancelar-citat {
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(217, 185, 120, 0.35);
+}
+
+.kancelar-citat p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.25rem, 3.5vw, 1.7rem);
+  line-height: 1.45;
+  max-width: 40rem;
+  margin-bottom: 1rem;
+}
+
+.kancelar-citat cite {
+  font-style: normal;
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--seal-soft);
+}
+
+/* ============ ANIMACE ============ */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroPar {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero::before,
+  .hero-eyebrow,
+  .hero-line,
+  .hero-lede,
+  .hero-cta,
+  .hero-margin {
+    animation: none;
+  }
+  .btn,
+  .sluzba {
+    transition: none;
+  }
+}
+
+/* ============ RESPONZIVITA ============ */
+
+@media (min-width: 640px) {
+  .hero {
+    padding: 2rem 3rem 5rem;
+  }
+  .sluzby,
+  .kancelar {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+  .sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .kancelar-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    padding: 2.25rem 4.5rem 6.5rem;
+  }
+  .hero-body {
+    padding-top: 5.5rem;
+  }
+  .sluzby {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+  .kancelar {
+    padding-top: 6rem;
+    padding-bottom: 6.5rem;
+  }
+}
