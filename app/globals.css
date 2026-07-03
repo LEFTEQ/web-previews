@@ -1,0 +1,706 @@
+/* =====================================================
+   TJ SLAVIA VŠ PLZEŇ — návrh nového webu
+   Paleta odvozená z klubu Slavia: červená a bílá,
+   doplněná antukou kurtů a tmavou "večerní" zelenomodrou.
+   Signature: lajny hřiště — bílé linky vedené přes hero
+   i celou stránkou jako čáry kurtu.
+   ===================================================== */
+
+:root {
+  --slavia-cervena: #c8102e;
+  --slavia-tmava: #8e0c21;
+  --antuka: #d97a4a;
+  --hriste: #123a34; /* tmavá zeleň krytého kurtu */
+  --lajna: #f7f3ec; /* bílá lajna, lehce teplá */
+  --inkoust: #1c1a1a;
+  --papir: #fcfaf6;
+
+  --pismo-display: "Archivo Black", "Arial Black", "Franklin Gothic Heavy",
+    sans-serif;
+  --pismo-text: "Georgia", "Times New Roman", serif;
+  --pismo-util: "Courier New", "Courier", monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--papir);
+  color: var(--inkoust);
+  font-family: var(--pismo-text);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--slavia-cervena);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.sekce-penzion :focus-visible {
+  outline-color: var(--lajna);
+}
+
+.sirka {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ===================== HERO ===================== */
+
+.hero {
+  position: relative;
+  background: var(--slavia-cervena);
+  color: var(--lajna);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 92vh;
+}
+
+/* Lajny kurtu — signature prvek */
+.hero-lajny {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.lajna {
+  position: absolute;
+  background: rgba(247, 243, 236, 0.55);
+}
+
+.lajna-1 {
+  left: 0;
+  right: 0;
+  top: 18%;
+  height: 3px;
+  transform-origin: left center;
+  animation: lajna-vodorovna 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+.lajna-2 {
+  left: 0;
+  right: 0;
+  bottom: 22%;
+  height: 3px;
+  transform-origin: right center;
+  animation: lajna-vodorovna 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+.lajna-3 {
+  left: 0;
+  right: 0;
+  bottom: 22%;
+  height: 14px;
+  background: rgba(247, 243, 236, 0.12);
+  transform-origin: right center;
+  animation: lajna-vodorovna 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+.lajna-svisla {
+  top: 0;
+  bottom: 0;
+  right: 14%;
+  width: 3px;
+  transform-origin: center top;
+  animation: lajna-svisla 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+}
+
+.lajna-kruh {
+  position: absolute;
+  right: 14%;
+  top: 18%;
+  width: 240px;
+  height: 240px;
+  border: 3px solid rgba(247, 243, 236, 0.55);
+  border-radius: 50%;
+  transform: translate(50%, -50%);
+  animation: kruh-nastup 1s ease-out 0.9s both;
+}
+
+@keyframes lajna-vodorovna {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes lajna-svisla {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes kruh-nastup {
+  from {
+    opacity: 0;
+    transform: translate(50%, -50%) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: translate(50%, -50%) scale(1);
+  }
+}
+
+.hero-obsah {
+  position: relative;
+  z-index: 1;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 48px 20px 56px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wordmark {
+  font-family: var(--pismo-display);
+  font-size: 1rem;
+  letter-spacing: 0.22em;
+  margin-bottom: 40px;
+  animation: nastup 0.7s ease-out both;
+}
+
+.wordmark-tj,
+.wordmark-vs {
+  display: inline-block;
+  background: var(--lajna);
+  color: var(--slavia-cervena);
+  padding: 2px 8px;
+  margin-right: 2px;
+}
+
+.hero-titulek {
+  font-family: var(--pismo-display);
+  font-size: clamp(2.4rem, 8.5vw, 5.6rem);
+  line-height: 0.98;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  max-width: 14ch;
+}
+
+.hero-titulek em {
+  font-style: normal;
+  color: var(--hriste);
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+
+.hero-radek {
+  display: block;
+  animation: nastup 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-radek-1 {
+  animation-delay: 0.1s;
+}
+.hero-radek-2 {
+  animation-delay: 0.22s;
+}
+.hero-radek-3 {
+  animation-delay: 0.34s;
+}
+.hero-radek-4 {
+  animation-delay: 0.46s;
+}
+
+@keyframes nastup {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-perex {
+  margin-top: 28px;
+  max-width: 46ch;
+  font-size: 1.1rem;
+  animation: nastup 0.8s ease-out 0.6s both;
+}
+
+.hero-akce {
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  animation: nastup 0.8s ease-out 0.72s both;
+}
+
+.tlacitko {
+  font-family: var(--pismo-display);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 15px 26px;
+  display: inline-block;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.tlacitko-plne {
+  background: var(--lajna);
+  color: var(--slavia-cervena);
+}
+
+.tlacitko-plne:hover {
+  transform: translateY(-3px);
+  background: #ffffff;
+}
+
+.tlacitko-linka {
+  border: 3px solid var(--lajna);
+  color: var(--lajna);
+}
+
+.tlacitko-linka:hover {
+  background: var(--lajna);
+  color: var(--slavia-cervena);
+  transform: translateY(-3px);
+}
+
+.tlacitko-svetle {
+  background: var(--lajna);
+  color: var(--hriste);
+}
+
+.tlacitko-svetle:hover {
+  transform: translateY(-3px);
+  background: #ffffff;
+}
+
+/* pás sportů dole v hero */
+.hero-pas {
+  position: relative;
+  z-index: 1;
+  border-top: 3px solid var(--lajna);
+  padding: 14px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  justify-content: center;
+  font-family: var(--pismo-util);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  animation: nastup 0.8s ease-out 0.85s both;
+}
+
+.pas-tecka {
+  opacity: 0.5;
+}
+
+/* ===================== SEKCE OBECNĚ ===================== */
+
+.sekce {
+  padding: 80px 0;
+}
+
+.sekce-hlava {
+  max-width: 620px;
+  margin-bottom: 48px;
+}
+
+.eyebrow {
+  font-family: var(--pismo-util);
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--slavia-cervena);
+  margin-bottom: 14px;
+}
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 34px;
+  height: 3px;
+  background: var(--slavia-cervena);
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+.eyebrow-svetly {
+  color: var(--antuka);
+}
+
+.eyebrow-svetly::before {
+  background: var(--antuka);
+}
+
+.sekce-titulek {
+  font-family: var(--pismo-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.sekce-titulek-svetly {
+  color: var(--lajna);
+}
+
+/* ===================== SEKCE AREÁL ===================== */
+
+.sekce-areal {
+  background: var(--papir);
+}
+
+/* rozvrh in-line tréninků — jako tabule u dráhy */
+.rozvrh {
+  border: 3px solid var(--inkoust);
+  background: #ffffff;
+  padding: 28px;
+  margin-bottom: 56px;
+  max-width: 560px;
+  box-shadow: 8px 8px 0 var(--slavia-cervena);
+}
+
+.rozvrh-hlava {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.rozvrh-titulek {
+  font-family: var(--pismo-display);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.rozvrh-obdobi {
+  font-family: var(--pismo-util);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: var(--slavia-cervena);
+}
+
+.rozvrh-seznam {
+  list-style: none;
+}
+
+.rozvrh-radek {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 9px 0;
+}
+
+.rozvrh-radek + .rozvrh-radek {
+  border-top: 1px solid #e8e2d8;
+}
+
+.rozvrh-den {
+  font-family: var(--pismo-display);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  min-width: 92px;
+}
+
+.rozvrh-linka {
+  flex: 1;
+  border-bottom: 2px dotted #cfc7ba;
+}
+
+.rozvrh-cas {
+  font-family: var(--pismo-util);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+}
+
+.rozvrh-poznamka {
+  margin-top: 18px;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #5c564d;
+}
+
+/* mřížka nabídky areálu */
+.mrizka {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3px;
+  background: var(--inkoust);
+  border: 3px solid var(--inkoust);
+}
+
+.karta {
+  background: var(--papir);
+  padding: 28px 24px;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.karta:hover {
+  background: #fff;
+}
+
+.karta:hover .karta-kod {
+  color: var(--slavia-cervena);
+}
+
+.karta-kod {
+  font-family: var(--pismo-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.28em;
+  color: var(--antuka);
+  margin-bottom: 12px;
+  transition: color 0.2s ease;
+}
+
+.karta-nazev {
+  font-family: var(--pismo-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.karta-popis {
+  font-size: 0.98rem;
+  margin-bottom: 16px;
+}
+
+.karta-detail {
+  font-family: var(--pismo-util);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  color: #6b6459;
+  border-top: 2px solid var(--slavia-cervena);
+  padding-top: 10px;
+  display: inline-block;
+}
+
+/* ===================== SEKCE PENZION ===================== */
+
+.sekce-penzion {
+  background: var(--hriste);
+  color: var(--lajna);
+  position: relative;
+}
+
+/* lajna pokračuje i tmavou sekcí */
+.sekce-penzion::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 14%;
+  width: 3px;
+  background: rgba(247, 243, 236, 0.14);
+}
+
+.penzion-rozlozeni {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 56px;
+  position: relative;
+  z-index: 1;
+}
+
+.penzion-perex {
+  margin-top: 22px;
+  font-size: 1.08rem;
+  max-width: 52ch;
+}
+
+.penzion-fakta {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  margin: 34px 0;
+}
+
+.penzion-fakta li {
+  display: flex;
+  flex-direction: column;
+  border-left: 3px solid var(--antuka);
+  padding-left: 14px;
+  max-width: 160px;
+}
+
+.fakt-cislo {
+  font-family: var(--pismo-display);
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--lajna);
+}
+
+.fakt-popis {
+  font-size: 0.9rem;
+  margin-top: 6px;
+  color: rgba(247, 243, 236, 0.8);
+}
+
+.penzion-vybava {
+  max-width: 52ch;
+  color: rgba(247, 243, 236, 0.88);
+}
+
+.penzion-akce {
+  margin-top: 32px;
+}
+
+/* recenze */
+.penzion-recenze {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.recenze {
+  background: rgba(247, 243, 236, 0.06);
+  border-left: 3px solid var(--antuka);
+  padding: 22px 22px 18px;
+}
+
+.recenze p {
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.recenze-autor {
+  margin-top: 12px;
+  font-family: var(--pismo-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--antuka);
+}
+
+.kontakt-blok {
+  margin-top: 8px;
+  border-top: 3px solid rgba(247, 243, 236, 0.25);
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.kontakt-radek {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kontakt-label {
+  font-family: var(--pismo-util);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(247, 243, 236, 0.6);
+}
+
+.kontakt-radek a {
+  font-family: var(--pismo-display);
+  font-size: 1.15rem;
+  text-decoration: none;
+  color: var(--lajna);
+}
+
+.kontakt-radek a:hover {
+  color: var(--antuka);
+}
+
+/* ===================== RESPONZIVITA ===================== */
+
+@media (max-width: 860px) {
+  .penzion-rozlozeni {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .sekce-penzion::before {
+    display: none;
+  }
+
+  .lajna-svisla,
+  .lajna-kruh {
+    right: 8%;
+  }
+
+  .lajna-kruh {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 560px) {
+  .sekce {
+    padding: 60px 0;
+  }
+
+  .hero {
+    min-height: 100svh;
+  }
+
+  .hero-obsah {
+    padding: 40px 20px 44px;
+  }
+
+  .rozvrh {
+    padding: 20px;
+    box-shadow: 6px 6px 0 var(--slavia-cervena);
+  }
+
+  .rozvrh-den {
+    min-width: 78px;
+    font-size: 0.85rem;
+  }
+
+  .hero-pas {
+    font-size: 0.72rem;
+    gap: 8px 10px;
+  }
+
+  .tlacitko {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ===================== REDUCED MOTION ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.001s !important;
+  }
+}
