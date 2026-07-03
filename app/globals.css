@@ -1,0 +1,436 @@
+:root {
+  /* Paleta z materiálů řemesla: titanzinek (modrošedá), měď + patina, zinkově světlé pozadí */
+  --kc-zinc-900: #23303a;   /* tmavý titanzinek – hlavní text, tmavé plochy */
+  --kc-zinc-700: #45555f;   /* sekundární text */
+  --kc-zinc-100: #e8ecee;   /* světlý zinkový podklad */
+  --kc-paper:    #f2f4f5;   /* pozadí stránky – světlý plech */
+  --kc-copper:   #b4562b;   /* měď – akcent, CTA barvy */
+  --kc-copper-d: #8f3f1c;   /* tmavší měď na hover/hrany */
+  --kc-patina:   #5e8a7e;   /* měděnka – tichý druhý akcent */
+
+  --kc-font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Impact, sans-serif;
+  --kc-font-body: Georgia, "Times New Roman", serif;
+  --kc-font-ui: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--kc-paper);
+  color: var(--kc-zinc-900);
+  font-family: var(--kc-font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.kc a:focus-visible,
+.kc button:focus-visible,
+:focus-visible {
+  outline: 3px solid var(--kc-copper);
+  outline-offset: 3px;
+}
+
+/* ============ HERO ============ */
+.kc-hero {
+  position: relative;
+  background: var(--kc-zinc-900);
+  color: var(--kc-zinc-100);
+  overflow: hidden;
+  padding: 2rem 1.25rem 0;
+}
+
+.kc-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding-bottom: 9rem;
+}
+
+.kc-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 3.5rem;
+}
+
+.kc-brand-name {
+  font-family: var(--kc-font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #fff;
+  border-bottom: 3px solid var(--kc-copper);
+  padding-bottom: 0.35rem;
+  align-self: flex-start;
+}
+
+.kc-brand-sub {
+  font-family: var(--kc-font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9fb0ba;
+}
+
+.kc-hero-title {
+  margin: 0 0 1.75rem;
+  font-family: var(--kc-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(3.1rem, 11vw, 8.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.kc-hero-title .kc-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.6em);
+  animation: kc-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.kc-line-1 { animation-delay: 0.05s; }
+.kc-line-2 { animation-delay: 0.18s; padding-left: 0.6em; }
+.kc-line-3 { animation-delay: 0.31s; }
+
+.kc-dot { color: var(--kc-copper); }
+
+@keyframes kc-rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.kc-hero-lead {
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #cdd6db;
+  opacity: 0;
+  animation: kc-fade 0.8s ease 0.55s forwards;
+}
+
+@keyframes kc-fade { to { opacity: 1; } }
+
+.kc-hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  opacity: 0;
+  animation: kc-fade 0.8s ease 0.75s forwards;
+}
+
+.kc-hero-facts span {
+  font-family: var(--kc-font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kc-zinc-100);
+  border: 1px solid #4a5b66;
+  border-radius: 2px;
+  padding: 0.4rem 0.7rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Signature: stojaté drážky falcované plechové střechy */
+.kc-seams {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 8rem;
+  display: flex;
+  z-index: 1;
+  background: linear-gradient(180deg, #2a3944 0%, #31424e 100%);
+}
+
+.kc-seams i {
+  flex: 1;
+  border-left: 2px solid rgba(233, 238, 240, 0.16);
+  position: relative;
+  transform-origin: bottom;
+  animation: kc-seam 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
+.kc-seams i::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -2px;
+  width: 2px; height: 100%;
+  background: linear-gradient(180deg, rgba(180, 86, 43, 0.55), transparent 65%);
+}
+
+.kc-seams i:nth-child(1)  { animation-delay: 0.40s; }
+.kc-seams i:nth-child(2)  { animation-delay: 0.44s; }
+.kc-seams i:nth-child(3)  { animation-delay: 0.48s; }
+.kc-seams i:nth-child(4)  { animation-delay: 0.52s; }
+.kc-seams i:nth-child(5)  { animation-delay: 0.56s; }
+.kc-seams i:nth-child(6)  { animation-delay: 0.60s; }
+.kc-seams i:nth-child(7)  { animation-delay: 0.64s; }
+.kc-seams i:nth-child(8)  { animation-delay: 0.68s; }
+.kc-seams i:nth-child(9)  { animation-delay: 0.72s; }
+.kc-seams i:nth-child(10) { animation-delay: 0.76s; }
+.kc-seams i:nth-child(11) { animation-delay: 0.80s; }
+.kc-seams i:nth-child(12) { animation-delay: 0.84s; }
+
+@keyframes kc-seam {
+  from { transform: scaleY(0); opacity: 0; }
+  to   { transform: scaleY(1); opacity: 1; }
+}
+
+/* hřeben – měděná linka mezi hero a obsahem */
+.kc-ridge {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--kc-copper-d), var(--kc-copper) 45%, var(--kc-patina));
+  z-index: 3;
+}
+
+/* ============ SEKCE ============ */
+.kc-section {
+  padding: 4.5rem 1.25rem;
+}
+
+.kc-section-head {
+  max-width: 68rem;
+  margin: 0 auto 3rem;
+}
+
+.kc-eyebrow {
+  font-family: var(--kc-font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--kc-copper);
+  margin: 0 0 0.75rem;
+}
+
+.kc-eyebrow-light { color: #d98a5f; }
+
+.kc-section h2 {
+  font-family: var(--kc-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  line-height: 1.02;
+  margin: 0 0 1rem;
+}
+
+.kc-section-lead {
+  max-width: 36rem;
+  color: var(--kc-zinc-700);
+  margin: 0;
+}
+
+/* --- řemesla --- */
+.kc-trades {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.kc-trade {
+  background: #fff;
+  border: 1px solid #d8dee1;
+  border-top: 4px solid var(--kc-zinc-900);
+  border-radius: 3px;
+  padding: 2rem 1.75rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.kc-trade:last-child { border-top-color: var(--kc-copper); }
+
+.kc-trade:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(35, 48, 58, 0.12);
+}
+
+.kc-trade-mark {
+  color: var(--kc-copper);
+  margin-bottom: 1rem;
+}
+
+.kc-trade:first-child .kc-trade-mark { color: var(--kc-zinc-700); }
+
+.kc-trade h3 {
+  font-family: var(--kc-font-display);
+  text-transform: uppercase;
+  font-size: 1.55rem;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.6rem;
+}
+
+.kc-trade p {
+  margin: 0 0 1rem;
+  color: var(--kc-zinc-700);
+}
+
+.kc-trade ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kc-trade li {
+  padding: 0.55rem 0 0.55rem 1.4rem;
+  border-top: 1px solid #e6eaec;
+  position: relative;
+  font-size: 0.98rem;
+}
+
+.kc-trade li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.05rem;
+  width: 0.7rem;
+  height: 2px;
+  background: var(--kc-copper);
+}
+
+/* --- materiály --- */
+.kc-materials {
+  max-width: 68rem;
+  margin: 2.5rem auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.kc-mat {
+  font-family: var(--kc-font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.9rem;
+  border-radius: 2px;
+  color: #fff;
+}
+
+.kc-mat-tz { background: #5b6e7a; }
+.kc-mat-cu { background: var(--kc-copper); }
+.kc-mat-zn { background: #8b9aa3; }
+.kc-mat-al { background: #aab6bd; color: var(--kc-zinc-900); }
+
+/* ============ DŮVĚRA ============ */
+.kc-trust {
+  position: relative;
+  background: var(--kc-zinc-900);
+  color: var(--kc-zinc-100);
+  overflow: hidden;
+}
+
+.kc-trust h2 { color: #fff; }
+
+.kc-trust-grid {
+  position: relative;
+  z-index: 2;
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.kc-trust-copy p {
+  color: #c3ccd2;
+  max-width: 36rem;
+}
+
+.kc-trust-copy strong { color: #fff; }
+
+.kc-reasons {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: kc-reason;
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
+
+.kc-reasons li {
+  counter-increment: kc-reason;
+  position: relative;
+  padding: 1.25rem 1.25rem 1.25rem 4.2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.kc-reasons li::before {
+  content: counter(kc-reason);
+  position: absolute;
+  left: 1.1rem;
+  top: 1.15rem;
+  font-family: var(--kc-font-display);
+  font-weight: 700;
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--kc-copper);
+}
+
+.kc-reasons h3 {
+  font-family: var(--kc-font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 1.15rem;
+  margin: 0 0 0.4rem;
+  color: #fff;
+}
+
+.kc-reasons p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #b6c1c8;
+}
+
+/* obří letopočet – tichá připomínka historie */
+.kc-since {
+  position: absolute;
+  right: -0.05em;
+  bottom: -0.28em;
+  margin: 0;
+  font-family: var(--kc-font-display);
+  font-weight: 700;
+  font-size: clamp(8rem, 24vw, 20rem);
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.05);
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ============ DESKTOP ============ */
+@media (min-width: 760px) {
+  .kc-hero { padding-top: 3rem; }
+  .kc-trades { grid-template-columns: 1fr 1fr; }
+  .kc-trust-grid { grid-template-columns: 1.1fr 1fr; gap: 4rem; }
+  .kc-section { padding: 6rem 2rem; }
+  .kc-hero-inner { padding-bottom: 11rem; }
+  .kc-seams { height: 10rem; }
+}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .kc-hero-title .kc-line,
+  .kc-hero-lead,
+  .kc-hero-facts,
+  .kc-seams i {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .kc-trade { transition: none; }
+  .kc-trade:hover { transform: none; }
+}
