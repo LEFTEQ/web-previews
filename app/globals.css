@@ -1,0 +1,569 @@
+/* =============================================================
+   SaviolaVet — veterinární ordinace, Ostrava
+   Palette:
+   --ink      #10312B  (hluboká lékařská zeleň — chirurgické roušky)
+   --pine     #1C4A40  (sekundární zeleň)
+   --mint     #DFF2EA  (světlá „ordinace“ mint)
+   --paper    #F7FBF9  (téměř bílá s nádechem zeleně)
+   --pulse    #FF5A3C  (EKG korál — signální barva tepu)
+   --sand     #EFE9DC  (teplý neutrál pro karty)
+   Type: Zilla Slab (display, veterinární/odborný slab) + Sora (body)
+   Signature: animovaná EKG křivka v hero
+   ============================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Sora:wght@400;500;600;700&display=swap");
+
+:root {
+  --ink: #10312b;
+  --pine: #1c4a40;
+  --mint: #dff2ea;
+  --paper: #f7fbf9;
+  --pulse: #ff5a3c;
+  --sand: #efe9dc;
+  --font-display: "Zilla Slab", "Georgia", serif;
+  --font-body: "Sora", "Segoe UI", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.vet a:focus-visible,
+.vet button:focus-visible {
+  outline: 3px solid var(--pulse);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  background: var(--ink);
+  color: var(--mint);
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemná mřížka milimetrového EKG papíru */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(223, 242, 234, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(223, 242, 234, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+}
+
+.hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 2.5rem;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.wordmark-cross {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--pulse);
+  color: var(--ink);
+  flex-shrink: 0;
+}
+
+.wordmark-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.01em;
+  color: #fff;
+}
+
+.wordmark-text em {
+  font-style: normal;
+  color: var(--pulse);
+}
+
+.hero-tel {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--mint);
+  text-decoration: none;
+  border: 2px solid rgba(223, 242, 234, 0.35);
+  border-radius: 999px;
+  padding: 0.45rem 1.1rem;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.hero-tel:hover {
+  border-color: var(--pulse);
+  background: rgba(255, 90, 60, 0.12);
+}
+
+.hero-main {
+  max-width: 720px;
+}
+
+.hero-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(223, 242, 234, 0.7);
+  margin: 0 0 1.25rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 8vw, 5.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.5rem;
+  color: #fff;
+}
+
+.hero-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.hero-line-1 {
+  animation-delay: 0.05s;
+}
+.hero-line-2 {
+  animation-delay: 0.18s;
+}
+.hero-line-3 {
+  animation-delay: 0.31s;
+}
+
+.hero-dot {
+  color: var(--pulse);
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(223, 242, 234, 0.85);
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  opacity: 0;
+  animation: fade 0.8s ease 0.5s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  opacity: 0;
+  animation: fade 0.8s ease 0.65s forwards;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--pulse);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.9rem 1.75rem;
+  border-radius: 999px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 18px rgba(255, 90, 60, 0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 90, 60, 0.45);
+}
+
+.btn-ghost {
+  display: inline-block;
+  color: var(--mint);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.9rem 1.75rem;
+  border-radius: 999px;
+  border: 2px solid rgba(223, 242, 234, 0.35);
+  transition: border-color 0.2s ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--mint);
+}
+
+/* --- Signature: EKG křivka --- */
+
+.ekg-wrap {
+  margin: 3rem 0 0;
+  color: var(--pulse);
+}
+
+.ekg {
+  display: block;
+  width: 100%;
+  height: 90px;
+}
+
+.ekg-path {
+  stroke-dasharray: 1600;
+  stroke-dashoffset: 1600;
+  animation: pulse-draw 2.4s cubic-bezier(0.4, 0, 0.3, 1) 0.7s forwards;
+  filter: drop-shadow(0 0 6px rgba(255, 90, 60, 0.6));
+}
+
+@keyframes pulse-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade {
+  to {
+    opacity: 1;
+  }
+}
+
+.hero-facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem 2rem;
+  margin: 2.5rem 0 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(223, 242, 234, 0.18);
+}
+
+.fact dt {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(223, 242, 234, 0.6);
+  margin: 0 0 0.2rem;
+}
+
+.fact dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+/* ============ SEKCE OBECNĚ ============ */
+
+.section-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem;
+}
+
+.section-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pulse);
+  margin: 0 0 0.75rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 4.5vw, 2.75rem);
+  line-height: 1.12;
+  margin: 0 0 1rem;
+  color: var(--ink);
+}
+
+.section-lead {
+  font-size: 1.1rem;
+  color: var(--pine);
+  max-width: 36rem;
+  margin: 0;
+}
+
+/* ============ SLUŽBY ============ */
+
+.sluzby {
+  background: var(--paper);
+}
+
+.section-head {
+  margin-bottom: 2.75rem;
+}
+
+.sluzby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.karta {
+  background: #fff;
+  border: 1px solid rgba(16, 49, 43, 0.1);
+  border-radius: 18px;
+  padding: 1.75rem 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 90, 60, 0.5);
+  box-shadow: 0 12px 30px rgba(16, 49, 43, 0.1);
+}
+
+.karta-stitek {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pine);
+  background: var(--mint);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  margin: 0 0 1rem;
+}
+
+.karta-nazev {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  margin: 0 0 0.6rem;
+  color: var(--ink);
+}
+
+.karta-popis {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #3c554f;
+}
+
+/* ============ DŮVĚRA ============ */
+
+.duvera {
+  background: var(--pine);
+  color: var(--mint);
+}
+
+.duvera-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.section-eyebrow-light {
+  color: #ffb3a3;
+}
+
+.section-title-light {
+  color: #fff;
+}
+
+.duvera-p {
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: rgba(223, 242, 234, 0.88);
+  margin: 0 0 1.1rem;
+  max-width: 38rem;
+}
+
+.radce-h {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin: 2.25rem 0 1rem;
+  color: #fff;
+}
+
+.radce {
+  margin: 0;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.radce-item {
+  border-left: 3px solid var(--pulse);
+  padding-left: 1rem;
+}
+
+.radce-item dt {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+  margin: 0 0 0.25rem;
+}
+
+.radce-item dd {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(223, 242, 234, 0.8);
+  max-width: 34rem;
+}
+
+/* --- hodiny --- */
+
+.hodiny {
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 22px;
+  padding: 2rem 1.5rem;
+  align-self: start;
+  box-shadow: 0 24px 60px rgba(6, 22, 19, 0.35);
+}
+
+.hodiny-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin: 0 0 1.1rem;
+}
+
+.hodiny-tab {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.hodiny-tab th {
+  text-align: left;
+  font-weight: 600;
+  padding: 0.5rem 0;
+  color: var(--pine);
+  white-space: nowrap;
+}
+
+.hodiny-tab td {
+  text-align: right;
+  padding: 0.5rem 0;
+}
+
+.hodiny-tab tr + tr th,
+.hodiny-tab tr + tr td {
+  border-top: 1px dashed rgba(16, 49, 43, 0.18);
+}
+
+.hodiny-note {
+  font-size: 0.9rem;
+  color: var(--pine);
+  margin: 1.1rem 0 1.25rem;
+}
+
+.btn-block {
+  display: block;
+  text-align: center;
+}
+
+.hodiny-mail {
+  text-align: center;
+  margin: 1rem 0 0;
+  font-size: 0.95rem;
+}
+
+.hodiny-mail a {
+  color: var(--pine);
+  text-decoration-color: var(--pulse);
+  text-underline-offset: 3px;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (min-width: 640px) {
+  .hero-facts {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .hero-inner {
+    padding: 2rem 2rem 4rem;
+  }
+  .section-inner {
+    padding: 5.5rem 2rem;
+  }
+  .sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .duvera-grid {
+    grid-template-columns: 1.5fr 1fr;
+    gap: 4rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-line,
+  .hero-sub,
+  .hero-actions {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .ekg-path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .karta,
+  .btn-primary,
+  .btn-ghost,
+  .hero-tel {
+    transition: none;
+  }
+  .karta:hover,
+  .btn-primary:hover {
+    transform: none;
+  }
+}
