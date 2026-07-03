@@ -1,0 +1,512 @@
+/* ==========================================================================
+   LuSo plus — rekonstrukce koupelen, Brno
+   Koncept: „spárořez" — svislé spáry mezi kachlemi jako nosný grafický motiv.
+   Paleta z koupelnového světa: hluboká petrolejová glazura, bílá keramika,
+   šedý cement spáry, měděný akcent (baterie / trubky).
+   ========================================================================== */
+
+:root {
+  --glazura: #0e3b43;      /* petrolejová glazura obkladu */
+  --glazura-tma: #082930;  /* stín ve spáře */
+  --keramika: #f7f5f0;     /* bílá keramika, teplá */
+  --cement: #8a9396;       /* spárovací hmota */
+  --med: #c46a3a;          /* měděná baterie */
+  --med-svetla: #e0956a;
+  --inkoust: #14282c;
+
+  --pismo-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+  --pismo-telo: Georgia, "Times New Roman", serif;
+  --pismo-util: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--pismo-telo);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--inkoust);
+  background: var(--keramika);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ko a:focus-visible,
+.ko :focus-visible {
+  outline: 3px solid var(--med);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =========================== HERO =========================== */
+
+.hero {
+  position: relative;
+  background: var(--glazura);
+  color: var(--keramika);
+  overflow: hidden;
+  padding: 2rem 1.25rem 0;
+}
+
+/* jemná mřížka spár v pozadí — jako stěna z obkladů */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(247, 245, 240, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(247, 245, 240, 0.06) 1px, transparent 1px);
+  background-size: 120px 120px;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 62rem;
+  margin: 0 auto;
+  padding-bottom: 3.5rem;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.wordmark {
+  font-family: var(--pismo-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  color: var(--keramika);
+}
+
+.wordmark-plus {
+  color: var(--med-svetla);
+  margin-left: 0.1em;
+}
+
+.hero-loc {
+  font-family: var(--pismo-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cement);
+}
+
+.hero-title {
+  font-family: var(--pismo-display);
+  font-size: clamp(2.3rem, 8.5vw, 5.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.75rem;
+  text-transform: uppercase;
+}
+
+.hero-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.5em);
+  animation: hero-vjezd 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.hero-line-1 { animation-delay: 0.1s; }
+.hero-line-2 { animation-delay: 0.28s; color: var(--cement); }
+.hero-line-3 { animation-delay: 0.46s; color: var(--med-svetla); }
+
+.tecka {
+  color: var(--med);
+}
+
+@keyframes hero-vjezd {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-sub {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(247, 245, 240, 0.85);
+  margin: 0 0 2.25rem;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--pismo-display);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 1rem 1.6rem;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-hlavni {
+  background: var(--med);
+  color: var(--keramika);
+}
+
+.btn-hlavni:hover {
+  background: var(--med-svetla);
+  color: var(--glazura-tma);
+  transform: translateY(-2px);
+}
+
+.btn-vedlejsi {
+  border: 2px solid rgba(247, 245, 240, 0.4);
+  color: var(--keramika);
+}
+
+.btn-vedlejsi:hover {
+  border-color: var(--keramika);
+  transform: translateY(-2px);
+}
+
+.hero-pozn {
+  font-family: var(--pismo-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--cement);
+  margin: 0;
+}
+
+/* --- signature: pás kachlí se spárami na hraně hera --- */
+
+.sparovka {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px; /* spára */
+  background: var(--glazura-tma); /* spárovací hmota ve tmě */
+  padding-top: 6px;
+  margin: 0 -1.25rem;
+}
+
+.kachle {
+  height: 3.5rem;
+  background: var(--keramika);
+  opacity: 0;
+  transform: translateY(100%);
+  animation: kachle-pokladka 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+/* obkladač pokládá kachle zleva doprava */
+.k1 { animation-delay: 0.55s; }
+.k2 { animation-delay: 0.63s; }
+.k3 { animation-delay: 0.71s; background: var(--med); }
+.k4 { animation-delay: 0.79s; }
+.k5 { animation-delay: 0.87s; }
+.k6 { animation-delay: 0.95s; background: var(--cement); }
+.k7 { animation-delay: 1.03s; }
+.k8 { animation-delay: 1.11s; }
+
+@keyframes kachle-pokladka {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================== SEKCE OBECNĚ =========================== */
+
+.sekce {
+  padding: 4.5rem 1.25rem;
+}
+
+.sekce-inner {
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: var(--pismo-util);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--med);
+  margin: 0 0 0.75rem;
+}
+
+.eyebrow-svetly {
+  color: var(--med-svetla);
+}
+
+.sekce-nadpis {
+  font-family: var(--pismo-display);
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  line-height: 1.15;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+  color: var(--glazura);
+}
+
+.sekce-nadpis-svetly {
+  color: var(--keramika);
+}
+
+.sekce-uvod {
+  max-width: 34rem;
+  margin: 0 0 3rem;
+  color: #3d5257;
+}
+
+/* =========================== POSTUP (služby) =========================== */
+
+.postup {
+  background: var(--keramika);
+}
+
+.postup-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.postup-item {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 1.25rem;
+  padding: 1.75rem 0;
+  border-top: 1px solid #d9d4c8;
+}
+
+.postup-item:last-child {
+  border-bottom: 1px solid #d9d4c8;
+}
+
+.postup-znacka {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.postup-cislo {
+  font-family: var(--pismo-display);
+  font-size: 1.35rem;
+  color: var(--keramika);
+  background: var(--glazura);
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+}
+
+/* svislá „spára" spojující kroky */
+.postup-spara {
+  flex: 1;
+  width: 4px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--cement) 0,
+    var(--cement) 8px,
+    transparent 8px,
+    transparent 14px
+  );
+  border-radius: 2px;
+}
+
+.postup-item:last-child .postup-spara {
+  display: none;
+}
+
+.postup-krok {
+  font-family: var(--pismo-util);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--med);
+  margin: 0 0 0.35rem;
+}
+
+.postup-nazev {
+  font-family: var(--pismo-display);
+  font-size: 1.25rem;
+  line-height: 1.25;
+  margin: 0 0 0.6rem;
+  color: var(--glazura);
+}
+
+.postup-popis {
+  margin: 0 0 0.6rem;
+  max-width: 38rem;
+  color: #33484d;
+}
+
+.postup-detail {
+  font-family: var(--pismo-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--cement);
+  margin: 0;
+}
+
+/* =========================== DŮVĚRA =========================== */
+
+.duvera {
+  background: var(--glazura);
+  color: var(--keramika);
+}
+
+.fakta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px; /* spára i tady */
+  background: var(--glazura-tma);
+  padding: 6px;
+  margin: 2.5rem 0 4rem;
+  border-radius: 6px;
+}
+
+.fakt {
+  background: rgba(247, 245, 240, 0.05);
+  padding: 1.5rem 1.4rem;
+  margin: 0;
+}
+
+.fakt-cislo {
+  font-family: var(--pismo-display);
+  font-size: 1.5rem;
+  color: var(--med-svetla);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.fakt-text {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: rgba(247, 245, 240, 0.82);
+}
+
+.ref-nadpis {
+  font-family: var(--pismo-display);
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  margin: 0 0 1.75rem;
+  color: var(--keramika);
+}
+
+.ref-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.ref {
+  margin: 0;
+  background: var(--keramika);
+  color: var(--inkoust);
+  padding: 1.6rem 1.5rem;
+  border-radius: 6px;
+  border-top: 5px solid var(--med);
+  display: flex;
+  flex-direction: column;
+}
+
+.ref-misto {
+  font-family: var(--pismo-util);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--med);
+  margin-bottom: 0.75rem;
+}
+
+.ref-text {
+  margin: 0 0 1rem;
+  font-style: italic;
+  line-height: 1.7;
+  flex: 1;
+}
+
+.ref-kdo {
+  margin: 0;
+  font-family: var(--pismo-util);
+  font-size: 0.82rem;
+  color: #4b5e63;
+}
+
+/* =========================== RESPONZIVITA =========================== */
+
+@media (min-width: 640px) {
+  .fakta {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    padding: 2.5rem 2rem 0;
+  }
+
+  .hero-inner {
+    padding-bottom: 5rem;
+  }
+
+  .sparovka {
+    margin: 0 -2rem;
+  }
+
+  .kachle {
+    height: 4.5rem;
+  }
+
+  .sekce {
+    padding: 6rem 2rem;
+  }
+
+  .ref-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .postup-item {
+    grid-template-columns: 4.5rem 1fr;
+    gap: 2rem;
+  }
+}
+
+/* =========================== REDUCED MOTION =========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-line,
+  .kachle {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .btn {
+    transition: none;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+}
