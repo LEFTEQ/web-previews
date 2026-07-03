@@ -1,0 +1,537 @@
+:root {
+  /* Paleta: hlubina výkopu + pitná voda + litina + písek lože */
+  --hlina: #1b2a32;        /* tmavá modrošedá — mokrá zemina/litina */
+  --hlina-2: #223640;
+  --voda: #1f8fb8;         /* pitná voda v profilu trubky */
+  --voda-svetla: #7cc4dd;
+  --pisek: #e8dfcf;        /* pískové lože pod potrubím */
+  --papir: #f7f5f0;        /* podklad technického výkresu */
+  --inkoust: #17232a;
+  --kota: #b3543a;         /* rezavá kóta — barva litiny/značení */
+
+  --disp: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  --body: Georgia, "Times New Roman", serif;
+  --tech: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--papir);
+  color: var(--inkoust);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--voda);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =============== HERO =============== */
+
+.hero {
+  position: relative;
+  background:
+    linear-gradient(180deg, var(--papir) 0%, var(--papir) 72%, var(--pisek) 100%);
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 20px 0;
+}
+
+/* --- wordmark --- */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 56px;
+}
+
+.brand-mark {
+  color: var(--voda);
+  display: inline-flex;
+}
+
+.brand-word {
+  font-family: var(--disp);
+  font-size: 1.7rem;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.brand-sub {
+  font-family: var(--tech);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  font-weight: 400;
+  color: var(--hlina-2);
+  text-transform: uppercase;
+}
+
+/* --- titulek --- */
+
+.hero-title {
+  font-family: var(--disp);
+  text-transform: uppercase;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  font-size: clamp(2.4rem, 8.5vw, 6.2rem);
+  max-width: 15ch;
+}
+
+.ht-row {
+  display: block;
+  animation: ht-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.ht-1 { animation-delay: 0.05s; }
+.ht-2 { animation-delay: 0.18s; }
+.ht-3 { animation-delay: 0.31s; }
+
+.ht-3 em {
+  font-style: normal;
+  color: var(--voda);
+  position: relative;
+  white-space: nowrap;
+}
+
+/* vlnovka pod "do země" — hladina vody */
+.ht-3 em::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.14em;
+  height: 0.16em;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 10'%3E%3Cpath d='M0 5c5-4 10 4 20 0s15 4 20 0' fill='none' stroke='%231f8fb8' stroke-width='2.5'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+}
+
+@keyframes ht-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-lead {
+  margin-top: 28px;
+  max-width: 46ch;
+  font-size: 1.15rem;
+  color: var(--hlina-2);
+  animation: ht-in 0.7s 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* --- CTA --- */
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+  animation: ht-in 0.7s 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.btn {
+  font-family: var(--disp);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  padding: 15px 26px;
+  border-radius: 3px;
+  display: inline-block;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--voda);
+  color: #fff;
+  box-shadow: 0 4px 0 #14708f;
+}
+
+.btn-solid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #14708f;
+}
+
+.btn-ghost {
+  color: var(--inkoust);
+  border: 2px solid var(--inkoust);
+}
+
+.btn-ghost:hover {
+  background: var(--inkoust);
+  color: var(--papir);
+}
+
+/* --- fakta --- */
+
+.hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 44px;
+  margin: 44px 0 36px;
+  animation: ht-in 0.7s 0.65s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.fact dt {
+  font-family: var(--tech);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--kota);
+}
+
+.fact dd {
+  font-family: var(--disp);
+  font-size: 1.25rem;
+  margin-top: 2px;
+}
+
+/* --- signature: řez výkopem --- */
+
+.trench {
+  position: relative;
+  border-top: 1px solid rgba(23, 35, 42, 0.15);
+}
+
+.trench-svg {
+  display: block;
+  width: 100%;
+  height: 220px;
+}
+
+.t-terrain {
+  stroke: var(--inkoust);
+  stroke-width: 3;
+}
+
+.t-wall {
+  stroke: var(--inkoust);
+  stroke-width: 2;
+  fill: none;
+}
+
+.t-bed {
+  stroke: var(--kota);
+  stroke-width: 5;
+  stroke-dasharray: 2 6;
+  stroke-linecap: round;
+}
+
+.t-pipe-outer {
+  fill: var(--papir);
+  stroke: var(--inkoust);
+  stroke-width: 4;
+}
+
+.t-pipe-inner {
+  fill: none;
+  stroke: var(--voda);
+  stroke-width: 2;
+}
+
+.t-water {
+  fill: none;
+  stroke: var(--voda);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.t-axis {
+  stroke: var(--kota);
+  stroke-width: 1.5;
+  stroke-dasharray: 22 6 3 6;
+  animation: axis-flow 2.8s linear infinite;
+}
+
+@keyframes axis-flow {
+  to {
+    stroke-dashoffset: -37;
+  }
+}
+
+.trench-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.tg-label {
+  position: absolute;
+  font-family: var(--tech);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--kota);
+  background: var(--papir);
+  padding: 1px 6px;
+}
+
+.tg-terrain { top: 6px; left: 20px; }
+.tg-pipe { top: 44%; right: 20px; }
+.tg-bed { bottom: 34px; left: 20px; }
+
+/* =============== SEKCE OBECNĚ =============== */
+
+.sec-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 72px 20px;
+}
+
+.eyebrow {
+  font-family: var(--tech);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--kota);
+  margin-bottom: 10px;
+}
+
+.sec-title {
+  font-family: var(--disp);
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  line-height: 1.08;
+  max-width: 22ch;
+}
+
+.sec-lead {
+  margin-top: 16px;
+  max-width: 56ch;
+  color: var(--hlina-2);
+  font-size: 1.05rem;
+}
+
+/* =============== SLUŽBY =============== */
+
+.sec-sluzby {
+  background: var(--pisek);
+}
+
+.sluzby-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 22px;
+  margin-top: 44px;
+}
+
+.sluzba {
+  background: var(--papir);
+  border: 1px solid rgba(23, 35, 42, 0.12);
+  border-top: 4px solid var(--voda);
+  border-radius: 4px;
+  padding: 26px 22px 28px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sluzba:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(23, 35, 42, 0.12);
+}
+
+.sluzba-kod {
+  font-family: var(--tech);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--kota);
+  border: 1px solid currentColor;
+  padding: 3px 8px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.sluzba-nazev {
+  font-family: var(--disp);
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  margin: 14px 0 10px;
+}
+
+.sluzba-popis {
+  font-size: 0.97rem;
+  color: var(--hlina-2);
+}
+
+/* =============== REFERENCE =============== */
+
+.sec-reference {
+  background: var(--hlina);
+  color: var(--papir);
+}
+
+.eyebrow-light {
+  color: var(--voda-svetla);
+}
+
+.sec-title-light {
+  color: #fff;
+}
+
+.sec-lead-light {
+  color: rgba(247, 245, 240, 0.75);
+}
+
+.ref-list {
+  list-style: none;
+  margin-top: 44px;
+}
+
+.ref-item {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 18px;
+  padding: 26px 0;
+  border-top: 1px solid rgba(247, 245, 240, 0.18);
+}
+
+.ref-item:last-child {
+  border-bottom: 1px solid rgba(247, 245, 240, 0.18);
+}
+
+.ref-rok {
+  font-family: var(--disp);
+  font-size: 1.3rem;
+  color: var(--voda-svetla);
+}
+
+.ref-stavba {
+  font-family: var(--disp);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.ref-misto {
+  font-family: var(--tech);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--voda-svetla);
+  margin-top: 6px;
+}
+
+.ref-detail {
+  margin-top: 8px;
+  color: rgba(247, 245, 240, 0.78);
+  font-size: 0.97rem;
+  max-width: 60ch;
+}
+
+/* --- záruky --- */
+
+.ref-zaruky {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+  margin-top: 52px;
+}
+
+.zaruka {
+  border-left: 3px solid var(--voda);
+  padding-left: 16px;
+}
+
+.zaruka strong {
+  font-family: var(--disp);
+  display: block;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.zaruka span {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.92rem;
+  color: rgba(247, 245, 240, 0.72);
+}
+
+/* =============== RESPONZIVITA =============== */
+
+@media (max-width: 640px) {
+  .hero-inner {
+    padding-top: 22px;
+  }
+
+  .brand {
+    margin-bottom: 40px;
+  }
+
+  .trench-svg {
+    height: 150px;
+  }
+
+  .tg-pipe {
+    top: 36%;
+  }
+
+  .ref-item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .sec-inner {
+    padding: 56px 18px;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* =============== REDUCED MOTION =============== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ht-row,
+  .hero-lead,
+  .hero-ctas,
+  .hero-facts {
+    animation: none;
+  }
+
+  .t-axis {
+    animation: none;
+  }
+
+  .sluzba,
+  .btn {
+    transition: none;
+  }
+
+  .sluzba:hover,
+  .btn-solid:hover {
+    transform: none;
+  }
+}
