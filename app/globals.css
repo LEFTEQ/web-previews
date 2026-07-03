@@ -1,0 +1,505 @@
+/* ==========================================================================
+   PRODAPA s.r.o. — autodíly Pardubice
+   Vizuální svět: sklad autodílů. Regálové štítky, skladové kódy, červená
+   z krabic Bosch/původního webu, ocelová šeď regálů, papírově bílý štítek.
+   Signature prvek: „regálová lišta" se štítky, která odděluje hero.
+   ========================================================================== */
+
+:root {
+  --pd-red: #c8102e;        /* skladová červená (Bosch krabice, původní header) */
+  --pd-red-deep: #8f0a20;
+  --pd-steel: #22262b;      /* ocel regálu */
+  --pd-steel-2: #2e343b;
+  --pd-paper: #f7f6f2;      /* papírový štítek */
+  --pd-ink: #16181b;
+  --pd-grey: #5d646c;
+  --pd-line: #d9d7d0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--pd-paper);
+  color: var(--pd-ink);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pd a:focus-visible,
+.pd button:focus-visible {
+  outline: 3px solid var(--pd-red);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =========================================================
+   HERO — typografický, skladový
+   ========================================================= */
+
+.pd-hero {
+  background: var(--pd-steel);
+  color: var(--pd-paper);
+  padding: 1.25rem 1.25rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemná mřížka regálu na pozadí */
+.pd-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
+}
+
+.pd-hero > * {
+  position: relative;
+}
+
+.pd-hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.pd-wordmark {
+  font-weight: 900;
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
+  color: #fff;
+}
+
+.pd-wordmark-cut {
+  color: var(--pd-red);
+  /* useknutý řez — jako razítko na krabici */
+  background: #fff;
+  color: var(--pd-red);
+  padding: 0 0.3rem;
+  margin-left: 0.15rem;
+  clip-path: polygon(0 0, 100% 0, 94% 100%, 0 100%);
+}
+
+.pd-hero-tag {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+}
+
+.pd-hero-main {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3rem 0 2.5rem;
+}
+
+.pd-hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--pd-red);
+  color: #ff5c72;
+  font-weight: 700;
+}
+
+.pd-hero-title {
+  margin: 0;
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  line-height: 0.98;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.pd-line {
+  display: block;
+}
+
+.pd-line-2 {
+  color: rgba(255, 255, 255, 0.55);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.65);
+  color: transparent;
+}
+
+.pd-line-3 em {
+  font-style: normal;
+  color: var(--pd-red);
+  color: #ff2f4e;
+}
+
+.pd-hero-sub {
+  max-width: 34rem;
+  margin: 1.75rem 0 0;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.pd-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.pd-btn {
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  border-radius: 3px;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.pd-btn-solid {
+  background: var(--pd-red);
+  color: #fff;
+}
+
+.pd-btn-solid:hover {
+  background: #e0173a;
+  transform: translateY(-2px);
+}
+
+.pd-btn-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.pd-btn-ghost:hover {
+  border-color: #fff;
+  transform: translateY(-2px);
+}
+
+/* --- signature: regálová lišta se štítky --- */
+
+.pd-shelf {
+  display: flex;
+  gap: 2px;
+  overflow: hidden;
+  margin: 0 -1.25rem;
+  background: var(--pd-red);
+  border-top: 4px solid var(--pd-red-deep);
+  padding: 0.45rem 1.25rem;
+}
+
+.pd-shelf-cell {
+  flex: 1 0 auto;
+  background: #fff;
+  color: var(--pd-ink);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  white-space: nowrap;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%);
+  text-align: center;
+}
+
+.pd-hero-facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem 2rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.5rem 0 2rem;
+}
+
+.pd-hero-facts dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 0.2rem;
+}
+
+.pd-hero-facts dd {
+  margin: 0;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* --- page-load sekvence (jediný orchestrovaný moment) --- */
+
+@keyframes pd-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pd-hero-eyebrow,
+.pd-line-1,
+.pd-line-2,
+.pd-line-3,
+.pd-hero-sub,
+.pd-hero-cta,
+.pd-shelf,
+.pd-hero-facts {
+  animation: pd-rise 0.55s ease-out both;
+}
+
+.pd-line-1 { animation-delay: 0.08s; }
+.pd-line-2 { animation-delay: 0.16s; }
+.pd-line-3 { animation-delay: 0.24s; }
+.pd-hero-sub { animation-delay: 0.34s; }
+.pd-hero-cta { animation-delay: 0.42s; }
+.pd-shelf { animation-delay: 0.5s; }
+.pd-hero-facts { animation-delay: 0.56s; }
+
+/* =========================================================
+   SEKCE
+   ========================================================= */
+
+.pd-section {
+  padding: 3.5rem 1.25rem;
+}
+
+.pd-section-head {
+  max-width: 72rem;
+  margin: 0 auto 2.25rem;
+}
+
+.pd-section-head h2 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.pd-section-head h2::after {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: 5px;
+  background: var(--pd-red);
+  margin-top: 0.75rem;
+  clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 100%, 5px 100%);
+}
+
+.pd-section-head p {
+  margin: 0;
+  max-width: 38rem;
+  color: var(--pd-grey);
+  font-size: 1.05rem;
+}
+
+/* --- sortiment: karty jako regálové štítky --- */
+
+.pd-grid {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 72rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.pd-card {
+  background: #fff;
+  border: 1px solid var(--pd-line);
+  border-top: 4px solid var(--pd-steel);
+  padding: 1.4rem 1.4rem 1.5rem;
+  border-radius: 3px;
+  transition: border-top-color 0.15s ease, transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.pd-card:hover {
+  border-top-color: var(--pd-red);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(22, 24, 27, 0.08);
+}
+
+.pd-card-kod {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--pd-steel);
+  padding: 0.2rem 0.6rem;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 100%, 6px 100%);
+}
+
+.pd-card h3 {
+  margin: 0.85rem 0 0.4rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.pd-card p {
+  margin: 0;
+  color: var(--pd-grey);
+  font-size: 0.95rem;
+}
+
+/* --- důvěra --- */
+
+.pd-section-dark {
+  background: var(--pd-steel);
+  color: var(--pd-paper);
+}
+
+.pd-section-dark .pd-section-head h2 {
+  color: #fff;
+}
+
+.pd-section-dark .pd-section-head p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.pd-trust {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.pd-trust-item {
+  border-left: 4px solid var(--pd-red);
+  padding-left: 1.25rem;
+}
+
+.pd-trust-num {
+  margin: 0;
+  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.pd-trust-item h3 {
+  margin: 0.35rem 0 0.5rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #ff5c72;
+  font-weight: 700;
+}
+
+.pd-trust-item p:last-child {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.98rem;
+}
+
+.pd-trust-note {
+  max-width: 72rem;
+  margin: 2.5rem auto 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.pd-trust-note strong {
+  color: #fff;
+}
+
+/* =========================================================
+   RESPONZIVITA
+   ========================================================= */
+
+@media (min-width: 640px) {
+  .pd-hero-facts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pd-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .pd-hero {
+    padding: 1.5rem 3rem 0;
+  }
+
+  .pd-shelf {
+    margin: 0 -3rem;
+    padding: 0.45rem 3rem;
+  }
+
+  .pd-hero-main {
+    padding: 4.5rem 0 3.5rem;
+  }
+
+  .pd-section {
+    padding: 5rem 3rem;
+  }
+
+  .pd-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .pd-trust {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+/* =========================================================
+   REDUKOVANÝ POHYB
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .pd-hero-eyebrow,
+  .pd-line-1,
+  .pd-line-2,
+  .pd-line-3,
+  .pd-hero-sub,
+  .pd-hero-cta,
+  .pd-shelf,
+  .pd-hero-facts {
+    animation: none;
+  }
+
+  .pd-btn,
+  .pd-card {
+    transition: none;
+  }
+
+  .pd-btn-solid:hover,
+  .pd-btn-ghost:hover,
+  .pd-card:hover {
+    transform: none;
+  }
+}
