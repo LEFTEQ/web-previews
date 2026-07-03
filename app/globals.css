@@ -1,0 +1,404 @@
+/* =====================================================
+   MASO BÍLOVICE — řeznictví, Bílovice nad Svitavou / Brno
+   Paleta: řeznická červeň, špalek, papír na maso, sádlo
+   ===================================================== */
+
+:root {
+  --rz-krev: #8e1f22;        /* řeznická červeň — vývěsní štít */
+  --rz-krev-tmava: #5f1315;  /* zaschlá, hluboká */
+  --rz-spalek: #2b201b;      /* dřevěný špalek, skoro černá hnědá */
+  --rz-papir: #efe4d3;       /* balicí papír na maso */
+  --rz-papir-svetly: #f7f0e3;
+  --rz-sadlo: #e8c9a0;       /* teplý akcent — sádlo/škvarky */
+  --rz-linka: rgba(43, 32, 27, 0.18);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--rz-papir);
+  color: var(--rz-spalek);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.rz a:focus-visible,
+.rz button:focus-visible,
+.rz :focus-visible {
+  outline: 3px solid var(--rz-krev);
+  outline-offset: 3px;
+}
+
+/* ===================== HERO ===================== */
+
+.rz-hero {
+  background:
+    linear-gradient(175deg, var(--rz-krev) 0%, var(--rz-krev-tmava) 88%);
+  color: var(--rz-papir-svetly);
+  padding: 1.25rem 1.25rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.rz-hero__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(247, 240, 227, 0.25);
+}
+
+/* Wordmark: MASO stencil-tvrdé, Bílovice měkkou kurzívou — cedule řeznictví */
+.rz-wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.rz-wordmark__maso {
+  font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-stretch: condensed;
+  letter-spacing: 0.28em;
+  font-size: 1.35rem;
+  text-transform: uppercase;
+}
+
+.rz-wordmark__bilovice {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 1.35rem;
+  color: var(--rz-sadlo);
+}
+
+.rz-hero__locality {
+  margin: 0;
+  font-size: 0.9rem;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(247, 240, 227, 0.75);
+}
+
+.rz-hero__stage {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.rz-hero__title {
+  margin: 0;
+  font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 9vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+}
+
+.rz-hero__line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: rz-rise 0.55s ease-out forwards;
+}
+
+.rz-hero__line--2 { animation-delay: 0.12s; color: var(--rz-sadlo); }
+.rz-hero__line--3 { animation-delay: 0.24s; }
+
+@keyframes rz-rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.rz-hero__claim {
+  margin: 0;
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: rgba(247, 240, 227, 0.92);
+}
+
+/* --- Signature: mapa bourání --- */
+
+.rz-cutmap {
+  margin: 0;
+  opacity: 0;
+  animation: rz-fade 0.8s ease-out 0.4s forwards;
+}
+
+@keyframes rz-fade { to { opacity: 1; } }
+
+.rz-cutmap__svg {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  display: block;
+}
+
+.rz-cutmap__body {
+  fill: none;
+  stroke: var(--rz-papir-svetly);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.rz-cutmap__lines path {
+  fill: none;
+  stroke: var(--rz-sadlo);
+  stroke-width: 2;
+  stroke-dasharray: 7 7;
+}
+
+.rz-cutmap__nums text {
+  fill: var(--rz-sadlo);
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+}
+
+.rz-cutmap__legend ol {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  color: rgba(247, 240, 227, 0.85);
+}
+
+.rz-cutmap__legend b {
+  color: var(--rz-sadlo);
+  margin-right: 0.35em;
+}
+
+/* pás sortimentu na spodku hera */
+.rz-hero__band {
+  border-top: 2px solid rgba(247, 240, 227, 0.25);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.9rem 0 1.1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.9rem;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  letter-spacing: 0.18em;
+  font-size: 0.8rem;
+  color: var(--rz-sadlo);
+}
+
+/* ===================== SEKCE: PULT ===================== */
+
+.rz-pult {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem 3.5rem;
+}
+
+.rz-section-head { margin-bottom: 2.25rem; }
+
+.rz-eyebrow {
+  margin: 0 0 0.5rem;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.85rem;
+  color: var(--rz-krev);
+  font-weight: 700;
+}
+
+.rz-pult h2,
+.rz-remeslo h2 {
+  margin: 0;
+  font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.05;
+}
+
+.rz-pult__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.rz-card {
+  background: var(--rz-papir-svetly);
+  border: 1px solid var(--rz-linka);
+  border-top: 5px solid var(--rz-krev);
+  padding: 1.5rem 1.5rem 1.25rem;
+}
+
+.rz-card__tag {
+  margin: 0 0 0.6rem;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  color: var(--rz-krev);
+  font-weight: 700;
+}
+
+.rz-card h3 {
+  margin: 0 0 0.6rem;
+  font-family: Georgia, serif;
+  font-size: 1.3rem;
+  line-height: 1.25;
+}
+
+.rz-card p { margin: 0 0 0.75rem; }
+
+.rz-card__note {
+  margin: 0;
+  font-style: italic;
+  color: var(--rz-krev-tmava);
+  border-top: 1px dashed var(--rz-linka);
+  padding-top: 0.7rem;
+  font-size: 0.95rem;
+}
+
+/* ===================== SEKCE: ŘEMESLO ===================== */
+
+.rz-remeslo {
+  background: var(--rz-spalek);
+  color: var(--rz-papir);
+  padding: 4rem 1.25rem 4rem;
+}
+
+.rz-remeslo > * {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rz-section-head--light .rz-eyebrow { color: var(--rz-sadlo); }
+
+.rz-remeslo__cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.rz-remeslo__text p {
+  margin: 0 0 1rem;
+  max-width: 38rem;
+  color: rgba(239, 228, 211, 0.92);
+}
+
+.rz-remeslo__facts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(239, 228, 211, 0.25);
+  border: 1px solid rgba(239, 228, 211, 0.25);
+}
+
+.rz-fact {
+  background: var(--rz-spalek);
+  padding: 1rem 1.1rem;
+}
+
+.rz-fact dt {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.75rem;
+  color: var(--rz-sadlo);
+  margin-bottom: 0.25rem;
+}
+
+.rz-fact dd {
+  margin: 0;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.rz-quotes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.rz-quote {
+  border-left: 4px solid var(--rz-krev);
+  padding-left: 1.1rem;
+}
+
+.rz-quote blockquote {
+  margin: 0 0 0.5rem;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: rgba(239, 228, 211, 0.95);
+}
+
+.rz-quote__who {
+  margin: 0;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+  color: var(--rz-sadlo);
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (min-width: 760px) {
+  .rz-hero__stage {
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    padding: 3.5rem 0 3rem;
+  }
+
+  .rz-hero__title { grid-column: 1; }
+  .rz-cutmap { grid-column: 2; grid-row: 1 / span 2; }
+  .rz-hero__claim { grid-column: 1; }
+
+  .rz-pult__grid { grid-template-columns: repeat(3, 1fr); }
+
+  .rz-remeslo__cols {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .rz-quotes { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ===================== MOTION ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .rz-hero__line,
+  .rz-cutmap {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
