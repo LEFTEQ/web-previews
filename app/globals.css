@@ -1,0 +1,529 @@
+/* =====================================================
+   NSK IZOLACE — Plzeň
+   Paleta odvozená z materiálů řemesla:
+   - asfaltový pás (téměř černá s hnědým nádechem)
+   - šedá PVC fólie (světlá studená šedá)
+   - signální oranžová kotevních terčů / horáku
+   - zinkový plech (chladná střední šedá)
+   ===================================================== */
+
+:root {
+  --asfalt: #1c1a17;
+  --asfalt-2: #262320;
+  --folie: #e8eaea;
+  --folie-2: #f4f5f5;
+  --zinek: #9aa1a3;
+  --horak: #e85d1f;
+  --horak-tmavy: #c44a12;
+  --text: #2a2723;
+  --max: 1120px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--folie-2);
+  color: var(--text);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.nsk a:focus-visible,
+.nsk .btn:focus-visible {
+  outline: 3px solid var(--horak);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  background: var(--asfalt);
+  color: var(--folie);
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 28px 20px 48px;
+}
+
+.hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-bottom: clamp(48px, 9vw, 96px);
+}
+
+/* Wordmark: NSK vysazené tučně, IZOLACE prostrkaně jako vrstva pod ním */
+.wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.wm-nsk {
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: 0.04em;
+  color: var(--folie-2);
+}
+
+.wm-izolace {
+  font-weight: 400;
+  font-size: 11.5px;
+  letter-spacing: 0.62em;
+  color: var(--horak);
+  margin-top: 4px;
+  padding-left: 2px;
+  border-top: 2px solid var(--horak);
+  padding-top: 4px;
+}
+
+.hero-loc {
+  margin: 0;
+  font-size: 14px;
+  color: var(--zinek);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-h1 {
+  margin: 0 0 24px;
+  font-weight: 800;
+  font-size: clamp(40px, 8.5vw, 92px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--folie-2);
+  max-width: 14ch;
+}
+
+.h1-line {
+  display: block;
+}
+
+.h1-line-3 {
+  color: var(--horak);
+}
+
+.hero-sub {
+  margin: 0 0 36px;
+  max-width: 52ch;
+  font-size: clamp(17px, 2vw, 19px);
+  color: #c9cdcd;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 15px 26px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background-color 0.18s ease, color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.btn-solid {
+  background: var(--horak);
+  color: #fff;
+}
+
+.btn-solid:hover {
+  background: var(--horak-tmavy);
+}
+
+.btn-line {
+  border: 2px solid var(--zinek);
+  color: var(--folie);
+}
+
+.btn-line:hover {
+  border-color: var(--folie-2);
+  color: #fff;
+}
+
+/* ---------- Signature: řez skladbou střechy ---------- */
+
+.skladba {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 20px 56px;
+}
+
+.skladba-label {
+  margin: 0 0 18px;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--zinek);
+}
+
+.skladba-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: vrstva;
+}
+
+.vrstva {
+  display: grid;
+  grid-template-columns: minmax(80px, 1fr) minmax(0, 2.2fr);
+  gap: 16px;
+  align-items: center;
+  padding: 0;
+  counter-increment: vrstva;
+  animation: vrstva-in 0.6s ease both;
+}
+
+.vrstva-1 { animation-delay: 0.15s; }
+.vrstva-2 { animation-delay: 0.3s; }
+.vrstva-3 { animation-delay: 0.45s; }
+.vrstva-4 { animation-delay: 0.6s; }
+.vrstva-5 { animation-delay: 0.75s; }
+
+@keyframes vrstva-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Každá vrstva má vlastní materiálový pruh — dohromady tvoří řez střechou */
+.vrstva-pruh {
+  display: block;
+  height: 26px;
+  border-left: 4px solid var(--horak);
+}
+
+.vrstva-1 .vrstva-pruh {
+  height: 18px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #45403a 0 8px,
+    #55504a 8px 16px
+  );
+}
+
+.vrstva-2 .vrstva-pruh {
+  height: 10px;
+  background: repeating-linear-gradient(90deg, #7b8285 0 3px, #5d6467 3px 6px);
+}
+
+.vrstva-3 .vrstva-pruh {
+  height: 44px;
+  background: linear-gradient(#3a3possible633 0 0) , #383430;
+  background: #383430;
+  background-image: radial-gradient(#4a453f 1.6px, transparent 1.7px);
+  background-size: 12px 12px;
+}
+
+.vrstva-4 .vrstva-pruh {
+  height: 8px;
+  background: #2f2b27;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0 18px,
+    #56504a 18px 20px
+  );
+}
+
+.vrstva-5 .vrstva-pruh {
+  height: 30px;
+  background: repeating-linear-gradient(
+    90deg,
+    #33302c 0 22px,
+    #443f3a 22px 30px,
+    #33302c 30px 44px
+  );
+}
+
+.vrstva-text {
+  display: block;
+  padding: 8px 0;
+  border-bottom: 1px solid #35322e;
+  font-size: 15px;
+}
+
+.vrstva:last-child .vrstva-text {
+  border-bottom: none;
+}
+
+.vrstva-text strong {
+  display: block;
+  color: var(--folie-2);
+  font-weight: 700;
+}
+
+.vrstva-text em {
+  display: block;
+  font-style: normal;
+  color: var(--zinek);
+  font-size: 14px;
+}
+
+/* ================= SLUŽBY ================= */
+
+.sluzby {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(56px, 9vw, 104px) 20px clamp(40px, 6vw, 72px);
+}
+
+.sekce-hlava {
+  max-width: 62ch;
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+
+.sekce-hlava h2,
+.duvera h2 {
+  margin: 0 0 14px;
+  font-size: clamp(28px, 4.5vw, 42px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--asfalt);
+}
+
+.sekce-hlava p {
+  margin: 0;
+  color: #55524d;
+}
+
+.sluzby-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+}
+
+.sluzba {
+  position: relative;
+  background: #fff;
+  border: 1px solid #dcdedd;
+  border-radius: 4px;
+  padding: 26px 24px 20px;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+}
+
+.sluzba:hover {
+  border-color: var(--horak);
+  transform: translateY(-3px);
+}
+
+/* "svár" — oranžový šev na horní hraně karty, jako svár fólie */
+.sluzba-svar {
+  position: absolute;
+  top: -1px;
+  left: 24px;
+  width: 56px;
+  height: 4px;
+  background: var(--horak);
+  border-radius: 0 0 2px 2px;
+}
+
+.sluzba h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--asfalt);
+}
+
+.sluzba p {
+  margin: 0 0 12px;
+  font-size: 15.5px;
+  color: #4c4944;
+}
+
+.sluzba-detail {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--horak-tmavy);
+}
+
+/* ================= DŮVĚRA ================= */
+
+.duvera {
+  background: var(--folie);
+  border-top: 1px solid #d6d9d8;
+}
+
+.duvera-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(56px, 9vw, 96px) 20px 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.duvera-text p {
+  color: #45423d;
+  margin: 0 0 16px;
+}
+
+.duvera-fakta {
+  margin: 0;
+  display: grid;
+  gap: 20px;
+  align-content: start;
+}
+
+.fakt {
+  border-left: 4px solid var(--horak);
+  padding-left: 16px;
+}
+
+.fakt dt {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6d6a64;
+  margin-bottom: 4px;
+}
+
+.fakt dd {
+  margin: 0;
+  font-size: 15.5px;
+  color: var(--text);
+}
+
+.fakt a {
+  color: var(--horak-tmavy);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.fakt a:hover {
+  text-decoration: underline;
+}
+
+.reference {
+  list-style: none;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 24px 20px clamp(56px, 8vw, 88px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+
+.reference li {
+  background: #fff;
+  border: 1px solid #d6d9d8;
+  border-radius: 4px;
+  padding: 20px 22px;
+}
+
+.ref-typ {
+  display: inline-block;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--asfalt);
+  padding: 4px 10px;
+  border-radius: 2px;
+  margin-bottom: 12px;
+}
+
+.reference p {
+  margin: 0;
+  font-size: 15px;
+  color: #4c4944;
+}
+
+/* ================= Mobilní CTA ================= */
+
+.mobil-cta {
+  display: none;
+}
+
+/* ================= Responzivita ================= */
+
+@media (max-width: 860px) {
+  .duvera-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .vrstva {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .hero-inner {
+    padding-top: 22px;
+  }
+
+  .mobil-cta {
+    display: block;
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 50;
+    background: var(--horak);
+    color: #fff;
+    font-weight: 800;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 14px 22px;
+    border-radius: 999px;
+    box-shadow: 0 6px 20px rgba(28, 26, 23, 0.35);
+  }
+
+  .mobil-cta:hover {
+    background: var(--horak-tmavy);
+  }
+}
+
+/* ================= Reduced motion ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .vrstva {
+    animation: none;
+  }
+
+  .sluzba,
+  .btn {
+    transition: none;
+  }
+
+  .sluzba:hover {
+    transform: none;
+  }
+}
