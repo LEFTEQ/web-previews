@@ -1,0 +1,464 @@
+:root {
+  /* paleta odvozená z demoliční techniky: bezpečnostní žluť strojů Wacker Neuson,
+     asfaltová čerň, betonová šeď, prach a rez armatury */
+  --asfalt: #17181a;
+  --beton: #8f9296;
+  --prach: #e8e6e1;
+  --stroj: #ffcc0a;   /* výstražná žluť bagru */
+  --rez: #b4552d;     /* rez z armovacího železa — jen drobný akcent */
+  --papir: #f0efec;
+
+  --font-display: "Arial Black", "Archivo Black", Haettenschweiler, "Franklin Gothic Heavy", sans-serif;
+  --font-body: "Trebuchet MS", "Segoe UI", Verdana, sans-serif;
+  --font-mono: "Courier New", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--papir);
+  color: var(--asfalt);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.lz a:focus-visible,
+.lz button:focus-visible {
+  outline: 3px solid var(--rez);
+  outline-offset: 3px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  background: var(--stroj);
+  color: var(--asfalt);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+  /* výstražné šrafování po okraji — pásky na stroji */
+  border-top: 14px solid transparent;
+  border-image: repeating-linear-gradient(-45deg, var(--asfalt) 0 16px, var(--stroj) 16px 32px) 14;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto 3rem;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.wordmark-lz {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+  background: var(--asfalt);
+  color: var(--stroj);
+  padding: 0.35rem 0.5rem;
+  letter-spacing: -0.03em;
+}
+
+.wordmark-rest {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  line-height: 1.35;
+}
+
+.hero-phone {
+  text-align: right;
+  text-decoration: none;
+  color: var(--asfalt);
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.hero-phone-num {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+}
+
+.hero-phone-hours {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.hero-phone:hover .hero-phone-num { text-decoration: underline 3px; }
+
+.hero-main {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem;
+  border-left: 6px solid var(--asfalt);
+  padding-left: 0.75rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.9rem, 11vw, 8.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  margin: 0 0 1.5rem;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-title b { font-weight: inherit; }
+
+.hero-title .line {
+  display: block;
+  animation: drop-in 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+}
+
+.hero-title .line-1 { animation-delay: 0.05s; }
+.hero-title .line-2 { animation-delay: 0.2s; }
+.hero-title .line-3 { animation-delay: 0.35s; }
+
+/* třetí řádek „POSTAVÍME.“ je vyzděný z papíru na asfaltu — co roste nahoru */
+.line-built {
+  color: var(--papir);
+  background: var(--asfalt);
+  width: fit-content;
+  padding: 0.05em 0.15em 0.08em;
+}
+
+@keyframes drop-in {
+  from { transform: translateY(-0.6em); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.hero-sub {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  margin: 0 0 2rem;
+}
+
+.hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  padding-bottom: 3.5rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 0.85rem 1.4rem;
+  border: 3px solid var(--asfalt);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--asfalt);
+  color: var(--stroj);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--asfalt);
+}
+
+.btn:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 5px 5px 0 var(--asfalt);
+}
+
+/* ---- signature: rozpad na recyklát ----
+   tři řady „suti“ — bloky, které se směrem dolů drolí na menší frakci,
+   jako drcení betonu v recyklační lince */
+.rubble {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 0;
+}
+
+.rubble-row {
+  display: flex;
+  gap: 6px;
+}
+
+.rubble-row i {
+  flex: 1;
+  background: var(--asfalt);
+  animation: settle 0.5s ease both;
+}
+
+.rubble-row.r1 i { height: 26px; }
+.rubble-row.r2 i { height: 15px; opacity: 0.75; }
+.rubble-row.r3 i { height: 7px; opacity: 0.5; }
+
+.rubble-row.r1 i { animation-delay: 0.5s; }
+.rubble-row.r2 i { animation-delay: 0.62s; }
+.rubble-row.r3 i { animation-delay: 0.74s; }
+
+.rubble-row.r1 i:nth-child(3n) { transform-origin: bottom left; }
+.rubble-row.r1 i:nth-child(4) ,
+.rubble-row.r2 i:nth-child(7),
+.rubble-row.r3 i:nth-child(11) { background: var(--rez); }
+
+@keyframes settle {
+  from { transform: translateY(14px); opacity: 0; }
+}
+
+.rubble-row.r2 i { animation-name: settle; }
+
+/* ============ SEKCE — společné ============ */
+
+.section-head {
+  max-width: 72rem;
+  margin: 0 auto 2.5rem;
+}
+
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--stroj);
+  padding: 0.3rem 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0 0 0.85rem;
+}
+
+.section-lead {
+  max-width: 38rem;
+  margin: 0;
+  color: #45474a;
+}
+
+/* ============ SLUŽBY ============ */
+
+.services {
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.services-grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 2px;
+  background: var(--asfalt);
+  border: 2px solid var(--asfalt);
+}
+
+.service {
+  background: var(--papir);
+  padding: 1.6rem 1.5rem 1.75rem;
+  transition: background 0.15s ease;
+}
+
+.service:hover { background: #fff; }
+
+.service-num {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.num-d { background: var(--asfalt); color: var(--stroj); }
+.num-s { background: var(--stroj); color: var(--asfalt); }
+
+.service h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.6rem;
+}
+
+.service p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #3a3c3f;
+}
+
+.fleet-strip {
+  max-width: 72rem;
+  margin: 2.5rem auto 0;
+  background: var(--asfalt);
+  color: var(--prach);
+  padding: 1.4rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  border-left: 10px solid var(--stroj);
+}
+
+.fleet-badge {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--stroj);
+  color: var(--asfalt);
+  padding: 0.3rem 0.6rem;
+  white-space: nowrap;
+}
+
+.fleet-strip p { margin: 0; flex: 1; min-width: 16rem; }
+.fleet-strip strong { color: #fff; }
+
+/* ============ REFERENCE ============ */
+
+.refs {
+  background: var(--asfalt);
+  color: var(--prach);
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.section-head-dark h2 { color: #fff; }
+.section-head-dark .section-lead { color: var(--beton); }
+
+.refs-list {
+  list-style: none;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.ref {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 1.25rem;
+  padding: 1.35rem 0;
+  border-top: 1px solid #333538;
+}
+
+.ref:last-child { border-bottom: 1px solid #333538; }
+
+.ref-place {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stroj);
+  padding-top: 0.25rem;
+}
+
+.ref-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+  color: #fff;
+}
+
+.ref-body p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--beton);
+}
+
+.refs-proof {
+  max-width: 72rem;
+  margin: 2.75rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1.5rem;
+}
+
+.proof {
+  border-top: 6px solid var(--stroj);
+  padding-top: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.proof-big {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.proof-label {
+  font-size: 0.92rem;
+  color: var(--beton);
+}
+
+/* ============ MOBIL ============ */
+
+@media (max-width: 40rem) {
+  .hero { padding-top: 1.1rem; }
+  .hero-top { margin-bottom: 2rem; }
+  .hero-phone-num { font-size: 1rem; }
+  .hero-cta-row .btn { width: 100%; text-align: center; }
+  .ref { grid-template-columns: 1fr; gap: 0.35rem; }
+  .ref-place { padding-top: 0; }
+  .rubble-row.r3 i:nth-child(n+17) { display: none; }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-title .line,
+  .rubble-row i {
+    animation: none;
+  }
+  .btn:hover {
+    transform: none;
+    box-shadow: none;
+    text-decoration: underline;
+  }
+  .btn,
+  .service {
+    transition: none;
+  }
+}
