@@ -1,0 +1,499 @@
+/* =====================================================================
+   AUTOSKLO ROGER — tónování autoskel, Hradec Králové
+   Koncept: svět fólií a skla. Paleta vychází z pohledu skrz tónované
+   okno: modročerné sklo, ocelová šeď dílny, slunečně žlutý akcent
+   (to, před čím fólie chrání). Signature prvek: „pás propustnosti" —
+   škála odstínů VLT 70→5 % jako horizontální gradient oken.
+   ===================================================================== */
+
+:root {
+  --ar-glass-900: #0b1220;   /* nejtmavší fólie / noční sklo */
+  --ar-glass-700: #16233a;   /* tmavé tónování */
+  --ar-glass-500: #2e4a6b;   /* střední odstín */
+  --ar-glass-200: #b8cde0;   /* světlé sklo */
+  --ar-paper: #eef3f8;       /* chladný světlý podklad — sklo, ne krém */
+  --ar-sun: #f5b62e;         /* slunce — akcent, důvod tónovat */
+  --ar-ink: #101827;
+  --ar-ink-soft: #46556b;
+
+  --ar-font-display: "Arial Black", "Avenir Next Heavy", Futura, "Helvetica Neue", Arial, sans-serif;
+  --ar-font-body: "Trebuchet MS", "Segoe UI", Verdana, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--ar-paper);
+  color: var(--ar-ink);
+  font-family: var(--ar-font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ar-page { display: block; }
+
+/* ---------- focus ---------- */
+.ar-page a:focus-visible,
+.ar-page .ar-btn:focus-visible {
+  outline: 3px solid var(--ar-sun);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* =====================================================================
+   HERO — tmavé „sklo", typografický statement, pás odstínů
+   ===================================================================== */
+.ar-hero {
+  background:
+    radial-gradient(120% 90% at 85% -10%, rgba(245, 182, 46, 0.16) 0%, rgba(245, 182, 46, 0) 55%),
+    linear-gradient(160deg, var(--ar-glass-700) 0%, var(--ar-glass-900) 70%);
+  color: #f2f6fb;
+  padding: 0 0 2.75rem;
+  overflow: hidden;
+}
+
+.ar-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.4rem clamp(1.25rem, 5vw, 4rem) 0;
+}
+
+/* wordmark: AUTOSKLO čiré (obrys = sklo), ROGER plné + žlutý „pruh fólie" */
+.ar-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  font-family: var(--ar-font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.ar-wordmark-auto {
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(184, 205, 224, 0.85);
+}
+
+.ar-wordmark-roger {
+  color: #fff;
+  padding-bottom: 0.2rem;
+  box-shadow: inset 0 -0.28em 0 var(--ar-sun);
+}
+
+.ar-topbar-tel {
+  text-decoration: none;
+  color: #f2f6fb;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.ar-topbar-tel-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ar-glass-200);
+}
+
+.ar-topbar-tel-num {
+  font-family: var(--ar-font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+}
+
+.ar-topbar-tel:hover .ar-topbar-tel-num { color: var(--ar-sun); }
+
+.ar-hero-inner {
+  padding: clamp(3rem, 8vw, 5.5rem) clamp(1.25rem, 5vw, 4rem) clamp(2.5rem, 5vw, 3.5rem);
+  max-width: 68rem;
+}
+
+.ar-hero-eyebrow {
+  margin: 0 0 1.2rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ar-sun);
+}
+
+/* titulek: tři řádky, které samy tmavnou jako škála fólií */
+.ar-hero-title {
+  margin: 0 0 1.4rem;
+  font-family: var(--ar-font-display);
+  font-size: clamp(2.6rem, 9vw, 6.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.ar-hero-line { display: block; }
+
+.ar-hero-line-1 { color: #ffffff; }
+.ar-hero-line-2 { color: rgba(255, 255, 255, 0.62); }
+.ar-hero-line-3 {
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(184, 205, 224, 0.75);
+}
+
+.ar-hero-sub {
+  margin: 0 0 2rem;
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: var(--ar-glass-200);
+}
+
+.ar-hero-actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+/* ---------- tlačítka ---------- */
+.ar-btn {
+  display: inline-block;
+  padding: 0.95rem 1.6rem;
+  font-family: var(--ar-font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: transform 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+
+.ar-btn-primary {
+  background: var(--ar-sun);
+  color: var(--ar-glass-900);
+}
+
+.ar-btn-primary:hover { background: #ffc94d; transform: translateY(-2px); }
+
+.ar-btn-ghost {
+  color: #f2f6fb;
+  border: 2px solid rgba(184, 205, 224, 0.5);
+}
+
+.ar-btn-ghost:hover { border-color: var(--ar-sun); color: var(--ar-sun); }
+
+/* =====================================================================
+   SIGNATURE — pás propustnosti (VLT škála 70→5 %)
+   Pět „oken" od světlého skla po limuzínovou fólii.
+   ===================================================================== */
+.ar-tintband {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 0 clamp(1.25rem, 5vw, 4rem);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(184, 205, 224, 0.28);
+}
+
+.ar-tint {
+  padding: 1.2rem 0.8rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-height: 6.5rem;
+  justify-content: flex-end;
+  transition: transform 180ms ease;
+}
+
+.ar-tint:hover { transform: translateY(-4px); }
+
+.ar-tint-vlt {
+  font-family: var(--ar-font-display);
+  font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+  line-height: 1;
+}
+
+.ar-tint-name {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+}
+
+/* odstíny: sky-to-black — jako přiložený vzorník na okno */
+.ar-tint-70 { background: #cfe0ef; color: var(--ar-glass-900); }
+.ar-tint-50 { background: #8fa9c4; color: var(--ar-glass-900); }
+.ar-tint-35 { background: #4c6584; color: #f2f6fb; }
+.ar-tint-20 { background: #263a55; color: #dbe6f1; }
+.ar-tint-5  { background: #070b13; color: #f5b62e; }
+
+.ar-tintband-note {
+  margin: 0.8rem clamp(1.25rem, 5vw, 4rem) 0;
+  font-size: 0.85rem;
+  color: var(--ar-glass-200);
+  max-width: 46rem;
+}
+
+/* ---------- animace při načtení ---------- */
+@keyframes ar-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ar-slide-in {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.ar-hero-eyebrow  { animation: ar-rise 500ms ease-out both; }
+.ar-hero-line-1   { animation: ar-rise 550ms ease-out 80ms both; }
+.ar-hero-line-2   { animation: ar-rise 550ms ease-out 180ms both; }
+.ar-hero-line-3   { animation: ar-rise 550ms ease-out 280ms both; }
+.ar-hero-sub      { animation: ar-rise 550ms ease-out 380ms both; }
+.ar-hero-actions  { animation: ar-rise 550ms ease-out 460ms both; }
+
+.ar-tint:nth-child(1) { animation: ar-slide-in 450ms ease-out 550ms both; }
+.ar-tint:nth-child(2) { animation: ar-slide-in 450ms ease-out 640ms both; }
+.ar-tint:nth-child(3) { animation: ar-slide-in 450ms ease-out 730ms both; }
+.ar-tint:nth-child(4) { animation: ar-slide-in 450ms ease-out 820ms both; }
+.ar-tint:nth-child(5) { animation: ar-slide-in 450ms ease-out 910ms both; }
+
+/* =====================================================================
+   SEKCE — společné
+   ===================================================================== */
+.ar-section {
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.ar-section-title {
+  margin: 0 0 1rem;
+  font-family: var(--ar-font-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--ar-ink);
+}
+
+.ar-section-lead {
+  margin: 0;
+  max-width: 38rem;
+  color: var(--ar-ink-soft);
+  font-size: 1.05rem;
+}
+
+.ar-section-head { margin-bottom: 2.5rem; }
+
+/* =====================================================================
+   SLUŽBY
+   ===================================================================== */
+.ar-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.1rem;
+}
+
+.ar-card {
+  background: #ffffff;
+  border: 1px solid #d5e1ec;
+  border-radius: 10px;
+  padding: 1.5rem 1.4rem;
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.ar-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--ar-glass-500);
+}
+
+.ar-card-featured {
+  grid-column: 1 / -1;
+  background: linear-gradient(140deg, var(--ar-glass-700), var(--ar-glass-900));
+  color: #f2f6fb;
+  border: none;
+  padding: 2rem 1.6rem;
+}
+
+.ar-card-featured .ar-card-title { color: #ffffff; }
+.ar-card-featured .ar-card-text { color: var(--ar-glass-200); max-width: 44rem; }
+
+.ar-card-tag {
+  margin: 0 0 0.8rem;
+  display: inline-block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ar-glass-900);
+  background: var(--ar-sun);
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.ar-card-title {
+  margin: 0 0 0.6rem;
+  font-family: var(--ar-font-display);
+  font-size: 1.1rem;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--ar-ink);
+}
+
+.ar-card-text {
+  margin: 0;
+  font-size: 0.97rem;
+  color: var(--ar-ink-soft);
+}
+
+.ar-card-meta {
+  margin: 1.1rem 0 0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ar-sun);
+}
+
+/* =====================================================================
+   DŮVĚRA / O NÁS + karta pobočky
+   ===================================================================== */
+.ar-trust {
+  background: #ffffff;
+  border-top: 1px solid #d5e1ec;
+}
+
+.ar-trust-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+.ar-trust-text {
+  margin: 0 0 1.1rem;
+  max-width: 40rem;
+  color: var(--ar-ink-soft);
+}
+
+.ar-trust-points {
+  list-style: none;
+  margin: 1.8rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.ar-trust-point {
+  padding-left: 1.1rem;
+  border-left: 4px solid var(--ar-sun);
+  color: var(--ar-ink-soft);
+}
+
+.ar-trust-point strong { color: var(--ar-ink); }
+
+/* karta pobočky — tmavé sklo */
+.ar-visit {
+  background: linear-gradient(160deg, var(--ar-glass-700), var(--ar-glass-900));
+  color: #f2f6fb;
+  border-radius: 12px;
+  padding: 1.8rem 1.6rem;
+  position: sticky;
+  top: 1.5rem;
+}
+
+.ar-visit-eyebrow {
+  margin: 0 0 0.2rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ar-sun);
+}
+
+.ar-visit-city {
+  margin: 0 0 1.2rem;
+  font-family: var(--ar-font-display);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.ar-visit-list { margin: 0 0 1.5rem; }
+
+.ar-visit-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(184, 205, 224, 0.2);
+}
+
+.ar-visit-row dt {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ar-glass-200);
+  flex-shrink: 0;
+}
+
+.ar-visit-row dd {
+  margin: 0;
+  text-align: right;
+  font-size: 0.95rem;
+}
+
+.ar-visit-row dd a {
+  color: #ffffff;
+  text-decoration: none;
+  font-family: var(--ar-font-display);
+  letter-spacing: 0.03em;
+}
+
+.ar-visit-row dd a:hover { color: var(--ar-sun); }
+
+.ar-visit-btn {
+  width: 100%;
+  text-align: center;
+}
+
+/* =====================================================================
+   RESPONZIVITA
+   ===================================================================== */
+@media (max-width: 860px) {
+  .ar-trust-grid { grid-template-columns: 1fr; }
+  .ar-visit { position: static; }
+}
+
+@media (max-width: 620px) {
+  .ar-tintband { grid-template-columns: repeat(5, 1fr); }
+  .ar-tint { padding: 0.9rem 0.4rem 0.8rem; min-height: 5.2rem; }
+  .ar-tint-name { display: none; }
+  .ar-hero-actions .ar-btn { width: 100%; text-align: center; }
+  .ar-topbar-tel-label { display: none; }
+}
+
+/* =====================================================================
+   REDUCED MOTION
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ar-hero-eyebrow,
+  .ar-hero-line-1,
+  .ar-hero-line-2,
+  .ar-hero-line-3,
+  .ar-hero-sub,
+  .ar-hero-actions,
+  .ar-tint {
+    animation: none;
+  }
+  .ar-btn,
+  .ar-card,
+  .ar-tint {
+    transition: none;
+  }
+  .ar-btn-primary:hover,
+  .ar-card:hover,
+  .ar-tint:hover {
+    transform: none;
+  }
+}
