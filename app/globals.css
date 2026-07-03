@@ -1,0 +1,562 @@
+/* =====================================================
+   MEDEA THERAPY — rehabilitace, Liberec
+   Palette (klinická, ale lidská — žádný nemocniční chlad):
+   --mt-ink      #10312E  hluboká lahvová zeleň (text)
+   --mt-paper    #F7FAF7  velmi světlá šalvějová bílá (pozadí)
+   --mt-sage     #DCE9E0  tlumená šalvěj (plochy)
+   --mt-moss     #3E7C6B  terapeutická zeleň (akcent, křivka „po")
+   --mt-clay     #C46A4A  teplá měď (jediný teplý akcent — bolest/před)
+   --mt-mist     #8FA9A0  šedozelená (sekundární text, mřížka)
+   ===================================================== */
+
+:root {
+  --mt-ink: #10312e;
+  --mt-paper: #f7faf7;
+  --mt-sage: #dce9e0;
+  --mt-moss: #3e7c6b;
+  --mt-clay: #c46a4a;
+  --mt-mist: #8fa9a0;
+
+  --mt-font-display: "Georgia", "Times New Roman", serif;
+  --mt-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  --mt-radius: 14px;
+  --mt-maxw: 72rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--mt-paper);
+  color: var(--mt-ink);
+  font-family: var(--mt-font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Viditelný focus všude */
+:focus-visible {
+  outline: 3px solid var(--mt-moss);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.mt {
+  display: block;
+}
+
+/* =========================
+   HERO
+   ========================= */
+
+.mt-hero {
+  position: relative;
+  background:
+    linear-gradient(160deg, #ffffff 0%, var(--mt-paper) 45%, var(--mt-sage) 100%);
+  overflow: hidden;
+  border-bottom: 1px solid rgba(16, 49, 46, 0.08);
+}
+
+.mt-hero-inner {
+  max-width: var(--mt-maxw);
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 0;
+}
+
+.mt-brandbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(16, 49, 46, 0.12);
+}
+
+.mt-wordmark {
+  font-family: var(--mt-font-display);
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--mt-ink);
+}
+
+.mt-wordmark-dot {
+  color: var(--mt-moss);
+  padding: 0 0.08em;
+}
+
+.mt-brandbar-loc {
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--mt-moss);
+  font-weight: 600;
+}
+
+.mt-hero-title {
+  font-family: var(--mt-font-display);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 6.4vw, 4.4rem);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  margin: 2.5rem 0 0;
+  max-width: 18ch;
+}
+
+.mt-hero-title .mt-line {
+  display: block;
+}
+
+.mt-line-3 {
+  color: var(--mt-moss);
+  font-style: italic;
+  font-size: 0.62em;
+  margin-top: 0.55em;
+  letter-spacing: 0;
+}
+
+.mt-accent-stop {
+  color: var(--mt-clay);
+}
+
+.mt-hero-lead {
+  max-width: 34rem;
+  margin: 1.5rem 0 0;
+  font-size: 1.125rem;
+  color: rgba(16, 49, 46, 0.82);
+}
+
+.mt-hero-facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem 2.5rem;
+  margin: 2.25rem 0 0;
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(16, 49, 46, 0.12);
+}
+
+.mt-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.mt-fact-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--mt-moss);
+  font-weight: 700;
+}
+
+.mt-fact-value {
+  font-size: 0.9875rem;
+  font-weight: 500;
+}
+
+/* --- Signature: křivka rozsahu pohybu --- */
+
+.mt-hero-graphic {
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.mt-rom {
+  display: block;
+  width: 100%;
+  height: clamp(150px, 26vw, 300px);
+}
+
+.mt-rom-grid {
+  stroke: rgba(143, 169, 160, 0.35);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+  fill: none;
+}
+
+.mt-rom-path {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.mt-rom-before {
+  stroke: var(--mt-clay);
+  stroke-width: 2.5;
+  stroke-dasharray: 1 9;
+  opacity: 0.85;
+}
+
+.mt-rom-after {
+  stroke: var(--mt-moss);
+  stroke-width: 4;
+  stroke-dasharray: 1500;
+  stroke-dashoffset: 1500;
+  animation: mt-draw 2.2s cubic-bezier(0.4, 0, 0.2, 1) 0.35s forwards;
+}
+
+.mt-rom-point {
+  fill: var(--mt-moss);
+  opacity: 0;
+  animation: mt-pop 0.5s ease-out 2.35s forwards;
+}
+
+@keyframes mt-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes mt-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+}
+
+.mt-rom-legend {
+  position: absolute;
+  top: 0.25rem;
+  left: 1.25rem;
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: rgba(16, 49, 46, 0.7);
+}
+
+.mt-legend-item::before {
+  content: "";
+  display: inline-block;
+  width: 1.4em;
+  height: 3px;
+  border-radius: 2px;
+  margin-right: 0.45em;
+  vertical-align: middle;
+}
+
+.mt-legend-before::before {
+  background: var(--mt-clay);
+}
+
+.mt-legend-after::before {
+  background: var(--mt-moss);
+}
+
+/* Jemný page-load rytmus textu v hero */
+.mt-line-1,
+.mt-line-2,
+.mt-line-3,
+.mt-hero-lead,
+.mt-hero-facts {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: mt-rise 0.7s ease-out forwards;
+}
+
+.mt-line-1 { animation-delay: 0.05s; }
+.mt-line-2 { animation-delay: 0.15s; }
+.mt-line-3 { animation-delay: 0.28s; }
+.mt-hero-lead { animation-delay: 0.4s; }
+.mt-hero-facts { animation-delay: 0.5s; }
+
+@keyframes mt-rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* =========================
+   SEKCE — společné
+   ========================= */
+
+.mt-section {
+  max-width: var(--mt-maxw);
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem;
+}
+
+.mt-section-head {
+  max-width: 42rem;
+  margin-bottom: 2.25rem;
+}
+
+.mt-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  color: var(--mt-moss);
+  margin-bottom: 0.65rem;
+}
+
+.mt-h2 {
+  font-family: var(--mt-font-display);
+  font-size: clamp(1.55rem, 3.6vw, 2.3rem);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* =========================
+   SLUŽBY
+   ========================= */
+
+.mt-services {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.mt-service {
+  background: #ffffff;
+  border: 1px solid rgba(16, 49, 46, 0.1);
+  border-radius: var(--mt-radius);
+  padding: 1.5rem 1.5rem 1.35rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.mt-service:hover {
+  border-color: var(--mt-moss);
+  box-shadow: 0 10px 30px -18px rgba(16, 49, 46, 0.4);
+  transform: translateY(-3px);
+}
+
+.mt-service-title {
+  font-family: var(--mt-font-display);
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem;
+}
+
+.mt-service-text {
+  margin: 0 0 1rem;
+  color: rgba(16, 49, 46, 0.82);
+  font-size: 0.9875rem;
+}
+
+.mt-service-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--mt-moss);
+  background: var(--mt-sage);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  font-weight: 600;
+}
+
+/* =========================
+   DŮVĚRA / PRŮBĚH
+   ========================= */
+
+.mt-section-trust {
+  border-top: 1px solid rgba(16, 49, 46, 0.08);
+}
+
+.mt-trust-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.mt-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: mt-step;
+}
+
+.mt-step {
+  position: relative;
+  counter-increment: mt-step;
+  padding: 0 0 1.9rem 3.4rem;
+}
+
+/* svislá „časová osa terapie" */
+.mt-step::before {
+  content: counter(mt-step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  background: var(--mt-ink);
+  color: var(--mt-paper);
+  font-family: var(--mt-font-display);
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mt-step::after {
+  content: "";
+  position: absolute;
+  left: 1.12rem;
+  top: 2.6rem;
+  bottom: 0.3rem;
+  width: 2px;
+  background: linear-gradient(var(--mt-moss), rgba(62, 124, 107, 0.15));
+}
+
+.mt-step:last-child::after {
+  display: none;
+}
+
+.mt-step-marker {
+  display: block;
+  font-family: var(--mt-font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding-top: 0.25rem;
+}
+
+.mt-step-text {
+  margin: 0.4rem 0 0;
+  color: rgba(16, 49, 46, 0.82);
+  font-size: 0.9875rem;
+  max-width: 34rem;
+}
+
+.mt-trust-card {
+  background: var(--mt-ink);
+  color: var(--mt-paper);
+  border-radius: var(--mt-radius);
+  padding: 1.75rem 1.6rem;
+  align-self: start;
+}
+
+.mt-trust-card-title {
+  font-family: var(--mt-font-display);
+  font-size: 1.35rem;
+  margin: 0 0 1rem;
+  color: #ffffff;
+}
+
+.mt-trust-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.mt-trust-list li {
+  padding-left: 1.1rem;
+  position: relative;
+  color: rgba(247, 250, 247, 0.85);
+}
+
+.mt-trust-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--mt-moss);
+}
+
+.mt-trust-list strong {
+  color: #ffffff;
+}
+
+/* =========================
+   RESPONSIVITA
+   ========================= */
+
+@media (min-width: 640px) {
+  .mt-hero-facts {
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+  }
+
+  .mt-services {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .mt-hero-inner {
+    padding-top: 2rem;
+  }
+
+  .mt-section {
+    padding: 5rem 2rem;
+  }
+
+  .mt-hero-inner {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .mt-trust-grid {
+    grid-template-columns: 1.3fr 1fr;
+    gap: 3.5rem;
+    align-items: start;
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .mt-line-1,
+  .mt-line-2,
+  .mt-line-3,
+  .mt-hero-lead,
+  .mt-hero-facts {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .mt-rom-after {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .mt-rom-point {
+    animation: none;
+    opacity: 1;
+  }
+
+  .mt-service {
+    transition: none;
+  }
+
+  .mt-service:hover {
+    transform: none;
+  }
+}
