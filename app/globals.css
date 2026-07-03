@@ -1,0 +1,541 @@
+/* ============================================================
+   VIK — tepelná technika, Hradec Králové
+   Paleta odvozená z reálného značení potrubí v ČSN:
+   žlutá = plyn, červená = topná voda, modrá = pitná voda.
+   Podklad: tmavá ocelová šeď (litina kotle), papírově bílá plocha
+   pro obsah (projekční výkres).
+   ============================================================ */
+
+:root {
+  --vk-steel: #1b2330;      /* tmavá ocel — hero, sekce důvěry */
+  --vk-steel-2: #232e3f;    /* světlejší ocel — karty na tmavé */
+  --vk-paper: #f7f8f6;      /* výkresový papír — sekce služeb */
+  --vk-ink: #202631;        /* text na světlé */
+  --vk-gas: #f2b705;        /* PLYN — žluté potrubí */
+  --vk-heat: #d94436;       /* TOPENÍ — červené potrubí */
+  --vk-water: #2f7fc1;      /* VODA — modré potrubí */
+  --vk-mist: #aab4c3;       /* tlumený text na tmavé */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--vk-steel);
+  color: var(--vk-ink);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.vk a:focus-visible,
+.vk .vk-btn:focus-visible {
+  outline: 3px solid var(--vk-gas);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ================= HERO ================= */
+
+.vk-hero {
+  position: relative;
+  background:
+    linear-gradient(160deg, #1b2330 0%, #1e2836 55%, #26221c 100%);
+  color: #fff;
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.vk-hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.vk-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55rem;
+}
+
+.vk-wordmark-main {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 1.7rem;
+  letter-spacing: 0.14em;
+  color: #fff;
+  border-bottom: 3px solid var(--vk-gas);
+  padding-bottom: 0.05em;
+}
+
+.vk-wordmark-sub {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--vk-mist);
+}
+
+.vk-hero-tel {
+  color: var(--vk-gas);
+  text-decoration: none;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.vk-hero-tel:hover {
+  text-decoration: underline;
+}
+
+.vk-hero-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3.5rem 0 2.5rem;
+}
+
+.vk-hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--vk-mist);
+}
+
+.vk-hero-title {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: clamp(3.2rem, 11vw, 7.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+}
+
+.vk-hero-title .vk-line {
+  display: block;
+}
+
+.vk-line-1 {
+  color: var(--vk-heat);
+}
+
+.vk-line-2 {
+  color: var(--vk-water);
+}
+
+.vk-line-3 {
+  color: var(--vk-gas);
+}
+
+.vk-flame {
+  color: #fff;
+}
+
+.vk-hero-lead {
+  max-width: 34em;
+  margin: 1.75rem 0 0;
+  font-size: 1.1rem;
+  color: #d9dee6;
+}
+
+.vk-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.vk-btn {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.vk-btn-solid {
+  background: var(--vk-gas);
+  color: #1b2330;
+}
+
+.vk-btn-solid:hover {
+  background: #ffc61a;
+  transform: translateY(-2px);
+}
+
+.vk-btn-ghost {
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+.vk-btn-ghost:hover {
+  border-color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ---- signature: schéma potrubních tras ---- */
+
+.vk-pipes {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-bottom: 1.25rem;
+}
+
+.vk-pipes svg {
+  display: block;
+  width: 100%;
+  height: 130px;
+}
+
+.vk-pipe {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+  animation: vk-flow 1.6s ease-out forwards;
+}
+
+.vk-pipe-heat {
+  stroke: var(--vk-heat);
+  animation-delay: 0.15s;
+}
+
+.vk-pipe-water {
+  stroke: var(--vk-water);
+  animation-delay: 0.35s;
+}
+
+.vk-pipe-gas {
+  stroke: var(--vk-gas);
+  animation-delay: 0.55s;
+}
+
+.vk-valve {
+  fill: var(--vk-steel);
+  stroke-width: 4;
+  opacity: 0;
+  animation: vk-pop 0.4s ease-out forwards;
+  animation-delay: 1.6s;
+}
+
+.vk-valve-heat { stroke: var(--vk-heat); }
+.vk-valve-water { stroke: var(--vk-water); }
+.vk-valve-gas { stroke: var(--vk-gas); }
+
+@keyframes vk-flow {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes vk-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+}
+
+.vk-pipes-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--vk-mist);
+}
+
+.vk-leg::before {
+  content: "";
+  display: inline-block;
+  width: 1.4em;
+  height: 4px;
+  border-radius: 2px;
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+
+.vk-leg-heat::before { background: var(--vk-heat); }
+.vk-leg-water::before { background: var(--vk-water); }
+.vk-leg-gas::before { background: var(--vk-gas); }
+
+/* ================= SLUŽBY ================= */
+
+.vk-sluzby {
+  background: var(--vk-paper);
+  /* jemná projekční mřížka jako z výkresu TZB */
+  background-image:
+    linear-gradient(rgba(32, 38, 49, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 38, 49, 0.045) 1px, transparent 1px);
+  background-size: 32px 32px;
+  padding: 4rem 1.25rem;
+}
+
+.vk-section-head {
+  max-width: 1100px;
+  margin: 0 auto 2.5rem;
+}
+
+.vk-section-head h2 {
+  margin: 0 0 0.75rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.vk-section-head p {
+  margin: 0;
+  max-width: 38em;
+  color: #4a5261;
+}
+
+.vk-sluzby-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.vk-karta {
+  background: #fff;
+  border: 1px solid #dfe3e0;
+  border-radius: 6px;
+  padding: 1.6rem 1.5rem;
+  border-top: 5px solid var(--vk-ink);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.vk-karta[data-medium="PLYN"] { border-top-color: var(--vk-gas); }
+.vk-karta[data-medium="TOPENÍ"] { border-top-color: var(--vk-heat); }
+.vk-karta[data-medium="VODA"] { border-top-color: var(--vk-water); }
+.vk-karta[data-medium="PROJEKCE"] { border-top-color: var(--vk-ink); }
+
+.vk-karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(27, 35, 48, 0.12);
+}
+
+.vk-karta-medium {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  color: #6a7382;
+}
+
+.vk-karta h3 {
+  margin: 0 0 0.6rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.vk-karta-popis {
+  margin: 0 0 1rem;
+  color: #4a5261;
+  font-size: 0.98rem;
+}
+
+.vk-karta-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.92rem;
+}
+
+.vk-karta-list li {
+  padding-left: 1.2em;
+  position: relative;
+  margin-top: 0.35em;
+}
+
+.vk-karta-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: #9aa3b1;
+}
+
+/* ================= DŮVĚRA ================= */
+
+.vk-duvera {
+  background: var(--vk-steel);
+  color: #eef1f5;
+  padding: 4rem 1.25rem 4.5rem;
+}
+
+.vk-section-head-inverse h2 {
+  color: #fff;
+}
+
+.vk-section-head-inverse p {
+  color: var(--vk-mist);
+}
+
+.vk-duvody {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.vk-duvod {
+  background: var(--vk-steel-2);
+  border-radius: 6px;
+  padding: 1.6rem 1.5rem;
+  border-left: 4px solid var(--vk-gas);
+}
+
+.vk-duvod:nth-child(2) {
+  border-left-color: var(--vk-heat);
+}
+
+.vk-duvod:nth-child(3) {
+  border-left-color: var(--vk-water);
+}
+
+.vk-duvod-cislo {
+  margin: 0 0 0.4rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.vk-duvod h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.vk-duvod p:last-child {
+  margin: 0;
+  color: var(--vk-mist);
+  font-size: 0.96rem;
+}
+
+.vk-vizitka {
+  max-width: 1100px;
+  margin: 2.5rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.vk-vizitka-label {
+  margin: 0 0 0.4rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--vk-mist);
+}
+
+.vk-vizitka-adresa {
+  margin: 0 0 0.3rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+.vk-vizitka-kontakt {
+  margin: 0;
+  color: var(--vk-mist);
+}
+
+.vk-vizitka-kontakt a {
+  color: var(--vk-gas);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.vk-vizitka-kontakt a:hover {
+  text-decoration: underline;
+}
+
+/* ================= RESPONSIVITA ================= */
+
+@media (min-width: 640px) {
+  .vk-sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vk-duvody {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .vk-hero {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .vk-hero-body {
+    padding: 5rem 0 3rem;
+  }
+
+  .vk-sluzby,
+  .vk-duvera {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .vk-pipes svg {
+    height: 170px;
+  }
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .vk-pipe {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .vk-valve {
+    animation: none;
+    opacity: 1;
+  }
+
+  .vk-btn,
+  .vk-karta {
+    transition: none;
+  }
+
+  .vk-btn-solid:hover,
+  .vk-btn-ghost:hover,
+  .vk-karta:hover {
+    transform: none;
+  }
+}
