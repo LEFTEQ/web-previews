@@ -1,0 +1,502 @@
+/* =====================================================
+   SANBRAVIA — autodoprava Olomouc
+   Paleta odvozená z kamionového světa:
+   asfalt / noční kabina, výstražná dopravní žluť (reflexní
+   značení návěsů), krémová plachta, ocelová šeď.
+   Typo: Archivo (široký, technický grotesk — jako popisky
+   na bocích návěsů) + systémový stack pro text.
+   Signature: „silniční pás" — přerušovaná středová čára
+   s destinacemi, která se při načtení rozjede.
+   ===================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400&family=Archivo+Narrow:wght@500;700&display=swap");
+
+:root {
+  --asfalt: #14171c;        /* noční dálnice */
+  --asfalt-2: #1d2129;      /* karta na asfaltu */
+  --zlut: #f5b800;          /* výstražná dopravní žluť */
+  --plachta: #f0ede4;       /* krémová plachta návěsu */
+  --ocel: #8b93a3;          /* ocelová šeď, sekundární text */
+  --cara: #2c313c;          /* dělicí linky */
+
+  --pismo-display: "Archivo", "Arial Black", sans-serif;
+  --pismo-uzke: "Archivo Narrow", "Arial Narrow", sans-serif;
+  --pismo-text: "Archivo", -apple-system, "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--asfalt);
+  color: var(--plachta);
+  font-family: var(--pismo-text);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sb a:focus-visible,
+.sb button:focus-visible {
+  outline: 3px solid var(--zlut);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =================== HERO =================== */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(245, 184, 0, 0.05) 0%, transparent 30%),
+    var(--asfalt);
+}
+
+.hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1;
+  font-family: var(--pismo-display);
+}
+
+.wordmark-san {
+  font-weight: 900;
+  font-size: 1.35rem;
+  letter-spacing: 0.32em;
+  color: var(--zlut);
+}
+
+.wordmark-bravia {
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.13em;
+  color: var(--plachta);
+}
+
+.wordmark-sub {
+  margin-top: 0.45rem;
+  font-family: var(--pismo-uzke);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ocel);
+}
+
+.hero-tel {
+  font-family: var(--pismo-uzke);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  color: var(--plachta);
+  text-decoration: none;
+  border-bottom: 2px solid var(--zlut);
+  padding-bottom: 2px;
+  transition: color 0.2s ease;
+}
+
+.hero-tel:hover {
+  color: var(--zlut);
+}
+
+.hero-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 68rem;
+  margin: 0 auto;
+  width: 100%;
+  padding: 3.5rem 0 3rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--pismo-uzke);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--zlut);
+  margin: 0 0 1.4rem;
+  animation: prijezd 0.7s ease both;
+}
+
+.hero-title {
+  margin: 0;
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 10vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.hero-title .line {
+  display: block;
+  animation: prijezd 0.7s ease both;
+}
+
+.hero-title .line-1 { animation-delay: 0.08s; }
+.hero-title .line-2 { animation-delay: 0.18s; }
+.hero-title .line-3 { animation-delay: 0.28s; }
+.hero-title .line-4 { animation-delay: 0.38s; }
+
+.line-accent {
+  color: var(--zlut);
+}
+
+.hero-lead {
+  max-width: 34rem;
+  margin: 1.8rem 0 0;
+  font-size: 1.1rem;
+  color: var(--ocel);
+  animation: prijezd 0.7s ease 0.5s both;
+}
+
+.hero-akce {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-top: 2.2rem;
+  animation: prijezd 0.7s ease 0.6s both;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.95rem 1.8rem;
+  font-family: var(--pismo-uzke);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: transform 0.15s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-hlavni {
+  background: var(--zlut);
+  color: var(--asfalt);
+}
+
+.btn-hlavni:hover {
+  background: #ffcb1f;
+}
+
+.btn-vedlejsi {
+  color: var(--plachta);
+  border: 2px solid var(--cara);
+}
+
+.btn-vedlejsi:hover {
+  border-color: var(--zlut);
+  color: var(--zlut);
+}
+
+/* ------- Signature: silniční pás ------- */
+
+.road {
+  position: relative;
+  margin: 0 -1.25rem;
+  border-top: 1px solid var(--cara);
+  background: #101318;
+  padding: 1.4rem 0 1.6rem;
+  overflow: hidden;
+}
+
+.road-line {
+  display: flex;
+  gap: 2.4rem;
+  width: max-content;
+  animation: jizda 14s linear infinite;
+}
+
+.road-line span {
+  display: block;
+  width: 5.5rem;
+  height: 7px;
+  background: var(--zlut);
+  border-radius: 2px;
+  flex: none;
+}
+
+.road-stops {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 1.1rem;
+  padding: 0 1.25rem;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: var(--pismo-uzke);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--ocel);
+}
+
+.stop-start {
+  color: var(--zlut);
+}
+
+@keyframes jizda {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes prijezd {
+  from {
+    opacity: 0;
+    transform: translateX(-1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* =================== SLUŽBY =================== */
+
+.sluzby {
+  padding: 5rem 1.25rem;
+  background: var(--plachta);
+  color: var(--asfalt);
+}
+
+.sekce-hlava {
+  max-width: 68rem;
+  margin: 0 auto 3rem;
+}
+
+.sekce-hlava h2 {
+  margin: 0 0 0.8rem;
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+.sekce-hlava p {
+  margin: 0;
+  max-width: 36rem;
+  color: #4b5261;
+  font-size: 1.05rem;
+}
+
+.sluzby-mriz {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: 1fr;
+}
+
+.sluzba {
+  position: relative;
+  background: #fff;
+  border: 1px solid #dcd8cb;
+  border-radius: 6px;
+  padding: 1.8rem 1.6rem 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sluzba:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(20, 23, 28, 0.12);
+}
+
+.sluzba-znacka {
+  display: inline-block;
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  background: var(--asfalt);
+  color: var(--zlut);
+  padding: 0.35rem 0.7rem;
+  border-radius: 3px;
+  margin-bottom: 1.1rem;
+}
+
+.sluzba h3 {
+  margin: 0 0 0.6rem;
+  font-family: var(--pismo-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.sluzba p {
+  margin: 0;
+  color: #4b5261;
+  font-size: 0.98rem;
+}
+
+.sluzba-detail {
+  margin-top: 1.1rem !important;
+  padding-top: 0.9rem;
+  border-top: 2px dashed var(--zlut);
+  font-family: var(--pismo-uzke);
+  font-weight: 700;
+  font-size: 0.85rem !important;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--asfalt) !important;
+}
+
+/* =================== DŮVĚRA =================== */
+
+.duvera {
+  padding: 5rem 1.25rem;
+  background: var(--asfalt);
+}
+
+.sekce-hlava-svetla h2 {
+  color: var(--plachta);
+}
+
+.sekce-hlava-svetla p {
+  color: var(--ocel);
+}
+
+.duvera-mriz {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: 1fr;
+}
+
+.duvod {
+  background: var(--asfalt-2);
+  border: 1px solid var(--cara);
+  border-radius: 6px;
+  padding: 1.8rem 1.6rem;
+}
+
+.duvod-cislo {
+  margin: 0 0 0.7rem;
+  font-family: var(--pismo-display);
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--zlut);
+  letter-spacing: 0.02em;
+}
+
+.duvod h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--pismo-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--plachta);
+}
+
+.duvod p {
+  margin: 0;
+  color: var(--ocel);
+  font-size: 0.97rem;
+}
+
+.reference {
+  max-width: 68rem;
+  margin: 3rem auto 0;
+  padding: 2rem 1.6rem;
+  border-left: 6px solid var(--zlut);
+  background: var(--asfalt-2);
+  border-radius: 0 6px 6px 0;
+}
+
+.reference p {
+  margin: 0;
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--plachta);
+}
+
+.reference-autor {
+  margin-top: 1rem;
+  font-family: var(--pismo-uzke);
+  font-style: normal;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ocel);
+}
+
+/* =================== RESPONZIVITA =================== */
+
+@media (min-width: 700px) {
+  .hero {
+    padding: 2rem 3rem 0;
+  }
+
+  .road {
+    margin: 0 -3rem;
+  }
+
+  .sluzby-mriz,
+  .duvera-mriz {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sluzby,
+  .duvera {
+    padding: 6.5rem 3rem;
+  }
+
+  .reference {
+    padding: 2.5rem 3rem;
+  }
+}
+
+/* =================== REDUCED MOTION =================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-eyebrow,
+  .hero-title .line,
+  .hero-lead,
+  .hero-akce {
+    animation: none;
+  }
+
+  .road-line {
+    animation: none;
+  }
+
+  .btn:hover,
+  .sluzba:hover {
+    transform: none;
+  }
+}
