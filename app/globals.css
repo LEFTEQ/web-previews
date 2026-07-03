@@ -1,0 +1,509 @@
+/* ============================================================
+   GENOVA spol. s r.o. — zemní práce, Ústí nad Labem
+   Koncept „Řez terénem": paleta odvozená z profilu výkopu
+   (ornice, jíl, štěrk, skála) + signální oranž stavebních strojů.
+   Typ: těžký expanded grotesk pro titulky, mono pro technická data.
+   ============================================================ */
+
+:root {
+  --gv-ornice: #3d2f24;      /* tmavá ornice — hlavní text */
+  --gv-jil: #8a6a4b;         /* okrový jíl */
+  --gv-sterk: #c9b9a3;       /* štěrkopísek — světlé plochy */
+  --gv-skala: #221f1c;       /* skalní podloží — tmavá sekce */
+  --gv-papir: #efe9df;       /* podklad — světlý papír dokumentace */
+  --gv-oranz: #e8641c;       /* signální oranž bagru — akcent */
+
+  --gv-display: "Arial Black", "Archivo Black", Haettenschweiler, Impact,
+    system-ui, sans-serif;
+  --gv-body: "Segoe UI", Roboto, "Helvetica Neue", Arial, system-ui, sans-serif;
+  --gv-mono: "IBM Plex Mono", "Cascadia Code", Consolas, "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--gv-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--gv-ornice);
+  background: var(--gv-papir);
+  -webkit-font-smoothing: antialiased;
+}
+
+.gv a:focus-visible,
+.gv button:focus-visible {
+  outline: 3px solid var(--gv-oranz);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- HERO ---------- */
+
+.gv-hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--gv-papir);
+  overflow: hidden;
+}
+
+.gv-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.25rem 1.25rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.gv-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* wordmark: tři vrstvy zeminy jako značka */
+.gv-brand-mark {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 26px;
+}
+
+.gv-brand-mark span {
+  height: 5px;
+  background: var(--gv-ornice);
+}
+
+.gv-brand-mark span:nth-child(2) {
+  background: var(--gv-jil);
+  width: 80%;
+}
+
+.gv-brand-mark span:nth-child(3) {
+  background: var(--gv-oranz);
+  width: 60%;
+}
+
+.gv-brand-name {
+  font-family: var(--gv-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.14em;
+}
+
+.gv-brand-suffix {
+  font-family: var(--gv-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--gv-jil);
+}
+
+.gv-hero-loc {
+  font-family: var(--gv-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--gv-jil);
+}
+
+.gv-hero-body {
+  position: relative;
+  z-index: 2;
+  padding: 3.5rem 1.25rem 2rem;
+  max-width: 62rem;
+}
+
+.gv-eyebrow {
+  font-family: var(--gv-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--gv-oranz);
+  margin-bottom: 1.1rem;
+}
+
+.gv-hero-title {
+  font-family: var(--gv-display);
+  font-size: clamp(2.6rem, 10vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+}
+
+.gv-hero-title .gv-line {
+  display: block;
+}
+
+.gv-hero-title em {
+  font-style: normal;
+  color: var(--gv-oranz);
+  position: relative;
+}
+
+.gv-hero-sub {
+  max-width: 34rem;
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+.gv-hero-cta {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+}
+
+.gv-btn {
+  display: inline-block;
+  font-family: var(--gv-display);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #fff;
+  background: var(--gv-oranz);
+  padding: 0.95rem 1.8rem;
+  text-decoration: none;
+  border: 2px solid var(--gv-oranz);
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.gv-btn:hover {
+  background: transparent;
+  color: var(--gv-oranz);
+}
+
+.gv-hero-note {
+  font-family: var(--gv-mono);
+  font-size: 0.78rem;
+  color: var(--gv-jil);
+}
+
+/* ---------- SIGNATURE: vrstvy zeminy (geologický profil) ---------- */
+
+.gv-strata {
+  position: relative;
+  margin-top: auto;
+  height: clamp(160px, 26vh, 260px);
+}
+
+.gv-stratum {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding: 0.4rem 1.25rem;
+  transform-origin: bottom;
+  animation: gv-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.gv-s1 { height: 18%; background: var(--gv-ornice); animation-delay: 0.15s; }
+.gv-s2 { height: 24%; background: var(--gv-jil); animation-delay: 0.3s; }
+.gv-s3 {
+  height: 28%;
+  background: var(--gv-sterk);
+  animation-delay: 0.45s;
+  /* tečkovaná textura štěrku */
+  background-image: radial-gradient(circle at 4px 4px, rgba(61, 47, 36, 0.28) 1.5px, transparent 1.6px);
+  background-size: 18px 14px;
+}
+.gv-s4 { height: 30%; background: var(--gv-skala); animation-delay: 0.6s; }
+
+.gv-stratum-label {
+  font-family: var(--gv-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(239, 233, 223, 0.85);
+}
+
+.gv-s3 .gv-stratum-label {
+  color: var(--gv-ornice);
+}
+
+/* diagonála svahu výkopu proříznutá vrstvami */
+.gv-cut {
+  position: absolute;
+  top: -12px;
+  right: 8%;
+  width: 4px;
+  height: calc(100% + 12px);
+  background: var(--gv-oranz);
+  transform: rotate(18deg);
+  transform-origin: bottom center;
+  animation: gv-cut-in 0.8s ease 0.8s both;
+}
+
+@keyframes gv-rise {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes gv-cut-in {
+  from { clip-path: inset(100% 0 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+/* ---------- SEKCE: SLUŽBY ---------- */
+
+.gv-sluzby {
+  padding: 4.5rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.gv-section-head {
+  max-width: 44rem;
+  margin-bottom: 2.8rem;
+}
+
+.gv-section-head h2 {
+  font-family: var(--gv-display);
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.gv-sluzby-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+
+.gv-karta {
+  background: #fff;
+  border: 1px solid rgba(61, 47, 36, 0.15);
+  border-left: 5px solid var(--gv-oranz);
+  padding: 1.4rem 1.4rem 1.5rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.gv-karta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(61, 47, 36, 0.12);
+}
+
+.gv-karta-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.7rem;
+}
+
+.gv-karta-kod {
+  font-family: var(--gv-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  color: var(--gv-oranz);
+}
+
+.gv-karta-hloubka {
+  font-family: var(--gv-mono);
+  font-size: 0.72rem;
+  color: var(--gv-jil);
+  border: 1px solid rgba(138, 106, 75, 0.4);
+  padding: 0.1rem 0.5rem;
+}
+
+.gv-karta h3 {
+  font-family: var(--gv-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.gv-karta p {
+  font-size: 0.95rem;
+  color: rgba(61, 47, 36, 0.85);
+}
+
+/* strojní park — řádkový seznam jako technická tabulka */
+.gv-stroje {
+  margin-top: 3rem;
+  border-top: 3px solid var(--gv-ornice);
+  padding-top: 1.4rem;
+}
+
+.gv-stroje-title {
+  font-family: var(--gv-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--gv-jil);
+  margin-bottom: 1rem;
+}
+
+.gv-stroje ul {
+  list-style: none;
+}
+
+.gv-stroje li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px dashed rgba(61, 47, 36, 0.25);
+}
+
+.gv-stroje strong {
+  font-family: var(--gv-display);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+}
+
+.gv-stroje span {
+  font-family: var(--gv-mono);
+  font-size: 0.78rem;
+  color: var(--gv-jil);
+}
+
+/* ---------- SEKCE: DŮVĚRA (tmavé podloží) ---------- */
+
+.gv-duvera {
+  background: var(--gv-skala);
+  color: var(--gv-papir);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.gv-duvera > * {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gv-section-head-inverse {
+  margin-bottom: 2.8rem;
+}
+
+.gv-section-head-inverse h2 {
+  color: var(--gv-papir);
+}
+
+.gv-eyebrow-light {
+  color: var(--gv-oranz);
+}
+
+.gv-duvera-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 3.2rem;
+}
+
+.gv-duvera-cislo {
+  display: block;
+  font-family: var(--gv-display);
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  color: var(--gv-oranz);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.gv-duvera-item h3 {
+  font-family: var(--gv-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.6rem;
+  color: var(--gv-sterk);
+}
+
+.gv-duvera-item p {
+  font-size: 0.95rem;
+  color: rgba(239, 233, 223, 0.8);
+  max-width: 26rem;
+}
+
+.gv-reference {
+  border-left: 5px solid var(--gv-oranz);
+  padding-left: 1.4rem;
+}
+
+.gv-reference blockquote {
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--gv-papir);
+  max-width: 40rem;
+  margin-bottom: 0.8rem;
+}
+
+.gv-reference figcaption {
+  font-family: var(--gv-mono);
+  font-size: 0.78rem;
+  color: var(--gv-jil);
+}
+
+/* ---------- RESPONSIVITA ---------- */
+
+@media (min-width: 640px) {
+  .gv-sluzby-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gv-stroje li {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .gv-hero-top,
+  .gv-hero-body {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .gv-hero-body {
+    padding-top: 5rem;
+  }
+
+  .gv-stratum {
+    padding-left: 4rem;
+  }
+
+  .gv-sluzby,
+  .gv-duvera {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .gv-duvera-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+/* ---------- MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .gv-stratum,
+  .gv-cut {
+    animation: none;
+  }
+
+  .gv-karta,
+  .gv-btn {
+    transition: none;
+  }
+
+  .gv-karta:hover {
+    transform: none;
+  }
+}
