@@ -1,0 +1,517 @@
+/* =====================================================
+   FLEXISTAV s.r.o. — výškové a stavební práce, Brno
+   Paleta: beton, vápno, výstražná oranž lezecké výbavy,
+   nebe nad fasádou. Signature: svislé lano s uzly.
+   ===================================================== */
+
+:root {
+  --beton: #2b2e33;        /* tmavý beton — text, plochy */
+  --beton-hloub: #1e2126;  /* stín pod římsou */
+  --vapno: #eef0ec;        /* vápenný štuk — pozadí */
+  --vapno-svetle: #f7f8f5;
+  --oranz: #e8641b;        /* lano / výstražná vesta */
+  --oranz-tmava: #c24f0f;
+  --nebe: #a8c3d4;         /* nebe odražené v okně */
+  --sedy-text: #565b63;
+
+  --font-display: "Arial Black", "Archivo Black", Futura, "Helvetica Neue", Arial, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-util: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--beton);
+  background: var(--vapno);
+  -webkit-font-smoothing: antialiased;
+}
+
+.fx a:focus-visible,
+.fx :focus-visible {
+  outline: 3px solid var(--oranz);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =================== HERO =================== */
+
+.hero {
+  position: relative;
+  background: var(--beton);
+  color: var(--vapno-svetle);
+  padding: 1.5rem 1.25rem 4rem;
+  overflow: hidden;
+  /* jemná textura hrubé omítky */
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, #33373d 0%, var(--beton) 45%, var(--beton-hloub) 100%);
+  background-size: 5px 5px, 100% 100%;
+}
+
+/* --- signature: lano s uzly, spuštěné shora --- */
+.hero-rope {
+  position: absolute;
+  top: 0;
+  right: 12%;
+  bottom: 0;
+  width: 4px;
+  pointer-events: none;
+}
+
+.rope-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: repeating-linear-gradient(
+    -35deg,
+    var(--oranz) 0 6px,
+    var(--oranz-tmava) 6px 12px
+  );
+  transform-origin: top center;
+  animation: ropeDrop 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rope-knot {
+  position: absolute;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--oranz);
+  box-shadow: 0 0 0 3px var(--beton), 0 0 0 5px rgba(232, 100, 27, 0.35);
+  transform: translateX(-50%) scale(1);
+  animation: knotIn 0.4s ease-out both;
+}
+
+.rope-knot.k1 { top: 22%; animation-delay: 0.7s; }
+.rope-knot.k2 { top: 48%; animation-delay: 0.85s; }
+.rope-knot.k3 { top: 74%; animation-delay: 1s; }
+
+.rope-karabina {
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  width: 22px;
+  height: 34px;
+  border: 4px solid var(--oranz);
+  border-radius: 11px / 15px;
+  transform: translateX(-50%);
+  animation: knotIn 0.45s ease-out 1.15s both;
+}
+
+@keyframes ropeDrop {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes knotIn {
+  from { opacity: 0; transform: translateX(-50%) scale(0.3); }
+  to { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+.hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.wm-flexi {
+  color: var(--vapno-svetle);
+}
+
+.wm-stav {
+  color: var(--oranz);
+  border-bottom: 4px solid var(--oranz);
+  padding-bottom: 2px;
+}
+
+.hero-loc {
+  font-family: var(--font-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--nebe);
+  text-transform: uppercase;
+}
+
+.hero-body {
+  position: relative;
+  z-index: 1;
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-util);
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--oranz);
+  margin-bottom: 1.25rem;
+  animation: riseIn 0.7s ease-out 0.15s both;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 10vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.75rem;
+}
+
+.ht-line {
+  display: block;
+  animation: riseIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ht-1 { animation-delay: 0.25s; }
+.ht-2 {
+  animation-delay: 0.4s;
+  padding-left: clamp(1rem, 6vw, 5rem); /* fasáda uskočená jako římsa */
+}
+.ht-3 {
+  animation-delay: 0.55s;
+  padding-left: clamp(2rem, 12vw, 10rem);
+}
+
+.ht-3 em {
+  font-style: normal;
+  color: var(--oranz);
+  text-shadow: 0 6px 0 rgba(0, 0, 0, 0.35);
+}
+
+.hero-sub {
+  max-width: 34rem;
+  font-size: 1.15rem;
+  color: #c9cdd2;
+  margin-bottom: 2.5rem;
+  animation: riseIn 0.7s ease-out 0.7s both;
+}
+
+.hero-sub strong {
+  color: var(--vapno-svetle);
+}
+
+.hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 2.5rem;
+  animation: riseIn 0.7s ease-out 0.85s both;
+}
+
+.fact {
+  border-left: 4px solid var(--oranz);
+  padding-left: 0.85rem;
+}
+
+.fact-num {
+  display: block;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.fact-label {
+  display: block;
+  font-family: var(--font-util);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  color: var(--nebe);
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =================== SLUŽBY =================== */
+
+.sluzby {
+  padding: 4rem 1.25rem 4.5rem;
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+.section-head {
+  max-width: 40rem;
+  margin-bottom: 3rem;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: clamp(1.7rem, 5vw, 2.6rem);
+  line-height: 1.05;
+  margin-bottom: 0.85rem;
+}
+
+.section-head p {
+  color: var(--sedy-text);
+  font-size: 1.05rem;
+}
+
+.sluzby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.col-title {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid var(--beton);
+}
+
+.col-mark {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+/* uzel — kroužek lana */
+.col-mark--rope {
+  border-radius: 50%;
+  border: 5px solid var(--oranz);
+}
+
+/* cihla — obdélník betonu */
+.col-mark--zem {
+  height: 12px;
+  background: var(--beton);
+}
+
+.sluzby-list {
+  list-style: none;
+}
+
+.sluzba {
+  padding: 1.1rem 0 1.1rem 1.1rem;
+  border-left: 3px solid #d4d7d0;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.sluzba + .sluzba {
+  border-top: 1px solid #dcdfd8;
+}
+
+.sluzba:hover {
+  border-left-color: var(--oranz);
+  background: var(--vapno-svetle);
+}
+
+.sluzba h4 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.3rem;
+}
+
+.sluzba p {
+  color: var(--sedy-text);
+  font-size: 0.98rem;
+}
+
+.zelena {
+  margin-top: 2rem;
+  padding: 1.1rem 1.25rem;
+  background: #e3ead9;
+  border-left: 4px solid #5c7a3d;
+  font-size: 0.98rem;
+}
+
+.zelena strong {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #3e5527;
+}
+
+/* =================== REFERENCE =================== */
+
+.refs {
+  background: var(--beton);
+  color: var(--vapno-svetle);
+  padding: 4rem 1.25rem 4.5rem;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 5px 5px;
+}
+
+.refs .section-head,
+.refs-list,
+.refs-note {
+  max-width: 68rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.refs .section-head {
+  margin-bottom: 2.5rem;
+}
+
+.section-head--light p {
+  color: #b8bdc4;
+}
+
+.refs-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid #454a51;
+  margin-bottom: 2.5rem;
+}
+
+.ref {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.9rem 0.25rem;
+  border-bottom: 1px solid #454a51;
+  transition: background-color 0.25s ease;
+}
+
+.ref:hover {
+  background: rgba(232, 100, 27, 0.08);
+}
+
+.ref-where {
+  font-family: var(--font-util);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--oranz);
+}
+
+.ref-what {
+  font-size: 1.02rem;
+}
+
+.refs-note {
+  color: #c9cdd2;
+  font-size: 1.05rem;
+  max-width: 44rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.refs-tel {
+  font-family: var(--font-display);
+  color: var(--oranz);
+  text-decoration: none;
+  border-bottom: 3px solid var(--oranz);
+  padding-bottom: 1px;
+  white-space: nowrap;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.refs-tel:hover {
+  color: var(--vapno-svetle);
+  border-color: var(--vapno-svetle);
+}
+
+/* =================== RESPONSIVE =================== */
+
+@media (min-width: 700px) {
+  .hero {
+    padding: 2rem 3rem 5.5rem;
+  }
+
+  .sluzby-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+  }
+
+  .refs-list {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 3rem;
+  }
+
+  .ref {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 1.25rem;
+  }
+
+  .ref-where {
+    flex: 0 0 15rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .hero {
+    padding: 2.5rem 4rem 6.5rem;
+  }
+
+  .hero-rope {
+    right: 16%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-rope {
+    right: 8%;
+  }
+}
+
+/* =================== MOTION =================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rope-line,
+  .rope-knot,
+  .rope-karabina,
+  .hero-eyebrow,
+  .ht-line,
+  .hero-sub,
+  .hero-facts {
+    animation: none;
+  }
+
+  .sluzba,
+  .ref,
+  .refs-tel {
+    transition: none;
+  }
+}
