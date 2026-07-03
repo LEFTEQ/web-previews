@@ -1,0 +1,528 @@
+/* ============================================================
+   MARKTRANS s.r.o. — autodoprava, Libochovany / Ústí nad Labem
+   Paleta odvozená z řemesla: reflexní výstražná žluť nákladních
+   vozů + asfaltová čerň + betonově světlé pozadí + brzdová červeň.
+   Signature: „krajnice" — přerušovaná vodicí čára s kilometrovníkem.
+   ============================================================ */
+
+:root {
+  --mk-asphalt: #1b1d21;      /* asfalt — hlavní tmavá */
+  --mk-asphalt-2: #26292f;    /* asfalt světlejší */
+  --mk-signal: #ffc400;       /* reflexní žluť — návěsy, značení */
+  --mk-concrete: #eef0f2;     /* beton — světlé pozadí */
+  --mk-chalk: #f8f9fa;        /* křída/bílá */
+  --mk-brake: #d5341f;        /* brzdová červeň — akcent, jen tečka */
+  --mk-ink-soft: #4a4e56;     /* šedý text na světlé */
+  --mk-max: 1120px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--mk-concrete);
+  color: var(--mk-asphalt);
+  font-family: "Barlow", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mk a { color: inherit; }
+
+.mk :is(a, button):focus-visible {
+  outline: 3px solid var(--mk-brake);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.mk-hero {
+  background: var(--mk-asphalt);
+  color: var(--mk-chalk);
+  padding: 1.25rem 1.25rem 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* jemná textura vozovky */
+.mk-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1200px 500px at 85% -10%, rgba(255, 196, 0, 0.09), transparent 60%),
+    radial-gradient(800px 400px at 0% 110%, rgba(255, 255, 255, 0.04), transparent 60%);
+  pointer-events: none;
+}
+
+.mk-hero-top {
+  max-width: var(--mk-max);
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.5rem;
+  position: relative;
+}
+
+/* Wordmark — MARK v žlutém "registračním" štítku, TRANS obrys */
+.mk-wordmark {
+  display: grid;
+  gap: 0.3rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.mk-wordmark-mark {
+  display: inline-block;
+  width: max-content;
+  background: var(--mk-signal);
+  color: var(--mk-asphalt);
+  padding: 0.28em 0.45em 0.22em;
+  font-size: 1.35rem;
+  border-radius: 3px;
+  border: 2px solid var(--mk-asphalt-2);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+.mk-wordmark-trans {
+  font-size: 1.35rem;
+  color: transparent;
+  -webkit-text-stroke: 1.2px var(--mk-chalk);
+  padding-left: 0.1em;
+}
+
+.mk-wordmark-sub {
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(248, 249, 250, 0.65);
+}
+
+.mk-hero-phone {
+  text-decoration: none;
+  text-align: right;
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  transition: background-color 160ms ease;
+}
+
+.mk-hero-phone:hover { background: rgba(255, 196, 0, 0.12); }
+
+.mk-hero-phone-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--mk-signal);
+}
+
+.mk-hero-phone-num {
+  font-weight: 700;
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.mk-hero-body {
+  max-width: var(--mk-max);
+  margin: 0 auto;
+  padding: 3.5rem 0 3rem;
+  position: relative;
+}
+
+.mk-hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--mk-signal);
+}
+
+/* Titulek: kondenzovaný, stoupavý jako řazení rychlostí */
+.mk-hero-title {
+  margin: 0 0 1.5rem;
+  font-family: "Barlow Condensed", "Arial Narrow", "Barlow", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(3rem, 11vw, 7.5rem);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  display: grid;
+}
+
+.mk-hero-line { display: block; }
+
+.mk-hero-line-1 { color: rgba(248, 249, 250, 0.38); }
+.mk-hero-line-2 { color: rgba(248, 249, 250, 0.72); }
+.mk-hero-line-3 { color: var(--mk-signal); }
+
+.mk-dot { color: var(--mk-brake); }
+
+@keyframes mk-rise {
+  from { opacity: 0; transform: translateY(0.5em); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.mk-hero-line-1 { animation: mk-rise 500ms ease-out both; }
+.mk-hero-line-2 { animation: mk-rise 500ms ease-out 130ms both; }
+.mk-hero-line-3 { animation: mk-rise 500ms ease-out 260ms both; }
+
+.mk-hero-lead {
+  margin: 0 0 2rem;
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: rgba(248, 249, 250, 0.85);
+  animation: mk-rise 500ms ease-out 400ms both;
+}
+
+.mk-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  animation: mk-rise 500ms ease-out 500ms both;
+}
+
+.mk-btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  transition: transform 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+
+.mk-btn:hover { transform: translateY(-2px); }
+
+.mk-btn-primary {
+  background: var(--mk-signal);
+  color: var(--mk-asphalt);
+}
+
+.mk-btn-primary:hover { background: #ffd23d; }
+
+.mk-btn-ghost {
+  border-color: rgba(248, 249, 250, 0.4);
+  color: var(--mk-chalk);
+}
+
+.mk-btn-ghost:hover {
+  border-color: var(--mk-signal);
+  color: var(--mk-signal);
+}
+
+/* ---- Signature: krajnice s kilometrovníkem ---- */
+
+.mk-road {
+  max-width: var(--mk-max);
+  margin: 0 auto;
+  padding: 1.5rem 0 2rem;
+  position: relative;
+}
+
+.mk-road-line {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  overflow: hidden;
+  border-top: 3px solid rgba(248, 249, 250, 0.15);
+  padding-top: 0.9rem;
+}
+
+.mk-road-dash {
+  flex: 1 0 auto;
+  height: 6px;
+  min-width: 3rem;
+  background: var(--mk-signal);
+  border-radius: 3px;
+  animation: mk-dash-in 700ms ease-out both;
+}
+
+.mk-road-dash:nth-child(2) { animation-delay: 80ms; }
+.mk-road-dash:nth-child(3) { animation-delay: 160ms; }
+.mk-road-dash:nth-child(4) { animation-delay: 240ms; }
+.mk-road-dash:nth-child(5) { animation-delay: 320ms; }
+.mk-road-dash:nth-child(6) { animation-delay: 400ms; }
+.mk-road-dash:nth-child(7) { animation-delay: 480ms; }
+.mk-road-dash:nth-child(8) { animation-delay: 560ms; }
+
+@keyframes mk-dash-in {
+  from { transform: translateX(-120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.mk-road-stops {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(248, 249, 250, 0.6);
+  font-variant-numeric: tabular-nums;
+}
+
+.mk-road-stop b {
+  color: var(--mk-signal);
+  font-weight: 700;
+  margin-right: 0.35em;
+}
+
+/* ============ SEKCE OBECNĚ ============ */
+
+.mk-section {
+  padding: 4.5rem 1.25rem;
+}
+
+.mk-section-head {
+  max-width: var(--mk-max);
+  margin: 0 auto 2.5rem;
+}
+
+.mk-section-title {
+  margin: 0 0 0.6rem;
+  font-family: "Barlow Condensed", "Arial Narrow", "Barlow", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  line-height: 1.05;
+}
+
+.mk-section-title::after {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: 5px;
+  margin-top: 0.7rem;
+  background: var(--mk-signal);
+  border-radius: 3px;
+}
+
+.mk-section-note {
+  margin: 1rem 0 0;
+  max-width: 32rem;
+  color: var(--mk-ink-soft);
+}
+
+/* ============ SLUŽBY ============ */
+
+.mk-cards {
+  max-width: var(--mk-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+
+.mk-card {
+  background: var(--mk-chalk);
+  border-radius: 6px;
+  padding: 1.6rem 1.5rem 1.4rem;
+  border: 1px solid #dde0e4;
+  border-top: 5px solid var(--mk-asphalt);
+  display: flex;
+  flex-direction: column;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-top-color 180ms ease;
+}
+
+.mk-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(27, 29, 33, 0.12);
+  border-top-color: var(--mk-signal);
+}
+
+/* "SPZ" štítek tonáže */
+.mk-card-plate {
+  align-self: flex-start;
+  background: var(--mk-signal);
+  color: var(--mk-asphalt);
+  font-weight: 800;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3em 0.7em;
+  border-radius: 3px;
+  border: 1.5px solid var(--mk-asphalt);
+  margin-bottom: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.mk-card-title {
+  margin: 0 0 0.6rem;
+  font-family: "Barlow Condensed", "Arial Narrow", "Barlow", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  line-height: 1.1;
+}
+
+.mk-card-text {
+  margin: 0 0 1.2rem;
+  color: var(--mk-ink-soft);
+  font-size: 0.98rem;
+  flex: 1;
+}
+
+.mk-card-meta {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mk-asphalt);
+  border-top: 1px dashed #c9ccd1;
+  padding-top: 0.8rem;
+}
+
+/* ============ O NÁS ============ */
+
+.mk-about {
+  background: var(--mk-asphalt);
+  color: var(--mk-chalk);
+}
+
+.mk-section-title-light { color: var(--mk-chalk); }
+
+.mk-about-grid {
+  max-width: var(--mk-max);
+  margin: 0 auto 3rem;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.mk-about-text {
+  margin: 0 0 1.1rem;
+  color: rgba(248, 249, 250, 0.85);
+  max-width: 36rem;
+}
+
+.mk-facts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(248, 249, 250, 0.15);
+  border: 1px solid rgba(248, 249, 250, 0.15);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.mk-fact {
+  background: var(--mk-asphalt-2);
+  padding: 1.1rem 1.2rem;
+}
+
+.mk-fact-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mk-signal);
+  margin-bottom: 0.25rem;
+}
+
+.mk-fact-value {
+  margin: 0;
+  font-family: "Barlow Condensed", "Arial Narrow", "Barlow", sans-serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.mk-quotes {
+  max-width: var(--mk-max);
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.mk-quote {
+  border-left: 4px solid var(--mk-signal);
+  padding: 0.4rem 0 0.4rem 1.2rem;
+}
+
+.mk-quote-text {
+  margin: 0 0 0.7rem;
+  font-size: 0.98rem;
+  color: rgba(248, 249, 250, 0.9);
+}
+
+.mk-quote-who {
+  margin: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(248, 249, 250, 0.55);
+}
+
+/* ============ RESPONZIVITA ============ */
+
+@media (max-width: 860px) {
+  .mk-about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .mk-quotes { grid-template-columns: 1fr; }
+  .mk-road-stop:nth-child(4) { display: none; }
+}
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+
+  .mk-hero-body { padding: 2.5rem 0 2rem; }
+
+  .mk-hero-phone-label { display: none; }
+
+  .mk-hero-actions .mk-btn {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+
+  .mk-section { padding: 3rem 1.25rem; }
+
+  .mk-road-dash:nth-child(n + 5) { display: none; }
+  .mk-road-stop:nth-child(3) { display: none; }
+
+  .mk-facts { grid-template-columns: 1fr 1fr; }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .mk-hero-line-1,
+  .mk-hero-line-2,
+  .mk-hero-line-3,
+  .mk-hero-lead,
+  .mk-hero-actions,
+  .mk-road-dash {
+    animation: none;
+  }
+
+  .mk-btn,
+  .mk-card,
+  .mk-hero-phone {
+    transition: none;
+  }
+
+  .mk-btn:hover,
+  .mk-card:hover {
+    transform: none;
+  }
+}
