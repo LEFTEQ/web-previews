@@ -1,0 +1,576 @@
+/* ============================================================
+   Lékárna METRO Petřiny — návrh nového webu
+   Koncept: lékárna jako stanice. Zelená linka lékárenského
+   kříže se potkává se zelenou linkou metra A. Signature prvek:
+   staniční tabule s otevírací dobou + linka se zastávkami.
+   ============================================================ */
+
+:root {
+  --pk-mint: #eaf6ef;        /* světlé pozadí — dlaždice stanice */
+  --pk-paper: #ffffff;
+  --pk-pine: #0e5c3f;        /* hluboká lékárenská zelená */
+  --pk-metro: #1fa06a;       /* zelená linky A / kříže */
+  --pk-ink: #10241b;         /* text */
+  --pk-signal: #f2b705;      /* signální žlutá — bezpečnostní pás nástupiště */
+  --pk-board: #0b1f17;       /* tmavá staniční tabule */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--pk-mint);
+  color: var(--pk-ink);
+  font-family: "Gill Sans", "Gill Sans MT", "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pk a:focus-visible,
+.pk button:focus-visible {
+  outline: 3px solid var(--pk-signal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.pk-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===================== HERO ===================== */
+
+.pk-hero {
+  position: relative;
+  background:
+    linear-gradient(160deg, var(--pk-mint) 0%, #ddf0e5 55%, #d2ebdc 100%);
+  padding: 1.5rem 1.25rem 7.5rem;
+  overflow: hidden;
+}
+
+.pk-hero-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.pk-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 3rem;
+}
+
+.pk-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  color: var(--pk-pine);
+}
+
+.pk-wordmark strong {
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+/* Miniaturní lékárenský kříž složený ze dvou pruhů */
+.pk-wordmark-cross {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  flex: none;
+}
+
+.pk-wordmark-cross span {
+  position: absolute;
+  background: var(--pk-metro);
+  border-radius: 3px;
+}
+
+.pk-wordmark-cross span:first-child {
+  left: 9px;
+  top: 0;
+  width: 8px;
+  height: 26px;
+}
+
+.pk-wordmark-cross span:last-child {
+  top: 9px;
+  left: 0;
+  height: 8px;
+  width: 26px;
+}
+
+.pk-topbar-note {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--pk-pine);
+  opacity: 0.75;
+}
+
+.pk-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.pk-hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--pk-metro);
+  font-weight: 700;
+  animation: pk-rise 0.7s ease both;
+}
+
+.pk-hero-title {
+  margin: 0 0 1.25rem;
+  font-size: clamp(2.9rem, 9vw, 5.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+  color: var(--pk-pine);
+  text-wrap: balance;
+  animation: pk-rise 0.7s 0.08s ease both;
+}
+
+.pk-hero-title em {
+  font-style: normal;
+  color: var(--pk-metro);
+  position: relative;
+}
+
+.pk-hero-title em::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.04em;
+  height: 0.09em;
+  background: var(--pk-signal);
+  border-radius: 999px;
+}
+
+.pk-hero-lead {
+  margin: 0 0 2rem;
+  max-width: 34rem;
+  font-size: 1.15rem;
+  animation: pk-rise 0.7s 0.16s ease both;
+}
+
+.pk-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  animation: pk-rise 0.7s 0.24s ease both;
+}
+
+.pk-btn {
+  display: inline-block;
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.pk-btn-solid {
+  background: var(--pk-pine);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(14, 92, 63, 0.28);
+}
+
+.pk-btn-solid:hover {
+  background: var(--pk-metro);
+  transform: translateY(-2px);
+}
+
+.pk-btn-ghost {
+  border: 2px solid var(--pk-pine);
+  color: var(--pk-pine);
+}
+
+.pk-btn-ghost:hover {
+  background: rgba(14, 92, 63, 0.08);
+  transform: translateY(-2px);
+}
+
+/* --- Staniční tabule s otevírací dobou --- */
+
+.pk-board {
+  background: var(--pk-board);
+  color: #d9f4e6;
+  border-radius: 14px;
+  padding: 1.4rem 1.5rem 1.2rem;
+  box-shadow: 0 20px 40px rgba(11, 31, 23, 0.3);
+  border-top: 6px solid var(--pk-signal);
+  max-width: 26rem;
+  animation: pk-rise 0.7s 0.3s ease both;
+}
+
+.pk-board-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.pk-board-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--pk-metro);
+  flex: none;
+  animation: pk-blink 2.4s ease-in-out infinite;
+}
+
+.pk-board-station {
+  font-size: 0.8rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #8fd9b6;
+}
+
+.pk-board-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.pk-board-table th,
+.pk-board-table td {
+  padding: 0.45rem 0;
+  border-bottom: 1px dashed rgba(143, 217, 182, 0.25);
+  font-size: 1rem;
+}
+
+.pk-board-table th {
+  text-align: left;
+  font-weight: 500;
+  color: #b8e8d0;
+}
+
+.pk-board-table td {
+  text-align: right;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+.pk-board-closed th,
+.pk-board-closed td {
+  color: rgba(184, 232, 208, 0.45);
+  font-weight: 500;
+}
+
+.pk-board-foot {
+  margin: 0.9rem 0 0;
+  font-size: 0.85rem;
+  color: #8fd9b6;
+}
+
+/* --- Linka metra se zastávkami --- */
+
+.pk-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 3.4rem;
+  height: 6px;
+  background: var(--pk-metro);
+}
+
+.pk-line-stop {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.pk-line-stop i {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  border: 4px solid var(--pk-pine);
+  display: block;
+}
+
+.pk-line-stop--here i {
+  width: 22px;
+  height: 22px;
+  border-color: var(--pk-signal);
+  background: var(--pk-pine);
+}
+
+.pk-line-stop b {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--pk-pine);
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.pk-line-stop--past b {
+  opacity: 0.55;
+  font-weight: 500;
+}
+
+/* ===================== SEKCE ===================== */
+
+.pk-section {
+  padding: 4.5rem 1.25rem;
+  background: var(--pk-paper);
+}
+
+.pk-section--deep {
+  background: var(--pk-mint);
+}
+
+.pk-section-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.pk-section-head {
+  max-width: 42rem;
+  margin-bottom: 2.75rem;
+}
+
+.pk-section-title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.9rem, 4.5vw, 2.7rem);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--pk-pine);
+}
+
+.pk-section-lead {
+  margin: 0;
+  font-size: 1.1rem;
+  color: rgba(16, 36, 27, 0.78);
+}
+
+/* --- Služby --- */
+
+.pk-services {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.pk-service {
+  background: var(--pk-mint);
+  border-radius: 14px;
+  padding: 1.5rem 1.5rem 1.4rem;
+  border-left: 5px solid var(--pk-metro);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.pk-service:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(14, 92, 63, 0.14);
+}
+
+.pk-service-code {
+  display: inline-block;
+  background: var(--pk-pine);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  margin-bottom: 0.85rem;
+}
+
+.pk-service-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--pk-ink);
+}
+
+.pk-service-text {
+  margin: 0;
+  font-size: 1rem;
+  color: rgba(16, 36, 27, 0.8);
+}
+
+/* --- Důvěra --- */
+
+.pk-trust {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2.75rem;
+}
+
+.pk-trust-card {
+  background: var(--pk-paper);
+  border-radius: 14px;
+  padding: 1.6rem 1.5rem;
+  box-shadow: 0 10px 24px rgba(14, 92, 63, 0.08);
+}
+
+.pk-trust-label {
+  margin: 0 0 0.6rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  color: var(--pk-metro);
+}
+
+.pk-trust-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--pk-pine);
+}
+
+.pk-trust-text {
+  margin: 0;
+  color: rgba(16, 36, 27, 0.8);
+}
+
+.pk-quote {
+  margin: 0;
+  padding: 1.75rem 1.75rem 1.6rem;
+  background: var(--pk-board);
+  color: #eafaf1;
+  border-radius: 14px;
+  border-left: 6px solid var(--pk-signal);
+}
+
+.pk-quote p {
+  margin: 0 0 0.75rem;
+  font-size: 1.2rem;
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+.pk-quote footer {
+  font-size: 0.9rem;
+  color: #8fd9b6;
+}
+
+/* ===================== ANIMACE ===================== */
+
+@keyframes pk-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pk-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .pk-hero-eyebrow,
+  .pk-hero-title,
+  .pk-hero-lead,
+  .pk-hero-actions,
+  .pk-board {
+    animation: none;
+  }
+
+  .pk-board-dot {
+    animation: none;
+  }
+
+  .pk-btn,
+  .pk-service {
+    transition: none;
+  }
+}
+
+/* ===================== RESPONZIVITA ===================== */
+
+@media (max-width: 719px) {
+  .pk-line-stop--past {
+    display: none;
+  }
+
+  .pk-hero {
+    padding-bottom: 6.5rem;
+  }
+}
+
+@media (min-width: 720px) {
+  .pk-hero {
+    padding: 2rem 2rem 8.5rem;
+  }
+
+  .pk-hero-grid {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .pk-services {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .pk-trust {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .pk-section {
+    padding: 5.5rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pk-services {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
