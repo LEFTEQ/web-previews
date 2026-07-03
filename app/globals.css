@@ -1,0 +1,530 @@
+/* ============================================================
+   GIOMETAL s.r.o. — vzduchotechnika, Brno-Chrlice
+   Vizuální svět: pozinkovaný plech, spiro potrubí, falcovaný šev
+   Paleta:
+     --gm-zinc     #2A3138  (temný plech / stín haly)
+     --gm-steel    #465059  (ocel)
+     --gm-galva    #C9D3D9  (pozinkovaný plech — světlá plocha)
+     --gm-white    #F2F5F7  (vzduch)
+     --gm-flame    #FF5A1F  (řez plamenem / TIG oblouk — akcent)
+   Typ: Archivo (široké groteskní tituly ~ technické štítky)
+        + system-ui pro text, tabulkové číslice pro specifikace
+   Signature: spirála z falců (SVG kruhy) + „šev" — oranžová
+   falcovaná linka procházející stránkou jako spoj plechů.
+   ============================================================ */
+
+:root {
+  --gm-zinc: #2a3138;
+  --gm-steel: #465059;
+  --gm-galva: #c9d3d9;
+  --gm-white: #f2f5f7;
+  --gm-flame: #ff5a1f;
+  --gm-flame-deep: #d94512;
+  --gm-radius: 6px;
+  --gm-font-display: "Archivo", "Arial Narrow", ui-sans-serif, system-ui,
+    sans-serif;
+  --gm-font-body: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--gm-font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--gm-zinc);
+  background: var(--gm-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+.gm a:focus-visible,
+.gm :focus-visible {
+  outline: 3px solid var(--gm-flame);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.gm-hero {
+  position: relative;
+  background:
+    /* jemný lesk plechu */
+    linear-gradient(115deg, #232930 0%, var(--gm-zinc) 38%, #333c45 62%, #2a3138 100%);
+  color: var(--gm-white);
+  overflow: hidden;
+}
+
+/* vlnitý plech — svislé pruhy jako trapézový profil, velmi decentní */
+.gm-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.025) 0px,
+    rgba(255, 255, 255, 0.025) 2px,
+    transparent 2px,
+    transparent 56px
+  );
+  pointer-events: none;
+}
+
+.gm-hero-inner {
+  position: relative;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 28px 24px 72px;
+}
+
+.gm-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(201, 211, 217, 0.22);
+  margin-bottom: clamp(48px, 9vw, 96px);
+}
+
+.gm-wordmark {
+  font-family: var(--gm-font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  color: var(--gm-galva);
+}
+
+.gm-wordmark b {
+  font-weight: 800;
+  color: var(--gm-white);
+}
+
+.gm-topbar-meta {
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--gm-galva);
+}
+
+/* --- titulek: tři řádky, druhý nese spirálu místo „o" prostoru --- */
+
+.gm-h1 {
+  margin: 0;
+  font-family: var(--gm-font-display);
+  font-weight: 800;
+  font-size: clamp(3.1rem, 11.5vw, 8.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.gm-h1-line {
+  display: flex;
+  align-items: center;
+  gap: 0.18em;
+}
+
+.gm-h1-line-1 {
+  color: var(--gm-galva);
+}
+
+.gm-h1-line-2 {
+  color: var(--gm-white);
+}
+
+.gm-h1-line-3 {
+  color: var(--gm-flame);
+}
+
+/* spirála — průřez spiro potrubím, roztočí se při načtení */
+.gm-spiro {
+  width: 0.92em;
+  height: 0.92em;
+  flex: none;
+}
+
+.gm-spiro-ring {
+  fill: none;
+  stroke: var(--gm-galva);
+  stroke-width: 3;
+  stroke-dasharray: 260 80;
+  opacity: 0.85;
+}
+
+.gm-spiro-ring:nth-child(2) {
+  stroke: var(--gm-white);
+  stroke-dasharray: 200 70;
+}
+
+.gm-spiro-ring:nth-child(4) {
+  stroke: var(--gm-white);
+  stroke-dasharray: 120 50;
+}
+
+.gm-spiro-core {
+  fill: var(--gm-flame);
+}
+
+.gm-hero-foot {
+  display: grid;
+  gap: 28px;
+  margin-top: clamp(44px, 8vw, 88px);
+  max-width: 640px;
+}
+
+.gm-lead {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--gm-galva);
+}
+
+.gm-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.gm-btn {
+  display: inline-block;
+  padding: 14px 26px;
+  font-family: var(--gm-font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-radius: var(--gm-radius);
+  transition: transform 0.18s ease, background-color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.gm-btn-solid {
+  background: var(--gm-flame);
+  color: #1c1108;
+}
+
+.gm-btn-solid:hover {
+  background: var(--gm-flame-deep);
+  color: var(--gm-white);
+  transform: translateY(-2px);
+}
+
+.gm-btn-ghost {
+  color: var(--gm-white);
+  border: 1px solid rgba(201, 211, 217, 0.45);
+}
+
+.gm-btn-ghost:hover {
+  border-color: var(--gm-flame);
+  transform: translateY(-2px);
+}
+
+/* --- šev: falcovaná linka na spodní hraně hera --- */
+.gm-seam {
+  height: 10px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--gm-flame) 0px,
+    var(--gm-flame) 34px,
+    var(--gm-flame-deep) 34px,
+    var(--gm-flame-deep) 40px
+  );
+}
+
+/* --- page-load sekvence: řádky titulku najíždějí, spirála se roztočí --- */
+
+@keyframes gm-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gm-spin {
+  from {
+    transform: rotate(-140deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.gm-h1-line-1 {
+  animation: gm-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.05s both;
+}
+
+.gm-h1-line-2 {
+  animation: gm-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.18s both;
+}
+
+.gm-h1-line-3 {
+  animation: gm-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.31s both;
+}
+
+.gm-spiro {
+  transform-origin: 50% 50%;
+  animation: gm-spin 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.25s both;
+}
+
+.gm-hero-foot {
+  animation: gm-rise 0.6s ease 0.5s both;
+}
+
+/* ============ SEKCE OBECNĚ ============ */
+
+.gm-section {
+  padding: clamp(56px, 9vw, 110px) 24px;
+}
+
+.gm-section-head {
+  max-width: 1160px;
+  margin: 0 auto clamp(36px, 6vw, 64px);
+}
+
+.gm-eyebrow {
+  margin: 0 0 14px;
+  font-family: var(--gm-font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gm-flame-deep);
+}
+
+.gm-h2 {
+  margin: 0;
+  font-family: var(--gm-font-display);
+  font-size: clamp(1.7rem, 4.2vw, 2.9rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  max-width: 22ch;
+}
+
+.gm-h3 {
+  margin: 0 0 10px;
+  font-family: var(--gm-font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* ============ SEKCE 1: VÝROBNÍ PROGRAM ============ */
+
+.gm-vyroba {
+  background: var(--gm-white);
+}
+
+.gm-grid {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1160px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.gm-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #dde4e8;
+  border-radius: var(--gm-radius);
+  padding: 26px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.gm-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--gm-flame);
+  box-shadow: 0 14px 30px rgba(42, 49, 56, 0.1);
+}
+
+.gm-card-tag {
+  display: inline-block;
+  align-self: flex-start;
+  margin-bottom: 16px;
+  padding: 4px 10px;
+  font-family: var(--gm-font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: var(--gm-white);
+  background: var(--gm-steel);
+  border-radius: 3px;
+}
+
+.gm-card:hover .gm-card-tag {
+  background: var(--gm-flame-deep);
+}
+
+.gm-card-text {
+  margin: 0 0 18px;
+  font-size: 0.98rem;
+  color: var(--gm-steel);
+  flex: 1;
+}
+
+.gm-card-spec {
+  margin: 0;
+  padding-top: 14px;
+  border-top: 1px dashed #ccd5da;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+  color: var(--gm-zinc);
+  font-weight: 600;
+}
+
+/* ============ SEKCE 2: PROCES + DŮVĚRA ============ */
+
+.gm-proces {
+  background: linear-gradient(180deg, var(--gm-galva) 0%, #bcc8cf 100%);
+}
+
+.gm-section-head-light .gm-eyebrow {
+  color: var(--gm-flame-deep);
+}
+
+.gm-kroky {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1160px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+.gm-krok {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.gm-krok-cislo {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  font-family: var(--gm-font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--gm-white);
+  background: var(--gm-zinc);
+  border-radius: 50%;
+  /* náznak spiro falců i tady */
+  box-shadow: 0 0 0 4px var(--gm-galva), 0 0 0 5px var(--gm-steel);
+}
+
+.gm-krok-text {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #333c44;
+}
+
+.gm-duvera {
+  max-width: 1160px;
+  margin: clamp(44px, 7vw, 72px) auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  border-top: 2px solid var(--gm-zinc);
+}
+
+.gm-fakt {
+  padding: 26px 22px 6px 0;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.gm-fakt + .gm-fakt {
+  border-left: 1px solid rgba(42, 49, 56, 0.25);
+  padding-left: 22px;
+}
+
+.gm-fakt-hodnota {
+  font-family: var(--gm-font-display);
+  font-size: clamp(2rem, 4.5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--gm-flame-deep);
+  letter-spacing: -0.01em;
+}
+
+.gm-fakt-popis {
+  font-size: 0.95rem;
+  color: #333c44;
+}
+
+/* ============ MOBIL ============ */
+
+@media (max-width: 640px) {
+  .gm-hero-inner {
+    padding: 22px 18px 56px;
+  }
+
+  .gm-section {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .gm-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .gm-fakt + .gm-fakt {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid rgba(42, 49, 56, 0.25);
+  }
+
+  .gm-fakt {
+    padding-right: 0;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .gm-h1-line-1,
+  .gm-h1-line-2,
+  .gm-h1-line-3,
+  .gm-spiro,
+  .gm-hero-foot {
+    animation: none;
+  }
+
+  .gm-card,
+  .gm-btn {
+    transition: none;
+  }
+
+  .gm-card:hover,
+  .gm-btn-solid:hover,
+  .gm-btn-ghost:hover {
+    transform: none;
+  }
+}
