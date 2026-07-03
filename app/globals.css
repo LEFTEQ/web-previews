@@ -1,0 +1,589 @@
+/* =====================================================
+   KB TAXI — Karel Buček, autodoprava Olomouc
+   Tokeny:
+   --asfalt   #17181A  (asfalt / noc)
+   --taxi     #F5B301  (taxi žlutá — dopravní, ne pastel)
+   --kridla   #FFDD57  (světlejší žlutá pro akcenty)
+   --papir    #F7F5F0  (papír nákladního listu)
+   --grafit   #2B2D31  (karty na tmavé)
+   --linka    #D8D4CB  (linky na papíru)
+   Typo: Archivo Black (display, silniční cedule)
+         Barlow (tělo — kondenzovaná, technická DNA nákl. dopravy)
+   Signature: šachovnice taxi jako diagonální pruh v heru
+   ===================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap");
+
+:root {
+  --asfalt: #17181a;
+  --taxi: #f5b301;
+  --kridla: #ffdd57;
+  --papir: #f7f5f0;
+  --grafit: #2b2d31;
+  --linka: #d8d4cb;
+  --font-display: "Archivo Black", "Arial Black", sans-serif;
+  --font-body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  --font-cond: "Barlow Condensed", "Arial Narrow", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--asfalt);
+  background: var(--papir);
+  -webkit-font-smoothing: antialiased;
+}
+
+.kb a:focus-visible,
+.kb button:focus-visible {
+  outline: 3px solid var(--taxi);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.duvera a:focus-visible {
+  outline-color: var(--kridla);
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  background: var(--asfalt);
+  color: var(--papir);
+  overflow: hidden;
+  padding: 1.25rem 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 92svh;
+}
+
+/* Signature: taxi šachovnice jako diagonální pás protínající hero */
+.hero-checker {
+  position: absolute;
+  top: 50%;
+  left: -20%;
+  width: 140%;
+  height: 72px;
+  transform: translateY(-50%) rotate(-7deg);
+  background: repeating-conic-gradient(
+    var(--taxi) 0% 25%,
+    var(--asfalt) 0% 50%
+  );
+  background-size: 36px 36px;
+  border-top: 3px solid var(--taxi);
+  border-bottom: 3px solid var(--taxi);
+  opacity: 0.9;
+  pointer-events: none;
+  animation: checker-roll 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes checker-roll {
+  from {
+    transform: translateY(-50%) translateX(-6%) rotate(-7deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-50%) translateX(0) rotate(-7deg);
+    opacity: 0.9;
+  }
+}
+
+.hero-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.wordmark-kb {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  line-height: 1;
+  background: var(--taxi);
+  color: var(--asfalt);
+  padding: 0.35rem 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.wordmark-rest {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.wordmark-rest strong {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.28em;
+}
+
+.wordmark-rest em {
+  font-style: normal;
+  font-family: var(--font-cond);
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: rgba(247, 245, 240, 0.65);
+}
+
+.hero-call {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-decoration: none;
+  color: var(--papir);
+  line-height: 1.15;
+}
+
+.hero-call-label {
+  font-family: var(--font-cond);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--taxi);
+}
+
+.hero-call-num {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+}
+
+.hero-call:hover .hero-call-num {
+  color: var(--kridla);
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  margin: auto 0;
+  padding: 3.5rem 0 3rem;
+  max-width: 60rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--taxi);
+  margin: 0 0 1rem;
+  animation: rise 0.6s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 9.5vw, 6.5rem);
+  line-height: 0.96;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.5rem;
+  text-transform: uppercase;
+}
+
+.hero-title .line {
+  display: block;
+  animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-title .l1 { animation-delay: 0.15s; }
+.hero-title .l2 { animation-delay: 0.28s; }
+.hero-title .l3 { animation-delay: 0.41s; }
+
+.hero-title .tonaz {
+  color: var(--asfalt);
+  background: var(--taxi);
+  padding: 0 0.18em;
+  display: inline-block;
+  transform: skewX(-4deg);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-sub {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: rgba(247, 245, 240, 0.82);
+  margin: 0 0 2rem;
+  animation: rise 0.7s 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  animation: rise 0.7s 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border: 2px solid transparent;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--taxi);
+  color: var(--asfalt);
+}
+
+.btn-primary:hover {
+  background: var(--kridla);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  border-color: rgba(247, 245, 240, 0.4);
+  color: var(--papir);
+}
+
+.btn-ghost:hover {
+  border-color: var(--taxi);
+  color: var(--taxi);
+}
+
+.hero-strip {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.9rem;
+  justify-content: center;
+  font-family: var(--font-cond);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  color: rgba(247, 245, 240, 0.55);
+  border-top: 1px solid rgba(247, 245, 240, 0.15);
+  padding: 0.9rem 0;
+  margin: 0 -1.25rem;
+}
+
+/* ============ VOZY ============ */
+
+.vozy {
+  padding: 4.5rem 1.25rem;
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+.section-head {
+  margin-bottom: 2.5rem;
+}
+
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background: var(--asfalt);
+  color: var(--taxi);
+  padding: 0.3rem 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.section-tag-dark {
+  background: var(--taxi);
+  color: var(--asfalt);
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  line-height: 1.1;
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.section-lead {
+  max-width: 36rem;
+  margin: 0;
+  color: #4c4e52;
+  font-size: 1.05rem;
+}
+
+.vuz-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+.vuz {
+  background: #fff;
+  border: 2px solid var(--asfalt);
+  padding: 1.5rem;
+  position: relative;
+  box-shadow: 6px 6px 0 var(--taxi);
+}
+
+.vuz-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.vuz-id {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  background: var(--asfalt);
+  color: var(--taxi);
+  padding: 0.4rem 0.55rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.vuz h3 {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  margin: 0 0 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.vuz-urceni {
+  margin: 0;
+  color: #6a6c70;
+  font-size: 0.95rem;
+}
+
+.vuz-params {
+  margin: 0 0 1.25rem;
+  border-top: 1px solid var(--linka);
+}
+
+.param {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--linka);
+}
+
+.param dt {
+  font-family: var(--font-cond);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6a6c70;
+}
+
+.param dd {
+  margin: 0;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 1.2rem;
+  white-space: nowrap;
+}
+
+.vuz-popis {
+  margin: 0;
+  color: #3a3c40;
+}
+
+.vozy-note {
+  margin: 2rem 0 0;
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border-left: 6px solid var(--taxi);
+  font-size: 1rem;
+  color: #3a3c40;
+}
+
+/* ============ DŮVĚRA ============ */
+
+.duvera {
+  background: var(--asfalt);
+  color: var(--papir);
+  padding: 4.5rem 1.25rem;
+}
+
+.duvera .section-head {
+  max-width: 68rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.duvera h2 {
+  color: var(--papir);
+}
+
+.zasady {
+  max-width: 68rem;
+  margin: 0 auto 3rem;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+
+.zasada {
+  background: var(--grafit);
+  padding: 1.5rem;
+  border-top: 4px solid var(--taxi);
+}
+
+.zasada h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  margin: 0 0 0.6rem;
+  color: var(--taxi);
+  letter-spacing: 0.04em;
+}
+
+.zasada p {
+  margin: 0;
+  color: rgba(247, 245, 240, 0.8);
+}
+
+.duvera-kontakt {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  border-top: 1px solid rgba(247, 245, 240, 0.15);
+  padding-top: 2rem;
+}
+
+.dk-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dk-label {
+  font-family: var(--font-cond);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(247, 245, 240, 0.55);
+}
+
+.dk-num {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--kridla);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+}
+
+a.dk-num:hover {
+  color: var(--taxi);
+  text-decoration: underline;
+}
+
+.dk-text {
+  color: var(--papir);
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (min-width: 640px) {
+  .hero {
+    padding: 1.5rem 2.5rem 0;
+  }
+
+  .hero-strip {
+    margin: 0 -2.5rem;
+  }
+
+  .hero-checker {
+    height: 96px;
+    background-size: 48px 48px;
+  }
+
+  .vozy,
+  .duvera {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .vuz-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .duvera-kontakt {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .zasady {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .vuz {
+    padding: 2rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-checker,
+  .hero-eyebrow,
+  .hero-title .line,
+  .hero-sub,
+  .hero-actions {
+    animation: none;
+  }
+
+  .btn,
+  .btn-primary:hover {
+    transition: none;
+    transform: none;
+  }
+}
