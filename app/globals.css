@@ -1,0 +1,524 @@
+/* ==========================================================================
+   ZAPA beton — betonárna Olomouc-Holice
+   Paleta odvozená z materiálu: mokrý beton, zaschlý cement, bednicí
+   překližka (žlutá tříprstá deska), signální oranž autodomíchávače.
+   ========================================================================== */
+
+:root {
+  --cement-tmavy: #33383d;   /* mokrý čerstvý beton */
+  --cement: #4b5158;
+  --beton-svetly: #dfe0dc;   /* zaschlá deska */
+  --beton-papir: #eceded;
+  --bedneni: #f2b705;        /* žlutá bednicí deska / výstražný pruh */
+  --okr: #c98a12;
+  --inkoust: #1d2126;
+  --bila: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--beton-papir);
+  color: var(--inkoust);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.zb a:focus-visible,
+.zb .btn:focus-visible {
+  outline: 3px solid var(--bedneni);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Typografie: stencil-inspirovaný display ---------- */
+/* Kondenzovaný, těžký, verzálkový titulek — písmo šablony na pytli
+   cementu. Systémové kondenzované fonty, žádné externí knihovny. */
+
+.hero-title,
+.zb h2 {
+  font-family: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed",
+    Impact, sans-serif;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+  background: linear-gradient(178deg, var(--cement-tmavy) 0%, var(--cement) 88%);
+  color: var(--beton-papir);
+  padding: 1.5rem 1.25rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-topbar {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.wordmark-zapa {
+  font-family: "Arial Narrow", Impact, sans-serif;
+  font-weight: 900;
+  font-size: 1.6rem;
+  letter-spacing: 0.12em;
+  color: var(--bila);
+  background: linear-gradient(0deg, var(--bedneni) 0 22%, transparent 22%);
+  padding: 0 0.15rem;
+}
+
+.wordmark-beton {
+  font-size: 1.05rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--beton-svetly);
+}
+
+.hero-plant {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: #b8bcc0;
+}
+
+.hero-body {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding-bottom: 3rem;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bedneni);
+  font-weight: 700;
+}
+
+.hero-title {
+  margin: 0 0 1.5rem;
+  font-size: clamp(3rem, 11vw, 7.5rem);
+  line-height: 0.92;
+  color: var(--bila);
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--bedneni);
+}
+
+.hero-sub {
+  margin: 0 0 2rem;
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: var(--beton-svetly);
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 1.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  border-radius: 3px;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--bedneni);
+  color: var(--inkoust);
+}
+
+.btn-solid:hover {
+  background: #ffc61a;
+  transform: translateY(-2px);
+}
+
+.btn-line {
+  border: 2px solid var(--beton-svetly);
+  color: var(--bila);
+}
+
+.btn-line:hover {
+  background: var(--beton-svetly);
+  color: var(--inkoust);
+}
+
+.btn-dark {
+  border-color: var(--cement-tmavy);
+  color: var(--cement-tmavy);
+}
+
+.btn-dark:hover {
+  background: var(--cement-tmavy);
+  color: var(--bila);
+}
+
+.hero-hours {
+  margin: 1.25rem 0 0;
+  font-size: 0.9rem;
+  color: #b8bcc0;
+}
+
+/* ---------- SIGNATURE: dávkovací pás ----------
+   Sloupce jako zásobníky betonárny: kamenivo (tečkovaný rastr),
+   cement (plná světlá), přísady (žlutý pruh). Poměry šířek ≈ poměr
+   složek v recepturě betonu. */
+
+.batch-strip {
+  display: flex;
+  height: 4.5rem;
+  margin-top: 2rem;
+  border-top: 4px solid var(--bedneni);
+}
+
+.batch-agg {
+  background-color: #565c63;
+  background-image: radial-gradient(#7c838b 1.4px, transparent 1.6px);
+  background-size: 11px 11px;
+}
+
+.batch-a1 { flex: 5; }
+.batch-a2 { flex: 3; background-size: 8px 8px; }
+.batch-a3 { flex: 4; background-size: 14px 14px; }
+.batch-a4 { flex: 2; background-size: 7px 7px; }
+.batch-a5 { flex: 4; background-size: 12px 12px; }
+
+.batch-cem {
+  flex: 2;
+  background: var(--beton-svetly);
+}
+
+.batch-c2 { flex: 1.5; }
+
+.batch-add {
+  flex: 0.6;
+  background: var(--bedneni);
+}
+
+/* ---------- Recepturová lišta ---------- */
+
+.hero-recipe {
+  list-style: none;
+  margin: 0;
+  padding: 1.25rem 0;
+  max-width: 68rem;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 2rem;
+}
+
+.hero-recipe li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.hero-recipe strong {
+  font-family: "Arial Narrow", Impact, sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--bedneni);
+  line-height: 1;
+}
+
+.hero-recipe span {
+  font-size: 0.85rem;
+  color: var(--beton-svetly);
+  letter-spacing: 0.03em;
+}
+
+/* ---------- Animace načtení hera ---------- */
+
+@keyframes zb-pour {
+  from {
+    opacity: 0;
+    transform: translateY(-1.2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zb-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.hero-line {
+  animation: zb-pour 0.55s ease-out both;
+}
+
+.hero-line-2 { animation-delay: 0.12s; }
+.hero-line-3 { animation-delay: 0.24s; }
+
+.hero-sub,
+.hero-cta,
+.hero-hours {
+  animation: zb-fade 0.6s ease-out 0.4s both;
+}
+
+.batch-strip {
+  animation: zb-fade 0.8s ease-out 0.55s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-line,
+  .hero-sub,
+  .hero-cta,
+  .hero-hours,
+  .batch-strip {
+    animation: none;
+  }
+  .btn {
+    transition: none;
+  }
+}
+
+/* ---------- Sekce obecně ---------- */
+
+.section-head {
+  max-width: 68rem;
+  margin: 0 auto 2.5rem;
+}
+
+.section-eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--okr);
+}
+
+.section-eyebrow-light {
+  color: var(--bedneni);
+}
+
+.zb h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.9rem, 5vw, 3.2rem);
+  line-height: 1.05;
+}
+
+.section-lead {
+  margin: 0;
+  max-width: 38rem;
+  font-size: 1.05rem;
+  color: var(--cement);
+}
+
+.section-lead-light {
+  color: var(--beton-svetly);
+}
+
+/* ---------- SLUŽBY ---------- */
+
+.sluzby {
+  padding: 4rem 1.25rem;
+}
+
+.sluzby-grid {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.karta {
+  background: var(--bila);
+  border-left: 5px solid var(--bedneni);
+  border-radius: 3px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  box-shadow: 0 1px 3px rgba(29, 33, 38, 0.08);
+}
+
+.karta-znacka {
+  margin: 0 0 0.5rem;
+  font-family: "Arial Narrow", Impact, sans-serif;
+  font-weight: 900;
+  font-size: 0.9rem;
+  letter-spacing: 0.16em;
+  color: var(--okr);
+  text-transform: uppercase;
+}
+
+.karta h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.3rem;
+  line-height: 1.25;
+}
+
+.karta-popis {
+  margin: 0 0 1rem;
+  color: var(--cement);
+}
+
+.karta-detail {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--cement-tmavy);
+  border-top: 1px dashed #c9cbc9;
+  padding-top: 0.75rem;
+}
+
+.mix-note {
+  max-width: 68rem;
+  margin: 2.5rem auto 0;
+  background: var(--beton-svetly);
+  border-radius: 3px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mix-note p {
+  margin: 0;
+  max-width: 38rem;
+}
+
+/* ---------- DŮVĚRA / REFERENCE ---------- */
+
+.duvera {
+  background: var(--cement-tmavy);
+  color: var(--beton-papir);
+  padding: 4rem 1.25rem 4.5rem;
+}
+
+.duvera h2 {
+  color: var(--bila);
+}
+
+.ref-list {
+  list-style: none;
+  margin: 0 auto 3rem;
+  padding: 0;
+  max-width: 68rem;
+}
+
+.ref-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid #4b5158;
+}
+
+.ref-stavba {
+  font-weight: 700;
+  color: var(--bila);
+  white-space: nowrap;
+}
+
+.ref-tecky {
+  flex: 1;
+  border-bottom: 2px dotted #6a7078;
+  transform: translateY(-0.3em);
+}
+
+.ref-misto {
+  font-size: 0.9rem;
+  color: var(--beton-svetly);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.duvera-fakta {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.fakt h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  color: var(--bedneni);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.fakt p {
+  margin: 0;
+  color: var(--beton-svetly);
+  font-size: 0.98rem;
+}
+
+/* ---------- Responsivita: tablet a výš ---------- */
+
+@media (min-width: 640px) {
+  .hero {
+    padding: 2rem 2rem 0;
+  }
+
+  .hero-recipe {
+    grid-template-columns: repeat(4, auto);
+    justify-content: space-between;
+  }
+
+  .sluzby-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .mix-note {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 960px) {
+  .duvera-fakta {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hero-body {
+    padding-bottom: 4rem;
+  }
+}
