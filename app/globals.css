@@ -1,0 +1,574 @@
+/* ============================================================
+   KOVO KLIMA s.r.o. — Plzeň
+   Palette: ocelová dílna + dva vzduchy (teplý / studený)
+   ocel tmavá   #1B222B
+   ocel plech   #E8EBEE
+   papír        #F7F8F9
+   teplý vzduch #E8590C  (oranž — topení)
+   studený vzduch #1F7A9E (petrolejová modř — chlazení)
+   ============================================================ */
+
+:root {
+  --kk-ink: #1b222b;
+  --kk-steel: #e8ebee;
+  --kk-paper: #f7f8f9;
+  --kk-hot: #e8590c;
+  --kk-cold: #1f7a9e;
+  --kk-cold-deep: #14556f;
+  --kk-muted: #5b6672;
+
+  --kk-font-display: "Arial Black", "Arial Bold", Futura, "Helvetica Neue",
+    Arial, sans-serif;
+  --kk-font-body: Georgia, "Times New Roman", serif;
+  --kk-font-utility: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--kk-paper);
+  color: var(--kk-ink);
+  font-family: var(--kk-font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.kk a:focus-visible,
+.kk button:focus-visible {
+  outline: 3px solid var(--kk-hot);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.kk-hero {
+  position: relative;
+  background: var(--kk-ink);
+  color: var(--kk-steel);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+.kk-hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-bottom: 2.5rem;
+}
+
+/* Wordmark: KOVO v oceli, KLIMA rozdělené teplem a chladem */
+.kk-wordmark {
+  font-family: var(--kk-font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
+  display: flex;
+  gap: 0.45em;
+  text-transform: uppercase;
+}
+
+.kk-wordmark-kovo {
+  color: var(--kk-steel);
+}
+
+.kk-wordmark-klima {
+  background: linear-gradient(90deg, var(--kk-hot) 0%, var(--kk-hot) 45%, var(--kk-cold) 55%, var(--kk-cold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.kk-hero-locality {
+  margin: 0;
+  font-family: var(--kk-font-utility);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8b95a1;
+}
+
+.kk-hero-main {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-bottom: 3rem;
+  position: relative;
+}
+
+.kk-hero-title {
+  font-family: var(--kk-font-display);
+  font-size: clamp(2.6rem, 9.5vw, 6.5rem);
+  line-height: 0.98;
+  margin: 0 0 1.75rem;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.kk-line {
+  display: block;
+  overflow: hidden;
+}
+
+.kk-hot {
+  color: var(--kk-hot);
+  display: inline-block;
+}
+
+.kk-cold {
+  color: #7cc4e0;
+  display: inline-block;
+}
+
+/* Signature: příčný řez spirálovým vzduchotechnickým potrubím.
+   Pruhy = plášť trubky, šikmý šev = falcovaný spoj z dílny. */
+.kk-duct {
+  position: absolute;
+  top: -1.5rem;
+  right: -4rem;
+  width: 19rem;
+  height: 19rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 38% 34%,
+    #39434f 0%,
+    #2a323c 45%,
+    #10151b 100%
+  );
+  box-shadow: inset 0 0 0 6px #444e5a, inset 0 0 60px rgba(0, 0, 0, 0.7),
+    0 0 0 1px #0b0f13;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.kk-duct-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(232, 235, 238, 0.14);
+}
+
+.kk-duct-ring-1 { transform: scale(0.84); }
+.kk-duct-ring-2 { transform: scale(0.66); border-color: rgba(232, 89, 12, 0.45); }
+.kk-duct-ring-3 { transform: scale(0.48); }
+.kk-duct-ring-4 { transform: scale(0.31); border-color: rgba(31, 122, 158, 0.55); }
+.kk-duct-ring-5 {
+  transform: scale(0.14);
+  background: #10151b;
+  border-color: rgba(232, 235, 238, 0.25);
+}
+
+.kk-duct-seam {
+  position: absolute;
+  inset: -30%;
+  background: repeating-linear-gradient(
+    35deg,
+    transparent 0,
+    transparent 44px,
+    rgba(232, 235, 238, 0.09) 44px,
+    rgba(232, 235, 238, 0.09) 47px
+  );
+}
+
+.kk-hero-sub {
+  position: relative;
+  z-index: 1;
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: #c3cad2;
+  margin: 0 0 2rem;
+}
+
+.kk-hero-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.kk-btn {
+  display: inline-block;
+  font-family: var(--kk-font-display);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  padding: 0.95rem 1.6rem;
+  border-radius: 3px;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.kk-btn-primary {
+  background: var(--kk-hot);
+  color: #fff;
+}
+
+.kk-btn-primary:hover {
+  background: #ff6a1a;
+  transform: translateY(-2px);
+}
+
+.kk-btn-ghost {
+  color: var(--kk-steel);
+  border: 2px solid #444e5a;
+}
+
+.kk-btn-ghost:hover {
+  border-color: var(--kk-steel);
+  transform: translateY(-2px);
+}
+
+/* Pás jako štítek na potrubí */
+.kk-hero-strip {
+  border-top: 1px solid #333d48;
+  margin: 0 -1.25rem;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem 0.75rem;
+  font-family: var(--kk-font-utility);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: #8b95a1;
+}
+
+.kk-strip-dot {
+  color: var(--kk-hot);
+}
+
+/* Page-load: jediná orchestrace — titulek vyjede jako vzduch z potrubí */
+@keyframes kk-rise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes kk-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.kk-line-1 .kk-hot {
+  animation: kk-rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.kk-line-2 .kk-cold {
+  animation: kk-rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.12s both;
+}
+
+.kk-hero-sub,
+.kk-hero-actions {
+  animation: kk-fade 0.6s ease 0.45s both;
+}
+
+.kk-duct {
+  animation: kk-fade 0.9s ease 0.25s both;
+}
+
+/* ============ SLUŽBY ============ */
+
+.kk-sluzby {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.kk-eyebrow {
+  font-family: var(--kk-font-utility);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--kk-hot);
+  margin: 0 0 0.75rem;
+}
+
+.kk-eyebrow-light {
+  color: #f2a071;
+}
+
+.kk-h2 {
+  font-family: var(--kk-font-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.7rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+}
+
+.kk-section-lead {
+  max-width: 36rem;
+  color: var(--kk-muted);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.kk-section-head {
+  margin-bottom: 2.75rem;
+}
+
+.kk-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: #d3d9de;
+  border: 1px solid #d3d9de;
+}
+
+.kk-card {
+  background: #fff;
+  padding: 1.75rem 1.5rem;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.kk-card:hover {
+  background: var(--kk-steel);
+}
+
+/* Kód služby jako značení na potrubí ve výkresu */
+.kk-card-kod {
+  font-family: var(--kk-font-utility);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: #fff;
+  background: var(--kk-cold);
+  padding: 0.2rem 0.55rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.kk-card:nth-child(odd) .kk-card-kod {
+  background: var(--kk-hot);
+}
+
+.kk-card-title {
+  font-family: var(--kk-font-display);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin: 0 0 0.6rem;
+}
+
+.kk-card-text {
+  margin: 0 0 0.9rem;
+  color: #3d4650;
+  font-size: 0.98rem;
+}
+
+.kk-card-detail {
+  margin: 0;
+  font-family: var(--kk-font-utility);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--kk-muted);
+  border-top: 1px dashed #c6cdd3;
+  padding-top: 0.7rem;
+}
+
+/* ============ DŮVĚRA ============ */
+
+.kk-duvera {
+  background: var(--kk-cold-deep);
+  color: #e9f2f7;
+}
+
+.kk-duvera-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.kk-h2-light {
+  color: #fff;
+}
+
+.kk-duvera-p {
+  max-width: 38rem;
+  color: #c8dde8;
+  margin: 0 0 1.2rem;
+}
+
+.kk-fakta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 3rem;
+  margin: 2.25rem 0 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.kk-fakt dt {
+  font-family: var(--kk-font-utility);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8fb9cc;
+  margin: 0 0 0.3rem;
+}
+
+.kk-fakt dd {
+  font-family: var(--kk-font-display);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  margin: 0;
+  color: #fff;
+}
+
+.kk-klienti-title {
+  font-family: var(--kk-font-utility);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8fb9cc;
+  margin: 0 0 1.25rem;
+}
+
+.kk-klienti-list {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem 1rem;
+}
+
+.kk-klient {
+  font-family: var(--kk-font-display);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #dcebf3;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.kk-klient::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.42em;
+  width: 0.45rem;
+  height: 0.45rem;
+  background: var(--kk-hot);
+}
+
+.kk-klient:nth-child(even)::before {
+  background: #7cc4e0;
+}
+
+.kk-klienti-note {
+  font-style: italic;
+  color: #a9cfdf;
+  font-size: 0.95rem;
+  margin: 0;
+  border-left: 3px solid var(--kk-hot);
+  padding-left: 0.9rem;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (min-width: 640px) {
+  .kk-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .kk-hero {
+    padding: 2rem 2.5rem 0;
+  }
+
+  .kk-hero-strip {
+    margin: 0 -2.5rem;
+  }
+
+  .kk-duct {
+    width: 26rem;
+    height: 26rem;
+    top: -3rem;
+    right: -3rem;
+  }
+
+  .kk-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .kk-duvera-inner {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4.5rem;
+    align-items: start;
+  }
+
+  .kk-sluzby,
+  .kk-duvera-inner {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .kk-duct {
+    width: 13rem;
+    height: 13rem;
+    top: auto;
+    bottom: 9rem;
+    right: -6rem;
+    opacity: 0.55;
+  }
+
+  .kk-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .kk-line-1 .kk-hot,
+  .kk-line-2 .kk-cold,
+  .kk-hero-sub,
+  .kk-hero-actions,
+  .kk-duct {
+    animation: none;
+  }
+
+  .kk-btn,
+  .kk-card {
+    transition: none;
+  }
+
+  .kk-btn-primary:hover,
+  .kk-btn-ghost:hover {
+    transform: none;
+  }
+}
