@@ -1,0 +1,491 @@
+/* =====================================================================
+   LANEX Olomouc — "Panelový rastr"
+   Paleta odvozená z regenerace paneláku:
+   - beton před zateplením (šedá), fasádní okr po zateplení,
+   - stavebně-modrá (plachty, helmy, ISO tabulky), tmavý grafit textu.
+   Typo: Arial Black-ová energie přes system stack s width/spacing prací —
+   žádné webfonty, rychlé načtení; osobnost dělá řez, prostrkání a rastr.
+   ===================================================================== */
+
+:root {
+  --beton: #d8d5cf;        /* nezateplený panel */
+  --beton-svetly: #eceae5; /* omítka, pozadí */
+  --okr: #e0a437;          /* fasádní okr — zateplený panel */
+  --modra: #1f4e79;        /* stavební modrá */
+  --grafit: #23272b;       /* text */
+  --bila: #ffffff;
+
+  --pismo-titulek: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  --pismo-text: Georgia, "Times New Roman", serif;
+  --pismo-technika: "Courier New", Courier, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--beton-svetly);
+  color: var(--grafit);
+  font-family: var(--pismo-text);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.lx a {
+  color: var(--modra);
+}
+
+.lx :focus-visible {
+  outline: 3px solid var(--modra);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ===== HLAVIČKA ===== */
+
+.lx-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.lx-wordmark {
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.lx-wordmark-lanex {
+  font-family: var(--pismo-titulek);
+  font-weight: 900;
+  font-size: 1.45rem;
+  letter-spacing: 0.14em;
+  color: var(--grafit);
+  /* wordmark: poslední písmeno "podepřené" okrovým panelem */
+  background: linear-gradient(to right, transparent 78%, var(--okr) 78%);
+  padding-right: 0.1em;
+}
+
+.lx-wordmark-ol {
+  font-family: var(--pismo-technika);
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--modra);
+}
+
+.lx-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.lx-nav a {
+  font-family: var(--pismo-technika);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--grafit);
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+}
+
+.lx-nav a:hover {
+  border-bottom-color: var(--okr);
+}
+
+.lx-nav-tel {
+  background: var(--modra);
+  color: var(--bila) !important;
+  padding: 0.5rem 0.9rem !important;
+  border: none !important;
+}
+
+.lx-nav-tel:hover {
+  background: var(--grafit);
+}
+
+/* ===== HERO ===== */
+
+.lx-hero {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+/* Signature: fasádní rastr — panely, okna, zateplené (okrové) panely.
+   Čte se jako průběh regenerace: šedé panely se "zaplňují" barvou. */
+.lx-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  order: -1;
+  max-height: 180px;
+  overflow: hidden;
+}
+
+.lx-panel {
+  background: var(--beton);
+  aspect-ratio: 4 / 3;
+  animation: lx-vyzdivka 0.7s ease-out backwards;
+}
+
+.lx-panel--okno {
+  background:
+    linear-gradient(180deg, var(--modra) 0 62%, var(--beton) 62%);
+}
+
+.lx-panel--teplo {
+  background: var(--okr);
+}
+
+/* panely "naskakují" zdola jako při montáži, po řadách */
+.lx-panel:nth-child(-n + 4) { animation-delay: 0.35s; }
+.lx-panel:nth-child(n + 5):nth-child(-n + 8) { animation-delay: 0.2s; }
+.lx-panel:nth-child(n + 9) { animation-delay: 0.05s; }
+
+@keyframes lx-vyzdivka {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lx-hero-eyebrow {
+  font-family: var(--pismo-technika);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--modra);
+  margin: 0 0 1rem;
+}
+
+.lx-hero-title {
+  font-family: var(--pismo-titulek);
+  font-weight: 900;
+  font-size: clamp(2.1rem, 7vw, 4.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0 0 1.4rem;
+}
+
+.lx-hero-title em {
+  font-style: normal;
+  color: var(--bila);
+  background: var(--modra);
+  padding: 0 0.12em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.lx-hero-sub {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  margin: 0 0 1.8rem;
+}
+
+.lx-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.lx-btn {
+  font-family: var(--pismo-technika);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.4rem;
+  display: inline-block;
+}
+
+.lx-btn--plna {
+  background: var(--okr);
+  color: var(--grafit);
+  font-weight: bold;
+}
+
+.lx-btn--plna:hover {
+  background: var(--grafit);
+  color: var(--bila);
+}
+
+.lx-btn--linka {
+  border: 2px solid var(--grafit);
+  color: var(--grafit);
+}
+
+.lx-btn--linka:hover {
+  background: var(--grafit);
+  color: var(--bila);
+}
+
+.lx-hero-adresa {
+  font-family: var(--pismo-technika);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: #5a5f64;
+  margin: 0;
+}
+
+/* ===== SEKCE (společné) ===== */
+
+.lx-sekce {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem;
+}
+
+.lx-eyebrow {
+  font-family: var(--pismo-technika);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--modra);
+  margin: 0 0 0.7rem;
+}
+
+.lx-sekce-hlava h2 {
+  font-family: var(--pismo-titulek);
+  font-weight: 900;
+  font-size: clamp(1.4rem, 3.6vw, 2.1rem);
+  line-height: 1.15;
+  text-transform: uppercase;
+  max-width: 42rem;
+  margin: 0 0 2.2rem;
+}
+
+/* ===== POSTUP (skutečná sekvence stavby → čísla mají význam) ===== */
+
+.lx-postup {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.6rem;
+}
+
+.lx-krok {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 1.2rem;
+  background: var(--bila);
+  border-left: 6px solid var(--beton);
+  padding: 1.3rem 1.3rem 1.3rem 0;
+}
+
+.lx-krok:hover {
+  border-left-color: var(--okr);
+}
+
+.lx-krok-znacka {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.lx-krok-cislo {
+  font-family: var(--pismo-titulek);
+  font-weight: 900;
+  font-size: 1.9rem;
+  color: var(--modra);
+  line-height: 1;
+}
+
+.lx-krok-jmeno {
+  font-family: var(--pismo-technika);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #5a5f64;
+}
+
+.lx-krok-telo h3 {
+  font-family: var(--pismo-titulek);
+  font-weight: 900;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.5rem;
+}
+
+.lx-krok-telo p {
+  margin: 0;
+  max-width: 46rem;
+}
+
+.lx-postup-pozn {
+  margin: 2rem 0 0;
+  max-width: 46rem;
+  font-style: italic;
+  color: #4a4f54;
+}
+
+/* ===== DŮVĚRA ===== */
+
+.lx-sekce--duvera {
+  background: var(--bila);
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+
+.lx-sekce--duvera .lx-sekce-hlava,
+.lx-duvera-mriz {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.lx-duvera-mriz {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.lx-duvera-blok h3 {
+  font-family: var(--pismo-titulek);
+  font-weight: 900;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+}
+
+.lx-milniky {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.lx-milniky li {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 0.9rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--beton);
+  align-items: baseline;
+}
+
+.lx-milnik-rok {
+  font-family: var(--pismo-technika);
+  font-weight: bold;
+  color: var(--modra);
+}
+
+.lx-duvera-pozn {
+  font-style: italic;
+  color: #4a4f54;
+  margin: 0;
+}
+
+.lx-podpora {
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lx-podpora li {
+  padding: 0.5rem 0 0.5rem 1.1rem;
+  border-left: 4px solid var(--okr);
+  margin-bottom: 0.6rem;
+}
+
+/* barevné pásy dole = vrstvy zateplení (beton → izolace → fasáda) */
+.lx-duvera-pasy {
+  display: flex;
+  height: 14px;
+}
+
+.lx-pas {
+  flex: 1;
+}
+
+.lx-pas--seda {
+  background: var(--beton);
+}
+
+.lx-pas--okr {
+  background: var(--okr);
+}
+
+.lx-pas--modra {
+  background: var(--modra);
+}
+
+/* ===== TABLET / DESKTOP ===== */
+
+@media (min-width: 760px) {
+  .lx-hero {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: stretch;
+    padding-top: 3rem;
+  }
+
+  .lx-hero-grid {
+    order: 2;
+    grid-template-columns: repeat(3, 1fr);
+    max-height: none;
+    align-content: start;
+  }
+
+  .lx-panel {
+    aspect-ratio: 5 / 4;
+  }
+
+  .lx-postup {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .lx-duvera-mriz {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+/* ===== REDUKOVANÝ POHYB ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .lx-panel {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
