@@ -1,0 +1,717 @@
+/* ==========================================================================
+   DRACAR OLOMOUC — pohonné hmoty · autodoprava · servis
+   Paleta: asfalt / naftová modř / signální oranž (reflexní pruh cisterny)
+   Typ: Archivo (display, wide) + system sans (tělo) + mono pro čísla
+   Signature: stupnice cisterny v heru (gauge) + oranžový reflexní pruh
+   ========================================================================== */
+
+:root {
+  --asfalt: #14181d;        /* tmavý asfalt — pozadí hero + důvěra */
+  --asfalt-2: #1d232b;      /* karty na tmavé */
+  --beton: #eef0ec;         /* světlé pozadí sekce služeb */
+  --bila: #f8f9f7;
+  --oranz: #ff7a1a;         /* signální oranžová — reflexní pruh */
+  --oranz-tmava: #e05e00;
+  --modr: #3d6a8f;          /* naftová modř — sekundární akcent */
+  --ink: #1a1e24;           /* text na světlé */
+  --ink-slaby: #4a5560;
+  --svetly-text: #d8dde2;
+  --svetly-text-slaby: #9aa4ae;
+
+  --font-display: "Archivo Black", "Arial Black", "Arial", sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono",
+    Menlo, monospace;
+
+  --max-w: 1140px;
+  --pad-x: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--beton);
+  -webkit-font-smoothing: antialiased;
+}
+
+.dc a {
+  color: inherit;
+}
+
+.dc :focus-visible {
+  outline: 3px solid var(--oranz);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(61, 106, 143, 0.10), rgba(61, 106, 143, 0) 40%),
+    var(--asfalt);
+  color: var(--bila);
+  overflow: hidden;
+}
+
+/* jemná "vozovka" — přerušovaná středová čára v pozadí */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 8%;
+  bottom: 0;
+  width: 6px;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.07) 0 46px,
+    transparent 46px 92px
+  );
+  pointer-events: none;
+}
+
+.topbar {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 22px var(--pad-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.wordmark {
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.wordmark-dra {
+  color: var(--bila);
+}
+
+.wordmark-car {
+  color: var(--oranz);
+}
+
+.wordmark-loc {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--svetly-text-slaby);
+  margin-left: 10px;
+}
+
+.topbar-links {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  font-size: 0.92rem;
+}
+
+.topbar-links a {
+  text-decoration: none;
+  color: var(--svetly-text);
+}
+
+.topbar-links a:hover {
+  color: var(--bila);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--oranz);
+}
+
+.topbar-tel {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--oranz) !important;
+  border: 1px solid rgba(255, 122, 26, 0.45);
+  padding: 8px 14px;
+  border-radius: 4px;
+}
+
+.topbar-tel:hover {
+  background: rgba(255, 122, 26, 0.12);
+}
+
+.hero-body {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 56px var(--pad-x) 48px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--svetly-text-slaby);
+  margin: 0 0 26px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-eyebrow-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--oranz);
+  flex: none;
+}
+
+.hero-title {
+  margin: 0 0 28px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.15rem, 7.2vw, 4.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-line-2 {
+  color: var(--svetly-text-slaby);
+}
+
+.hero-em {
+  font-style: normal;
+  color: var(--oranz);
+  position: relative;
+  white-space: nowrap;
+}
+
+.hero-perex {
+  max-width: 560px;
+  font-size: 1.08rem;
+  color: var(--svetly-text);
+  margin: 0 0 36px;
+}
+
+.hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 15px 26px;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--oranz);
+  color: #14100b;
+}
+
+.btn-primary:hover {
+  background: var(--oranz-tmava);
+  color: var(--bila);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: var(--bila);
+}
+
+.btn-ghost:hover {
+  border-color: var(--oranz);
+  transform: translateY(-2px);
+}
+
+/* --- SIGNATURE: stupnice cisterny --------------------------------------- */
+
+.hero-gauge {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--pad-x) 54px;
+  position: relative;
+  z-index: 2;
+}
+
+.gauge-track {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.18);
+  padding-bottom: 0;
+  position: relative;
+}
+
+.gauge-tick {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.gauge-tick:nth-child(odd) {
+  height: 28px;
+}
+
+.gauge-fill {
+  height: 6px;
+  margin-top: -4px;
+  background: linear-gradient(90deg, var(--modr), var(--oranz) 85%);
+  transform-origin: left center;
+  animation: gauge-load 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: 0.35s;
+  border-radius: 3px;
+}
+
+.gauge-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--svetly-text-slaby);
+  margin: 10px 0 14px;
+}
+
+.gauge-full {
+  color: var(--oranz);
+  font-weight: 600;
+}
+
+@keyframes gauge-load {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* jemný nájezd hero textu */
+.hero-eyebrow,
+.hero-title .hero-line,
+.hero-perex,
+.hero-cta-row {
+  animation: rise-in 0.7s ease both;
+}
+
+.hero-line-1 { animation-delay: 0.05s; }
+.hero-line-2 { animation-delay: 0.15s; }
+.hero-line-3 { animation-delay: 0.25s; }
+.hero-perex { animation-delay: 0.35s; }
+.hero-cta-row { animation-delay: 0.45s; }
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   SEKCE — společné
+   ========================================================================== */
+
+.section-head {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--oranz-tmava);
+  margin: 0 0 14px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 4vw, 2.3rem);
+  line-height: 1.18;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  margin: 0 0 44px;
+  max-width: 820px;
+}
+
+/* ==========================================================================
+   SLUŽBY
+   ========================================================================== */
+
+.sluzby {
+  background: var(--beton);
+  padding: 76px 0 84px;
+  border-top: 6px solid var(--oranz);
+}
+
+.sluzby-grid {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.sluzba {
+  background: var(--bila);
+  border: 1px solid #dcdfd8;
+  border-radius: 6px;
+  padding: 26px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.sluzba:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(20, 24, 29, 0.12);
+}
+
+.sluzba-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.sluzba-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  background: var(--asfalt);
+  color: var(--bila);
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+.sluzba-cislo {
+  text-align: right;
+  line-height: 1.15;
+}
+
+.sluzba-cislo strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  color: var(--oranz-tmava);
+}
+
+.sluzba-cislo small {
+  font-size: 0.7rem;
+  color: var(--ink-slaby);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.sluzba-nazev {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+
+.sluzba-popis {
+  margin: 0 0 18px;
+  color: var(--ink-slaby);
+}
+
+.sluzba-list {
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid #e3e6df;
+}
+
+.sluzba-list li {
+  padding: 11px 0 11px 22px;
+  border-bottom: 1px solid #e3e6df;
+  font-size: 0.93rem;
+  position: relative;
+}
+
+.sluzba-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 19px;
+  width: 10px;
+  height: 3px;
+  background: var(--oranz);
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   ČÍSLA + DŮVĚRA
+   ========================================================================== */
+
+.duvera {
+  background: var(--asfalt);
+  color: var(--bila);
+  padding: 76px 0 84px;
+}
+
+.section-head-inverse .section-eyebrow {
+  color: var(--oranz);
+}
+
+.cisla-grid {
+  max-width: var(--max-w);
+  margin: 0 auto 52px;
+  padding: 0 var(--pad-x);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.cislo {
+  background: var(--asfalt-2);
+  padding: 24px 20px 26px;
+  margin: 0;
+}
+
+.cislo-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--svetly-text-slaby);
+  margin-bottom: 10px;
+}
+
+.cislo-hodnota {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 700;
+  color: var(--oranz);
+  line-height: 1.1;
+}
+
+.cislo-jednotka {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--svetly-text);
+  margin-top: 4px;
+}
+
+.reference {
+  max-width: var(--max-w);
+  margin: 0 auto 52px;
+  padding: 0 var(--pad-x);
+}
+
+.reference blockquote {
+  margin: 0;
+  border-left: 5px solid var(--oranz);
+  padding: 6px 0 6px 26px;
+}
+
+.reference blockquote p {
+  margin: 0;
+  font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+  line-height: 1.5;
+  color: var(--svetly-text);
+  max-width: 760px;
+}
+
+.reference figcaption {
+  margin-top: 16px;
+  padding-left: 31px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--svetly-text-slaby);
+}
+
+.kontakty-pas {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+
+.kontakty-pas-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--oranz);
+  margin: 0 0 18px;
+}
+
+.kontakty-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.kontakt {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  padding: 18px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kontakt-role {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--svetly-text-slaby);
+}
+
+.kontakt-jmeno {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.kontakt-tel {
+  font-family: var(--font-mono);
+  color: var(--oranz);
+  text-decoration: none;
+  font-size: 1.05rem;
+  margin-top: 4px;
+}
+
+.kontakt-tel:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ==========================================================================
+   RESPONSIVITA
+   ========================================================================== */
+
+@media (max-width: 980px) {
+  .sluzby-grid {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+  }
+
+  .cisla-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .kontakty-list {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+
+  .topbar {
+    flex-wrap: wrap;
+  }
+
+  .topbar-links {
+    gap: 16px;
+  }
+
+  .topbar-links a:not(.topbar-tel) {
+    display: none;
+  }
+
+  .hero::before {
+    right: 14px;
+  }
+
+  .hero-body {
+    padding-top: 40px;
+  }
+
+  .gauge-labels span:nth-child(2),
+  .gauge-labels span:nth-child(4) {
+    display: none;
+  }
+
+  .cisla-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-eyebrow,
+  .hero-title .hero-line,
+  .hero-perex,
+  .hero-cta-row,
+  .gauge-fill {
+    animation: none;
+  }
+
+  .btn,
+  .sluzba {
+    transition: none;
+  }
+
+  .btn:hover,
+  .sluzba:hover {
+    transform: none;
+  }
+}
