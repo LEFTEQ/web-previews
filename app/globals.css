@@ -1,0 +1,441 @@
+:root {
+  /* Paleta: barva ze sítotiskového karuselu — CMYK proces + hluboká tisková čerň.
+     Oranžová z původního webu zůstává jako dědictví značky, ale kalibrovaná (soutisk M+Y). */
+  --ink: #16130f;          /* tisková čerň s teplým podtónem */
+  --paper: #f7f5f0;        /* nenatíraný ofsetový papír */
+  --falco: #f25c05;        /* kalibrovaná falco oranžová (M+Y soutisk) */
+  --cyan: #00a6c8;         /* procesní C */
+  --magenta: #e5197f;      /* procesní M */
+  --yellow: #f2b705;       /* procesní Y */
+  --ink-soft: #4a443c;
+
+  --font-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-utility: "Courier New", Courier, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ft a:focus-visible,
+.ft button:focus-visible,
+:focus-visible {
+  outline: 3px solid var(--falco);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   HERO — typografický statement: sítotiskové vrstvy barvy
+   ========================================================= */
+
+.hero {
+  position: relative;
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3.5rem;
+}
+
+.hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid var(--ink);
+  margin-bottom: clamp(2rem, 6vw, 4rem);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+.wordmark-team {
+  color: var(--falco);
+  margin-left: 0.15em;
+}
+
+.hero-loc {
+  font-family: var(--font-utility);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+}
+
+/* Titulek: tři řádky = tři průchody karuselem.
+   Signature prvek: poslední řádek má trojitou „soutiskovou" vrstvu C/M/Y
+   posunutou o pár pixelů — jako mírně rozjetá registrace sítotisku. */
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 11vw, 8.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-line {
+  display: block;
+  animation: pass-in 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.hero-line-1 {
+  color: var(--ink);
+  animation-delay: 0.05s;
+}
+
+.hero-line-2 {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--ink);
+  animation-delay: 0.2s;
+}
+
+.hero-line-2 .tick {
+  -webkit-text-stroke: 0;
+  color: var(--falco);
+}
+
+.hero-line-3 {
+  color: var(--falco);
+  animation-delay: 0.35s;
+  /* soutisk: CMY vrstvy lehce mimo registraci */
+  text-shadow:
+    -0.045em 0.035em 0 var(--cyan),
+    0.045em -0.02em 0 var(--yellow),
+    0.02em 0.05em 0 var(--magenta);
+}
+
+@keyframes pass-in {
+  from {
+    opacity: 0;
+    transform: translateX(-1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* soutiskové značky CMYK — malý technický podpis dílny */
+.hero-registry {
+  display: flex;
+  gap: 0.6rem;
+  margin: 1.4rem 0 1.6rem;
+  animation: pass-in 0.5s 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.reg {
+  font-family: var(--font-utility);
+  font-size: 0.75rem;
+  font-weight: bold;
+  width: 1.7rem;
+  height: 1.7rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid;
+}
+
+.reg-c { color: var(--cyan); border-color: var(--cyan); }
+.reg-m { color: var(--magenta); border-color: var(--magenta); }
+.reg-y { color: var(--yellow); border-color: var(--yellow); }
+.reg-k { color: var(--ink); border-color: var(--ink); }
+
+.hero-claim {
+  max-width: 34rem;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  animation: pass-in 0.5s 0.65s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.hero-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.75rem;
+  animation: pass-in 0.5s 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.hero-tags li {
+  font-family: var(--font-utility);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.4rem 0.75rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+}
+
+/* perforovaný okraj fólie — přechod mezi hero a dílnou */
+.hero-perf {
+  height: 22px;
+  background-color: var(--falco);
+  background-image: radial-gradient(circle at 11px 11px, var(--paper) 5px, transparent 5.5px);
+  background-size: 34px 22px;
+  background-repeat: repeat-x;
+}
+
+/* =========================================================
+   SEKCE: STROJE
+   ========================================================= */
+
+.stroje {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 5.5rem) 1.25rem clamp(3.5rem, 9vw, 6rem);
+}
+
+.section-head {
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.eyebrow {
+  font-family: var(--font-utility);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--falco);
+  margin-bottom: 0.6rem;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4.5vw, 2.9rem);
+  line-height: 1.08;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.section-lead {
+  max-width: 36rem;
+  margin-top: 1rem;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+.stroj-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.stroj {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 1.25rem;
+  padding: 1.75rem 0;
+  border-top: 2px solid var(--ink);
+  transition: background-color 0.2s ease;
+}
+
+.stroj:last-child {
+  border-bottom: 2px solid var(--ink);
+}
+
+.stroj:hover {
+  background: linear-gradient(90deg, rgba(242, 92, 5, 0.07), transparent 60%);
+}
+
+.stroj-kod {
+  font-family: var(--font-utility);
+  font-weight: bold;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: var(--paper);
+  background: var(--ink);
+  align-self: start;
+  justify-self: start;
+  padding: 0.35rem 0.65rem;
+  transform: rotate(-2deg);
+}
+
+.stroj:hover .stroj-kod {
+  background: var(--falco);
+}
+
+.stroj-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.5rem;
+}
+
+.stroj-body p {
+  max-width: 40rem;
+  color: var(--ink-soft);
+}
+
+.stroj-vyrobky {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+}
+
+.stroj-vyrobky li {
+  font-family: var(--font-utility);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.6rem;
+  background: rgba(22, 19, 15, 0.07);
+  border-radius: 3px;
+}
+
+/* =========================================================
+   SEKCE: PROČ FALCO (inverzní — tisková čerň)
+   ========================================================= */
+
+.proc {
+  background: var(--ink);
+  color: var(--paper);
+  padding: clamp(3rem, 8vw, 5.5rem) 1.25rem clamp(3rem, 7vw, 5rem);
+}
+
+.proc .section-head,
+.proc-grid,
+.proc-strip {
+  max-width: 1160px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-head-inv h2 {
+  color: var(--paper);
+}
+
+.eyebrow-inv {
+  color: var(--yellow);
+}
+
+.proc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.proc-card {
+  border: 1.5px solid rgba(247, 245, 240, 0.25);
+  padding: 1.5rem;
+  border-radius: 4px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.proc-card:hover {
+  border-color: var(--falco);
+  transform: translateY(-3px);
+}
+
+.proc-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  color: var(--falco);
+  margin-bottom: 0.6rem;
+}
+
+.proc-card p {
+  color: rgba(247, 245, 240, 0.82);
+  font-size: 0.98rem;
+}
+
+.proc-strip {
+  font-family: var(--font-utility);
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+  color: rgba(247, 245, 240, 0.7);
+  border-top: 1px solid rgba(247, 245, 240, 0.2);
+  padding-top: 1.25rem;
+}
+
+.proc-strip strong {
+  color: var(--paper);
+}
+
+/* =========================================================
+   RESPONZIVITA
+   ========================================================= */
+
+@media (max-width: 720px) {
+  .stroj {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .proc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-inner {
+    padding-bottom: 2.5rem;
+  }
+
+  .hero-line-3 {
+    text-shadow:
+      -0.035em 0.025em 0 var(--cyan),
+      0.035em -0.015em 0 var(--yellow),
+      0.015em 0.04em 0 var(--magenta);
+  }
+}
+
+/* =========================================================
+   REDUKOVANÝ POHYB
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-line,
+  .hero-registry,
+  .hero-claim,
+  .hero-tags {
+    animation: none;
+  }
+
+  .proc-card,
+  .stroj,
+  .stroj-kod {
+    transition: none;
+  }
+
+  .proc-card:hover {
+    transform: none;
+  }
+}
