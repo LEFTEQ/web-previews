@@ -1,0 +1,471 @@
+/* ============================================================
+   Čečetka s.r.o. — obkladačství, České Budějovice
+   Paleta odvozená z materiálů řemesla:
+   spára (světle šedá malta), glazura (kobaltová modř kachle),
+   slinutá dlažba (grafit), keramický střep (pálená okrová).
+   ============================================================ */
+
+:root {
+  --sparovka: #eceae4;      /* světlá spárovací hmota — pozadí */
+  --malta: #d9d5cb;         /* šedá malta — linky spár */
+  --glazura: #1d4ed0;       /* kobaltová glazura — akcent */
+  --glazura-tmava: #14339a; /* stín glazury */
+  --strep: #c96f2e;         /* pálený keramický střep — teplý detail */
+  --grafit: #23241f;        /* slinutá dlažba — text, tmavá sekce */
+  --papir: #ffffff;
+
+  --font-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial,
+    sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-util: "Courier New", ui-monospace, monospace;
+
+  --spara: 3px; /* šířka "spáry" v mřížkách */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--sparovka);
+  color: var(--grafit);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  display: block;
+}
+
+/* Focus stavy — viditelné všude */
+:focus-visible {
+  outline: 3px solid var(--glazura);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   HERO — typografický statement + obkladová mřížka
+   ============================================================ */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--sparovka);
+  /* jemná spárová mřížka přes celé hero — signature systém */
+  background-image: linear-gradient(var(--malta) 1px, transparent 1px),
+    linear-gradient(90deg, var(--malta) 1px, transparent 1px);
+  background-size: 88px 88px;
+  border-bottom: var(--spara) solid var(--grafit);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3.5rem;
+}
+
+/* --- dekorativní "kachle" v rozích hera --- */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.tile {
+  position: absolute;
+  width: 88px;
+  height: 88px;
+  animation: tile-in 0.7s ease-out both;
+}
+
+.t1 { top: 0; right: 0; background: var(--glazura); animation-delay: 0.15s; }
+.t2 { top: 0; right: 91px; background: var(--glazura-tmava); animation-delay: 0.3s; }
+.t3 { top: 91px; right: 0; background: var(--strep); animation-delay: 0.45s; }
+.t4 { top: 91px; right: 182px; background: var(--glazura); animation-delay: 0.6s; }
+.t5 { bottom: 0; left: 0; background: var(--glazura-tmava); animation-delay: 0.35s; }
+.t6 { bottom: 0; left: 91px; background: var(--strep); animation-delay: 0.5s; }
+.t7 { bottom: 91px; left: 0; background: var(--glazura); animation-delay: 0.65s; }
+.t8 { bottom: 0; left: 273px; background: var(--glazura); animation-delay: 0.8s; }
+
+@keyframes tile-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.94); }
+  to { opacity: 1; transform: none; }
+}
+
+/* --- wordmark --- */
+.brandline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1rem;
+  margin-bottom: 3.5rem;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.14em;
+  color: var(--grafit);
+}
+
+.wordmark-dot {
+  color: var(--glazura);
+  margin-left: 0.15em;
+}
+
+.brand-sub {
+  font-family: var(--font-util);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5a5a52;
+}
+
+/* --- titulek --- */
+.hero-title {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  font-size: clamp(2.4rem, 8.5vw, 5.6rem);
+  max-width: 14ch;
+}
+
+.hero-title .line {
+  display: block;
+  animation: rise 0.7s ease-out both;
+}
+
+.hero-title .l1 { animation-delay: 0.05s; }
+.hero-title .l2 { animation-delay: 0.2s; }
+
+.hero-title em {
+  font-style: normal;
+  color: var(--glazura);
+  /* glazurový lesk — jediný gradient na stránce, odvozený z kachle */
+  background: linear-gradient(100deg, var(--glazura) 55%, var(--glazura-tmava));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(0.35em); }
+  to { opacity: 1; transform: none; }
+}
+
+.hero-lead {
+  max-width: 34rem;
+  font-size: 1.15rem;
+  margin: 0 0 2.5rem;
+  animation: rise 0.7s ease-out 0.35s both;
+}
+
+/* --- fakta jako řada "dlaždic" se spárou --- */
+.hero-facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spara);
+  background: var(--grafit);
+  border: var(--spara) solid var(--grafit);
+  max-width: 46rem;
+  animation: rise 0.7s ease-out 0.5s both;
+}
+
+.hero-facts li {
+  background: var(--papir);
+  padding: 1rem 1.2rem;
+}
+
+.hero-facts strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--glazura);
+}
+
+.hero-facts span {
+  font-size: 0.92rem;
+  color: #4c4c44;
+}
+
+/* ============================================================
+   SEKCE — společné
+   ============================================================ */
+
+.section-head {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem 2rem;
+}
+
+.eyebrow {
+  font-family: var(--font-util);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--strep);
+  margin: 0 0 0.75rem;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  line-height: 1.08;
+  margin: 0 0 1rem;
+  max-width: 22ch;
+}
+
+.section-lead {
+  max-width: 38rem;
+  margin: 0;
+  color: #4c4c44;
+}
+
+/* ============================================================
+   SLUŽBY — mřížka se spárou (grid-gap = spára)
+   ============================================================ */
+
+.sluzby {
+  background: var(--sparovka);
+}
+
+.sluzby-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.25rem 4.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spara);
+  background: transparent;
+}
+
+.sluzba {
+  background: var(--papir);
+  border: 1px solid var(--malta);
+  padding: 1.5rem 1.4rem 1.6rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sluzba:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(35, 36, 31, 0.12);
+}
+
+.format {
+  display: inline-block;
+  font-family: var(--font-util);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  background: var(--glazura);
+  color: #fff;
+  padding: 0.25rem 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.sluzba h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.6rem;
+}
+
+.sluzba p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #43433c;
+}
+
+/* ============================================================
+   ŘEMESLO — tmavá sekce (slinutá dlažba) + vrstvy + reference
+   ============================================================ */
+
+.remeslo {
+  background: var(--grafit);
+  color: var(--sparovka);
+  border-top: var(--spara) solid var(--glazura);
+}
+
+.section-head.inverse .section-lead {
+  color: #b8b6ac;
+}
+
+.section-head.inverse h2 {
+  color: var(--sparovka);
+}
+
+.vrstvy {
+  list-style: none;
+  counter-reset: none;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.25rem 3.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spara);
+}
+
+.vrstva {
+  background: #2c2d27;
+  border-left: 4px solid var(--strep);
+  padding: 1.4rem 1.4rem 1.5rem;
+}
+
+/* vrstvy jdou odspodu — jako souvrství na stavbě */
+.vrstva:nth-child(2) { border-left-color: var(--glazura); }
+.vrstva:nth-child(3) { border-left-color: var(--strep); }
+.vrstva:nth-child(4) { border-left-color: var(--glazura); }
+
+.vrstva-cislo {
+  font-family: var(--font-util);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #9c9a8f;
+}
+
+.vrstva h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.15rem;
+  margin: 0.35rem 0 0.55rem;
+  color: var(--sparovka);
+}
+
+.vrstva p {
+  margin: 0;
+  font-size: 0.97rem;
+  color: #cfcdc3;
+}
+
+/* --- reference --- */
+.reference {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.25rem 4.5rem;
+}
+
+.reference-h {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  margin: 0 0 1.5rem;
+  color: var(--sparovka);
+}
+
+.reference-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spara);
+}
+
+.refka {
+  margin: 0;
+  background: var(--sparovka);
+  color: var(--grafit);
+  padding: 1.5rem 1.4rem;
+}
+
+.refka-misto {
+  font-family: var(--font-util);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--glazura);
+  margin: 0 0 0.7rem;
+}
+
+.refka-text {
+  margin: 0 0 0.9rem;
+  font-size: 1rem;
+}
+
+.refka-jmeno {
+  font-family: var(--font-util);
+  font-size: 0.85rem;
+  color: #5a5a52;
+}
+
+/* ============================================================
+   RESPONZIVITA
+   ============================================================ */
+
+@media (min-width: 640px) {
+  .hero-facts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .reference-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .vrstvy {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .hero-inner {
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+  }
+  .sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .vrstvy {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  /* na mobilu jen dvě rohové kachle, ať nepřekáží textu */
+  .t2, .t3, .t4, .t6, .t7, .t8 {
+    display: none;
+  }
+  .tile {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .tile,
+  .hero-title .line,
+  .hero-lead,
+  .hero-facts {
+    animation: none;
+  }
+  .sluzba {
+    transition: none;
+  }
+  .sluzba:hover {
+    transform: none;
+  }
+}
