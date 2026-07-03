@@ -1,0 +1,464 @@
+/* ============================================================
+   FALK, spol. s r. o. — pokrývačství, Plzeň
+   Paleta odvozená z materiálů řemesla:
+   - asfalt / tmavý pás      #1B1F24
+   - PVC fólie světle šedá   #E8EBED
+   - měď / klempířina        #C2622B  (jediný akcent)
+   - hliník / zinek          #9AA4AC
+   - beton                   #F5F6F7  (podklad)
+   Typografie: display = úzký grotesk (technické výkresy, popisky
+   na plechu), body = čitelný humanistický sans.
+   ============================================================ */
+
+:root {
+  --asfalt: #1b1f24;
+  --folie: #e8ebed;
+  --med: #c2622b;
+  --med-tmava: #9e4d1f;
+  --hlinik: #9aa4ac;
+  --beton: #f5f6f7;
+  --text: #23282e;
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", "Archivo Narrow", Arial, sans-serif;
+  --font-body: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--beton);
+  -webkit-font-smoothing: antialiased;
+}
+
+.fk a {
+  color: var(--med-tmava);
+  text-decoration: none;
+}
+
+.fk a:hover {
+  text-decoration: underline;
+}
+
+.fk a:focus-visible,
+.fk :focus-visible {
+  outline: 3px solid var(--med);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   HERO — asfaltově tmavý, typografický, se signature schématem
+   střešního souvrství (vrstvy se "pokládají" při načtení)
+   ============================================================ */
+
+.fk-hero {
+  background: var(--asfalt);
+  color: var(--folie);
+  padding: 1.5rem 1.25rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemná textura asfaltového pásu — diagonální posyp */
+.fk-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    115deg,
+    transparent 0,
+    transparent 22px,
+    rgba(255, 255, 255, 0.025) 22px,
+    rgba(255, 255, 255, 0.025) 24px
+  );
+  pointer-events: none;
+}
+
+.fk-hero > * {
+  position: relative;
+}
+
+.fk-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+.fk-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.fk-wordmark-name {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--folie);
+  /* měděná linka jako okap pod jménem */
+  border-bottom: 3px solid var(--med);
+  padding-bottom: 0.2rem;
+  width: max-content;
+}
+
+.fk-wordmark-sub {
+  margin-top: 0.45rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hlinik);
+}
+
+.fk-hero-contact {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+}
+
+.fk-hero-contact a {
+  color: var(--folie);
+  border-bottom: 1px solid var(--med);
+  padding-bottom: 2px;
+}
+
+.fk-hero-contact a:hover {
+  color: var(--med);
+  text-decoration: none;
+}
+
+.fk-hero-body {
+  max-width: 68rem;
+  margin: 3.5rem auto 0;
+}
+
+.fk-hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--med);
+  font-weight: 600;
+}
+
+.fk-hero-title {
+  margin: 0 0 2.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 8vw, 5.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.fk-hero-title .fk-line {
+  display: block;
+}
+
+.fk-line-3 {
+  color: var(--med);
+}
+
+/* animace nadpisu — řádky nabíhají po vrstvách */
+@keyframes fk-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fk-line-1 { animation: fk-rise 0.55s ease-out both; }
+.fk-line-2 { animation: fk-rise 0.55s 0.12s ease-out both; }
+.fk-line-3 { animation: fk-rise 0.55s 0.24s ease-out both; }
+
+/* ---------- SIGNATURE: schéma souvrství ploché střechy ---------- */
+
+.fk-souvrstvi {
+  max-width: 46rem;
+  border-left: 3px solid var(--med);
+}
+
+.fk-vrstva {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1.1rem;
+  font-family: var(--font-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  transform-origin: left center;
+}
+
+/* vrstvy se pokládají odspodu — jako na stavbě */
+@keyframes fk-lay {
+  from {
+    opacity: 0;
+    transform: translateX(-1.2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fk-vrstva-4 { background: #2a3038; color: var(--hlinik); animation: fk-lay 0.5s 0.35s ease-out both; }
+.fk-vrstva-3 { background: #39414b; color: var(--folie); width: 92%; animation: fk-lay 0.5s 0.5s ease-out both; }
+.fk-vrstva-2 { background: #4d5762; color: var(--folie); width: 84%; animation: fk-lay 0.5s 0.65s ease-out both; }
+.fk-vrstva-1 { background: var(--med); color: #fff; width: 76%; animation: fk-lay 0.5s 0.8s ease-out both; }
+
+.fk-vrstva-cislo {
+  font-weight: 700;
+  font-size: 1.1rem;
+  min-width: 1.2rem;
+}
+
+.fk-hero-lead {
+  margin: 2.5rem 0 0;
+  max-width: 40rem;
+  font-size: 1.1rem;
+  color: #c8cfd5;
+}
+
+/* ============================================================
+   SLUŽBY
+   ============================================================ */
+
+.fk-sluzby {
+  padding: 4.5rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.fk-section-head {
+  max-width: 44rem;
+  margin-bottom: 3rem;
+}
+
+.fk-section-head h2,
+.fk-duvera h2 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+.fk-section-head p {
+  margin: 0;
+  color: #4a525a;
+  font-size: 1.05rem;
+}
+
+.fk-sluzby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.fk-karta {
+  background: #fff;
+  border-top: 4px solid var(--asfalt);
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.fk-karta:hover {
+  border-top-color: var(--med);
+  transform: translateY(-4px);
+}
+
+.fk-karta-hlava {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.fk-karta-kod {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--med);
+  border: 1.5px solid currentColor;
+  padding: 0.25rem 0.5rem;
+}
+
+.fk-karta h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 1.25rem;
+}
+
+.fk-karta-popis {
+  margin: 0 0 1.25rem;
+  color: #3d444b;
+}
+
+.fk-karta-seznam {
+  margin: auto 0 0;
+  padding: 1rem 0 0;
+  list-style: none;
+  border-top: 1px solid var(--folie);
+}
+
+.fk-karta-seznam li {
+  padding: 0.3rem 0 0.3rem 1.3rem;
+  position: relative;
+  font-size: 0.95rem;
+  color: #4a525a;
+}
+
+/* odrážka = sklon střechy, malý klín */
+.fk-karta-seznam li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  width: 0;
+  height: 0;
+  border-left: 8px solid var(--med);
+  border-top: 5px solid transparent;
+}
+
+/* ============================================================
+   DŮVĚRA / O NÁS
+   ============================================================ */
+
+.fk-duvera {
+  background: var(--folie);
+  padding: 4.5rem 1.25rem;
+}
+
+.fk-duvera-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.fk-duvera-text h2 {
+  max-width: 34rem;
+}
+
+.fk-duvera-text p {
+  max-width: 38rem;
+  color: #3d444b;
+  margin: 0 0 1.1rem;
+}
+
+.fk-fakta {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 3px solid var(--asfalt);
+}
+
+.fk-fakt {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--hlinik);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.25rem;
+}
+
+.fk-fakt dt {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.9rem;
+  letter-spacing: 0.02em;
+  color: var(--asfalt);
+  line-height: 1;
+}
+
+.fk-fakt dd {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #4a525a;
+  max-width: 26rem;
+}
+
+/* ============================================================
+   RESPONZIVITA
+   ============================================================ */
+
+@media (min-width: 640px) {
+  .fk-hero {
+    padding: 2rem 2.5rem 5.5rem;
+  }
+
+  .fk-sluzby,
+  .fk-duvera {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .fk-vrstva {
+    font-size: 0.95rem;
+    padding: 1rem 1.4rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .fk-sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .fk-duvera-inner {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+  }
+}
+
+/* ============================================================
+   PŘÍSTUPNOST — redukovaný pohyb
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .fk-line-1,
+  .fk-line-2,
+  .fk-line-3,
+  .fk-vrstva-1,
+  .fk-vrstva-2,
+  .fk-vrstva-3,
+  .fk-vrstva-4 {
+    animation: none;
+  }
+
+  .fk-karta,
+  .fk-karta:hover {
+    transition: none;
+    transform: none;
+  }
+}
