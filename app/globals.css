@@ -1,0 +1,514 @@
+/* =========================================================
+   Profimakléřky s.r.o. — Brno · reality v ženské péči
+   Paleta: hluboká švestková (péče, ženská energie, serióznost),
+   pudrová růžová, teplá slonovina, zlatavý mosazný akcent
+   (klika/klíč — artefakty předání nemovitosti).
+   Signature: mosazný „klíčový" tah v hero titulku + štítky
+   kroků prodeje jako klíčenky.
+   ========================================================= */
+
+:root {
+  --svestka: #3d1f33;
+  --svestka-tmava: #2b1424;
+  --pudr: #edd9d3;
+  --slonovina: #faf5ef;
+  --mosaz: #c08a3e;
+  --mosaz-svetla: #d9a95c;
+  --inkoust: #33222e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--slonovina);
+  color: var(--inkoust);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pm h1,
+.pm h2,
+.pm h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+.pm a:focus-visible,
+.pm button:focus-visible {
+  outline: 3px solid var(--mosaz);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  background: linear-gradient(168deg, var(--svestka-tmava) 0%, var(--svestka) 62%, #4b2940 100%);
+  color: var(--slonovina);
+  padding: 1.5rem 1.25rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  /* jemná pudrová záře — teplo, péče */
+  content: "";
+  position: absolute;
+  right: -20%;
+  top: -30%;
+  width: 70%;
+  height: 90%;
+  background: radial-gradient(closest-side, rgba(237, 217, 211, 0.14), transparent 70%);
+  pointer-events: none;
+}
+
+.hero-nav {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.wordmark {
+  font-size: 1.35rem;
+  letter-spacing: 0.01em;
+  color: var(--slonovina);
+}
+
+.wordmark em {
+  font-style: italic;
+  color: var(--mosaz-svetla);
+}
+
+.nav-tel {
+  color: var(--pudr);
+  text-decoration: none;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid rgba(237, 217, 211, 0.4);
+  padding-bottom: 2px;
+}
+
+.nav-tel:hover {
+  color: var(--mosaz-svetla);
+  border-color: var(--mosaz-svetla);
+}
+
+.hero-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 3.5rem 0 3rem;
+  position: relative;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1.25rem;
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--mosaz-svetla);
+}
+
+.hero-title {
+  font-size: clamp(3rem, 11vw, 7.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: var(--slonovina);
+}
+
+.hero-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: hero-vstup 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.line-1 { animation-delay: 0.05s; }
+.line-2 { animation-delay: 0.2s; font-style: italic; color: var(--pudr); }
+.line-3 { animation-delay: 0.35s; }
+
+/* Signature: mosazný tah zakončený „zubem klíče" —
+   klíč jako symbol předání nemovitosti do péče */
+.hero-key {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.25em;
+  width: 1.6em;
+  height: 0.09em;
+  background: linear-gradient(90deg, var(--mosaz), var(--mosaz-svetla));
+  position: relative;
+  transform-origin: left center;
+  animation: klic-tah 0.9s 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-key::before {
+  /* hlava klíče */
+  content: "";
+  position: absolute;
+  left: -0.14em;
+  top: 50%;
+  width: 0.32em;
+  height: 0.32em;
+  border: 0.045em solid var(--mosaz-svetla);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.hero-key::after {
+  /* zuby klíče */
+  content: "";
+  position: absolute;
+  right: 0.1em;
+  bottom: 100%;
+  width: 0.3em;
+  height: 0.16em;
+  background:
+    linear-gradient(90deg,
+      var(--mosaz-svetla) 0 30%, transparent 30% 45%,
+      var(--mosaz-svetla) 45% 75%, transparent 75%);
+}
+
+.hero-lead {
+  max-width: 34rem;
+  margin: 2rem 0 0;
+  font-size: 1.15rem;
+  color: rgba(250, 245, 239, 0.85);
+  opacity: 0;
+  animation: hero-vstup 0.7s 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2.25rem;
+  opacity: 0;
+  animation: hero-vstup 0.7s 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.7rem;
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn-solid {
+  background: var(--mosaz);
+  color: var(--svestka-tmava);
+}
+
+.btn-solid:hover {
+  background: var(--mosaz-svetla);
+}
+
+.btn-line {
+  border: 1px solid rgba(237, 217, 211, 0.5);
+  color: var(--pudr);
+}
+
+.btn-line:hover {
+  border-color: var(--mosaz-svetla);
+  color: var(--mosaz-svetla);
+}
+
+.hero-strip {
+  border-top: 1px solid rgba(237, 217, 211, 0.22);
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 1.1rem 0 1.3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(237, 217, 211, 0.65);
+}
+
+@keyframes hero-vstup {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes klic-tah {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* ============ SLUŽBY ============ */
+
+.sluzby {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.sekce-hlava {
+  max-width: 38rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.8rem;
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 0.76rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--mosaz);
+}
+
+.pm h2 {
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.15;
+  color: var(--svestka);
+}
+
+.pm h2 em {
+  font-style: italic;
+  color: var(--mosaz);
+}
+
+.kroky {
+  list-style: none;
+  margin: 3rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  counter-reset: krok;
+}
+
+.krok {
+  background: #fff;
+  border: 1px solid rgba(61, 31, 51, 0.1);
+  border-radius: 14px;
+  padding: 1.6rem 1.5rem 1.5rem;
+  position: relative;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.krok:hover {
+  border-color: var(--mosaz);
+  transform: translateY(-3px);
+}
+
+.krok-stitek {
+  /* štítek jako klíčenka — kroužek + jmenovka */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--svestka);
+  background: var(--pudr);
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem 0.3rem 0.55rem;
+}
+
+.krok-stitek::before {
+  content: "";
+  width: 0.65rem;
+  height: 0.65rem;
+  border: 2px solid var(--mosaz);
+  border-radius: 50%;
+}
+
+.krok h3 {
+  margin: 1rem 0 0.45rem;
+  font-size: 1.25rem;
+  color: var(--svestka);
+}
+
+.krok p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #5a4652;
+}
+
+.sluzby-pozn {
+  margin: 2.5rem auto 0;
+  max-width: 44rem;
+  text-align: center;
+  font-size: 1.05rem;
+  color: var(--svestka);
+}
+
+.sluzby-pozn a {
+  color: var(--mosaz);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.sluzby-pozn a:hover {
+  color: var(--svestka);
+}
+
+/* ============ DŮVĚRA / REFERENCE ============ */
+
+.duvera {
+  background: var(--pudr);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.duvera-uvod {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.hodnoceni {
+  background: var(--svestka);
+  color: var(--slonovina);
+  border-radius: 14px;
+  padding: 1.6rem 1.5rem;
+  display: grid;
+  gap: 0.25rem;
+  justify-items: start;
+  max-width: 16rem;
+}
+
+.hodnoceni-cislo {
+  font-size: 3.2rem;
+  line-height: 1;
+}
+
+.hodnoceni-hvezdy {
+  color: var(--mosaz-svetla);
+  letter-spacing: 0.15em;
+  font-size: 1.05rem;
+}
+
+.hodnoceni-pop {
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: rgba(250, 245, 239, 0.8);
+}
+
+.duvera-text {
+  max-width: 36rem;
+  margin: 1rem 0 0;
+  font-size: 1.08rem;
+  color: #4b3542;
+}
+
+.reference {
+  list-style: none;
+  max-width: 68rem;
+  margin: 3rem auto 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.ref {
+  background: var(--slonovina);
+  border-radius: 14px;
+  padding: 1.6rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+
+.ref blockquote {
+  margin: 0;
+}
+
+.ref-titulek {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--svestka);
+}
+
+.ref-text {
+  margin: 0;
+  font-size: 0.96rem;
+  color: #5a4652;
+}
+
+.ref-datum {
+  margin: 0;
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mosaz);
+}
+
+/* ============ RESPONSIVITA ============ */
+
+@media (min-width: 640px) {
+  .kroky {
+    grid-template-columns: 1fr 1fr;
+  }
+  .reference {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero-inner {
+    padding: 5.5rem 0 4.5rem;
+  }
+  .duvera-uvod {
+    grid-template-columns: 16rem 1fr;
+    gap: 3.5rem;
+  }
+  .kroky {
+    gap: 1.5rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-line,
+  .hero-lead,
+  .hero-actions,
+  .hero-key {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .krok:hover {
+    transform: none;
+  }
+}
