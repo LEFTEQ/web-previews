@@ -1,0 +1,598 @@
+/* =====================================================================
+   Interprojekt odpady s.r.o. — „výkres v terénu"
+   Paleta:
+   --jil        #1E3A2F  jílová zeleň (minerální těsnění, rekultivace)
+   --jil-tmavy  #12241D  hluboké podloží
+   --papir      #EDEFE8  projekční papír s nádechem zeleně
+   --beton      #5E6B63  betonová šedozelená (sekundární text)
+   --kolik      #E8641E  signální oranž geodetického kolíku (akcent)
+   --linka      #C3CCC0  slabá výkresová linka
+   ===================================================================== */
+
+:root {
+  --jil: #1e3a2f;
+  --jil-tmavy: #12241d;
+  --papir: #edefe8;
+  --beton: #5e6b63;
+  --kolik: #e8641e;
+  --linka: #c3ccc0;
+  --font-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--papir);
+  color: var(--jil-tmavy);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ip a:focus-visible,
+.ip button:focus-visible {
+  outline: 3px solid var(--kolik);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =================== HERO =================== */
+
+.hero {
+  position: relative;
+  background: var(--jil);
+  color: var(--papir);
+  overflow: hidden;
+  /* jemná milimetrová mřížka projekčního papíru */
+  background-image: linear-gradient(
+      rgba(237, 239, 232, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(237, 239, 232, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.hero-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.4rem 5vw 0;
+  flex-wrap: wrap;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.wordmark-inter {
+  font-weight: 900;
+  font-size: 1.35rem;
+  color: var(--papir);
+}
+
+.wordmark-projekt {
+  font-weight: 300;
+  font-size: 1.35rem;
+  color: var(--kolik);
+}
+
+.wordmark-sub {
+  display: block;
+  margin-top: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(237, 239, 232, 0.65);
+}
+
+.hero-tel {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--papir);
+  text-decoration: none;
+  border: 1px solid rgba(237, 239, 232, 0.35);
+  padding: 0.5rem 0.9rem;
+  border-radius: 3px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.hero-tel:hover {
+  border-color: var(--kolik);
+  color: var(--kolik);
+}
+
+.hero-body {
+  padding: 4.5rem 5vw 2rem;
+  max-width: 60rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--kolik);
+  margin: 0 0 1.4rem;
+  animation: ip-rise 0.7s ease-out both;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.3rem, 7vw, 5.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0 0 1.6rem;
+  animation: ip-rise 0.7s ease-out 0.12s both;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--kolik);
+  /* podtržení jako kóta ve výkresu */
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: rgba(232, 100, 30, 0.6);
+}
+
+.hero-lead {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.65;
+  max-width: 34rem;
+  color: rgba(237, 239, 232, 0.85);
+  margin: 0 0 2.2rem;
+  animation: ip-rise 0.7s ease-out 0.24s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  animation: ip-rise 0.7s ease-out 0.36s both;
+}
+
+.btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 0.95rem 1.7rem;
+  border-radius: 3px;
+  display: inline-block;
+  transition: transform 0.15s ease, background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--kolik);
+  color: var(--jil-tmavy);
+}
+
+.btn-primary:hover {
+  background: #f4772f;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--papir);
+  border: 1px solid rgba(237, 239, 232, 0.4);
+}
+
+.btn-ghost:hover {
+  border-color: var(--papir);
+  transform: translateY(-2px);
+}
+
+/* --- Signature: řez skládkou --- */
+
+.hero-section-cut {
+  position: relative;
+  margin-top: 2rem;
+}
+
+.cut-svg {
+  display: block;
+  width: 100%;
+  height: clamp(110px, 18vw, 220px);
+}
+
+.cut-layer-1 {
+  fill: #2b5241;
+  animation: ip-layer 1s ease-out 0.3s both;
+}
+
+.cut-layer-2 {
+  fill: #406853;
+  animation: ip-layer 1s ease-out 0.5s both;
+}
+
+.cut-layer-3 {
+  fill: var(--papir);
+  animation: ip-layer 1s ease-out 0.7s both;
+}
+
+.cut-line {
+  stroke: var(--kolik);
+  stroke-width: 2.5;
+  stroke-dasharray: 10 7;
+  animation: ip-dash 30s linear infinite;
+}
+
+.cut-labels {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding-bottom: 0.6rem;
+  pointer-events: none;
+}
+
+.cut-labels span {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--jil);
+  background: rgba(237, 239, 232, 0.8);
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+}
+
+.cut-labels span:nth-child(2) {
+  align-self: center;
+  color: var(--papir);
+  background: rgba(18, 36, 29, 0.45);
+}
+
+.cut-labels span:first-child {
+  align-self: flex-start;
+  margin-top: 0.4rem;
+  color: var(--papir);
+  background: rgba(18, 36, 29, 0.45);
+}
+
+/* =================== SEKCE: SLUŽBY =================== */
+
+.sluzby {
+  padding: 4.5rem 5vw 5rem;
+  max-width: 74rem;
+  margin: 0 auto;
+}
+
+.section-head {
+  max-width: 42rem;
+  margin-bottom: 3rem;
+}
+
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--kolik);
+  margin: 0 0 0.8rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+}
+
+.section-lead {
+  color: var(--beton);
+  margin: 0;
+}
+
+.sluzby-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--linka);
+  border: 1px solid var(--linka);
+}
+
+.sluzba {
+  background: var(--papir);
+  padding: 1.8rem 1.6rem 2rem;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.sluzba:hover {
+  background: #ffffff;
+}
+
+.sluzba-kod {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--kolik);
+  border: 1.5px solid var(--kolik);
+  border-radius: 2px;
+  padding: 0.2rem 0.5rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.sluzba-nazev {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.25;
+  margin: 0 0 0.6rem;
+}
+
+.sluzba-popis {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--beton);
+  margin: 0;
+}
+
+/* --- postup --- */
+
+.postup {
+  margin-top: 4rem;
+}
+
+.postup-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  letter-spacing: 0.02em;
+  margin: 0 0 1.8rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 2px solid var(--jil);
+}
+
+.postup-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+.postup-krok {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.postup-cislo {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--kolik);
+  line-height: 1;
+  padding-top: 0.2rem;
+}
+
+.postup-faze {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.4rem;
+}
+
+.postup-text {
+  font-size: 0.95rem;
+  color: var(--beton);
+  margin: 0;
+}
+
+/* =================== SEKCE: DŮVĚRA =================== */
+
+.duvera {
+  background: var(--jil-tmavy);
+  color: var(--papir);
+  padding: 4.5rem 5vw 5rem;
+}
+
+.section-head--light .section-title {
+  color: var(--papir);
+}
+
+.duvera-grid {
+  max-width: 74rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(0, 2fr);
+  gap: 3.5rem;
+}
+
+.duvera .section-head {
+  max-width: 74rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.duvera-fakta {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+}
+
+.fakt {
+  border-left: 3px solid var(--kolik);
+  padding-left: 1.1rem;
+}
+
+.fakt-hodnota {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 2rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.fakt-popis {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.92rem;
+  color: rgba(237, 239, 232, 0.7);
+}
+
+.reference-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.reference {
+  padding: 1.6rem 0;
+  border-top: 1px solid rgba(237, 239, 232, 0.18);
+}
+
+.reference:last-child {
+  border-bottom: 1px solid rgba(237, 239, 232, 0.18);
+}
+
+.reference-typ {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--kolik);
+}
+
+.reference-nazev {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  margin: 0.5rem 0 0.5rem;
+}
+
+.reference-text {
+  font-size: 0.95rem;
+  color: rgba(237, 239, 232, 0.72);
+  margin: 0;
+  max-width: 38rem;
+}
+
+/* =================== ANIMACE =================== */
+
+@keyframes ip-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ip-layer {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ip-dash {
+  to {
+    stroke-dashoffset: -680;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-eyebrow,
+  .hero-title,
+  .hero-lead,
+  .hero-actions,
+  .cut-layer-1,
+  .cut-layer-2,
+  .cut-layer-3 {
+    animation: none;
+  }
+  .cut-line {
+    animation: none;
+  }
+  .btn:hover {
+    transform: none;
+  }
+}
+
+/* =================== RESPONZIVITA =================== */
+
+@media (max-width: 860px) {
+  .duvera-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .duvera-fakta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .fakt {
+    flex: 1 1 200px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-body {
+    padding-top: 3rem;
+  }
+
+  .hero-actions .btn {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+
+  .cut-labels span:nth-child(2) {
+    display: none;
+  }
+
+  .sluzby,
+  .duvera {
+    padding-left: 6vw;
+    padding-right: 6vw;
+  }
+}
