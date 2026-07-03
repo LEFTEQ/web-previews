@@ -1,0 +1,633 @@
+/* ─────────────────────────────────────────────────────────
+   VAPEE Morava — autodoprava Olomouc
+   Paleta odvozená z reality firmy: původní olivová zůstává
+   jako DNA značky, ale povýšená na tmavou „khaki-asfaltovou"
+   scénu; akcent = výstražná oranž z reflexních vest a plachet.
+   Typo: Archivo (široký, technický grotesk — nápisy na bocích
+   návěsů) + systémový mono pro tonáže a čísla (nákladový list).
+   ───────────────────────────────────────────────────────── */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap");
+
+:root {
+  --asphalt: #191d16;      /* tmavé olivově-černé pozadí hero */
+  --olive: #4a5240;        /* DNA značky — původní olivová, ztišená */
+  --olive-soft: #6b7460;
+  --paper: #eef0e9;        /* světlá olivově tónovaná plocha */
+  --white: #fbfcf9;
+  --amber: #f59f1e;        /* výstražná oranž — plachty, vesty, majáky */
+  --ink: #23271f;
+  --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Archivo", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus — viditelný všude */
+.vp a:focus-visible,
+.vp button:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── HERO ─────────────────────────────────────────────── */
+
+.vp-hero {
+  background:
+    linear-gradient(160deg, #1c211a 0%, var(--asphalt) 55%, #14170f 100%);
+  color: var(--white);
+  padding: 1.25rem 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 92svh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemná „vodicí čára silnice" napříč pozadím */
+.vp-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0 48px,
+    rgba(238, 240, 233, 0.045) 48px 49px
+  );
+  pointer-events: none;
+}
+
+.vp-hero-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.vp-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.vp-wordmark-main {
+  font-weight: 900;
+  font-stretch: 118%;
+  font-size: 1.6rem;
+  letter-spacing: 0.14em;
+  color: var(--white);
+}
+
+.vp-wordmark-main::after {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-left: 0.3em;
+  background: var(--amber);
+  /* šipka doprava — směr jízdy */
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  transform: translateY(0.02em);
+}
+
+.vp-wordmark-sub {
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--olive-soft);
+  margin-top: 0.45rem;
+}
+
+.vp-hero-phone {
+  text-decoration: none;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.vp-hero-phone-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--olive-soft);
+}
+
+.vp-hero-phone-num {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  color: var(--amber);
+  white-space: nowrap;
+}
+
+.vp-hero-phone:hover .vp-hero-phone-num {
+  text-decoration: underline;
+}
+
+.vp-hero-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 60rem;
+  padding: 3.5rem 0 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.vp-hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--amber);
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+  animation: vp-rise 0.6s 0.05s both;
+}
+
+.vp-hero-title {
+  font-weight: 900;
+  font-stretch: 112%;
+  font-size: clamp(2.4rem, 8.5vw, 6rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.vp-hero-title em {
+  font-style: normal;
+  color: var(--amber);
+}
+
+.vp-line {
+  display: block;
+}
+
+.vp-line-1 { animation: vp-rise 0.7s 0.15s both; }
+.vp-line-2 { animation: vp-rise 0.7s 0.3s both; }
+
+.vp-hero-lead {
+  margin-top: 1.5rem;
+  max-width: 34rem;
+  font-size: 1.05rem;
+  color: #c3c8ba;
+  animation: vp-rise 0.7s 0.45s both;
+}
+
+.vp-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  animation: vp-rise 0.7s 0.55s both;
+}
+
+.vp-btn {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.vp-btn-solid {
+  background: var(--amber);
+  color: #1c1608;
+}
+
+.vp-btn-solid:hover {
+  transform: translateX(4px); /* směr jízdy */
+  background: #ffb440;
+}
+
+.vp-btn-line {
+  border: 1.5px solid rgba(238, 240, 233, 0.35);
+  color: var(--white);
+}
+
+.vp-btn-line:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
+/* ── SIGNATURE: kilometrovníková škála tonáží ─────────── */
+
+.vp-route {
+  position: relative;
+  z-index: 1;
+  padding: 0 0 2rem;
+}
+
+.vp-route-line {
+  height: 3px;
+  background: linear-gradient(90deg, var(--olive) 0%, var(--amber) 100%);
+  border-radius: 2px;
+  transform-origin: left center;
+  animation: vp-road 1.1s 0.5s both cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.vp-route-stops {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.35rem;
+}
+
+.vp-stop {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  animation: vp-rise 0.5s both;
+}
+
+.vp-stop:nth-child(1) { animation-delay: 0.7s; }
+.vp-stop:nth-child(2) { animation-delay: 0.85s; }
+.vp-stop:nth-child(3) { animation-delay: 1s; }
+.vp-stop:nth-child(4) { animation-delay: 1.15s; }
+.vp-stop:nth-child(5) { animation-delay: 1.3s; }
+
+.vp-stop-last {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.vp-stop-tick {
+  width: 2px;
+  height: 10px;
+  background: var(--olive-soft);
+  margin-bottom: 0.35rem;
+}
+
+.vp-stop-last .vp-stop-tick {
+  background: var(--amber);
+}
+
+.vp-stop-t {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--white);
+  line-height: 1.2;
+}
+
+.vp-stop-n {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--olive-soft);
+}
+
+/* na úzkých mobilech schovej prostřední popisky, škála zůstane čitelná */
+@media (max-width: 420px) {
+  .vp-stop:nth-child(2) .vp-stop-n,
+  .vp-stop:nth-child(3) .vp-stop-n,
+  .vp-stop:nth-child(4) .vp-stop-n {
+    display: none;
+  }
+}
+
+/* ── SEKCE — společné ─────────────────────────────────── */
+
+.vp-section {
+  padding: 4.5rem 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.vp-section-head {
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+}
+
+.vp-kicker {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--olive);
+  margin-bottom: 0.75rem;
+}
+
+.vp-kicker::before {
+  content: "▸ ";
+  color: var(--amber);
+}
+
+.vp-kicker-light {
+  color: #b9c0ad;
+}
+
+.vp-h2 {
+  font-weight: 900;
+  font-stretch: 110%;
+  text-transform: uppercase;
+  font-size: clamp(1.7rem, 4.5vw, 2.7rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+.vp-section-lead {
+  margin-top: 1rem;
+  color: #4d5347;
+  font-size: 1.05rem;
+}
+
+/* ── FLEET karty ──────────────────────────────────────── */
+
+.vp-fleet-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.vp-card {
+  background: var(--white);
+  border: 1px solid #dde0d4;
+  border-left: 4px solid var(--olive);
+  border-radius: 6px;
+  padding: 1.5rem 1.4rem;
+  transition: border-left-color 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.vp-card:hover {
+  border-left-color: var(--amber);
+  transform: translateX(6px); /* opět směr jízdy */
+  box-shadow: 0 6px 24px rgba(25, 29, 22, 0.08);
+}
+
+.vp-card-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  background: var(--asphalt);
+  color: var(--amber);
+  padding: 0.2rem 0.55rem;
+  border-radius: 3px;
+  margin-bottom: 0.8rem;
+}
+
+.vp-card-name {
+  font-weight: 800;
+  font-stretch: 108%;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.4rem;
+}
+
+.vp-card-desc {
+  color: #4d5347;
+  font-size: 0.97rem;
+}
+
+.vp-card-meta {
+  margin-top: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--olive);
+  border-top: 1px dashed #d4d8c9;
+  padding-top: 0.6rem;
+}
+
+/* ── SKLAD blok ───────────────────────────────────────── */
+
+.vp-store {
+  margin-top: 3rem;
+  background: var(--asphalt);
+  color: var(--white);
+  border-radius: 8px;
+  padding: 2.25rem 1.5rem;
+  display: grid;
+  gap: 2rem;
+}
+
+.vp-store-h {
+  font-weight: 900;
+  font-stretch: 110%;
+  text-transform: uppercase;
+  font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+.vp-store-p {
+  color: #c3c8ba;
+  max-width: 34rem;
+}
+
+.vp-store-stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.vp-stat {
+  border-left: 3px solid var(--amber);
+  padding-left: 1rem;
+}
+
+.vp-stat-num {
+  font-family: var(--mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--amber);
+  line-height: 1.1;
+}
+
+.vp-stat-label {
+  font-size: 0.9rem;
+  color: #c3c8ba;
+  margin-top: 0.25rem;
+}
+
+/* ── DŮVĚRA ───────────────────────────────────────────── */
+
+.vp-trust {
+  border-top: 1px solid #dde0d4;
+}
+
+.vp-trust-list {
+  list-style: none;
+  display: grid;
+  gap: 2rem;
+}
+
+.vp-trust-item {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.vp-trust-year {
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--olive);
+  border-radius: 4px;
+  padding: 0.35rem 0.5rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.vp-trust-title {
+  font-weight: 800;
+  font-stretch: 108%;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.vp-trust-text {
+  color: #4d5347;
+  font-size: 0.97rem;
+  max-width: 38rem;
+}
+
+.vp-address {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: var(--white);
+  border: 1px dashed #c9cebc;
+  border-radius: 6px;
+}
+
+.vp-address-firm {
+  font-weight: 800;
+  font-stretch: 110%;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.vp-address-line {
+  color: #4d5347;
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+}
+
+.vp-inline-link {
+  color: var(--olive);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--amber);
+}
+
+.vp-inline-link:hover {
+  color: var(--amber);
+}
+
+/* ── ANIMACE ──────────────────────────────────────────── */
+
+@keyframes vp-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes vp-road {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .vp *,
+  .vp *::before,
+  .vp *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── RESPONSIVE ≥ tablet / desktop ────────────────────── */
+
+@media (min-width: 640px) {
+  .vp-hero {
+    padding: 1.75rem 2.5rem 0;
+  }
+
+  .vp-section {
+    padding: 5.5rem 2.5rem;
+  }
+
+  .vp-fleet-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vp-store {
+    padding: 3rem 2.5rem;
+  }
+
+  .vp-store-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .vp-fleet-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* pátá karta (nadrozměr) přes zbývající šířku */
+  .vp-fleet-list .vp-card:nth-child(4) {
+    grid-column: span 1;
+  }
+
+  .vp-store {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+  }
+
+  .vp-store-stats {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .vp-trust-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .vp-trust-item {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .vp-trust-year {
+    justify-self: start;
+  }
+}
