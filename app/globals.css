@@ -1,0 +1,583 @@
+/* =====================================================
+   N.E.O. Uklidovka Praha — čistota jako designový systém
+   Palety: hloubková modř nočního úklidu + čistá bílá +
+   „bublinková" aqua + teplý citron (přípravky, guma rukavic)
+   ===================================================== */
+
+:root {
+  --noc: #0e2a3f;        /* hloubková modř — noc, kdy uklízíme */
+  --noc-tmava: #081c2c;
+  --cista: #fbfdff;      /* čistá bílá s modrým nádechem */
+  --aqua: #2fbecb;       /* voda + čisticí prostředek */
+  --aqua-svetla: #d9f3f5;
+  --citron: #f2c437;     /* žluté gumové rukavice */
+  --inkoust: #16323f;
+  --sed: #5a6f7c;
+
+  --pismo-display: "Arial Black", "Avenir Next Condensed", "Franklin Gothic Medium", Arial, sans-serif;
+  --pismo-text: Georgia, "Times New Roman", serif;
+  --pismo-util: "Trebuchet MS", Verdana, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cista);
+  color: var(--inkoust);
+  font-family: var(--pismo-text);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.neo img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---------- fokus ---------- */
+.neo a:focus-visible,
+.neo button:focus-visible {
+  outline: 3px solid var(--citron);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* =====================================================
+   HERO — noční směna. Tmavá plocha, přes kterou vede
+   jeden „setřený" světlý pruh (signature prvek).
+   ===================================================== */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--noc) 0%, var(--noc-tmava) 100%);
+  color: var(--cista);
+  padding: 2rem 1.25rem 4.5rem;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+/* --- wordmark --- */
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 3.5rem;
+  font-family: var(--pismo-util);
+}
+
+.wordmark-neo {
+  font-family: var(--pismo-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.12em;
+  color: var(--citron);
+}
+
+.wordmark-rest {
+  font-size: 0.95rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--aqua-svetla);
+}
+
+/* --- titulek --- */
+.hero-title {
+  margin: 0 0 1.5rem;
+  font-family: var(--pismo-display);
+  font-size: clamp(2.1rem, 7.5vw, 4.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.hero-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.6em);
+  animation: hero-vstup 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+
+.hero-line-1 { animation-delay: 0.1s; }
+.hero-line-2 { animation-delay: 0.28s; }
+.hero-line-3 { animation-delay: 0.5s; }
+
+.hero-line em {
+  font-style: normal;
+  color: var(--aqua);
+}
+
+/* třetí řádek: text „setřený do čista" — světlý pruh za písmem,
+   který se roztáhne jako tah mopem */
+.hero-wiped {
+  position: relative;
+  display: inline-block;
+  color: var(--noc-tmava);
+  padding: 0.05em 0.25em;
+  background: linear-gradient(90deg, var(--aqua-svetla), var(--cista) 60%);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  animation:
+    hero-vstup 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) 0.5s forwards,
+    hero-stir 0.9s cubic-bezier(0.65, 0, 0.2, 1) 0.75s forwards;
+}
+
+@keyframes hero-vstup {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-stir {
+  to {
+    background-size: 100% 100%;
+  }
+}
+
+/* --- podtitulek + akce --- */
+.hero-sub {
+  max-width: 34rem;
+  margin: 0 0 2.2rem;
+  font-size: 1.1rem;
+  color: #c3d6e0;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.1rem;
+  margin-bottom: 3.2rem;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-family: var(--pismo-util);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.btn-primary {
+  background: var(--citron);
+  color: var(--noc-tmava);
+  padding: 0.95rem 1.7rem;
+  border-radius: 999px;
+  font-size: 1.02rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 6px 22px rgba(242, 196, 55, 0.28);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(242, 196, 55, 0.4);
+}
+
+.hero-note {
+  font-family: var(--pismo-util);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--aqua);
+}
+
+/* --- fakta --- */
+.hero-facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+  max-width: 46rem;
+}
+
+.hero-facts li {
+  border-left: 3px solid var(--aqua);
+  padding-left: 0.9rem;
+}
+
+.hero-facts strong {
+  display: block;
+  font-family: var(--pismo-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  color: var(--cista);
+}
+
+.hero-facts span {
+  font-family: var(--pismo-util);
+  font-size: 0.88rem;
+  color: #9db6c4;
+}
+
+/* --- signature: setřený pruh dole v hero --- */
+.hero-swipe {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3.2rem;
+  z-index: 1;
+}
+
+.swipe-dust {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 12% 40%, rgba(155, 180, 195, 0.22) 0 2px, transparent 3px),
+    radial-gradient(circle at 33% 70%, rgba(155, 180, 195, 0.18) 0 2px, transparent 3px),
+    radial-gradient(circle at 57% 30%, rgba(155, 180, 195, 0.2) 0 2px, transparent 3px),
+    radial-gradient(circle at 78% 62%, rgba(155, 180, 195, 0.16) 0 2px, transparent 3px),
+    radial-gradient(circle at 92% 38%, rgba(155, 180, 195, 0.2) 0 2px, transparent 3px);
+}
+
+.swipe-clean {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--aqua) 0%, var(--aqua-svetla) 55%, var(--cista) 100%);
+  border-radius: 999px 0 0 0;
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: hero-stir-pruh 1.2s cubic-bezier(0.65, 0, 0.2, 1) 1s forwards;
+}
+
+@keyframes hero-stir-pruh {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.swipe-shine {
+  position: absolute;
+  top: -0.55rem;
+  left: 8%;
+  width: 0.9rem;
+  height: 0.9rem;
+  background: var(--cista);
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  opacity: 0;
+  animation: hero-blysk 0.6s ease 2s forwards;
+}
+
+@keyframes hero-blysk {
+  0% { opacity: 0; transform: scale(0.4) rotate(-20deg); }
+  60% { opacity: 1; transform: scale(1.25) rotate(8deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+/* =====================================================
+   SLUŽBY
+   ===================================================== */
+
+.sluzby {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 3.5rem;
+}
+
+.sekce-hlava {
+  max-width: 38rem;
+  margin-bottom: 2.8rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.7rem;
+  font-family: var(--pismo-util);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--aqua);
+}
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 2rem;
+  height: 3px;
+  background: var(--citron);
+  border-radius: 2px;
+  margin-right: 0.6rem;
+  vertical-align: middle;
+}
+
+.sluzby h2,
+.duvera h2 {
+  margin: 0;
+  font-family: var(--pismo-display);
+  font-size: clamp(1.5rem, 4.2vw, 2.3rem);
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--noc);
+}
+
+.sluzby-mrizka {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+
+.sluzba {
+  background: #fff;
+  border: 1px solid #e2ecf1;
+  border-radius: 14px;
+  padding: 1.5rem 1.4rem 1.6rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.sluzba:hover {
+  transform: translateY(-4px);
+  border-color: var(--aqua);
+  box-shadow: 0 14px 32px rgba(14, 42, 63, 0.1);
+}
+
+.sluzba-rezim {
+  margin: 0 0 0.6rem;
+  display: inline-block;
+  font-family: var(--pismo-util);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--noc);
+  background: var(--aqua-svetla);
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+}
+
+.sluzba h3 {
+  margin: 0 0 0.55rem;
+  font-family: var(--pismo-display);
+  font-size: 1.12rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--noc);
+}
+
+.sluzba-popis {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--sed);
+}
+
+.sluzby-pozn {
+  margin: 2.4rem 0 0;
+  max-width: 36rem;
+  font-style: italic;
+  color: var(--sed);
+}
+
+/* =====================================================
+   DŮVĚRA / O NÁS
+   ===================================================== */
+
+.duvera {
+  background: linear-gradient(180deg, var(--aqua-svetla) 0%, var(--cista) 100%);
+  padding: 4.5rem 1.25rem 4rem;
+}
+
+.duvera-grid {
+  max-width: 62rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.8rem;
+}
+
+.eyebrow-svetly {
+  color: #1a94a0;
+}
+
+.duvera-pribeh h2 {
+  margin-bottom: 1.1rem;
+}
+
+.duvera-pribeh > p {
+  max-width: 34rem;
+  color: var(--inkoust);
+}
+
+.duvera-citat {
+  margin: 2rem 0 0;
+  background: var(--noc);
+  color: var(--cista);
+  border-radius: 14px;
+  padding: 1.8rem 1.6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.duvera-citat::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 40%;
+  bottom: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--aqua), transparent);
+  border-radius: 0 999px 0 0;
+}
+
+.duvera-citat p {
+  margin: 0 0 1.1rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.duvera-citat footer strong {
+  display: block;
+  font-family: var(--pismo-util);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  color: var(--citron);
+}
+
+.duvera-citat footer span {
+  font-family: var(--pismo-util);
+  font-size: 0.82rem;
+  color: #9db6c4;
+}
+
+.duvera-zasady {
+  display: grid;
+  gap: 1.1rem;
+  align-content: start;
+}
+
+.zasada {
+  background: #fff;
+  border-left: 4px solid var(--citron);
+  border-radius: 0 12px 12px 0;
+  padding: 1.15rem 1.3rem;
+  box-shadow: 0 4px 16px rgba(14, 42, 63, 0.06);
+}
+
+.zasada h3 {
+  margin: 0 0 0.35rem;
+  font-family: var(--pismo-util);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--noc);
+}
+
+.zasada p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--sed);
+}
+
+.recenze {
+  margin: 0.6rem 0 0;
+  padding: 1.3rem 1.4rem;
+  background: transparent;
+  border: 2px dashed rgba(47, 190, 203, 0.5);
+  border-radius: 14px;
+}
+
+.recenze blockquote {
+  margin: 0 0 0.7rem;
+}
+
+.recenze p {
+  margin: 0;
+  font-style: italic;
+  color: var(--inkoust);
+}
+
+.recenze figcaption {
+  font-family: var(--pismo-util);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--sed);
+}
+
+/* =====================================================
+   RESPONZIVITA
+   ===================================================== */
+
+@media (min-width: 640px) {
+  .hero {
+    padding: 2.5rem 2rem 5.5rem;
+  }
+
+  .hero-facts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sluzby-mrizka {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .hero {
+    padding-top: 3rem;
+  }
+
+  .sluzby-mrizka {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .duvera-grid {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+/* =====================================================
+   REDUKOVANÝ POHYB
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-line,
+  .hero-wiped {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-wiped {
+    background-size: 100% 100%;
+  }
+
+  .swipe-clean {
+    animation: none;
+    transform: scaleX(1);
+  }
+
+  .swipe-shine {
+    animation: none;
+    opacity: 1;
+  }
+
+  .sluzba,
+  .btn-primary {
+    transition: none;
+  }
+
+  .sluzba:hover,
+  .btn-primary:hover {
+    transform: none;
+  }
+}
