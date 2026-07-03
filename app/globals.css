@@ -1,0 +1,626 @@
+/* ==========================================================================
+   ALEKAR s.r.o. — autodoprava a kontejnery, Ústí nad Labem
+   Paleta odvozená z řemesla: ocel korby, výstražná oranž nosiče kontejnerů,
+   asfalt, prach betonu.
+   ========================================================================== */
+
+:root {
+  --ak-asfalt: #1b1f24;       /* tmavý asfalt — pozadí hero */
+  --ak-ocel: #39424d;         /* ocelový plech korby */
+  --ak-oranz: #f2790f;        /* výstražná oranžová nosiče */
+  --ak-oranz-tmava: #c95f05;
+  --ak-beton: #e8e6e1;        /* betonový prach — světlé pozadí */
+  --ak-papir: #f7f6f3;
+  --ak-inkoust: #22262b;
+  --ak-seda: #5c646e;
+
+  --ak-font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Impact, sans-serif;
+  --ak-font-body: Georgia, "Times New Roman", serif;
+  --ak-font-util: "Courier New", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--ak-font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ak-inkoust);
+  background: var(--ak-papir);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ak h1,
+.ak h2,
+.ak h3 {
+  font-family: var(--ak-font-display);
+  font-stretch: condensed;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+.ak a:focus-visible,
+.ak button:focus-visible {
+  outline: 3px solid var(--ak-oranz);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============================ HERO ============================ */
+
+.ak-hero {
+  position: relative;
+  background:
+    linear-gradient(180deg, var(--ak-asfalt) 0%, #232a32 100%);
+  color: var(--ak-beton);
+  padding: 1.5rem 1.25rem 0;
+  overflow: hidden;
+}
+
+/* jemný raster jako plech s okujemi */
+.ak-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.025) 0,
+    rgba(255, 255, 255, 0.025) 1px,
+    transparent 1px,
+    transparent 72px
+  );
+  pointer-events: none;
+}
+
+.ak-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  position: relative;
+}
+
+.ak-wordmark {
+  font-family: var(--ak-font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.12em;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.ak-wordmark-dot {
+  color: var(--ak-oranz);
+}
+
+.ak-wordmark-sub {
+  font-family: var(--ak-font-util);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9aa3ad;
+  display: none;
+}
+
+.ak-hero-tel {
+  font-family: var(--ak-font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--ak-oranz);
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+}
+
+.ak-hero-tel:hover {
+  border-bottom-color: var(--ak-oranz);
+}
+
+.ak-hero-body {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3.5rem 0 2.5rem;
+  position: relative;
+}
+
+.ak-hero-eyebrow {
+  font-family: var(--ak-font-util);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ak-oranz);
+  margin: 0 0 1.25rem;
+}
+
+.ak-hero-title {
+  font-size: clamp(3rem, 11vw, 7.5rem);
+  font-weight: 700;
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.ak-hero-title .ak-line {
+  display: block;
+}
+
+.ak-hero-title em {
+  font-style: normal;
+  color: var(--ak-oranz);
+}
+
+.ak-line {
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: ak-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.ak-line-1 { animation-delay: 0.05s; }
+.ak-line-2 { animation-delay: 0.18s; }
+.ak-line-3 { animation-delay: 0.31s; }
+
+@keyframes ak-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ak-hero-lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: #c6cbd1;
+  margin: 1.75rem 0 2rem;
+  opacity: 0;
+  animation: ak-rise 0.6s 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.ak-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  opacity: 0;
+  animation: ak-rise 0.6s 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.ak-btn {
+  font-family: var(--ak-font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: 3px;
+  display: inline-block;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.ak-btn-solid {
+  background: var(--ak-oranz);
+  color: var(--ak-asfalt);
+}
+
+.ak-btn-solid:hover {
+  background: #ff8b1f;
+  transform: translateY(-2px);
+}
+
+.ak-btn-ghost {
+  border: 2px solid var(--ak-ocel);
+  color: var(--ak-beton);
+}
+
+.ak-btn-ghost:hover {
+  border-color: var(--ak-oranz);
+  color: var(--ak-oranz);
+}
+
+/* --- Signature: řez korby — tři kontejnery vedle sebe podle objemu --- */
+
+.ak-hero-container {
+  max-width: 72rem;
+  margin: 1.5rem auto 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  position: relative;
+}
+
+.ak-cnt {
+  position: relative;
+  border: 3px solid var(--ak-ocel);
+  border-bottom: none;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04) 0,
+      rgba(255, 255, 255, 0.04) 2px,
+      transparent 2px,
+      transparent 34px
+    ),
+    #262c34;
+  /* zkosené boky jako korba kontejneru */
+  clip-path: polygon(7% 0, 93% 0, 100% 100%, 0 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0.75rem 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: ak-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.ak-cnt-5  { flex: 5;  height: 68px;  animation-delay: 0.6s; }
+.ak-cnt-11 { flex: 11; height: 96px;  animation-delay: 0.72s; }
+.ak-cnt-21 { flex: 21; height: 132px; animation-delay: 0.84s; }
+
+.ak-cnt-21 {
+  border-color: var(--ak-oranz);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.07) 0,
+      rgba(0, 0, 0, 0.07) 2px,
+      transparent 2px,
+      transparent 34px
+    ),
+    var(--ak-oranz);
+}
+
+.ak-cnt-vol {
+  font-family: var(--ak-font-display);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 3.4vw, 2rem);
+  line-height: 1;
+  color: var(--ak-beton);
+}
+
+.ak-cnt-21 .ak-cnt-vol {
+  color: var(--ak-asfalt);
+}
+
+.ak-cnt-label {
+  font-family: var(--ak-font-util);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #8d97a2;
+}
+
+.ak-cnt-21 .ak-cnt-label {
+  color: rgba(27, 31, 36, 0.75);
+}
+
+.ak-hero-ground {
+  height: 10px;
+  margin: 0 -1.25rem;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--ak-oranz) 0,
+    var(--ak-oranz) 14px,
+    var(--ak-asfalt) 14px,
+    var(--ak-asfalt) 28px
+  );
+}
+
+/* ============================ SEKCE ============================ */
+
+.ak-section {
+  padding: 4rem 1.25rem;
+}
+
+.ak-section-head {
+  max-width: 72rem;
+  margin: 0 auto 2.5rem;
+}
+
+.ak-section-head h2,
+.ak-duvera h2 {
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  text-transform: uppercase;
+  line-height: 1.05;
+  margin-bottom: 0.75rem;
+}
+
+.ak-section-head p {
+  max-width: 40rem;
+  color: var(--ak-seda);
+  margin: 0;
+}
+
+/* --- kontejnerové karty --- */
+
+.ak-kontejnery {
+  background: var(--ak-beton);
+}
+
+.ak-cards {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.ak-card {
+  background: var(--ak-papir);
+  border: 1px solid #d5d2cb;
+  border-top: 4px solid var(--ak-ocel);
+  padding: 1.5rem;
+  transition: transform 0.2s ease, border-top-color 0.2s ease;
+}
+
+.ak-card:hover {
+  transform: translateY(-4px);
+  border-top-color: var(--ak-oranz);
+}
+
+.ak-card-vol {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.ak-card-num {
+  font-family: var(--ak-font-display);
+  font-weight: 700;
+  font-size: 3.4rem;
+  line-height: 1;
+  color: var(--ak-oranz);
+}
+
+.ak-card-unit {
+  font-family: var(--ak-font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--ak-seda);
+}
+
+.ak-card h3 {
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.ak-card p {
+  color: var(--ak-seda);
+  margin: 0 0 1rem;
+  font-size: 0.98rem;
+}
+
+.ak-card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ak-card li {
+  font-family: var(--ak-font-util);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.45rem 0;
+  border-top: 1px dashed #c9c5bd;
+}
+
+.ak-card li::before {
+  content: "→ ";
+  color: var(--ak-oranz);
+}
+
+/* --- druhy odpadů --- */
+
+.ak-odpady {
+  max-width: 72rem;
+  margin: 3rem auto 0;
+}
+
+.ak-odpady h3 {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.ak-odpady-list {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ak-odpady-list li {
+  font-family: var(--ak-font-util);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.4rem 0.75rem;
+  background: var(--ak-papir);
+  border: 1px solid #cfccc4;
+  border-radius: 2px;
+}
+
+.ak-odpady-note {
+  max-width: 42rem;
+  color: var(--ak-seda);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* --- důvěra / o nás --- */
+
+.ak-duvera {
+  background: var(--ak-papir);
+}
+
+.ak-duvera-grid {
+  max-width: 72rem;
+  margin: 0 auto 3rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.ak-eyebrow {
+  font-family: var(--ak-font-util);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ak-oranz-tmava);
+  margin: 0 0 0.75rem;
+}
+
+.ak-duvera-text h2 {
+  margin-bottom: 1rem;
+}
+
+.ak-duvera-text p {
+  color: var(--ak-seda);
+  margin: 0 0 1rem;
+}
+
+.ak-fakta {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 3px solid var(--ak-asfalt);
+  align-self: start;
+}
+
+.ak-fakt {
+  padding: 1rem 0;
+  border-bottom: 1px solid #ddd9d1;
+}
+
+.ak-fakt dt {
+  font-family: var(--ak-font-util);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ak-oranz-tmava);
+  margin-bottom: 0.25rem;
+}
+
+.ak-fakt dd {
+  margin: 0;
+  font-family: var(--ak-font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+
+/* --- postup 1-2-3 --- */
+
+.ak-postup {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.ak-krok {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: var(--ak-beton);
+  padding: 1.25rem;
+  border-left: 4px solid var(--ak-oranz);
+}
+
+.ak-krok-num {
+  font-family: var(--ak-font-display);
+  font-weight: 700;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: var(--ak-oranz);
+  min-width: 2rem;
+}
+
+.ak-krok h3 {
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.ak-krok p {
+  margin: 0;
+  color: var(--ak-seda);
+  font-size: 0.95rem;
+}
+
+/* ============================ RESPONSIVE ============================ */
+
+@media (min-width: 640px) {
+  .ak-wordmark-sub {
+    display: inline;
+  }
+
+  .ak-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .ak-postup {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .ak-hero {
+    padding: 2rem 2.5rem 0;
+  }
+
+  .ak-hero-ground {
+    margin: 0 -2.5rem;
+  }
+
+  .ak-section {
+    padding: 5.5rem 2.5rem;
+  }
+
+  .ak-duvera-grid {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+  }
+}
+
+/* ============================ MOTION ============================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ak-line,
+  .ak-hero-lead,
+  .ak-hero-actions,
+  .ak-cnt {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .ak-card,
+  .ak-btn {
+    transition: none;
+  }
+
+  .ak-card:hover,
+  .ak-btn-solid:hover {
+    transform: none;
+  }
+}
