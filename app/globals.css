@@ -1,0 +1,491 @@
+/* ==========================================================================
+   PL PLAST — plastová okna, Karlovy Vary
+   Koncept: řez okenním profilem. Bílý PVC profil + ocelová výztuha (modř)
+   + teplo domova (jantar). Typografie: těžký groteskní displej = hrana rámu.
+   ========================================================================== */
+
+:root {
+  --pvc: #f7f9fb;            /* bílý PVC profil */
+  --pvc-shadow: #dde5ec;     /* stín v drážce */
+  --steel: #17456e;          /* ocelová výztuha / hlavní modř */
+  --steel-deep: #0c2b47;     /* tmavá komora */
+  --sky: #7fb2d9;            /* chlad venku */
+  --warm: #f2a33c;           /* teplo doma / jantar */
+  --ink: #16222e;            /* text */
+  --radius: 6px;
+
+  --font-display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-ui: "Trebuchet MS", Verdana, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--pvc);
+  -webkit-font-smoothing: antialiased;
+}
+
+.pl a { color: var(--steel); }
+
+.pl :focus-visible {
+  outline: 3px solid var(--warm);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ===== HERO ===== */
+
+.hero {
+  background:
+    linear-gradient(115deg, var(--steel-deep) 0%, var(--steel) 62%, #1d5b8f 100%);
+  color: var(--pvc);
+  overflow: hidden;
+  /* okenní mřížka jemně v pozadí */
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 88px 88px;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 28px 20px 64px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 56px;
+}
+
+.brand-mark {
+  color: var(--warm);
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.brand-sub {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--sky);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  gap: 56px;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin: 0 0 20px;
+  animation: rise 0.7s ease both;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5.4vw, 3.9rem);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  margin: 0 0 24px;
+  text-transform: none;
+  animation: rise 0.7s 0.1s ease both;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--warm);
+  white-space: nowrap;
+}
+
+.hero-lead {
+  max-width: 34em;
+  font-size: 1.1rem;
+  color: #d7e5f1;
+  margin: 0 0 32px;
+  animation: rise 0.7s 0.2s ease both;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  animation: rise 0.7s 0.3s ease both;
+}
+
+.btn {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 14px 26px;
+  border-radius: var(--radius);
+  display: inline-block;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--warm);
+  color: var(--steel-deep);
+}
+
+.btn-solid:hover { background: #ffb955; transform: translateY(-2px); }
+
+.btn-ghost {
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  color: var(--pvc);
+}
+
+.btn-ghost:hover { border-color: var(--pvc); background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+
+/* ===== SIGNATURE: řez profilem ===== */
+
+.profile-cut {
+  margin: 0;
+  animation: rise 0.9s 0.35s ease both;
+}
+
+.cut-frame {
+  display: grid;
+  grid-template-columns: 0.7fr 0.8fr 0.9fr 1.6fr 0.9fr 0.8fr 0.7fr;
+  gap: 6px;
+  background: var(--pvc);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  min-height: 280px;
+}
+
+.cut-chamber {
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 10px;
+  border: 1px solid var(--pvc-shadow);
+}
+
+.cut-chamber i {
+  font-style: normal;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--steel);
+  opacity: 0.75;
+}
+
+/* přechod chladu do tepla zleva doprava */
+.c1 { background: #cfe4f3; }
+.c2 { background: #ddecf6; }
+.c3 { background: #ecf4fa; }
+.c5 { background: #fdf3e2; }
+.c6 { background: #fbe8c8; }
+.c7 { background: #f8dcab; }
+
+.cut-steel {
+  background: var(--steel);
+  border-color: var(--steel);
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.cut-steel i { color: var(--warm); opacity: 1; }
+
+.cut-steel b {
+  font-family: var(--font-ui);
+  font-weight: 400;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sky);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  align-self: center;
+  margin-bottom: auto;
+  padding-top: 12px;
+}
+
+.cut-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 14px;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+}
+
+.cut-temp.cold { color: var(--sky); }
+.cut-temp.warm { color: var(--warm); }
+
+.cut-depth {
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.68rem;
+  text-align: center;
+}
+
+/* ===== SEKCE: SLUŽBY ===== */
+
+.sluzby {
+  background: var(--pvc);
+  padding: 80px 20px;
+}
+
+.section-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.6vw, 2.5rem);
+  line-height: 1.15;
+  color: var(--steel-deep);
+  margin: 0 0 16px;
+}
+
+.section-title em {
+  font-style: normal;
+  color: var(--steel);
+  box-shadow: inset 0 -0.32em 0 rgba(242, 163, 60, 0.45);
+}
+
+.section-lead {
+  max-width: 42em;
+  font-size: 1.08rem;
+  color: #3d4c5a;
+  margin: 0 0 48px;
+}
+
+.sluzby-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.sluzba {
+  background: #fff;
+  border: 1px solid var(--pvc-shadow);
+  border-top: 5px solid var(--steel);
+  border-radius: var(--radius);
+  padding: 26px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.sluzba:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(23, 69, 110, 0.12);
+}
+
+.sluzba h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin: 0;
+  color: var(--steel-deep);
+}
+
+.sluzba p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #3d4c5a;
+  flex-grow: 1;
+}
+
+.sluzba-tag {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--steel);
+  border-top: 1px dashed var(--pvc-shadow);
+  padding-top: 10px;
+}
+
+.sluzba-servis {
+  border-top-color: var(--warm);
+  grid-column: span 2;
+}
+
+/* ===== SEKCE: DŮVĚRA ===== */
+
+.duvera {
+  background: var(--steel-deep);
+  color: #d7e5f1;
+  padding: 80px 20px;
+}
+
+.duvera-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 64px;
+  align-items: start;
+}
+
+.section-title-light { color: var(--pvc); }
+.section-title-light em { color: var(--warm); box-shadow: none; }
+
+.duvera-copy p { max-width: 36em; }
+
+.duvera-fakta {
+  margin: 36px 0 0;
+  display: grid;
+  gap: 20px;
+}
+
+.duvera-fakta div {
+  border-left: 4px solid var(--warm);
+  padding-left: 18px;
+}
+
+.duvera-fakta dt {
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin-bottom: 4px;
+}
+
+.duvera-fakta dd {
+  margin: 0;
+  color: var(--pvc);
+}
+
+.duvera-hlasy {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.duvera-hlasy blockquote {
+  margin: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+}
+
+.duvera-hlasy blockquote p {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--pvc);
+}
+
+.duvera-hlasy cite {
+  font-family: var(--font-ui);
+  font-style: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--sky);
+}
+
+.duvera-kontakt {
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  color: var(--sky);
+  margin: 8px 0 0;
+}
+
+.duvera-kontakt a { color: var(--warm); text-decoration: none; }
+.duvera-kontakt a:hover { text-decoration: underline; }
+
+/* ===== ANIMACE ===== */
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .pl *,
+  .pl *::before,
+  .pl *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ===== RESPONZIVITA ===== */
+
+@media (max-width: 980px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .profile-cut { max-width: 560px; }
+
+  .sluzby-grid { grid-template-columns: repeat(2, 1fr); }
+  .sluzba-servis { grid-column: span 2; }
+
+  .duvera-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-inner { padding: 22px 18px 52px; }
+  .brand { margin-bottom: 40px; }
+
+  .cut-frame { min-height: 200px; }
+  .cut-steel b { display: none; }
+  .cut-caption { flex-wrap: wrap; }
+  .cut-depth { order: 3; width: 100%; text-align: left; margin-top: 4px; }
+
+  .sluzby, .duvera { padding: 60px 18px; }
+
+  .sluzby-grid { grid-template-columns: 1fr; }
+  .sluzba-servis { grid-column: auto; }
+
+  .btn { width: 100%; text-align: center; }
+}
