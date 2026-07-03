@@ -1,0 +1,641 @@
+/* =====================================================================
+   REMO ELEKTRO BRNO — design „Rozvaděč"
+   Paleta odvozená z řemesla:
+   --re-panel   #16232E  ocelový antracit skříně rozvaděče
+   --re-slate   #1F313F  hlubší panel
+   --re-signal  #FFC42E  výstražná žluť (blesk v trojúhelníku)
+   --re-copper  #C97B3A  měď vodiče
+   --re-paper   #EFF3F5  matný lak / štítek
+   --re-ink     #0D161D  text na světlé
+   Typo: Archivo (Expanded pro display) + Archivo pro text,
+         JetBrains Mono pro technické štítky a kódy okruhů.
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Archivo+Expanded:wght@600;800&family=JetBrains+Mono:wght@400;600&display=swap");
+
+:root {
+  --re-panel: #16232e;
+  --re-slate: #1f313f;
+  --re-signal: #ffc42e;
+  --re-copper: #c97b3a;
+  --re-paper: #eff3f5;
+  --re-ink: #0d161d;
+  --re-line: rgba(239, 243, 245, 0.14);
+
+  --re-display: "Archivo Expanded", "Archivo", system-ui, sans-serif;
+  --re-body: "Archivo", system-ui, sans-serif;
+  --re-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--re-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--re-ink);
+  background: var(--re-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.re a {
+  color: inherit;
+}
+
+.re :focus-visible {
+  outline: 3px solid var(--re-signal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =========================== HERO =========================== */
+
+.re-hero {
+  background:
+    linear-gradient(180deg, rgba(31, 49, 63, 0.55), rgba(22, 35, 46, 0) 40%),
+    radial-gradient(1200px 500px at 85% -10%, rgba(201, 123, 58, 0.18), transparent 65%),
+    var(--re-panel);
+  color: var(--re-paper);
+  padding: 1.25rem 1.25rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemný „perforovaný plech" — tečkovaná mřížka skříně */
+.re-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(239, 243, 245, 0.06) 1px, transparent 1.5px);
+  background-size: 26px 26px;
+  pointer-events: none;
+}
+
+.re-hero__topbar {
+  position: relative;
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--re-line);
+}
+
+.re-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.re-wordmark__bolt {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  background: var(--re-signal);
+  color: var(--re-ink);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%); /* výstražný trojúhelník */
+  padding-top: 6px;
+}
+
+.re-wordmark__text {
+  font-family: var(--re-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.re-wordmark__text b {
+  color: var(--re-signal);
+  font-weight: 800;
+}
+
+.re-wordmark__text em {
+  display: block;
+  font-family: var(--re-mono);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.62rem;
+  letter-spacing: 0.42em;
+  color: rgba(239, 243, 245, 0.6);
+  margin-top: 3px;
+}
+
+.re-hero__tel {
+  font-family: var(--re-mono);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: var(--re-ink);
+  background: var(--re-signal);
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.re-hero__tel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255, 196, 46, 0.35);
+}
+
+.re-hero__body {
+  position: relative;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding-top: 3rem;
+}
+
+.re-hero__eyebrow {
+  font-family: var(--re-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(239, 243, 245, 0.72);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.5rem;
+  animation: re-rise 0.6s ease both;
+}
+
+.re-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--re-signal);
+  box-shadow: 0 0 12px rgba(255, 196, 46, 0.8);
+  flex: none;
+}
+
+.re-hero__title {
+  font-family: var(--re-display);
+  font-weight: 800;
+  font-size: clamp(2.1rem, 7.2vw, 5.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  margin: 0;
+  max-width: 18ch;
+}
+
+.re-hero__title span {
+  display: block;
+  animation: re-rise 0.7s ease both;
+}
+
+.re-hero__line2 {
+  color: var(--re-signal);
+  animation-delay: 0.12s !important;
+}
+
+.re-hero__line3 {
+  animation-delay: 0.24s !important;
+}
+
+/* -------- signature: schéma fáze L1 -------- */
+
+.re-circuit {
+  position: relative;
+  margin: 2.2rem -1.25rem 2.2rem;
+  color: var(--re-copper);
+}
+
+.re-circuit__svg {
+  display: block;
+  width: 100%;
+  height: 90px;
+}
+
+.re-circuit__path {
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+  animation: re-current 2.2s ease-out 0.35s forwards;
+}
+
+.re-circuit__node {
+  fill: var(--re-signal);
+  opacity: 0;
+  animation: re-node 0.4s ease-out forwards;
+}
+
+.re-circuit__node:nth-of-type(1) { animation-delay: 0.9s; }
+.re-circuit__node:nth-of-type(2) { animation-delay: 1.3s; }
+.re-circuit__node:nth-of-type(3) { animation-delay: 1.7s; }
+.re-circuit__node:nth-of-type(4) { animation-delay: 2.1s; }
+
+.re-circuit__label {
+  position: absolute;
+  right: 1.5rem;
+  bottom: -0.4rem;
+  font-family: var(--re-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: rgba(239, 243, 245, 0.45);
+}
+
+.re-hero__lead {
+  max-width: 56ch;
+  font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+  line-height: 1.65;
+  color: rgba(239, 243, 245, 0.85);
+  margin: 0 0 2.5rem;
+  animation: re-rise 0.7s ease 0.35s both;
+}
+
+.re-hero__facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--re-line);
+  border: 1px solid var(--re-line);
+  max-width: 760px;
+  animation: re-rise 0.7s ease 0.5s both;
+}
+
+.re-fact {
+  background: var(--re-panel);
+  padding: 1.1rem 1.2rem;
+}
+
+.re-fact__value {
+  display: block;
+  font-family: var(--re-mono);
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--re-signal);
+}
+
+.re-fact__label {
+  display: block;
+  font-size: 0.82rem;
+  color: rgba(239, 243, 245, 0.65);
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}
+
+/* =========================== SLUŽBY =========================== */
+
+.re-sluzby {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem;
+}
+
+.re-section-head {
+  max-width: 640px;
+  margin-bottom: 2.75rem;
+}
+
+.re-section-head__eyebrow {
+  font-family: var(--re-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--re-copper);
+  margin: 0 0 0.75rem;
+}
+
+.re-section-head__eyebrow--light {
+  color: var(--re-signal);
+}
+
+.re-section-head__title {
+  font-family: var(--re-display);
+  font-weight: 800;
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin: 0 0 1rem;
+}
+
+.re-section-head__note {
+  margin: 0;
+  color: rgba(13, 22, 29, 0.72);
+}
+
+/* „čelo rozvaděče": moduly jako jističe v liště */
+.re-panel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+
+.re-modul {
+  background: #fff;
+  border: 1px solid rgba(13, 22, 29, 0.12);
+  border-top: 4px solid var(--re-panel);
+  border-radius: 6px;
+  padding: 1.4rem 1.4rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-top-color 0.18s ease;
+}
+
+.re-modul:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(13, 22, 29, 0.12);
+  border-top-color: var(--re-signal);
+}
+
+.re-modul__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.re-modul__kod {
+  font-family: var(--re-mono);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--re-copper);
+  border: 1px solid rgba(201, 123, 58, 0.4);
+  border-radius: 3px;
+  padding: 0.15rem 0.5rem;
+}
+
+/* miniaturní páčka jističe — při hoveru „nahodí" */
+.re-modul__switch {
+  width: 18px;
+  height: 30px;
+  border: 2px solid rgba(13, 22, 29, 0.25);
+  border-radius: 3px;
+  position: relative;
+  display: block;
+}
+
+.re-modul__lever {
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  height: 10px;
+  background: rgba(13, 22, 29, 0.3);
+  border-radius: 2px;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.re-modul:hover .re-modul__lever {
+  transform: translateY(-11px);
+  background: var(--re-signal);
+}
+
+.re-modul__nazev {
+  font-family: var(--re-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.25;
+  margin: 0 0 0.6rem;
+}
+
+.re-modul__popis {
+  margin: 0 0 1.1rem;
+  font-size: 0.95rem;
+  color: rgba(13, 22, 29, 0.75);
+  flex: 1;
+}
+
+.re-modul__stitek {
+  margin: 0;
+  font-family: var(--re-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(13, 22, 29, 0.55);
+  border-top: 1px dashed rgba(13, 22, 29, 0.2);
+  padding-top: 0.75rem;
+}
+
+/* =========================== DŮVĚRA =========================== */
+
+.re-duvera {
+  background: var(--re-slate);
+  color: var(--re-paper);
+  padding: 4.5rem 1.25rem;
+}
+
+.re-duvera__grid {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.re-duvera__title {
+  font-family: var(--re-display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+  line-height: 1.15;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem;
+}
+
+.re-duvera__text {
+  color: rgba(239, 243, 245, 0.8);
+  margin: 0 0 1rem;
+  max-width: 52ch;
+}
+
+.re-duvera__partner {
+  margin-top: 1.75rem;
+  border-left: 4px solid var(--re-signal);
+  padding: 0.4rem 0 0.4rem 1rem;
+}
+
+.re-duvera__partner-label {
+  display: block;
+  font-family: var(--re-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(239, 243, 245, 0.55);
+}
+
+.re-duvera__partner-name {
+  display: block;
+  font-family: var(--re-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  margin-top: 0.2rem;
+}
+
+.re-duvera__karty {
+  display: grid;
+  gap: 1.1rem;
+}
+
+/* kvalifikační „štítek" — jako štítek na dvířkách rozvaděče */
+.re-stitek {
+  display: flex;
+  gap: 1.25rem;
+  background: var(--re-panel);
+  border: 1px solid var(--re-line);
+  border-radius: 6px;
+  padding: 1.4rem;
+}
+
+.re-stitek__para {
+  flex: none;
+  font-family: var(--re-mono);
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--re-signal);
+  width: 3.4rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  border-right: 1px dashed var(--re-line);
+  padding-right: 1rem;
+}
+
+.re-stitek__kdo {
+  font-family: var(--re-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin: 0 0 0.4rem;
+}
+
+.re-stitek__text {
+  margin: 0;
+  font-size: 0.93rem;
+  color: rgba(239, 243, 245, 0.75);
+}
+
+.re-stitek--adresa {
+  border-color: rgba(255, 196, 46, 0.35);
+}
+
+/* =========================== ANIMACE =========================== */
+
+@keyframes re-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes re-current {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes re-node {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .re-hero__eyebrow,
+  .re-hero__title span,
+  .re-hero__lead,
+  .re-hero__facts {
+    animation: none;
+  }
+  .re-circuit__path {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+  .re-circuit__node {
+    opacity: 1;
+    animation: none;
+  }
+  .re-modul,
+  .re-modul__lever,
+  .re-hero__tel {
+    transition: none;
+  }
+  .re-modul:hover {
+    transform: none;
+  }
+}
+
+/* =========================== RESPONZIVITA =========================== */
+
+@media (max-width: 900px) {
+  .re-panel {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .re-duvera__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .re-hero {
+    padding-bottom: 3rem;
+  }
+  .re-hero__topbar {
+    flex-wrap: wrap;
+  }
+  .re-hero__tel {
+    width: 100%;
+    text-align: center;
+  }
+  .re-hero__body {
+    padding-top: 2.25rem;
+  }
+  .re-circuit {
+    margin-top: 1.75rem;
+    margin-bottom: 1.75rem;
+  }
+  .re-circuit__svg {
+    height: 64px;
+  }
+  .re-hero__facts {
+    grid-template-columns: 1fr;
+    max-width: none;
+  }
+  .re-panel {
+    grid-template-columns: 1fr;
+  }
+  .re-sluzby,
+  .re-duvera {
+    padding-top: 3.25rem;
+    padding-bottom: 3.25rem;
+  }
+  .re-stitek {
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+  .re-stitek__para {
+    border-right: none;
+    border-bottom: 1px dashed var(--re-line);
+    width: auto;
+    justify-content: flex-start;
+    padding: 0 0 0.6rem;
+  }
+}
