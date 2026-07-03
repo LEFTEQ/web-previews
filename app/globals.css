@@ -1,0 +1,516 @@
+:root {
+  /* Paleta odvozená z terénu deratizace: noční sklep, výstražná signální žluť
+     nástrahových stanic, betonová šeď, chemická zeleň protokolu */
+  --ink: #101418;          /* noční sklep – téměř černá s modrým podtónem */
+  --concrete: #1b2229;     /* mokrý beton */
+  --paper: #eef0ec;        /* protokolový papír */
+  --hazard: #f5c518;       /* signální žluť výstražných samolepek na staništích */
+  --hazard-deep: #c99700;
+  --trace: #6ee7a0;        /* zelený záchyt na monitorovacím plánu */
+  --mute: #8b98a5;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dp a:focus-visible,
+.dp button:focus-visible {
+  outline: 3px solid var(--hazard);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.dp ::selection { background: var(--hazard); color: var(--ink); }
+
+/* ========================= HERO ========================= */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  padding: 1.5rem 1.25rem 3rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(245, 197, 24, 0.07), transparent 60%),
+    linear-gradient(180deg, var(--ink) 0%, var(--concrete) 100%);
+}
+
+/* výstražný šrafovaný pruh — jako páska kolem ošetřeného prostoru */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 10px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--hazard) 0 14px,
+    var(--ink) 14px 28px
+  );
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-left: 0.75rem;
+}
+
+.wordmark { display: flex; flex-direction: column; gap: 0.1rem; }
+
+.wordmark-main {
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  color: var(--paper);
+}
+
+.wordmark-main b {
+  font-weight: 800;
+  color: var(--hazard);
+}
+
+.wordmark-sub {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+.hero-phone {
+  text-decoration: none;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.hero-phone-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--trace);
+}
+
+.hero-phone-num {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--paper);
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-phone:hover .hero-phone-num { color: var(--hazard); }
+
+.hero-body {
+  margin: auto 0;
+  padding: 3rem 0.75rem 2rem;
+  max-width: 46rem;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1.25rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--mute);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.tag-3d {
+  display: inline-block;
+  background: var(--hazard);
+  color: var(--ink);
+  font-weight: 800;
+  padding: 0.15rem 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.hero-title {
+  margin: 0 0 1.5rem;
+  font-size: clamp(2.6rem, 9.5vw, 6.5rem);
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.hero-title .line { display: block; }
+.hero-title .l2 { color: var(--mute); }
+.hero-title .l3 em {
+  font-style: normal;
+  color: var(--hazard);
+  position: relative;
+}
+
+.hero-lead {
+  margin: 0 0 2rem;
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: #c6cdd4;
+}
+
+.hero-actions { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 2px;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--hazard);
+  color: var(--ink);
+}
+
+.btn-solid:hover { background: #ffd83d; transform: translateY(-2px); }
+
+.btn-ghost {
+  color: var(--paper);
+  border: 1px solid rgba(238, 240, 236, 0.35);
+}
+
+.btn-ghost:hover { border-color: var(--hazard); color: var(--hazard); }
+
+/* ---- Signature: monitorovací mřížka nástrahových stanic ---- */
+
+.grid-map {
+  padding-left: 0.75rem;
+  max-width: 46rem;
+}
+
+.grid-map-inner {
+  position: relative;
+  height: 110px;
+  border: 1px solid rgba(139, 152, 165, 0.3);
+  background-image:
+    linear-gradient(rgba(139, 152, 165, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 152, 165, 0.14) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.station {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--mute);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.station i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--mute);
+}
+
+.station.hit { border-color: var(--trace); }
+.station.hit i {
+  background: var(--trace);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+.s1 { left: 6%;  top: 60%; }
+.s2 { left: 22%; top: 22%; }
+.s3 { left: 41%; top: 55%; }
+.s4 { left: 58%; top: 18%; }
+.s5 { left: 74%; top: 48%; }
+.s6 { left: 90%; top: 25%; }
+
+/* stopa hlodavce — tečkovaná trasa napříč plánem */
+.trail {
+  position: absolute;
+  left: 4%;
+  right: 6%;
+  top: 50%;
+  height: 0;
+  border-top: 2px dashed rgba(245, 197, 24, 0.45);
+  transform: rotate(-3deg);
+}
+
+.grid-map-caption {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute);
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(2.2); opacity: 0.5; }
+}
+
+/* animace při načtení */
+.hero-title .line,
+.hero-lead,
+.hero-actions,
+.hero-eyebrow,
+.grid-map {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-eyebrow { animation-delay: 0.05s; }
+.hero-title .l1 { animation-delay: 0.12s; }
+.hero-title .l2 { animation-delay: 0.22s; }
+.hero-title .l3 { animation-delay: 0.32s; }
+.hero-lead { animation-delay: 0.45s; }
+.hero-actions { animation-delay: 0.55s; }
+.grid-map { animation-delay: 0.7s; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================= SLUŽBY ========================= */
+
+.sluzby {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.section-head {
+  max-width: 68rem;
+  margin: 0 auto 3rem;
+}
+
+.section-head h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  line-height: 1.1;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.section-head p {
+  margin: 0;
+  max-width: 38rem;
+  color: #3c4650;
+  font-size: 1.05rem;
+}
+
+.cards {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #d7dbd4;
+  border-top: 6px solid var(--hazard);
+  padding: 1.75rem 1.5rem 1.5rem;
+  position: relative;
+}
+
+.card-code {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.25rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: #b9c0b6;
+}
+
+.card h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.card-target {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hazard-deep);
+  font-weight: 700;
+}
+
+.card > p:not(.card-target) {
+  margin: 0 0 1rem;
+  color: #3c4650;
+}
+
+.card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card li {
+  padding: 0.4rem 0 0.4rem 1.5rem;
+  position: relative;
+  color: #101418;
+  font-size: 0.95rem;
+  border-top: 1px dashed #d7dbd4;
+}
+
+.card li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.85rem;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--hazard-deep);
+  border-radius: 50%;
+}
+
+/* ========================= DŮVĚRA ========================= */
+
+.duvera {
+  background: var(--concrete);
+  color: var(--paper);
+  padding: 4.5rem 1.25rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.duvera::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 10px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--hazard) 0 14px,
+    var(--concrete) 14px 28px
+  );
+}
+
+.duvera-inner {
+  max-width: 68rem;
+  margin: 0 auto 3rem;
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1fr;
+}
+
+.duvera-text h2 {
+  margin: 0 0 1.25rem;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  line-height: 1.12;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.duvera-text p {
+  margin: 0 0 1rem;
+  color: #c6cdd4;
+  max-width: 36rem;
+}
+
+.duvera-facts {
+  margin: 0;
+  display: grid;
+  gap: 0;
+  grid-template-columns: 1fr;
+  border: 1px solid rgba(139, 152, 165, 0.3);
+}
+
+.fact {
+  padding: 1.25rem 1.4rem;
+  border-bottom: 1px solid rgba(139, 152, 165, 0.3);
+}
+
+.fact:last-child { border-bottom: none; }
+
+.fact dt {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--hazard);
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.fact dd {
+  margin: 0;
+  color: #c6cdd4;
+  font-size: 0.98rem;
+}
+
+.duvera-quote {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 1.75rem 1.5rem;
+  border-left: 6px solid var(--trace);
+  background: rgba(110, 231, 160, 0.06);
+}
+
+.duvera-quote blockquote {
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--paper);
+}
+
+.duvera-quote figcaption {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--trace);
+}
+
+/* ========================= RESPONSIVE ========================= */
+
+@media (min-width: 640px) {
+  .hero { padding: 2rem 3rem 3.5rem; }
+  .cards { grid-template-columns: repeat(3, 1fr); }
+  .duvera-facts { grid-template-columns: 1fr 1fr; }
+  .fact:nth-last-child(2) { border-bottom: none; }
+  .fact:nth-child(odd) { border-right: 1px solid rgba(139, 152, 165, 0.3); }
+}
+
+@media (min-width: 960px) {
+  .hero { padding: 2.5rem 5rem 4rem; }
+  .duvera-inner { grid-template-columns: 1.1fr 1fr; align-items: start; }
+  .sluzby, .duvera { padding-left: 5rem; padding-right: 5rem; }
+}
+
+/* ========================= REDUCED MOTION ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-title .line,
+  .hero-lead,
+  .hero-actions,
+  .hero-eyebrow,
+  .grid-map {
+    animation: none;
+  }
+  .station.hit i { animation: none; }
+  .btn { transition: none; }
+  .btn-solid:hover { transform: none; }
+}
