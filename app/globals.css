@@ -1,0 +1,642 @@
+/* =====================================================================
+   HERTZ AUTOPŮJČOVNA BRNO — náhledový design
+   Palette: asfalt / hertzovská žluť / křídová bílá / betonová šeď
+   Type:    display — systémový kondenzovaný stack (Archivo-like fallback
+            přes Arial Narrow / Helvetica Condensed vibe pomocí stretch),
+            body — Georgia-free: čistý grotesk stack
+   Signature: středová čára silnice (žlutý pruh s přerušovanou dělicí čarou)
+   ===================================================================== */
+
+:root {
+  --asfalt: #17181c;        /* tmavý asfalt — pozadí hero a sekce Jak to probíhá */
+  --asfalt-2: #22242a;      /* světlejší asfalt — karty na tmavé */
+  --zlut: #ffcc00;          /* hertzovská žluť — signage, CTA, akcenty */
+  --zlut-tmava: #b28f00;    /* tmavší žluť pro drobné texty na světlé */
+  --krida: #f7f7f4;         /* křídová bílá — světlé sekce */
+  --beton: #5c5f66;         /* betonová šeď — sekundární text na světlé */
+  --inkoust: #1b1c20;       /* text na světlé */
+  --linka: #e3e3dd;         /* dělicí linky na světlé */
+
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", Impact, "Arial", sans-serif;
+  --font-body: "Helvetica Neue", Helvetica, Arial, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--inkoust);
+  background: var(--krida);
+  -webkit-font-smoothing: antialiased;
+}
+
+.hz a:focus-visible,
+.hz button:focus-visible {
+  outline: 3px solid var(--zlut);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.hz-hero .hz-btn:focus-visible,
+.hz-header a:focus-visible {
+  outline-color: var(--zlut);
+}
+
+.hz-wrap {
+  width: min(1120px, 100% - 2.5rem);
+  margin-inline: auto;
+}
+
+/* ============ HLAVIČKA ============ */
+
+.hz-header {
+  background: var(--asfalt);
+  border-bottom: 1px solid rgba(255, 204, 0, 0.25);
+}
+
+.hz-header-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.hz-wordmark {
+  text-decoration: none;
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.hz-wordmark-main {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: condensed;
+  font-size: 1.65rem;
+  letter-spacing: 0.14em;
+  color: var(--zlut);
+}
+
+.hz-wordmark-sub {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #b9bac0;
+  margin-top: 0.3rem;
+}
+
+.hz-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hz-nav a {
+  color: #e8e8e5;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.hz-nav a:hover {
+  color: var(--zlut);
+}
+
+.hz-nav-tel {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--zlut) !important;
+  border: 1px solid rgba(255, 204, 0, 0.5);
+  padding: 0.45rem 0.9rem;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.hz-nav-tel:hover {
+  background: rgba(255, 204, 0, 0.1);
+}
+
+@media (max-width: 640px) {
+  .hz-nav a:not(.hz-nav-tel) {
+    display: none;
+  }
+}
+
+/* ============ HERO ============ */
+
+.hz-hero {
+  background: var(--asfalt);
+  color: #f2f2ee;
+  position: relative;
+  overflow: hidden;
+}
+
+/* jemná textura asfaltu — diagonální šrafování */
+.hz-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.015) 0px,
+    rgba(255, 255, 255, 0.015) 1px,
+    transparent 1px,
+    transparent 9px
+  );
+  pointer-events: none;
+}
+
+.hz-hero-in {
+  position: relative;
+  padding: 4.5rem 0 3.5rem;
+}
+
+.hz-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c9cacd;
+  animation: hz-rise 0.6s ease-out both;
+}
+
+.hz-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #3ecf6e;
+  box-shadow: 0 0 0 3px rgba(62, 207, 110, 0.2);
+}
+
+.hz-hero-title {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(3.4rem, 12vw, 8.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  margin: 1.6rem 0 1.4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.hz-line {
+  display: block;
+  animation: hz-rise 0.7s ease-out both;
+}
+
+.hz-line-1 { animation-delay: 0.05s; color: #f2f2ee; }
+.hz-line-2 { animation-delay: 0.15s; color: #f2f2ee; }
+.hz-line-3 { animation-delay: 0.25s; color: var(--zlut); }
+
+.hz-title-period {
+  color: #f2f2ee;
+}
+
+.hz-hero-lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: #c9cacd;
+  animation: hz-rise 0.7s ease-out 0.35s both;
+}
+
+.hz-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2rem;
+  animation: hz-rise 0.7s ease-out 0.45s both;
+}
+
+.hz-btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.95rem 1.9rem;
+  border-radius: 3px;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.hz-btn-primary {
+  background: var(--zlut);
+  color: var(--asfalt);
+}
+
+.hz-btn-primary:hover {
+  background: #ffd83d;
+  transform: translateY(-2px);
+}
+
+.hz-btn-ghost {
+  color: #f2f2ee;
+  border: 1px solid rgba(242, 242, 238, 0.4);
+}
+
+.hz-btn-ghost:hover {
+  border-color: var(--zlut);
+  color: var(--zlut);
+}
+
+/* --- SIGNATURE: středová čára silnice --- */
+
+.hz-lane {
+  margin: 3rem 0 0;
+  height: 44px;
+  background: var(--zlut);
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.hz-lane-dash {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 5px;
+  transform: translateY(-50%);
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--asfalt) 0 56px,
+    transparent 56px 96px
+  );
+  background-size: 96px 5px;
+  animation: hz-drive 2.4s linear infinite;
+}
+
+@keyframes hz-drive {
+  from { background-position-x: 0; }
+  to { background-position-x: -96px; }
+}
+
+@keyframes hz-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* fakta pod pruhem */
+
+.hz-hero-facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 2.25rem;
+  animation: hz-rise 0.7s ease-out 0.55s both;
+}
+
+.hz-fact dt {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9a9ba1;
+  order: 2;
+}
+
+.hz-fact dd {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.1;
+  color: #f2f2ee;
+}
+
+.hz-fact {
+  display: flex;
+  flex-direction: column;
+  border-left: 3px solid rgba(255, 204, 0, 0.45);
+  padding-left: 0.85rem;
+}
+
+@media (max-width: 720px) {
+  .hz-hero-in {
+    padding: 3rem 0 2.5rem;
+  }
+  .hz-hero-facts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hz-lane {
+    height: 34px;
+    margin-top: 2.25rem;
+  }
+}
+
+/* ============ SEKCE OBECNĚ ============ */
+
+.hz-section-head {
+  max-width: 44rem;
+  margin-bottom: 2.75rem;
+}
+
+.hz-eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--zlut-tmava);
+  margin-bottom: 0.8rem;
+}
+
+.hz-eyebrow-dark {
+  color: var(--zlut);
+}
+
+.hz-section-title {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: 0.005em;
+}
+
+.hz-section-lead {
+  margin-top: 1rem;
+  color: var(--beton);
+  font-size: 1.05rem;
+}
+
+/* ============ VOZOVÝ PARK ============ */
+
+.hz-fleet {
+  background: var(--krida);
+  padding: 4.5rem 0;
+}
+
+.hz-fleet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.hz-car {
+  background: #fff;
+  border: 1px solid var(--linka);
+  border-radius: 6px;
+  padding: 1.4rem 1.4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.hz-car:hover {
+  transform: translateY(-4px);
+  border-color: var(--zlut);
+  box-shadow: 0 12px 28px rgba(23, 24, 28, 0.09);
+}
+
+/* „SPZ" štítek kategorie — odkaz na registrační značku */
+.hz-car-plate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.hz-car-kat {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: var(--asfalt);
+  color: var(--zlut);
+  padding: 0.3rem 0.6rem;
+  border-radius: 3px;
+}
+
+.hz-car-cena {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--inkoust);
+  white-space: nowrap;
+}
+
+.hz-car-model {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+
+.hz-car-popis {
+  color: var(--beton);
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+.hz-car-specs {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--zlut-tmava);
+  border-top: 1px dashed var(--linka);
+  padding-top: 0.75rem;
+}
+
+.hz-fleet-note {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--beton);
+  max-width: 42rem;
+}
+
+@media (max-width: 900px) {
+  .hz-fleet-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .hz-fleet {
+    padding: 3.25rem 0;
+  }
+  .hz-fleet-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============ JAK TO PROBÍHÁ ============ */
+
+.hz-how {
+  background: var(--asfalt);
+  color: #f2f2ee;
+  padding: 4.5rem 0;
+}
+
+.hz-how .hz-section-title {
+  color: #f2f2ee;
+}
+
+.hz-steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  counter-reset: none;
+}
+
+.hz-step {
+  background: var(--asfalt-2);
+  border-radius: 6px;
+  padding: 1.5rem 1.4rem;
+  border-top: 4px solid var(--zlut);
+}
+
+/* kilometrovník — silniční značení místo generických 01/02/03 */
+.hz-step-km {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  color: var(--asfalt);
+  background: var(--zlut);
+  padding: 0.25rem 0.65rem;
+  border-radius: 3px;
+  margin-bottom: 0.9rem;
+}
+
+.hz-step-title {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: 1.35rem;
+  line-height: 1.15;
+  margin-bottom: 0.6rem;
+}
+
+.hz-step-text {
+  color: #b9bac0;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 820px) {
+  .hz-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- důvěra --- */
+
+.hz-trust {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.hz-quote {
+  border-left: 4px solid var(--zlut);
+  padding-left: 1.4rem;
+}
+
+.hz-quote p {
+  font-family: var(--font-display);
+  font-stretch: condensed;
+  font-weight: 700;
+  font-size: clamp(1.3rem, 2.6vw, 1.75rem);
+  line-height: 1.25;
+  color: #f2f2ee;
+}
+
+.hz-quote-author {
+  margin-top: 0.9rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--zlut);
+}
+
+.hz-trust-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.hz-trust-item {
+  font-size: 0.95rem;
+  color: #b9bac0;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px dashed rgba(255, 204, 0, 0.25);
+}
+
+.hz-trust-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.hz-trust-item strong {
+  color: #f2f2ee;
+}
+
+@media (max-width: 820px) {
+  .hz-how {
+    padding: 3.25rem 0;
+  }
+  .hz-trust {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hz-hero-eyebrow,
+  .hz-line,
+  .hz-hero-lead,
+  .hz-hero-cta,
+  .hz-hero-facts {
+    animation: none;
+  }
+  .hz-lane-dash {
+    animation: none;
+  }
+  .hz-btn,
+  .hz-car {
+    transition: none;
+  }
+  .hz-btn-primary:hover,
+  .hz-car:hover {
+    transform: none;
+  }
+}
