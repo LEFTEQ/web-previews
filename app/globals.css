@@ -1,0 +1,557 @@
+/* =====================================================
+   STŘECHY ČERNÝ · OLOMOUC — pokrývačství, klempířství, tesařství
+   Paleta odvozená z materiálů řemesla:
+   - břidlice / mokrý plech (tmavé pozadí hero)
+   - pálená bobrovka (cihlově červená — hlavní akcent)
+   - měděný plech / patina (teplý sekundární tón)
+   - vápenná omítka (světlé pozadí sekcí)
+   ===================================================== */
+
+:root {
+  --bridlice: #23272b;      /* tmavá břidlice */
+  --bridlice-2: #2e3338;    /* světlejší břidlice */
+  --bobrovka: #c4501f;      /* pálená taška */
+  --bobrovka-tm: #9c3d15;   /* taška ve stínu */
+  --med: #d9a441;           /* měděný / mosazný detail */
+  --omitka: #f2ede4;        /* vápenná omítka */
+  --papir: #fdfbf7;         /* karty */
+  --inkoust: #26221e;       /* text na světlém */
+  --sedy: #6b655d;
+
+  --font-display: "Archivo Black", "Arial Black", "Arial", sans-serif;
+  --font-body: "Georgia", "Times New Roman", serif;
+  --font-ui: "Trebuchet MS", "Verdana", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--inkoust);
+  background: var(--omitka);
+  -webkit-font-smoothing: antialiased;
+}
+
+.cerny a:focus-visible,
+.cerny .btn:focus-visible {
+  outline: 3px solid var(--med);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =============== HERO =============== */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(178deg, var(--bridlice) 0%, var(--bridlice-2) 68%, #363b41 100%);
+  color: var(--omitka);
+  padding: 1.5rem 1.25rem 15rem;
+  min-height: 92svh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* — signature: pás bobrovek (pálené tašky) rostoucí zespodu hero — */
+.hero-tiles {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: clamp(140px, 24vh, 240px);
+  pointer-events: none;
+}
+
+.hero-tiles svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.tile {
+  fill: var(--bobrovka);
+  stroke: var(--bridlice);
+  stroke-width: 3;
+  transform-origin: bottom center;
+  animation: tile-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.tile-r0 {
+  fill: var(--bobrovka-tm);
+  animation-delay: 0.15s;
+}
+
+.tile-r1 {
+  fill: var(--bobrovka);
+  animation-delay: 0.35s;
+}
+
+.tile-r2 {
+  fill: #d35f2c;
+  animation-delay: 0.55s;
+}
+
+@keyframes tile-rise {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.wm-roof {
+  color: var(--bobrovka);
+  display: inline-flex;
+}
+
+.wm-roof svg {
+  width: 30px;
+  height: 17px;
+}
+
+.wm-text {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  letter-spacing: 0.22em;
+  font-weight: 400;
+}
+
+.wm-text strong {
+  color: var(--med);
+  font-weight: 700;
+}
+
+.hero-loc {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  color: rgba(242, 237, 228, 0.65);
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  max-width: 62rem;
+  margin: auto 0;
+  padding-top: 3.5rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--med);
+  margin: 0 0 1rem;
+  animation: fade-up 0.7s 0.1s both;
+}
+
+/* — typografický statement: tři vrstvy střechy jako tři slova — */
+.hero-title {
+  font-family: var(--font-display);
+  margin: 0 0 1.5rem;
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.ht-line {
+  display: block;
+  font-size: clamp(3.2rem, 12vw, 8.5rem);
+}
+
+.ht-1 {
+  color: rgba(242, 237, 228, 0.35);
+  animation: fade-up 0.7s 0.2s both;
+}
+
+.ht-2 {
+  color: rgba(242, 237, 228, 0.7);
+  padding-left: 0.35em;
+  animation: fade-up 0.7s 0.35s both;
+}
+
+.ht-3 {
+  color: var(--bobrovka);
+  padding-left: 0.7em;
+  animation: fade-up 0.7s 0.5s both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-sub {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: rgba(242, 237, 228, 0.88);
+  margin: 0 0 2rem;
+  animation: fade-up 0.7s 0.6s both;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  animation: fade-up 0.7s 0.7s both;
+}
+
+.btn {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 3px;
+  display: inline-block;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--bobrovka);
+  color: #fff;
+}
+
+.btn-solid:hover {
+  background: var(--bobrovka-tm);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--omitka);
+  border: 2px solid rgba(242, 237, 228, 0.4);
+}
+
+.btn-ghost:hover {
+  border-color: var(--med);
+  color: var(--med);
+  transform: translateY(-2px);
+}
+
+/* =============== SLUŽBY =============== */
+
+.sluzby {
+  padding: 4.5rem 1.25rem 5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.sec-head {
+  max-width: 40rem;
+  margin-bottom: 3rem;
+}
+
+.sec-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bobrovka);
+  margin: 0 0 0.75rem;
+}
+
+.sec-eyebrow-light {
+  color: var(--med);
+}
+
+.sluzby h2,
+.rodina h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  letter-spacing: -0.01em;
+}
+
+.sec-lead {
+  color: var(--sedy);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.sluzby-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+.karta {
+  background: var(--papir);
+  border-radius: 4px;
+  padding: 1.75rem 1.5rem 1.9rem;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(38, 34, 30, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(38, 34, 30, 0.12);
+}
+
+/* zaoblená spodní hrana karty = tvar bobrovky */
+.karta-hrana {
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  width: 3.5rem;
+  height: 6px;
+  border-radius: 0 0 6px 6px;
+  background: var(--bobrovka);
+}
+
+.karta:nth-child(2) .karta-hrana {
+  background: var(--med);
+}
+
+.karta:nth-child(3) .karta-hrana {
+  background: var(--bridlice-2);
+}
+
+.karta-remeslo {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--sedy);
+  margin: 0.4rem 0 0.6rem;
+}
+
+.karta-heslo {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  line-height: 1.25;
+  margin: 0 0 0.8rem;
+}
+
+.karta-popis {
+  margin: 0 0 1.1rem;
+  color: #45403a;
+}
+
+.karta-body {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.karta-body li {
+  padding: 0.45rem 0 0.45rem 1.4rem;
+  position: relative;
+  border-top: 1px solid rgba(38, 34, 30, 0.1);
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+}
+
+.karta-body li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.85rem;
+  width: 0.7rem;
+  height: 0.45rem;
+  border-radius: 0 0 0.7rem 0.7rem; /* miniaturní bobrovka jako odrážka */
+  background: var(--bobrovka);
+}
+
+/* =============== RODINA / DŮVĚRA =============== */
+
+.rodina {
+  background: var(--bridlice);
+  color: var(--omitka);
+  padding: 4.5rem 1.25rem 5rem;
+}
+
+.rodina-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 1fr;
+}
+
+.rodina-text p {
+  color: rgba(242, 237, 228, 0.85);
+  max-width: 36rem;
+}
+
+.rodina-sliby {
+  list-style: none;
+  padding: 0;
+  margin: 1.75rem 0 0;
+}
+
+.rodina-sliby li {
+  padding: 0.9rem 0 0.9rem 1.5rem;
+  border-left: 3px solid var(--bobrovka);
+  margin-bottom: 0.9rem;
+  color: rgba(242, 237, 228, 0.85);
+}
+
+.rodina-sliby strong {
+  color: var(--med);
+  font-family: var(--font-ui);
+  display: block;
+  margin-bottom: 0.15rem;
+  letter-spacing: 0.02em;
+}
+
+.rodina-kontakty {
+  background: var(--bridlice-2);
+  border-radius: 6px;
+  padding: 1.75rem 1.5rem;
+  align-self: start;
+}
+
+.kontakty-h {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin: 0 0 1.25rem;
+  color: var(--omitka);
+}
+
+.kontakt {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "jmeno tel"
+    "role tel";
+  gap: 0 1rem;
+  align-items: center;
+  text-decoration: none;
+  padding: 0.85rem 0.75rem;
+  margin: 0 -0.75rem;
+  border-radius: 4px;
+  border-top: 1px solid rgba(242, 237, 228, 0.12);
+  transition: background-color 0.15s ease;
+}
+
+.kontakt:first-of-type {
+  border-top: none;
+}
+
+.kontakt:hover {
+  background: rgba(196, 80, 31, 0.18);
+}
+
+.kontakt-jmeno {
+  grid-area: jmeno;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  color: var(--omitka);
+}
+
+.kontakt-role {
+  grid-area: role;
+  font-size: 0.85rem;
+  color: rgba(242, 237, 228, 0.6);
+}
+
+.kontakt-tel {
+  grid-area: tel;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--med);
+  white-space: nowrap;
+}
+
+.kontakt-mail {
+  margin: 1.25rem 0 0;
+  font-size: 0.92rem;
+  color: rgba(242, 237, 228, 0.7);
+}
+
+.kontakt-mail a {
+  color: var(--med);
+  word-break: break-all;
+}
+
+/* =============== RESPONSIVITA =============== */
+
+@media (min-width: 700px) {
+  .hero {
+    padding: 2rem 3rem 16rem;
+  }
+
+  .sluzby,
+  .rodina {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .sluzby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .rodina-inner {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 4rem;
+  }
+}
+
+/* =============== REDUCED MOTION =============== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .tile,
+  .hero-eyebrow,
+  .ht-1,
+  .ht-2,
+  .ht-3,
+  .hero-sub,
+  .hero-cta {
+    animation: none;
+  }
+
+  .btn,
+  .karta,
+  .kontakt {
+    transition: none;
+  }
+
+  .karta:hover,
+  .btn:hover {
+    transform: none;
+  }
+}
