@@ -1,0 +1,492 @@
+/* =====================================================
+   REVAS — zateplování, Olomouc
+   Paleta odvozená z řemesla: šedý polystyren, celulóza,
+   minerální vata (žlutá), bílá omítka.
+   ===================================================== */
+
+:root {
+  --omitka: #f7f6f2;        /* bílá fasádní omítka */
+  --polystyren: #7d8a94;    /* šedý EPS */
+  --grafit: #232a30;        /* grafitová stěrka / téměř černá */
+  --vata: #f2b229;          /* minerální vata — signální žlutá */
+  --celuloza: #b7aa93;      /* foukaná celulóza */
+  --inkoust: #1b2126;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--omitka);
+  color: var(--inkoust);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.rv a:focus-visible,
+.rv button:focus-visible {
+  outline: 3px solid var(--vata);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Typografie ---------- */
+
+.rv-h1, .rv-h2, .rv-h3, .rv-wordmark, .rv-krok-h, .rv-vrstva-nazev {
+  font-family: "Arial Black", "Arial Bold", Arial, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.rv-h1 {
+  margin: 0.4em 0 0.5em;
+  font-size: clamp(2.6rem, 8.5vw, 5.6rem);
+  line-height: 0.98;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Nadpis sám je „vrstvený" — každý řádek jiná vrstva stěny */
+.rv-h1-line { display: block; }
+.rv-h1-line-1 { color: var(--grafit); }
+.rv-h1-line-2 {
+  color: var(--omitka);
+  background: var(--polystyren);
+  width: fit-content;
+  padding: 0 0.15em;
+}
+.rv-h1-line-3 {
+  color: var(--grafit);
+  background: var(--vata);
+  width: fit-content;
+  padding: 0 0.15em;
+}
+
+.rv-h2 {
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  line-height: 1.1;
+  margin: 0.2em 0 0;
+  text-transform: uppercase;
+}
+
+.rv-h3 {
+  font-size: 1.25rem;
+  margin: 0 0 0.4em;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.rv-eyebrow {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: var(--polystyren);
+  margin: 0;
+}
+
+.rv-eyebrow-inv { color: var(--vata); }
+
+/* ---------- Layout ---------- */
+
+.rv { display: block; }
+
+.rv-section, .rv-hero {
+  padding: 4rem 1.25rem;
+}
+
+.rv-section-head, .rv-hero-grid, .rv-sluzby-grid, .rv-vrstvy,
+.rv-duvera-grid, .rv-citace, .rv-topbar, .rv-hero-strip {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- Hero ---------- */
+
+.rv-hero {
+  background:
+    linear-gradient(180deg, var(--omitka) 0%, #edece6 100%);
+  padding-top: 1.5rem;
+  overflow: hidden;
+}
+
+.rv-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 2.5rem;
+}
+
+.rv-wordmark {
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  color: var(--grafit);
+}
+
+/* wordmark: druhá půlka „odříznutá" jako řez izolací */
+.rv-wordmark-cut {
+  background: var(--vata);
+  padding: 0 0.12em;
+}
+
+.rv-topbar-loc {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--polystyren);
+}
+
+.rv-hero-grid {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+}
+
+.rv-hero-perex {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  margin: 0 0 1.8rem;
+}
+
+.rv-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.rv-btn {
+  display: inline-block;
+  background: var(--grafit);
+  color: var(--omitka);
+  text-decoration: none;
+  font-weight: 800;
+  padding: 0.9rem 1.5rem;
+  border-radius: 3px;
+  border: 2px solid var(--grafit);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.rv-btn:hover {
+  background: var(--vata);
+  color: var(--grafit);
+  border-color: var(--vata);
+}
+
+.rv-btn-ghost {
+  background: transparent;
+  color: var(--grafit);
+}
+
+.rv-btn-ghost:hover {
+  background: var(--grafit);
+  color: var(--omitka);
+  border-color: var(--grafit);
+}
+
+/* ---------- Signature: řez zateplenou stěnou ---------- */
+
+.rv-cut {
+  position: relative;
+  display: grid;
+  grid-template-columns: 6px 14px 96px 10px 1fr;
+  min-height: 300px;
+  border: 3px solid var(--grafit);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--omitka);
+}
+
+.rv-cut-layer {
+  position: relative;
+  animation: rv-slide-in 0.7s ease both;
+}
+
+.rv-cut-l1 { background: #ffffff; animation-delay: 0.55s; }
+.rv-cut-l2 {
+  background: repeating-linear-gradient(45deg, #d8d5cc 0 3px, #efede7 3px 7px);
+  animation-delay: 0.45s;
+}
+.rv-cut-l3 {
+  background: repeating-linear-gradient(90deg, var(--vata) 0 18px, #e0a41f 18px 22px);
+  animation-delay: 0.3s;
+}
+.rv-cut-l4 { background: var(--celuloza); animation-delay: 0.2s; }
+.rv-cut-l5 {
+  background: repeating-linear-gradient(0deg, var(--polystyren) 0 44px, #6b7883 44px 48px);
+  animation-delay: 0.05s;
+}
+
+.rv-cut-layer span {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: rotate(180deg) translateX(50%);
+  writing-mode: vertical-rl;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  color: var(--grafit);
+}
+
+.rv-cut-l5 span { color: var(--omitka); }
+.rv-cut-l1 span, .rv-cut-l2 span, .rv-cut-l4 span { display: none; }
+
+.rv-cut-temp {
+  position: absolute;
+  top: 14px;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 3px;
+  animation: rv-fade-up 0.6s ease 0.9s both;
+}
+
+.rv-cut-temp-out {
+  left: -3px;
+  top: -3px;
+  background: var(--grafit);
+  color: var(--omitka);
+  border-radius: 0 0 4px 0;
+}
+
+.rv-cut-temp-in {
+  right: -3px;
+  top: auto;
+  bottom: -3px;
+  background: var(--vata);
+  color: var(--grafit);
+  border-radius: 4px 0 0 0;
+}
+
+.rv-hero-strip {
+  margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 2rem;
+  border-top: 3px solid var(--grafit);
+  padding-top: 1rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Sekce: služby ---------- */
+
+.rv-section-sluzby { background: var(--omitka); }
+
+.rv-section-head { margin-bottom: 2.5rem; }
+
+.rv-sluzby-grid {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: 1fr;
+}
+
+.rv-karta {
+  background: #ffffff;
+  border: 2px solid var(--grafit);
+  border-radius: 4px;
+  padding: 1.5rem;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.rv-karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0 var(--vata);
+}
+
+.rv-karta-stitek {
+  display: inline-block;
+  margin: 0 0 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--vata);
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px;
+}
+
+.rv-karta-text { margin: 0; color: #3a444c; }
+
+/* Vrstvy */
+
+.rv-vrstvy {
+  margin-top: 4rem;
+  border-left: 6px solid var(--vata);
+  padding-left: 1.5rem;
+}
+
+.rv-vrstvy-h { margin-top: 0; }
+
+.rv-vrstvy-perex {
+  max-width: 40rem;
+  margin: 0 0 1.8rem;
+  color: #3a444c;
+}
+
+.rv-vrstvy-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.4rem;
+}
+
+.rv-vrstva {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.rv-vrstva-n {
+  flex: 0 0 auto;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 0.95rem;
+  background: var(--grafit);
+  color: var(--omitka);
+  padding: 0.25rem 0.5rem;
+  border-radius: 2px;
+}
+
+.rv-vrstva-nazev {
+  margin: 0 0 0.2em;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+}
+
+.rv-vrstva-popis { margin: 0; color: #3a444c; }
+
+/* ---------- Sekce: důvěra ---------- */
+
+.rv-section-duvera {
+  background: var(--grafit);
+  color: var(--omitka);
+}
+
+.rv-section-duvera .rv-h2 { color: var(--omitka); }
+
+.rv-duvera-grid {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1fr;
+}
+
+.rv-duvera-text p {
+  margin: 0 0 1rem;
+  max-width: 36rem;
+  color: #d7dade;
+}
+
+.rv-kroky {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.4rem;
+}
+
+.rv-krok {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  border-top: 2px solid var(--polystyren);
+  padding-top: 1rem;
+}
+
+.rv-krok-n {
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 1.6rem;
+  color: var(--vata);
+  line-height: 1;
+}
+
+.rv-krok-h { margin: 0 0 0.3em; font-size: 1.05rem; color: var(--omitka); }
+.rv-krok-text { margin: 0; color: #c3c8cd; }
+
+.rv-citace {
+  margin: 3.5rem auto 0;
+  padding: 1.8rem;
+  background: #2c343b;
+  border-left: 6px solid var(--vata);
+  border-radius: 0 4px 4px 0;
+}
+
+.rv-citace blockquote {
+  margin: 0 0 0.8rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: var(--omitka);
+  font-style: italic;
+}
+
+.rv-citace figcaption {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--vata);
+}
+
+/* ---------- Animace ---------- */
+
+@keyframes rv-slide-in {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes rv-fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.rv-h1-line { animation: rv-fade-up 0.5s ease both; }
+.rv-h1-line-1 { animation-delay: 0.05s; }
+.rv-h1-line-2 { animation-delay: 0.15s; }
+.rv-h1-line-3 { animation-delay: 0.25s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rv-cut-layer,
+  .rv-cut-temp,
+  .rv-h1-line {
+    animation: none;
+  }
+  .rv-karta:hover,
+  .rv-btn:hover {
+    transform: none;
+  }
+}
+
+/* ---------- Responzivita ---------- */
+
+@media (min-width: 720px) {
+  .rv-hero-grid {
+    grid-template-columns: 1.2fr 1fr;
+  }
+
+  .rv-cut { min-height: 420px; }
+
+  .rv-sluzby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .rv-duvera-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1000px) {
+  .rv-section, .rv-hero { padding-left: 2rem; padding-right: 2rem; }
+}
