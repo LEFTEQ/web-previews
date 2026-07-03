@@ -1,0 +1,592 @@
+/* =====================================================
+   Ortoptika Hradec — design tokens
+   Palette: klinická běloba + hluboký petrolejový modrozelený
+   (barva duhovky / vyšetřovny), korálová tečka fixačního
+   světla jako akcent. Žádná šablonová terakota, žádný acid.
+   Type: Zilla Slab (display — přátelský slab, „dětská
+   ordinace, ale odborná") + system-ui pro tělo (rychlost).
+   Signature: optotypová stěna v hero — řádky testovací
+   tabule, které se při načtení „zaostří".
+   ===================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,500;0,600;0,700;1,600&display=swap");
+
+:root {
+  --ink: #0e2a30;          /* petrolejová čerň */
+  --teal: #14555e;         /* hluboký petrolej — duhovka */
+  --teal-soft: #e3f0ef;    /* světlá vyšetřovna */
+  --paper: #fbfdfd;        /* klinická běloba, lehce chladná */
+  --coral: #ff6a5e;        /* fixační světlo ortoptického přístroje */
+  --coral-dark: #d94a3f;
+  --muted: #557276;
+
+  --font-display: "Zilla Slab", "Georgia", serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ort-page a:focus-visible,
+.ort-page button:focus-visible {
+  outline: 3px solid var(--coral);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(20, 85, 94, 0.08), transparent 60%),
+    var(--paper);
+  border-bottom: 1px solid #dcebe9;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 28px 20px 56px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 48px;
+  color: var(--teal);
+}
+
+.brand-mark {
+  display: inline-flex;
+  color: var(--teal);
+}
+
+.brand-word {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.brand-word strong {
+  font-weight: 700;
+}
+
+.hero-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 18px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 7.5vw, 4.6rem);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  margin: 0 0 24px;
+  max-width: 14ch;
+}
+
+.hero-title .line {
+  display: block;
+}
+
+.hero-title em.fuse {
+  font-style: italic;
+  color: var(--teal);
+  position: relative;
+  white-space: nowrap;
+}
+
+.fuse-dot {
+  display: inline-block;
+  width: 0.32em;
+  height: 0.32em;
+  margin-left: 0.18em;
+  border-radius: 50%;
+  background: var(--coral);
+  vertical-align: 0.08em;
+}
+
+.hero-lead {
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: #2c4a4f;
+  margin: 0 0 32px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 48px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--coral);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(255, 106, 94, 0.35);
+}
+
+.btn-primary:hover {
+  background: var(--coral-dark);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--teal);
+  border: 2px solid var(--teal);
+}
+
+.btn-ghost:hover {
+  background: var(--teal-soft);
+  transform: translateY(-2px);
+}
+
+.hero-facts {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 48px;
+  margin: 0;
+  padding: 24px 0 0;
+  border-top: 1px solid #d6e7e5;
+  max-width: 40rem;
+}
+
+.hero-facts li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fact-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--teal);
+}
+
+.fact-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  max-width: 12rem;
+}
+
+/* --- Signature: optotypová stěna --- */
+
+.optotype {
+  position: absolute;
+  top: 50%;
+  right: 3vw;
+  transform: translateY(-50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--teal);
+  text-align: center;
+  user-select: none;
+  pointer-events: none;
+}
+
+.opto-row {
+  display: block;
+  letter-spacing: 0.28em;
+  animation: opto-focus 0.9s ease both;
+}
+
+.opto-row.r1 { font-size: 5.2rem; opacity: 0.10; animation-delay: 0.1s; }
+.opto-row.r2 { font-size: 3.6rem; opacity: 0.13; animation-delay: 0.25s; }
+.opto-row.r3 { font-size: 2.6rem; opacity: 0.17; animation-delay: 0.4s; }
+.opto-row.r4 { font-size: 1.9rem; opacity: 0.22; animation-delay: 0.55s; }
+.opto-row.r5 { font-size: 1.4rem; opacity: 0.28; animation-delay: 0.7s; }
+.opto-row.r6 {
+  font-size: 1.05rem;
+  opacity: 1;
+  color: var(--coral);
+  animation-delay: 0.9s;
+}
+
+@keyframes opto-focus {
+  from {
+    filter: blur(8px);
+    transform: translateY(6px);
+  }
+  to {
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* ============ SEKCE OBECNĚ ============ */
+
+.section {
+  padding: 72px 20px;
+}
+
+.section-head {
+  max-width: 1120px;
+  margin: 0 auto 40px;
+}
+
+.section-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--coral-dark);
+  margin: 0 0 10px;
+}
+
+.section-eyebrow-light {
+  color: var(--coral);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  line-height: 1.15;
+  margin: 0;
+  max-width: 24ch;
+}
+
+.section-title-light {
+  color: #f2fbfa;
+}
+
+/* ============ SLUŽBY ============ */
+
+.services {
+  background: var(--paper);
+}
+
+.cards {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #dcebe9;
+  border-radius: 16px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(14, 42, 48, 0.09);
+}
+
+.card-accent {
+  background: var(--teal-soft);
+  border-color: #bcd9d6;
+}
+
+.card-tag {
+  align-self: flex-start;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--teal);
+  background: rgba(20, 85, 94, 0.09);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+
+.card-accent .card-tag {
+  background: rgba(20, 85, 94, 0.14);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1.25;
+  margin: 0 0 12px;
+}
+
+.card p {
+  margin: 0 0 12px;
+  color: #2c4a4f;
+}
+
+.card-note {
+  margin-top: auto !important;
+  padding-top: 8px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  border-top: 1px dashed #cde2e0;
+}
+
+/* --- cesta pacienta --- */
+
+.path {
+  max-width: 1120px;
+  margin: 48px auto 0;
+  background: var(--teal-soft);
+  border-radius: 16px;
+  padding: 32px 28px;
+}
+
+.path-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 0 0 20px;
+  color: var(--teal);
+}
+
+.path-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  counter-reset: none;
+}
+
+.path-steps li {
+  font-size: 0.98rem;
+  color: #24444a;
+}
+
+.step-k {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--coral-dark);
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+/* ============ DŮVĚRA / O NÁS ============ */
+
+.trust {
+  background: linear-gradient(160deg, var(--teal) 0%, #0e3d44 100%);
+  color: #dceceb;
+}
+
+.trust-grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 48px;
+}
+
+.trust-text {
+  max-width: 36rem;
+  margin: 18px 0 0;
+  color: #cfe3e1;
+}
+
+.trust-text strong {
+  color: #fff;
+}
+
+.trust-points {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+  max-width: 36rem;
+}
+
+.trust-points li {
+  position: relative;
+  padding-left: 28px;
+  color: #e8f4f3;
+}
+
+.trust-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--coral);
+}
+
+.trust-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.aside-block {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 22px 20px;
+}
+
+.aside-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin: 0 0 8px;
+  color: #fff;
+}
+
+.aside-block p {
+  margin: 0 0 8px;
+  color: #d7e9e7;
+  font-size: 0.98rem;
+}
+
+.aside-link {
+  color: var(--coral);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.aside-link:hover {
+  color: #ff8a80;
+}
+
+.aside-quote {
+  background: rgba(255, 106, 94, 0.1);
+  border-color: rgba(255, 106, 94, 0.35);
+}
+
+.aside-quote p:first-child {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.08rem;
+  color: #fff;
+}
+
+.quote-by {
+  font-size: 0.85rem !important;
+  color: #b9d4d1 !important;
+}
+
+/* ============ RESPONSIVITA ============ */
+
+@media (max-width: 960px) {
+  .optotype {
+    position: static;
+    transform: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.6em 1em;
+    padding: 0 20px 40px;
+  }
+
+  .opto-row.r1 { font-size: 2.6rem; }
+  .opto-row.r2 { font-size: 2.1rem; }
+  .opto-row.r3 { font-size: 1.7rem; }
+  .opto-row.r4 { font-size: 1.35rem; }
+  .opto-row.r5 { font-size: 1.1rem; }
+  .opto-row.r6 { font-size: 1rem; }
+
+  .cards,
+  .path-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero-inner {
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+
+  .brand {
+    margin-bottom: 36px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-facts {
+    gap: 20px 28px;
+  }
+
+  .section {
+    padding: 56px 18px;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .opto-row {
+    animation: none;
+  }
+
+  .btn,
+  .card {
+    transition: none;
+  }
+
+  .btn:hover,
+  .card:hover {
+    transform: none;
+  }
+}
