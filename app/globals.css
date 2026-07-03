@@ -1,0 +1,733 @@
+/* ============================================================
+   IMONT HK — plyn · topení · voda · Hradec Králové
+   Paleta odvozená z řemesla:
+   — ocel (potrubí):    #1B2430 / #2A3646
+   — plamen (plyn):     #2E9BFF (modrý plamen správně seřízeného hořáku)
+   — měď (lisované fit.): #C87A4B
+   — topení (signál ÚT): #E4572E
+   — papír / stěna:     #EFF3F6
+   Typo: Archivo (široký, technický grotesk pro display)
+         + Source Serif / system serif NE — body je Inter-like system stack,
+         utility mono pro značení potrubí (NTL/ÚT/ZTI).
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@500;600&display=swap");
+
+:root {
+  --ocel-900: #151c26;
+  --ocel-800: #1b2430;
+  --ocel-700: #2a3646;
+  --ocel-200: #c3ced9;
+  --plamen: #2e9bff;
+  --plamen-hot: #7cc4ff;
+  --med: #c87a4b;
+  --topeni: #e4572e;
+  --papir: #eff3f6;
+  --bila: #ffffff;
+
+  --font-display: "Archivo", "Arial Black", sans-serif;
+  --font-body: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+
+  --max: 72rem;
+  --pad: clamp(1.25rem, 4vw, 3rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ocel-800);
+  background: var(--papir);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus — viditelný, plamenově modrý */
+.im a:focus-visible,
+.im button:focus-visible {
+  outline: 3px solid var(--plamen);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.im abbr[title] {
+  text-decoration: underline dotted;
+  cursor: help;
+}
+
+/* ============ HERO ============ */
+
+.im-hero {
+  position: relative;
+  background: linear-gradient(168deg, var(--ocel-900) 0%, var(--ocel-800) 55%, #202f42 100%);
+  color: var(--bila);
+  overflow: hidden;
+  padding: clamp(1.25rem, 3vw, 2rem) var(--pad) clamp(3rem, 7vw, 5.5rem);
+}
+
+.im-hero__top {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.im-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.im-wordmark__flame {
+  color: var(--plamen);
+  display: inline-flex;
+}
+
+.im-wordmark__text {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 75%;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+}
+
+.im-wordmark__text em {
+  font-style: normal;
+  color: var(--plamen);
+  margin-left: 0.12em;
+}
+
+.im-hero__tel {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--bila);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  white-space: nowrap;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.im-hero__tel:hover {
+  border-color: var(--plamen);
+  background: rgba(46, 155, 255, 0.12);
+}
+
+.im-hero__body {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max);
+  margin: clamp(2.5rem, 7vw, 5rem) auto 0;
+}
+
+.im-hero__kicker {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+  animation: im-rise 600ms ease both;
+}
+
+.im-tag {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.65rem;
+  border-radius: 3px;
+}
+
+.im-tag--plyn {
+  background: var(--plamen);
+  color: var(--ocel-900);
+}
+
+.im-tag--topeni {
+  background: var(--topeni);
+  color: var(--bila);
+}
+
+.im-tag--voda {
+  background: transparent;
+  color: var(--plamen-hot);
+  box-shadow: inset 0 0 0 1px var(--plamen-hot);
+}
+
+.im-hero__kicker-city {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ocel-200);
+  letter-spacing: 0.08em;
+}
+
+.im-hero__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 68%;
+  text-transform: uppercase;
+  font-size: clamp(2.9rem, 9.5vw, 7.25rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  max-width: 12ch;
+}
+
+.im-hero__line {
+  display: block;
+}
+
+.im-hero__line--1 {
+  animation: im-rise 600ms 80ms ease both;
+}
+
+.im-hero__line--2 {
+  animation: im-rise 600ms 180ms ease both;
+}
+
+.im-hero__line strong {
+  font-weight: 900;
+  color: transparent;
+  background: linear-gradient(92deg, var(--plamen) 10%, var(--plamen-hot) 60%, var(--med) 110%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.im-hero__lead {
+  max-width: 34rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  color: #d7e0e9;
+  margin: 1.75rem 0 2.25rem;
+  animation: im-rise 600ms 280ms ease both;
+}
+
+.im-hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  animation: im-rise 600ms 360ms ease both;
+}
+
+.im-btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.02rem;
+  text-decoration: none;
+  color: var(--ocel-900);
+  background: var(--plamen);
+  padding: 0.85rem 1.7rem;
+  border-radius: 6px;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.im-btn:hover {
+  background: var(--plamen-hot);
+  transform: translateY(-2px);
+}
+
+.im-btn--ghost {
+  background: transparent;
+  color: var(--bila);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+}
+
+.im-btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.6);
+}
+
+.im-hero__note {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max);
+  margin: clamp(2.5rem, 6vw, 4rem) auto 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ocel-200);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.im-hero__note-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--plamen);
+  box-shadow: 0 0 10px var(--plamen);
+  flex: none;
+}
+
+/* — Signature: schéma potrubí — */
+
+.im-hero__pipes {
+  position: absolute;
+  right: -2rem;
+  bottom: 0;
+  width: clamp(280px, 38vw, 480px);
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.im-hero__pipes svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.im-pipe {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: im-flow 1400ms 300ms ease-out forwards;
+}
+
+.im-pipe--main {
+  stroke: var(--ocel-700);
+  stroke-width: 14;
+}
+
+.im-pipe--plyn {
+  stroke: var(--plamen);
+  animation-delay: 700ms;
+}
+
+.im-pipe--topeni {
+  stroke: var(--topeni);
+  animation-delay: 850ms;
+}
+
+.im-pipe--voda {
+  stroke: var(--med);
+  animation-delay: 1000ms;
+}
+
+.im-valve circle {
+  fill: var(--ocel-800);
+  stroke: var(--ocel-200);
+  stroke-width: 3;
+}
+
+.im-valve line {
+  stroke: var(--ocel-200);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.im-node {
+  opacity: 0;
+  animation: im-pop 400ms 1700ms ease-out forwards;
+}
+
+.im-node--plyn {
+  fill: var(--plamen);
+}
+
+.im-node--topeni {
+  fill: var(--topeni);
+}
+
+.im-node--voda {
+  fill: var(--med);
+}
+
+.im-flame {
+  fill: var(--plamen-hot);
+  opacity: 0;
+  transform-origin: 80px 40px;
+  animation: im-pop 400ms 2000ms ease-out forwards, im-flicker 2.4s 2400ms ease-in-out infinite;
+}
+
+@keyframes im-flow {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes im-pop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes im-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+
+@keyframes im-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============ SEKCE — společné ============ */
+
+.im-section-head {
+  max-width: var(--max);
+  margin: 0 auto clamp(2rem, 5vw, 3.5rem);
+}
+
+.im-eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--med);
+  margin: 0 0 0.75rem;
+}
+
+.im-eyebrow--light {
+  color: var(--plamen-hot);
+}
+
+.im-h2 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 72%;
+  text-transform: uppercase;
+  font-size: clamp(1.9rem, 4.5vw, 3.2rem);
+  line-height: 1.02;
+  margin: 0;
+  color: var(--ocel-900);
+}
+
+.im-h2--light {
+  color: var(--bila);
+}
+
+.im-section-lead {
+  max-width: 40rem;
+  margin: 1rem 0 0;
+  color: var(--ocel-700);
+}
+
+/* ============ SLUŽBY ============ */
+
+.im-sluzby {
+  padding: clamp(3.5rem, 8vw, 6.5rem) var(--pad);
+  background: var(--papir);
+}
+
+.im-sluzby__grid {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.im-karta {
+  background: var(--bila);
+  border-radius: 10px;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border-top: 6px solid var(--ocel-700);
+  box-shadow: 0 1px 2px rgba(21, 28, 38, 0.06), 0 8px 24px rgba(21, 28, 38, 0.06);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.im-karta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 2px 4px rgba(21, 28, 38, 0.08), 0 16px 36px rgba(21, 28, 38, 0.12);
+}
+
+.im-karta--plyn {
+  border-top-color: var(--plamen);
+}
+
+.im-karta--topeni {
+  border-top-color: var(--topeni);
+}
+
+.im-karta--voda {
+  border-top-color: var(--med);
+}
+
+.im-karta__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.im-karta__znacka {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1.6rem;
+  letter-spacing: 0.04em;
+  color: var(--ocel-900);
+}
+
+.im-karta__medium {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--ocel-200);
+}
+
+.im-karta--plyn .im-karta__medium {
+  color: var(--plamen);
+}
+
+.im-karta--topeni .im-karta__medium {
+  color: var(--topeni);
+}
+
+.im-karta--voda .im-karta__medium {
+  color: var(--med);
+}
+
+.im-karta__titul {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 80%;
+  font-size: 1.35rem;
+  margin: 0 0 0.6rem;
+  color: var(--ocel-900);
+}
+
+.im-karta__popis {
+  margin: 0 0 1.1rem;
+  color: var(--ocel-700);
+  font-size: 0.97rem;
+}
+
+.im-karta__body {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid #e2e8ee;
+}
+
+.im-karta__body li {
+  padding: 0.6rem 0 0.6rem 1.25rem;
+  border-bottom: 1px solid #e2e8ee;
+  font-size: 0.92rem;
+  position: relative;
+}
+
+.im-karta__body li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.05rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--ocel-200);
+}
+
+.im-karta--plyn .im-karta__body li::before {
+  background: var(--plamen);
+}
+
+.im-karta--topeni .im-karta__body li::before {
+  background: var(--topeni);
+}
+
+.im-karta--voda .im-karta__body li::before {
+  background: var(--med);
+}
+
+/* ============ DŮVĚRA + REFERENCE ============ */
+
+.im-duvera {
+  background: var(--ocel-900);
+  color: var(--bila);
+  padding: clamp(3.5rem, 8vw, 6.5rem) var(--pad);
+}
+
+.im-duvera__grid {
+  max-width: var(--max);
+  margin: 0 auto clamp(3rem, 6vw, 4.5rem);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.im-fakt {
+  border-left: 3px solid var(--plamen);
+  padding-left: 1.25rem;
+}
+
+.im-fakt__cislo {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 70%;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  line-height: 1;
+  margin: 0 0 0.5rem;
+  color: var(--plamen);
+}
+
+.im-fakt__titul {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin: 0 0 0.4rem;
+}
+
+.im-fakt__text {
+  margin: 0;
+  font-size: 0.94rem;
+  color: #b8c4d1;
+}
+
+.im-reference {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.im-reference__h {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--med);
+  margin: 0 0 1rem;
+}
+
+.im-reference__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--ocel-700);
+}
+
+.im-reference__row {
+  display: grid;
+  grid-template-columns: 11rem 16rem 1fr;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--ocel-700);
+  align-items: baseline;
+}
+
+.im-reference__typ {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.im-reference__misto {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--plamen-hot);
+  letter-spacing: 0.03em;
+}
+
+.im-reference__prace {
+  font-size: 0.94rem;
+  color: #b8c4d1;
+}
+
+/* ============ RESPONZIVITA ============ */
+
+@media (max-width: 900px) {
+  .im-sluzby__grid,
+  .im-duvera__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .im-hero__pipes {
+    width: clamp(200px, 45vw, 300px);
+    opacity: 0.35;
+    right: -3rem;
+  }
+
+  .im-reference__row {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .im-hero__tel {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .im-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .im-hero__title {
+    max-width: none;
+  }
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .im-hero__kicker,
+  .im-hero__line--1,
+  .im-hero__line--2,
+  .im-hero__lead,
+  .im-hero__cta {
+    animation: none;
+  }
+
+  .im-pipe {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .im-node,
+  .im-flame {
+    animation: none;
+    opacity: 1;
+  }
+
+  .im-karta,
+  .im-btn,
+  .im-hero__tel {
+    transition: none;
+  }
+
+  .im-karta:hover,
+  .im-btn:hover {
+    transform: none;
+  }
+}
