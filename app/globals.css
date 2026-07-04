@@ -1,0 +1,513 @@
+:root {
+  --ink: #171313;
+  --paper: #f3ede2;
+  --paper-2: #eae0d0;
+  --amber: #d84e1a;
+  --amber-deep: #a83411;
+  --violet: #2c2140;
+  --line: rgba(23, 19, 19, 0.16);
+  --shadow: 0 24px 60px -32px rgba(44, 33, 64, 0.55);
+  --edge: 3px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Georgia", serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.fo-page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ---------- Topbar ---------- */
+.fo-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 0 18px;
+  flex-wrap: wrap;
+}
+
+.fo-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.fo-wordmark__mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 30%, #fff5e6 0%, var(--amber) 46%, var(--amber-deep) 100%);
+  display: grid;
+  place-items: center;
+  box-shadow: inset 0 0 0 3px var(--ink);
+}
+
+.fo-wordmark__aperture {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 0 3px rgba(243, 237, 226, 0.85);
+}
+
+.fo-wordmark__text {
+  font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.fo-wordmark__foto {
+  color: var(--ink);
+}
+
+.fo-wordmark__orita {
+  color: var(--amber);
+  margin-left: 0.28em;
+}
+
+.fo-topbar__place {
+  margin: 0;
+  font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--violet);
+}
+
+/* ---------- Hero ---------- */
+.fo-hero {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 42px;
+  align-items: center;
+  padding: 26px 0 76px;
+}
+
+.fo-hero__frame {
+  position: relative;
+  padding: 18px;
+  background: var(--violet);
+  border-radius: 2px;
+}
+
+.fo-hero__img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 1px;
+  filter: saturate(1.02) contrast(1.02);
+  animation: fo-reveal 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.fo-hero__corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--amber);
+}
+.fo-hero__corner--tl { top: 6px; left: 6px; border-right: 0; border-bottom: 0; }
+.fo-hero__corner--tr { top: 6px; right: 6px; border-left: 0; border-bottom: 0; }
+.fo-hero__corner--bl { bottom: 6px; left: 6px; border-right: 0; border-top: 0; }
+.fo-hero__corner--br { bottom: 6px; right: 6px; border-left: 0; border-top: 0; }
+
+.fo-hero__eyebrow {
+  margin: 0 0 18px;
+  font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+  font-size: 0.74rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber-deep);
+}
+
+.fo-hero__title {
+  margin: 0 0 22px;
+  font-size: clamp(2.15rem, 5.4vw, 3.5rem);
+  line-height: 1.04;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.fo-hero__title em {
+  font-style: italic;
+  color: var(--amber);
+}
+
+.fo-hero__lead {
+  margin: 0 0 28px;
+  font-size: 1.08rem;
+  max-width: 32ch;
+  color: #38312e;
+}
+
+.fo-hero__actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 34px;
+}
+
+.fo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 24px;
+  font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 2px solid var(--ink);
+  transition: transform 140ms ease, background 140ms ease, color 140ms ease;
+}
+
+.fo-btn--primary {
+  background: var(--amber);
+  border-color: var(--amber);
+  color: #fff;
+}
+
+.fo-btn--primary:hover {
+  background: var(--amber-deep);
+  border-color: var(--amber-deep);
+  transform: translateY(-2px);
+}
+
+.fo-btn--ghost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.fo-btn--ghost:hover {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateY(-2px);
+}
+
+.fo-hero__specs {
+  display: flex;
+  gap: 26px;
+  margin: 0;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+
+.fo-hero__specs div {
+  min-width: 96px;
+}
+
+.fo-hero__specs dt {
+  font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.fo-hero__specs dd {
+  margin: 3px 0 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--violet);
+}
+
+/* ---------- Shared section bits ---------- */
+.fo-eyebrow {
+  margin: 0 0 14px;
+  font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+  font-size: 0.74rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber-deep);
+}
+
+.fo-section__head {
+  max-width: 40rem;
+  margin-bottom: 44px;
+}
+
+.fo-section__title {
+  margin: 0 0 16px;
+  font-size: clamp(1.7rem, 3.6vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.fo-section__intro {
+  margin: 0;
+  color: #38312e;
+  font-size: 1.05rem;
+}
+
+/* ---------- Services ---------- */
+.fo-services {
+  padding: 40px 0 72px;
+}
+
+.fo-cards {
+  list-style: none;
+  margin: 0 0 46px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.fo-card {
+  position: relative;
+  background: var(--paper);
+  padding: 30px 26px 28px;
+  transition: background 160ms ease;
+}
+
+.fo-card:hover {
+  background: var(--paper-2);
+}
+
+.fo-card__num {
+  font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  color: var(--amber);
+  display: inline-block;
+  border: 2px solid var(--amber);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  line-height: 36px;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.fo-card__title {
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+}
+
+.fo-card__text {
+  margin: 0 0 16px;
+  font-size: 0.98rem;
+  color: #3a332f;
+}
+
+.fo-card__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.fo-card__list li {
+  padding: 7px 0 7px 20px;
+  position: relative;
+  border-top: 1px solid var(--line);
+  color: var(--violet);
+}
+
+.fo-card__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin-top: -4px;
+  border: 2px solid var(--amber);
+  border-radius: 50%;
+}
+
+.fo-services__figure {
+  margin: 0;
+  border: 12px solid var(--violet);
+  border-radius: 2px;
+}
+
+.fo-services__figure img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.fo-services__figure figcaption {
+  background: var(--violet);
+  color: var(--paper-2);
+  padding: 12px 16px;
+  font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------- About ---------- */
+.fo-about {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 46px;
+  align-items: center;
+  padding: 40px 0 84px;
+}
+
+.fo-about__media img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: var(--shadow);
+}
+
+.fo-about__title {
+  margin: 0 0 20px;
+  font-size: clamp(1.7rem, 3.6vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.fo-about__text {
+  margin: 0 0 16px;
+  color: #38312e;
+}
+
+.fo-about__points {
+  list-style: none;
+  margin: 24px 0 28px;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.fo-about__points li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.fo-about__k {
+  font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.fo-about__v {
+  color: var(--violet);
+  font-size: 0.94rem;
+  text-align: right;
+}
+
+/* ---------- Focus ---------- */
+a:focus-visible,
+.fo-btn:focus-visible {
+  outline: 3px solid var(--violet);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Motion ---------- */
+@keyframes fo-reveal {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+    filter: saturate(0.4) contrast(1.02);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: saturate(1.02) contrast(1.02);
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .fo-hero {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding-bottom: 52px;
+  }
+  .fo-hero__frame {
+    order: -1;
+  }
+  .fo-about {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .fo-about__media img {
+    aspect-ratio: 3 / 2;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 16px;
+  }
+  .fo-cards {
+    grid-template-columns: 1fr;
+  }
+  .fo-hero__actions .fo-btn {
+    flex: 1 1 auto;
+  }
+  .fo-about__points li {
+    flex-direction: column;
+    gap: 2px;
+  }
+  .fo-about__v {
+    text-align: left;
+  }
+  .fo-services__figure {
+    border-width: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .fo-hero__img {
+    animation: none;
+  }
+}
