@@ -1,0 +1,327 @@
+:root {
+  --bd-plaster: #E6E1D8;   /* svěží vápenná omítka */
+  --bd-concrete: #8A8579;  /* pohledový beton */
+  --bd-ink: #23211D;       /* mokré hladítko */
+  --bd-clay: #B4552E;      /* pigment cihla */
+  --bd-lime: #F4F2EC;      /* leštěné vápno */
+  --bd-line: rgba(35, 33, 29, 0.14);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bd-plaster);
+  color: var(--bd-ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.bd { overflow-x: clip; }
+
+/* ---------- shared ---------- */
+.bd-eyebrow {
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--bd-clay);
+  margin: 0 0 1.1rem;
+}
+
+.bd-btn {
+  display: inline-block;
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  background: var(--bd-ink);
+  color: var(--bd-lime);
+  border: 1px solid var(--bd-ink);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.bd-btn:hover { background: var(--bd-clay); border-color: var(--bd-clay); transform: translateY(-2px); }
+.bd-btn-ghost { background: transparent; color: var(--bd-ink); }
+.bd-btn-ghost:hover { background: var(--bd-ink); color: var(--bd-lime); border-color: var(--bd-ink); }
+
+a:focus-visible,
+.bd-mark:focus-visible {
+  outline: 3px solid var(--bd-clay);
+  outline-offset: 3px;
+}
+
+/* ---------- nav ---------- */
+.bd-nav {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.4rem clamp(1.2rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--bd-line);
+}
+.bd-mark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35em;
+  text-decoration: none;
+  color: var(--bd-ink);
+}
+.bd-mark-a {
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  font-family: "Arial Narrow", "Helvetica Neue", sans-serif;
+  font-stretch: condensed;
+}
+.bd-mark-b {
+  font-weight: 400;
+  font-style: italic;
+  color: var(--bd-clay);
+  font-family: "Iowan Old Style", Georgia, serif;
+}
+.bd-loc {
+  font-family: "Courier New", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bd-concrete);
+}
+
+/* ---------- hero ---------- */
+.bd-hero {
+  position: relative;
+  padding: clamp(3rem, 9vw, 7rem) clamp(1.2rem, 5vw, 4rem) 0;
+  overflow: hidden;
+}
+.bd-hero-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+/* signature: hladítkové tahy stěrky přes plochu betonu */
+.bd-trowel {
+  position: absolute;
+  right: -8%;
+  top: 8%;
+  width: min(58vw, 640px);
+  height: 78%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.4rem, 1.4vw, 1rem);
+  transform: rotate(-4deg);
+}
+.bd-sweep {
+  display: block;
+  flex: 1;
+  border-radius: 2px 40% 30% 2px;
+  background:
+    linear-gradient(105deg,
+      var(--bd-concrete) 0%,
+      #b8b3a6 22%,
+      var(--bd-plaster) 55%,
+      #cfcabf 78%,
+      var(--bd-concrete) 100%);
+  opacity: 0.55;
+  filter: blur(0.4px);
+  transform-origin: left center;
+  animation: bd-drag 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.bd-sweep-1 { animation-delay: 0.15s; }
+.bd-sweep-2 { animation-delay: 0.3s; opacity: 0.4; }
+.bd-sweep-3 { animation-delay: 0.45s; opacity: 0.65; }
+@keyframes bd-drag {
+  from { transform: scaleX(0); opacity: 0; }
+  to { transform: scaleX(1); }
+}
+
+.bd-hero-inner {
+  position: relative;
+  max-width: 40ch;
+}
+.bd-title {
+  margin: 0 0 1.6rem;
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  font-size: clamp(3.2rem, 15vw, 8.5rem);
+}
+.bd-line {
+  display: block;
+  animation: bd-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.bd-line-2, .bd-line-4 {
+  font-style: italic;
+  color: var(--bd-clay);
+  padding-left: 0.6em;
+}
+.bd-line-1 { animation-delay: 0.1s; }
+.bd-line-2 { animation-delay: 0.22s; }
+.bd-line-3 { animation-delay: 0.34s; }
+.bd-line-4 { animation-delay: 0.46s; }
+@keyframes bd-rise {
+  from { opacity: 0; transform: translateY(0.5em); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bd-lede {
+  margin: 0 0 2rem;
+  font-size: 1.12rem;
+  max-width: 32ch;
+  color: #4a473f;
+}
+.bd-hero-cta { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+.bd-ticker {
+  position: relative;
+  margin: clamp(3rem, 8vw, 5rem) 0 0;
+  padding: 1.4rem 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem 2rem;
+  border-top: 1px solid var(--bd-line);
+  border-bottom: 1px solid var(--bd-line);
+  font-size: 0.98rem;
+}
+.bd-ticker b {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-family: "Arial Narrow", "Helvetica Neue", sans-serif;
+  font-stretch: condensed;
+  color: var(--bd-ink);
+}
+
+/* ---------- sections ---------- */
+.bd-sec {
+  padding: clamp(3.5rem, 9vw, 7rem) clamp(1.2rem, 5vw, 4rem);
+}
+.bd-sec-alt {
+  background: var(--bd-ink);
+  color: var(--bd-lime);
+}
+.bd-sec-alt .bd-eyebrow { color: #e2915f; }
+
+.bd-sec-head { max-width: 30ch; margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+.bd-h2 {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+.bd-sec-lede { margin: 1.2rem 0 0; color: #c9c4b7; max-width: 42ch; }
+
+.bd-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--bd-line);
+}
+.bd-card {
+  padding: 2rem 1.6rem 2.4rem;
+  border-bottom: 1px solid var(--bd-line);
+  border-right: 1px solid var(--bd-line);
+  transition: background 0.25s ease;
+}
+.bd-card:hover { background: var(--bd-lime); }
+.bd-card-no {
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+  color: var(--bd-clay);
+  letter-spacing: 0.1em;
+}
+.bd-card-spec {
+  display: block;
+  margin-top: 0.4rem;
+  font-family: "Courier New", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bd-concrete);
+}
+.bd-card-name {
+  margin: 0.5rem 0 0.8rem;
+  font-weight: 400;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+}
+.bd-card-desc { margin: 0; font-size: 1rem; color: #4a473f; }
+
+.bd-quotes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+.bd-quote {
+  margin: 0;
+  padding: 1.8rem 1.6rem;
+  border: 1px solid rgba(244, 242, 236, 0.16);
+  border-left: 3px solid var(--bd-clay);
+  background: rgba(244, 242, 236, 0.03);
+}
+.bd-quote blockquote {
+  margin: 0 0 1rem;
+  font-size: 1.14rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+.bd-quote figcaption {
+  font-family: "Courier New", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #b7b2a5;
+}
+
+.bd-brands {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(244, 242, 236, 0.16);
+  display: flex;
+  align-items: baseline;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+}
+.bd-brands-label {
+  font-family: "Courier New", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #b7b2a5;
+}
+.bd-brands ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+  font-family: "Arial Narrow", "Helvetica Neue", sans-serif;
+  font-stretch: condensed;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: 1.15rem;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 640px) {
+  .bd-trowel { opacity: 0.4; right: -20%; }
+  .bd-cards { grid-template-columns: 1fr; }
+  .bd-card { border-right: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bd-sweep, .bd-line { animation: none !important; }
+  .bd-line { opacity: 1; transform: none; }
+  .bd-btn { transition: none; }
+}
