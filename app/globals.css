@@ -1,0 +1,405 @@
+/* ============================================================
+   VAŠE ZAHRADA s.r.o. — zahradní architektura, Ostrava-Zábřeh
+   Signature: vertikální "letokruh" popisky sekcí + botanický
+   sazeč nadpisů. Paleta odvozená z mokré hlíny, mechu a
+   spadaného listí — záměrně mimo AI defaulty (žádná krémová
+   + terakota, žádné acid-green na černé).
+   ============================================================ */
+
+:root {
+  --soil: #241d16;      /* mokrá hlína — základní tmavá */
+  --bark: #3c342a;      /* kůra */
+  --paper: #eae4d6;     /* nebělený papír na skici */
+  --clay: #cdbfa6;      /* jílová písková */
+  --moss: #4a5d3a;      /* mech — hlavní zeleň */
+  --bloom: #b8632f;     /* rezavý květ / oxidovaný kov (akcent) */
+
+  --font-body: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --font-disp: "Baskerville", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-util: ui-monospace, "SFMono-Regular", "Menlo", "Consolas", monospace;
+
+  --maxw: 1160px;
+  --gutter: clamp(20px, 5vw, 64px);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--soil);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--bloom);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.vz { overflow-x: clip; }
+
+/* -------------------------------------------------- shared bits */
+.vz-eyebrow {
+  font-family: var(--font-util);
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--moss);
+  display: flex;
+  gap: 0.6em;
+  align-items: center;
+  margin: 0 0 1.1rem;
+}
+
+.vz-h2 {
+  font-family: var(--font-disp);
+  font-weight: 400;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.vz-btn {
+  display: inline-block;
+  font-family: var(--font-util);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.95em 1.6em;
+  background: var(--moss);
+  color: var(--paper);
+  border: 1px solid var(--moss);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.vz-btn:hover { background: var(--soil); border-color: var(--soil); transform: translateY(-2px); }
+.vz-btn--ghost { background: transparent; color: var(--soil); border-color: var(--bark); }
+.vz-btn--ghost:hover { background: var(--bark); color: var(--paper); transform: translateY(-2px); }
+
+/* -------------------------------------------------- topbar */
+.vz-top {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(18px, 3vw, 30px) var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.vz-mark {
+  position: relative;
+  text-decoration: none;
+  line-height: 0.82;
+  display: inline-flex;
+  flex-direction: column;
+}
+.vz-mark__a {
+  font-family: var(--font-util);
+  font-size: 12px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--moss);
+  padding-left: 0.3em;
+}
+.vz-mark__b {
+  font-family: var(--font-disp);
+  font-size: 30px;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+.vz-mark__dot {
+  position: absolute;
+  right: -13px;
+  bottom: 4px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--bloom);
+}
+
+.vz-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2.4vw, 30px);
+  font-family: var(--font-util);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.vz-nav a { text-decoration: none; padding: 4px 0; border-bottom: 1px solid transparent; }
+.vz-nav a:hover { border-bottom-color: var(--bloom); }
+.vz-nav__call { color: var(--moss); }
+
+/* -------------------------------------------------- hero */
+.vz-hero {
+  max-width: var(--maxw);
+  margin: clamp(8px, 2vw, 24px) auto 0;
+  padding: 0 var(--gutter) clamp(40px, 7vw, 90px);
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: end;
+}
+
+.vz-hero__frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--clay);
+  border-radius: 260px 260px 8px 8px;
+}
+.vz-hero__img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  animation: vz-rise 1s ease both;
+}
+.vz-hero__grain {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(120% 60% at 50% 0%, transparent 55%, rgba(36,29,22,0.28) 100%);
+  pointer-events: none;
+}
+
+.vz-hero__panel { padding-bottom: clamp(8px, 2vw, 30px); }
+
+.vz-hero__title {
+  font-family: var(--font-disp);
+  font-weight: 400;
+  font-size: clamp(3.4rem, 11vw, 6.2rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.4rem;
+}
+.vz-hero__title em {
+  font-style: italic;
+  color: var(--bloom);
+}
+.vz-hero__lead {
+  font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+  max-width: 40ch;
+  margin: 0 0 2rem;
+  color: var(--bark);
+}
+.vz-hero__cta { display: flex; flex-wrap: wrap; gap: 12px; }
+
+@keyframes vz-rise {
+  from { opacity: 0; transform: translateY(20px) scale(1.02); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* -------------------------------------------------- sekce 1 — cesta */
+.vz-work {
+  background: var(--soil);
+  color: var(--paper);
+  padding: clamp(56px, 9vw, 120px) var(--gutter);
+}
+.vz-work__head {
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+.vz-work .vz-eyebrow { color: var(--clay); }
+.vz-work__intro {
+  max-width: 52ch;
+  margin: 1.4rem 0 0;
+  color: var(--clay);
+  font-size: 1.1rem;
+}
+
+.vz-figure {
+  max-width: var(--maxw);
+  margin: clamp(32px, 5vw, 56px) auto;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.vz-figure img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; }
+
+.vz-steps {
+  list-style: none;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+  counter-reset: leto;
+}
+.vz-step {
+  position: relative;
+  padding-top: 26px;
+  border-top: 1px solid rgba(234,228,214,0.28);
+}
+/* signature: letokruhová linka mezi kroky */
+.vz-step::before {
+  content: "";
+  position: absolute;
+  top: -4px; left: 0;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--bloom);
+}
+.vz-step__phase {
+  font-family: var(--font-util);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--clay);
+  margin: 0 0 0.5rem;
+}
+.vz-step__name {
+  font-family: var(--font-disp);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.9rem;
+  margin: 0 0 0.5rem;
+  color: var(--paper);
+}
+.vz-step__note {
+  margin: 0 0 1.1rem;
+  color: var(--clay);
+}
+.vz-step__list {
+  list-style: none;
+  margin: 0; padding: 0;
+  font-size: 0.98rem;
+}
+.vz-step__list li {
+  padding: 0.5em 0 0.5em 1.2em;
+  position: relative;
+  border-top: 1px solid rgba(234,228,214,0.12);
+}
+.vz-step__list li::before {
+  content: "—";
+  position: absolute; left: 0;
+  color: var(--moss);
+  filter: brightness(1.7);
+}
+
+/* -------------------------------------------------- sekce 2 — lidé */
+.vz-people {
+  padding: clamp(56px, 9vw, 120px) var(--gutter);
+}
+.vz-people__grid {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(28px, 5vw, 64px);
+  align-items: start;
+}
+
+.vz-people__media { position: sticky; top: 24px; }
+.vz-people__media img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 8px 8px 160px 160px;
+}
+.vz-people__cap {
+  margin-top: 0.9rem;
+  font-family: var(--font-util);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--bark);
+}
+
+.vz-credo {
+  font-family: var(--font-disp);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3.4vw, 2.5rem);
+  line-height: 1.14;
+  margin: 0 0 1.4rem;
+  border-left: 3px solid var(--bloom);
+  padding-left: 0.7em;
+}
+.vz-people__body {
+  max-width: 56ch;
+  margin: 0 0 2.4rem;
+  color: var(--bark);
+  font-size: 1.08rem;
+}
+
+.vz-quotes {
+  display: grid;
+  gap: 1px;
+  background: var(--clay);
+  border-top: 1px solid var(--clay);
+  border-bottom: 1px solid var(--clay);
+}
+.vz-quote {
+  margin: 0;
+  padding: 1.5rem 0;
+  background: var(--paper);
+}
+.vz-quote blockquote {
+  margin: 0 0 0.7rem;
+  font-size: 1.05rem;
+}
+.vz-quote blockquote::before { content: "„"; color: var(--bloom); }
+.vz-quote blockquote::after { content: "“"; color: var(--bloom); }
+.vz-quote figcaption {
+  font-family: var(--font-util);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  gap: 0.7em;
+  align-items: baseline;
+}
+.vz-quote__name { color: var(--soil); font-weight: 700; }
+.vz-quote__place { color: var(--moss); }
+
+.vz-contact {
+  max-width: var(--maxw);
+  margin: clamp(40px, 6vw, 72px) auto 0;
+  font-style: normal;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em 2em;
+  align-items: baseline;
+  padding-top: 1.6rem;
+  border-top: 2px solid var(--soil);
+  font-family: var(--font-util);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+.vz-contact__label {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--moss);
+}
+.vz-contact a { text-decoration: none; border-bottom: 1px solid var(--bloom); padding-bottom: 1px; }
+.vz-contact a:hover { color: var(--bloom); }
+
+/* -------------------------------------------------- responsivita */
+@media (max-width: 900px) {
+  .vz-hero { grid-template-columns: 1fr; align-items: start; }
+  .vz-hero__frame { aspect-ratio: 3 / 4; border-radius: 180px 180px 8px 8px; }
+  .vz-steps { grid-template-columns: 1fr; }
+  .vz-people__grid { grid-template-columns: 1fr; }
+  .vz-people__media { position: static; }
+  .vz-people__media img { aspect-ratio: 16 / 11; border-radius: 8px; }
+}
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .vz-nav a:not(.vz-nav__call) { display: none; }
+  .vz-hero__title { font-size: clamp(3rem, 18vw, 4.6rem); }
+}
+
+/* -------------------------------------------------- reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
