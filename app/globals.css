@@ -1,0 +1,512 @@
+:root {
+  --malt: #3a1f0e;        /* tmavá sladová hnědá */
+  --malt-deep: #24130a;   /* skoro černá pěna */
+  --pour: #c67c1c;        /* zlatavé ležácké zlato */
+  --pour-bright: #e6a531; /* světlá pěna zlata */
+  --foam: #f3ead6;        /* krémová pěna */
+  --paper: #efe4ce;
+  --ink: #2a1607;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--malt-deep);
+  color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua",
+    Georgia, serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pj {
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---------- skip link ---------- */
+.pj-skip {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 50;
+  background: var(--pour-bright);
+  color: var(--malt-deep);
+  padding: 0.7rem 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.pj-skip:focus {
+  left: 0.75rem;
+  top: 0.75rem;
+}
+
+/* ---------- topbar ---------- */
+.pj-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem clamp(1.1rem, 5vw, 3.5rem);
+  background: var(--malt-deep);
+  color: var(--foam);
+  border-bottom: 1px solid rgba(230, 165, 49, 0.22);
+}
+
+.pj-wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 0.9;
+}
+.pj-wordmark__top {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  color: var(--pour-bright);
+}
+.pj-wordmark__main {
+  font-family: "Iowan Old Style", Palatino, Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.55rem;
+  letter-spacing: 0.01em;
+  color: var(--foam);
+}
+.pj-topbar__note {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(243, 234, 214, 0.55);
+}
+
+/* ---------- eyebrow shared ---------- */
+.pj-eyebrow {
+  margin: 0 0 1.1rem;
+  font-family: Georgia, serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--pour-bright);
+}
+.pj-eyebrow--dark {
+  color: var(--pour);
+}
+
+/* ---------- HERO ---------- */
+.pj-hero {
+  position: relative;
+  min-height: min(88vh, 760px);
+  display: grid;
+  align-items: end;
+  background: var(--malt-deep);
+}
+.pj-hero__media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.pj-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.06);
+  animation: pj-drift 18s ease-out forwards;
+}
+.pj-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      180deg,
+      rgba(36, 19, 10, 0.15) 0%,
+      rgba(36, 19, 10, 0.55) 55%,
+      rgba(36, 19, 10, 0.94) 100%
+    ),
+    linear-gradient(90deg, rgba(36, 19, 10, 0.75) 0%, rgba(36, 19, 10, 0) 62%);
+}
+.pj-hero__panel {
+  position: relative;
+  z-index: 2;
+  padding: clamp(2rem, 6vw, 4.5rem) clamp(1.1rem, 5vw, 3.5rem);
+  max-width: 46rem;
+}
+.pj-hero__title {
+  margin: 0 0 1.2rem;
+  font-family: "Iowan Old Style", Palatino, Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(2.7rem, 9vw, 5.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  color: var(--foam);
+}
+.pj-hero__title em {
+  font-style: italic;
+  color: var(--pour-bright);
+}
+.pj-hero__lead {
+  margin: 0 0 1.8rem;
+  max-width: 34rem;
+  font-size: 1.08rem;
+  color: rgba(243, 234, 214, 0.86);
+}
+.pj-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+/* ---------- buttons ---------- */
+.pj-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.5rem;
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+  min-height: 48px;
+}
+.pj-btn--solid {
+  background: var(--pour-bright);
+  color: var(--malt-deep);
+  border: 1px solid var(--pour-bright);
+}
+.pj-btn--solid:hover {
+  background: var(--pour);
+  border-color: var(--pour);
+  transform: translateY(-2px);
+}
+.pj-btn--ghost {
+  background: transparent;
+  color: var(--foam);
+  border: 1px solid rgba(243, 234, 214, 0.5);
+}
+.pj-btn--ghost:hover {
+  border-color: var(--pour-bright);
+  color: var(--pour-bright);
+  transform: translateY(-2px);
+}
+.pj-btn--ghost-dark {
+  color: var(--malt);
+  border-color: rgba(58, 31, 14, 0.45);
+}
+.pj-btn--ghost-dark:hover {
+  border-color: var(--pour);
+  color: var(--pour);
+}
+
+/* ---------- SEKCE 1 brew ---------- */
+.pj-brew {
+  background: var(--foam);
+  color: var(--ink);
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.1rem, 5vw, 3.5rem);
+}
+.pj-brew__intro {
+  max-width: 42rem;
+}
+.pj-h2 {
+  margin: 0 0 0.9rem;
+  font-family: "Iowan Old Style", Palatino, Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--malt);
+}
+.pj-brew__note {
+  margin: 0;
+  color: rgba(42, 22, 7, 0.78);
+}
+
+.pj-steps {
+  list-style: none;
+  margin: clamp(2rem, 5vw, 3.2rem) 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  border-top: 2px solid var(--malt);
+}
+.pj-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1rem, 4vw, 2.5rem);
+  padding: clamp(1.4rem, 4vw, 2rem) 0;
+  border-bottom: 1px solid rgba(58, 31, 14, 0.22);
+}
+.pj-step__num {
+  font-family: "Iowan Old Style", Palatino, Georgia, serif;
+  font-style: italic;
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  line-height: 1;
+  color: var(--pour);
+}
+.pj-step__title {
+  margin: 0;
+  font-family: "Iowan Old Style", Palatino, Georgia, serif;
+  font-size: 1.35rem;
+  color: var(--malt);
+}
+.pj-step__meta {
+  display: inline-block;
+  margin: 0.15rem 0 0.6rem;
+  font-family: Georgia, serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--pour);
+}
+.pj-step__text {
+  margin: 0;
+  max-width: 42rem;
+  color: rgba(42, 22, 7, 0.82);
+}
+
+/* taps */
+.pj-taps {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+.pj-taps__head {
+  max-width: 40rem;
+  margin-bottom: 1.6rem;
+}
+.pj-h3 {
+  margin: 0 0 0.4rem;
+  font-family: "Iowan Old Style", Palatino, Georgia, serif;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  color: var(--malt);
+}
+.pj-taps__sub {
+  margin: 0;
+  color: rgba(42, 22, 7, 0.78);
+}
+.pj-pours {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+.pj-pour {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  padding: 1.3rem;
+  background: var(--paper);
+  border: 1px solid rgba(58, 31, 14, 0.16);
+  border-radius: 3px;
+}
+.pj-pour__deg {
+  align-self: start;
+  font-family: "Iowan Old Style", Palatino, Georgia, serif;
+  font-weight: 700;
+  font-size: 1.7rem;
+  color: var(--pour);
+  border-bottom: 3px solid var(--pour-bright);
+  padding-bottom: 0.1rem;
+}
+.pj-pour__name {
+  margin: 0 0 0.3rem;
+  font-family: "Iowan Old Style", Palatino, Georgia, serif;
+  font-size: 1.15rem;
+  color: var(--malt);
+}
+.pj-pour__desc {
+  margin: 0;
+  font-size: 0.96rem;
+  color: rgba(42, 22, 7, 0.8);
+}
+
+.pj-figure {
+  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+}
+.pj-figure__img {
+  width: 100%;
+  border-radius: 4px;
+  filter: saturate(1.02);
+}
+.pj-figure__cap {
+  margin-top: 0.8rem;
+  font-family: Georgia, serif;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: rgba(42, 22, 7, 0.7);
+}
+
+/* ---------- SEKCE 2 visit ---------- */
+.pj-visit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--malt);
+  color: var(--foam);
+}
+.pj-visit__media {
+  overflow: hidden;
+}
+.pj-visit__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 320px;
+}
+.pj-visit__content {
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1.1rem, 5vw, 3.5rem);
+}
+.pj-visit .pj-h2 {
+  color: var(--foam);
+}
+.pj-cards {
+  display: grid;
+  gap: 1.2rem;
+  margin-top: 1.8rem;
+}
+.pj-card {
+  background: var(--foam);
+  color: var(--ink);
+  padding: 1.6rem;
+  border-radius: 4px;
+  border-top: 4px solid var(--pour-bright);
+}
+.pj-card__title {
+  margin: 0 0 0.6rem;
+  font-family: "Iowan Old Style", Palatino, Georgia, serif;
+  font-size: 1.3rem;
+  color: var(--malt);
+}
+.pj-card__text {
+  margin: 0 0 1rem;
+  font-size: 0.98rem;
+  color: rgba(42, 22, 7, 0.82);
+}
+.pj-card__facts {
+  margin: 0 0 1.2rem;
+  display: grid;
+  gap: 0.6rem;
+}
+.pj-card__facts div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(58, 31, 14, 0.16);
+}
+.pj-card__facts dt {
+  font-family: Georgia, serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pour);
+}
+.pj-card__facts dd {
+  margin: 0;
+  font-weight: 700;
+  color: var(--malt);
+}
+.pj-card__facts a {
+  color: var(--malt);
+  text-decoration: none;
+  border-bottom: 1px solid var(--pour);
+}
+.pj-card__facts a:hover {
+  color: var(--pour);
+}
+.pj-visit__addr {
+  margin: 1.8rem 0 0;
+  font-family: Georgia, serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(243, 234, 214, 0.6);
+}
+
+/* ---------- focus ---------- */
+a:focus-visible,
+.pj-btn:focus-visible {
+  outline: 3px solid var(--pour-bright);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- motion ---------- */
+@keyframes pj-drift {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1.02);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .pj-hero__img {
+    transform: scale(1.02);
+  }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 860px) {
+  .pj-visit {
+    grid-template-columns: 1fr;
+  }
+  .pj-visit__img {
+    min-height: 240px;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 16px;
+  }
+  .pj-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+  .pj-hero {
+    min-height: 82vh;
+  }
+  .pj-hero__scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(36, 19, 10, 0.25) 0%,
+      rgba(36, 19, 10, 0.7) 50%,
+      rgba(36, 19, 10, 0.96) 100%
+    );
+  }
+  .pj-btn {
+    width: 100%;
+  }
+  .pj-pour,
+  .pj-step {
+    grid-template-columns: 1fr;
+  }
+  .pj-step__num {
+    font-size: 2rem;
+  }
+}
