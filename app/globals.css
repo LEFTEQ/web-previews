@@ -1,0 +1,455 @@
+:root {
+  --graf: #12313a;      /* smaltová zeleň-modř, barva vody v obkladu */
+  --graf-deep: #0b2129;
+  --mokra: #2f9bb0;     /* mokrý lesk, tyrkys */
+  --spara: #e9e3d6;     /* barva spárovací hmoty */
+  --paper: #f5f2ec;
+  --dlazba: #ffffff;
+  --ink: #16232a;
+  --muted: #5c6a70;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.vk-page {
+  overflow-x: clip;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--mokra);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Topbar ---------- */
+.vk-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem clamp(1.1rem, 5vw, 4rem);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.vk-wordmark {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.vk-wordmark-vk {
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  font-size: 1.55rem;
+  background: var(--graf);
+  color: var(--spara);
+  padding: 0.1em 0.32em;
+  line-height: 1;
+}
+
+.vk-wordmark-rest {
+  font-weight: 400;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.vk-topphone {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  border-bottom: 2px solid var(--mokra);
+  padding-bottom: 2px;
+  white-space: nowrap;
+}
+
+/* ---------- Hero ---------- */
+.vk-hero {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1.1rem, 5vw, 4rem)
+    clamp(3rem, 7vw, 6rem);
+  isolation: isolate;
+}
+
+/* signature: mřížka obkladaček s jednou "mokrou" dlaždicí */
+.vk-hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 3px;
+  padding: inherit;
+  opacity: 0.9;
+  -webkit-mask-image: linear-gradient(
+    115deg,
+    #000 0%,
+    #000 42%,
+    transparent 66%
+  );
+  mask-image: linear-gradient(115deg, #000 0%, #000 42%, transparent 66%);
+}
+
+.vk-tile {
+  aspect-ratio: 1 / 1;
+  background: var(--spara);
+  box-shadow: inset 0 0 0 1px rgba(18, 49, 58, 0.06);
+  animation: tileIn 0.5s ease both;
+  animation-delay: calc(var(--i) * 14ms);
+}
+
+.vk-tile:nth-child(11),
+.vk-tile:nth-child(19),
+.vk-tile:nth-child(20),
+.vk-tile:nth-child(28) {
+  background: linear-gradient(150deg, var(--mokra), var(--graf));
+}
+
+@keyframes tileIn {
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.vk-hero-inner {
+  position: relative;
+  max-width: 40ch;
+  padding-top: clamp(1rem, 4vw, 2.5rem);
+}
+
+.vk-eyebrow {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--mokra);
+  margin: 0 0 1.1rem;
+}
+
+.vk-eyebrow-dark {
+  color: var(--graf);
+}
+
+.vk-hero-title {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  font-size: clamp(3rem, 13vw, 6.6rem);
+  margin: 0 0 1.6rem;
+  color: var(--graf-deep);
+}
+
+.vk-line {
+  display: block;
+  animation: lineUp 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.vk-line-b {
+  color: var(--mokra);
+  animation-delay: 0.08s;
+}
+.vk-line-c {
+  animation-delay: 0.16s;
+}
+.vk-line-d {
+  color: var(--mokra);
+  animation-delay: 0.24s;
+}
+.vk-line-a {
+  animation-delay: 0s;
+}
+
+@keyframes lineUp {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vk-hero-lead {
+  font-size: 1.14rem;
+  max-width: 36ch;
+  margin: 0 0 2rem;
+  color: var(--ink);
+}
+
+.vk-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.vk-btn {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.9rem 1.5rem;
+  display: inline-block;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.vk-btn-primary {
+  background: var(--graf);
+  color: var(--spara);
+}
+
+.vk-btn-primary:hover {
+  background: var(--mokra);
+  color: var(--graf-deep);
+  transform: translateY(-2px);
+}
+
+.vk-btn-ghost {
+  background: transparent;
+  color: var(--graf);
+  box-shadow: inset 0 0 0 2px var(--graf);
+}
+
+.vk-btn-ghost:hover {
+  background: var(--graf);
+  color: var(--spara);
+  transform: translateY(-2px);
+}
+
+/* ---------- Sekce ---------- */
+.vk-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 8vw, 6.5rem) clamp(1.1rem, 5vw, 4rem);
+}
+
+.vk-section-head {
+  max-width: 44ch;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.vk-section-title {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  margin: 0 0 1.1rem;
+  color: var(--graf-deep);
+}
+
+.vk-section-lead {
+  font-size: 1.1rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ---------- Postup / kroky ---------- */
+.vk-kroky {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  border-top: 2px solid var(--graf);
+}
+
+.vk-krok {
+  display: grid;
+  grid-template-columns: minmax(3.5rem, 5rem) 1fr;
+  gap: clamp(1rem, 4vw, 3rem);
+  padding: clamp(1.6rem, 4vw, 2.6rem) 0;
+  border-bottom: 1px solid rgba(18, 49, 58, 0.16);
+  align-items: start;
+}
+
+.vk-krok-cislo {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  letter-spacing: -0.03em;
+  color: var(--mokra);
+  line-height: 1;
+}
+
+.vk-krok-nazev {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  margin: 0 0 0.5rem;
+  color: var(--graf-deep);
+}
+
+.vk-krok-popis {
+  margin: 0 0 0.7rem;
+  max-width: 52ch;
+  color: var(--ink);
+}
+
+.vk-krok-detail {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--spara);
+  padding: 0.28em 0.7em;
+  display: inline-block;
+}
+
+/* ---------- O nás (tmavá) ---------- */
+.vk-onas {
+  background: var(--graf);
+  color: var(--spara);
+  max-width: none;
+  margin-top: clamp(1rem, 4vw, 2rem);
+}
+
+.vk-onas .vk-section-head {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 44ch;
+}
+
+.vk-onas {
+  padding-left: clamp(1.1rem, 5vw, 4rem);
+  padding-right: clamp(1.1rem, 5vw, 4rem);
+}
+
+.vk-onas > * {
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vk-section-title-light {
+  color: var(--dlazba);
+}
+
+.vk-section-lead-light {
+  color: rgba(233, 227, 214, 0.82);
+}
+
+.vk-onas .vk-eyebrow {
+  color: var(--mokra);
+}
+
+.vk-duvery {
+  list-style: none;
+  margin: 0 auto clamp(2.5rem, 6vw, 4rem);
+  padding: 0;
+  display: grid;
+  gap: 1px;
+  background: rgba(233, 227, 214, 0.16);
+  grid-template-columns: 1fr;
+  border: 1px solid rgba(233, 227, 214, 0.16);
+}
+
+.vk-duvera {
+  background: var(--graf);
+  padding: clamp(1.6rem, 4vw, 2.4rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.vk-duvera-cislo {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-size: clamp(2.2rem, 7vw, 3.4rem);
+  line-height: 1;
+  color: var(--mokra);
+}
+
+.vk-duvera-popis {
+  color: rgba(233, 227, 214, 0.9);
+  max-width: 34ch;
+}
+
+.vk-adresa {
+  border-top: 1px solid rgba(233, 227, 214, 0.22);
+  padding-top: clamp(1.5rem, 4vw, 2.2rem);
+  display: grid;
+  gap: 0.6rem;
+}
+
+.vk-adresa-radek {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.vk-adresa-radek strong {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  color: var(--mokra);
+  display: inline-block;
+  min-width: 6.5rem;
+}
+
+.vk-adresa-radek a {
+  border-bottom: 1px solid var(--mokra);
+  text-decoration: none;
+}
+
+/* ---------- Responsivita ---------- */
+@media (min-width: 720px) {
+  .vk-duvery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .vk-hero-inner {
+    max-width: 52ch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vk-tile,
+  .vk-line {
+    animation: none !important;
+  }
+  .vk-btn:hover {
+    transform: none;
+  }
+}
