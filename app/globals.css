@@ -1,0 +1,487 @@
+:root {
+  --ink: #0d1b24;
+  --paper: #eef2f3;
+  --cool: #1f6fa8;
+  --cool-deep: #0e3d5e;
+  --warm: #e8622a;
+  --warm-soft: #f4a25e;
+  --line: #c3d0d5;
+
+  --font-display: "Arial Narrow", "Roboto Condensed", "Helvetica Neue",
+    sans-serif;
+  --font-body: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.df {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--warm);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Top bar / wordmark ---------- */
+.df-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 0 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.df-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.df-wm-1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  font-size: clamp(20px, 4vw, 26px);
+  color: var(--cool-deep);
+}
+
+.df-wm-2 {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-top: 6px;
+}
+
+.df-call {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: clamp(15px, 3.2vw, 19px);
+  text-decoration: none;
+  color: var(--cool-deep);
+  white-space: nowrap;
+}
+
+.df-call:hover {
+  color: var(--warm);
+}
+
+/* ---------- Hero ---------- */
+.df-hero {
+  position: relative;
+  padding: clamp(48px, 9vw, 104px) 0 clamp(40px, 7vw, 80px);
+  overflow: hidden;
+}
+
+.df-hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: linear-gradient(
+      to right,
+      rgba(31, 111, 168, 0.09) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(31, 111, 168, 0.09) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(
+    120% 90% at 80% 20%,
+    #000 30%,
+    transparent 75%
+  );
+  mask-image: radial-gradient(120% 90% at 80% 20%, #000 30%, transparent 75%);
+}
+
+/* Signature: airflow arrows drifting through the grid */
+.df-flow {
+  position: absolute;
+  top: 8%;
+  right: 6%;
+  display: flex;
+  gap: 30px;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 9vw, 96px);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.df-arrow {
+  color: var(--cool);
+  opacity: 0.22;
+  animation: df-drift 4.5s ease-in-out infinite;
+}
+.df-arrow:nth-child(2) {
+  color: var(--warm);
+  animation-delay: 0.6s;
+}
+.df-arrow:nth-child(3) {
+  animation-delay: 1.2s;
+}
+
+@keyframes df-drift {
+  0%,
+  100% {
+    transform: translateY(-8px);
+    opacity: 0.14;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 0.32;
+  }
+}
+
+.df-eyebrow {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 18px;
+  font-size: 12px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--cool);
+  font-weight: 700;
+}
+
+.df-h1 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.22em;
+}
+
+.df-word {
+  display: inline-block;
+  font-size: clamp(58px, 18vw, 176px);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: df-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.df-cool {
+  color: var(--cool-deep);
+  animation-delay: 0.05s;
+}
+.df-amp {
+  font-size: clamp(34px, 9vw, 84px);
+  color: var(--warm);
+  font-style: italic;
+  animation-delay: 0.2s;
+}
+.df-warm {
+  color: var(--warm);
+  animation-delay: 0.35s;
+}
+
+@keyframes df-rise {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.df-lede {
+  position: relative;
+  z-index: 1;
+  max-width: 46ch;
+  margin: 28px 0 0;
+  font-size: clamp(17px, 2.4vw, 21px);
+  color: #2c414c;
+}
+
+.df-hero-akce {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.df-btn {
+  display: inline-block;
+  padding: 14px 22px;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.df-btn-primary {
+  background: var(--warm);
+  color: #fff;
+}
+.df-btn-primary:hover {
+  background: var(--cool-deep);
+  transform: translateY(-2px);
+}
+
+.df-btn-ghost {
+  border: 1.5px solid var(--cool-deep);
+  color: var(--cool-deep);
+}
+.df-btn-ghost:hover {
+  background: var(--cool-deep);
+  color: #fff;
+}
+
+.df-znacky {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin: 40px 0 0;
+  padding: 22px 0 0;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-size: 16px;
+  color: var(--cool-deep);
+  text-transform: uppercase;
+}
+
+.df-znacky li {
+  position: relative;
+  padding-left: 16px;
+}
+.df-znacky li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  margin-top: -3px;
+  background: var(--warm);
+}
+
+/* ---------- Services section ---------- */
+.df-sekce {
+  padding: clamp(48px, 8vw, 88px) 0;
+}
+
+.df-sekce-hlava {
+  max-width: 40ch;
+  margin-bottom: 40px;
+}
+
+.df-h2 {
+  margin: 12px 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  line-height: 1;
+  font-size: clamp(30px, 6vw, 52px);
+  color: var(--cool-deep);
+}
+
+.df-sluzby {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.df-karta {
+  background: var(--paper);
+  padding: 28px 24px;
+}
+
+.df-karta-kod {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--warm);
+  padding: 4px 10px;
+  border: 1.5px solid var(--warm);
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+.df-karta-nazev {
+  margin: 0 0 10px;
+  font-size: 21px;
+  color: var(--cool-deep);
+}
+
+.df-karta-text {
+  margin: 0;
+  font-size: 16px;
+  color: #33474f;
+}
+
+.df-obraz {
+  margin: 40px 0 0;
+}
+
+.df-obraz img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+}
+
+.df-obraz figcaption {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #5a6d75;
+}
+
+/* ---------- Trust section ---------- */
+.df-duvera {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(28px, 5vw, 56px);
+  align-items: start;
+  padding: clamp(48px, 8vw, 88px) 0 clamp(56px, 9vw, 96px);
+  border-top: 1px solid var(--line);
+}
+
+.df-duvera-obraz img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+}
+
+.df-duvera-lede {
+  max-width: 48ch;
+  font-size: clamp(17px, 2.2vw, 20px);
+  color: #2c414c;
+}
+
+.df-opravneni {
+  list-style: none;
+  margin: 24px 0 32px;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.df-opravneni li {
+  background: var(--paper);
+  padding: 16px 18px 16px 44px;
+  position: relative;
+  font-size: 16px;
+}
+
+.df-opravneni li::before {
+  content: "✓";
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  color: var(--cool);
+  font-weight: 700;
+}
+
+.df-kontakt {
+  margin: 0;
+  display: grid;
+  gap: 14px;
+  padding-top: 24px;
+  border-top: 2px solid var(--cool-deep);
+}
+
+.df-kontakt div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  align-items: baseline;
+}
+
+.df-kontakt dt {
+  min-width: 130px;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cool);
+  font-weight: 700;
+}
+
+.df-kontakt dd {
+  margin: 0;
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.df-kontakt a {
+  color: var(--cool-deep);
+  text-decoration: underline;
+  text-decoration-color: var(--warm-soft);
+  text-underline-offset: 3px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 760px) {
+  .df-sluzby {
+    grid-template-columns: 1fr;
+  }
+  .df-duvera {
+    grid-template-columns: 1fr;
+  }
+  .df-h1 {
+    gap: 0 0.14em;
+  }
+}
+
+@media (max-width: 420px) {
+  .df-flow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .df-word {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+  .df-arrow {
+    animation: none;
+    opacity: 0.2;
+  }
+  .df-btn:hover {
+    transform: none;
+  }
+}
