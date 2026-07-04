@@ -1,0 +1,432 @@
+:root {
+  --paper: #eef3ee;
+  --ink: #10261b;
+  --moss: #1f5138;
+  --grass: #4a9b52;
+  --water: #2f8fb0;
+  --spark: #d7ef4a;
+
+  --f-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --f-body: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+
+  --wrap: 68rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.zs {
+  overflow-x: clip;
+}
+
+.zs-skip {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.75rem 1rem;
+  z-index: 50;
+  border-radius: 0 0 0.4rem 0;
+}
+.zs-skip:focus {
+  left: 0;
+}
+
+:where(a, button):focus-visible {
+  outline: 3px solid var(--water);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---- top bar / wordmark ---- */
+.zs-top {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 1.4rem 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.zs-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--f-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-size: 1.15rem;
+  color: var(--moss);
+}
+.zs-mark-drop {
+  width: 0.85rem;
+  height: 1.15rem;
+  background: var(--water);
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  transform: rotate(0deg);
+  clip-path: polygon(50% 0, 100% 65%, 78% 100%, 22% 100%, 0 65%);
+  border-radius: 0;
+}
+.zs-mark-txt {
+  text-transform: lowercase;
+}
+.zs-mark-thin {
+  font-weight: 400;
+  color: var(--grass);
+}
+.zs-top-meta {
+  font-family: var(--f-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--moss);
+  opacity: 0.72;
+}
+
+/* ---- hero ---- */
+.zs-hero {
+  position: relative;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 3.5rem;
+}
+
+.zs-hero-grid {
+  position: absolute;
+  inset: 2rem 1.5rem auto;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-auto-rows: 2.4rem;
+  gap: 0;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(120% 90% at 78% 15%, #000 0%, transparent 68%);
+  -webkit-mask-image: radial-gradient(120% 90% at 78% 15%, #000 0%, transparent 68%);
+}
+.zs-spray {
+  width: 0.34rem;
+  height: 0.34rem;
+  border-radius: 50%;
+  justify-self: center;
+  align-self: center;
+  background: var(--water);
+  opacity: 0;
+  transform: scale(0.4);
+  animation: zs-drop 5.5s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 90ms);
+}
+@keyframes zs-drop {
+  0%,
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  10% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  30% {
+    opacity: 0.18;
+    transform: scale(0.7);
+  }
+}
+
+.zs-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 40rem;
+}
+
+.zs-eyebrow {
+  font-family: var(--f-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--water);
+  margin: 0 0 1.1rem;
+}
+.zs-eyebrow-dark {
+  color: var(--grass);
+}
+
+.zs-h1 {
+  font-family: var(--f-display);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.94;
+  font-size: clamp(2.9rem, 11vw, 6.2rem);
+  margin: 0 0 1.4rem;
+  color: var(--ink);
+}
+.zs-h1-accent {
+  color: var(--moss);
+  position: relative;
+}
+.zs-h1-accent::after {
+  content: "";
+  display: block;
+  width: 3.4ch;
+  height: 0.32rem;
+  margin-top: 0.6rem;
+  background: var(--spark);
+  border-radius: 999px;
+}
+
+.zs-lead {
+  font-size: 1.2rem;
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  color: #234232;
+}
+
+.zs-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 2.4rem;
+}
+
+.zs-btn {
+  display: inline-block;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px;
+  background: var(--moss);
+  color: var(--paper);
+  border: 2px solid var(--moss);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.zs-btn:hover {
+  transform: translateY(-2px);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.zs-btn-ghost {
+  background: transparent;
+  color: var(--moss);
+}
+.zs-btn-ghost:hover {
+  background: var(--moss);
+  color: var(--paper);
+}
+
+.zs-hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 3rem;
+  margin: 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(31, 81, 56, 0.24);
+}
+.zs-hero-facts dt {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--water);
+}
+.zs-hero-facts dd {
+  margin: 0.2rem 0 0;
+  font-size: 1.02rem;
+  color: #2c4a38;
+}
+
+/* ---- content sections ---- */
+.zs-sekce {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem;
+}
+.zs-sekce-alt {
+  background: var(--moss);
+  color: var(--paper);
+  max-width: none;
+  border-radius: 1.5rem 1.5rem 0 0;
+}
+.zs-sekce-alt > * {
+  max-width: var(--wrap);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.zs-sekce-head {
+  max-width: 40rem;
+  margin-bottom: 2.6rem;
+}
+.zs-sekce-head h2 {
+  font-family: var(--f-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  font-size: clamp(1.9rem, 5.5vw, 3rem);
+  margin: 0.4rem 0 1rem;
+}
+.zs-sekce-lead {
+  font-size: 1.12rem;
+  margin: 0;
+}
+.zs-sekce-alt .zs-eyebrow {
+  color: var(--spark);
+}
+.zs-sekce-alt .zs-sekce-lead {
+  color: #cfe6d6;
+}
+
+/* ---- zones list ---- */
+.zs-zony {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+.zs-zona {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 1rem 1.4rem;
+  padding: 1.9rem 0;
+  border-top: 1px solid rgba(31, 81, 56, 0.22);
+}
+.zs-zona:last-child {
+  border-bottom: 1px solid rgba(31, 81, 56, 0.22);
+}
+.zs-zona-cislo {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+  color: var(--water);
+  line-height: 1;
+  padding-top: 0.15rem;
+}
+.zs-zona-body h3 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+}
+.zs-zona-body p {
+  margin: 0 0 0.6rem;
+  max-width: 42rem;
+  color: #2c4a38;
+}
+.zs-zona-detail {
+  font-family: var(--f-display);
+  font-size: 0.86rem;
+  letter-spacing: 0.02em;
+  color: var(--grass) !important;
+  font-weight: 600;
+}
+
+/* ---- trust ---- */
+.zs-duvery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 0 auto 2.6rem;
+  padding: 0;
+}
+.zs-duvera {
+  border-top: 2px solid var(--spark);
+  padding-top: 1rem;
+}
+.zs-duvera dt {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.zs-duvera dd {
+  margin: 0.5rem 0 0;
+  color: #cfe6d6;
+  font-size: 1rem;
+}
+
+.zs-cit {
+  margin: 0 auto;
+  max-width: 44rem;
+  border-left: 3px solid var(--spark);
+  padding: 0.4rem 0 0.4rem 1.4rem;
+}
+.zs-cit p {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin: 0 0 0.8rem;
+}
+.zs-cit footer {
+  font-family: var(--f-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a9d0b5;
+}
+
+.zs-updated {
+  margin: 2.2rem auto 0;
+  font-family: var(--f-display);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  color: #a9d0b5;
+}
+
+/* ---- responsive ---- */
+@media (max-width: 640px) {
+  .zs-hero-grid {
+    display: none;
+  }
+  .zs-hero-facts {
+    gap: 1.4rem;
+  }
+  .zs-zona {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+  .zs-zona-cislo {
+    font-size: 1.2rem;
+  }
+  .zs-duvery {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .zs-sekce-alt {
+    border-radius: 1rem 1rem 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zs-spray {
+    animation: none;
+    opacity: 0.28;
+    transform: scale(1);
+  }
+  .zs-btn {
+    transition: none;
+  }
+}
