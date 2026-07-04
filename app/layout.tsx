@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="lv-cta__panel">
           <p className="lv-cta__eyebrow">Návrh studia lovinka</p>
           <h2 className="lv-cta__title">Líbí se vám nová podoba webu?</h2>
-          <p className="lv-cta__sub">Tohle je teprve ukázka. Pojďme ji dotáhnout do plné podoby — kompletní web na míru od 9 900 Kč.</p>
+          <p className="lv-cta__sub">Tohle je teprve ukázka. Pojďme ji dotáhnout do plné podoby — kompletní web na míru od 5 000 Kč.</p>
           <div className="lv-cta__actions">
             <a className="lv-btn lv-btn--primary" href="mailto:lukas.pribik.dev@gmail.com">Napsat e-mail</a>
           </div>
