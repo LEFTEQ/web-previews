@@ -1,0 +1,405 @@
+:root {
+  /* Palette drawn from the shop: dried-blood maroon, butcher-paper, brass
+     scale-hook, aged-beef fat and a cold cut-line steel. */
+  --pmm-maroon: #6b1220;
+  --pmm-maroon-deep: #4a0c16;
+  --pmm-paper: #efe7d6;
+  --pmm-paper-line: #ddd0b6;
+  --pmm-brass: #b98a3f;
+  --pmm-fat: #f4ede0;
+  --pmm-ink: #241b18;
+  --pmm-steel: #7d6f61;
+  --pmm-red: #a8202f;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--pmm-paper);
+  color: var(--pmm-ink);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pmm {
+  --edge: clamp(20px, 5vw, 72px);
+  overflow-x: hidden;
+}
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--pmm-red);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+img { display: block; max-width: 100%; }
+
+/* ---------- Header ---------- */
+.pmm-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px var(--edge);
+  position: relative;
+  z-index: 5;
+}
+
+.pmm-mark {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.9;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.pmm-mark-presto {
+  font-family: "Times New Roman", Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 27px;
+  color: var(--pmm-maroon);
+}
+.pmm-mark-mm {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.42em;
+  font-size: 10px;
+  color: var(--pmm-steel);
+  padding-left: 2px;
+}
+
+.pmm-nav {
+  display: flex;
+  gap: clamp(14px, 3vw, 34px);
+  font-family: "Arial Narrow", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 12px;
+  font-weight: 700;
+}
+.pmm-nav a {
+  text-decoration: none;
+  color: var(--pmm-ink);
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.pmm-nav a:hover { border-color: var(--pmm-red); color: var(--pmm-maroon); }
+
+/* ---------- Hero ---------- */
+.pmm-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: min(88vh, 760px);
+  align-items: end;
+  padding: 0 var(--edge) clamp(36px, 6vw, 72px);
+  margin-top: 6px;
+  isolation: isolate;
+}
+.pmm-hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+.pmm-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  filter: saturate(0.92) contrast(1.02);
+  animation: pmm-heroZoom 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.pmm-hero-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(36,27,24,0.05) 0%, rgba(36,27,24,0.15) 40%, rgba(74,12,22,0.82) 100%),
+    linear-gradient(90deg, rgba(74,12,22,0.55) 0%, rgba(74,12,22,0) 60%);
+}
+
+.pmm-hero-copy {
+  max-width: 40ch;
+  color: var(--pmm-fat);
+  animation: pmm-rise 0.8s ease both;
+  animation-delay: 0.25s;
+}
+.pmm-kicker {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.34em;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--pmm-brass);
+  margin: 0 0 14px;
+}
+.pmm-h1 {
+  font-family: "Times New Roman", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(42px, 8.5vw, 92px);
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+}
+.pmm-h1-em {
+  font-style: italic;
+  color: var(--pmm-brass);
+}
+.pmm-lede {
+  font-size: clamp(16px, 2.2vw, 19px);
+  line-height: 1.55;
+  margin: 0 0 24px;
+  color: #f0e6d6;
+}
+.pmm-hero-hours {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  background: rgba(20,10,10,0.4);
+  border: 1px solid rgba(185,138,63,0.5);
+  padding: 9px 15px;
+  border-radius: 999px;
+  backdrop-filter: blur(3px);
+}
+.pmm-hero-hours a { color: var(--pmm-brass); font-weight: 700; text-decoration: none; }
+.pmm-hero-hours a:hover { text-decoration: underline; }
+.pmm-open-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #66c07a;
+  box-shadow: 0 0 0 3px rgba(102,192,122,0.28);
+  animation: pmm-pulse 2.4s ease-in-out infinite;
+}
+
+/* ---------- Section shell ---------- */
+.pmm-section {
+  padding: clamp(56px, 9vw, 108px) var(--edge);
+}
+.pmm-section-head { margin-bottom: clamp(28px, 5vw, 48px); }
+.pmm-eyebrow {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--pmm-red);
+  margin: 0 0 10px;
+}
+.pmm-h2 {
+  font-family: "Times New Roman", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(30px, 5.5vw, 52px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0;
+  max-width: 16ch;
+}
+
+/* ---------- Pult ---------- */
+.pmm-pult { background: var(--pmm-fat); }
+.pmm-pult-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(28px, 5vw, 60px);
+  align-items: start;
+}
+.pmm-services { list-style: none; margin: 0; padding: 0; }
+.pmm-service {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  padding: 22px 0;
+  border-top: 1px solid var(--pmm-paper-line);
+}
+.pmm-service:last-child { border-bottom: 1px solid var(--pmm-paper-line); }
+.pmm-service-n {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--pmm-brass);
+  letter-spacing: 0.1em;
+  padding-top: 4px;
+}
+.pmm-service-label {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--pmm-maroon);
+}
+.pmm-service-body { margin: 0; font-size: 16px; color: #4b3f38; }
+
+.pmm-pult-fig { margin: 0; }
+.pmm-fig-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 4 / 5;
+  border: 8px solid #fff;
+  box-shadow: 0 18px 40px rgba(74,12,22,0.16);
+}
+.pmm-pult-fig figcaption {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  color: var(--pmm-steel);
+  margin-top: 12px;
+  text-transform: uppercase;
+}
+
+/* ---------- Řezy (signature: butcher price-tag cards) ---------- */
+.pmm-rezy { background: var(--pmm-maroon-deep); color: var(--pmm-fat); }
+.pmm-rezy .pmm-h2 { color: var(--pmm-fat); }
+.pmm-rezy .pmm-eyebrow { color: var(--pmm-brass); }
+
+.pmm-cuts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(16px, 3vw, 28px);
+}
+.pmm-cut {
+  position: relative;
+  background: var(--pmm-paper);
+  color: var(--pmm-ink);
+  padding: 26px 24px 24px;
+  border-radius: 3px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.28);
+}
+/* the tag punch-hole, like a hanging butcher label */
+.pmm-cut::before {
+  content: "";
+  position: absolute;
+  top: 16px; right: 20px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--pmm-maroon-deep);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+}
+.pmm-cut:hover {
+  transform: translateY(-5px) rotate(-0.5deg);
+  box-shadow: 0 18px 34px rgba(0,0,0,0.36);
+}
+.pmm-cut-tag {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  border-bottom: 1.5px dashed var(--pmm-paper-line);
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+.pmm-cut-id {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  font-size: 13px;
+  color: var(--pmm-red);
+}
+.pmm-cut-animal {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 11px;
+  color: var(--pmm-steel);
+  margin-left: auto;
+}
+.pmm-cut-name {
+  font-family: "Times New Roman", Georgia, serif;
+  font-style: italic;
+  font-size: 27px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: var(--pmm-maroon);
+}
+.pmm-cut-note { margin: 0; font-size: 15px; color: #4b3f38; line-height: 1.5; }
+
+/* ---------- Řezníci ---------- */
+.pmm-reznici { background: var(--pmm-paper); }
+.pmm-reznici-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+.pmm-reznici-fig { margin: 0; }
+.pmm-reznici-fig .pmm-fig-img { aspect-ratio: 3 / 4; }
+.pmm-reznici-body { font-size: 17px; color: #3f342e; margin: 18px 0 0; }
+
+.pmm-facts {
+  margin: 28px 0 0;
+  border-top: 2px solid var(--pmm-maroon);
+}
+.pmm-facts > div {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--pmm-paper-line);
+}
+.pmm-facts dt {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--pmm-steel);
+  padding-top: 2px;
+}
+.pmm-facts dd { margin: 0; font-size: 16px; }
+.pmm-facts a { color: var(--pmm-maroon); font-weight: 700; text-decoration: none; }
+.pmm-facts a:hover { text-decoration: underline; }
+
+/* ---------- Motion ---------- */
+@keyframes pmm-heroZoom {
+  from { transform: scale(1.08); }
+  to { transform: scale(1); }
+}
+@keyframes pmm-rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pmm-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(102,192,122,0.28); }
+  50% { box-shadow: 0 0 0 6px rgba(102,192,122,0.08); }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .pmm-pult-grid,
+  .pmm-reznici-grid { grid-template-columns: 1fr; }
+  .pmm-reznici-fig { order: -1; }
+  .pmm-reznici-fig .pmm-fig-img { aspect-ratio: 4 / 3; }
+}
+@media (max-width: 620px) {
+  body { font-size: 16px; }
+  .pmm-nav { display: none; }
+  .pmm-cuts { grid-template-columns: 1fr; }
+  .pmm-facts > div { grid-template-columns: 1fr; gap: 4px; }
+  .pmm-hero { min-height: 82vh; }
+  .pmm-hero-img { object-position: center 35%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .pmm-hero-img,
+  .pmm-hero-copy,
+  .pmm-open-dot { animation: none !important; }
+  .pmm-cut:hover { transform: none; }
+}
