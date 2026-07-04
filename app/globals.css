@@ -1,0 +1,424 @@
+:root {
+  /* Paleta odvozená z řemesla: čistící pruh přes zašlou fasádu */
+  --grime: #2b2a26;      /* zašlá, špinavá omítka */
+  --grime-2: #3d3b34;
+  --wash: #f2efe6;       /* čistá fasáda po umytí */
+  --lime: #c9e265;       /* svěží řasa/limetka — čistota */
+  --sky: #3f7ec4;        /* modrá airless / obloha nad domem */
+  --ink: #1a1916;
+  --line: rgba(43, 42, 38, 0.14);
+
+  --ff-display: "Arial Narrow", "Helvetica Neue", "Impact", sans-serif;
+  --ff-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--wash);
+  color: var(--ink);
+  font-family: var(--ff-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.kbn { display: block; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Topbar ---------- */
+.kbn-topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem clamp(1.1rem, 5vw, 3.5rem);
+  background: var(--grime);
+  color: var(--wash);
+}
+
+.kbn-wordmark {
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.kbn-mark {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: 1.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--wash);
+  padding-left: 0.18em;
+}
+
+.kbn-mark-sub {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--lime);
+}
+
+.kbn-loc {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 230, 0.6);
+}
+
+/* ---------- Hero ---------- */
+.kbn-hero {
+  position: relative;
+  background: var(--grime);
+  color: var(--wash);
+  overflow: hidden;
+  padding: clamp(2.5rem, 8vw, 6rem) clamp(1.1rem, 5vw, 3.5rem)
+    clamp(3rem, 9vw, 7rem);
+}
+
+/* signature: diagonální pás "umyté" fasády prořízne zašlou plochu */
+.kbn-hero-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.kbn-swipe {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 62%;
+  height: 145%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    transparent 8%,
+    rgba(242, 239, 230, 0.06) 8%,
+    rgba(242, 239, 230, 0.06) 9%,
+    transparent 9%
+  ),
+  linear-gradient(160deg, var(--wash) 0%, #e7e2d3 100%);
+  transform: skewX(-11deg) translateX(6%);
+  opacity: 0.14;
+  border-left: 2px solid var(--lime);
+  animation: kbn-swipe-in 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes kbn-swipe-in {
+  from { transform: skewX(-11deg) translateX(60%); opacity: 0; }
+  to   { transform: skewX(-11deg) translateX(6%); opacity: 0.14; }
+}
+
+.kbn-hero-inner {
+  position: relative;
+  max-width: 62rem;
+}
+
+.kbn-eyebrow {
+  margin: 0 0 1.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--lime);
+  animation: kbn-rise 0.7s ease both;
+}
+
+.kbn-h1 {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: clamp(3rem, 13vw, 8.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0 0 1.6rem;
+  animation: kbn-rise 0.7s ease 0.08s both;
+}
+
+.kbn-h1-dirty {
+  color: rgba(242, 239, 230, 0.34);
+  position: relative;
+}
+
+.kbn-h1-dirty::after {
+  content: "";
+  position: absolute;
+  right: -0.28em;
+  top: 8%;
+  bottom: 8%;
+  width: 3px;
+  background: var(--lime);
+  transform: skewX(-11deg);
+}
+
+.kbn-h1-clean { color: var(--wash); }
+
+.kbn-lede {
+  max-width: 34rem;
+  font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+  color: rgba(242, 239, 230, 0.82);
+  margin: 0 0 2rem;
+  animation: kbn-rise 0.7s ease 0.16s both;
+}
+
+.kbn-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-bottom: 3rem;
+  animation: kbn-rise 0.7s ease 0.24s both;
+}
+
+.kbn-btn {
+  display: inline-block;
+  padding: 0.95rem 1.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.kbn-btn-primary {
+  background: var(--lime);
+  color: var(--grime);
+}
+.kbn-btn-primary:hover { transform: translateY(-2px); background: #d5ec7d; }
+
+.kbn-btn-ghost {
+  border: 1px solid rgba(242, 239, 230, 0.4);
+  color: var(--wash);
+}
+.kbn-btn-ghost:hover { border-color: var(--lime); color: var(--lime); }
+
+.kbn-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+  margin: 0;
+  max-width: 42rem;
+  border-top: 1px solid rgba(242, 239, 230, 0.16);
+  padding-top: 1.6rem;
+  animation: kbn-rise 0.7s ease 0.32s both;
+}
+
+.kbn-stats dt {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 230, 0.55);
+  margin-bottom: 0.35rem;
+}
+
+.kbn-stats dd {
+  margin: 0;
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 4vw, 1.9rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--lime);
+}
+
+@keyframes kbn-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Sekce hlavičky ---------- */
+.kbn-sec-head {
+  max-width: 40rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.kbn-sec-head h2 {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 6.5vw, 3.4rem);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  margin: 0 0 0.9rem;
+}
+
+.kbn-sec-head p { margin: 0; color: rgba(26, 25, 22, 0.72); }
+.kbn-sec-head--light p { color: rgba(242, 239, 230, 0.7); }
+.kbn-sec-head--light h2 { color: var(--wash); }
+
+/* ---------- Služby ---------- */
+.kbn-services {
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.1rem, 5vw, 3.5rem);
+}
+
+.kbn-service-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.kbn-service {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1rem, 4vw, 2.5rem);
+  align-items: start;
+  padding: clamp(1.5rem, 4vw, 2.4rem) 0;
+  border-top: 1px solid var(--line);
+}
+.kbn-service:last-child { border-bottom: 1px solid var(--line); }
+
+.kbn-service-kod {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  color: var(--sky);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.kbn-service-body h3 {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 4vw, 1.9rem);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin: 0 0 0.5rem;
+}
+
+.kbn-service-body p { margin: 0 0 0.5rem; max-width: 44rem; }
+
+.kbn-service-detail {
+  font-size: 0.78rem !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sky);
+}
+
+/* ---------- Reference / důvěra ---------- */
+.kbn-trust {
+  background: var(--grime-2);
+  color: var(--wash);
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.1rem, 5vw, 3.5rem);
+}
+
+.kbn-ref-table {
+  border-top: 2px solid var(--lime);
+}
+
+.kbn-ref-head {
+  display: grid;
+  grid-template-columns: 2.4fr 1fr 0.7fr 1fr;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 230, 0.5);
+  border-bottom: 1px solid rgba(242, 239, 230, 0.14);
+}
+
+.kbn-ref-table ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.kbn-ref-row {
+  display: grid;
+  grid-template-columns: 2.4fr 1fr 0.7fr 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 1.05rem 0;
+  border-bottom: 1px solid rgba(242, 239, 230, 0.1);
+  transition: background 0.15s ease;
+}
+.kbn-ref-row:hover { background: rgba(201, 226, 101, 0.06); }
+
+.kbn-ref-what { display: flex; flex-direction: column; gap: 0.15rem; }
+.kbn-ref-what strong {
+  font-family: var(--ff-display);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.kbn-ref-what em {
+  font-style: normal;
+  font-size: 0.82rem;
+  color: rgba(242, 239, 230, 0.6);
+}
+
+.kbn-ref-row > span:not(.kbn-ref-what) {
+  font-family: var(--ff-display);
+  font-size: 1.05rem;
+  color: rgba(242, 239, 230, 0.85);
+}
+
+.kbn-quote {
+  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+  max-width: 46rem;
+}
+
+.kbn-quote blockquote {
+  margin: 0 0 1rem;
+  font-size: clamp(1.2rem, 3.2vw, 1.75rem);
+  line-height: 1.4;
+  color: var(--wash);
+}
+
+.kbn-quote-name {
+  font-family: var(--ff-display);
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--lime);
+  margin-right: 0.7rem;
+}
+.kbn-quote-meta {
+  font-size: 0.8rem;
+  color: rgba(242, 239, 230, 0.55);
+}
+
+/* ---------- Mobil ---------- */
+@media (max-width: 640px) {
+  .kbn-ref-head { display: none; }
+
+  .kbn-ref-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem 1rem;
+  }
+  .kbn-ref-what { grid-column: 1 / -1; margin-bottom: 0.3rem; }
+
+  .kbn-ref-row > span:not(.kbn-ref-what)::before {
+    content: attr(data-label) " · ";
+    font-family: var(--ff-body);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(242, 239, 230, 0.45);
+  }
+
+  .kbn-stats { grid-template-columns: 1fr; gap: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .kbn-swipe { opacity: 0.14; }
+}
