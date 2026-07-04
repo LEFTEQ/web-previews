@@ -1,0 +1,543 @@
+/* Shopmánie u Vendy — textil & oděvy, Ostrava
+   Koncept: web postavený jako kus tkaniny. Signature prvek = tkalcovská
+   vazba (warp/weft mřížka) + "okraj tkaniny" (selvedge) s ryskami na kraji.
+   Paleta odvozená z barvírny: indigo (barvená příze), režná bavlna (nebělený
+   len), okrová nit. Vědomě NE cream+serif+terakota, NE černá+neon. */
+
+:root {
+  --indigo: #23324e;
+  --indigo-deep: #161f31;
+  --rezna: #ece3d2;
+  --rezna-hluboka: #e0d4bd;
+  --okr: #c67b3d;
+  --nit: #7f93b0;
+  --tinta: #12161f;
+
+  --font-disp: "Arial Narrow", "Roboto Condensed", "Helvetica Neue", sans-serif;
+  --font-body: ui-sans-serif, "Segoe UI", Roboto, system-ui, sans-serif;
+  --font-mono: "SFMono-Regular", ui-monospace, "Menlo", "Consolas", monospace;
+
+  --maxw: 1120px;
+  --pad: clamp(20px, 5vw, 64px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--rezna);
+  color: var(--tinta);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--okr);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.pg {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* ---------- top bar / wordmark ---------- */
+.pg-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px var(--pad);
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+
+.wordmark {
+  text-decoration: none;
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.wordmark-line {
+  font-family: var(--font-disp);
+  font-weight: 700;
+  font-size: clamp(22px, 4.5vw, 30px);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--indigo);
+  transform: scaleX(1.04);
+  transform-origin: left;
+}
+
+.wordmark-sub {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--okr);
+}
+
+.pg-call {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--indigo);
+  border-bottom: 2px solid var(--okr);
+  padding-bottom: 2px;
+  white-space: nowrap;
+}
+.pg-call:hover {
+  color: var(--okr);
+}
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(24px, 6vw, 56px) var(--pad) clamp(40px, 9vw, 96px);
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: clamp(16px, 4vw, 40px);
+}
+
+.selvedge {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-left: 2px solid var(--indigo);
+}
+.selvedge-tick {
+  width: 18px;
+  height: 2px;
+  background: var(--okr);
+}
+.selvedge-label {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--nit);
+  white-space: nowrap;
+}
+
+.hero-inner {
+  max-width: 760px;
+}
+
+.hero-eyebrow {
+  margin: 0 0 clamp(16px, 3vw, 28px);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--okr);
+}
+
+.hero-h1 {
+  margin: 0;
+  font-family: var(--font-disp);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--indigo);
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+  font-size: clamp(3.4rem, 15vw, 8.2rem);
+}
+
+.hero-word {
+  display: block;
+  transform: scaleX(1.08);
+  transform-origin: left;
+}
+.hero-word--b {
+  color: var(--tinta);
+  margin-left: 0.06em;
+}
+.hero-word--c {
+  color: var(--okr);
+}
+
+.hero-lead {
+  margin: clamp(24px, 4vw, 36px) 0 0;
+  max-width: 44ch;
+  font-size: clamp(1.05rem, 2.4vw, 1.28rem);
+  line-height: 1.5;
+  color: #33404f;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: clamp(24px, 4vw, 34px);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.weave {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: clamp(120px, 34vw, 340px);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.9;
+}
+.weave-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 3px;
+}
+.weave-grid span {
+  aspect-ratio: 1;
+}
+.warp {
+  background: var(--indigo);
+}
+.weft {
+  background: var(--rezna-hluboka);
+  border: 1px solid var(--nit);
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 13px 20px;
+  border: 2px solid var(--indigo);
+  transition: transform 0.12s ease, background 0.12s ease, color 0.12s ease;
+}
+.btn--solid {
+  background: var(--indigo);
+  color: var(--rezna);
+}
+.btn--solid:hover {
+  background: var(--indigo-deep);
+  transform: translateY(-2px);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--indigo);
+}
+.btn--ghost:hover {
+  background: var(--indigo);
+  color: var(--rezna);
+  transform: translateY(-2px);
+}
+.btn--onlight {
+  border-color: var(--rezna);
+  color: var(--rezna);
+}
+.btn--onlight:hover {
+  background: var(--rezna);
+  color: var(--indigo);
+}
+
+/* ---------- nabidka ---------- */
+.nabidka {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(48px, 9vw, 96px) var(--pad);
+  border-top: 2px solid var(--indigo);
+}
+
+.sec-head {
+  max-width: 640px;
+  margin-bottom: clamp(32px, 6vw, 56px);
+}
+.sec-eyebrow {
+  margin: 0 0 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--okr);
+}
+.sec-h2 {
+  margin: 0;
+  font-family: var(--font-disp);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--indigo);
+  letter-spacing: 0.01em;
+  line-height: 0.98;
+  transform: scaleX(1.05);
+  transform-origin: left;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+}
+.sec-h2--light {
+  color: var(--rezna);
+}
+.sec-note {
+  margin: 18px 0 0;
+  max-width: 46ch;
+  color: #3b4756;
+}
+
+.karty {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: var(--indigo);
+  border: 2px solid var(--indigo);
+}
+.karta {
+  background: var(--rezna);
+  padding: clamp(22px, 3.5vw, 34px);
+  display: flex;
+  gap: 18px;
+}
+.karta-kod {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--rezna);
+  background: var(--okr);
+  padding: 4px 8px;
+  height: fit-content;
+  flex: none;
+}
+.karta-material {
+  margin: 0 0 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--nit);
+}
+.karta-nazev {
+  margin: 0 0 10px;
+  font-family: var(--font-disp);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.2rem, 2.6vw, 1.5rem);
+  line-height: 1.02;
+  color: var(--indigo);
+}
+.karta-popis {
+  margin: 0 0 12px;
+  font-size: 0.98rem;
+  color: #3b4756;
+}
+.karta-slozeni {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--okr);
+}
+
+/* ---------- duvera ---------- */
+.duvera {
+  background: var(--indigo);
+  color: var(--rezna);
+}
+.duvera .sec-head,
+.duvera .duvody,
+.duvera .kontakt-radek {
+  max-width: var(--maxw);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+}
+.duvera .sec-head {
+  padding-top: clamp(48px, 9vw, 96px);
+}
+
+.duvody {
+  list-style: none;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: clamp(32px, 6vw, 56px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 4vw, 44px);
+}
+.duvod {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 20px;
+  border-top: 2px solid var(--nit);
+}
+.duvod-cislo {
+  font-family: var(--font-disp);
+  font-weight: 700;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--okr);
+}
+.duvod-titulek {
+  margin: 0;
+  font-family: var(--font-disp);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  color: var(--rezna);
+}
+.duvod-text {
+  margin: 0;
+  color: #c9d2e0;
+  font-size: 1rem;
+}
+
+.kontakt-radek {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: clamp(48px, 9vw, 88px);
+  border-top: 2px solid var(--nit);
+  padding-top: clamp(28px, 5vw, 44px);
+}
+.kontakt-adresa {
+  margin: 0;
+  max-width: 40ch;
+  color: #c9d2e0;
+}
+.kontakt-akce {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 720px) {
+  .karty {
+    grid-template-columns: 1fr;
+  }
+  .duvody {
+    grid-template-columns: 1fr;
+  }
+  .hero {
+    grid-template-columns: 20px 1fr;
+  }
+  .weave {
+    opacity: 0.5;
+    width: 42vw;
+  }
+  .pg-call {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .karta {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* ---------- load animation ---------- */
+.hero-word,
+.hero-eyebrow,
+.hero-lead,
+.hero-actions {
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.hero-eyebrow {
+  animation-delay: 0.05s;
+}
+.hero-word--a {
+  animation-delay: 0.12s;
+}
+.hero-word--b {
+  animation-delay: 0.22s;
+}
+.hero-word--c {
+  animation-delay: 0.32s;
+}
+.hero-lead {
+  animation-delay: 0.44s;
+}
+.hero-actions {
+  animation-delay: 0.54s;
+}
+.selvedge-tick {
+  animation: tick 0.5s ease both;
+}
+.selvedge-tick:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.selvedge-tick:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.selvedge-tick:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.selvedge-tick:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes tick {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+/* hero words keep their horizontal stretch after animating */
+.hero-word {
+  transform-origin: left;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
