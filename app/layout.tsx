@@ -1,14 +1,14 @@
 import "./globals.css";
 import "./_lovinka.css";
-export const metadata = { title: "Volejte:  606 070 600", description: "Návrh moderního webu — Volejte:  606 070 600" };
+export const metadata = { title: "Autíčka Liška s.r.o.", description: "Návrh moderního webu — Autíčka Liška s.r.o." };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="cs">
       <body>
         {children}
-      <section className="lv-cta" aria-label="Nabídka nového webu">
-        <div className="lv-cta__blur" aria-hidden="true"><span /><span /><span /></div>
-        <div className="lv-cta__panel">
+      <section className="lv-cta" aria-label="Nabídka nového webu" style={{ ["--lv-accent" as string]: "#f2b84b", ["--lv-accent-text" as string]: "#111827" }}>
+        <div className="lv-cta__inner">
+          <span className="lv-cta__mark" aria-hidden="true" />
           <p className="lv-cta__eyebrow">Návrh studia lovinka</p>
           <h2 className="lv-cta__title">Líbí se vám nová podoba webu?</h2>
           <p className="lv-cta__sub">Tohle je teprve ukázka. Pojďme ji dotáhnout do plné podoby — kompletní web na míru od 5 000 Kč.</p>
@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </div>
       </section>
       <footer className="lv-foot">
-        <p>Toto je nezávazný designový návrh studia lovinka — ne oficiální web firmy Volejte:  606 070 600. Návrh nepoužívá skutečné logo firmy.</p>
+        <p>Toto je nezávazný designový návrh studia lovinka — ne oficiální web firmy Autíčka Liška s.r.o.. Návrh nepoužívá skutečné logo firmy.</p>
       </footer>
       </body>
     </html>
