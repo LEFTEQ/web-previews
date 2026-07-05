@@ -1,14 +1,14 @@
 import "./globals.css";
 import "./_lovinka.css";
-export const metadata = { title: "Skip to Main Content", description: "Návrh moderního webu — Skip to Main Content" };
+export const metadata = { title: "Roman Brenza", description: "Návrh moderního webu — Roman Brenza" };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="cs">
       <body>
         {children}
-      <section className="lv-cta" aria-label="Nabídka nového webu">
-        <div className="lv-cta__blur" aria-hidden="true"><span /><span /><span /></div>
-        <div className="lv-cta__panel">
+      <section className="lv-cta" aria-label="Nabídka nového webu" style={{ ["--lv-accent" as string]: "#d6a84f", ["--lv-accent-text" as string]: "#ffffff" }}>
+        <div className="lv-cta__inner">
+          <span className="lv-cta__mark" aria-hidden="true" />
           <p className="lv-cta__eyebrow">Návrh studia lovinka</p>
           <h2 className="lv-cta__title">Líbí se vám nová podoba webu?</h2>
           <p className="lv-cta__sub">Tohle je teprve ukázka. Pojďme ji dotáhnout do plné podoby — kompletní web na míru od 5 000 Kč.</p>
@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </div>
       </section>
       <footer className="lv-foot">
-        <p>Toto je nezávazný designový návrh studia lovinka — ne oficiální web firmy Skip to Main Content. Návrh nepoužívá skutečné logo firmy.</p>
+        <p>Toto je nezávazný designový návrh studia lovinka — ne oficiální web firmy Roman Brenza. Návrh nepoužívá skutečné logo firmy.</p>
       </footer>
       </body>
     </html>
