@@ -1,0 +1,390 @@
+@import url('https://fonts.bunny.net/css2?family=archivo:wght@500;600;700;800&family=inter:wght@400;500;600&display=swap');
+
+:root {
+  --ink: #0c1418;
+  --panel: #10201f;
+  --paper: #f2f5f4;
+  --paper-2: #e6ece9;
+  --teal: #12b0a0;
+  --teal-deep: #0c7a70;
+  --amber: #f4b23c;
+  --line: rgba(12, 20, 24, 0.14);
+  --line-dark: rgba(255, 255, 255, 0.12);
+  --display: 'Archivo', 'Segoe UI', sans-serif;
+  --body: 'Inter', 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.eiko { display: block; }
+
+a { color: inherit; }
+
+img { display: block; max-width: 100%; height: auto; }
+
+:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- top bar ---------- */
+.eiko-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem clamp(1.1rem, 4vw, 3rem);
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.eiko-mark {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  column-gap: 0.7rem;
+  align-items: center;
+  text-decoration: none;
+}
+.eiko-mark__lens {
+  grid-row: 1 / 3;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.eiko-mark__lens::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  border: 1px solid rgba(12,20,24,0.35);
+}
+.eiko-mark__iris {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 0 3px rgba(18,176,160,0.25);
+}
+.eiko-mark__word {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: 0.14em;
+  line-height: 1;
+}
+.eiko-mark__sub {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+  font-weight: 600;
+}
+
+.eiko-call {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.5rem 0.9rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.eiko-call:hover { background: var(--ink); color: var(--paper); }
+
+/* ---------- hero ---------- */
+.eiko-hero {
+  max-width: 1240px;
+  margin: 0.5rem auto 0;
+  padding: 0 clamp(1.1rem, 4vw, 3rem) clamp(2rem, 6vw, 4rem);
+  display: grid;
+  gap: clamp(1.6rem, 4vw, 3rem);
+}
+
+.eiko-hero__frame {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--ink);
+  box-shadow: 0 30px 60px -30px rgba(12,20,24,0.5);
+}
+.eiko-hero__img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  filter: saturate(1.02) contrast(1.02);
+  animation: eiko-fade 1s ease both;
+}
+
+.eiko-hero__hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-family: var(--display);
+  color: #eafffb;
+}
+.eiko-rec {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+}
+.eiko-rec__dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #ff4d4d;
+  animation: eiko-blink 1.6s steps(1) infinite;
+}
+.eiko-cam {
+  position: absolute;
+  bottom: 14px;
+  right: 16px;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+}
+.eiko-grid {
+  position: absolute;
+  inset: 22px;
+  border: 1px solid rgba(234,255,251,0.35);
+  border-radius: 4px;
+}
+.eiko-grid::before, .eiko-grid::after {
+  content: "";
+  position: absolute;
+  background: rgba(234,255,251,0.28);
+}
+.eiko-grid::before { left: 0; right: 0; top: 50%; height: 1px; }
+.eiko-grid::after { top: 0; bottom: 0; left: 50%; width: 1px; }
+
+.eiko-hero__text { max-width: 60ch; }
+
+.eiko-eyebrow {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+  margin: 0 0 0.9rem;
+}
+
+.eiko-hero__title {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.1rem, 6.5vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0 0 1rem;
+}
+.eiko-hero__title--em {
+  color: var(--teal-deep);
+  display: inline-block;
+}
+
+.eiko-hero__lead {
+  font-size: clamp(1.02rem, 2.4vw, 1.2rem);
+  color: #33474b;
+  margin: 0 0 1.6rem;
+  max-width: 52ch;
+}
+
+.eiko-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.eiko-btn {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: 100px;
+  background: var(--teal);
+  color: #062825;
+  border: 1.5px solid var(--teal);
+  transition: transform .15s ease, background .15s ease;
+}
+.eiko-btn:hover { background: var(--teal-deep); border-color: var(--teal-deep); color: #eafffb; transform: translateY(-2px); }
+.eiko-btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.eiko-btn--ghost:hover { background: var(--ink); color: var(--paper); }
+
+/* ---------- sections ---------- */
+.eiko-section {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 7vw, 5rem) clamp(1.1rem, 4vw, 3rem);
+}
+.eiko-section--alt {
+  max-width: none;
+  background: var(--ink);
+  color: var(--paper);
+}
+.eiko-section--alt .eiko-trust { max-width: 1240px; margin: 0 auto; }
+
+.eiko-section__head { max-width: 34ch; margin-bottom: clamp(2rem, 4vw, 3rem); }
+
+.eiko-h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4.2vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.eiko-split {
+  display: grid;
+  gap: clamp(1.8rem, 4vw, 3rem);
+  grid-template-columns: 1fr;
+}
+
+.eiko-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+.eiko-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.1rem;
+  padding: 1.4rem 0;
+  border-top: 1px solid var(--line);
+}
+.eiko-step:last-child { border-bottom: 1px solid var(--line); }
+.eiko-step__no {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--teal-deep);
+  border: 1.5px solid var(--teal);
+  border-radius: 8px;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: grid;
+  place-items: center;
+}
+.eiko-step__title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin: 0.15rem 0 0.4rem;
+}
+.eiko-step__body p { margin: 0; color: #3a4c50; }
+
+.eiko-figure {
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+.eiko-figure img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.eiko-figure figcaption {
+  font-size: 0.9rem;
+  color: #3a4c50;
+  padding: 0.9rem 1.1rem;
+}
+
+.eiko-trust {
+  display: grid;
+  gap: clamp(1.8rem, 4vw, 3rem);
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+.eiko-figure--wide { background: #08110f; }
+.eiko-figure--wide img { aspect-ratio: 16 / 11; }
+
+.eiko-trust .eiko-eyebrow { color: var(--amber); }
+.eiko-trust__lead {
+  color: #b9c8c5;
+  font-size: 1.05rem;
+  margin: 1rem 0 2rem;
+  max-width: 52ch;
+}
+
+.eiko-proof {
+  display: grid;
+  gap: 1.3rem;
+  margin: 0;
+}
+.eiko-proof__item {
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--teal);
+}
+.eiko-proof__item dt {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 0.3rem;
+}
+.eiko-proof__item dd {
+  margin: 0;
+  color: #b9c8c5;
+  font-size: 0.97rem;
+}
+
+/* ---------- responsive ---------- */
+@media (min-width: 720px) {
+  .eiko-hero {
+    grid-template-columns: 1.15fr 1fr;
+    align-items: center;
+  }
+  .eiko-proof { grid-template-columns: 1fr 1fr; gap: 1.6rem 2rem; }
+}
+
+@media (min-width: 900px) {
+  .eiko-split { grid-template-columns: 1.05fr 0.95fr; align-items: start; }
+  .eiko-trust { grid-template-columns: 1fr 1fr; }
+}
+
+@keyframes eiko-fade {
+  from { opacity: 0; transform: scale(1.03); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes eiko-blink {
+  0%, 60% { opacity: 1; }
+  61%, 100% { opacity: 0.15; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .eiko-hero__img { animation: none; }
+  .eiko-rec__dot { animation: none; }
+  .eiko-btn:hover { transform: none; }
+}
