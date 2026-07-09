@@ -1,0 +1,255 @@
+@import url('https://fonts.bunny.net/css2?family=archivo:500,600,700,800&family=fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=jetbrains-mono:400,500&display=swap');
+
+:root{
+  --paper:#F2EEE6;
+  --board:#E9E3D6;
+  --ink:#1C1A17;
+  --graphite:#6E6A62;
+  --line:#C9C1B1;
+  --red:#E8402A;
+  --joint:#C7CBD1;
+  --steel:#3A4048;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Archivo',system-ui,sans-serif;
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* ---------- shared type ---------- */
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--graphite);
+  display:flex;align-items:center;gap:.7em;
+}
+.eyebrow::before{
+  content:"";
+  width:26px;height:2px;background:var(--red);display:inline-block;
+}
+
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:900;line-height:.98;letter-spacing:-.015em}
+
+/* =================== TOP BAR =================== */
+.bar{
+  border-bottom:1px solid var(--line);
+  background:var(--paper);
+  position:sticky;top:0;z-index:40;
+}
+.bar-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 24px;max-width:1180px;margin:0 auto;gap:16px;
+}
+.mark{
+  font-family:'Fraunces',serif;font-weight:900;font-size:1.4rem;
+  letter-spacing:-.02em;display:flex;align-items:baseline;gap:.05em;
+}
+.mark b{color:var(--red);font-weight:900}
+.mark span{
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:500;
+  letter-spacing:.2em;color:var(--graphite);text-transform:uppercase;
+  align-self:center;margin-left:.5em;border-left:1px solid var(--line);padding-left:.6em;
+}
+.bar-phone{
+  font-family:'JetBrains Mono',monospace;font-size:.85rem;font-weight:500;
+  color:var(--ink);text-decoration:none;white-space:nowrap;
+}
+.bar-phone:hover{color:var(--red)}
+.bar-phone .lab{color:var(--graphite);margin-right:.5em;letter-spacing:.1em;font-size:.7rem}
+
+/* =================== HERO =================== */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero-grid{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:0;align-items:stretch;
+}
+.hero-text{padding:70px 48px 60px 0}
+@media(min-width:900px){.hero-text{padding-left:24px;padding-right:56px}}
+.hero-eyebrow{margin-bottom:26px}
+.hero h1{
+  font-size:clamp(2.7rem,7.5vw,5.4rem);
+  margin-bottom:22px;
+}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero h1 .thin{font-weight:400;font-style:italic}
+.hero-lede{
+  font-size:1.12rem;color:var(--steel);max-width:38ch;margin-bottom:34px;
+}
+.hero-lede b{color:var(--ink);font-weight:600}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.btn{
+  font-family:'Archivo',sans-serif;font-weight:700;font-size:.95rem;
+  padding:15px 26px;border:none;cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;gap:.6em;letter-spacing:.01em;
+  transition:transform .15s ease, background .15s ease;
+}
+.btn-primary{background:var(--red);color:#fff}
+.btn-primary:hover{background:#c93320;transform:translateY(-2px)}
+.btn-ghost{
+  background:transparent;color:var(--ink);border:1.5px solid var(--ink);
+}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+
+.hero-photo{position:relative;min-height:340px;border-left:1px solid var(--line)}
+.hero-photo img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+}
+/* the joint-tape overlay stripe — the signature */
+.tape{
+  position:absolute;left:-40px;bottom:44px;z-index:3;
+  background:var(--paper);
+  border:1px solid var(--line);
+  padding:16px 22px;max-width:270px;
+  box-shadow:6px 6px 0 rgba(28,26,23,.08);
+}
+.tape .t-num{
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.18em;
+  color:var(--red);text-transform:uppercase;margin-bottom:6px;
+}
+.tape .t-big{font-family:'Fraunces',serif;font-weight:900;font-size:2.1rem;line-height:1}
+.tape .t-lab{font-size:.82rem;color:var(--graphite);margin-top:4px}
+
+/* the measured seam running down the page — signature motif */
+.seam{
+  position:absolute;top:0;bottom:0;left:0;width:100%;
+  pointer-events:none;
+}
+
+/* =================== SPEC STRIP =================== */
+.spec{
+  background:var(--ink);color:var(--paper);
+  border-bottom:1px solid var(--ink);
+}
+.spec-inner{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  max-width:1180px;margin:0 auto;
+}
+.spec-cell{
+  padding:26px 24px;border-right:1px solid rgba(242,238,230,.14);
+}
+.spec-cell:last-child{border-right:none}
+.spec-cell .n{
+  font-family:'Fraunces',serif;font-weight:900;font-size:2.3rem;line-height:1;
+}
+.spec-cell .n small{font-size:1rem;color:var(--red);font-weight:600;margin-left:2px}
+.spec-cell .l{
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.16em;
+  text-transform:uppercase;color:#b8b2a6;margin-top:8px;
+}
+
+/* =================== SECTION SHELL =================== */
+section.block{padding:82px 0}
+.sec-head{margin-bottom:44px;max-width:60ch}
+.sec-head h2{font-size:clamp(2rem,4.6vw,3.2rem);margin:16px 0 0}
+.sec-head h2 em{font-style:italic;font-weight:600;color:var(--graphite)}
+
+/* ---- layers (services as a wall build-up) ---- */
+.layers{display:grid;gap:0;border-top:1px solid var(--line)}
+.layer{
+  display:grid;grid-template-columns:70px 1fr auto;
+  gap:20px;align-items:center;
+  padding:24px 0;border-bottom:1px solid var(--line);
+  transition:background .18s ease, padding .18s ease;
+}
+.layer:hover{background:var(--board);padding-left:14px;padding-right:14px}
+.layer:focus-within{background:var(--board)}
+.layer .code{
+  font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--red);
+  font-weight:500;letter-spacing:.05em;
+}
+.layer .body h3{font-size:1.35rem;font-weight:600;margin-bottom:6px}
+.layer .body p{color:var(--steel);font-size:1rem;max-width:52ch}
+.layer .thick{
+  font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--graphite);
+  white-space:nowrap;text-align:right;
+}
+.layer .thick b{color:var(--ink);font-weight:600}
+
+/* ---- chips of extra trades ---- */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:38px}
+.chip{
+  font-family:'JetBrains Mono',monospace;font-size:.78rem;
+  border:1px solid var(--line);padding:9px 14px;color:var(--steel);
+  background:var(--paper);letter-spacing:.02em;
+}
+
+/* =================== ABOUT / TRUST =================== */
+.about{background:var(--board);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.about-photo{position:relative}
+.about-photo img{width:100%;height:100%;object-fit:cover;display:block;border:1px solid var(--line)}
+.about-copy p{color:var(--steel);margin-bottom:18px;max-width:52ch}
+.about-copy p b{color:var(--ink);font-weight:600}
+
+.proof{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);margin-top:34px;border:1px solid var(--line)}
+.proof div{background:var(--board);padding:20px 18px}
+.proof h3{font-size:1.02rem;font-weight:700;margin-bottom:8px;letter-spacing:0}
+.proof p{font-size:.94rem;color:var(--steel);margin:0}
+.proof .k{
+  font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--red);
+  letter-spacing:.16em;text-transform:uppercase;display:block;margin-bottom:8px;
+}
+
+/* quote */
+.quote{
+  margin-top:44px;border-left:3px solid var(--red);padding:6px 0 6px 24px;
+}
+.quote blockquote{
+  font-family:'Fraunces',serif;font-weight:600;font-style:italic;
+  font-size:1.3rem;line-height:1.4;color:var(--ink);max-width:46ch;
+}
+.quote figcaption{
+  font-family:'JetBrains Mono',monospace;font-size:.74rem;letter-spacing:.08em;
+  color:var(--graphite);margin-top:14px;text-transform:uppercase;
+}
+.quote figcaption b{color:var(--ink)}
+
+/* =================== reveal anim =================== */
+.rise{opacity:0;transform:translateY(16px);animation:rise .7s cubic-bezier(.2,.6,.2,1) forwards}
+.d1{animation-delay:.05s}.d2{animation-delay:.14s}.d3{animation-delay:.23s}.d4{animation-delay:.32s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* focus */
+a:focus-visible,.btn:focus-visible,.layer a:focus-visible{
+  outline:3px solid var(--red);outline-offset:3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .rise{animation:none;opacity:1;transform:none}
+  .btn:hover,.layer:hover{transform:none}
+}
+
+/* =================== responsive =================== */
+@media(max-width:860px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-text{padding:52px 0 44px}
+  .hero-photo{min-height:320px;border-left:none;border-top:1px solid var(--line)}
+  .tape{left:16px;bottom:16px}
+  .spec-inner{grid-template-columns:1fr 1fr}
+  .spec-cell:nth-child(2){border-right:none}
+  .spec-cell{border-bottom:1px solid rgba(242,238,230,.14)}
+  .about-grid{grid-template-columns:1fr;gap:32px}
+  .about-photo{order:-1}
+}
+@media(max-width:560px){
+  body{font-size:16px}
+  .bar-phone .lab{display:none}
+  .spec-inner{grid-template-columns:1fr 1fr}
+  .layer{grid-template-columns:44px 1fr;gap:14px}
+  .layer .thick{grid-column:2;text-align:left;margin-top:-4px}
+  .proof{grid-template-columns:1fr}
+  section.block{padding:60px 0}
+}
