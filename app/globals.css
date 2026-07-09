@@ -1,0 +1,371 @@
+@import url('https://fonts.bunny.net/css2?family=archivo:600,700,800,900&family=barlow-semi-condensed:500,600,700&family=jetbrains-mono:400,500,700&display=swap');
+
+:root {
+  --beton: #7c8087;
+  --beton-tmavy: #43474d;
+  --beton-svetly: #c9cbce;
+  --uhel: #1b1d20;
+  --papir: #ece9e3;
+  --papir-tmavy: #ddd9d0;
+  --zluta: #f2b705;
+  --zluta-tmava: #d19d00;
+  --linka: rgba(27,29,32,0.14);
+  --font-display: 'Archivo', system-ui, sans-serif;
+  --font-body: 'Barlow Semi Condensed', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--papir);
+  color: var(--uhel);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.wrap { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- HORNÍ LIŠTA / WORDMARK ---------- */
+.topbar {
+  border-bottom: 1px solid var(--linka);
+  background: var(--papir);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(20px, 3vw, 26px);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--uhel);
+  text-decoration: none;
+}
+.wordmark .frisch { }
+.wordmark .beton { color: var(--beton-tmavy); }
+.wordmark .dot {
+  width: 9px; height: 9px;
+  background: var(--zluta);
+  display: inline-block;
+  margin-left: 4px;
+  transform: translateY(-2px);
+}
+.topbar-meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--beton-tmavy);
+}
+.topbar-meta a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--zluta); padding-bottom: 1px; }
+@media (max-width: 640px) { .topbar-meta { display: none; } }
+
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--zluta);
+  outline-offset: 3px;
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  position: relative;
+  background: var(--uhel);
+  color: var(--papir);
+  overflow: hidden;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 0;
+  align-items: stretch;
+}
+.hero-copy {
+  padding: clamp(40px, 6vw, 84px) clamp(24px, 4vw, 56px) clamp(40px, 6vw, 72px) 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-copy-pad { padding-left: max(24px, calc((100vw - 1180px) / 2 + 24px)); }
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--zluta);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+.hero-eyebrow::before {
+  content: "";
+  width: 34px; height: 2px;
+  background: var(--zluta);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(44px, 8vw, 92px);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.hero-title .zluta { color: var(--zluta); }
+.hero-title .outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--beton-svetly);
+  text-stroke: 2px var(--beton-svetly);
+}
+.hero-lead {
+  font-size: clamp(17px, 2vw, 20px);
+  color: var(--beton-svetly);
+  max-width: 44ch;
+  margin-bottom: 34px;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+.btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 15px;
+  padding: 15px 26px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.btn-primary { background: var(--zluta); color: var(--uhel); }
+.btn-primary:hover { background: #fff; transform: translateY(-2px); }
+.btn-ghost { border-color: var(--beton); color: var(--papir); }
+.btn-ghost:hover { border-color: var(--zluta); color: var(--zluta); }
+
+.hero-media {
+  position: relative;
+  min-height: 340px;
+}
+.hero-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.25) contrast(1.05);
+}
+.hero-media::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, var(--uhel) 0%, rgba(27,29,32,0.25) 22%, rgba(27,29,32,0) 55%);
+}
+/* diagonální žlutý pruh — signature nádech */
+.hero-slump {
+  position: absolute;
+  right: 0; bottom: 0;
+  z-index: 3;
+  background: var(--zluta);
+  color: var(--uhel);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 10px 18px;
+  font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-copy { padding: 40px 24px 44px; }
+  .hero-copy-pad { padding-left: 24px; }
+  .hero-media { min-height: 260px; order: -1; }
+  .hero-media::after { background: linear-gradient(0deg, var(--uhel) 0%, rgba(27,29,32,0) 60%); }
+}
+
+/* ---------- RECEPTURY / SLUŽBY ---------- */
+.sekce { padding: clamp(56px, 8vw, 104px) 0; }
+.sekce-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+.sekce-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--zluta-tmava);
+  display: block;
+  margin-bottom: 14px;
+}
+.sekce-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(30px, 5vw, 52px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  max-width: 16ch;
+}
+.sekce-note {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--beton-tmavy);
+  max-width: 30ch;
+}
+
+/* katalog receptur jako datový list */
+.recept-list {
+  border-top: 2px solid var(--uhel);
+}
+.recept {
+  display: grid;
+  grid-template-columns: 84px 1fr 200px;
+  gap: 24px;
+  align-items: baseline;
+  padding: 26px 8px;
+  border-bottom: 1px solid var(--linka);
+  transition: background 0.18s ease, padding 0.18s ease;
+}
+.recept:hover { background: var(--papir-tmavy); padding-left: 18px; }
+.recept-trida {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--zluta-tmava);
+  letter-spacing: 0.02em;
+}
+.recept-body h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(20px, 2.4vw, 26px);
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.recept-body p { color: var(--beton-tmavy); font-size: 16px; max-width: 52ch; }
+.recept-use {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--beton-tmavy);
+  line-height: 1.5;
+}
+@media (max-width: 720px) {
+  .recept { grid-template-columns: 60px 1fr; gap: 14px 16px; }
+  .recept-use { grid-column: 2; }
+}
+
+/* ---------- O NÁS / DŮVĚRA ---------- */
+.duvera { background: var(--uhel); color: var(--papir); }
+.duvera-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+.duvera-media { position: relative; }
+.duvera-media img {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  object-fit: cover;
+  filter: grayscale(0.2) contrast(1.05);
+  display: block;
+}
+.duvera-tag {
+  position: absolute;
+  left: 0; bottom: 0;
+  background: var(--zluta);
+  color: var(--uhel);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 9px 16px;
+}
+.duvera-copy .sekce-eyebrow { color: var(--zluta); }
+.duvera-copy h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(28px, 4.4vw, 48px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.duvera-copy p { color: var(--beton-svetly); font-size: 17px; margin-bottom: 16px; max-width: 50ch; }
+.duvera-copy p strong { color: var(--papir); }
+
+.fakta {
+  list-style: none;
+  margin-top: 30px;
+  border-top: 1px solid rgba(255,255,255,0.16);
+}
+.fakta li {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.16);
+}
+.fakta .cislo {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(28px, 4vw, 40px);
+  color: var(--zluta);
+  line-height: 1;
+  min-width: 130px;
+  letter-spacing: -0.02em;
+}
+.fakta .popis {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--beton-svetly);
+}
+@media (max-width: 820px) {
+  .duvera-grid { grid-template-columns: 1fr; }
+  .duvera-media img { min-height: 240px; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: rise 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.reveal.d1 { animation-delay: 0.08s; }
+.reveal.d2 { animation-delay: 0.16s; }
+.reveal.d3 { animation-delay: 0.24s; }
+@keyframes rise { to { opacity: 1; transform: none; } }
