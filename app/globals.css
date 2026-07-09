@@ -1,0 +1,371 @@
+@import url('https://fonts.bunny.net/css2?family=archivo:600,800&family=fraunces:400,600&family=jetbrains-mono:500,700&display=swap');
+
+:root {
+  /* Palette pulled from the trade: copper wire, live/neutral wire, warm arc */
+  --pes-ink: #14181c;         /* near-black graphite, insulation */
+  --pes-paper: #f2ede3;       /* warm technical off-white */
+  --pes-copper: #b06a2c;      /* stripped copper wire */
+  --pes-hot: #e63a1e;         /* live wire / flame — the accent */
+  --pes-cold: #1f6fb4;        /* neutral wire / gas blue */
+  --pes-steel: #6b7480;       /* muted labels */
+  --pes-line: rgba(20, 24, 28, 0.14);
+
+  --pes-display: 'Archivo', system-ui, sans-serif;
+  --pes-serif: 'Fraunces', Georgia, serif;
+  --pes-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--pes-paper);
+  color: var(--pes-ink);
+  font-family: var(--pes-serif);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pes { max-width: 1180px; margin: 0 auto; padding: 0 20px 40px; }
+
+/* ---------- Top bar ---------- */
+.pes-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 0 18px;
+  flex-wrap: wrap;
+}
+
+.pes-wordmark {
+  text-decoration: none;
+  color: var(--pes-ink);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--pes-display);
+}
+.pes-wordmark-lead {
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  background: var(--pes-hot);
+  color: var(--pes-paper);
+  padding: 2px 9px 3px;
+  border-radius: 3px;
+}
+.pes-wordmark-rest {
+  font-weight: 600;
+  font-size: 1.02rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.pes-wordmark-rest em {
+  font-style: normal;
+  color: var(--pes-copper);
+}
+
+.pes-callchip {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-decoration: none;
+  color: var(--pes-ink);
+  border: 1.5px solid var(--pes-ink);
+  border-radius: 4px;
+  padding: 6px 12px;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.pes-callchip-label {
+  font-family: var(--pes-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pes-hot);
+}
+.pes-callchip-num {
+  font-family: var(--pes-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+.pes-callchip:hover { background: var(--pes-ink); color: var(--pes-paper); }
+.pes-callchip:hover .pes-callchip-label { color: #ff8f6e; }
+
+/* ---------- Shared bits ---------- */
+.pes-eyebrow {
+  font-family: var(--pes-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--pes-steel);
+  margin: 0 0 14px;
+}
+
+.pes-h2 {
+  font-family: var(--pes-display);
+  font-weight: 800;
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0 0 14px;
+}
+
+/* ---------- Hero ---------- */
+.pes-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 26px;
+  border-top: 2px solid var(--pes-ink);
+  padding-top: 30px;
+}
+
+.pes-hero-media { position: relative; }
+.pes-hero-img {
+  width: 100%;
+  height: clamp(240px, 42vw, 460px);
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;
+  filter: saturate(1.02) contrast(1.02);
+}
+
+.pes-h1 {
+  font-family: var(--pes-display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 8.5vw, 5.2rem);
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+  margin: 4px 0 20px;
+  text-transform: uppercase;
+}
+/* The signature: the live-wire underline that arcs under "co hoří" */
+.pes-h1-hot {
+  color: var(--pes-hot);
+  position: relative;
+  display: inline-block;
+}
+.pes-h1-hot::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.02em;
+  height: 0.12em;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--pes-hot) 0 10px,
+    transparent 10px 16px
+  );
+  transform-origin: left center;
+  animation: pes-spark 1.1s steps(12, end) 0.35s both;
+}
+.pes-h1-and {
+  color: var(--pes-steel);
+  font-family: var(--pes-serif);
+  font-weight: 400;
+  text-transform: lowercase;
+  font-size: 0.6em;
+}
+.pes-h1-cold { color: var(--pes-cold); }
+
+.pes-lede {
+  font-size: clamp(1.05rem, 2.4vw, 1.28rem);
+  line-height: 1.5;
+  max-width: 34ch;
+  margin: 0 0 26px;
+}
+
+.pes-hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.pes-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--pes-display);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  padding: 14px 22px;
+  border-radius: 4px;
+  border: 2px solid var(--pes-ink);
+  transition: transform 0.15s ease, background 0.18s ease, color 0.18s ease;
+}
+.pes-btn-primary { background: var(--pes-hot); border-color: var(--pes-hot); color: #fff; }
+.pes-btn-primary:hover { transform: translateY(-2px); background: #cc2f16; border-color: #cc2f16; }
+.pes-btn-ghost { background: transparent; color: var(--pes-ink); }
+.pes-btn-ghost:hover { transform: translateY(-2px); background: var(--pes-ink); color: var(--pes-paper); }
+
+.pes-hero-note {
+  font-family: var(--pes-mono);
+  font-size: 0.78rem;
+  color: var(--pes-steel);
+  margin: 18px 0 0;
+}
+
+@media (min-width: 860px) {
+  .pes-hero {
+    grid-template-columns: 1.05fr 1fr;
+    align-items: center;
+    gap: 44px;
+  }
+  .pes-hero-media { order: 2; }
+}
+
+/* ---------- Services ---------- */
+.pes-sluzby { margin-top: 74px; }
+.pes-section-head { max-width: 60ch; }
+.pes-section-sub { color: #3a4149; margin: 0; }
+
+.pes-cards {
+  list-style: none;
+  margin: 34px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--pes-line);
+}
+.pes-card {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 18px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--pes-line);
+  transition: background 0.18s ease;
+}
+.pes-card:hover { background: rgba(176, 106, 44, 0.06); }
+.pes-card-phase {
+  font-family: var(--pes-mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--pes-hot);
+  border: 1.5px solid var(--pes-hot);
+  border-radius: 3px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: start;
+}
+.pes-card-title {
+  font-family: var(--pes-display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin: 0 0 6px;
+}
+.pes-card-text { margin: 0; color: #3a4149; max-width: 58ch; }
+
+@media (min-width: 720px) {
+  .pes-cards { grid-template-columns: 1fr 1fr; column-gap: 40px; }
+  .pes-card:nth-last-child(2) { border-bottom: 1px solid var(--pes-line); }
+}
+
+.pes-sluzby-fig { margin: 34px 0 0; }
+.pes-fig-img {
+  width: 100%;
+  height: clamp(220px, 34vw, 380px);
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;
+}
+.pes-fig-cap {
+  font-family: var(--pes-mono);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--pes-steel);
+  margin: 12px 0 0;
+  max-width: 62ch;
+  border-left: 3px solid var(--pes-cold);
+  padding-left: 12px;
+}
+
+/* ---------- O firmě ---------- */
+.pes-ofirme {
+  margin-top: 78px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  background: var(--pes-ink);
+  color: var(--pes-paper);
+  border-radius: 8px;
+  padding: 26px;
+}
+.pes-ofirme .pes-eyebrow { color: #ff8f6e; }
+.pes-ofirme-fig { margin: 0; }
+.pes-ofirme .pes-fig-img { height: clamp(220px, 40vw, 440px); }
+.pes-ofirme-text { color: #d7d2c6; max-width: 52ch; margin: 0 0 26px; }
+
+.pes-stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  margin: 0 0 28px;
+  padding: 22px 0;
+  border-top: 1px solid rgba(242, 237, 227, 0.18);
+  border-bottom: 1px solid rgba(242, 237, 227, 0.18);
+}
+.pes-stat { margin: 0; }
+.pes-stat-num {
+  font-family: var(--pes-display);
+  font-weight: 800;
+  font-size: 1.7rem;
+  color: #fff;
+  margin: 0;
+}
+.pes-stat-desc {
+  margin: 4px 0 0;
+  font-size: 0.92rem;
+  color: #b9b4a8;
+}
+
+.pes-kontakt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-style: normal;
+}
+.pes-kontakt-label {
+  font-family: var(--pes-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pes-steel);
+  margin-bottom: 6px;
+}
+.pes-kontakt-line { color: var(--pes-paper); }
+.pes-kontakt-mail { color: #ff8f6e; text-decoration: none; margin-top: 6px; width: fit-content; }
+.pes-kontakt-mail:hover { text-decoration: underline; }
+
+@media (min-width: 860px) {
+  .pes-ofirme {
+    grid-template-columns: 1fr 1.1fr;
+    align-items: center;
+    gap: 48px;
+    padding: 44px;
+  }
+  .pes-stats { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+}
+
+/* ---------- Focus ---------- */
+a:focus-visible {
+  outline: 3px solid var(--pes-cold);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ---------- Motion ---------- */
+@keyframes pes-spark {
+  from { transform: scaleX(0); opacity: 0.4; }
+  to { transform: scaleX(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  .pes-h1-hot::after { transform: scaleX(1); opacity: 1; }
+}
