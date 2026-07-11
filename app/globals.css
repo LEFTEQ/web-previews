@@ -1,0 +1,402 @@
+@import url('https://fonts.bunny.net/css2?family=fraunces:9pt,24pt,400,500,600,700;9pt,24pt,italic,500,600&family=archivo:400,500,600,700;500,italic&display=swap');
+
+/* ---------- Tokeny ---------- */
+/* Paleta odvozená z pekárny: spálená kůrka, žitná střída, popel z pece,
+   noční modř brzkého rána — vědomě NE cream+terracotta default. */
+:root {
+  --rye: #f3 e6d0; /* placeholder overwritten below */
+}
+:root {
+  --crust: #8a3f1f;        /* spálená kůrka — akcent */
+  --crust-deep: #5e2913;
+  --rye: #f0e5d1;          /* žitná mouka / světlé pozadí */
+  --rye-2: #e7d7b8;
+  --crumb: #2a1c12;        /* skoro černá, teplá */
+  --night: #171029;        /* noční modř — kontrast řemesla ve tmě */
+  --night-2: #241a3d;
+  --ash: #6b5b4a;          /* popel / tlumený text */
+  --paper: #fbf6ec;
+
+  --ff-display: "Fraunces", Georgia, serif;
+  --ff-body: "Archivo", system-ui, sans-serif;
+
+  --maxw: 1180px;
+  --pad: clamp(1.15rem, 5vw, 4rem);
+  --r: 3px;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--crumb);
+  font-family: var(--ff-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+.pk { overflow-x: clip; }
+
+/* ---------- Sdílené prvky ---------- */
+.pk-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .6em;
+  margin: 0 0 1.4rem;
+  font-family: var(--ff-body);
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--crust);
+}
+.pk-eyebrow--dark { color: var(--rye-2); }
+.pk-eyebrow__dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 22%, transparent);
+}
+
+.pk-h2 {
+  font-family: var(--ff-display);
+  font-weight: 500;
+  font-size: clamp(1.9rem, 5.2vw, 3.4rem);
+  line-height: 1.06;
+  letter-spacing: -.015em;
+  margin: 0;
+  font-variation-settings: "opsz" 24;
+}
+.pk-h2--dark { color: var(--paper); }
+
+.pk-btn {
+  display: inline-block;
+  font-family: var(--ff-body);
+  font-weight: 600;
+  font-size: .82rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: .95em 1.9em;
+  border-radius: 999px;
+  transition: transform .2s ease, background .2s ease, color .2s ease;
+}
+.pk-btn--light {
+  background: var(--paper);
+  color: var(--crumb);
+}
+.pk-btn--light:hover { transform: translateY(-2px); background: var(--crust); color: var(--paper); }
+
+.pk-inline-link {
+  color: var(--crust);
+  text-decoration: none;
+  border-bottom: 2px solid color-mix(in srgb, var(--crust) 40%, transparent);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.pk-inline-link:hover { border-bottom-color: var(--crust); }
+
+/* ---------- HERO ---------- */
+.pk-hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(2rem, 8vh, 5rem) var(--pad);
+  color: var(--paper);
+  isolation: isolate;
+}
+.pk-hero__img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  animation: pk-kenburns 20s ease-out both;
+}
+.pk-hero__scrim {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(to top, rgba(23,16,41,.86) 0%, rgba(23,16,41,.42) 42%, rgba(23,16,41,.16) 78%),
+    linear-gradient(to right, rgba(23,16,41,.5), transparent 60%);
+}
+.pk-hero__inner { max-width: 760px; width: 100%; }
+.pk-hero__eyebrow { color: var(--rye-2); }
+
+.pk-hero__title {
+  margin: 0 0 1.6rem;
+  font-family: var(--ff-display);
+  font-weight: 400;
+  line-height: .98;
+  letter-spacing: -.02em;
+  text-shadow: 0 2px 30px rgba(0,0,0,.35);
+}
+.pk-hero__line { display: block; }
+.pk-hero__line--muted {
+  font-size: clamp(1.15rem, 3.6vw, 1.9rem);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--rye-2);
+  letter-spacing: 0;
+  margin-bottom: .35em;
+}
+.pk-hero__line--big {
+  font-size: clamp(2.8rem, 10vw, 6rem);
+  font-weight: 600;
+  font-variation-settings: "opsz" 144;
+}
+.pk-hero__line--script {
+  font-size: clamp(3.2rem, 12vw, 7.2rem);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--crust);
+  filter: brightness(1.5);
+  margin-top: -.08em;
+}
+
+.pk-hero__lead {
+  max-width: 46ch;
+  font-size: clamp(1rem, 2.4vw, 1.18rem);
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--paper) 92%, transparent);
+  margin: 0 0 2rem;
+}
+
+.pk-hero__mark {
+  position: absolute;
+  top: clamp(1.4rem, 4vh, 2.4rem);
+  right: var(--pad);
+  margin: 0;
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: .95rem;
+  color: var(--rye-2);
+  writing-mode: vertical-rl;
+  letter-spacing: .18em;
+  opacity: .8;
+}
+
+/* ---------- SEKCE 1: den ---------- */
+.pk-day {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(4rem, 10vh, 7rem) var(--pad);
+}
+.pk-day__head { max-width: 62ch; margin-bottom: clamp(2.5rem, 6vh, 4rem); }
+.pk-day__lead {
+  font-size: 1.1rem;
+  color: var(--ash);
+  margin: 1.2rem 0 0;
+  max-width: 52ch;
+}
+.pk-day__grid {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+.pk-time { list-style: none; margin: 0; padding: 0; }
+.pk-time__item {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 1.2rem;
+  padding: 1.6rem 0;
+  border-top: 1px solid color-mix(in srgb, var(--crumb) 14%, transparent);
+}
+.pk-time__item:last-child { border-bottom: 1px solid color-mix(in srgb, var(--crumb) 14%, transparent); }
+.pk-time__clock {
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  color: var(--crust);
+  font-variation-settings: "opsz" 24;
+  letter-spacing: -.02em;
+  line-height: 1;
+  padding-top: .1em;
+}
+.pk-time__akce {
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 0 0 .3rem;
+}
+.pk-time__detail { margin: 0; color: var(--ash); font-size: 1rem; }
+
+.pk-day__figure { margin: 0; position: sticky; top: 2rem; }
+.pk-day__img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--r);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  box-shadow: 0 30px 60px -30px rgba(42,28,18,.5);
+}
+.pk-day__cap {
+  margin: 1rem 0 0;
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--ash);
+  line-height: 1.45;
+}
+
+/* ---------- SEKCE 2: pobočky ---------- */
+.pk-shops {
+  background: var(--night);
+  color: var(--paper);
+  padding: clamp(4rem, 10vh, 7rem) var(--pad);
+  background-image:
+    radial-gradient(120% 80% at 85% -10%, rgba(138,63,31,.35), transparent 60%);
+}
+.pk-shops__intro {
+  max-width: var(--maxw);
+  margin: 0 auto clamp(2.5rem, 6vh, 4rem);
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+.pk-shops__img {
+  width: 100%;
+  border-radius: var(--r);
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,.6);
+}
+.pk-shops__lead {
+  margin: 1.3rem 0 0;
+  font-size: 1.1rem;
+  color: var(--rye-2);
+  max-width: 46ch;
+}
+.pk-count {
+  color: var(--crust);
+  filter: brightness(1.55);
+  font-style: italic;
+}
+
+.pk-list {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border: 1px solid rgba(240,229,209,.14);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.pk-shop {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1.4rem;
+  border-bottom: 1px solid rgba(240,229,209,.1);
+  border-right: 1px solid rgba(240,229,209,.1);
+}
+.pk-shop:nth-child(2n) { border-right: none; }
+.pk-shop__badge {
+  flex: 0 0 auto;
+  width: 2.7rem; height: 2.7rem;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--crust) 30%, var(--night-2));
+  color: var(--rye-2);
+  font-family: var(--ff-body);
+  font-weight: 700;
+  font-size: .78rem;
+  letter-spacing: .02em;
+  border: 1px solid rgba(240,229,209,.16);
+}
+.pk-shop__badge--cafe { font-size: 1.1rem; }
+.pk-shop__info { flex: 1 1 auto; min-width: 0; }
+.pk-shop__ctvrt {
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin: 0;
+}
+.pk-shop__adresa {
+  margin: .1rem 0 0;
+  font-size: .92rem;
+  color: var(--ash);
+  color: color-mix(in srgb, var(--rye-2) 70%, transparent);
+}
+.pk-shop__tel {
+  flex: 0 0 auto;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: .9rem;
+  color: var(--rye-2);
+  white-space: nowrap;
+  padding: .35em .5em;
+  border-radius: 4px;
+  transition: color .2s ease;
+}
+.pk-shop__tel:hover { color: var(--paper); text-decoration: underline; }
+.pk-shop--cafe { background: rgba(138,63,31,.14); }
+
+.pk-shops__hire {
+  max-width: var(--maxw);
+  margin: clamp(2rem, 5vh, 3rem) auto 0;
+  font-family: var(--ff-display);
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  color: var(--rye-2);
+}
+.pk-shops__hire .pk-inline-link {
+  color: var(--paper);
+  filter: brightness(1.1);
+  border-bottom-color: var(--crust);
+}
+
+/* ---------- Focus ---------- */
+a:focus-visible,
+.pk-btn:focus-visible {
+  outline: 3px solid var(--crust);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.pk-shops a:focus-visible { outline-color: var(--rye-2); }
+
+/* ---------- Responzivita ---------- */
+@media (max-width: 860px) {
+  .pk-day__grid { grid-template-columns: 1fr; }
+  .pk-day__figure { position: static; order: -1; }
+  .pk-shops__intro { grid-template-columns: 1fr; }
+  .pk-list { grid-template-columns: 1fr; }
+  .pk-shop { border-right: none; }
+}
+@media (max-width: 520px) {
+  body { font-size: 16px; }
+  .pk-hero { align-items: flex-end; }
+  .pk-hero__mark { display: none; }
+  .pk-time__item { grid-template-columns: 4.2rem 1fr; gap: .9rem; }
+  .pk-shop { flex-wrap: wrap; }
+  .pk-shop__tel { width: 100%; padding-left: 3.7rem; }
+}
+
+/* ---------- Motion ---------- */
+@keyframes pk-kenburns {
+  from { transform: scale(1.08); }
+  to { transform: scale(1); }
+}
+@keyframes pk-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.pk-hero__eyebrow { animation: pk-rise .7s .1s both; }
+.pk-hero__title { animation: pk-rise .8s .22s both; }
+.pk-hero__lead { animation: pk-rise .8s .38s both; }
+.pk-hero .pk-btn { animation: pk-rise .8s .52s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .pk-hero__img { transform: none; }
+}
