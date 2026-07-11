@@ -1,0 +1,358 @@
+@import url('https://fonts.bunny.net/css2?family=fraunces:400,500,600,9..144,600,9..144,600italic&family=inter:400,500,600&family=archivo:600,700&display=swap');
+
+:root{
+  /* Paleta odvozená z ateliéru: karton pasparty, jádrová čerň řezu,
+     teplá dřevěná lišta, chladný hliník. */
+  --board: #ECE6DA;      /* barva pasparty / kartonu */
+  --board-deep: #E1D8C6; /* hlubší tón kartonu */
+  --ink: #221E1A;        /* jádro řezu, tisk */
+  --walnut: #6B3B22;     /* dřevěná lišta (akcent) */
+  --walnut-lit:#8A4E2E;
+  --alu: #4A5560;        /* kovový rám, chladná linka */
+  --line: #C7BCA6;       /* jemná linka na kartonu */
+  --paper:#F6F2E9;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--board);
+  color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+
+.atelier{overflow-x:hidden}
+
+/* ——— typografie ——— */
+.eyebrow{
+  font-family:'Archivo',sans-serif;
+  font-weight:600;
+  font-size:.72rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--walnut);
+  margin:0 0 1rem;
+}
+.section-title{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-optical-sizing:auto;
+  font-size:clamp(1.9rem,4.5vw,3.1rem);
+  line-height:1.05;
+  letter-spacing:-.015em;
+  margin:0 0 1rem;
+}
+.section-sub{
+  max-width:46ch;
+  font-size:1.05rem;
+  color:#4a4238;
+  margin:0;
+}
+
+/* ——— nav ——— */
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:1.5rem clamp(1.2rem,5vw,4rem);
+  flex-wrap:wrap;
+}
+.wordmark{
+  text-decoration:none;
+  display:flex;
+  align-items:baseline;
+  gap:.08em;
+  position:relative;
+}
+.wordmark__da,.wordmark__pa{
+  font-family:'Archivo',sans-serif;
+  font-weight:700;
+  font-size:1.7rem;
+  letter-spacing:.02em;
+}
+.wordmark__da{color:var(--ink)}
+.wordmark__pa{
+  color:var(--board);
+  background:var(--walnut);
+  padding:.02em .28em;
+  border-radius:2px;
+}
+.wordmark__note{
+  position:absolute;
+  top:100%;
+  left:2px;
+  margin-top:.2rem;
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+  font-size:.66rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#6c6255;
+  white-space:nowrap;
+}
+.nav__links{
+  list-style:none;
+  display:flex;
+  align-items:center;
+  gap:1.6rem;
+  margin:0;padding:0;
+  font-family:'Archivo',sans-serif;
+  font-weight:600;
+  font-size:.82rem;
+  letter-spacing:.04em;
+}
+.nav__links a{text-decoration:none;color:var(--ink);padding:.3rem 0;border-bottom:2px solid transparent}
+.nav__links a:hover{border-bottom-color:var(--walnut)}
+.nav__cta{
+  background:var(--ink);
+  color:var(--board)!important;
+  padding:.55rem 1rem!important;
+  border-radius:2px;
+  border-bottom:none!important;
+}
+.nav__cta:hover{background:var(--walnut)}
+
+/* ——— HERO ——— */
+.hero{
+  padding:0 clamp(1.2rem,5vw,4rem) clamp(2rem,6vw,5rem);
+}
+.hero__grid{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:clamp(2rem,5vw,4.5rem);
+  align-items:center;
+  margin-top:clamp(1.5rem,4vw,3rem);
+}
+.hero__title{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-optical-sizing:auto;
+  font-size:clamp(2.4rem,6.2vw,4.6rem);
+  line-height:1.02;
+  letter-spacing:-.02em;
+  margin:0 0 1.4rem;
+}
+.hero__accent{
+  font-style:italic;
+  color:var(--walnut);
+}
+.hero__lede{
+  max-width:44ch;
+  font-size:1.1rem;
+  color:#463e34;
+  margin:0 0 2rem;
+}
+.hero__actions{display:flex;flex-wrap:wrap;gap:.9rem}
+
+.btn{
+  font-family:'Archivo',sans-serif;
+  font-weight:600;
+  font-size:.9rem;
+  letter-spacing:.02em;
+  text-decoration:none;
+  padding:.85rem 1.4rem;
+  border-radius:2px;
+  transition:transform .18s ease,background .18s ease,color .18s ease;
+}
+.btn--solid{background:var(--walnut);color:var(--paper)}
+.btn--solid:hover{background:var(--walnut-lit);transform:translateY(-2px)}
+.btn--ghost{border:1.5px solid var(--ink);color:var(--ink)}
+.btn--ghost:hover{background:var(--ink);color:var(--board)}
+
+/* Hero obrázek jako zarámovaný objekt — dvojitá paspartová linka */
+.hero__figure{margin:0;position:relative}
+.hero__img{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  border-radius:2px;
+  border:14px solid var(--paper);
+  outline:1px solid var(--line);
+  outline-offset:-22px;
+  box-shadow:0 30px 60px -30px rgba(34,30,26,.45), 0 2px 0 rgba(0,0,0,.06);
+}
+.hero__cap{
+  display:flex;
+  align-items:center;
+  gap:.8rem;
+  margin-top:1rem;
+  font-family:'Inter',sans-serif;
+  font-size:.82rem;
+  color:#5a5145;
+  max-width:34ch;
+}
+.hero__cap-num{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:1.7rem;
+  color:var(--walnut);
+  line-height:1;
+}
+
+/* ——— SEKCE 1: vrstvy ——— */
+.work{
+  background:var(--paper);
+  padding:clamp(3rem,7vw,6rem) clamp(1.2rem,5vw,4rem);
+  border-top:1px solid var(--line);
+}
+.section-head{margin-bottom:clamp(2rem,4vw,3rem)}
+.layers{
+  list-style:none;
+  margin:0 0 clamp(2rem,4vw,3.5rem);
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-radius:3px;
+  overflow:hidden;
+}
+.layer{
+  background:var(--paper);
+  padding:1.8rem 1.6rem;
+  position:relative;
+  transition:background .2s ease;
+}
+.layer:hover{background:var(--board)}
+.layer__num{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:2.4rem;
+  color:var(--line);
+  line-height:1;
+  display:block;
+  margin-bottom:.8rem;
+}
+.layer:hover .layer__num{color:var(--walnut)}
+.layer__title{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:1.4rem;
+  margin:0 0 .6rem;
+}
+.layer__body{font-size:.98rem;color:#463e34;margin:0 0 1rem}
+.layer__tag{
+  font-family:'Archivo',sans-serif;
+  font-weight:600;
+  font-size:.68rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--alu);
+}
+
+.work__strip{margin:0}
+.work__img{
+  width:100%;
+  aspect-ratio:16/8;
+  object-fit:cover;
+  border-radius:3px;
+  border:1px solid var(--line);
+}
+.work__cap{
+  margin-top:.9rem;
+  font-size:.9rem;
+  color:#5a5145;
+  max-width:52ch;
+}
+
+/* ——— SEKCE 2: o ateliéru ——— */
+.about{
+  padding:clamp(3rem,7vw,6rem) clamp(1.2rem,5vw,4rem);
+  border-top:1px solid var(--line);
+}
+.about__grid{
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  gap:clamp(2rem,5vw,4rem);
+  align-items:start;
+}
+.about__figure{margin:0}
+.about__img{
+  width:100%;
+  aspect-ratio:5/6;
+  object-fit:cover;
+  border-radius:2px;
+  border:12px solid var(--paper);
+  outline:1px solid var(--line);
+  outline-offset:-19px;
+  box-shadow:0 24px 50px -28px rgba(34,30,26,.4);
+}
+.about__body{font-size:1.05rem;color:#3f382f;margin:0 0 1.1rem;max-width:56ch}
+.facts{
+  display:flex;
+  flex-wrap:wrap;
+  gap:2rem;
+  margin:1.8rem 0;
+  padding:1.3rem 0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.fact dt{
+  font-family:'Archivo',sans-serif;
+  font-weight:600;
+  font-size:.68rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--alu);
+  margin-bottom:.35rem;
+}
+.fact dd{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:1.25rem;
+  margin:0;
+}
+.pull{
+  margin:0;
+  font-family:'Fraunces',serif;
+  font-weight:500;
+  font-style:italic;
+  font-size:clamp(1.2rem,2.6vw,1.6rem);
+  line-height:1.35;
+  color:var(--walnut);
+  padding-left:1.2rem;
+  border-left:3px solid var(--walnut);
+}
+
+/* ——— page-load: jeden orchestr ——— */
+@media (prefers-reduced-motion:no-preference){
+  .hero__text > *{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  .hero__text > *:nth-child(1){animation-delay:.05s}
+  .hero__text > *:nth-child(2){animation-delay:.15s}
+  .hero__text > *:nth-child(3){animation-delay:.25s}
+  .hero__text > *:nth-child(4){animation-delay:.35s}
+  .hero__figure{opacity:0;animation:fadeIn 1s ease .3s forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @keyframes fadeIn{to{opacity:1}}
+}
+
+/* ——— focus ——— */
+a:focus-visible,.btn:focus-visible{
+  outline:3px solid var(--alu);
+  outline-offset:3px;
+  border-radius:2px;
+}
+
+/* ——— responzivita ——— */
+@media (max-width:880px){
+  .hero__grid{grid-template-columns:1fr}
+  .hero__figure{max-width:440px}
+  .about__grid{grid-template-columns:1fr}
+  .about__figure{max-width:360px}
+  .layers{grid-template-columns:1fr}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .nav{gap:.8rem}
+  .nav__links{gap:1rem;font-size:.75rem;width:100%;justify-content:flex-start;flex-wrap:wrap}
+  .wordmark__note{position:static;display:block;margin-top:.25rem}
+  .hero__actions .btn{flex:1 1 auto;text-align:center}
+}
