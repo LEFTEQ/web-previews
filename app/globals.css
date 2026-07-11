@@ -1,0 +1,371 @@
+@import url('https://fonts.bunny.net/css2?family=archivo:wght@500;600;700;800&family=fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=jetbrains-mono:wght@500;600&display=swap');
+
+:root {
+  /* solder & steel palette — odvozeno z pájené elektroniky a kovu */
+  --ink: #10161c;        /* voronová ocel */
+  --ink-soft: #2a333c;
+  --paper: #eef1f0;      /* studená dílenská bílá */
+  --panel: #f7f9f8;
+  --solder: #e2551f;     /* horká pájka / oranžová */
+  --copper: #b8823c;     /* měď PCB */
+  --line: rgba(16, 22, 28, 0.14);
+  --line-strong: rgba(16, 22, 28, 0.28);
+
+  --disp: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --body: 'Archivo', 'Segoe UI', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --wrap: 1200px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+a { color: inherit; }
+
+::selection { background: var(--solder); color: #fff; }
+
+.tse {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* ---------- shared ---------- */
+.tse-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--solder);
+  margin: 0 0 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.tse-eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 2px;
+  background: var(--solder);
+  display: inline-block;
+}
+
+.tse-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 0.98rem;
+  letter-spacing: 0.01em;
+  padding: 0.85rem 1.4rem;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 2px solid var(--ink);
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+.tse-btn--solid { background: var(--solder); border-color: var(--solder); color: #fff; }
+.tse-btn--ghost { background: transparent; color: var(--ink); }
+.tse-btn:hover { transform: translateY(-2px); }
+.tse-btn--ghost:hover { background: var(--ink); color: var(--paper); }
+
+/* ---------- header ---------- */
+.tse-top {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem clamp(1rem, 4vw, 3rem);
+  background: rgba(238, 241, 240, 0.92);
+  backdrop-filter: saturate(140%) blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.tse-mark { text-decoration: none; display: flex; flex-direction: column; line-height: 1; }
+.tse-mark__t {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 1.65rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+.tse-mark__t::after {
+  content: "";
+  display: inline-block;
+  width: 8px; height: 8px;
+  margin-left: 4px;
+  border-radius: 50%;
+  background: var(--solder);
+  vertical-align: 0.15em;
+}
+.tse-mark__sub {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 0.35rem;
+}
+.tse-nav { display: flex; align-items: center; gap: clamp(0.8rem, 2vw, 1.9rem); }
+.tse-nav > a {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+.tse-nav > a:not(.tse-nav__tel):hover { color: var(--solder); }
+.tse-nav__tel {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  padding: 0.4rem 0.8rem;
+  border: 2px solid var(--solder);
+  border-radius: 2px;
+  text-align: right;
+}
+.tse-nav__tellabel { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--solder); }
+.tse-nav__telnum { font-weight: 700; font-size: 0.95rem; }
+.tse-nav__tel:hover { background: var(--solder); }
+.tse-nav__tel:hover .tse-nav__telnum { color: #fff; }
+.tse-nav__tel:hover .tse-nav__tellabel { color: #fff; }
+
+/* ---------- hero ---------- */
+.tse-hero {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  align-items: stretch;
+  border-bottom: 1px solid var(--line-strong);
+}
+.tse-hero__media { position: relative; overflow: hidden; background: var(--ink); }
+.tse-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 340px;
+  filter: contrast(1.04) saturate(1.05);
+  animation: tse-scale 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes tse-scale { from { transform: scale(1.08); } to { transform: scale(1); } }
+
+.tse-hero__panel {
+  padding: clamp(2rem, 5vw, 4.5rem) clamp(1.4rem, 4vw, 3.6rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    linear-gradient(var(--paper), var(--paper)) padding-box,
+    repeating-linear-gradient(90deg, transparent 0 46px, var(--line) 46px 47px) padding-box;
+}
+.tse-hero__h {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(2.1rem, 5vw, 3.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.2rem;
+  color: var(--ink);
+  animation: tse-rise 0.7s ease both 0.05s;
+}
+.tse-hero__accent {
+  font-style: italic;
+  color: var(--solder);
+}
+.tse-hero__lead {
+  font-size: 1.08rem;
+  max-width: 46ch;
+  color: var(--ink-soft);
+  margin: 0 0 1.9rem;
+  animation: tse-rise 0.7s ease both 0.15s;
+}
+.tse-hero__cta { display: flex; flex-wrap: wrap; gap: 0.8rem; animation: tse-rise 0.7s ease both 0.25s; }
+
+.tse-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 2.4rem 0 0;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--line);
+  animation: tse-rise 0.7s ease both 0.35s;
+}
+.tse-stats div { min-width: 0; }
+.tse-stats dt {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--ink);
+}
+.tse-stats dd {
+  margin: 0.15rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+@keyframes tse-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+/* ---------- section head ---------- */
+.tse-sec__head { max-width: 60ch; padding: 0 0 2.4rem; }
+.tse-sec__h {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(1.7rem, 3.6vw, 2.7rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.9rem;
+}
+.tse-sec__lead { font-size: 1.06rem; color: var(--ink-soft); margin: 0; max-width: 52ch; }
+
+/* ---------- divize ---------- */
+.tse-divize { padding: clamp(3rem, 7vw, 5.5rem) clamp(1.4rem, 4vw, 3.6rem); max-width: var(--wrap); margin: 0 auto; }
+.tse-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+.tse-grid__img {
+  position: sticky;
+  top: 92px;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.tse-grid__img img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+
+.tse-list { list-style: none; margin: 0; padding: 0; counter-reset: none; }
+.tse-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.2rem;
+  padding: 1.6rem 0;
+  border-top: 1px solid var(--line);
+}
+.tse-item:last-child { border-bottom: 1px solid var(--line); }
+.tse-item__num {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--solder);
+  padding-top: 0.35rem;
+}
+.tse-item__tag {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin: 0 0 0.3rem;
+}
+.tse-item__h {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: 1.45rem;
+  margin: 0 0 0.5rem;
+}
+.tse-item__p { margin: 0; color: var(--ink-soft); font-size: 1rem; }
+
+/* ---------- profil ---------- */
+.tse-profil { background: var(--ink); color: var(--paper); }
+.tse-profil__grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(1.6rem, 4vw, 4rem);
+  align-items: center;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 5.5rem) clamp(1.4rem, 4vw, 3.6rem);
+}
+.tse-profil__media { overflow: hidden; border-radius: 2px; }
+.tse-profil__media img { width: 100%; aspect-ratio: 5 / 6; object-fit: cover; filter: contrast(1.05); }
+.tse-profil .tse-eyebrow { color: var(--solder); }
+.tse-profil .tse-sec__h { color: var(--paper); }
+.tse-profil__lead { color: rgba(238, 241, 240, 0.82); font-size: 1.08rem; margin: 0 0 2rem; max-width: 48ch; }
+
+.tse-facts { list-style: none; margin: 0 0 2rem; padding: 0; }
+.tse-facts li {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid rgba(238, 241, 240, 0.16);
+}
+.tse-facts li:last-child { border-bottom: 1px solid rgba(238, 241, 240, 0.16); }
+.tse-facts__k { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--copper); padding-top: 0.15rem; }
+.tse-facts__v { color: var(--paper); }
+
+.tse-quote {
+  font-family: var(--disp);
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.35;
+  margin: 0 0 2rem;
+  padding-left: 1.2rem;
+  border-left: 3px solid var(--solder);
+  color: var(--paper);
+}
+.tse-quote cite {
+  display: block;
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(238, 241, 240, 0.6);
+  margin-top: 0.8rem;
+}
+.tse-profil__contact { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+.tse-profil .tse-btn--ghost { color: var(--paper); border-color: var(--paper); }
+.tse-profil .tse-btn--ghost:hover { background: var(--paper); color: var(--ink); }
+
+/* ---------- focus ---------- */
+a:focus-visible, .tse-btn:focus-visible {
+  outline: 3px solid var(--solder);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.tse-profil a:focus-visible { outline-color: #fff; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 860px) {
+  .tse-hero { grid-template-columns: 1fr; }
+  .tse-hero__media { order: -1; }
+  .tse-hero__img { min-height: 260px; max-height: 46vh; }
+  .tse-grid { grid-template-columns: 1fr; }
+  .tse-grid__img { position: static; }
+  .tse-grid__img img { aspect-ratio: 16 / 10; }
+  .tse-profil__grid { grid-template-columns: 1fr; }
+  .tse-profil__media img { aspect-ratio: 16 / 11; }
+  .tse-facts li { grid-template-columns: 1fr; gap: 0.2rem; }
+  .tse-facts__k { padding-top: 0; }
+}
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .tse-mark__sub { display: none; }
+  .tse-nav > a:not(.tse-nav__tel) { display: none; }
+  .tse-nav__tel { flex-direction: row; align-items: baseline; gap: 0.4rem; }
+  .tse-stats { gap: 1.2rem 1.8rem; }
+  .tse-hero__cta .tse-btn, .tse-profil__contact .tse-btn { flex: 1 1 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .tse-btn:hover { transform: none; }
+}
