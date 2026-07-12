@@ -72,7 +72,7 @@ export default function Page() {
           <span data-d="0 m">ornice</span>
           <span data-d="6 m">jíly</span>
           <span data-d="18 m">písky</span>
-          <span data-d="34 m">štěrky · voda">štěrky · voda</span>
+          <span data-d="34 m">štěrky · voda</span>
           <span data-d="60 m">skalní podloží</span>
         </div>
         <div className="hero__inner">
