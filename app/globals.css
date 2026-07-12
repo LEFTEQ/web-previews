@@ -1,0 +1,374 @@
+@import url('https://fonts.bunny.net/css2?family=fraunces:400,500,600,900&family=archivo:400,500,600,700&display=swap');
+
+:root {
+  /* Paleta odvozená z reality FVE: noční modř panelu, měď/oranž paprsku,
+     kyslíkově zelená (energie), teplá bílá střechy. Vědomě NE cream+terakota. */
+  --panel: #0b1e2d;      /* modročerná plocha panelu */
+  --panel-2: #12314a;    /* modravý odlesk */
+  --copper: #e07b39;     /* měděný rám / západ slunce na skle */
+  --volt: #0e7a5f;       /* zelená = vyrobená energie */
+  --volt-lite: #6fd0ab;
+  --paper: #f6f4ef;      /* teplá bílá */
+  --ink: #101c26;
+  --muted: #5b6b74;
+  --line: rgba(16, 28, 38, .12);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.iss { max-width: 1180px; margin: 0 auto; padding: 0 22px; }
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--copper);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Header / wordmark ---------- */
+.iss-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px 0 18px;
+  gap: 16px;
+}
+
+.iss-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  letter-spacing: .16em;
+  font-size: 1.05rem;
+}
+.iss-wm-ista { color: var(--ink); }
+.iss-wm-solar { color: var(--volt); }
+.iss-wm-sun {
+  width: 13px; height: 13px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #ffd27a, var(--copper) 70%);
+  box-shadow: 0 0 0 3px rgba(224,123,57,.18);
+  display: inline-block;
+}
+
+.iss-nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  font-weight: 500;
+  font-size: .98rem;
+}
+.iss-nav a { text-decoration: none; }
+.iss-nav a:not(.iss-nav-phone):hover { color: var(--volt); }
+.iss-nav-phone {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: background .18s ease;
+}
+.iss-nav-phone:hover { background: var(--volt); }
+
+/* ---------- Hero ---------- */
+.iss-hero {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 46px;
+  align-items: center;
+  padding: 30px 0 64px;
+}
+
+.iss-eyebrow {
+  font-family: 'Archivo', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: .74rem;
+  font-weight: 600;
+  color: var(--volt);
+  margin: 0 0 18px;
+}
+
+.iss-h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 6vw, 4.3rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0 0 22px;
+}
+.iss-h1-accent {
+  color: var(--copper);
+  font-style: italic;
+  position: relative;
+}
+
+.iss-lede {
+  font-size: 1.12rem;
+  color: var(--muted);
+  max-width: 30em;
+  margin: 0 0 28px;
+}
+
+.iss-hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 38px; }
+
+.iss-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform .16s ease, background .18s ease, color .18s ease;
+}
+.iss-btn-primary { background: var(--volt); color: #fff; }
+.iss-btn-primary:hover { background: #0c6650; transform: translateY(-2px); }
+.iss-btn-ghost { border: 1.5px solid var(--line); color: var(--ink); }
+.iss-btn-ghost:hover { border-color: var(--ink); transform: translateY(-2px); }
+
+/* Signature: wattmetr — čtyři buňky s reálnými čísly firmy */
+.iss-meter {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 0;
+  background: #fff;
+}
+.iss-meter-cell {
+  padding: 16px 14px 18px;
+  border-right: 1px solid var(--line);
+}
+.iss-meter-cell:last-child { border-right: none; }
+.iss-meter-cell dt {
+  font-size: .72rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.iss-meter-cell dd {
+  margin: 0;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--ink);
+}
+.iss-meter-cell dd span {
+  font-family: 'Archivo', sans-serif;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--copper);
+  margin-left: 3px;
+  vertical-align: super;
+}
+
+/* Hero image */
+.iss-hero-media {
+  position: relative;
+  margin: 0;
+}
+.iss-hero-img {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 30px 60px -30px rgba(11,30,45,.5);
+}
+.iss-hero-tag {
+  position: absolute;
+  left: 16px; bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(11,30,45,.86);
+  color: #fff;
+  padding: 9px 15px;
+  border-radius: 999px;
+  font-size: .82rem;
+  font-weight: 500;
+  backdrop-filter: blur(6px);
+}
+.iss-hero-tag-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--volt-lite);
+  box-shadow: 0 0 0 4px rgba(111,208,171,.25);
+}
+
+/* ---------- Sections ---------- */
+.iss-section { padding: 68px 0; }
+.iss-section-alt {
+  background: var(--panel);
+  color: var(--paper);
+  border-radius: 28px;
+  padding: 62px 40px;
+  margin-bottom: 20px;
+}
+
+.iss-section-head { max-width: 44rem; margin-bottom: 42px; }
+.iss-h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: clamp(1.9rem, 4vw, 2.9rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0 0 14px;
+}
+.iss-section-sub { font-size: 1.08rem; color: var(--muted); margin: 0; }
+.iss-section-alt .iss-section-sub { color: rgba(246,244,239,.7); }
+
+/* Grid řešení */
+.iss-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.iss-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 26px 24px;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.iss-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 40px -26px rgba(11,30,45,.4);
+}
+.iss-card-kind {
+  display: inline-block;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--volt);
+  margin-bottom: 14px;
+}
+.iss-card h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 1.28rem;
+  line-height: 1.2;
+  margin: 0 0 10px;
+}
+.iss-card p { margin: 0; color: var(--muted); font-size: .98rem; }
+
+.iss-card-wide {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.iss-card-img { width: 100%; height: 100%; min-height: 240px; object-fit: cover; }
+.iss-card-wide-copy { padding: 30px 30px; align-self: center; }
+
+/* Postup — číslovaná sekvence */
+.iss-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.iss-two-copy .iss-eyebrow { color: var(--volt-lite); }
+
+.iss-steps { list-style: none; margin: 32px 0 0; padding: 0; }
+.iss-steps li {
+  display: flex;
+  gap: 18px;
+  padding: 18px 0;
+  border-top: 1px solid rgba(246,244,239,.14);
+}
+.iss-steps li:last-child { border-bottom: 1px solid rgba(246,244,239,.14); }
+.iss-step-num {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--copper);
+  min-width: 40px;
+}
+.iss-steps h4 {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 2px 0 4px;
+}
+.iss-steps p { margin: 0; color: rgba(246,244,239,.68); font-size: .96rem; }
+
+.iss-two-media { margin: 0; }
+.iss-two-img {
+  width: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+  min-height: 300px;
+}
+.iss-trust {
+  margin-top: 20px;
+  padding: 22px 24px;
+  background: var(--panel-2);
+  border-left: 3px solid var(--copper);
+  border-radius: 12px;
+}
+.iss-trust-quote {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.12rem;
+  margin: 0 0 10px;
+  color: var(--paper);
+}
+.iss-trust-by {
+  margin: 0;
+  font-size: .82rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--volt-lite);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .iss-hero { grid-template-columns: 1fr; gap: 34px; }
+  .iss-hero-media { order: -1; }
+  .iss-two { grid-template-columns: 1fr; gap: 32px; }
+  .iss-grid { grid-template-columns: 1fr 1fr; }
+  .iss-card-wide { grid-template-columns: 1fr; }
+  .iss-card-img { min-height: 200px; }
+  .iss-section-alt { padding: 48px 26px; }
+}
+
+@media (max-width: 620px) {
+  body { font-size: 16px; }
+  .iss-nav a:not(.iss-nav-phone) { display: none; }
+  .iss-hero { padding-bottom: 44px; }
+  .iss-meter { grid-template-columns: 1fr 1fr; }
+  .iss-meter-cell:nth-child(2) { border-right: none; }
+  .iss-meter-cell:nth-child(1),
+  .iss-meter-cell:nth-child(2) { border-bottom: 1px solid var(--line); }
+  .iss-grid { grid-template-columns: 1fr; }
+  .iss-section { padding: 48px 0; }
+  .iss-hero-img { min-height: 260px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+  .iss-btn, .iss-card, .iss-nav-phone { transition: none !important; }
+  .iss-btn:hover, .iss-card:hover { transform: none !important; }
+}
