@@ -1,0 +1,362 @@
+@import url('https://fonts.bunny.net/css2?family=fraunces:9pt,24pt,400,500,600,700&family=space-grotesk:400,500,600,700&display=swap');
+
+/* ===== Exiram — rámařství Chodov =====
+   Palette derived from the trade: brushed aluminium, matte black frame,
+   raw wood edge, plexi cool-white, one confident cut-red for the miter.
+*/
+:root{
+  --ink:#181614;          /* matte black frame */
+  --paper:#F2EEE7;        /* passe-partout board */
+  --alu:#B9BCC0;          /* brushed aluminium */
+  --alu-deep:#6E7278;
+  --wood:#8A5A32;         /* raw wood edge */
+  --cut:#C6462E;          /* the 45° cut, our accent */
+  --cut-deep:#9E351F;
+  --line:#D8D2C7;
+
+  --f-display:'Fraunces','Georgia',serif;
+  --f-body:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+
+  --wrap:1180px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+
+.ex{
+  font-family:var(--f-body);
+  color:var(--ink);
+  background:var(--paper);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+.ex h1,.ex h2,.ex h3{margin:0;line-height:1.02;letter-spacing:-.01em}
+.ex p{margin:0}
+.ex a{color:inherit}
+
+.eyebrow{
+  font-family:var(--f-body);
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--cut);
+  margin:0 0 1rem;
+}
+.eyebrow-dark{color:var(--cut-deep)}
+
+/* ---------- HERO ---------- */
+.hero{
+  padding:clamp(1rem,3vw,2.2rem);
+  background:var(--ink);
+}
+.hero-frame{
+  max-width:var(--wrap);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1.05fr 1fr;
+  gap:clamp(1.4rem,3vw,3rem);
+  align-items:stretch;
+  /* the physical frame: a matte border around everything */
+  border:14px solid var(--ink);
+  outline:1px solid rgba(255,255,255,.08);
+  background:var(--ink);
+}
+
+.hero-media{
+  position:relative;
+  min-height:340px;
+  overflow:hidden;
+  background:#000;
+}
+.hero-img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  filter:saturate(1.02) contrast(1.02);
+}
+/* the 45° cut line drawn across the corner — our signature */
+.miter-line{
+  position:absolute;
+  top:-2px;left:-2px;
+  width:210px;height:210px;
+  pointer-events:none;
+  background:
+    linear-gradient(135deg, var(--cut) 0 3px, transparent 3px 100%);
+  opacity:.95;
+}
+.miter-line::after{
+  content:"45°";
+  position:absolute;
+  top:16px;left:16px;
+  font-family:var(--f-body);
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.1em;
+  color:var(--cut);
+  background:rgba(24,22,20,.6);
+  padding:.15em .45em;
+}
+
+.hero-copy{
+  padding:clamp(1.6rem,3vw,2.8rem) clamp(1.6rem,3vw,2.6rem);
+  color:var(--paper);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.hero-copy .eyebrow{color:var(--alu)}
+
+.wordmark{margin-bottom:1.2rem}
+.wordmark-main{
+  display:block;
+  font-family:var(--f-display);
+  font-weight:600;
+  font-optical-sizing:auto;
+  font-size:clamp(3.4rem,10vw,6.4rem);
+  letter-spacing:-.02em;
+  line-height:.9;
+  color:#fff;
+}
+.wordmark-sub{
+  display:block;
+  margin-top:.7rem;
+  font-family:var(--f-display);
+  font-style:italic;
+  font-weight:400;
+  font-size:clamp(1.1rem,2.6vw,1.5rem);
+  line-height:1.15;
+  color:var(--cut);
+  letter-spacing:0;
+}
+
+.lede{
+  color:#D9D3C9;
+  font-size:1.02rem;
+  max-width:34ch;
+  margin-bottom:1.6rem;
+}
+
+.hero-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:2rem}
+.btn{
+  display:inline-block;
+  font-family:var(--f-body);
+  font-weight:600;
+  font-size:.95rem;
+  letter-spacing:.01em;
+  padding:.85em 1.5em;
+  text-decoration:none;
+  border:1.5px solid transparent;
+  transition:transform .15s ease, background .15s ease, color .15s ease;
+}
+.btn-primary{background:var(--cut);color:#fff}
+.btn-primary:hover{background:var(--cut-deep)}
+.btn-ghost{border-color:var(--alu-deep);color:var(--paper)}
+.btn-ghost:hover{border-color:var(--cut);color:var(--cut)}
+.btn:active{transform:translateY(1px)}
+
+.hero-facts{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  margin:0;
+  background:rgba(255,255,255,.1);
+  border-top:1px solid rgba(255,255,255,.1);
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+.hero-facts>div{
+  background:var(--ink);
+  padding:.9rem .4rem .9rem 0;
+}
+.hero-facts dt{
+  font-size:.66rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--alu);
+  margin-bottom:.25rem;
+}
+.hero-facts dd{
+  margin:0;
+  font-family:var(--f-display);
+  font-size:1rem;
+  color:#fff;
+}
+
+/* ---------- SEKCE 1 : NABÍDKA ---------- */
+.offer{
+  max-width:var(--wrap);
+  margin:0 auto;
+  padding:clamp(3.5rem,8vw,6rem) clamp(1.2rem,4vw,2rem);
+}
+.section-head{max-width:46ch;margin-bottom:2.6rem}
+.section-head h2{
+  font-family:var(--f-display);
+  font-weight:600;
+  font-size:clamp(1.9rem,5vw,3.1rem);
+  margin-bottom:.7rem;
+}
+.section-sub{color:#5a544c;font-size:1.02rem}
+
+.offer-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+}
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  padding:1.6rem 1.5rem;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  transition:border-color .18s ease, transform .18s ease;
+}
+.card::before{
+  /* corner tick echoing the miter */
+  content:"";
+  position:absolute;top:0;right:0;
+  width:26px;height:26px;
+  background:linear-gradient(225deg, var(--cut) 0 2px, transparent 2px 100%);
+}
+.card:hover{border-color:var(--cut);transform:translateY(-3px)}
+.card-code{
+  font-size:.68rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--alu-deep);
+  margin-bottom:.8rem;
+}
+.card h3{
+  font-family:var(--f-display);
+  font-weight:600;
+  font-size:1.35rem;
+  margin-bottom:.6rem;
+}
+.card p{color:#5a544c;font-size:.96rem;margin-bottom:1.1rem}
+.spec{list-style:none;margin:auto 0 0;padding:.9rem 0 0;border-top:1px solid var(--line);font-size:.9rem}
+.spec li{display:flex;justify-content:space-between;gap:1rem;padding:.32rem 0;color:#6a655c}
+.spec strong{color:var(--ink);font-weight:600}
+
+.offer-extra{
+  margin-top:1.4rem;
+  display:grid;
+  grid-template-columns:1.3fr 1fr;
+  gap:1.4rem;
+  align-items:center;
+  background:var(--ink);
+  color:var(--paper);
+}
+.offer-img{width:100%;height:100%;object-fit:cover;display:block;min-height:220px}
+.offer-note{padding:clamp(1.4rem,3vw,2.4rem)}
+.offer-note h3{
+  font-family:var(--f-display);
+  font-weight:600;
+  font-size:1.5rem;
+  color:#fff;
+  margin-bottom:.6rem;
+}
+.offer-note p{color:#cfc9bf;margin-bottom:1.1rem}
+.link-arrow{
+  color:var(--cut);
+  font-weight:600;
+  text-decoration:none;
+  border-bottom:1.5px solid transparent;
+}
+.link-arrow:hover{border-bottom-color:var(--cut)}
+
+/* ---------- SEKCE 2 : DŮVĚRA ---------- */
+.trust{background:#fff;border-top:1px solid var(--line)}
+.trust-inner{
+  max-width:var(--wrap);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  gap:clamp(1.6rem,4vw,3.4rem);
+  align-items:center;
+  padding:clamp(3rem,7vw,5.5rem) clamp(1.2rem,4vw,2rem);
+}
+.trust-media{position:relative}
+.trust-img{
+  width:100%;
+  display:block;
+  border:12px solid var(--ink);
+  outline:1px solid var(--line);
+}
+.trust-copy h2{
+  font-family:var(--f-display);
+  font-weight:600;
+  font-size:clamp(1.9rem,4.6vw,2.9rem);
+  margin-bottom:.9rem;
+}
+.trust-lede{color:#5a544c;max-width:44ch;margin-bottom:1.8rem}
+.trust-list{list-style:none;margin:0;padding:0}
+.trust-list li{
+  display:grid;
+  grid-template-columns:5.5rem 1fr;
+  gap:1rem;
+  padding:.85rem 0;
+  border-top:1px solid var(--line);
+  align-items:baseline;
+}
+.trust-list li:last-child{border-bottom:1px solid var(--line)}
+.tl-k{
+  font-size:.68rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--cut);
+}
+.tl-v{font-family:var(--f-display);font-size:1.02rem;color:var(--ink)}
+.tl-v a{color:var(--cut);text-decoration:none;border-bottom:1px solid transparent}
+.tl-v a:hover{border-bottom-color:var(--cut)}
+
+/* ---------- focus ---------- */
+.ex a:focus-visible,.ex .btn:focus-visible{
+  outline:3px solid var(--cut);
+  outline-offset:3px;
+}
+.hero .btn-ghost:focus-visible{outline-color:#fff}
+
+/* ---------- page-load: one orchestrated reveal ---------- */
+.hero-copy>*{
+  opacity:0;
+  transform:translateY(14px);
+  animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards;
+}
+.hero-copy>*:nth-child(1){animation-delay:.05s}
+.hero-copy>*:nth-child(2){animation-delay:.15s}
+.hero-copy>*:nth-child(3){animation-delay:.25s}
+.hero-copy>*:nth-child(4){animation-delay:.35s}
+.hero-copy>*:nth-child(5){animation-delay:.45s}
+.miter-line{
+  transform-origin:top left;
+  animation:cut .8s ease .3s both;
+}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes cut{from{clip-path:polygon(0 0,0 0,0 0)}to{clip-path:polygon(0 0,100% 0,0 100%)}}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .hero-frame{grid-template-columns:1fr;border-width:10px}
+  .hero-media{min-height:260px;order:-1}
+  .offer-grid{grid-template-columns:1fr}
+  .offer-extra{grid-template-columns:1fr}
+  .trust-inner{grid-template-columns:1fr}
+  .trust-media{max-width:420px}
+}
+@media (max-width:560px){
+  .ex{font-size:16px}
+  .hero-facts{grid-template-columns:1fr;gap:0}
+  .hero-facts>div{padding:.7rem 0;border-bottom:1px solid rgba(255,255,255,.1)}
+  .miter-line{width:150px;height:150px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .hero-copy>*,.miter-line{animation:none;opacity:1;transform:none;clip-path:none}
+  .card,.btn{transition:none}
+}
