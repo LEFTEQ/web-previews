@@ -35,4 +35,11 @@ export default function Page() {
                 </div>
               </div>
               <h3 className="course-title">D&amp;D / Roleplay</h3>
-              <p className="course-desc">Dungeons &amp; Dragons a vlastní hry na hrdiny. Rozvíjíš kritické myšlení, týmovou práci a angličtinu v gamifikovaném prostředí. Skupina „Dare
+              <p className="course-desc">Dungeons &amp; Dragons a vlastní hry na hrdiny. Rozvíjíš kritické myšlení, týmovou práci a angličtinu v gamifikovaném prostředí. Skupina „Dare</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
