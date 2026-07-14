@@ -1,5 +1,3 @@
-import type { CSSProperties } from "react";
-
 const menu = [
   {
     kind: "Polévka",
@@ -205,5 +203,3 @@ export default function Page() {
     </main>
   );
 }
-
-export const _styleHint: CSSProperties = {};
