@@ -1,5 +1,3 @@
-import type { CSSProperties } from "react";
-
 const services = [
   {
     code: "FV",
@@ -183,5 +181,3 @@ export default function Page() {
     </main>
   );
 }
-
-export const _unused: CSSProperties = {};
