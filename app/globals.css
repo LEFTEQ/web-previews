@@ -1,0 +1,357 @@
+@import url('https://fonts.bunny.net/css2?family=inter:wght@400;500;600&family=newsreader:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
+:root {
+  --coal: #241c2b;
+  --plum: #3a2d47;
+  --brass: #b7893f;
+  --sandstone: #d8c9ad;
+  --ash: #9a958c;
+  --ivory: #f4efe6;
+
+  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  --section-pad: clamp(3.75rem, 9vw, 6.5rem);
+  --seam-left: clamp(22px, 4.5vw, 44px);
+  --content-left: clamp(46px, 9vw, 92px);
+  --measure: 46ch;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--coal);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; }
+
+/* ---- Layout shell + eternal-light seam ------------------------------- */
+.krem {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 80% at 12% -5%, rgba(58, 45, 71, 0.9) 0%, rgba(36, 28, 43, 0) 60%),
+    var(--coal);
+}
+
+.krem-seam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--seam-left);
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    rgba(183, 137, 63, 0) 0,
+    rgba(183, 137, 63, 0.95) 4%,
+    var(--brass) 10%,
+    var(--brass) 94%,
+    rgba(183, 137, 63, 0) 100%
+  );
+  box-shadow: 0 0 14px 1px rgba(183, 137, 63, 0.55);
+  animation: krem-breathe 6s ease-in-out infinite;
+  will-change: opacity;
+}
+
+@keyframes krem-breathe {
+  0%, 100% { opacity: 0.34; }
+  50% { opacity: 1; }
+}
+
+.krem-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px 0 var(--content-left);
+  animation: krem-rise 400ms ease-out both;
+}
+
+@keyframes krem-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---- Section rhythm (single source of spacing) ---------------------- */
+.krem-section { padding-block: var(--section-pad); }
+.krem-hero { padding-top: clamp(4.5rem, 12vw, 8rem); }
+.krem-section + .krem-section { border-top: 1px solid rgba(154, 149, 140, 0.16); }
+
+/* ---- Wordmark ------------------------------------------------------- */
+.krem-mark {
+  margin: 0 0 clamp(2rem, 6vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+.krem-mark-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 500;
+  color: var(--ivory);
+}
+.krem-mark-city {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(0.7rem, 2vw, 0.85rem);
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-top: 0.5rem;
+}
+.krem-mark-meta {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ash);
+  margin-top: 0.65rem;
+}
+
+/* ---- Hero ----------------------------------------------------------- */
+.krem-hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.05rem, 6vw, 4rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0;
+  max-width: 18ch;
+  color: var(--ivory);
+  text-wrap: balance;
+}
+.krem-hero-title em {
+  font-style: italic;
+  color: var(--brass);
+}
+.krem-hero-lead {
+  margin: clamp(1.5rem, 4vw, 2.25rem) 0 0;
+  max-width: var(--measure);
+  color: var(--sandstone);
+  font-size: 1.0625rem;
+}
+.krem-hero-actions {
+  margin-top: clamp(2rem, 5vw, 2.75rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 1.75rem;
+}
+.krem-hours {
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+
+.krem-btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--coal);
+  background: var(--brass);
+  padding: 0.85rem 1.6rem;
+  border: 1px solid var(--brass);
+  transition: background-color 180ms ease, color 180ms ease;
+}
+.krem-btn:hover { background: #cd9d4d; border-color: #cd9d4d; }
+
+/* ---- Section headings ---------------------------------------------- */
+.krem-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin: 0 0 1rem;
+}
+.krem-section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 4.2vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--ivory);
+}
+.krem-section-lead {
+  margin: 1.25rem 0 clamp(2.25rem, 5vw, 3rem);
+  max-width: var(--measure);
+  color: var(--sandstone);
+}
+
+/* ---- Services list -------------------------------------------------- */
+.krem-services {
+  list-style: none;
+  margin: 0 0 clamp(2.5rem, 6vw, 3.5rem);
+  padding: 0;
+  display: grid;
+  gap: 1px;
+  background: rgba(154, 149, 140, 0.16);
+  border: 1px solid rgba(154, 149, 140, 0.16);
+}
+.krem-service {
+  background: var(--coal);
+  padding: clamp(1.35rem, 3vw, 1.75rem);
+}
+.krem-service h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.25rem;
+  margin: 0 0 0.4rem;
+  color: var(--ivory);
+}
+.krem-service p {
+  margin: 0;
+  color: var(--ash);
+  font-size: 0.98rem;
+}
+
+@media (min-width: 680px) {
+  .krem-services { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---- Sandstone reading panel --------------------------------------- */
+.krem-panel {
+  background: var(--sandstone);
+  color: var(--coal);
+  padding: clamp(1.75rem, 5vw, 2.75rem);
+  border-left: 3px solid var(--brass);
+}
+.krem-panel-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #7a5a24;
+  margin: 0 0 1.25rem;
+}
+.krem-panel-list { margin: 0; display: grid; gap: 1.1rem; }
+.krem-panel-list div {
+  display: grid;
+  gap: 0.15rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(36, 28, 43, 0.18);
+}
+.krem-panel-list dt {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6a5330;
+}
+.krem-panel-list dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--coal);
+}
+.krem-panel-list dd a { color: #4a381f; text-underline-offset: 3px; }
+.krem-panel-note {
+  margin: 1.5rem 0 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #4a381f;
+  max-width: 40ch;
+}
+
+/* ---- Director's address -------------------------------------------- */
+.krem-address {
+  margin: 0 0 clamp(3rem, 7vw, 4.5rem);
+  max-width: 30ch;
+}
+.krem-address p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.35rem, 3.4vw, 1.95rem);
+  line-height: 1.45;
+  color: var(--ivory);
+  margin: 0;
+}
+.krem-address-sign {
+  margin-top: 2rem;
+  display: grid;
+  gap: 0.1rem;
+}
+.krem-sign-name {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--brass);
+}
+.krem-sign-role {
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  color: var(--ash);
+}
+
+/* ---- Contacts grid -------------------------------------------------- */
+.krem-contacts {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 2.5rem);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .krem-contacts { grid-template-columns: 1fr 1fr; }
+}
+.krem-contact h3 {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin: 0 0 0.6rem;
+}
+.krem-contact p {
+  margin: 0;
+  color: var(--ivory);
+  line-height: 1.65;
+}
+.krem-contact a { color: var(--sandstone); text-underline-offset: 3px; }
+.krem-ico {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--ash);
+  letter-spacing: 0.04em;
+}
+
+/* ---- Utility -------------------------------------------------------- */
+.krem-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- Focus ---------------------------------------------------------- */
+a:focus-visible,
+.krem-btn:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+.krem-panel a:focus-visible { outline-color: #4a381f; }
+
+/* ---- Reduced motion ------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .krem-seam { animation: none; opacity: 0.85; }
+  .krem-inner { animation: none; }
+}
