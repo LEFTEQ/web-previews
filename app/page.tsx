@@ -191,10 +191,8 @@ export default function Page() {
               <figure key={g.cap} className="plate">
                 <div className="plate__frame">
                   <AiImage
-                    prompt={g.prompt}
+                    src={g.prompt}
                     alt={g.alt}
-                    width={640}
-                    height={480}
                     className="plate__img"
                   />
                 </div>
