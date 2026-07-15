@@ -1,0 +1,467 @@
+@import url('https://fonts.bunny.net/css2?family=libre-caslon-display:400&family=ibm-plex-sans:400,500,600&display=swap');
+
+:root {
+  --bordo: #6d1a2e;
+  --brass: #a8873f;
+  --ink: #1b2330;
+  --slate: #445058;
+  --parchment: #e9e6dd;
+  --guilloche: #cfc7b6;
+
+  --band-pad: clamp(3.5rem, 8vw, 6.5rem);
+  --edge: clamp(1.25rem, 5vw, 4rem);
+  --maxw: 68rem;
+
+  --display: "Libre Caslon Display", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* faint security-print tint under the whole sheet */
+.sheet {
+  background-image:
+    repeating-linear-gradient(
+      135deg,
+      rgba(207, 199, 182, 0.16) 0 1px,
+      transparent 1px 9px
+    );
+}
+
+a {
+  color: var(--bordo);
+}
+
+:focus-visible {
+  outline: 2.5px solid var(--bordo);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---- single source of section spacing ---- */
+.band {
+  padding-block: var(--band-pad);
+  padding-inline: var(--edge);
+  max-width: var(--maxw);
+  margin-inline: auto;
+}
+
+/* ---- masthead ---- */
+.masthead {
+  padding-block: clamp(1.5rem, 4vw, 2.5rem);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--guilloche);
+}
+
+.wordmark {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+}
+
+.wordmark-name {
+  font-family: var(--display);
+  font-size: 1.75rem;
+  letter-spacing: 0.01em;
+  color: var(--bordo);
+}
+
+.wordmark-sub {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.masthead-meta {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+/* ---- hero ---- */
+.hero {
+  text-align: center;
+  padding-top: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.eyebrow {
+  margin: 0 0 clamp(1.5rem, 4vw, 2.75rem);
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 9vw, 5.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: clamp(2rem, 5vw, 3rem) 0 0;
+}
+
+.hero-role {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(1.05rem, 3.4vw, 1.75rem);
+  color: var(--bordo);
+  letter-spacing: 0;
+  margin-top: 0.55rem;
+}
+
+.hero-lede {
+  max-width: 40ch;
+  margin: 1.5rem auto 0;
+  color: var(--slate);
+  font-size: clamp(1.05rem, 2.4vw, 1.2rem);
+}
+
+.hero-cite {
+  margin: 2.25rem 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+/* ---- the seal (signature element) ---- */
+.seal {
+  width: clamp(15rem, 46vw, 23rem);
+  margin: 0 auto;
+  animation: seal-press 0.55s cubic-bezier(0.3, 0.8, 0.3, 1) 1.05s both;
+}
+
+.seal svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.seal circle {
+  fill: none;
+  stroke: var(--bordo);
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: seal-draw 1.05s ease-out forwards;
+}
+
+.seal-rings circle {
+  stroke-width: 0.9;
+}
+.seal-rings circle:nth-child(1),
+.seal-rings circle:nth-child(3) {
+  stroke-width: 2.4;
+}
+.seal-rosette circle {
+  stroke: var(--brass);
+  stroke-width: 0.5;
+  opacity: 0.85;
+}
+.seal-core circle {
+  stroke-width: 1.4;
+}
+
+.seal-text {
+  fill: var(--brass);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 3.4px;
+  opacity: 0;
+  animation: seal-fade 0.5s ease 1.15s forwards;
+}
+
+.seal-mono {
+  fill: var(--bordo);
+  font-family: var(--display);
+  font-size: 34px;
+  letter-spacing: 1px;
+  opacity: 0;
+  animation: seal-fade 0.5s ease 1.2s forwards;
+}
+
+@keyframes seal-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes seal-fade {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes seal-press {
+  0% {
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 0 rgba(27, 35, 48, 0));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.65))
+      drop-shadow(0 3px 5px rgba(27, 35, 48, 0.22));
+  }
+}
+
+/* ---- section heads ---- */
+.section-head {
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+  padding-top: clamp(1.5rem, 4vw, 2.25rem);
+  border-top: 2px solid var(--bordo);
+}
+
+.section-head h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  line-height: 1.05;
+  margin: 0.35rem 0 0;
+  color: var(--ink);
+}
+
+.section-note {
+  margin: 0.85rem 0 0;
+  max-width: 46ch;
+  color: var(--slate);
+}
+
+.record-no {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.25rem;
+  color: var(--brass);
+}
+
+/* ---- specimen catalog ---- */
+.specimens {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.specimen {
+  display: grid;
+  grid-template-columns: minmax(7rem, 12rem) 1fr;
+  gap: clamp(1rem, 4vw, 3rem);
+  padding-block: clamp(1.75rem, 4vw, 2.75rem);
+  border-top: 1px solid var(--guilloche);
+}
+.specimen:last-child {
+  border-bottom: 1px solid var(--guilloche);
+}
+
+.specimen-no {
+  display: block;
+  font-family: var(--display);
+  font-size: 1.35rem;
+  color: var(--bordo);
+}
+
+.specimen-tag {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.specimen-body h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.3rem, 3.2vw, 1.7rem);
+  line-height: 1.15;
+  margin: 0 0 0.6rem;
+  color: var(--ink);
+}
+
+.specimen-body p {
+  margin: 0;
+  color: var(--slate);
+  max-width: 54ch;
+}
+
+.specimen-lines {
+  list-style: none;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+
+.specimen-lines li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+.specimen-lines li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.45rem;
+  height: 0.45rem;
+  border: 1px solid var(--brass);
+  border-radius: 50%;
+}
+
+/* ---- record / contact ---- */
+.record-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.record-block {
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--guilloche);
+}
+
+.record-block h4 {
+  margin: 0 0 0.75rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brass);
+  font-weight: 600;
+}
+
+.record-block address {
+  font-style: normal;
+  font-size: 1.2rem;
+  font-family: var(--display);
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.record-hint {
+  margin: 0.85rem 0 0;
+  font-size: 0.92rem;
+  color: var(--slate);
+}
+
+.hours,
+.ident {
+  margin: 0;
+}
+
+.hours div,
+.ident div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.4rem;
+  border-bottom: 1px dotted var(--guilloche);
+}
+
+.hours dt,
+.ident dt {
+  color: var(--slate);
+  font-size: 0.92rem;
+}
+
+.hours dd,
+.ident dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: right;
+}
+
+.record-line {
+  margin: 0 0 0.85rem;
+  display: flex;
+  flex-direction: column;
+}
+.record-line a {
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(109, 26, 46, 0.35);
+  align-self: flex-start;
+}
+.record-line a:hover {
+  border-bottom-color: var(--bordo);
+}
+.record-line span {
+  margin-top: 0.2rem;
+  font-size: 0.85rem;
+  color: var(--slate);
+}
+
+.record-ident {
+  grid-column: span 2;
+}
+
+.record-mini-seal {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  opacity: 0.9;
+  margin-bottom: 0.75rem;
+  mix-blend-mode: multiply;
+}
+
+@media (max-width: 34rem) {
+  .specimen {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+  .specimen-index {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+  }
+  .specimen-tag {
+    margin-top: 0;
+  }
+  .record-ident {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seal {
+    animation: none;
+    filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.65))
+      drop-shadow(0 3px 5px rgba(27, 35, 48, 0.2));
+  }
+  .seal circle {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+  .seal-text,
+  .seal-mono {
+    opacity: 1;
+    animation: none;
+  }
+}
