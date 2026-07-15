@@ -1,5 +1,3 @@
-import { AiImage } from "./_ui";
-
 // Guilloché rosette — concentric security line-work echoing the notář's round official stamp.
 // Two interleaved flowers of circles produce the engraved rosette; rings frame the stamp text.
 function Seal() {
@@ -55,6 +53,44 @@ function Seal() {
         </text>
       </svg>
     </div>
+  );
+}
+
+// Compact engraved rosette used as a decorative record-mark in the contact block.
+function MiniSeal() {
+  const petals = Array.from({ length: 16 }, (_, i) => {
+    const a = (i / 16) * Math.PI * 2;
+    const cx = 50 + 15 * Math.cos(a);
+    const cy = 50 + 15 * Math.sin(a);
+    return <circle key={i} cx={cx} cy={cy} r={21} />;
+  });
+
+  return (
+    <svg
+      className="record-mini-seal"
+      viewBox="0 0 100 100"
+      role="presentation"
+      aria-hidden="true"
+    >
+      <g fill="none" stroke="var(--bordo)">
+        <circle cx={50} cy={50} r={47.5} strokeWidth={2} />
+        <circle cx={50} cy={50} r={44} strokeWidth={0.8} />
+        <circle cx={50} cy={50} r={16} strokeWidth={1.2} />
+      </g>
+      <g fill="none" stroke="var(--brass)" strokeWidth={0.5}>
+        {petals}
+      </g>
+      <text
+        x={50}
+        y={58}
+        textAnchor="middle"
+        fontFamily="var(--display)"
+        fontSize={22}
+        fill="var(--bordo)"
+      >
+        PW
+      </text>
+    </svg>
   );
 }
 
@@ -226,13 +262,7 @@ export default function Page() {
           </div>
 
           <div className="record-block record-seal-note">
-            <AiImage
-              alt=""
-              width={96}
-              height={96}
-              className="record-mini-seal"
-              prompt="engraved concentric guilloché notarial rosette stamp, fine bordeaux line-work on grey parchment, monochrome, security document detail"
-            />
+            <MiniSeal />
             <h4>Soudní komisař</h4>
             <p className="record-hint">
               Pro dědictví jednám jako soudní komisař v obvodu Okresního soudu
