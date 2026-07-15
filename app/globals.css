@@ -1,0 +1,537 @@
+@import url('https://fonts.bunny.net/css2?family=archivo-expanded:600,700,800&family=archivo:500,600,700,800&family=ibm-plex-sans:400,500,600&display=swap');
+
+:root {
+  --render: #eceae4;
+  --concrete: #9c9ea1;
+  --ink: #262a30;
+  --orange: #e35d1c;
+  --slate: #46586a;
+  --brass: #a8853f;
+
+  --joint: rgba(38, 42, 48, 0.16);
+  --panel-shadow: rgba(38, 42, 48, 0.12);
+
+  --display: "Archivo Expanded", "Archivo", sans-serif;
+  --body: "IBM Plex Sans", system-ui, sans-serif;
+
+  --band-pad-block: clamp(64px, 9vw, 116px);
+  --band-pad-inline: clamp(20px, 5vw, 72px);
+  --wrap: 1220px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--render);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  overflow: clip;
+}
+
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.band {
+  padding-block: var(--band-pad-block);
+  padding-inline: var(--band-pad-inline);
+}
+
+/* ---------- shared type ---------- */
+
+.eyebrow {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin: 0 0 1.1rem;
+}
+
+.sectionHead {
+  max-width: 40ch;
+  margin-bottom: clamp(2.4rem, 5vw, 3.6rem);
+}
+
+.sectionTitle {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 4.2vw, 3rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.panelTag {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  color: var(--slate);
+  display: inline-block;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  padding-top: clamp(48px, 8vw, 88px);
+  border-bottom: 2px solid var(--joint);
+  background:
+    linear-gradient(180deg, #f1efe9 0%, var(--render) 46%);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) 48px minmax(0, 0.86fr);
+  align-items: stretch;
+  column-gap: 0;
+}
+
+.heroDisplay {
+  padding-right: clamp(8px, 2vw, 28px);
+  align-self: center;
+}
+
+.wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5ch;
+  margin: 0 0 1.6rem;
+  font-family: var(--display);
+  text-transform: uppercase;
+}
+
+.wordmarkShort {
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.26em;
+  color: var(--ink);
+  border-left: 4px solid var(--orange);
+  padding-left: 0.6ch;
+}
+
+.wordmarkLong {
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.42em;
+  color: var(--slate);
+}
+
+.heroTitle {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.7rem, 7.4vw, 5.4rem);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.6rem;
+  text-wrap: balance;
+}
+
+.heroTitleAccent {
+  color: var(--orange);
+}
+
+.heroLead {
+  max-width: 46ch;
+  font-size: 1.05rem;
+  color: #363b42;
+  margin: 0 0 2rem;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.btn {
+  --btn-pad: 0.9rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  padding: var(--btn-pad);
+  border: 2px solid var(--ink);
+  transition: transform 0.12s ease, background-color 0.12s ease,
+    color 0.12s ease;
+}
+
+.btnPrimary {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  background: #c94e12;
+  border-color: #c94e12;
+}
+
+.btnGhost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btnGhost:hover {
+  transform: translateY(-2px);
+  background: var(--ink);
+  color: var(--render);
+}
+
+/* ---------- the panel joint (seam) ---------- */
+
+.seam {
+  position: relative;
+}
+
+.seam::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--orange);
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top center;
+  animation: seal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
+  box-shadow: 0 0 0 4px rgba(236, 234, 228, 0.9);
+}
+
+.seamTag {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--slate);
+  background: var(--render);
+  padding-block: 0.35rem;
+  opacity: 0;
+  animation: tagIn 0.4s ease forwards;
+}
+
+.seamTag1 { top: 6%; animation-delay: 1.1s; }
+.seamTag2 { top: 32%; animation-delay: 1.22s; }
+.seamTag3 { top: 58%; animation-delay: 1.34s; }
+.seamTag4 { top: 82%; animation-delay: 1.46s; }
+
+@keyframes seal {
+  to { transform: translateX(-50%) scaleY(1); }
+}
+
+@keyframes tagIn {
+  to { opacity: 1; }
+}
+
+/* ---------- hero fact panels ---------- */
+
+.heroFacts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--joint);
+  border: 2px solid var(--joint);
+  align-self: center;
+}
+
+.fact {
+  padding: clamp(1.1rem, 2.4vw, 1.6rem);
+  min-height: 128px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.2rem;
+  opacity: 0;
+  transform: translateY(-16px);
+  animation: panelSet 0.5s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+  animation-delay: calc(0.12s + var(--i) * 0.14s);
+}
+
+.fact--render { background: var(--render); }
+.fact--concrete { background: #b8bab9; }
+.fact--ink { background: var(--ink); color: var(--render); }
+.fact--brass {
+  background: var(--brass);
+  color: #fff;
+  background-image: linear-gradient(135deg, #b8964a 0%, #a8853f 60%);
+}
+
+.fact--ink .panelTag,
+.fact--brass .panelTag { color: rgba(255, 255, 255, 0.72); }
+
+.factBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.factNum {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4.5vw, 2.7rem);
+  line-height: 0.9;
+  letter-spacing: -0.015em;
+}
+
+.factNum.accent { color: var(--orange); }
+
+.factLabel {
+  font-size: 0.82rem;
+  line-height: 1.35;
+  opacity: 0.86;
+}
+
+@keyframes panelSet {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- services ---------- */
+
+.services {
+  border-bottom: 2px solid var(--joint);
+}
+
+.panelGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--joint);
+  border: 2px solid var(--joint);
+}
+
+.servicePanel {
+  background: var(--render);
+  padding: clamp(1.4rem, 3vw, 2.1rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  position: relative;
+  transition: background-color 0.16s ease;
+}
+
+.servicePanel::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--orange);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.22s ease;
+}
+
+.servicePanel:hover,
+.servicePanel:focus-within {
+  background: #f3f1eb;
+}
+
+.servicePanel:hover::after,
+.servicePanel:focus-within::after {
+  transform: scaleY(1);
+}
+
+.panelTitle {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.18rem;
+  letter-spacing: -0.005em;
+  margin: 0.2rem 0 0;
+}
+
+.panelText {
+  margin: 0;
+  font-size: 0.96rem;
+  color: #3a3f46;
+}
+
+/* ---------- informační deska ---------- */
+
+.deska {
+  background: var(--slate);
+  color: var(--render);
+}
+
+.deska .eyebrow { color: #b9c4cf; }
+.deska .sectionTitle { color: var(--render); }
+
+.boardGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1rem, 2.4vw, 1.6rem);
+}
+
+.note {
+  background: var(--render);
+  color: var(--ink);
+  padding: clamp(1.4rem, 3vw, 2rem);
+  position: relative;
+  border-top: 4px solid var(--orange);
+}
+
+.note::before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--brass);
+  box-shadow: 0 2px 4px rgba(38, 42, 48, 0.35);
+}
+
+.noteLabel {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.noteTitle {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.24rem;
+  line-height: 1.1;
+  margin: 0.5rem 0 0.6rem;
+  text-wrap: balance;
+}
+
+.noteText {
+  margin: 0;
+  font-size: 0.96rem;
+  color: #3a3f46;
+}
+
+/* ---------- focus ---------- */
+
+a:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.deska a:focus-visible {
+  outline-color: var(--brass);
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 880px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    row-gap: 0;
+  }
+
+  .heroDisplay {
+    padding-right: 0;
+    padding-bottom: 2.4rem;
+  }
+
+  .seam {
+    height: 46px;
+  }
+
+  .seam::before {
+    left: 0;
+    right: 0;
+    top: 50%;
+    bottom: auto;
+    width: auto;
+    height: 2px;
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: left center;
+    animation-name: sealX;
+  }
+
+  .seamTag {
+    writing-mode: horizontal-tb;
+    transform: translateY(-50%) translateX(0) rotate(0deg);
+    top: 50%;
+    left: auto;
+    padding-inline: 0.4rem;
+    padding-block: 0;
+  }
+
+  .seamTag1 { left: 2%; }
+  .seamTag2 { left: 27%; }
+  .seamTag3 { left: 52%; }
+  .seamTag4 { left: 77%; }
+
+  .panelGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@keyframes sealX {
+  to { transform: translateY(-50%) scaleX(1); }
+}
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+
+  .heroFacts { grid-template-columns: 1fr 1fr; }
+
+  .panelGrid,
+  .boardGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroActions { flex-direction: column; align-items: stretch; }
+  .btn { justify-content: center; }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .fact,
+  .seamTag {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .seam::before {
+    animation: none;
+    transform: translateX(-50%) scaleY(1);
+  }
+
+  @media (max-width: 880px) {
+    .seam::before {
+      transform: translateY(-50%) scaleX(1);
+    }
+  }
+
+  .btn:hover,
+  .servicePanel::after {
+    transition: none;
+  }
+}
