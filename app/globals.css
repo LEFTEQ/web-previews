@@ -1,0 +1,468 @@
+@import url('https://fonts.bunny.net/css2?family=bodoni-moda:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=jost:wght@300;400;500;600&display=swap');
+
+:root {
+  --ink: #17141b;
+  --wine: #5e2333;
+  --brass: #b58a4c;
+  --veil: #cfc7c4;
+  --lace: #ecd7d6;
+  --chalk: #f4f1ec;
+
+  --display: "Bodoni Moda", Georgia, "Times New Roman", serif;
+  --body: "Jost", "Segoe UI", system-ui, sans-serif;
+
+  --section-y: clamp(4.5rem, 10vw, 8.5rem);
+  --wrap: 1180px;
+  --gutter: clamp(1.25rem, 5vw, 3.5rem);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--chalk);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page { overflow-x: clip; }
+
+/* ---- shared pin marker (dressmaker's pin, diamond head) ---- */
+.pin {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  background: var(--brass);
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 1px rgba(181, 138, 76, 0.35);
+  margin-right: 0.85em;
+  vertical-align: 0.05em;
+}
+
+/* ---- eyebrow / labels ---- */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 0 0 1.4rem;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--veil);
+}
+.eyebrow.center { justify-content: center; }
+
+/* ---- buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 1.7rem;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 0.98rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+.btn-brass {
+  background: var(--brass);
+  color: var(--ink);
+  font-weight: 600;
+}
+.btn-brass:hover { background: var(--lace); transform: translateY(-2px); }
+.btn-ghost {
+  background: transparent;
+  color: var(--chalk);
+  border: 1px solid rgba(207, 199, 196, 0.4);
+}
+.btn-ghost:hover { border-color: var(--brass); color: var(--lace); transform: translateY(-2px); }
+
+a:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+}
+
+/* ================= HERO ================= */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(6rem, 14vh, 10rem) var(--gutter) clamp(4.5rem, 10vw, 7rem);
+  min-height: 92svh;
+  display: flex;
+  align-items: center;
+  background:
+    radial-gradient(120% 90% at 50% -10%, rgba(94, 35, 51, 0.55) 0%, transparent 55%),
+    radial-gradient(90% 70% at 50% 8%, rgba(236, 215, 214, 0.10) 0%, transparent 45%),
+    var(--ink);
+}
+/* tulle texture over hero */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(58deg, rgba(207, 199, 196, 0.045) 0 1px, transparent 1px 5px),
+    repeating-linear-gradient(122deg, rgba(207, 199, 196, 0.04) 0 1px, transparent 1px 5px);
+  -webkit-mask-image: radial-gradient(80% 65% at 50% 12%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(80% 65% at 50% 12%, #000 20%, transparent 75%);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 clamp(2.2rem, 6vw, 3.5rem);
+  font-family: var(--display);
+}
+.wm-name {
+  font-weight: 600;
+  font-size: 1.35rem;
+  letter-spacing: 0.42em;
+  color: var(--chalk);
+}
+.wm-city {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+  color: var(--veil);
+}
+.wm-pin {
+  width: 8px;
+  height: 8px;
+  background: var(--brass);
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 1px rgba(181, 138, 76, 0.4);
+}
+
+.hero-title {
+  margin: 0 0 1.7rem;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(2.9rem, 10.5vw, 8rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  color: var(--chalk);
+}
+.hero-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--brass);
+}
+
+.hero-lede {
+  max-width: 40ch;
+  margin: 0 0 2.4rem;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: var(--veil);
+  line-height: 1.65;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+/* the unveiling — tulle scrim lifts on load */
+.veil-load {
+  position: absolute;
+  inset: -2px;
+  z-index: 4;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(58deg, rgba(207, 199, 196, 0.18) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(122deg, rgba(207, 199, 196, 0.16) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg, rgba(207, 199, 196, 0.9) 0%, rgba(207, 199, 196, 0.72) 60%, rgba(23, 20, 27, 0.85) 100%);
+  transform-origin: top center;
+  animation: unveil 1000ms cubic-bezier(0.5, 0, 0.2, 1) 180ms forwards;
+}
+@keyframes unveil {
+  0% { opacity: 1; transform: translateY(0) scaleY(1); }
+  100% { opacity: 0; transform: translateY(-9%) scaleY(1.04); }
+}
+
+/* hero content quietly settles behind the lifting veil */
+@media (prefers-reduced-motion: no-preference) {
+  .wordmark, .hero .eyebrow, .hero-title, .hero-lede, .hero-cta {
+    opacity: 0;
+    animation: settle 700ms ease forwards;
+  }
+  .wordmark { animation-delay: 620ms; }
+  .hero .eyebrow { animation-delay: 720ms; }
+  .hero-title { animation-delay: 800ms; }
+  .hero-lede { animation-delay: 920ms; }
+  .hero-cta { animation-delay: 1020ms; }
+}
+@keyframes settle {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= SECTIONS ================= */
+.section {
+  padding-block: var(--section-y);
+  padding-inline: var(--gutter);
+}
+.section-head {
+  max-width: var(--wrap);
+  margin: 0 auto clamp(2.8rem, 6vw, 4.5rem);
+}
+.section-title {
+  margin: 0 0 1rem;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(2.1rem, 5.5vw, 3.8rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: var(--chalk);
+}
+.section-lede {
+  max-width: 46ch;
+  margin: 0;
+  color: var(--veil);
+  font-size: 1.1rem;
+}
+
+/* ---- offering / gown grid ---- */
+.offering {
+  background:
+    radial-gradient(80% 40% at 15% 0%, rgba(94, 35, 51, 0.3) 0%, transparent 60%),
+    var(--ink);
+}
+.gown-grid {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+}
+.gown { display: flex; flex-direction: column; }
+
+.gown-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #0f0d12;
+}
+.gown-photo,
+.about-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.92) brightness(0.92);
+}
+
+/* signature veil scrim — tulle over every gown, edges dissolving to the dark */
+.scrim::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(58deg, rgba(207, 199, 196, 0.07) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(122deg, rgba(207, 199, 196, 0.055) 0 1px, transparent 1px 4px),
+    radial-gradient(120% 85% at 50% 8%, transparent 34%, rgba(23, 20, 27, 0.9) 100%),
+    linear-gradient(180deg, transparent 55%, rgba(23, 20, 27, 0.55) 100%);
+}
+.scrim { position: relative; }
+
+.gown-body { padding-top: 1.4rem; }
+.gown-meta {
+  display: flex;
+  align-items: center;
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+.gown-title {
+  margin: 0 0 0.55rem;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  color: var(--chalk);
+}
+.gown-text {
+  margin: 0;
+  color: var(--veil);
+  font-size: 1rem;
+  max-width: 38ch;
+}
+
+/* ---- extras ---- */
+.extras {
+  max-width: var(--wrap);
+  margin: clamp(3rem, 7vw, 5rem) auto 0;
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid rgba(207, 199, 196, 0.16);
+}
+.extras-label {
+  margin: 0 0 1.2rem;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--lace);
+}
+.extras-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.extras-list li {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: var(--chalk);
+}
+
+/* ---- about ---- */
+.about {
+  background:
+    radial-gradient(70% 50% at 85% 0%, rgba(94, 35, 51, 0.32) 0%, transparent 55%),
+    var(--ink);
+}
+.about-grid {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+.about-p {
+  margin: 0 0 1.3rem;
+  color: var(--veil);
+  font-size: 1.08rem;
+  max-width: 50ch;
+}
+.pull {
+  margin: 2rem 0 0;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--brass);
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+  line-height: 1.4;
+  color: var(--lace);
+}
+.pull cite {
+  display: block;
+  margin-top: 0.9rem;
+  font-family: var(--body);
+  font-style: normal;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--veil);
+}
+.about-media {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #0f0d12;
+}
+
+/* ---- reasons ---- */
+.reasons {
+  max-width: var(--wrap);
+  margin: clamp(3.5rem, 8vw, 6rem) auto 0;
+}
+.reasons-list {
+  list-style: none;
+  margin: 1.8rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(207, 199, 196, 0.16);
+  border: 1px solid rgba(207, 199, 196, 0.16);
+}
+.reason {
+  background: var(--ink);
+  padding: 1.8rem clamp(1.4rem, 2.5vw, 2rem);
+}
+.reason .pin { margin-bottom: 0.9rem; margin-right: 0; }
+.reason-title {
+  margin: 0 0 0.5rem;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: var(--chalk);
+}
+.reason-text {
+  margin: 0;
+  color: var(--veil);
+  font-size: 0.98rem;
+}
+
+/* ================= scroll reveal ================= */
+.reveal { opacity: 1; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 4% cover 26%;
+    }
+  }
+}
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= responsive ================= */
+@media (max-width: 860px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-media { max-width: 480px; }
+  .reasons-list { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px) {
+  .gown-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .reasons-list { grid-template-columns: 1fr; }
+  .hero { min-height: auto; }
+  .btn { width: 100%; }
+}
+
+/* ================= reduced motion ================= */
+@media (prefers-reduced-motion: reduce) {
+  .veil-load { display: none; }
+  .wordmark, .hero .eyebrow, .hero-title, .hero-lede, .hero-cta,
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  * { scroll-behavior: auto !important; }
+}
