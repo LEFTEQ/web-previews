@@ -89,10 +89,8 @@ export default function Page() {
             <article className="gown reveal" key={g.title}>
               <div className="gown-frame scrim">
                 <AiImage
-                  prompt={g.img}
+                  src={g.img}
                   alt={g.alt}
-                  width={720}
-                  height={900}
                   className="gown-photo"
                 />
               </div>
@@ -139,10 +137,8 @@ export default function Page() {
 
           <div className="about-media scrim reveal">
             <AiImage
-              prompt="Elegant dim bridal salon interior at night, rows of gowns, brass fixtures, deep wine velvet drapes, single spotlight"
+              src="Elegant dim bridal salon interior at night, rows of gowns, brass fixtures, deep wine velvet drapes, single spotlight"
               alt="Interiér svatebního salonu CAXA Brno v tlumeném večerním světle"
-              width={860}
-              height={1080}
               className="about-photo"
             />
           </div>
