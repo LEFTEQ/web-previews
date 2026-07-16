@@ -1,0 +1,435 @@
+@import url('https://fonts.bunny.net/css2?family=barlow:400,500,600&family=barlow-condensed:600,700,800&display=swap');
+
+/* ============================================================
+   Zbyněk Dvořáček s.r.o. — arboristika, Brno
+   Craft-catalog. Signature: log cross-section growth rings.
+   ============================================================ */
+
+:root {
+  --bark: #241f19;
+  --bark-2: #2f2820;
+  --bark-edge: #6b4a26;
+  --sapwood: #e7dcc2;
+  --sapwood-2: #efe7d4;
+  --heartwood: #a86a24;
+  --moss: #43602e;
+  --moss-2: #375026;
+  --orange: #e6541d;
+  --ring-dim: rgba(168, 106, 36, 0.42);
+
+  --section-pad: clamp(3.75rem, 8vw, 7rem);
+  --edge: clamp(1.25rem, 5vw, 5rem);
+  --maxw: 74rem;
+
+  --font-display: "Barlow Condensed", system-ui, sans-serif;
+  --font-body: "Barlow", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bark);
+  color: var(--sapwood);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.cc { overflow-x: clip; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Top bar ---------- */
+.cc-top {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.15rem var(--edge);
+  background: var(--bark);
+  border-bottom: 1px solid rgba(231, 220, 194, 0.12);
+}
+
+.cc-mark {
+  display: inline-flex;
+  flex-direction: column;
+  text-decoration: none;
+  line-height: 0.9;
+}
+.cc-mark__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
+  color: var(--sapwood);
+}
+.cc-mark__sub {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--heartwood);
+  margin-top: 0.32rem;
+}
+
+.cc-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.9rem, 2.4vw, 2rem);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.98rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.cc-nav a { text-decoration: none; padding: 0.35rem 0; }
+.cc-nav a:not(.cc-nav__call):hover { color: var(--heartwood); }
+.cc-nav__call {
+  color: var(--bark);
+  background: var(--orange);
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+.cc-nav__call:hover { background: #ff6321; }
+
+/* ---------- Log rings (signature) ---------- */
+.cc-rings {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+.cc-rings svg { display: block; width: 100%; height: 100%; }
+
+.cc-rings--hero {
+  top: 50%;
+  right: -14%;
+  transform: translateY(-50%);
+  width: min(120vw, 46rem);
+  aspect-ratio: 1;
+  opacity: 0.9;
+}
+
+.cc-rings--trust {
+  bottom: -30%;
+  left: -18%;
+  width: min(90vw, 34rem);
+  aspect-ratio: 1;
+  opacity: 0.16;
+}
+.cc-rings--trust circle { stroke: var(--sapwood) !important; }
+.cc-rings--trust path { stroke: var(--sapwood) !important; }
+
+/* orchestrated load: rings revealed outward from the pith */
+@media (prefers-reduced-motion: no-preference) {
+  .cc-rings--hero {
+    animation: ringsReveal 0.95s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+}
+@keyframes ringsReveal {
+  from { clip-path: circle(0% at 47% 51%); }
+  to   { clip-path: circle(75% at 47% 51%); }
+}
+
+/* ---------- Hero ---------- */
+.cc-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(3.5rem, 9vw, 8rem) var(--edge) clamp(4rem, 10vw, 8.5rem);
+  background:
+    radial-gradient(120% 90% at 80% 40%, #322a20 0%, var(--bark) 58%);
+}
+.cc-hero__inner {
+  position: relative;
+  z-index: 2;
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+
+.cc-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--heartwood);
+  margin: 0 0 1.35rem;
+}
+
+.cc-hero__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.9rem, 8.5vw, 6.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  margin: 0;
+  max-width: 15ch;
+  color: var(--sapwood);
+}
+.cc-hero__title span { display: inline; }
+.cc-hero__accent { color: var(--heartwood); }
+
+.cc-hero__lede {
+  font-size: clamp(1.05rem, 1.9vw, 1.3rem);
+  max-width: 46ch;
+  color: rgba(231, 220, 194, 0.86);
+  margin: 1.9rem 0 2.4rem;
+}
+
+.cc-hero__cta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.1rem 1.5rem;
+}
+.cc-btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--bark);
+  background: var(--orange);
+  padding: 0.95rem 1.9rem;
+  border-radius: 999px;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+.cc-btn:hover { background: #ff6321; transform: translateY(-2px); }
+.cc-hero__note {
+  font-size: 0.95rem;
+  color: rgba(231, 220, 194, 0.62);
+}
+
+/* load animation for text */
+@media (prefers-reduced-motion: no-preference) {
+  .cc-load {
+    opacity: 0;
+    animation: riseIn 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+}
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Shared block spacing (single source) ---------- */
+.cc-block {
+  position: relative;
+  overflow: hidden;
+  padding: var(--section-pad) var(--edge);
+}
+.cc-block__head { max-width: var(--maxw); margin: 0 auto clamp(2.5rem, 5vw, 4rem); }
+
+.cc-kicker {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin: 0 0 0.9rem;
+}
+.cc-kicker--light { color: var(--sapwood); opacity: 0.85; }
+
+.cc-h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.1rem, 5vw, 3.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0;
+  max-width: 18ch;
+}
+.cc-h2--light { color: var(--sapwood); }
+
+/* ---------- Catalog (services) ---------- */
+.cc-block--catalog {
+  background: var(--sapwood);
+  color: var(--bark);
+}
+.cc-block--catalog .cc-h2 { color: var(--bark); }
+.cc-block__intro {
+  max-width: 52ch;
+  margin: 1.4rem 0 0;
+  font-size: 1.1rem;
+  color: #4a4032;
+}
+
+.cc-catalog {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: var(--maxw);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1rem, 2.4vw, 1.6rem);
+}
+.cc-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--sapwood-2);
+  border: 1px solid rgba(36, 31, 25, 0.14);
+  border-radius: 4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.cc-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px -18px rgba(36, 31, 25, 0.55);
+  border-color: var(--heartwood);
+}
+.cc-card__num {
+  flex: none;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  line-height: 0.8;
+  color: var(--heartwood);
+  /* growth-ring texture behind the ring-count number */
+  background:
+    repeating-radial-gradient(circle at 32% 62%,
+      rgba(168, 106, 36, 0.28) 0 1px,
+      transparent 1px 7px);
+  -webkit-background-clip: text;
+  background-clip: border-box;
+  padding: 0.15em 0.05em 0 0;
+}
+.cc-card__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+  color: var(--bark);
+}
+.cc-card__text { margin: 0; color: #4a4032; font-size: 1.02rem; }
+
+/* ---------- Trust / o nás ---------- */
+.cc-block--trust {
+  background: var(--moss);
+  color: var(--sapwood);
+  border-top: 4px solid var(--orange);
+}
+.cc-trust {
+  position: relative;
+  z-index: 2;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+.cc-trust__text {
+  font-size: 1.1rem;
+  color: rgba(231, 220, 194, 0.88);
+  max-width: 52ch;
+  margin: 1.4rem 0 0;
+}
+.cc-trust__lead .cc-h2 { margin-bottom: 0.4rem; }
+
+.cc-facts { list-style: none; margin: 0 0 2rem; padding: 0; }
+.cc-facts__item {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(231, 220, 194, 0.22);
+}
+.cc-facts__item:last-child { border-bottom: 1px solid rgba(231, 220, 194, 0.22); }
+.cc-facts__k {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--sapwood);
+}
+.cc-facts__v { font-size: 0.98rem; color: rgba(231, 220, 194, 0.78); margin-top: 0.15rem; }
+
+.cc-contact {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.4rem 1.5rem;
+  background: var(--moss-2);
+  border-left: 4px solid var(--orange);
+  border-radius: 4px;
+}
+.cc-contact__label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--heartwood);
+  margin-bottom: 0.3rem;
+}
+.cc-contact a { text-decoration: none; font-weight: 600; }
+.cc-contact a:hover { color: #ff6321; text-decoration: underline; }
+
+/* ---------- Scroll reveal (CSS scroll-driven, graceful fallback) ---------- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .cc-reveal {
+      animation: revealUp linear both;
+      animation-timeline: view();
+      animation-range: entry 2% entry 32%;
+    }
+  }
+}
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 760px) {
+  .cc-catalog { grid-template-columns: 1fr; }
+  .cc-trust { grid-template-columns: 1fr; }
+  .cc-rings--hero {
+    top: auto;
+    bottom: -8%;
+    right: -35%;
+    transform: none;
+    width: 34rem;
+    opacity: 0.55;
+  }
+  .cc-nav { width: 100%; justify-content: flex-start; gap: 1rem; }
+  .cc-nav__call { margin-left: auto; }
+}
+
+@media (max-width: 460px) {
+  .cc-card { flex-direction: column; gap: 0.6rem; }
+  .cc-hero__note { flex-basis: 100%; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+  .cc-rings--hero { clip-path: none; }
+  .cc-load { opacity: 1; }
+}
