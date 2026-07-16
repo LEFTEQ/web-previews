@@ -1,0 +1,553 @@
+@import url('https://fonts.bunny.net/css2?family=inter:400,500,600&family=saira-condensed:600,700,800&display=swap');
+
+:root {
+  --battleship: #3a4753;
+  --carbon: #1b1f24;
+  --marigold: #e6a52c;
+  --crimson: #b11f2f;
+  --chalk: #f2efe9;
+  --steel: #8a94a0;
+  --accent: #5a6b7a;
+  --hazard: #e6a52c;
+  --wrap: 1180px;
+  /* 90 - 65.5 = 24.5deg → stripes/cuts read as a 65.5° head-tube slash */
+  --slash-cut: 17px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--chalk);
+  color: var(--carbon);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ba { display: block; }
+
+.ba-wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding-inline: 1.25rem;
+  width: 100%;
+}
+
+a { color: inherit; }
+
+:where(a, button):focus-visible {
+  outline: 3px solid var(--marigold);
+  outline-offset: 3px;
+}
+
+/* ---------- Topbar ---------- */
+.ba-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 1.05rem 1.25rem;
+}
+
+.ba-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.34rem;
+  text-decoration: none;
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.35rem, 4vw, 1.7rem);
+  letter-spacing: 0.02em;
+  color: var(--carbon);
+}
+.ba-wordmark-slash {
+  align-self: stretch;
+  width: 12px;
+  transform: skewX(-24.5deg);
+  background: var(--marigold);
+  border-radius: 1px;
+}
+.ba-wordmark-geo {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: var(--steel);
+  transform: translateY(-0.15em);
+}
+
+.ba-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.9rem, 3vw, 1.8rem);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+.ba-nav a { text-decoration: none; }
+.ba-nav a:hover { color: var(--crimson); }
+.ba-nav-call {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---------- Eyebrow ---------- */
+.ba-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1rem;
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.82rem;
+  color: var(--battleship);
+}
+.ba-eyebrow--on-dark { color: var(--steel); }
+.ba-tick {
+  width: 22px;
+  height: 10px;
+  transform: skewX(-24.5deg);
+  background: var(--accent);
+  border-radius: 1px;
+  transition: background 0.4s ease;
+}
+
+/* ---------- Hero ---------- */
+.ba-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(3rem, 7vw, 5rem);
+}
+.ba-hero-grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+}
+
+.ba-hero-title {
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 800;
+  font-size: clamp(3.4rem, 15vw, 8.2rem);
+  line-height: 0.86;
+  letter-spacing: -0.005em;
+  margin: 0 0 1.4rem;
+  text-transform: uppercase;
+}
+
+.ba-swap {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  min-height: 0.9em;
+  padding-right: 0.12em;
+}
+.ba-swap-word {
+  display: inline-block;
+  color: var(--accent);
+  will-change: transform, opacity;
+}
+
+.ba-lede {
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  font-size: 1.08rem;
+  color: #384049;
+}
+
+.ba-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.ba-btn {
+  --cut: var(--slash-cut);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.7rem;
+  background: var(--marigold);
+  color: var(--carbon);
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 1.02rem;
+  text-decoration: none;
+  border: none;
+  clip-path: polygon(0 0, 100% 0, calc(100% - var(--cut)) 100%, 0 100%);
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+.ba-btn:hover { background: #f2b53c; transform: translateX(2px); }
+.ba-btn--block { width: 100%; margin-top: 1.4rem; }
+
+.ba-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.85rem 1.5rem;
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 1.02rem;
+  text-decoration: none;
+  color: var(--carbon);
+  border: 2px solid var(--carbon);
+  clip-path: polygon(0 0, 100% 0, calc(100% - var(--slash-cut)) 100%, 0 100%);
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+.ba-btn-ghost:hover { color: var(--crimson); border-color: var(--crimson); }
+
+/* ---------- Hero geometry graphic ---------- */
+.ba-geo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.ba-geo-frame {
+  position: relative;
+  height: clamp(190px, 34vw, 280px);
+  background:
+    linear-gradient(155deg, var(--battleship), var(--carbon));
+  clip-path: polygon(calc(var(--slash-cut) * 2.4) 0, 100% 0, 100% 100%, 0 100%);
+  overflow: hidden;
+}
+.ba-geo-ground {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 20%;
+  height: 2px;
+  background: var(--steel);
+  opacity: 0.6;
+}
+.ba-geo-line {
+  position: absolute;
+  left: 42%;
+  bottom: 20%;
+  width: 6px;
+  height: 62%;
+  background: var(--marigold);
+  transform-origin: bottom center;
+  transform: rotate(24.5deg);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+.ba-geo-hazard {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 14px;
+  background: repeating-linear-gradient(
+    24.5deg,
+    var(--marigold) 0 13px,
+    var(--carbon) 13px 26px
+  );
+}
+.ba-geo-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+.ba-geo-num {
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 6vw, 2.7rem);
+  color: var(--battleship);
+  line-height: 1;
+}
+.ba-geo-cap {
+  font-size: 0.78rem;
+  color: var(--steel);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  max-width: 12rem;
+}
+
+/* ---------- Sections ---------- */
+.ba-section {
+  position: relative;
+  padding: clamp(3.5rem, 9vw, 6rem) 0;
+}
+.ba-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: repeating-linear-gradient(
+    24.5deg,
+    var(--carbon) 0 13px,
+    transparent 13px 26px
+  );
+  opacity: 0.12;
+}
+.ba-section--dark {
+  background: var(--carbon);
+  color: var(--chalk);
+}
+.ba-section--dark::before {
+  background: repeating-linear-gradient(
+    24.5deg,
+    var(--marigold) 0 13px,
+    var(--carbon) 13px 26px
+  );
+  opacity: 1;
+}
+
+.ba-head { max-width: 40rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
+.ba-h2 {
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.1rem, 6.5vw, 3.6rem);
+  line-height: 0.96;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0 0 0.9rem;
+}
+.ba-h2--on-dark { color: var(--chalk); }
+.ba-head-note { margin: 0; color: #4a525b; max-width: 32rem; }
+
+/* ---------- Product grid ---------- */
+.ba-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.4rem;
+  grid-template-columns: 1fr;
+}
+.ba-card {
+  background: #fff;
+  border: 1px solid #e2ddd2;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, var(--slash-cut) 100%, 0 calc(100% - var(--slash-cut)));
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.ba-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px -18px rgba(27, 31, 36, 0.5);
+}
+.ba-card-chip {
+  position: relative;
+  height: 128px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0.75rem 0.85rem;
+}
+.ba-card-chip::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 7px;
+  background: repeating-linear-gradient(
+    24.5deg,
+    rgba(0, 0, 0, 0.28) 0 9px,
+    transparent 9px 18px
+  );
+}
+.ba-card-tag {
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  color: #fff;
+  background: rgba(27, 31, 36, 0.62);
+  padding: 0.2rem 0.5rem;
+}
+.ba-card-matte {
+  font-family: "Inter", sans-serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  align-self: flex-start;
+}
+.ba-card-body { padding: 1.05rem 1.1rem 1.3rem; }
+.ba-card-brand {
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+  color: var(--crimson);
+  margin: 0;
+}
+.ba-card-model {
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 1.05;
+  margin: 0.1rem 0 0.55rem;
+}
+.ba-card-colour {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 0 0.85rem;
+  font-size: 0.92rem;
+  color: #4a525b;
+}
+.ba-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  flex: none;
+}
+.ba-card-spec {
+  display: flex;
+  gap: 1.6rem;
+  margin: 0 0 0.9rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid #ece7dc;
+  border-bottom: 1px solid #ece7dc;
+}
+.ba-card-spec div { display: flex; flex-direction: column; }
+.ba-card-spec dt {
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+  color: var(--steel);
+}
+.ba-card-spec dd {
+  margin: 0.1rem 0 0;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+.ba-card-price {
+  margin: 0;
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: var(--carbon);
+}
+.ba-card-price span { font-size: 1rem; color: var(--steel); }
+
+/* ---------- Servis ---------- */
+.ba-servis-grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+}
+.ba-servis-lede {
+  max-width: 32rem;
+  color: #c9cfd6;
+  font-size: 1.06rem;
+}
+.ba-facts {
+  list-style: none;
+  margin: 1.8rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+.ba-facts li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 1rem 0 1rem 1rem;
+  border-left: 4px solid var(--marigold);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.ba-facts li:first-child { border-top: none; }
+.ba-fact-key {
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 1.05rem;
+}
+.ba-fact-val { color: #aab2bb; font-size: 0.94rem; }
+
+.ba-servis-card {
+  background: var(--chalk);
+  color: var(--carbon);
+  padding: clamp(1.5rem, 4vw, 2.2rem);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, var(--slash-cut) 100%, 0 calc(100% - var(--slash-cut)));
+}
+.ba-servis-card-title {
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  margin: 0 0 0.8rem;
+}
+.ba-address {
+  font-style: normal;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  margin-bottom: 1.4rem;
+}
+.ba-hours {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+.ba-hours p { margin: 0.15rem 0; font-size: 0.92rem; color: #4a525b; }
+.ba-hours-h {
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.78rem;
+  color: var(--battleship) !important;
+}
+.ba-phone {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-weight: 600;
+  color: var(--crimson);
+  text-decoration: none;
+}
+.ba-phone:hover { text-decoration: underline; }
+
+/* ---------- Responsive ---------- */
+@media (min-width: 720px) {
+  .ba-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 900px) {
+  .ba-hero-grid {
+    grid-template-columns: 1.35fr 0.9fr;
+    align-items: center;
+  }
+  .ba-grid { grid-template-columns: repeat(3, 1fr); }
+  .ba-servis-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: start;
+  }
+}
+@media (max-width: 520px) {
+  .ba-nav a:not(.ba-nav-call) { display: none; }
+}
+
+/* ---------- First-reveal motion (CSS-first) ---------- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .ba-card {
+      animation: ba-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 42%;
+    }
+  }
+}
+@keyframes ba-reveal {
+  from { opacity: 0; transform: translate3d(-14px, 26px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ba-card, .ba-btn, .ba-btn-ghost { transition: none; }
+  .ba-card:hover { transform: none; }
+}
