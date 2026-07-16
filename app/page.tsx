@@ -1,4 +1,49 @@
-import { PictoCar, PictoMoto, PictoWheel, PictoBadge } from "./_picto";
+function PictoCar() {
+  return (
+    <svg viewBox="0 0 48 48" fill="none" stroke="#f6f7f4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" role="img" aria-hidden="true">
+      <path d="M6 30v6a1 1 0 0 0 1 1h4v-3h26v3h4a1 1 0 0 0 1-1v-6" />
+      <path d="M6 30l3-9a4 4 0 0 1 3.8-2.7h22.4A4 4 0 0 1 39 21l3 9z" />
+      <path d="M6 30h36" />
+      <circle cx="14" cy="30" r="3" fill="#f5b525" stroke="none" />
+      <circle cx="34" cy="30" r="3" fill="#f5b525" stroke="none" />
+    </svg>
+  );
+}
+
+function PictoMoto() {
+  return (
+    <svg viewBox="0 0 48 48" fill="none" stroke="#f6f7f4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" role="img" aria-hidden="true">
+      <circle cx="11" cy="32" r="6" />
+      <circle cx="37" cy="32" r="6" />
+      <path d="M11 32l7-9h10l4 6" />
+      <path d="M18 23h12l3-6h5" />
+      <path d="M37 32l-6-9" />
+      <circle cx="11" cy="32" r="1.5" fill="#f5b525" stroke="none" />
+      <circle cx="37" cy="32" r="1.5" fill="#f5b525" stroke="none" />
+    </svg>
+  );
+}
+
+function PictoWheel() {
+  return (
+    <svg viewBox="0 0 48 48" fill="none" stroke="#f6f7f4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" role="img" aria-hidden="true">
+      <circle cx="24" cy="24" r="16" />
+      <circle cx="24" cy="24" r="5" fill="#f5b525" stroke="none" />
+      <path d="M24 29v9" />
+      <path d="M19.7 21.5L11.5 16.8" />
+      <path d="M28.3 21.5l8.2-4.7" />
+    </svg>
+  );
+}
+
+function PictoBadge() {
+  return (
+    <svg viewBox="0 0 48 48" fill="none" stroke="#f6f7f4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" role="img" aria-hidden="true">
+      <path d="M24 6l14 5v9c0 9-6 15-14 18-8-3-14-9-14-18v-9z" />
+      <path d="M17.5 24l4.5 4.5 9-9" stroke="#f5b525" />
+    </svg>
+  );
+}
 
 export default function Page() {
   return (
