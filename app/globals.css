@@ -1,0 +1,373 @@
+@import url('https://fonts.bunny.net/css2?family=bricolage-grotesque:400,600,700,800&family=hanken-grotesk:400,500,600,700&display=swap');
+
+:root {
+  --orange: #e2662a;
+  --foam: #f4e8cd;
+  --gold: #d89a3a;
+  --copper: #a4552a;
+  --malt: #1b1410;
+  --hop: #5d6a3a;
+  --band-pad: clamp(3.5rem, 9vw, 7rem);
+  --wrap: 74rem;
+  --seal: clamp(64px, 12vw, 92px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--malt);
+  color: var(--malt);
+  font-family: "Hanken Grotesk", system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  overflow-x: clip;
+}
+
+/* ---------- HERO / THE POUR ---------- */
+.hero {
+  position: relative;
+  isolation: isolate;
+  background: var(--malt);
+  color: var(--foam);
+  padding: clamp(4.5rem, 12vw, 8rem) 1.5rem clamp(5rem, 12vw, 8rem);
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero__pour {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(216, 154, 58, 0) 0%,
+    var(--gold) 26%,
+    var(--copper) 100%
+  );
+  animation: pour 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero__pour::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: var(--foam);
+  box-shadow: 0 6px 0 rgba(244, 232, 205, 0.35), 0 14px 22px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes pour {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+.hero__inner {
+  width: min(var(--wrap), 100%);
+  margin: 0 auto;
+  animation: rise 0.8s ease-out 0.9s both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero__eyebrow {
+  margin: 0 0 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: var(--foam);
+}
+
+.wordmark {
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(4.2rem, 20vw, 13rem);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.4rem;
+  color: var(--foam);
+  text-shadow: 0 3px 0 rgba(27, 20, 16, 0.28);
+}
+
+.hero__lead {
+  max-width: 42ch;
+  font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+  line-height: 1.5;
+  margin: 0 0 1.8rem;
+  color: #fbf3e0;
+}
+
+.hero__chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+}
+
+.hero__chips li {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.95rem;
+  border: 2px solid rgba(244, 232, 205, 0.7);
+  border-radius: 999px;
+  color: var(--foam);
+}
+
+/* ---------- SEAM / MEDALLION ---------- */
+.seam {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  margin: calc(var(--seal) / -2) 0;
+  pointer-events: none;
+}
+
+.seal {
+  width: var(--seal);
+  height: var(--seal);
+  filter: drop-shadow(0 6px 10px rgba(27, 20, 16, 0.35));
+}
+
+.seal--stamp {
+  animation: stamp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.35s both;
+}
+
+@keyframes stamp {
+  0% {
+    opacity: 0;
+    transform: scale(1.7) rotate(-16deg);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(0.92) rotate(4deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+/* ---------- BANDS ---------- */
+.band {
+  padding: calc(var(--band-pad) + var(--seal) / 2) 1.5rem;
+}
+
+.band__inner {
+  width: min(var(--wrap), 100%);
+  margin: 0 auto;
+}
+
+.band--cream {
+  background: var(--foam);
+  color: var(--malt);
+}
+
+.band--orange {
+  background: var(--orange);
+  color: var(--malt);
+}
+
+.band--hop {
+  background: var(--hop);
+  color: var(--foam);
+}
+
+.eyebrow {
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  margin: 0 0 0.9rem;
+  color: var(--copper);
+}
+
+.eyebrow--light {
+  color: #4a2c15;
+}
+
+.band__title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.1rem, 5.5vw, 3.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0 0 2.4rem;
+  max-width: 20ch;
+}
+
+.band__title--light {
+  color: var(--malt);
+}
+
+/* cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: clamp(1.2rem, 3vw, 2.2rem);
+}
+
+.card {
+  background: #fffaf0;
+  border: 2px solid var(--malt);
+  border-radius: 4px 22px 4px 22px;
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  box-shadow: 6px 6px 0 var(--copper);
+}
+
+.card__head {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin: 0 0 1.1rem;
+  color: var(--copper);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.list li {
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  background: var(--orange);
+  border: 2px solid var(--malt);
+}
+
+.list strong {
+  font-weight: 700;
+}
+
+/* prose + trust */
+.prose {
+  max-width: 60ch;
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  margin: 0 0 2.4rem;
+  color: #2c1a0e;
+}
+
+.trust {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0;
+  border-top: 2px solid var(--malt);
+}
+
+.trust li {
+  padding: 1.2rem 1.2rem 1.2rem 0;
+  border-bottom: 2px solid var(--malt);
+}
+
+.trust__k {
+  display: block;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--malt);
+}
+
+.trust__v {
+  display: block;
+  font-size: 0.98rem;
+  color: #3a2413;
+}
+
+/* ---------- scroll reveal (progressive, calm) ---------- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .band__inner {
+      animation: arrive linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 42%;
+    }
+  }
+}
+
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- focus ---------- */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--malt);
+  outline-offset: 3px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 600px) {
+  .hero {
+    min-height: 80vh;
+  }
+  .card {
+    box-shadow: 4px 4px 0 var(--copper);
+  }
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero__pour,
+  .hero__inner,
+  .seal--stamp,
+  .band__inner {
+    animation: none !important;
+  }
+}
