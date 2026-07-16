@@ -1,5 +1,3 @@
-import { Plate } from "./_ui";
-
 const services = [
   {
     n: "01",
@@ -22,6 +20,70 @@ const services = [
     lead: "Dobré vztahy stojí na důvěře, z důvěry pramení pochopení. To za vás budujeme s veřejností každý den.",
   },
 ];
+
+function Plate() {
+  return (
+    <svg
+      className="plate"
+      viewBox="0 0 600 440"
+      role="img"
+      aria-labelledby="plate-title plate-desc"
+    >
+      <title id="plate-title">Metabolický diagram značky</title>
+      <desc id="plate-desc">
+        Jedna žláza se čtyřmi vývody: identita, web, reklama a public relations.
+      </desc>
+
+      <g className="gland">
+        <path
+          className="gland__fill"
+          d="M70 250 C60 190 130 158 205 172 C265 183 320 205 372 208 C412 210 434 232 424 258 C408 292 352 292 300 281 C242 269 186 262 132 270 C96 275 78 292 70 250 Z"
+        />
+        <path
+          className="gland__duct"
+          d="M96 252 C170 240 262 240 344 240 C382 240 404 244 420 252"
+        />
+        <path className="gland__acinus" d="M140 232 q10 -14 20 0" />
+        <path className="gland__acinus" d="M186 236 q10 -14 20 0" />
+        <path className="gland__acinus" d="M232 236 q10 -14 20 0" />
+        <path className="gland__acinus" d="M278 236 q10 -14 20 0" />
+        <path className="gland__acinus" d="M324 236 q10 -14 20 0" />
+        <path className="gland__acinus" d="M162 258 q10 14 20 0" />
+        <path className="gland__acinus" d="M208 260 q10 14 20 0" />
+        <path className="gland__acinus" d="M254 260 q10 14 20 0" />
+        <path className="gland__acinus" d="M300 258 q10 14 20 0" />
+      </g>
+
+      <g className="callout c1">
+        <path className="leader" pathLength={1} d="M300 200 C360 140 430 96 508 82" />
+        <circle className="node" cx={508} cy={82} r={7} />
+        <text className="cl-num" x={524} y={72}>01</text>
+        <text className="cl-name" x={524} y={94}>Identita</text>
+      </g>
+
+      <g className="callout c2">
+        <path className="leader" pathLength={1} d="M344 224 C410 200 460 178 508 168" />
+        <circle className="node" cx={508} cy={168} r={7} />
+        <text className="cl-num" x={524} y={158}>02</text>
+        <text className="cl-name" x={524} y={180}>Web</text>
+      </g>
+
+      <g className="callout c3">
+        <path className="leader" pathLength={1} d="M360 258 C420 268 464 274 508 278" />
+        <circle className="node" cx={508} cy={278} r={7} />
+        <text className="cl-num" x={524} y={268}>03</text>
+        <text className="cl-name" x={524} y={290}>Reklama</text>
+      </g>
+
+      <g className="callout c4">
+        <path className="leader" pathLength={1} d="M300 278 C360 320 430 356 508 366" />
+        <circle className="node" cx={508} cy={366} r={7} />
+        <text className="cl-num" x={524} y={356}>04</text>
+        <text className="cl-name" x={524} y={378}>PR</text>
+      </g>
+    </svg>
+  );
+}
 
 export default function Page() {
   return (
