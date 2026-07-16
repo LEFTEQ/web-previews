@@ -1,4 +1,68 @@
-import { AntlerDefs, HeroAntler, CardAntler } from "./_ui";
+const ANTLER_PATH =
+  "M120 70C120 46 130 34 154 30M138 36C142 24 140 16 132 8M154 30C176 26 194 18 204 6M176 24C182 16 182 8 178 0M120 70C120 46 110 34 86 30M102 36C98 24 100 16 108 8M86 30C64 26 46 18 36 6M64 24C58 16 58 8 62 0";
+
+function AntlerDefs() {
+  return (
+    <svg
+      className="antler-defs"
+      viewBox="0 0 240 72"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <symbol id="antler" viewBox="0 0 240 72">
+        <path
+          d={ANTLER_PATH}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={6}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </symbol>
+    </svg>
+  );
+}
+
+function HeroAntler() {
+  return (
+    <svg
+      className="hero-antler"
+      viewBox="0 0 240 72"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        pathLength={1}
+        d={ANTLER_PATH}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={6}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CardAntler() {
+  return (
+    <svg
+      className="card-antler"
+      viewBox="0 0 240 72"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d={ANTLER_PATH}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={6}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 const specimens = [
   {
