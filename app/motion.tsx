@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 import type { ReactNode } from "react";
 
 export function HeroReveal({ children }: { children: ReactNode }) {
@@ -49,7 +49,7 @@ export function SpotlightPlate({
 }) {
   const reduce = useReducedMotion();
 
-  const frameVariants = reduce
+  const frameVariants: Variants | undefined = reduce
     ? undefined
     : {
         dark: { opacity: 0.18, filter: "brightness(0.4)" },
@@ -60,7 +60,7 @@ export function SpotlightPlate({
         }
       };
 
-  const capVariants = reduce
+  const capVariants: Variants | undefined = reduce
     ? undefined
     : {
         dark: { opacity: 0, y: 12 },
