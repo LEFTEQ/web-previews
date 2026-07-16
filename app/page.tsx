@@ -1,4 +1,4 @@
-import styles from "./globals.css";
+import "./globals.css";
 
 const materials = [
   {
