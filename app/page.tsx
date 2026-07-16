@@ -1,5 +1,3 @@
-import styles from "./page.module";
-
 // ——— data: the five services become the plan legend ———
 const legend = [
   {
