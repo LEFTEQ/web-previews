@@ -1,0 +1,415 @@
+@import url('https://fonts.bunny.net/css2?family=archivo:400,500,600,700&family=marcellus:400&display=swap');
+
+:root {
+  --granite: #22242a;
+  --slate: #454f59;
+  --travertin: #b1946b;
+  --marfil: #e7dcc6;
+  --brass: #927436;
+  --lichen: #6f7a67;
+
+  --ink: #22242a;
+  --paper: #ece4d3;
+
+  --display: "Marcellus", "Times New Roman", serif;
+  --body: "Archivo", system-ui, sans-serif;
+
+  --pad-x: clamp(1.25rem, 5vw, 5.5rem);
+  --section-y: clamp(4.5rem, 9vw, 8rem);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--granite);
+  -webkit-font-smoothing: antialiased;
+}
+
+.km { display: block; }
+
+a { color: inherit; }
+
+/* ---------- header ---------- */
+.km-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem var(--pad-x);
+  background: var(--granite);
+  border-bottom: 1px solid rgba(146, 116, 54, 0.35);
+}
+
+.km-mark {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 0.86;
+  text-decoration: none;
+  font-family: var(--display);
+  letter-spacing: 0.14em;
+}
+.km-mark__k { color: var(--marfil); font-size: 1.15rem; }
+.km-mark__p { color: var(--brass); font-size: 1.15rem; }
+
+.km-nav {
+  display: flex;
+  gap: clamp(0.9rem, 3vw, 2rem);
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 0.8rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.km-nav a {
+  text-decoration: none;
+  color: rgba(231, 220, 198, 0.72);
+  padding: 0.35rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.km-nav a:hover { color: var(--marfil); border-color: var(--brass); }
+
+/* ---------- incised lettering (signature) ---------- */
+.km-incised {
+  font-family: var(--display);
+  color: var(--marfil);
+  letter-spacing: 0.02em;
+  text-shadow:
+    -1px -1px 0 rgba(9, 10, 12, 0.85),
+    -2px -2px 1px rgba(0, 0, 0, 0.45),
+    1px 1px 0 rgba(146, 116, 54, 0.55),
+    2px 3px 5px rgba(0, 0, 0, 0.55);
+}
+
+.km-incised--dark {
+  color: #2c2f36;
+  text-shadow:
+    -1px -1px 0 rgba(255, 250, 240, 0.65),
+    1px 1px 0 rgba(146, 116, 54, 0.4),
+    2px 3px 4px rgba(34, 36, 42, 0.22);
+}
+
+/* ---------- hero ---------- */
+.km-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(3.5rem, 8vw, 7rem) var(--pad-x) clamp(4rem, 9vw, 8rem);
+  background:
+    radial-gradient(120% 90% at 15% 0%, #2b2e35 0%, var(--granite) 55%, #191b20 100%);
+}
+.km-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(94deg, rgba(255, 255, 255, 0.018) 0 2px, transparent 2px 5px);
+  pointer-events: none;
+}
+
+.km-hero__light {
+  position: absolute;
+  top: -50%;
+  left: 0;
+  width: 45%;
+  height: 200%;
+  background: linear-gradient(100deg, transparent, rgba(231, 220, 198, 0.16), transparent);
+  transform: translateX(-140%) rotate(4deg);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  animation: km-rake 2.1s cubic-bezier(0.22, 0.7, 0.2, 1) 0.15s both;
+}
+
+.km-eyebrow {
+  position: relative;
+  margin: 0 0 clamp(1.4rem, 4vw, 2.6rem);
+  font-size: 0.82rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--travertin);
+}
+
+.km-hero__title {
+  position: relative;
+  margin: 0;
+  font-weight: 400;
+  line-height: 0.94;
+}
+.km-hero__title .km-incised {
+  display: block;
+  font-size: clamp(3.3rem, 15vw, 11rem);
+}
+.km-hero__title .km-incised:last-child { color: var(--travertin); }
+.km-hero__title .km-incised:last-child {
+  text-shadow:
+    -1px -1px 0 rgba(9, 10, 12, 0.85),
+    1px 1px 0 rgba(231, 220, 198, 0.35),
+    2px 3px 5px rgba(0, 0, 0, 0.55);
+}
+
+.km-hero__lead {
+  position: relative;
+  max-width: 44ch;
+  margin: clamp(1.6rem, 4vw, 2.6rem) 0 0;
+  color: rgba(231, 220, 198, 0.82);
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+}
+
+.km-datum {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: clamp(2rem, 5vw, 3rem) 0 0;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(146, 116, 54, 0.4);
+}
+.km-datum__cut {
+  font-family: var(--display);
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  letter-spacing: 0.05em;
+  color: var(--marfil);
+}
+.km-datum__sub {
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--lichen);
+}
+
+/* ---------- shared section ---------- */
+.km-section {
+  padding: var(--section-y) var(--pad-x);
+}
+.km-section--light {
+  background:
+    linear-gradient(180deg, #efe7d6, #e4d9c3);
+  color: var(--ink);
+}
+.km-section--dark {
+  background:
+    radial-gradient(120% 80% at 85% 0%, #2c2f37, var(--granite) 60%, #191b20);
+  color: var(--marfil);
+}
+
+.km-head { max-width: 60ch; margin: 0 0 clamp(2.4rem, 6vw, 3.6rem); }
+.km-kicker {
+  margin: 0 0 0.9rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+.km-kicker--brass { color: var(--travertin); }
+.km-head h2 {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(2rem, 6vw, 3.6rem);
+  line-height: 1.02;
+}
+.km-head__note {
+  margin: 1.1rem 0 0;
+  max-width: 52ch;
+  color: #4c4436;
+}
+.km-head__note--dark { color: rgba(231, 220, 198, 0.72); }
+
+/* ---------- vzorník board ---------- */
+.km-board {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  gap: clamp(0.6rem, 1.4vw, 0.9rem);
+}
+.km-slab {
+  position: relative;
+  min-height: clamp(140px, 20vw, 200px);
+  padding: 1.2rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.3rem;
+  border-radius: 2px;
+  border: 1px solid rgba(34, 36, 42, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 10px 22px -14px rgba(34, 36, 42, 0.6);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.km-slab:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 18px 30px -16px rgba(34, 36, 42, 0.75);
+}
+.km-slab__name {
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+  letter-spacing: 0.015em;
+  line-height: 1.05;
+}
+.km-slab__stone {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.km-slab--granite {
+  background:
+    radial-gradient(140% 120% at 20% 10%, #34373f, #22242a 70%);
+}
+.km-slab--granite .km-slab__name {
+  color: var(--marfil);
+  text-shadow: -1px -1px 0 rgba(0,0,0,0.7), 1px 1px 0 rgba(146,116,54,0.5);
+}
+.km-slab--granite .km-slab__stone { color: var(--lichen); }
+
+.km-slab--slate {
+  background:
+    linear-gradient(150deg, #545e69, #3c454e 80%);
+}
+.km-slab--slate .km-slab__name {
+  color: #f1ead9;
+  text-shadow: -1px -1px 0 rgba(0,0,0,0.45), 1px 1px 0 rgba(0,0,0,0.3);
+}
+.km-slab--slate .km-slab__stone { color: rgba(231,220,198,0.7); }
+
+.km-slab--travertin {
+  background:
+    repeating-linear-gradient(88deg, #b79c74 0 7px, #ab8f66 7px 13px),
+    linear-gradient(#b99e75, #a98d63);
+}
+.km-slab--travertin .km-slab__name {
+  color: #3a2f1e;
+  text-shadow: 0 1px 0 rgba(255,246,228,0.5);
+}
+.km-slab--travertin .km-slab__stone { color: #5f4d31; }
+
+.km-slab--marfil {
+  background:
+    radial-gradient(130% 120% at 80% 0%, #f3ecdc, #e2d6bd 75%);
+}
+.km-slab--marfil .km-slab__name {
+  color: #514833;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+}
+.km-slab--marfil .km-slab__stone { color: #8a7a55; }
+
+/* ---------- realizace ---------- */
+.km-works {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+.km-work {
+  display: grid;
+  grid-template-columns: minmax(3rem, 5rem) 1fr;
+  gap: clamp(1rem, 3vw, 2.2rem);
+  padding: clamp(1.6rem, 4vw, 2.4rem) 0;
+  border-top: 1px solid rgba(146, 116, 54, 0.32);
+}
+.km-work:last-of-type { border-bottom: 1px solid rgba(146, 116, 54, 0.32); }
+.km-work__no {
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--brass);
+  letter-spacing: 0.05em;
+}
+.km-work__title {
+  margin: 0 0 0.6rem;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.35rem, 3.4vw, 2rem);
+  color: var(--marfil);
+  line-height: 1.05;
+}
+.km-work__place { color: var(--travertin); }
+.km-work__text {
+  margin: 0 0 1.1rem;
+  max-width: 60ch;
+  color: rgba(231, 220, 198, 0.78);
+}
+.km-work__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--marfil);
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--brass);
+  transition: gap 0.2s, color 0.2s;
+}
+.km-work__cta::after { content: "\2192"; }
+.km-work__cta:hover { gap: 0.85rem; color: var(--travertin); }
+
+.km-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 4vw, 3rem);
+  margin: clamp(2.4rem, 6vw, 3.4rem) 0 0;
+}
+.km-values span {
+  font-family: var(--display);
+  font-size: clamp(1rem, 2.4vw, 1.35rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--lichen);
+  text-shadow: -1px -1px 0 rgba(0,0,0,0.5), 1px 1px 0 rgba(146,116,54,0.35);
+}
+
+/* ---------- load reveal ---------- */
+.km-reveal {
+  animation: km-carve 0.75s cubic-bezier(0.22, 0.7, 0.2, 1) both;
+  animation-delay: calc(0.12s * var(--i, 0));
+}
+@keyframes km-carve {
+  from { opacity: 0; transform: translateY(0.4em); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes km-rake {
+  from { transform: translateX(-140%) rotate(4deg); }
+  to { transform: translateX(320%) rotate(4deg); }
+}
+
+/* ---------- focus ---------- */
+a:focus-visible {
+  outline: 3px solid var(--brass);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 560px) {
+  .km-work {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .km-work__no { font-size: 1.1rem; }
+  .km-nav a:nth-child(1),
+  .km-nav a:nth-child(2) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .km-reveal,
+  .km-hero__light {
+    animation: none !important;
+  }
+  .km-reveal { opacity: 1; transform: none; }
+  .km-hero__light { display: none; }
+  .km-slab { transition: none; }
+}
