@@ -1,0 +1,332 @@
+@import url('https://fonts.bunny.net/css2?family=Anton&family=Public+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --cobalt: #12428f;
+  --cobalt-deep: #0e356f;
+  --porcelain: #eef1f4;
+  --sky: #4a86c9;
+  --iron: #24272e;
+  --copper: #b5622f;
+  --signal: #c8352b;
+
+  --ink: #1b2330;
+  --ink-soft: #4a5568;
+
+  --plate-radius: clamp(14px, 3vw, 24px);
+  --section-pad: clamp(3.5rem, 9vw, 7rem);
+  --wrap: 1120px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(120% 80% at 50% -20%, #ffffff 0%, var(--porcelain) 55%, #e3e8ee 100%)
+      no-repeat;
+  color: var(--ink);
+  font-family: "Public Sans", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page { overflow-x: clip; }
+
+.section {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: var(--section-pad) clamp(1.25rem, 5vw, 3rem);
+}
+
+/* ——— Eyebrow / labels ——— */
+.eyebrow {
+  margin: 0 0 clamp(1.5rem, 4vw, 2.5rem);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+}
+.eyebrow .dot { margin: 0 0.5em; color: var(--copper); font-weight: 700; }
+
+/* ——— The enamel plaque (signature) ——— */
+.plaque {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: var(--plate-radius);
+  background:
+    linear-gradient(158deg, var(--sky) 0%, #235da8 26%, var(--cobalt) 62%, var(--cobalt-deep) 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -8px 22px rgba(0, 0, 0, 0.34),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 22px 55px -22px rgba(10, 30, 70, 0.6);
+}
+
+/* soft specular gloss layer (also the load sweep) */
+.gloss {
+  position: absolute;
+  inset: -20% -10%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.42) 46%,
+    rgba(255, 255, 255, 0.62) 50%,
+    rgba(255, 255, 255, 0.42) 54%,
+    transparent 70%
+  );
+  transform: translateX(-130%) skewX(-12deg);
+  opacity: 0;
+}
+
+/* chipped corner — dark iron substrate revealed */
+.chip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  width: clamp(46px, 9vw, 78px);
+  height: clamp(38px, 7vw, 60px);
+  background:
+    linear-gradient(135deg, #33373f 0%, var(--iron) 45%, #14161b 100%);
+  clip-path: polygon(0 100%, 0 26%, 20% 40%, 38% 14%, 55% 42%, 78% 22%, 100% 100%);
+  box-shadow: inset 1px -1px 0 rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+}
+
+/* Hero master plaque */
+.plaque-hero {
+  display: block;
+  padding: clamp(1.6rem, 5vw, 3rem) clamp(1.4rem, 5vw, 3.2rem)
+    clamp(1.9rem, 5.5vw, 3.4rem);
+}
+.wordmark {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  font-family: "Anton", "Public Sans", sans-serif;
+  font-weight: 400;
+  line-height: 0.86;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  color: var(--porcelain);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.18), 0 3px 6px rgba(0, 0, 0, 0.4);
+}
+.wordmark-1 { font-size: clamp(2.9rem, 13vw, 8.4rem); }
+.wordmark-2 {
+  font-size: clamp(2.9rem, 13vw, 8.4rem);
+  color: #cfe0f2;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.25);
+}
+
+.etymology {
+  margin: clamp(1.4rem, 4vw, 2.2rem) 0 0;
+  font-size: clamp(0.95rem, 2.4vw, 1.15rem);
+  color: var(--cobalt);
+  letter-spacing: 0.02em;
+}
+.etymology b { color: var(--iron); }
+
+.hero-sub {
+  max-width: 42ch;
+  margin: 1rem 0 0;
+  font-size: clamp(1.05rem, 2.6vw, 1.3rem);
+  color: var(--ink-soft);
+}
+.hero-sub b { color: var(--ink); }
+
+/* ——— Title plaques ——— */
+.plaque-title {
+  display: inline-block;
+  padding: clamp(0.7rem, 2.5vw, 1.1rem) clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+.plaque-title::before {
+  /* two rivets, left + right */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 15px 50%, rgba(0, 0, 0, 0.45) 1.6px, rgba(255, 255, 255, 0.25) 2.4px, transparent 3.2px),
+    radial-gradient(circle at calc(100% - 15px) 50%, rgba(0, 0, 0, 0.45) 1.6px, rgba(255, 255, 255, 0.25) 2.4px, transparent 3.2px);
+  pointer-events: none;
+}
+.plaque-title h2 {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  padding: 0 0.4em;
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 5vw, 2.7rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--porcelain);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+}
+
+/* ——— Services ——— */
+.service-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.4rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+.service { min-width: 0; }
+.plaque-sm {
+  display: inline-block;
+  padding: 0.55rem 1.2rem;
+  margin-bottom: 1rem;
+}
+.plaque-sm h3 {
+  position: relative;
+  z-index: 3;
+  margin: 0;
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.15rem, 3.4vw, 1.5rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--porcelain);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+.service p {
+  margin: 0;
+  color: var(--ink-soft);
+  border-left: 3px solid rgba(18, 66, 143, 0.25);
+  padding-left: 1rem;
+}
+.service-copper .plaque-sm {
+  background:
+    linear-gradient(158deg, #d98a54 0%, #c06e37 30%, var(--copper) 66%, #8f4a22 100%);
+}
+.service-copper p { border-left-color: rgba(181, 98, 47, 0.4); }
+
+/* ——— Trust ——— */
+.trust-grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 860px) {
+  .trust-grid { grid-template-columns: 1.4fr 1fr; align-items: start; }
+}
+.trust-copy p { margin: 0 0 1.2rem; max-width: 56ch; }
+.trust-copy p:first-child { font-size: clamp(1.1rem, 2.6vw, 1.3rem); color: var(--ink); }
+.trust-note {
+  font-size: 0.85rem !important;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cobalt) !important;
+}
+
+.badges {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+.badge {
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  background: linear-gradient(160deg, #ffffff, #dfe6ee);
+  border: 1px solid rgba(18, 66, 143, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--cobalt);
+}
+
+.info-card {
+  border-radius: var(--plate-radius);
+  background: #ffffff;
+  border: 1px solid rgba(18, 66, 143, 0.14);
+  box-shadow: 0 18px 44px -26px rgba(10, 30, 70, 0.5);
+  padding: clamp(1.4rem, 4vw, 2rem);
+}
+.info-title {
+  margin: 0 0 0.75rem;
+  font-family: "Public Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.info-title + .info-title, .hours + .info-title { margin-top: 1.6rem; }
+.hours { margin: 0; }
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(18, 66, 143, 0.1);
+}
+.hours-row:last-child { border-bottom: 0; }
+.hours dt { color: var(--ink-soft); }
+.hours dd { margin: 0; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+.contact { font-style: normal; line-height: 1.9; color: var(--ink-soft); }
+.contact a { color: var(--cobalt); text-decoration: none; font-weight: 600; }
+.contact a:hover { color: var(--signal); text-decoration: underline; }
+
+/* ——— Focus states ——— */
+a:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ——— Motion: one orchestrated load sweep, then stillness ——— */
+@keyframes sweep {
+  0%   { transform: translateX(-130%) skewX(-12deg); opacity: 0; }
+  10%  { opacity: 1; }
+  55%  { opacity: 1; }
+  100% { transform: translateX(210%) skewX(-12deg); opacity: 0; }
+}
+@keyframes chip-reveal {
+  from { opacity: 0; transform: translate(-6px, 6px) scale(0.6); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.plaque-hero .gloss { animation: sweep 1.7s cubic-bezier(0.33, 0, 0.2, 1) 0.45s 1 both; }
+.plaque-hero .chip { animation: chip-reveal 0.55s ease-out 1.75s both; }
+
+.eyebrow { animation: rise 0.6s ease-out 0.05s both; }
+.plaque-hero { animation: rise 0.7s ease-out 0.12s both; }
+.etymology { animation: rise 0.6s ease-out 0.9s both; }
+.hero-sub { animation: rise 0.6s ease-out 1.05s both; }
+
+/* hover gloss-shift — cursor as light source, cheap + static after */
+.plaque-sm { transition: filter 0.25s ease; }
+.service:hover .plaque-sm { filter: brightness(1.08); }
+.service:hover .plaque-sm .gloss { opacity: 0.6; transform: translateX(0) skewX(-12deg); transition: opacity 0.3s ease, transform 0.4s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  .plaque-hero .gloss { opacity: 0; }
+  .plaque-hero .chip { opacity: 1; transform: none; }
+}
