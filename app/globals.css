@@ -1,0 +1,376 @@
+@import url('https://fonts.bunny.net/css2?family=bricolage-grotesque:400,600,700,800&family=ibm-plex-sans:400,500,600&display=swap');
+
+:root {
+  --ink: #1b1e21;
+  --green: #1f3b31;
+  --green-hi: #274a3d;
+  --green-lo: #172c24;
+  --brass: #b1873a;
+  --brass-hi: #d8b978;
+  --brass-lo: #7c5e28;
+  --sage: #c6cbbb;
+  --enamel: #efece1;
+  --red: #b23a2e;
+
+  --plate-frame:
+    0 0 0 2px var(--brass),
+    0 0 0 4px rgba(0, 0, 0, 0.28),
+    0 7px 16px rgba(0, 0, 0, 0.32);
+  --plate-press:
+    0 0 0 2px var(--brass-hi),
+    0 0 0 4px rgba(0, 0, 0, 0.28),
+    0 2px 6px rgba(0, 0, 0, 0.32);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  color: var(--enamel);
+  background: var(--green);
+}
+
+.vd {
+  background:
+    radial-gradient(120% 80% at 50% -10%, var(--green-hi), var(--green) 46%, var(--green-lo) 100%);
+  overflow-x: clip;
+}
+
+/* faint painted-door seams — pure CSS, no image weight */
+.vd::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 148px,
+    rgba(0, 0, 0, 0.10) 148px,
+    rgba(0, 0, 0, 0.10) 150px
+  );
+  opacity: 0.5;
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 2.4rem, 66rem);
+  margin-inline: auto;
+}
+
+/* single source of section rhythm */
+.section { padding-block: clamp(3.5rem, 8vw, 6.5rem); position: relative; }
+.band {
+  background: linear-gradient(180deg, var(--ink), #14171a);
+  box-shadow: inset 0 2px 0 rgba(177, 135, 58, 0.4),
+    inset 0 -2px 0 rgba(177, 135, 58, 0.4);
+}
+
+/* ---------- shared plate ---------- */
+.plate {
+  position: relative;
+  background: linear-gradient(180deg, #f6f3ea, var(--enamel));
+  border-radius: 5px;
+  box-shadow: var(--plate-frame);
+  transition: transform 60ms ease, box-shadow 60ms ease;
+}
+.plate::after {
+  content: "";
+  position: absolute;
+  top: 0.72rem;
+  right: 0.72rem;
+  width: 0.66rem;
+  height: 0.66rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, var(--brass-hi), var(--brass) 58%, var(--brass-lo));
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.55), 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+.plate:hover { transform: translateY(1px); box-shadow: var(--plate-press); }
+
+/* ---------- eyebrow ---------- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1.1rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brass-hi);
+}
+.eyebrow .dot {
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, var(--brass-hi), var(--brass) 60%, var(--brass-lo));
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 0 0 2px rgba(0, 0, 0, 0.35);
+  flex: none;
+}
+
+/* ---------- hero ---------- */
+.hero-inner { display: flex; flex-direction: column; align-items: flex-start; }
+
+.board {
+  align-self: stretch;
+  background: linear-gradient(180deg, var(--green-hi), var(--green-lo));
+  border-radius: 12px;
+  padding: clamp(0.85rem, 3vw, 1.6rem);
+  box-shadow:
+    0 0 0 3px var(--brass),
+    0 0 0 6px rgba(0, 0, 0, 0.45),
+    0 26px 55px rgba(0, 0, 0, 0.4);
+}
+
+.nameplate--title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.7rem;
+  padding: clamp(1.4rem, 5vw, 2.4rem) 1rem;
+  margin-bottom: clamp(0.85rem, 3vw, 1.6rem);
+  background: linear-gradient(180deg, #f6f3ea, var(--enamel));
+  border-radius: 5px;
+  box-shadow: var(--plate-frame);
+}
+.wordmark {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.6rem, 11vw, 5.6rem);
+  line-height: 0.9;
+  letter-spacing: -0.015em;
+  color: var(--green);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75), 0 -1px 0 rgba(0, 0, 0, 0.14);
+}
+.wordmark-sub {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--brass-lo);
+  padding-top: 0.7rem;
+  border-top: 2px solid rgba(177, 135, 58, 0.5);
+}
+
+.stat-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.7rem, 2.4vw, 1rem);
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: clamp(0.9rem, 3vw, 1.3rem);
+  animation: slot-in 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+.stat:nth-child(1) { animation-delay: 0.05s; }
+.stat:nth-child(2) { animation-delay: 0.17s; }
+.stat:nth-child(3) { animation-delay: 0.29s; }
+.stat:nth-child(4) { animation-delay: 0.41s; }
+.stat-num {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 7vw, 3.2rem);
+  line-height: 1;
+  color: var(--green);
+  font-variant-numeric: tabular-nums;
+}
+.stat-suffix { color: var(--brass); margin-left: 0.06em; }
+.stat-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #55655a;
+  max-width: 15ch;
+}
+
+@keyframes slot-in {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.lede {
+  max-width: 42ch;
+  margin: clamp(1.6rem, 4vw, 2.2rem) 0 1.6rem;
+  font-size: clamp(1.05rem, 2.4vw, 1.28rem);
+  line-height: 1.55;
+  color: var(--sage);
+}
+
+.actions { display: flex; flex-wrap: wrap; gap: 0.9rem; align-items: center; }
+.buzzer {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(180deg, #c8463a, var(--red));
+  box-shadow:
+    0 0 0 2px #7c2820,
+    0 0 0 4px var(--brass),
+    0 5px 12px rgba(0, 0, 0, 0.38);
+  transition: transform 60ms ease, box-shadow 60ms ease;
+}
+.buzzer-led {
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffd2ca, #ff6a58 55%, #b23a2e);
+  box-shadow: 0 0 8px 1px rgba(255, 120, 100, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+.buzzer:hover { transform: translateY(1px); box-shadow: 0 0 0 2px #7c2820, 0 0 0 4px var(--brass-hi), 0 2px 6px rgba(0, 0, 0, 0.38); }
+.ghost {
+  color: var(--brass-hi);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-bottom: 2px solid rgba(177, 135, 58, 0.55);
+  padding-bottom: 2px;
+}
+.ghost:hover { border-bottom-color: var(--brass-hi); }
+
+/* ---------- section heads ---------- */
+.section-head { max-width: 44ch; margin-bottom: clamp(2rem, 5vw, 3rem); }
+.section-title {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.85rem, 5.5vw, 3rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.9rem;
+  color: var(--enamel);
+}
+.section-sub { margin: 0; font-size: 1.05rem; line-height: 1.6; color: var(--sage); }
+
+/* ---------- services ---------- */
+.service-list { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(0.9rem, 2.5vw, 1.3rem); }
+.service {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1rem, 3vw, 1.8rem);
+  align-items: start;
+  padding: clamp(1.2rem, 3.5vw, 1.8rem);
+}
+.svc-num {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.2rem, 7vw, 3.4rem);
+  line-height: 0.9;
+  color: var(--brass);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+.svc-body { min-width: 0; }
+.svc-title {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin: 0.2rem 0 0.55rem;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+.svc-body p { margin: 0 0 0.9rem; color: #3a4a40; line-height: 1.6; font-size: 1.02rem; }
+.svc-tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brass-lo);
+  padding: 0.35rem 0.7rem;
+  border: 2px solid rgba(177, 135, 58, 0.5);
+  border-radius: 4px;
+}
+
+/* ---------- references ---------- */
+.prop-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: clamp(0.7rem, 2vw, 1rem);
+  margin: 0 0 clamp(1.6rem, 4vw, 2.4rem);
+}
+.prop {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1.05rem 1.15rem;
+}
+.prop-name {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.18rem;
+  color: var(--green);
+  padding-right: 1.3rem;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+.prop-meta { font-size: 0.95rem; color: #4a5a50; }
+.prop-since {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brass-lo);
+  margin-top: 0.2rem;
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: clamp(0.8rem, 2.4vw, 1.1rem);
+}
+.quote { grid-column: 1 / -1; padding: clamp(1.3rem, 4vw, 2rem); }
+.quote p {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  line-height: 1.35;
+  color: var(--green);
+  margin: 0 0 0.9rem;
+}
+.quote cite { font-style: normal; font-size: 0.85rem; color: var(--brass-lo); font-weight: 600; letter-spacing: 0.04em; }
+.assure { padding: 1.2rem 1.3rem; }
+.assure-head {
+  display: block;
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.02rem;
+  letter-spacing: 0.02em;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+}
+.assure p { margin: 0; color: #3a4a40; line-height: 1.55; font-size: 0.98rem; }
+
+/* ---------- focus ---------- */
+a:focus-visible {
+  outline: 3px solid var(--brass-hi);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 30rem) {
+  .service { grid-template-columns: 1fr; gap: 0.5rem; }
+  .plate::after { top: 0.6rem; right: 0.6rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stat { animation: none; }
+  .plate, .buzzer { transition: none; }
+}
