@@ -1,0 +1,409 @@
+@import url('https://fonts.bunny.net/css2?family=space-grotesk:400,500,600,700&family=ibm-plex-sans:400,500,600&display=swap');
+
+:root {
+  --noc: #16233f;
+  --proud: #16b6b0;
+  --kremen: #eef0ef;
+  --gilt: #c39a49;
+  --signal: #3ee6d6;
+  --uhel: #10141c;
+
+  --display: "Space Grotesk", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, sans-serif;
+
+  --section-pad: clamp(4.5rem, 9vw, 8rem);
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  --maxw: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--kremen);
+  color: var(--uhel);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  overflow-x: clip;
+}
+
+:focus-visible {
+  outline: 3px solid var(--proud);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Proud current lines (signature) ---------- */
+.proud {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.proud .pl {
+  fill: none;
+  stroke: var(--proud);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  opacity: 0.55;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 900ms cubic-bezier(0.33, 0, 0.2, 1) forwards;
+}
+.proud .pl3 {
+  stroke: var(--signal);
+  stroke-width: 1.8;
+  opacity: 0.85;
+}
+.proud .pl2 { animation-delay: 90ms; }
+.proud .pl3 { animation-delay: 180ms; }
+.proud .pl4 { animation-delay: 270ms; opacity: 0.4; }
+.proud .pl5 { animation-delay: 360ms; opacity: 0.3; }
+
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Slow, GPU-cheap resting drift — no layout shift */
+@supports (animation-timeline: scroll()) {
+  .proud-group {
+    animation: drift linear both;
+    animation-timeline: scroll(root);
+    will-change: transform;
+  }
+}
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-46px, 14px, 0); }
+}
+
+.divider {
+  display: block;
+  width: 200px;
+  height: 20px;
+  margin: 0 0 1.4rem;
+}
+.divider path {
+  fill: none;
+  stroke: var(--proud);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  background:
+    radial-gradient(120% 90% at 82% 0%, #1d3155 0%, var(--noc) 55%, var(--uhel) 100%);
+  color: var(--kremen);
+  padding: clamp(1.1rem, 3vw, 1.6rem) var(--gutter) clamp(4rem, 8vw, 6.5rem);
+  overflow: hidden;
+}
+
+.hero-bar {
+  position: relative;
+  z-index: 1;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: clamp(3rem, 9vw, 6rem);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5ch;
+  font-family: var(--display);
+}
+.wordmark-mark {
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.12em;
+  color: var(--kremen);
+  border-bottom: 3px solid var(--proud);
+  padding-bottom: 2px;
+}
+.wordmark-sub {
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gilt);
+}
+.hero-locale {
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(238, 240, 239, 0.6);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+
+.eyebrow {
+  margin: 0 0 1.2rem;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gilt);
+}
+
+.hero-title {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(2.9rem, 10vw, 6.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: var(--kremen);
+}
+.flow {
+  color: var(--signal);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.lede {
+  margin: clamp(1.6rem, 4vw, 2.4rem) 0 0;
+  max-width: 46ch;
+  font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+  line-height: 1.55;
+  color: rgba(238, 240, 239, 0.86);
+}
+
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+  margin: clamp(2.6rem, 6vw, 3.6rem) 0 0;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(62, 230, 214, 0.28);
+}
+.stat dt {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(238, 240, 239, 0.55);
+}
+.stat dd {
+  margin: 0.25rem 0 0;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-variant-numeric: tabular-nums;
+  color: var(--proud);
+}
+
+/* ---------- Section head shared ---------- */
+.section-head {
+  max-width: 60ch;
+  margin: 0 auto clamp(2.6rem, 6vw, 4rem);
+}
+.section-label {
+  margin: 0 0 1.2rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gilt);
+}
+.section-label-light { color: var(--signal); }
+.section-title {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 5vw, 3.1rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--noc);
+}
+.section-title-light { color: var(--kremen); }
+.section-intro {
+  margin: 1.2rem 0 0;
+  font-size: 1.08rem;
+  color: #384358;
+}
+.section-intro-light { color: rgba(238, 240, 239, 0.82); }
+
+/* ---------- Services (craft-catalog) ---------- */
+.services {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--section-pad) var(--gutter);
+}
+.card-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 1px;
+  background: rgba(22, 35, 63, 0.14);
+  border: 1px solid rgba(22, 35, 63, 0.14);
+}
+.card {
+  position: relative;
+  background: var(--kremen);
+  padding: clamp(1.6rem, 3vw, 2.3rem);
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+}
+.card-num {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.1em;
+  color: var(--proud);
+}
+.card-title {
+  margin: 0.9rem 0 0.7rem;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.28rem;
+  color: var(--noc);
+  width: max-content;
+  max-width: 100%;
+  padding-bottom: 3px;
+  background-image: linear-gradient(var(--proud), var(--proud));
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 120ms ease;
+}
+.card:hover .card-title,
+.card:focus-within .card-title {
+  background-size: 100% 2px;
+}
+.card-body {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: #3a4457;
+}
+
+/* ---------- Team + trust ---------- */
+.team {
+  position: relative;
+  background: var(--noc);
+  color: var(--kremen);
+  overflow: hidden;
+}
+.proud-team .pl { opacity: 0.22; }
+.proud-team .pl3 { opacity: 0.4; }
+.team-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--section-pad) var(--gutter);
+}
+
+.roster {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(62, 230, 214, 0.22);
+}
+.roster-row {
+  display: grid;
+  grid-template-columns: 3ch minmax(9rem, 15rem) 1fr;
+  gap: clamp(0.8rem, 3vw, 2rem);
+  align-items: baseline;
+  padding: clamp(1.05rem, 2.5vw, 1.5rem) 0;
+  border-bottom: 1px solid rgba(62, 230, 214, 0.22);
+}
+.roster-idx {
+  font-family: var(--display);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  color: var(--proud);
+  font-size: 0.9rem;
+}
+.roster-role {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.1rem, 2.6vw, 1.4rem);
+  color: var(--kremen);
+}
+.roster-note {
+  color: rgba(238, 240, 239, 0.7);
+  font-size: 0.98rem;
+}
+.roster-open .roster-role { color: var(--gilt); }
+.roster-open .roster-idx { color: var(--gilt); }
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: clamp(1.4rem, 3vw, 2.2rem);
+  margin-top: clamp(3rem, 7vw, 4.5rem);
+}
+.pillar {
+  padding-top: 1.3rem;
+  border-top: 3px solid var(--proud);
+}
+.pillar-k {
+  margin: 0 0 0.5rem;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--signal);
+}
+.pillar-v {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: rgba(238, 240, 239, 0.82);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 620px) {
+  .roster-row {
+    grid-template-columns: 3ch 1fr;
+  }
+  .roster-note {
+    grid-column: 2;
+  }
+  .hero-bar {
+    padding-bottom: 2.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proud .pl {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .proud-group {
+    animation: none;
+  }
+  .card-title {
+    transition: none;
+  }
+}
