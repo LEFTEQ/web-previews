@@ -26,12 +26,12 @@ const cornerV = {
 const focusV = {
   hidden: { filter: "blur(11px)", opacity: 0 },
   show: { filter: "blur(0px)", opacity: 1, transition: { duration: 0.7, ease: "easeOut" } },
-};
+} as const;
 
 const plainV = {
   hidden: { opacity: 0, y: 12 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
+} as const;
 
 export function Frame({
   children,
