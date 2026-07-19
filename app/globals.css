@@ -1,0 +1,271 @@
+@import url('https://fonts.bunny.net/css2?family=inter:400,500,600&family=syne:600,700,800&display=swap');
+
+:root {
+  --kaolin: #ece7dd;
+  --biscuit: #c8c0b3;
+  --celadon: #94a99b;
+  --cobalt: #234a86;
+  --grout: #33363b;
+  --joint: 2px;
+  --pad: clamp(1.15rem, 2.6vw, 2.1rem);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--kaolin);
+  color: var(--grout);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- The laid field: page = one continuous tile wall ---------- */
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: var(--joint);
+  background: var(--grout);
+  display: flex;
+  flex-direction: column;
+  gap: var(--joint);
+}
+
+.hero,
+.svc,
+.team {
+  display: grid;
+  gap: var(--joint);
+  grid-template-columns: 1fr;
+}
+
+.cell {
+  background: var(--kaolin);
+  padding: var(--pad);
+  min-width: 0;
+}
+
+/* ---------- Type ---------- */
+.display,
+.heading,
+.wm,
+.tile-name,
+.m-name,
+.cta-main {
+  font-family: "Syne", system-ui, sans-serif;
+}
+
+.eyebrow,
+.cta-eyebrow,
+.tile-tag,
+.sw-code,
+.m-role,
+.wm-sub {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+}
+
+.eyebrow { color: var(--cobalt); margin: 0 0 1rem; }
+
+.wm {
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(1.5rem, 3.2vw, 2rem);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--grout);
+}
+.wm span { color: var(--cobalt); }
+.wm-sub { margin: 0.55rem 0 0; color: #6b6a63; letter-spacing: 0.14em; }
+
+.display {
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 7vw, 5.4rem);
+  line-height: 0.94;
+  letter-spacing: -0.015em;
+}
+
+.heading {
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(1.7rem, 4vw, 2.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+.joint-line {
+  display: block;
+  height: 2px;
+  width: 4.5rem;
+  margin-top: clamp(1.2rem, 3vw, 2rem);
+  background: var(--cobalt);
+}
+
+.lede { margin: 0; font-size: clamp(1rem, 1.5vw, 1.12rem); max-width: 42ch; }
+
+/* ---------- Hero cells ---------- */
+.c-head { display: flex; flex-direction: column; justify-content: center; }
+.c-mark { display: flex; flex-direction: column; justify-content: center; }
+.c-lede { display: flex; align-items: flex-end; }
+
+.c-cta {
+  background: var(--cobalt);
+  color: var(--kaolin);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+.c-cta:hover { background: #1b3a6b; }
+.cta-eyebrow { color: var(--celadon); }
+.cta-main { font-weight: 700; font-size: clamp(1.35rem, 2.6vw, 1.9rem); line-height: 1.05; }
+.cta-meta { font-size: 0.82rem; opacity: 0.85; }
+
+.c-note { background: var(--grout); color: var(--kaolin); display: flex; align-items: center; }
+.c-note p { margin: 0; font-size: 0.94rem; }
+
+/* ---------- Swatches (specular glaze sweep) ---------- */
+.swatch {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 150px;
+}
+.swatch::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 32%,
+    rgba(255, 255, 255, 0.32) 48%,
+    rgba(255, 255, 255, 0.05) 56%,
+    transparent 70%
+  );
+  transform: translateX(-125%);
+  transition: transform 1.1s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.swatch:hover::after,
+.swatch:focus-within::after { transform: translateX(125%); }
+
+.sw-name { font-family: "Syne", sans-serif; font-weight: 700; font-size: 1.15rem; }
+.sw-code { margin-top: 0.3rem; opacity: 0.8; }
+
+.sw-celadon { background: var(--celadon); color: var(--grout); }
+.sw-cobalt { background: var(--cobalt); color: var(--kaolin); }
+.sw-cobalt .sw-code { color: var(--celadon); opacity: 1; }
+.sw-biscuit { background: var(--biscuit); color: var(--grout); }
+
+/* ---------- Section 1: nabídka ---------- */
+.tile { min-height: 210px; justify-content: flex-start; gap: 0.65rem; }
+.tile-tag { color: inherit; opacity: 0.7; }
+.tile-name { margin: 0.2rem 0 0; font-weight: 700; font-size: clamp(1.25rem, 2vw, 1.55rem); }
+.tile-desc { margin: auto 0 0; font-size: 0.92rem; }
+
+.t-celadon { background: var(--celadon); color: var(--grout); }
+.t-cobalt { background: var(--cobalt); color: var(--kaolin); }
+.t-cobalt .tile-tag { opacity: 0.85; color: var(--celadon); }
+.t-biscuit { background: var(--biscuit); color: var(--grout); }
+.t-graphite { background: var(--grout); color: var(--kaolin); }
+
+.s-intro p { margin: 0; max-width: 46ch; }
+.s-intro { display: flex; align-items: center; }
+
+/* ---------- Section 2: tým ---------- */
+.t-note { background: var(--biscuit); }
+.t-note p { margin: 0; font-size: 0.95rem; }
+.t-note a { color: var(--cobalt); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+
+.member { min-height: 170px; display: flex; flex-direction: column; }
+.m-name { margin: 0; font-weight: 700; font-size: 1.2rem; }
+.m-role { margin: 0.35rem 0 0; color: var(--cobalt); }
+.m-bio { margin: 0.9rem 0 0; font-size: 0.92rem; }
+
+/* ---------- Responsive grids ---------- */
+@media (min-width: 640px) {
+  .hero { grid-template-columns: 1fr 1fr; }
+  .svc, .team { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 980px) {
+  .hero {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto 1fr 1fr auto;
+    grid-template-areas:
+      "mark  mark  glaze  cobalt"
+      "head  head  head   bisc"
+      "head  head  head   note"
+      "lede  lede  cta    cta";
+  }
+  .c-mark { grid-area: mark; }
+  .c-head { grid-area: head; }
+  .c-lede { grid-area: lede; }
+  .c-cta { grid-area: cta; }
+  .sw-celadon { grid-area: glaze; }
+  .sw-cobalt { grid-area: cobalt; }
+  .sw-biscuit { grid-area: bisc; }
+  .c-note { grid-area: note; }
+
+  .svc {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+      "sh sh si si"
+      "t1 t2 t3 t4";
+  }
+  .s-head { grid-area: sh; }
+  .s-intro { grid-area: si; }
+
+  .team {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+      "th th tn tn"
+      "m1 m2 m3 m4";
+  }
+  .t-head { grid-area: th; }
+  .t-note { grid-area: tn; }
+  .m1 { grid-area: m1; }
+  .m2 { grid-area: m2; }
+  .m3 { grid-area: m3; }
+  .m4 { grid-area: m4; }
+}
+
+/* ---------- Motion: the laid field assembles ---------- */
+@keyframes lay {
+  from { opacity: 0; transform: translateY(10px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+.hero .cell {
+  animation: lay 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--d, 0) * 90ms + 120ms);
+}
+
+/* ---------- Focus & reduced motion ---------- */
+a:focus-visible,
+.c-cta:focus-visible {
+  outline: 3px solid var(--cobalt);
+  outline-offset: 3px;
+}
+.c-cta:focus-visible,
+.c-note a:focus-visible,
+.t-note a:focus-visible {
+  outline-color: var(--grout);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .cell { animation: none; }
+  .swatch::after { transition: none; }
+  * { scroll-behavior: auto; }
+}
