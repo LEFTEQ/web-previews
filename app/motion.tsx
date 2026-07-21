@@ -1,15 +1,15 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 
 const EASE = [0.2, 0.8, 0.2, 1] as const;
 
-const standardV = {
+const standardV: Variants = {
   hidden: { scaleY: 0 },
   build: { scaleY: 1, transition: { duration: 0.42, ease: EASE } },
 };
 
-const ledgerV = {
+const ledgerV: Variants = {
   hidden: { scaleX: 0 },
   build: {
     scaleX: 1,
@@ -17,7 +17,7 @@ const ledgerV = {
   },
 };
 
-const braceV = {
+const braceV: Variants = {
   hidden: { pathLength: 0, opacity: 0 },
   build: {
     pathLength: 1,
@@ -26,7 +26,7 @@ const braceV = {
   },
 };
 
-const dotV = {
+const dotV: Variants = {
   hidden: { scale: 0 },
   build: {
     scale: 1,
