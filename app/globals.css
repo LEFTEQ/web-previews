@@ -1,0 +1,448 @@
+@import url('https://fonts.bunny.net/css2?family=space-grotesk:400,500,600,700&family=ibm-plex-sans:400,500,600&display=swap');
+
+:root {
+  --ink: #17222e;
+  --granite: #6f7880;
+  --green: #23694a;
+  --red: #c8402f;
+  --paper: #eef1ea;
+  --brass: #a98a4b;
+
+  --line: rgba(23, 34, 46, 0.09);
+  --display: "Space Grotesk", "IBM Plex Sans", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, sans-serif;
+
+  --gap-section: clamp(3.5rem, 8vw, 6.5rem);
+  --pad-x: clamp(1.15rem, 5vw, 3rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background-color: var(--paper);
+  /* the ruled ledger paper */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 33px,
+    var(--line) 33px,
+    var(--line) 34px
+  );
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+  /* red-pen margin rule of a ledger */
+  border-left: 2px solid rgba(200, 64, 47, 0.28);
+}
+
+@media (max-width: 640px) {
+  .wrap {
+    border-left-width: 1px;
+  }
+}
+
+/* ---------- signature: the double-rule total line ---------- */
+.doublerule {
+  height: 4px;
+  border-top: 1px solid var(--brass);
+  border-bottom: 3px solid var(--brass);
+  width: 100%;
+}
+
+.doublerule--draw {
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: draw 0.75s cubic-bezier(0.16, 1, 0.3, 1) 1.55s forwards;
+}
+
+@keyframes draw {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------- masthead ---------- */
+.masthead {
+  padding-top: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.9rem;
+}
+
+.brand-mark {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  letter-spacing: 0.02em;
+}
+
+.brand-sub {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--granite);
+}
+
+.brand-rule {
+  margin-top: 0.7rem;
+}
+
+/* ---------- single-source section spacing ---------- */
+.section {
+  padding-block: var(--gap-section);
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--green);
+  font-weight: 600;
+  margin: 0 0 1.1rem;
+}
+
+.section-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.85rem, 5vw, 3.1rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.9rem;
+}
+
+.section-lede {
+  max-width: 46ch;
+  color: var(--granite);
+  margin: 0 0 2.3rem;
+}
+
+/* ---------- hero ---------- */
+.hero {
+  padding-top: clamp(2.2rem, 6vw, 3.5rem);
+}
+
+.hero-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(2.7rem, 9.5vw, 6.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  margin: 0.4rem 0 0;
+  text-wrap: balance;
+}
+
+.is-green {
+  color: var(--green);
+}
+
+.hero-headrule {
+  margin: 1.4rem 0 1.6rem;
+}
+
+.hero-lede {
+  max-width: 54ch;
+  font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+  margin: 0 0 2.8rem;
+}
+
+.tally {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 4vw, 2.5rem);
+  margin: 0;
+}
+
+.tally-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.tally-num {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(2.8rem, 9vw, 5.4rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.tally-label {
+  margin: 0.7rem 0 0;
+  font-size: 0.9rem;
+  color: var(--granite);
+  line-height: 1.35;
+  max-width: 22ch;
+}
+
+.hero-balance {
+  margin-top: 2.2rem;
+}
+
+.balance-caption {
+  font-family: var(--display);
+  color: var(--brass);
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  margin: 0.55rem 0 0;
+}
+
+.hero-figure {
+  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+  border-top: 1px solid var(--brass);
+  border-bottom: 3px solid var(--brass);
+  padding: 6px 0;
+}
+
+.hero-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+}
+
+/* ---------- ledger of services ---------- */
+.ledger {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ledger-row {
+  display: flex;
+  gap: clamp(0.9rem, 3vw, 1.6rem);
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.ledger-row:first-child {
+  border-top: 1px solid var(--line);
+}
+
+.ledger-idx {
+  font-family: var(--display);
+  font-variant-numeric: tabular-nums;
+  color: var(--brass);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding-top: 0.35rem;
+  min-width: 1.8em;
+}
+
+.ledger-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.ledger-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.ledger-name {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+  letter-spacing: -0.01em;
+}
+
+.ledger-leader {
+  flex: 1;
+  border-bottom: 1px dotted var(--granite);
+  transform: translateY(-0.2em);
+  min-width: 1.5rem;
+}
+
+.ledger-figure {
+  font-family: var(--display);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+  text-align: right;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.ledger-unit {
+  color: var(--granite);
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 0.85em;
+}
+
+.ledger-note {
+  display: block;
+  color: var(--granite);
+  font-size: 0.94rem;
+  margin-top: 0.35rem;
+  max-width: 52ch;
+}
+
+/* ---------- total line ---------- */
+.total {
+  margin-top: 1.8rem;
+}
+
+.total-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  margin-top: 0.75rem;
+}
+
+.total-eq {
+  font-family: var(--display);
+  color: var(--brass);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.total-label {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+  flex: 1;
+}
+
+.total-figure {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+  color: var(--green);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ---------- trust ---------- */
+.trust-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 5vw, 3rem);
+  align-items: start;
+}
+
+.trust-figure {
+  margin: 0;
+  border-top: 1px solid var(--brass);
+  border-bottom: 3px solid var(--brass);
+  padding: 6px 0;
+}
+
+.trust-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+}
+
+.trust-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.trust-points li {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 1.02rem;
+}
+
+.trust-points li:first-child {
+  padding-top: 0;
+}
+
+.tp-k {
+  font-family: var(--display);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.refs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.2rem, 4vw, 2.2rem);
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+
+.ref {
+  margin: 0;
+  padding-left: 1.1rem;
+  border-left: 3px solid var(--brass);
+}
+
+.ref p {
+  font-size: 1.08rem;
+  margin: 0 0 0.7rem;
+}
+
+.ref cite {
+  font-style: normal;
+  color: var(--granite);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- focus ---------- */
+a:focus-visible,
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 760px) {
+  .tally {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+  .tally-item {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .tally-num {
+    min-width: 3.2ch;
+  }
+  .tally-label {
+    margin-top: 0;
+  }
+  .trust-grid,
+  .refs {
+    grid-template-columns: 1fr;
+  }
+  .trust-img {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 480px) {
+  .ledger-note {
+    font-size: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .doublerule--draw {
+    animation: none;
+    transform: scaleX(1);
+  }
+}
