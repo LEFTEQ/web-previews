@@ -1,0 +1,553 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sterka: #d9d4cc;
+  --color-beton: #4a4743;
+  --color-grafit: #1f1e1c;
+  --color-dub: #b07a45;
+  --color-orech: #5c3b26;
+  --color-vapno: #f4f1ec;
+  --color-ardex: #c8102e;
+  --font-display: "Fraunces Variable", "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Instrument Sans", "Segoe UI", Roboto, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+
+:root {
+  /* Motion tokens (transitions.dev) */
+  --duration-stagger: 40ms;
+  --duration-micro: 80ms;
+  --duration-quick: 150ms;
+  --duration-fast: 250ms;
+  --duration-medium: 350ms;
+  --duration-slow: 400ms;
+  --duration-very-slow: 500ms;
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: ease-in-out;
+  --ease-out: ease-out;
+  --ease-linear: linear;
+  --distance-medium: 12px;
+  --blur-small: 2px;
+  --blur-medium: 3px;
+
+  /* Texts reveal – ladění podle briefu (12px, 3px blur, 500ms in-out, 80ms stagger) */
+  --stagger-dur: var(--duration-very-slow);
+  --stagger-distance: var(--distance-medium);
+  --stagger-stagger: var(--duration-micro);
+  --stagger-blur: var(--blur-medium);
+  --stagger-ease: var(--ease-in-out);
+
+  /* Accordion */
+  --acc-expand: 250ms;
+  --acc-collapse: 250ms;
+  --acc-chevron: 250ms;
+  --acc-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Learn more hover */
+  --learn-shift: 2px;
+  --learn-spread: 8deg;
+  --learn-in: 350ms;
+  --learn-out: 350ms;
+  --learn-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Trowel sweep (vlastní) */
+  --sweep-dur: 1400ms;
+
+  /* Pevné lišty */
+  --header-h: 4rem;
+  --bar-h: calc(4rem + env(safe-area-inset-bottom, 0px));
+
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (min-width: 768px) {
+  :root { --bar-h: 0px; }
+}
+
+@layer base {
+  html {
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+    scroll-padding-bottom: calc(var(--bar-h) + 1rem);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background-color: var(--color-sterka);
+    color: var(--color-beton);
+    font-family: var(--font-sans);
+    padding-bottom: var(--bar-h);
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Jemná textura stěrky přes celou stránku (3 %) */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 70;
+    background-image: var(--noise);
+    opacity: 0.03;
+  }
+  h1, h2, h3 {
+    color: var(--color-grafit);
+    font-family: var(--font-display);
+    font-weight: 300;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-grafit);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  :target, a, button, input, select, textarea, [tabindex] {
+    scroll-margin-top: calc(var(--header-h) + 1rem);
+    scroll-margin-bottom: calc(var(--bar-h) + 1rem);
+  }
+}
+
+@layer components {
+  .concept-banner {
+    background: var(--color-grafit);
+    color: var(--color-vapno);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.5;
+    padding: 0.5rem 1rem;
+    text-align: center;
+  }
+  .skip-link {
+    position: fixed;
+    left: 0.75rem;
+    top: 0.75rem;
+    z-index: 80;
+    transform: translateY(-200%);
+    background: var(--color-vapno);
+    color: var(--color-grafit);
+    padding: 0.6rem 1rem;
+    font-weight: 600;
+  }
+  .skip-link:focus { transform: none; }
+
+  .site-header {
+    background: color-mix(in srgb, var(--color-sterka) 92%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 1px 0 rgb(74 71 67 / 0.12);
+  }
+  .nav-link {
+    border-radius: 2px;
+    transition: color var(--duration-quick) var(--ease-out);
+  }
+  .nav-link:hover { color: var(--color-orech); }
+
+  .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-beton);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.6rem 1.1rem;
+    border-radius: 3px;
+    background: var(--color-dub);
+    color: var(--color-grafit);
+    font-weight: 600;
+    transition: background-color var(--duration-quick) var(--ease-out), color var(--duration-quick) var(--ease-out);
+  }
+  .btn-primary:hover, .btn-primary:active { background: var(--color-orech); color: var(--color-vapno); }
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    min-width: 0;
+    max-width: 100%;
+    padding: 0.6rem 1rem;
+    border-radius: 3px;
+    border: 1px solid rgb(74 71 67 / 0.35);
+    color: var(--color-grafit);
+    font-weight: 500;
+    transition: border-color var(--duration-quick) var(--ease-out), color var(--duration-quick) var(--ease-out);
+  }
+  .btn-ghost:hover { border-color: var(--color-orech); color: var(--color-orech); }
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 3px;
+    background: var(--color-dub);
+    color: var(--color-grafit);
+  }
+  .icon-btn:hover { background: var(--color-orech); color: var(--color-vapno); }
+  .menu-btn {
+    min-height: 44px;
+    padding: 0 0.95rem;
+    border-radius: 3px;
+    border: 1px solid rgb(31 30 28 / 0.4);
+    color: var(--color-grafit);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .menu-btn:hover { border-color: var(--color-orech); color: var(--color-orech); }
+  .mobile-menu {
+    background: var(--color-vapno);
+    border: 1px solid rgb(74 71 67 / 0.15);
+    border-radius: 4px;
+    padding: 0.5rem;
+    box-shadow: 0 18px 40px -18px rgb(31 30 28 / 0.45);
+    max-height: calc(100svh - var(--header-h) - var(--bar-h) - 1.5rem);
+    overflow-y: auto;
+  }
+
+  .text-link {
+    color: var(--color-orech);
+    text-decoration: underline;
+    text-decoration-color: var(--color-dub);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    border-radius: 2px;
+  }
+  .text-link:hover { color: var(--color-grafit); text-decoration-thickness: 2px; }
+
+  .card {
+    background: var(--color-vapno);
+    border: 1px solid rgb(74 71 67 / 0.12);
+    border-radius: 4px;
+  }
+
+  .phone-big {
+    margin-top: 0.4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+    color: var(--color-orech);
+    border-radius: 2px;
+  }
+  .phone-big:hover { color: var(--color-grafit); }
+
+  .ardex-tag {
+    display: inline-block;
+    background: var(--color-ardex);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    padding: 0.15rem 0.45rem;
+    border-radius: 2px;
+  }
+
+  /* Razítko na ilustracích */
+  .stamp {
+    position: absolute;
+    left: 0.75rem;
+    bottom: 0.75rem;
+    max-width: calc(100% - 1.5rem);
+    background: rgb(244 241 236 / 0.92);
+    color: var(--color-grafit);
+    border: 1px solid rgb(31 30 28 / 0.25);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    line-height: 1.4;
+    padding: 0.35rem 0.55rem;
+    border-radius: 2px;
+  }
+
+  /* Bezesparý přechod mezi sekcemi */
+  .seam {
+    height: 56px;
+    background:
+      radial-gradient(55% 100% at 50% 0%, rgb(74 71 67 / 0.09), transparent 72%),
+      radial-gradient(40% 80% at 30% 100%, rgb(244 241 236 / 0.45), transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Vzorkovnice */
+  .sample-row {
+    scroll-padding-inline: 1.25rem;
+    scrollbar-width: thin;
+  }
+  .sample-tile {
+    background: var(--color-vapno);
+    padding: 0.6rem;
+    border-radius: 3px;
+    border: 1px solid rgb(74 71 67 / 0.14);
+    transition: border-color var(--duration-quick) var(--ease-out);
+  }
+  .sample-tile:hover { border-color: var(--color-dub); }
+  .swatch {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+    box-shadow: inset 0 0 0 1px rgb(244 241 236 / 0.7);
+    isolation: isolate;
+  }
+  .swatch::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--noise);
+    opacity: 0.22;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+  .swatch-code {
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: fit-content;
+    max-width: calc(100% - 1rem);
+    z-index: 2;
+    background: rgb(244 241 236 / 0.92);
+    color: var(--color-grafit);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.35;
+    padding: 0.2rem 0.4rem;
+    border-radius: 2px;
+  }
+
+  .mat-cement {
+    background:
+      radial-gradient(120% 70% at 15% 10%, #e7e2da 0%, transparent 55%),
+      radial-gradient(80% 60% at 85% 75%, #b6b0a7 0%, transparent 62%),
+      radial-gradient(70% 45% at 35% 85%, #d3cdc4 0%, transparent 70%),
+      radial-gradient(50% 35% at 70% 30%, #c2bcb3 0%, transparent 70%),
+      #c9c3ba;
+  }
+  .mat-oak {
+    background:
+      repeating-linear-gradient(91deg, transparent 0 6px, rgb(92 59 38 / 0.13) 6px 7px, transparent 7px 13px, rgb(92 59 38 / 0.07) 13px 15px),
+      repeating-linear-gradient(0deg, transparent 0 109px, rgb(60 38 22 / 0.3) 109px 110px),
+      linear-gradient(90deg, #c38d55, #b07a45 38%, #a66f3c 66%, #bd8650);
+  }
+  .mat-veneer {
+    background:
+      repeating-linear-gradient(90deg, transparent 0 3px, rgb(31 20 12 / 0.16) 3px 4px, transparent 4px 9px, rgb(255 230 200 / 0.06) 9px 11px),
+      linear-gradient(180deg, #6b4630, #5c3b26 50%, #4f321f);
+  }
+  .door-panel {
+    position: absolute;
+    inset: 14% 16%;
+    border: 1px solid rgb(244 241 236 / 0.28);
+    box-shadow: inset 0 0 0 6px rgb(0 0 0 / 0.06);
+  }
+  .door-panel::after {
+    content: "";
+    position: absolute;
+    right: -10%;
+    top: 52%;
+    width: 14%;
+    height: 3px;
+    background: rgb(244 241 236 / 0.7);
+    border-radius: 2px;
+  }
+  .mat-joinery {
+    background:
+      repeating-linear-gradient(180deg, #dcc097 0 7px, #c39a67 7px 8px, #e5cca6 8px 14px, #b4875a 14px 15px),
+      #d8b98e;
+  }
+
+  /* Formulář */
+  .field { display: grid; gap: 0.35rem; font-size: 0.95rem; color: var(--color-grafit); font-weight: 500; }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    min-height: 44px;
+    background: #fff;
+    border: 1px solid rgb(74 71 67 / 0.35);
+    border-radius: 3px;
+    padding: 0.55rem 0.7rem;
+    font-weight: 400;
+    color: var(--color-grafit);
+  }
+  .field input:hover, .field select:hover, .field textarea:hover { border-color: var(--color-orech); }
+
+  .site-footer {
+    background: linear-gradient(180deg, rgb(244 241 236 / 0) 0%, rgb(244 241 236 / 0.55) 40%);
+  }
+
+  /* Spodní lišta (mobil) */
+  .bottom-bar {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 45;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    height: var(--bar-h);
+    padding: 0.6rem 0.75rem calc(0.6rem + env(safe-area-inset-bottom, 0px));
+    background: var(--color-grafit);
+  }
+  .bar-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  .bar-btn:focus-visible { outline-color: var(--color-vapno); outline-offset: 2px; }
+  .bar-btn--call { background: var(--color-dub); color: var(--color-grafit); }
+  .bar-btn--mail { border: 1px solid rgb(244 241 236 / 0.5); color: var(--color-vapno); }
+
+  .surface-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity var(--duration-very-slow) var(--ease-in-out);
+  }
+  .surface-canvas.is-live { opacity: 1; }
+}
+
+/* ============ Texts reveal (transitions.dev 18) ============
+   Skryté výchozí stavy jen s JS (třída .js na <html>). */
+.t-stagger-line {
+  display: block;
+  transition:
+    opacity   var(--stagger-dur) var(--stagger-ease),
+    transform var(--stagger-dur) var(--stagger-ease),
+    filter    var(--stagger-dur) var(--stagger-ease);
+  will-change: transform, opacity, filter;
+}
+.js .t-stagger-line {
+  opacity: 0;
+  transform: translateY(var(--stagger-distance));
+  filter: blur(var(--stagger-blur));
+}
+.t-stagger-line--2 { transition-delay: var(--stagger-stagger); }
+.t-stagger-line--3 { transition-delay: calc(var(--stagger-stagger) * 2); }
+.js .t-stagger.is-shown .t-stagger-line {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+.js .t-stagger.is-hiding .t-stagger-line {
+  opacity: 0;
+  transform: translateY(0);
+  filter: blur(0);
+  transition:
+    opacity 200ms ease,
+    transform 0s linear,
+    filter 0s linear;
+  transition-delay: 0s;
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Bez posunu a rozmazání – jen jednoduchá změna průhlednosti. */
+  .js .t-stagger-line { transform: none !important; filter: none !important; }
+  .t-stagger-line { transition: opacity 200ms linear !important; transition-delay: 0s !important; }
+}
+
+/* ============ Accordion (transitions.dev 21) ============
+   Bez JS zůstávají odpovědi otevřené a čitelné. */
+.t-acc-panel {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+.js .t-acc-panel {
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--acc-collapse) var(--acc-ease);
+}
+.js .t-acc[data-open="true"] .t-acc-panel {
+  grid-template-rows: 1fr;
+  transition: grid-template-rows var(--acc-expand) var(--acc-ease);
+}
+.t-acc-panel-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+.js .t-acc-panel-inner {
+  opacity: 0;
+  filter: blur(2px);
+  transition:
+    opacity var(--acc-collapse) var(--acc-ease),
+    filter var(--acc-collapse) var(--acc-ease);
+}
+.js .t-acc[data-open="true"] .t-acc-panel-inner {
+  opacity: 1;
+  filter: blur(0);
+  transition:
+    opacity var(--acc-expand) var(--acc-ease),
+    filter var(--acc-expand) var(--acc-ease);
+}
+.t-acc-chevron {
+  display: inline-flex;
+  transform: scaleY(1);
+  transform-origin: center;
+  transition: transform var(--acc-chevron) var(--acc-ease);
+}
+.t-acc-chevron path { vector-effect: non-scaling-stroke; }
+.t-acc[data-open="true"] .t-acc-chevron {
+  transform: scaleY(-1);
+}
+.t-acc-head:hover { color: var(--color-orech); }
+@media (prefers-reduced-motion: reduce) {
+  .t-acc-panel, .t-acc-panel-inner, .t-acc-chevron {
+    transition: none !important;
+  }
+}
+
+/* ============ Learn more hover (transitions.dev 24) ============ */
+.t-learn-chevron {
+  display: inline-flex;
+  transform: translateX(0);
+  transition: transform var(--learn-out) var(--learn-ease);
+}
+.t-learn-arm {
+  transform-box: view-box;
+  transform-origin: 10px 8px;
+  vector-effect: non-scaling-stroke;
+  transition: transform var(--learn-out) var(--learn-ease);
+}
+.t-learn:hover .t-learn-chevron { transform: translateX(var(--learn-shift)); transition-duration: var(--learn-in); }
+.t-learn:hover .t-learn-arm { transition-duration: var(--learn-in); }
+.t-learn:hover .t-learn-arm-top { transform: rotate(var(--learn-spread)); }
+.t-learn:hover .t-learn-arm-bot { transform: rotate(calc(var(--learn-spread) * -1)); }
+@media (prefers-reduced-motion: reduce) {
+  .t-learn-chevron, .t-learn-arm { transition: none !important; }
+}
+
+/* ============ Trowel sweep (vlastní pohyb) ============
+   Světelný pruh je v klidu mimo vzorek vlevo; .is-swept (přidá JS přes
+   IntersectionObserver) ho jednou provede přes plochu. Bez JS se nic neskrývá. */
+.sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: rgb(255 248 236 / 0.55);
+  -webkit-mask-image: linear-gradient(115deg, transparent 42%, #000 50%, transparent 58%);
+  mask-image: linear-gradient(115deg, transparent 42%, #000 50%, transparent 58%);
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+  transition:
+    -webkit-mask-position var(--sweep-dur) var(--ease-in-out),
+    mask-position var(--sweep-dur) var(--ease-in-out);
+  transition-delay: calc(var(--i, 0) * 120ms);
+}
+.sweep.is-swept::after {
+  -webkit-mask-position: 0% 0;
+  mask-position: 0% 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sweep::after { display: none; }
+}
