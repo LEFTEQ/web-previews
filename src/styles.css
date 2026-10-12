@@ -1,0 +1,286 @@
+@import "tailwindcss";
+
+@theme {
+  --color-loess: #E9E1D3;
+  --color-loess-deep: #D3C6AE;
+  --color-ink: #1F2124;
+  --color-hazard: #F2B705;
+  --color-river: #2F5D50;
+  --color-clay: #8A6A4A;
+  --color-clay-tint: #D8C6A8;
+  --color-concrete: #A7A9A6;
+  --font-display: "Archivo Variable", "Archivo", "IBM Plex Sans", system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+/* ---- Motion tokens (transitions.dev subset) ---- */
+:root {
+  --duration-stagger: 40ms;
+  --duration-quick: 150ms;
+  --duration-fast: 250ms;
+  --duration-very-slow: 500ms;
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --distance-medium: 12px;
+  --blur-medium: 3px;
+
+  --stagger-dur: 500ms;
+  --stagger-distance: 12px;
+  --stagger-stagger: 40ms;
+  --stagger-blur: 3px;
+  --stagger-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --acc-expand: 250ms;
+  --acc-collapse: 250ms;
+  --acc-chevron: 250ms;
+  --acc-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --learn-shift: 2px;
+  --learn-spread: 8deg;
+  --learn-in: 350ms;
+  --learn-out: 350ms;
+  --learn-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --contour-draw: 600ms;
+}
+
+/* ---- Base ---- */
+html {
+  scroll-behavior: smooth;
+  /* sticky header ≈ 60px, fixed mobile call bar ≈ 66px + safe area */
+  scroll-padding-top: 84px;
+  scroll-padding-bottom: calc(100px + env(safe-area-inset-bottom));
+  -webkit-text-size-adjust: 100%;
+}
+@media (min-width: 48rem) {
+  html {
+    scroll-padding-top: 96px;
+    scroll-padding-bottom: 24px;
+  }
+}
+body {
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  font-feature-settings: "kern";
+  text-rendering: optimizeLegibility;
+}
+#root {
+  overflow-x: clip;
+}
+
+.font-display {
+  font-stretch: 116%;
+  font-variation-settings: "wdth" 116;
+}
+.wide-125 {
+  font-stretch: 122%;
+  font-variation-settings: "wdth" 122;
+}
+
+h1,
+h2,
+h3 {
+  overflow-wrap: break-word;
+  hyphens: manual;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 3px solid #1F2124;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.on-dark :focus-visible {
+  outline-color: #F2B705;
+}
+:where(a, button, input, select, textarea):focus-visible {
+  scroll-margin-top: 96px;
+  scroll-margin-bottom: calc(108px + env(safe-area-inset-bottom));
+}
+@media (min-width: 48rem) {
+  :where(a, button, input, select, textarea):focus-visible {
+    scroll-margin-bottom: 24px;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -80px;
+  z-index: 100;
+  background: #F2B705;
+  color: #1F2124;
+  padding: 10px 14px;
+  font-weight: 600;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+/* Hazard stripe – only for call-to-action bars */
+.hazard {
+  height: 6px;
+  background: repeating-linear-gradient(-45deg, #F2B705 0 10px, #1F2124 10px 20px);
+}
+
+/* ---- Stratum contour divider (custom scroll draw) ----
+   The line is fully drawn by default; only with JS present is the
+   dash offset hidden until the observer adds .is-drawn. */
+.js .contour-line {
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset var(--contour-draw) var(--ease-smooth-out);
+}
+.js .contour.is-drawn .contour-line {
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .contour-line {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    transition: none !important;
+  }
+}
+
+/* ---- Texts reveal (transitions.dev 18) – hidden state only with JS ---- */
+.t-stagger-line {
+  display: block;
+}
+.js .t-stagger-line {
+  opacity: 0;
+  transform: translateY(var(--stagger-distance));
+  filter: blur(var(--stagger-blur));
+  transition:
+    opacity   var(--stagger-dur) var(--stagger-ease),
+    transform var(--stagger-dur) var(--stagger-ease),
+    filter    var(--stagger-dur) var(--stagger-ease);
+  will-change: transform, opacity, filter;
+}
+.js .t-stagger-line--2 { transition-delay: var(--stagger-stagger); }
+.js .t-stagger-line--3 { transition-delay: calc(var(--stagger-stagger) * 2); }
+
+.js .t-stagger.is-shown .t-stagger-line {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+.js .t-stagger.is-hiding .t-stagger-line {
+  opacity: 0;
+  transform: translateY(0);
+  filter: blur(0);
+  transition:
+    opacity 200ms ease,
+    transform 0s linear,
+    filter 0s linear;
+  transition-delay: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-stagger-line { transition: none !important; }
+}
+
+/* ---- Accordion expand (transitions.dev 21) – mobile only, JS only ---- */
+.t-acc-head {
+  display: none;
+}
+@media (max-width: 47.99rem) {
+  .js .t-acc-head {
+    display: flex;
+  }
+  .js .t-acc-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--acc-collapse) var(--acc-ease);
+  }
+  .js .t-acc[data-open="true"] .t-acc-panel {
+    grid-template-rows: 1fr;
+    transition: grid-template-rows var(--acc-expand) var(--acc-ease);
+  }
+  .js .t-acc-panel-inner {
+    overflow: hidden;
+    opacity: 0;
+    filter: blur(2px);
+    transition:
+      opacity var(--acc-collapse) var(--acc-ease),
+      filter var(--acc-collapse) var(--acc-ease);
+  }
+  .js .t-acc[data-open="true"] .t-acc-panel-inner {
+    opacity: 1;
+    filter: blur(0);
+    transition:
+      opacity var(--acc-expand) var(--acc-ease),
+      filter var(--acc-expand) var(--acc-ease);
+  }
+  .js .t-acc[data-open="false"] .t-acc-panel-inner {
+    visibility: hidden;
+    transition:
+      opacity var(--acc-collapse) var(--acc-ease),
+      filter var(--acc-collapse) var(--acc-ease),
+      visibility 0s linear var(--acc-collapse);
+  }
+}
+.t-acc-chevron {
+  display: inline-flex;
+  transform: scaleY(1);
+  transform-origin: center;
+  transition: transform var(--acc-chevron) var(--acc-ease);
+}
+.t-acc-chevron path { vector-effect: non-scaling-stroke; }
+.t-acc[data-open="true"] .t-acc-chevron {
+  transform: scaleY(-1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-acc-panel, .t-acc-panel-inner, .t-acc-chevron {
+    transition: none !important;
+  }
+}
+
+/* ---- Learn more hover (transitions.dev 24) ---- */
+.t-learn-chevron {
+  display: inline-flex;
+  transform: translateX(0);
+  transition: transform var(--learn-out) var(--learn-ease);
+}
+.t-learn-arm {
+  transform-box: view-box;
+  transform-origin: 10px 8px;
+  vector-effect: non-scaling-stroke;
+  transition: transform var(--learn-out) var(--learn-ease);
+}
+.t-learn:hover .t-learn-chevron { transform: translateX(var(--learn-shift)); transition-duration: var(--learn-in); }
+.t-learn:hover .t-learn-arm { transition-duration: var(--learn-in); }
+.t-learn:hover .t-learn-arm-top { transform: rotate(var(--learn-spread)); }
+.t-learn:hover .t-learn-arm-bot { transform: rotate(calc(var(--learn-spread) * -1)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .t-learn-chevron, .t-learn-arm { transition: none !important; }
+}
+
+/* ---- 3D section model ---- */
+.model-canvas {
+  opacity: 0;
+  transition: opacity 400ms var(--ease-smooth-out);
+}
+.model-canvas.is-ready {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .model-canvas { transition: none; }
+}
+
+/* Ruled service list */
+.ruled li {
+  border-bottom: 1px solid currentColor;
+  border-bottom-color: color-mix(in srgb, currentColor 35%, transparent);
+}
+
+/* Mobile: leave space for fixed call bar */
+@media (max-width: 47.99rem) {
+  body {
+    padding-bottom: calc(68px + env(safe-area-inset-bottom));
+  }
+}
