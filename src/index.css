@@ -1,0 +1,288 @@
+@import "tailwindcss";
+
+@theme {
+  --color-loam: #3B2E22;
+  --color-clay: #A8714A;
+  --color-hydra: #F2B705;
+  --color-pond: #2F5D62;
+  --color-concrete: #D9D6CF;
+  --color-stake: #FAF8F3;
+  --color-water: #1E6FB8;
+  --color-sewer: #6B4A2B;
+  --color-cable: #C8321E;
+
+  --font-display: "Archivo Variable", "Archivo", "Segoe UI", Roboto, system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", "Segoe UI", Roboto, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+
+/* ---------- Motion tokens (transitions.dev) ---------- */
+:root {
+  --duration-stagger: 40ms;
+  --duration-micro: 80ms;
+  --duration-quick: 150ms;
+  --duration-fast: 250ms;
+  --duration-medium: 350ms;
+  --duration-slow: 400ms;
+  --duration-very-slow: 500ms;
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: ease-in-out;
+  --ease-out: ease-out;
+  --ease-linear: linear;
+  --distance-micro: 4px;
+  --distance-medium: 12px;
+  --blur-small: 2px;
+  --blur-medium: 3px;
+
+  /* Texts reveal (hero) — brief: 500ms ease-in-out */
+  --stagger-dur: var(--duration-very-slow);
+  --stagger-distance: var(--distance-medium);
+  --stagger-stagger: var(--duration-micro);
+  --stagger-blur: var(--blur-medium);
+  --stagger-ease: var(--ease-in-out);
+
+  /* Learn more hover */
+  --learn-shift: 2px;
+  --learn-spread: 8deg;
+  --learn-in: 350ms;
+  --learn-out: 350ms;
+  --learn-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Výšky pevných lišt — řídí scroll-padding i posun fokusu */
+  --header-h: 60px;
+  --bar-h: 64px;
+}
+@media (min-width: 1024px) {
+  :root { --header-h: 72px; }
+}
+
+/* ---------- Základ ---------- */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+  scroll-padding-bottom: calc(var(--bar-h) + 24px + env(safe-area-inset-bottom));
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+}
+@media (min-width: 1024px) {
+  html { scroll-padding-bottom: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+body {
+  overflow-x: clip;
+  background: var(--color-concrete);
+  color: var(--color-loam);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+body.has-bar {
+  padding-bottom: calc(var(--bar-h) + env(safe-area-inset-bottom));
+}
+@media (min-width: 1024px) {
+  body.has-bar { padding-bottom: 0; }
+}
+h1, h2, h3 {
+  overflow-wrap: break-word;
+  hyphens: auto;
+  text-wrap: balance;
+}
+p { overflow-wrap: break-word; }
+
+a, button, input, select, textarea, summary {
+  scroll-margin-top: calc(var(--header-h) + 16px);
+  scroll-margin-bottom: calc(var(--bar-h) + 24px + env(safe-area-inset-bottom));
+}
+[id] { scroll-margin-top: calc(var(--header-h) + 12px); }
+
+:focus-visible {
+  outline: 3px solid var(--color-loam);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.on-dark :focus-visible { outline-color: var(--color-hydra); }
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -100px;
+  z-index: 100;
+  background: var(--color-hydra);
+  color: var(--color-loam);
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+.skip-link:focus { top: 12px; }
+
+/* ---------- Komponenty ---------- */
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    min-height: 3rem;
+    padding: 0.65rem 1.25rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color var(--duration-quick) var(--ease-out),
+      color var(--duration-quick) var(--ease-out),
+      border-color var(--duration-quick) var(--ease-out);
+  }
+  .btn-cta { background: var(--color-hydra); color: var(--color-loam); }
+  .btn-cta:hover { background: #ffc61a; }
+  .btn-ghost-dark { border: 2px solid rgb(250 248 243 / 0.75); color: var(--color-stake); }
+  .btn-ghost-dark:hover { background: rgb(250 248 243 / 0.12); }
+  .btn-ghost { border: 2px solid var(--color-loam); color: var(--color-loam); }
+  .btn-ghost:hover { background: rgb(59 46 34 / 0.08); }
+
+  .field-label { display: block; font-weight: 600; margin-bottom: 0.35rem; }
+  .field {
+    display: block;
+    width: 100%;
+    min-height: 3rem;
+    border-radius: 0.5rem;
+    border: 2px solid rgb(59 46 34 / 0.25);
+    background: var(--color-stake);
+    color: var(--color-loam);
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+  }
+  .field:focus-visible { outline-offset: 2px; border-color: var(--color-loam); }
+}
+
+.hero-shade {
+  background: linear-gradient(180deg, rgb(59 46 34 / 0.55) 0%, rgb(59 46 34 / 0.78) 55%, rgb(59 46 34 / 0.95) 100%);
+}
+@media (min-width: 768px) {
+  .hero-shade {
+    background: linear-gradient(90deg, rgb(59 46 34 / 0.94) 0%, rgb(59 46 34 / 0.78) 45%, rgb(59 46 34 / 0.2) 100%);
+  }
+}
+
+/* ---------- Texts reveal (transitions.dev #18), progresivní vylepšení ---------- */
+.t-stagger-line { display: block; }
+.js .t-stagger-line {
+  opacity: 0;
+  transform: translateY(var(--stagger-distance));
+  filter: blur(var(--stagger-blur));
+  transition:
+    opacity   var(--stagger-dur) var(--stagger-ease),
+    transform var(--stagger-dur) var(--stagger-ease),
+    filter    var(--stagger-dur) var(--stagger-ease);
+  will-change: transform, opacity, filter;
+}
+.t-stagger-line--2 { transition-delay: var(--stagger-stagger); }
+.t-stagger-line--3 { transition-delay: calc(var(--stagger-stagger) * 2); }
+.t-stagger-line--4 { transition-delay: calc(var(--stagger-stagger) * 3); }
+.t-stagger-line--5 { transition-delay: calc(var(--stagger-stagger) * 4); }
+
+.js .t-stagger.is-shown .t-stagger-line,
+.reveal-fallback .t-stagger-line {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-stagger-line { transition: none !important; }
+  .js .t-stagger-line { opacity: 1; transform: none; filter: none; }
+}
+
+/* ---------- Learn more hover (transitions.dev #24) ---------- */
+.t-learn-chevron {
+  display: inline-flex;
+  transform: translateX(0);
+  transition: transform var(--learn-out) var(--learn-ease);
+}
+.t-learn-arm {
+  transform-box: view-box;
+  transform-origin: 10px 8px;
+  vector-effect: non-scaling-stroke;
+  transition: transform var(--learn-out) var(--learn-ease);
+}
+.t-learn:hover .t-learn-chevron { transform: translateX(var(--learn-shift)); transition-duration: var(--learn-in); }
+.t-learn:hover .t-learn-arm { transition-duration: var(--learn-in); }
+.t-learn:hover .t-learn-arm-top { transform: rotate(var(--learn-spread)); }
+.t-learn:hover .t-learn-arm-bot { transform: rotate(calc(var(--learn-spread) * -1)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .t-learn-chevron, .t-learn-arm { transition: none !important; }
+}
+
+/* ---------- Výkopová rýha (signature) ---------- */
+.trench {
+  background:
+    repeating-linear-gradient(180deg, rgb(168 113 74 / 0.18) 0 2px, transparent 2px 22px),
+    var(--color-loam);
+  border-right: 3px dashed rgb(168 113 74 / 0.8);
+}
+.trench-line {
+  position: absolute;
+  top: var(--header-h);
+  bottom: 0;
+  width: 2px;
+  background: var(--c);
+  transform-origin: top;
+}
+.trench-tick {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+  padding-right: 4px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1;
+  color: rgb(250 248 243 / 0.7);
+}
+.trench-tick::after {
+  content: "";
+  width: 8px;
+  height: 1px;
+  background: rgb(250 248 243 / 0.7);
+}
+.depth-swap { animation: depth-in var(--duration-quick) var(--ease-in-out); }
+@keyframes depth-in {
+  from { opacity: 0; transform: translateY(calc(var(--distance-micro) * -1)); filter: blur(var(--blur-small)); }
+}
+
+/* Potrubí služeb: linky odbočují z rýhy (na desktopu sahají až k ní) */
+.pipe-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform-origin: left center;
+}
+@media (min-width: 1024px) {
+  .pipe-line { left: calc((100% - 100vw + 4rem) / 2); }
+}
+
+@keyframes pipe-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes trench-draw { from { transform: scaleY(0.04); } to { transform: scaleY(1); } }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .pipe-line {
+      animation: pipe-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
+    .trench-line {
+      animation: trench-draw linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .depth-swap { animation: none; }
+  .pipe-line, .trench-line { animation: none !important; transform: none !important; }
+}
